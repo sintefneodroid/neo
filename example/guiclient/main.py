@@ -40,7 +40,7 @@ def on_step_callback(slider_values):
     #Motion('Car', 'Wheel2rot_X', slider_values[1]),
     #Motion('Car', 'Wheel3rot_X', slider_values[2]),
     #Motion('Car', 'Wheel4rot_X', slider_values[3])
-    Motion('Player', 'PlayerX', slider_values[0])
+    #Motion('Player', 'PlayerX', slider_values[0])
   ]
   new_state = _neo_environment.step(Reaction(False, motions))
   update_callback(new_state)
@@ -51,7 +51,7 @@ def on_reset_callback():
 
 
 def update_environment_widgets(environment_state: EnvironmentState):
-  _gui.update_depth_image(environment_state.get_observers()[b'DepthCamera'].get_data())
+  #_gui.update_depth_image(environment_state.get_observers()[b'DepthCamera'].get_data())
   #_gui.update_light_mask_image(environment_state.get_observers()[b'LightMaskCamera'].get_data())
   #combined_image = get_masked_depth_image(environment_state.get_observers()[b'DepthCamera'].get_data(),
   #                                        environment_state.get_observers()[b'LightMaskCamera'].get_data(), 50, 200)
