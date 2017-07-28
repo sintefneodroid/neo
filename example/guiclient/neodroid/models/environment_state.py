@@ -23,9 +23,9 @@ class EnvironmentState(object):
     #  if b'_total_energy_spent_since_reset' in obj:
         self._total_energy_spent_since_reset = obj[3]#['_total_energy_spent_since_reset']
     #  if b'_actors' in obj:
-        self._actors = {key: Actor(key,actor) for key,actor in obj[0].items()}#['_actors']
+        self._actors = {key: Actor(key,actor) for key,actor in obj[0][1].items()}#['_actors']
     #  if b'_observers' in obj:
-        self._observers = {key: Observer(key,observer) for (key,observer) in obj[1].items()}#['_observers']
+        self._observers = {key: Observer(key,observer) for (key,observer) in obj[1][1].items()}#['_observers']
     #  if b'_reward_for_last_step' in obj:
         self._reward_for_last_step = obj[2]#['_reward_for_last_step']
         return self

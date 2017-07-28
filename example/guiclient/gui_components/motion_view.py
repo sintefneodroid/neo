@@ -18,26 +18,29 @@ class MotionView(GridLayout):
       'size_hint_y': None,
       'height': 25,
       'cls_dicts': [
+
+        {'cls': ListItemLabel,
+           'kwargs': {'text': row_data['text'],
+                      'is_representing_cls': True
+            }
+        },
+        {'cls': ListItemLabel,
+           'kwargs': {
+              'text': "Middle-{0}".format(row_data['text']),
+              'is_representing_cls': True
+           }
+        },
+        {'cls': ListItemLabel,
+           'kwargs': {
+             'text': "End-{0}".format(row_data['text']),
+             'is_representing_cls': True
+           }
+         },
         {'cls': ListItemButton,
-         'kwargs': {'text': row_data['text']}
-         },
-        {'cls': ListItemLabel,
-         'kwargs': {'text': row_data['text'],
-                    'is_representing_cls': True
-          }
-        },
-        {'cls': ListItemLabel,
-         'kwargs': {
-            'text': "Middle-{0}".format(row_data['text']),
-            'is_representing_cls': True
-         }
-        },
-        {'cls': ListItemLabel,
-         'kwargs': {
-           'text': "End-{0}".format(row_data['text']),
-           'is_representing_cls': True
-         }
-         },
+           'kwargs': {'text': row_data['text'],
+                      }
+           },
+
       ]
     }
 

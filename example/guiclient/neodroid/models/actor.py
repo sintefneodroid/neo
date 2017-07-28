@@ -9,10 +9,14 @@ class Actor(object):
   _rotation: List[float]
   _motors: List[Motor]
 
-  def __init__(self, name, obj):
+  def __init__(self, name, obj_tuple):
     self._name = name
-    self._position = obj[0]
-    self._rotation = obj[1]
+    self.unpack(obj_tuple)
+
+  def unpack(self, obj_tuple):
+    self._position = obj_tuple[1]
+    self._rotation = obj_tuple[2]
+    self._motors = {key: Motor(key,motor) for (key,motor) in obj_tuple[0][1].items()}
 
   def get_position(self):
     return self._position
