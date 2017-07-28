@@ -57,8 +57,9 @@ def update_environment_widgets(environment_state: EnvironmentState):
   #combined_image = get_masked_depth_image(environment_state.get_observers()[b'DepthCamera'].get_data(),
   #                                        environment_state.get_observers()[b'LightMaskCamera'].get_data(), 50, 200)
   #_gui.update_combined_image(combined_image)
-  _gui.update_position_label(str(environment_state.get_actors()[b'Player'].get_position()))
-  _gui.update_rotation_label(str(str(environment_state.get_actors()[b'Player'].get_rotation())))
+  _gui.update_xml_text_label(str(environment_state))
+  #_gui.update_position_label(str(environment_state.get_actors()[b'Player'].get_position()))
+  _gui.update_rotation_label(str(environment_state.get_actors()[b'Player'].get_rotation()))
   _gui.update_reward_label(str(environment_state.get_reward_for_last_step()))
   _gui.update_energi_label(str(environment_state.get_total_energy_spent_since_reset()))
   _gui.update_time_label(str(environment_state.get_time_since_reset()))

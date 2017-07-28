@@ -14,7 +14,7 @@ class StaturBar(BoxLayout):
   def build(self):
     self.ip_address_input = TextInput(text='127.0.0.1')
     self.port_input = TextInput(text='5555')
-    self.launch_label = Label(text='Launch Environment', halign='right', font_size=10)
+    self.launch_label = Label(text='Launch Environment', halign='right', font_size=12)
     self.launch_check_box = CheckBox(active=True)
     self.connect_button = Button(text='Connect')
     self.connect_button.bind(on_release=self.on_connect_button)

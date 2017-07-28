@@ -12,15 +12,15 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/UnityPythonClient$Client.coverage" NAME="Client Coverage Results" MODIFIED="1501154919495" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/guiclient$MotionView.coverage" NAME="MotionView Coverage Results" MODIFIED="1501225732227" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui_components" />
-    <SUITE FILE_PATH="coverage/guiclient$Client.coverage" NAME="Client Coverage Results" MODIFIED="1501251322754" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/guiclient$Client.coverage" NAME="Client Coverage Results" MODIFIED="1501257466303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="46" column="28" lean-forward="true" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+            <state relative-caret-position="411">
+              <caret line="61" column="89" lean-forward="false" selection-start-line="61" selection-start-column="89" selection-end-line="61" selection-end-column="89" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
                 <element signature="e#232#386#0" expanded="true" />
@@ -29,48 +29,91 @@
                 <element signature="e#921#1012#0" expanded="true" />
                 <element signature="e#1054#1422#0" expanded="true" />
                 <element signature="e#1451#1533#0" expanded="true" />
-                <element signature="e#1607#2486#0" expanded="true" />
-                <element signature="e#2503#2688#0" expanded="true" />
+                <element signature="e#2552#2737#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="motor.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/motor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-              <folding>
-                <element signature="e#113#157#0" expanded="true" />
-                <element signature="e#194#258#0" expanded="true" />
-                <element signature="e#611#633#0" expanded="true" />
-                <element signature="e#664#686#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="utilities.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utilities.py">
+      <file leaf-file-name="xml_column.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gui_components/xml_column.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+              <caret line="18" column="30" lean-forward="false" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+              <folding>
+                <element signature="e#210#268#0" expanded="true" />
+                <element signature="e#293#372#0" expanded="true" />
+                <element signature="e#414#440#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="motion_view.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gui_components/motion_view.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="298">
+              <caret line="53" column="53" lean-forward="false" selection-start-line="53" selection-start-column="53" selection-end-line="53" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="networking_utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/messaging/networking_utils.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gui_components/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+            <state relative-caret-position="51">
+              <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#755#1182#0" expanded="true" />
-                <element signature="e#1228#1462#0" expanded="true" />
-                <element signature="e#1521#1942#0" expanded="true" />
+                <element signature="e#0#60#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="environment_state_column.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gui_components/environment_state_column.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="37" column="44" lean-forward="false" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gui.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gui.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="377">
+              <caret line="27" column="53" lean-forward="true" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+                <element signature="e#2732#2772#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="status_bar.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gui_components/status_bar.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="16" column="85" lean-forward="false" selection-start-line="16" selection-start-column="85" selection-end-line="16" selection-end-column="85" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="environment_state.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/neodroid/models/environment_state.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+                <element signature="e#721#1339#0" expanded="true" />
+                <element signature="e#2567#2589#0" expanded="true" />
+                <element signature="e#2620#2642#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -91,67 +134,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="observer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/observer.py">
+      <file leaf-file-name="reaction_column.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gui_components/reaction_column.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+            <state relative-caret-position="51">
+              <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
               <folding>
-                <element signature="e#0#23#0" expanded="true" />
-                <element signature="e#175#213#0" expanded="true" />
-                <element signature="e#250#355#0" expanded="true" />
-                <element signature="e#820#842#0" expanded="true" />
-                <element signature="e#873#895#0" expanded="true" />
+                <element signature="e#434#1584#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reaction.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/reaction.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="environment_state.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/environment_state.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-                <element signature="e#721#1339#0" expanded="true" />
-                <element signature="e#2567#2589#0" expanded="true" />
-                <element signature="e#2620#2642#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="motion.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/motion.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="55" lean-forward="true" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
-              <folding>
-                <element signature="e#203#296#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gui.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="20" column="64" lean-forward="false" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="64" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -182,18 +172,22 @@
         <option value="$PROJECT_DIR$/neodroid/models/reaction.py" />
         <option value="$PROJECT_DIR$/neodroid/messaging/__init__.py" />
         <option value="$PROJECT_DIR$/gui_components/environment_state_column.py" />
-        <option value="$PROJECT_DIR$/gui.py" />
-        <option value="$PROJECT_DIR$/gui_components/status_bar.py" />
         <option value="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
         <option value="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
-        <option value="$PROJECT_DIR$/gui_components/reaction_column.py" />
         <option value="$PROJECT_DIR$/gui_components/motions.py" />
         <option value="$PROJECT_DIR$/gui_components/motion_view.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/neodroid/models/environment_state.py" />
         <option value="$PROJECT_DIR$/neodroid/models/observer.py" />
         <option value="$PROJECT_DIR$/neodroid/models/actor.py" />
         <option value="$PROJECT_DIR$/neodroid/models/motor.py" />
+        <option value="$PROJECT_DIR$/gui_components/reaction_column_old.py" />
+        <option value="$PROJECT_DIR$/gui_components/reaction_column.py" />
+        <option value="$PROJECT_DIR$/gui_components/xml_rep_column.py" />
+        <option value="$PROJECT_DIR$/gui_components/xml_column.py" />
+        <option value="$PROJECT_DIR$/gui_components/__init__.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/gui.py" />
+        <option value="$PROJECT_DIR$/gui_components/status_bar.py" />
       </list>
     </option>
   </component>
@@ -505,6 +499,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13006397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -512,7 +507,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32950193" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32950193" sideWeight="0.48933902" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -540,7 +535,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -579,7 +574,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column_old.py">
+    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="15" column="44" lean-forward="true" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
@@ -602,8 +597,7 @@
             <element signature="e#921#1012#0" expanded="true" />
             <element signature="e#1054#1422#0" expanded="true" />
             <element signature="e#1451#1533#0" expanded="true" />
-            <element signature="e#1607#2486#0" expanded="true" />
-            <element signature="e#2503#2688#0" expanded="true" />
+            <element signature="e#2552#2737#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -620,9 +614,9 @@
         <state relative-caret-position="374">
           <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding>
-            <element signature="e#0#24#0" expanded="false" />
-            <element signature="e#2300#2344#0" expanded="false" />
-            <element signature="e#2397#2439#0" expanded="false" />
+            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#2433#2477#0" expanded="false" />
+            <element signature="e#2530#2572#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -649,12 +643,12 @@
         <state relative-caret-position="34">
           <caret line="2" column="33" lean-forward="false" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
           <folding>
-            <element signature="e#0#60#0" expanded="false" />
+            <element signature="e#0#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column_old.py">
+    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="34" lean-forward="false" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
@@ -698,8 +692,7 @@
             <element signature="e#921#1012#0" expanded="true" />
             <element signature="e#1054#1422#0" expanded="true" />
             <element signature="e#1451#1533#0" expanded="true" />
-            <element signature="e#1607#2486#0" expanded="true" />
-            <element signature="e#2503#2688#0" expanded="true" />
+            <element signature="e#2552#2737#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -729,9 +722,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#24#0" expanded="false" />
-            <element signature="e#2300#2344#0" expanded="false" />
-            <element signature="e#2397#2439#0" expanded="false" />
+            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#2433#2477#0" expanded="false" />
+            <element signature="e#2530#2572#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -748,8 +741,7 @@
             <element signature="e#921#1012#0" expanded="true" />
             <element signature="e#1054#1422#0" expanded="true" />
             <element signature="e#1451#1533#0" expanded="true" />
-            <element signature="e#1607#2486#0" expanded="true" />
-            <element signature="e#2503#2688#0" expanded="true" />
+            <element signature="e#2552#2737#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -771,7 +763,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column_old.py">
+    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="34" lean-forward="false" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
@@ -801,7 +793,7 @@
         <state relative-caret-position="34">
           <caret line="2" column="33" lean-forward="true" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
           <folding>
-            <element signature="e#0#60#0" expanded="false" />
+            <element signature="e#0#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -831,34 +823,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui_components/environment_state_column.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="37" column="44" lean-forward="false" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui_components/status_bar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="48" lean-forward="false" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui_components/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="33" lean-forward="false" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#60#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -868,30 +836,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#194#1" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui_components/motion_view.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="53" column="53" lean-forward="false" selection-start-line="53" selection-start-column="53" selection-end-line="53" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#49#0" expanded="false" />
-            <element signature="e#1783#2137#0" expanded="false" />
-            <element signature="e#2171#2175#0" expanded="false" />
-            <element signature="e#2210#2214#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="18" column="59" lean-forward="true" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
-          <folding>
-            <element signature="e#829#882#0" expanded="false" />
-            <element signature="e#924#949#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -916,49 +860,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column_old.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="44" lean-forward="false" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-            <element signature="e#1625#2082#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="64" lean-forward="false" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/models/reaction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="46" column="28" lean-forward="true" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <element signature="e#232#386#0" expanded="true" />
-            <element signature="e#423#494#0" expanded="true" />
-            <element signature="e#562#888#0" expanded="true" />
-            <element signature="e#921#1012#0" expanded="true" />
-            <element signature="e#1054#1422#0" expanded="true" />
-            <element signature="e#1451#1533#0" expanded="true" />
-            <element signature="e#1607#2486#0" expanded="true" />
-            <element signature="e#2503#2688#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -994,15 +901,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/models/environment_state.py">
+    <entry file="file://$PROJECT_DIR$/neodroid/models/observer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+        <state relative-caret-position="445">
+          <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
-            <element signature="e#721#1339#0" expanded="true" />
-            <element signature="e#2567#2589#0" expanded="true" />
-            <element signature="e#2620#2642#0" expanded="true" />
+            <element signature="e#175#213#0" expanded="true" />
+            <element signature="e#250#355#0" expanded="true" />
+            <element signature="e#820#842#0" expanded="true" />
+            <element signature="e#873#895#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/models/motor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="20" lean-forward="true" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+          <folding>
+            <element signature="e#113#157#0" expanded="true" />
+            <element signature="e#194#258#0" expanded="true" />
+            <element signature="e#286#583#0" expanded="true" />
+            <element signature="e#611#633#0" expanded="true" />
+            <element signature="e#664#686#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui_components/xml_column.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="30" lean-forward="false" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+          <folding>
+            <element signature="e#210#268#0" expanded="true" />
+            <element signature="e#293#372#0" expanded="true" />
+            <element signature="e#414#440#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui_components/motion_view.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="53" column="53" lean-forward="false" selection-start-line="53" selection-start-column="53" selection-end-line="53" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui_components/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1020,30 +972,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/models/observer.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+        <state relative-caret-position="411">
+          <caret line="61" column="89" lean-forward="false" selection-start-line="61" selection-start-column="89" selection-end-line="61" selection-end-column="89" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
-            <element signature="e#175#213#0" expanded="true" />
-            <element signature="e#250#355#0" expanded="true" />
-            <element signature="e#820#842#0" expanded="true" />
-            <element signature="e#873#895#0" expanded="true" />
+            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#232#386#0" expanded="true" />
+            <element signature="e#423#494#0" expanded="true" />
+            <element signature="e#562#888#0" expanded="true" />
+            <element signature="e#921#1012#0" expanded="true" />
+            <element signature="e#1054#1422#0" expanded="true" />
+            <element signature="e#1451#1533#0" expanded="true" />
+            <element signature="e#2552#2737#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/models/motor.py">
+    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+        <state relative-caret-position="51">
+          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
           <folding>
-            <element signature="e#113#157#0" expanded="true" />
-            <element signature="e#194#258#0" expanded="true" />
-            <element signature="e#611#633#0" expanded="true" />
-            <element signature="e#664#686#0" expanded="true" />
+            <element signature="e#434#1584#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/models/environment_state.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="49" column="47" lean-forward="false" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#721#1339#0" expanded="true" />
+            <element signature="e#2567#2589#0" expanded="true" />
+            <element signature="e#2620#2642#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui_components/environment_state_column.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="37" column="44" lean-forward="false" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="27" column="53" lean-forward="true" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#2732#2772#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui_components/status_bar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="16" column="85" lean-forward="false" selection-start-line="16" selection-start-column="85" selection-end-line="16" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
