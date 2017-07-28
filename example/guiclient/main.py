@@ -31,6 +31,7 @@ def on_connect_callback(ip_address, port, launch_environment):
 
 def update_callback(state):
   state = EnvironmentState().unpack(state)
+  print(state)
   update_environment_widgets(state)
 
 

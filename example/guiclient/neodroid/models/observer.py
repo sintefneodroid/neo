@@ -21,3 +21,17 @@ class Observer(object):
 
   def get_data(self):
     return self._data
+
+  def __repr__(self):
+    return '    <Observer>\n' + \
+           '      <name>' + self._name.decode('utf-8') + '</name>\n' + \
+           '      <position>' + str(self._position) + '</position>\n' + \
+           '      <rotation>' + str(self._rotation) + '</rotation>\n' + \
+           '      <data_size>' + str(self._data.__sizeof__()) + '</data_size>\n'+\
+           '    </Observer>\n'
+
+  def __str__(self):
+    return self.__repr__()
+
+  def __unicode__(self):
+    return self.__repr__()
