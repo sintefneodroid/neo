@@ -26,7 +26,7 @@ def on_connect_callback(ip_address, port, launch_environment):
   if _neo_environment and _neo_environment.is_connected():
     _neo_environment.close(on_disconnected_callback)
   else:
-    _neo_environment = neo.NeodroidEnvironment(ip_address, int(port), on_connected_callback=on_connected_callback, name='dodgescene.exe', connect_to_running=(not launch_environment))
+    _neo_environment = neo.NeodroidEnvironment(ip_address, int(port), on_connected_callback=on_connected_callback, name='carscene.exe', connect_to_running=(not launch_environment))
 
 
 def update_callback(state):

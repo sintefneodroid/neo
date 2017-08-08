@@ -19,7 +19,7 @@ class NeoGUI(App):
         self.reaction_column = ReactionColumn(on_step_callback=self._on_step_callback,
                                               on_reset_callback=self._on_reset_callback,
                                               orientation='vertical',
-                                              size_hint=(0.12,1.0),
+                                              size_hint=(0.2,1.0),
                                               spacing=10,
                                               padding=10)
 

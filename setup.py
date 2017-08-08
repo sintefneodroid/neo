@@ -1,11 +1,12 @@
 from setuptools import setup, find_packages
+import glob
 setup(
     name='Neodroid',
     version=0.1,
     packages=find_packages(),
 
     package_data={
-        'neodroid': ['*'],
+        'neodroid': ['environments/**','environments/*/*','environments/*/*/*','environments/*/*/*/*','environments/*/*/*/*/*','environments/*/*/*/*/*/*','environments/*/*/*/*/*/*/*'],
     },
 
     author='Christian Heider Nielsen',

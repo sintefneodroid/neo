@@ -9,9 +9,9 @@ class EnvironmentStateColumn(BoxLayout):
         self.build()
 
     def build(self):
-        self.depth_image = Image(source='images/default.jpg')
-        self.light_mask_image = Image(source='images/default.png')
-        self.combined_image = Image(source='images/default.jpg')
+        self.depth_image = Image(source='images/default.png')
+        self.light_mask_image = Image(source='images/neo.jpg')
+        self.combined_image = Image(source='images/neodroid.jpg')
         self.position_label = Label(text='Position: ',size_hint=(1.0,0.05))
         self.rotation_label = Label(text='Rotation: ', size_hint=(1.0, 0.05))
         self.reward_label = Label(text='Reward: ', size_hint=(1.0, 0.05))
