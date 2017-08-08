@@ -18,6 +18,7 @@ class EnvironmentState(object):
       self._reward_for_last_step = reward_for_last_step
 
   def unpack(self, obj):
+    if obj:
   #  if b'_time_since_reset' in obj:
       self._time_since_reset = obj[3]#['_time_since_reset']
   #  if b'_total_energy_spent_since_reset' in obj:
@@ -28,7 +29,7 @@ class EnvironmentState(object):
       self._observers = {key: Observer(key,observer) for (key,observer) in obj[1][1].items()}#['_observers']
   #  if b'_reward_for_last_step' in obj:
       self._reward_for_last_step = obj[2]#['_reward_for_last_step']
-      return self
+    return self
 
   def get_time_since_reset(self) -> float:
       return self._time_since_reset

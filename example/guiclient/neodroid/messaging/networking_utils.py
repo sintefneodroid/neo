@@ -13,11 +13,14 @@ _unpacker = msgpack.Unpacker(use_list=False)  # , object_hook=EnvironmentState()
 
 def send_reaction(stream, reaction: Reaction, callback):
   global _waiting_for_response, _connected
-  if _connected and not _waiting_for_response:
-    stream.send(msgpack.packb(reaction.to_dict(), use_bin_type=True))
-    if callback:
-      callback()
-    _waiting_for_response = True
+  try:
+    if _connected and not _waiting_for_response:
+      stream.send(msgpack.packb(reaction.to_dict(), use_bin_type=True))
+      if callback:
+        callback()
+      _waiting_for_response = True
+  except:
+    print('Failed at sending reaction to environment')
 
 
 def recvall(stream, buffer_size=2):

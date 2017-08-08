@@ -31,17 +31,15 @@ def on_connect_callback(ip_address, port, launch_environment):
 
 def update_callback(state):
   state = EnvironmentState().unpack(state)
-  print(state)
   update_environment_widgets(state)
 
 
-def on_step_callback(slider_values):
+def on_step_callback(actor_name, slider_values):
   motions = [
-    #Motion('Car', 'Wheel1rot_X', slider_values[0]),
-    #Motion('Car', 'Wheel2rot_X', slider_values[1]),
-    #Motion('Car', 'Wheel3rot_X', slider_values[2]),
-    #Motion('Car', 'Wheel4rot_X', slider_values[3])
-    #Motion('Player', 'PlayerX', slider_values[0])
+    Motion(str(actor_name), slider_values[0][0], slider_values[0][1]),
+    Motion(str(actor_name), slider_values[1][0], slider_values[1][1]),
+    Motion(str(actor_name), slider_values[2][0], slider_values[2][1]),
+    Motion(str(actor_name), slider_values[3][0], slider_values[3][1])
   ]
   new_state = _neo_environment.step(Reaction(False, motions))
   update_callback(new_state)
@@ -52,17 +50,20 @@ def on_reset_callback():
 
 
 def update_environment_widgets(environment_state: EnvironmentState):
-  _gui.update_depth_image(environment_state.get_observers()[b'DepthCamera'].get_data())
-  #_gui.update_light_mask_image(environment_state.get_observers()[b'LightMaskCamera'].get_data())
-  #combined_image = get_masked_depth_image(environment_state.get_observers()[b'DepthCamera'].get_data(),
-  #                                        environment_state.get_observers()[b'LightMaskCamera'].get_data(), 50, 200)
-  #_gui.update_combined_image(combined_image)
-  _gui.update_xml_text_label(str(environment_state))
-  #_gui.update_position_label(str(environment_state.get_actors()[b'Player'].get_position()))
-  _gui.update_rotation_label(str(environment_state.get_actors()[b'Player'].get_rotation()))
-  _gui.update_reward_label(str(environment_state.get_reward_for_last_step()))
-  _gui.update_energi_label(str(environment_state.get_total_energy_spent_since_reset()))
-  _gui.update_time_label(str(environment_state.get_time_since_reset()))
+  try:
+    _gui.update_depth_image(environment_state.get_observers()[b'DepthCamera'].get_data())
+    _gui.update_light_mask_image(environment_state.get_observers()[b'LightMaskCamera'].get_data())
+    combined_image = get_masked_depth_image(environment_state.get_observers()[b'DepthCamera'].get_data(),
+                                            environment_state.get_observers()[b'LightMaskCamera'].get_data(), 50, 200)
+    _gui.update_combined_image(combined_image)
+    _gui.update_xml_text_label(str(environment_state))
+    _gui.update_position_label(str(environment_state.get_actors()[b'Player'].get_position()))
+    _gui.update_rotation_label(str(environment_state.get_actors()[b'Player'].get_rotation()))
+    _gui.update_reward_label(str(environment_state.get_reward_for_last_step()))
+    _gui.update_energi_label(str(environment_state.get_total_energy_spent_since_reset()))
+    _gui.update_time_label(str(environment_state.get_time_since_reset()))
+  except:
+    print('Failed at updating GUI')
 
 
 def main():

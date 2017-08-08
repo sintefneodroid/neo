@@ -2,6 +2,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.slider import Slider
+from kivy.uix.textinput import TextInput
 
 
 class XMLColumn(BoxLayout):
@@ -10,7 +11,7 @@ class XMLColumn(BoxLayout):
     self.build()
 
   def build(self):
-    self.text_label = Label()
+    self.text_label = TextInput(font_size=12)
 
     self.add_widget(self.text_label)
     return self
