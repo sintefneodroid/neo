@@ -5,6 +5,7 @@ import logging
 import functools
 
 import time
+import shlex
 
 from .messaging import *
 
@@ -15,7 +16,7 @@ class NeodroidEnvironment(object):
                on_connected_callback=print,
                connect_to_running=False,
                name='carscene.exe',
-               path_to_executatble=os.path.join(os.path.dirname(os.path.realpath(__file__)),'environments')):
+               path_to_executatble_directory=os.path.join(os.path.dirname(os.path.realpath(__file__)),'environments')):
 
     #Logging
     logging.basicConfig(filename='log.txt', level=logging.DEBUG)
@@ -31,17 +32,18 @@ class NeodroidEnvironment(object):
     self._awaiting_response = False
 
     if not connect_to_running and not self._simulation_instance:
-      if self._start_instance(name, path_to_executatble, ip, port):
+      if self._start_instance(name, path_to_executatble_directory, ip, port):
         self._logger.debug('successfully started environment ' + str(name))
       else:
         self._logger.debug('could not start environment ' + str(name))
     self._connect(ip, port, on_connected_callback)
 
-  def _start_instance(self, name, path_to_executable, ip, port):
-    path_to_executatble = os.path.join(path_to_executable, name)
-    print('Executing '+path_to_executable)
-    self._simulation_instance = subprocess.Popen([path_to_executatble, ' -screen-fullscreen 0 -screen-height 500 -screen-width 500 -batchmode -nographics ' + '-ip ' + str(ip) + '-port ' + str(port)]) # Figure out have to parameterise unity executable
-    time.sleep(3) # Not good a callback would be better.
+  def _start_instance(self, name, path_to_executatble_directory, ip, port):
+    path_to_executatble = os.path.join(path_to_executatble_directory, name)
+    args = shlex.split('-ip ' + str(ip) + ' -port ' + str(port) + ' -screen-fullscreen 0 -screen-height 500 -screen-width 500')# -batchmode -nographics')
+    print([path_to_executatble]+args)
+    self._simulation_instance = subprocess.Popen([path_to_executatble]+args) # Figure out have to parameterise unity executable
+    #time.sleep(8) # Not good a callback would be better.
     if self._simulation_instance:
       self._logger.debug('Started executable ' + str(name))
       return True
@@ -59,6 +61,7 @@ class NeodroidEnvironment(object):
 
   def _connect(self, ip, port, on_connected_callback):
     self._logger.debug('Connecting to server')
+    time.sleep(8)
     start_connect_thread(ip, port, functools.partial(self._internal_on_connected_callback, on_connected_callback=on_connected_callback))
 
   def get_environment(self):

@@ -7,113 +7,33 @@ Direct3D:
     VRAM:     2259 MB
     Driver:   21.21.13.7651
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\UnityEngine.Timeline.dll (this message is harmless)
-Loading C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\UnityEngine.Timeline.dll into Unity Child Domain
-Platform assembly: C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
-Loading C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-Platform assembly: C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\MsgPack.dll (this message is harmless)
-Loading C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\MsgPack.dll into Unity Child Domain
-Platform assembly: C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\System.dll (this message is harmless)
-Platform assembly: C:\Users\chrini\Documents\neo\example\guiclient\neodroid\environments\carscene_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.051 seconds
+Platform assembly: C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\UnityEngine.Timeline.dll (this message is harmless)
+Loading C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\UnityEngine.Timeline.dll into Unity Child Domain
+Platform assembly: C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\MsgPack.dll (this message is harmless)
+Loading C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\MsgPack.dll into Unity Child Domain
+Platform assembly: C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\chrini\Documents\neo\neodroid\environments\carscene_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.091 seconds
 <RI> Initializing input.
 XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.867655 ms
+UnloadTime: 0.957884 ms
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: 255c -> priority: 1 
-  Thread -> id: 247c -> priority: 1 
-  Thread -> id: a98 -> priority: 1 
-  Thread -> id: 2f24 -> priority: 1 
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Could find not motor with the specified name: SingleAxisX
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
+  Thread -> id: 2d9c -> priority: 1 
+  Thread -> id: 2b40 -> priority: 1 
+  Thread -> id: 17c0 -> priority: 1 
+  Thread -> id: a18 -> priority: 1 
 Could find not motor with the specified name: SingleAxisX
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)

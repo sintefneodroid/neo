@@ -16,18 +16,28 @@ class StaturBar(BoxLayout):
     self.port_input = TextInput(text='5555')
     self.launch_label = Label(text='Launch Environment', halign='right', font_size=12)
     self.launch_check_box = CheckBox(active=True)
+    self.environment_input = TextInput(text='carscene.exe')
     self.connect_button = Button(text='Connect')
+
     self.connect_button.bind(on_release=self.on_connect_button)
+    self.launch_check_box.bind(active=self.on_launch_button)
 
     self.add_widget(self.ip_address_input)
     self.add_widget(self.port_input)
     self.add_widget(self.launch_label)
     self.add_widget(self.launch_check_box)
+    self.add_widget(self.environment_input)
     self.add_widget(self.connect_button)
     return self
 
+  def on_launch_button(self, instance, value):
+    if(value == True):
+      self.environment_input.disabled = False
+    else:
+      self.environment_input.disabled = True
+
   def on_connect_button(self, value):
-    self._on_connect_callback(self.ip_address_input.text, self.port_input.text, self.launch_check_box.active)
+    self._on_connect_callback(self.ip_address_input.text, self.port_input.text, self.launch_check_box.active, self.environment_input.text)
 
   def update_connect_button(self, value: str):
     self.connect_button.text = value
