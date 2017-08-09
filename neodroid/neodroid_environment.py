@@ -34,6 +34,7 @@ class NeodroidEnvironment(object):
     if not connect_to_running and not self._simulation_instance:
       if self._start_instance(name, path_to_executatble_directory, ip, port):
         self._logger.debug('successfully started environment ' + str(name))
+        time.sleep(8)
       else:
         self._logger.debug('could not start environment ' + str(name))
     self._connect(ip, port, on_connected_callback)
@@ -61,7 +62,6 @@ class NeodroidEnvironment(object):
 
   def _connect(self, ip, port, on_connected_callback):
     self._logger.debug('Connecting to server')
-    time.sleep(8)
     start_connect_thread(ip, port, functools.partial(self._internal_on_connected_callback, on_connected_callback=on_connected_callback))
 
   def get_environment(self):
