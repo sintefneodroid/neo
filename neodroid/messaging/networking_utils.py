@@ -3,19 +3,25 @@ from _socket import socket as Socket
 from threading import Thread
 
 import msgpack
+import zmq
+
+from .FlatBufferModels import *
 
 from neodroid.models import Reaction
 
 _connected = False
 _waiting_for_response = False
 _unpacker = msgpack.Unpacker(use_list=False)  # , object_hook=EnvironmentState().unpack)
+ctx = zmq.Context.instance()
+_req_socket = ctx.socket(zmq.REQ)
 
 
 def send_reaction(stream, reaction: Reaction, callback):
   global _waiting_for_response, _connected
   try:
     if _connected and not _waiting_for_response:
-      stream.send(msgpack.packb(reaction.to_dict(), use_bin_type=True))
+      #stream.send(msgpack.packb(reaction.to_dict(), use_bin_type=True))
+      _req_socket.send(b'sa')
       if callback:
         callback()
       _waiting_for_response = True
@@ -24,11 +30,9 @@ def send_reaction(stream, reaction: Reaction, callback):
 
 
 def recvall(stream, buffer_size=2):
-  buf = stream.recv(buffer_size)
+  buf = True
   while buf:
-    yield buf
-    print('yielding')
-    buf = stream.recv(buffer_size)
+    buf = stream.recv()
 
 
 def recv_msg(stream, callback=None):
@@ -44,15 +48,22 @@ def recv_msg(stream, callback=None):
     # return reply
 
 
+#def synchronous_receive_message(stream):
+#  global _waiting_for_response
+#  if _waiting_for_response:
+#    reply = None
+#    while not reply:
+#      _unpacker.feed(stream.recv(1))
+#      for value in _unpacker:
+#        reply = value
+#    _waiting_for_response = False
+#    return reply
+
 def synchronous_receive_message(stream):
   global _waiting_for_response
   if _waiting_for_response:
-    reply = None
-    while not reply:
-      _unpacker.feed(stream.recv(1))
-      for value in _unpacker:
-        reply = value
-    _waiting_for_response = False
+    by = _req_socket.recv()
+    reply = FlatBufferState.GetRootAsFlatBufferState(by, 0)
     return reply
 
 
@@ -74,9 +85,9 @@ def receive_environment_state(stream, callback=None):
 
 def setup_connection(tcp_address, tcp_port, on_connect_callback):
   global _connected
-  stream_socket = Socket(socket.AF_INET, socket.SOCK_STREAM)
-  stream_socket.connect((tcp_address, tcp_port))
-  on_connect_callback(stream_socket)
+  #stream_socket = Socket(socket.AF_INET, socket.SOCK_STREAM)
+  #stream_socket.connect((tcp_address, tcp_port))
+  #on_connect_callback(stream_socket)
   _connected = True
 
 
