@@ -13,7 +13,7 @@ _connected = False
 _waiting_for_response = False
 _unpacker = msgpack.Unpacker(use_list=False)  # , object_hook=EnvironmentState().unpack)
 ctx = zmq.Context.instance()
-_req_socket = ctx.socket(zmq.REQ)
+_req_socket = ctx.socket(zmq.PAIR)
 
 
 def send_reaction(stream, reaction: Reaction, callback):
@@ -59,7 +59,7 @@ def recv_msg(stream, callback=None):
 #    _waiting_for_response = False
 #    return reply
 
-def synchronous_receive_message(stream):
+def synchronous_receive_message(_req_socket):
   global _waiting_for_response
   if _waiting_for_response:
     by = _req_socket.recv()
@@ -87,7 +87,9 @@ def setup_connection(tcp_address, tcp_port, on_connect_callback):
   global _connected
   #stream_socket = Socket(socket.AF_INET, socket.SOCK_STREAM)
   #stream_socket.connect((tcp_address, tcp_port))
-  #on_connect_callback(stream_socket)
+  #socket.bind("tcp://*:%s" % tcp_port)
+  _req_socket.connect("tcp://localhost:%s" % tcp_port)
+  on_connect_callback(_req_socket)
   _connected = True
 
 
