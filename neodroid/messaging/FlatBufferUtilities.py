@@ -2,7 +2,7 @@ import flatbuffers
 from .FlatBufferModels import *
 
 def build_reaction():
-  builder = flatbuffers.Builder(1024)
+  builder = flatbuffers.Builder(0)
 
   FlatBufferMotionStart(builder)
   motion1 = FlatBufferMotionEnd(builder)
@@ -17,10 +17,11 @@ def build_reaction():
 
   FlatBufferReactionStart(builder)
   FlatBufferReactionAddReset(builder, False)
-  FlatBufferReactionAddMotions(builder,motions)
+  FlatBufferReactionAddMotions(builder, motions)
   reaction = FlatBufferReactionEnd(builder)
   builder.Finish(reaction)
   return builder.Output()
 
 def deserialize_state(state):
-  return FlatBufferState.GetRootAsFlatBufferState(state, 0)
+  s = FlatBufferState.GetRootAsFlatBufferState(state, 0)
+  return s

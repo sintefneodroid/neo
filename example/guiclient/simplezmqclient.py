@@ -10,10 +10,12 @@ socket.connect("tcp://127.0.0.1:5555")
 
 reaction = msging.build_reaction()
 
-#socket.send(reaction)
 while True:
     socket.send(reaction)
     msg = socket.recv()
     print(len(msg))
+    print(type(msg))
     msg_ = msging.deserialize_state(msg)
-    print(msg_.RewardForLastStep())
+    print(type(msg_))
+    print(msg_.ObserversLength())
+    time.sleep(1)
