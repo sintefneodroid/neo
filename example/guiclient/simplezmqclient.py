@@ -17,5 +17,5 @@ while True:
     print(type(msg))
     msg_ = msging.deserialize_state(msg)
     print(type(msg_))
-    print(msg_.ObserversLength())
+    print(msg_.Observers(1).Name())
     time.sleep(1)
