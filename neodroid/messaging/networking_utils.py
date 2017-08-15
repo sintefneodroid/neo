@@ -1,27 +1,23 @@
-import socket
-from _socket import socket as Socket
 from threading import Thread
 
-import msgpack
 import zmq
 
 from .FlatBufferModels import *
 
 from neodroid.models import Reaction
+from .FlatBufferUtilities import build_flat_reaction
 
 _connected = False
 _waiting_for_response = False
-_unpacker = msgpack.Unpacker(use_list=False)  # , object_hook=EnvironmentState().unpack)
 ctx = zmq.Context.instance()
-_req_socket = ctx.socket(zmq.PAIR)
-
+_req_socket = ctx.socket(zmq.REQ)
 
 def send_reaction(stream, reaction: Reaction, callback):
   global _waiting_for_response, _connected
   try:
     if _connected and not _waiting_for_response:
-      #stream.send(msgpack.packb(reaction.to_dict(), use_bin_type=True))
-      _req_socket.send(b'sa')
+      flat_reaction = build_flat_reaction(Reaction(False, []))
+      _req_socket.send(flat_reaction)
       if callback:
         callback()
       _waiting_for_response = True
@@ -29,40 +25,11 @@ def send_reaction(stream, reaction: Reaction, callback):
     print('Failed at sending reaction to environment')
 
 
-def recvall(stream, buffer_size=2):
-  buf = True
-  while buf:
-    buf = stream.recv()
-
-
-def recv_msg(stream, callback=None):
-  global _waiting_for_response
-  if _waiting_for_response:
-    reply = None
-    while not reply:
-      _unpacker.feed(stream.recv(1))
-      for value in _unpacker:  #### Use unpackb instead has ...Unpacker's object_hook callback receives a dict; the object_pairs_hook callback may instead be used to receive a list of key-value pairs.
-        reply = value
-    _waiting_for_response = False
-    callback(reply)
-    # return reply
-
-
-#def synchronous_receive_message(stream):
-#  global _waiting_for_response
-#  if _waiting_for_response:
-#    reply = None
-#    while not reply:
-#      _unpacker.feed(stream.recv(1))
-#      for value in _unpacker:
-#        reply = value
-#    _waiting_for_response = False
-#    return reply
-
 def synchronous_receive_message(_req_socket):
   global _waiting_for_response
   if _waiting_for_response:
     by = _req_socket.recv()
+    _waiting_for_response = False
     reply = FlatBufferState.GetRootAsFlatBufferState(by, 0)
     return reply
 
@@ -71,12 +38,8 @@ def receive_environment_state(stream, callback=None):
   global _waiting_for_response, _connected
   if _connected:
     _waiting_for_response = True
-    # reply = stream.recv(4096*2*2)
-    reply = recv_msg(stream)
-    # reply = b''.join(recvall(stream))
-    # reply = msgpack.unpackb(reply)
+    reply = synchronous_receive_message(stream)
     _waiting_for_response = False
-    # reply = msgpack.unpackb(reply, use_list=False)#, object_hook=EnvironmentState)
     if callback:
       callback(reply)
     return reply
@@ -85,9 +48,6 @@ def receive_environment_state(stream, callback=None):
 
 def setup_connection(tcp_address, tcp_port, on_connect_callback):
   global _connected
-  #stream_socket = Socket(socket.AF_INET, socket.SOCK_STREAM)
-  #stream_socket.connect((tcp_address, tcp_port))
-  #socket.bind("tcp://*:%s" % tcp_port)
   _req_socket.connect("tcp://localhost:%s" % tcp_port)
   on_connect_callback(_req_socket)
   _connected = True
@@ -109,12 +69,6 @@ def start_connect_thread(tcp_ip_address='127.0.0.1', tcp_port=5555, on_connected
 
 def start_send_msg_thread(stream, action, on_connected_callback):
   thread = Thread(target=send_reaction, args=(stream, action, on_connected_callback))
-  thread.daemon = True  # Terminate with the rest of the program, is a Background Thread
-  thread.start()
-
-
-def start_recv_msg_thread(stream, on_receive_callback):
-  thread = Thread(target=recv_msg, args=(stream, on_receive_callback))
   thread.daemon = True  # Terminate with the rest of the program, is a Background Thread
   thread.start()
 

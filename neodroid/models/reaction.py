@@ -3,8 +3,8 @@ from typing import List
 import json
 
 class Reaction(object):
-  _actor_motor_motions: List[Motion]
-  _reset: bool
+  #_actor_motor_motions: List[Motion]
+  #_reset: bool
 
   def __init__(self, reset, actor_motor_motions):
     self._reset = reset

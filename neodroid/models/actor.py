@@ -4,10 +4,10 @@ from neodroid.models.motor import Motor
 
 
 class Actor(object):
-  _name: str
-  _position: List[float]
-  _rotation: List[float]
-  _motors: List[Motor]
+  #_name: str
+  #_position: List[float]
+  #_rotation: List[float]
+  #_motors: List[Motor]
 
   def __init__(self, name, obj_tuple):
     self._name = name

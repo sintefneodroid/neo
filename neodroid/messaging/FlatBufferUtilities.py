@@ -1,27 +1,42 @@
-import flatbuffers
 from .FlatBufferModels import *
 
-def build_reaction():
+def build_flat_reaction(reaction):
   builder = flatbuffers.Builder(0)
 
-  FlatBufferMotionStart(builder)
-  motion1 = FlatBufferMotionEnd(builder)
+  motion_offsets = []
+  for motion in reaction._actor_motor_motions:
+    FlatBufferMotionStart(builder)
+    FlatBufferMotionAddActorName(builder, motion._actor_name)
+    FlatBufferMotionAddMotorName(builder, motion._motor_name)
+    FlatBufferMotionAddStrength(builder, motion._strength)
+    motion_offset = FlatBufferMotionEnd(builder)
+    motion_offsets.append(motion_offset)
 
-  FlatBufferMotionStart(builder)
-  motion2 = FlatBufferMotionEnd(builder)
-
-  FlatBufferReactionStartMotionsVector(builder, 2)
-  builder.PrependUOffsetTRelative(motion1)
-  builder.PrependUOffsetTRelative(motion2)
-  motions = builder.EndVector(2)
+  FlatBufferReactionStartMotionsVector(builder, len(motion_offsets))
+  for motion in motion_offsets:
+    builder.PrependUOffsetTRelative(motion)
+  motions = builder.EndVector(len(motion_offsets))
 
   FlatBufferReactionStart(builder)
-  FlatBufferReactionAddReset(builder, False)
+  FlatBufferReactionAddReset(builder, reaction._reset)
   FlatBufferReactionAddMotions(builder, motions)
-  reaction = FlatBufferReactionEnd(builder)
-  builder.Finish(reaction)
+  flat_reaction = FlatBufferReactionEnd(builder)
+  builder.Finish(flat_reaction)
   return builder.Output()
 
 def deserialize_state(state):
   s = FlatBufferState.GetRootAsFlatBufferState(state, 0)
   return s
+
+def create_state(state):
+
+  pass
+def create_actor(actor):
+
+  pass
+def create_observer(observer):
+
+  pass
+def create_motor(motor):
+
+  pass

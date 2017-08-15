@@ -4,10 +4,10 @@ import io
 
 
 class Observer(object):
-  _name:str
-  _data:bytearray
-  _position:List[float]
-  _rotation:List[float]
+  #_name:str
+  #_data:bytearray
+  #_position:List[float]
+  #_rotation:List[float]
 
   def __init__(self,name,obj):
     self._name = name

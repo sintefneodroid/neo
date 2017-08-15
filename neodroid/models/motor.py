@@ -1,7 +1,7 @@
 class Motor(object):
-  _binary:bool
-  _energy_cost:float
-  _name:str
+  #_binary:bool
+  #_energy_cost:float
+  #_name:str
 
   def __init__(self, name, obj_tuple):
     self._name = name
