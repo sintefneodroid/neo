@@ -5,7 +5,7 @@ import zmq
 from .FlatBufferModels import *
 
 from neodroid.models import Reaction
-from .FlatBufferUtilities import build_flat_reaction
+from .FlatBufferUtilities import build_flat_reaction, create_state
 
 _connected = False
 _waiting_for_response = False
@@ -14,15 +14,15 @@ _req_socket = ctx.socket(zmq.REQ)
 
 def send_reaction(stream, reaction: Reaction, callback):
   global _waiting_for_response, _connected
-  try:
-    if _connected and not _waiting_for_response:
-      flat_reaction = build_flat_reaction(Reaction(False, []))
-      _req_socket.send(flat_reaction)
-      if callback:
-        callback()
-      _waiting_for_response = True
-  except:
-    print('Failed at sending reaction to environment')
+  #try:
+  if _connected and not _waiting_for_response:
+    flat_reaction = build_flat_reaction(reaction)
+    _req_socket.send(flat_reaction)
+    if callback:
+      callback()
+    _waiting_for_response = True
+  #except:
+    #print('Failed at sending reaction to environment')
 
 
 def synchronous_receive_message(_req_socket):
@@ -31,7 +31,8 @@ def synchronous_receive_message(_req_socket):
     by = _req_socket.recv()
     _waiting_for_response = False
     reply = FlatBufferState.GetRootAsFlatBufferState(by, 0)
-    return reply
+    state = create_state(reply)
+    return state
 
 
 def receive_environment_state(stream, callback=None):

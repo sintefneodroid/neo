@@ -3,13 +3,11 @@ class Motor(object):
   #_energy_cost:float
   #_name:str
 
-  def __init__(self, name, obj_tuple):
+  def __init__(self, name, binary, energy_cost, energy_spent):
     self._name = name
-    self.unpack(obj_tuple)
-
-  def unpack(self, obj_tuple):
-    self._binary = obj_tuple[0]
-    self._energy_cost = obj_tuple[1]
+    self._binary = binary
+    self._energy_cost = energy_cost
+    self._energy_spent = energy_spent
 
   def __repr__(self):
     return  '        <Motor>\n'+\

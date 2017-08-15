@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 
 from neodroid.models.actor import Actor
 from neodroid.models.observer import Observer
@@ -10,7 +10,7 @@ class EnvironmentState(object):
   #_observers: Dict[str,Observer]
   #_reward_for_last_step: float
 
-  def __init__(self, time_since_reset:float=0, total_energy_spent_since_reset=0, actors:Dict={}, observers:Dict={}, reward_for_last_step:float=0):
+  def __init__(self, time_since_reset:float=0, total_energy_spent_since_reset=0, actors=[], observers=[], reward_for_last_step:float=0):
       self._time_since_reset = time_since_reset
       self._total_energy_spent_since_reset = total_energy_spent_since_reset
       self._actors = actors
@@ -23,18 +23,18 @@ class EnvironmentState(object):
   def get_total_energy_spent_since_reset(self) -> float:
       return self._total_energy_spent_since_reset
 
-  def get_actors(self) -> Dict:
+  def get_actors(self) -> List:
       return self._actors
 
-  def get_observers(self) -> Dict:
+  def get_observers(self) -> List:
       return self._observers
 
   def get_reward_for_last_step(self) -> float:
       return self._reward_for_last_step
 
   def __repr__(self):
-    observers_str = ''.join([str(observer.__repr__()) for observer in self._observers.values()])
-    actors_str = ''.join([str(actor.__repr__()) for actor in self._actors.values()])
+    observers_str = ''.join([str(observer.__repr__()) for observer in self._observers])
+    actors_str = ''.join([str(actor.__repr__()) for actor in self._actors])
 
     return '<EnvironmentState>\n' + \
            '  <time_since_reset>' + str(self._time_since_reset) + '</time_since_reset>\n' + \

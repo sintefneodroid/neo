@@ -9,15 +9,20 @@ class Observer(object):
   #_position:List[float]
   #_rotation:List[float]
 
-  def __init__(self,name,obj):
+  def __init__(self, name, data, position, rotation):
     self._name = name
-    self.unpack(obj)
+    self._data = io.BytesIO(data)
+    self._position = position
+    self._rotation = rotation
 
-  def unpack(self, obj_tuple):
-    self._data = io.BytesIO(obj_tuple[0])
-    self._position = obj_tuple[1]
-    self._rotation = obj_tuple[2]
+  def get_name(self):
+    return self._name
 
+  def get_position(self):
+    return self._position
+
+  def get_rotation(self):
+    return self._rotation
 
   def get_data(self):
     return self._data

@@ -35,10 +35,10 @@ def update_callback(state):
 
 def on_step_callback(actor_name, slider_values):
   motions = [
-    Motion(str(actor_name), slider_values[0][0], slider_values[0][1]),
-    Motion(str(actor_name), slider_values[1][0], slider_values[1][1]),
-    Motion(str(actor_name), slider_values[2][0], slider_values[2][1]),
-    Motion(str(actor_name), slider_values[3][0], slider_values[3][1])
+    Motion(str(actor_name), str(slider_values[0][0]), slider_values[0][1]),
+    Motion(str(actor_name), str(slider_values[1][0]), slider_values[1][1]),
+    Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
+    Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
   ]
   new_state = _neo_environment.step(Reaction(False, motions))
   update_callback(new_state)
@@ -50,20 +50,21 @@ def on_reset_callback():
 
 def update_environment_widgets(environment_state):
   try:
-    #_gui.update_depth_image(environment_state.get_observers()[b'DepthCamera'].get_data())
-    #_gui.update_light_mask_image(environment_state.get_observers()[b'LightMaskCamera'].get_data())
-    #combined_image = get_masked_depth_image(environment_state.get_observers()[b'DepthCamera'].get_data(),
-    #                                        environment_state.get_observers()[
-    # b'LightMaskCamera'].get_data(), 50, 200)
+    _gui.update_depth_image(environment_state.get_observers()[0].get_data())
+    _gui.update_light_mask_image(environment_state.get_observers()[1].get_data())
+    #combined_image = get_masked_depth_image(environment_state.get_observers()[0].get_data(),                             #           environment_state.get_observers()[1].get_data(), 50, 200)
     #_gui.update_combined_image(combined_image)
-    _gui.update_xml_text_label(str(environment_state))
-    #_gui.update_position_label(str(environment_state.get_actors()[b'Player'].get_position()))
-    #_gui.update_rotation_label(str(environment_state.get_actors()[b'Player'].get_rotation()))
-    #_gui.update_reward_label(str(environment_state.get_reward_for_last_step()))
-    #_gui.update_energi_label(str(environment_state.get_total_energy_spent_since_reset()))
-    #_gui.update_time_label(str(environment_state.get_time_since_reset()))
   except:
-    print('Failed at updating GUI')
+    print('Failed at updating Images')
+  try:
+    _gui.update_xml_text_label(str(environment_state))
+    _gui.update_position_label(str(environment_state.get_actors()[0].get_position()))
+    _gui.update_rotation_label(str(environment_state.get_actors()[0].get_rotation()))
+    _gui.update_reward_label(str(environment_state.get_reward_for_last_step()))
+    _gui.update_energi_label(str(environment_state.get_total_energy_spent_since_reset()))
+    _gui.update_time_label(str(environment_state.get_time_since_reset()))
+  except:
+    print('Failed at updating rest of GUI')
 
 
 def main():
