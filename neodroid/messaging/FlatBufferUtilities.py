@@ -74,7 +74,7 @@ def create_motors(flat_actor):
   motors = []
   for i in range(1,flat_actor.MotorsLength()+1):
     flat_motor = flat_actor.Motors(i)
-    motor = Motor(flat_motor.Name(),flat_motor.Binary(),flat_motor.EnergyCost(),
+    motor = Motor(flat_motor.Name(), flat_motor.Binary(), flat_motor.EnergyCost(),
                   flat_motor.EnergySpentSinceReset())
     motors.append(motor)
   return motors
