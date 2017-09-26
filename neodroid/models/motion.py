@@ -1,7 +1,7 @@
 class Motion(object):
-  _actor_name:str
-  _motor_name:str
-  _strength:float #Strength has a possible direction given by the sign of the float
+  #_actor_name:str
+  #_motor_name:str
+  #_strength:float #Strength has a possible direction given by the sign of the float
 
   def __init__(self, actor_name, motor_name, strength):
     self._actor_name = actor_name

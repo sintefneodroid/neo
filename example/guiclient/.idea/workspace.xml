@@ -12,25 +12,26 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/UnityPythonClient$Client.coverage" NAME="Client Coverage Results" MODIFIED="1501154919495" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/guiclient$MotionView.coverage" NAME="MotionView Coverage Results" MODIFIED="1501225732227" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui_components" />
-    <SUITE FILE_PATH="coverage/guiclient$Client.coverage" NAME="Client Coverage Results" MODIFIED="1502275588356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/guiclient$Client.coverage" NAME="Client Coverage Results" MODIFIED="1502302596954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
                 <element signature="e#232#386#0" expanded="true" />
                 <element signature="e#423#494#0" expanded="true" />
                 <element signature="e#575#896#0" expanded="true" />
                 <element signature="e#929#1005#0" expanded="true" />
-                <element signature="e#1059#1467#0" expanded="true" />
-                <element signature="e#1496#1578#0" expanded="true" />
-                <element signature="e#1652#2650#0" expanded="true" />
-                <element signature="e#2667#2852#0" expanded="true" />
+                <element signature="e#1059#1448#0" expanded="true" />
+                <marker date="1502279647721" expanded="true" signature="1474:1559" ph="..." />
+                <marker date="1502279647721" expanded="true" signature="1630:2631" ph="..." />
+                <marker date="1502279647721" expanded="true" signature="1637:2585" ph="..." />
+                <marker date="1502279647721" expanded="true" signature="2645:2833" ph="..." />
               </folding>
             </state>
           </provider>
@@ -39,7 +40,7 @@
       <file leaf-file-name="gui.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="255">
               <caret line="21" column="60" lean-forward="false" selection-start-line="21" selection-start-column="60" selection-end-line="21" selection-end-column="60" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
@@ -62,7 +63,7 @@
       <file leaf-file-name="reaction_column.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui_components/reaction_column.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
+            <state relative-caret-position="119">
               <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
@@ -87,15 +88,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="neodroid_environment.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../neodroid/neodroid_environment.py">
+      <file leaf-file-name="environment_state_column.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gui_components/environment_state_column.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="81" column="57" lean-forward="true" selection-start-line="81" selection-start-column="57" selection-end-line="81" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#17#0" expanded="true" />
-                <element signature="e#2388#2458#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="170">
+              <caret line="15" column="73" lean-forward="false" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="73" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,22 +101,15 @@
       <file leaf-file-name="networking_utils.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../../neodroid/messaging/networking_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="38" column="10" lean-forward="true" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
+            <state relative-caret-position="228">
+              <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
               <folding>
-                <element signature="e#1310#1544#0" expanded="true" />
-                <element signature="e#1603#2024#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#755#802#0" expanded="true" />
+                <element signature="e#844#1271#0" expanded="true" />
+                <element signature="e#1606#1702#0" expanded="true" />
+                <element signature="e#1761#2182#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="environment_state_column.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui_components/environment_state_column.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="15" column="73" lean-forward="false" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="73" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -137,7 +128,7 @@
         <entry file="file://$PROJECT_DIR$/gui_components/status_bar.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="25" column="36" lean-forward="true" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+              <caret line="25" column="36" lean-forward="false" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
               <folding>
                 <element signature="e#1196#1315#0" expanded="true" />
                 <element signature="e#1359#1493#0" expanded="true" />
@@ -193,6 +184,7 @@
         <option value="$PROJECT_DIR$/gui_components/status_bar.py" />
         <option value="$PROJECT_DIR$/../../neodroid/neodroid_environment.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/../../neodroid/messaging/networking_utils.py" />
       </list>
     </option>
   </component>
@@ -244,13 +236,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../agent" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../neodroid" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
@@ -494,17 +486,17 @@
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13539445" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13646056" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34195402" sideWeight="0.51492536" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34195402" sideWeight="0.5170576" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34195402" sideWeight="0.48507464" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34195402" sideWeight="0.48294243" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994253" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994253" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -592,10 +584,11 @@
             <element signature="e#423#494#0" expanded="true" />
             <element signature="e#575#896#0" expanded="true" />
             <element signature="e#929#1005#0" expanded="true" />
-            <element signature="e#1059#1467#0" expanded="true" />
-            <element signature="e#1496#1578#0" expanded="true" />
-            <element signature="e#1652#2650#0" expanded="true" />
-            <element signature="e#2667#2852#0" expanded="true" />
+            <element signature="e#1059#1448#0" expanded="true" />
+            <marker date="1502279647721" expanded="true" signature="1474:1559" ph="..." />
+            <marker date="1502279647721" expanded="true" signature="1630:2631" ph="..." />
+            <marker date="1502279647721" expanded="true" signature="1637:2585" ph="..." />
+            <marker date="1502279647721" expanded="true" signature="2645:2833" ph="..." />
           </folding>
         </state>
       </provider>
@@ -623,10 +616,11 @@
             <element signature="e#423#494#0" expanded="true" />
             <element signature="e#575#896#0" expanded="true" />
             <element signature="e#929#1005#0" expanded="true" />
-            <element signature="e#1059#1467#0" expanded="true" />
-            <element signature="e#1496#1578#0" expanded="true" />
-            <element signature="e#1652#2650#0" expanded="true" />
-            <element signature="e#2667#2852#0" expanded="true" />
+            <element signature="e#1059#1448#0" expanded="true" />
+            <marker date="1502279647721" expanded="true" signature="1474:1559" ph="..." />
+            <marker date="1502279647721" expanded="true" signature="1630:2631" ph="..." />
+            <marker date="1502279647721" expanded="true" signature="1637:2585" ph="..." />
+            <marker date="1502279647721" expanded="true" signature="2645:2833" ph="..." />
           </folding>
         </state>
       </provider>
@@ -724,12 +718,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="45" lean-forward="false" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-            <element signature="e#251#310#0" expanded="true" />
-            <element signature="e#836#890#0" expanded="true" />
-            <element signature="e#949#1001#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -753,7 +741,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="14" column="43" lean-forward="true" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -768,7 +755,7 @@
     <entry file="file://$PROJECT_DIR$/gui_components/status_bar.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="25" column="36" lean-forward="true" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+          <caret line="25" column="36" lean-forward="false" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
           <folding>
             <element signature="e#1196#1315#0" expanded="true" />
             <element signature="e#1359#1493#0" expanded="true" />
@@ -787,7 +774,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="255">
           <caret line="21" column="60" lean-forward="false" selection-start-line="21" selection-start-column="60" selection-end-line="21" selection-end-column="60" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
@@ -798,19 +785,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui_components/environment_state_column.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="170">
           <caret line="15" column="73" lean-forward="false" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="73" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#309#466#0" expanded="true" />
+            <element signature="e#491#1214#0" expanded="true" />
+            <element signature="e#1255#1698#0" expanded="true" />
+            <element signature="e#1741#1766#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#232#386#0" expanded="true" />
+            <element signature="e#423#494#0" expanded="true" />
+            <element signature="e#575#896#0" expanded="true" />
+            <element signature="e#929#1005#0" expanded="true" />
+            <element signature="e#1059#1448#0" expanded="true" />
+            <marker date="1502279647721" expanded="true" signature="1474:1559" ph="..." />
+            <marker date="1502279647721" expanded="true" signature="1630:2631" ph="..." />
+            <marker date="1502279647721" expanded="true" signature="1637:2585" ph="..." />
+            <marker date="1502279647721" expanded="true" signature="2645:2833" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../neodroid/neodroid_environment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="415">
-          <caret line="81" column="57" lean-forward="true" selection-start-line="81" selection-start-column="57" selection-end-line="81" selection-end-column="57" />
+          <caret line="81" column="57" lean-forward="false" selection-start-line="81" selection-start-column="57" selection-end-line="81" selection-end-column="57" />
           <folding>
-            <element signature="e#0#17#0" expanded="true" />
-            <element signature="e#2388#2458#0" expanded="true" />
+            <element signature="e#0#17#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -825,45 +844,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui_components/reaction_column.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-            <element signature="e#309#466#0" expanded="true" />
-            <element signature="e#491#1214#0" expanded="true" />
-            <element signature="e#1255#1698#0" expanded="true" />
-            <element signature="e#1741#1766#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <element signature="e#232#386#0" expanded="true" />
-            <element signature="e#423#494#0" expanded="true" />
-            <element signature="e#575#896#0" expanded="true" />
-            <element signature="e#929#1005#0" expanded="true" />
-            <element signature="e#1059#1467#0" expanded="true" />
-            <element signature="e#1496#1578#0" expanded="true" />
-            <element signature="e#1652#2650#0" expanded="true" />
-            <element signature="e#2667#2852#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../neodroid/messaging/networking_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="38" column="10" lean-forward="true" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
+        <state relative-caret-position="228">
+          <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
-            <element signature="e#1310#1544#0" expanded="true" />
-            <element signature="e#1603#2024#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#755#802#0" expanded="true" />
+            <element signature="e#844#1271#0" expanded="true" />
+            <element signature="e#1606#1702#0" expanded="true" />
+            <element signature="e#1761#2182#0" expanded="true" />
           </folding>
         </state>
       </provider>

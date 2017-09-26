@@ -72,11 +72,9 @@ class NeodroidEnvironment(object):
     self._logger.debug('Step')
     sent_callback = print
     self._awaiting_response = True
-    #start_send_msg_thread(self._stream, action, sent_callback)
-    #start_recv_msg_thread(self._stream, callback)
     send_reaction(self._stream, reaction, sent_callback)
     if callback:
-      recv_msg(self._stream, callback)
+      #recv_msg(self._stream, callback)
       self._awaiting_response = False
     else:
       message = synchronous_receive_message(self._stream)
@@ -88,8 +86,6 @@ class NeodroidEnvironment(object):
     send_reaction(self._stream, reaction, print)
     message = synchronous_receive_message(self._stream)
     return message
-    #start_send_msg_thread(self._stream, action)
-    #start_recv_msg_thread(self._stream, callback)
 
   def close(self, callback=None):
     self._logger.debug('Close')
