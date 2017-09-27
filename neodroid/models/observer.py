@@ -27,7 +27,7 @@ class Observer(object):
            '      <name>' + self._name.decode('utf-8') + '</name>\n' + \
            '      <position>' + str(self._position) + '</position>\n' + \
            '      <rotation>' + str(self._rotation) + '</rotation>\n' + \
-           '      <data_size>' + str(self._data.getvalue()[:10]) +'...'+ str(self._data.getvalue()[-10:]) + '</data_size>\n'+\
+           '      <data_sample>' + str(self._data.getvalue()[:10]) +'...'+ str(self._data.getvalue()[-10:]) + '</data_sample>\n'+\
            '      <data_size>' + str(self._data.__sizeof__()) + '</data_size>\n'+\
            '    </Observer>\n'
 

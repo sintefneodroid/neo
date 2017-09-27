@@ -1,4 +1,4 @@
-from .environment_state_column import EnvironmentStateColumn
-from .reaction_column import ReactionColumn
+from .environment_state_box import EnvironmentStateBox
+from .reaction_box import ReactionBox
 from .status_bar import StaturBar
-from .xml_column import XMLColumn
+from .xml_box import XMLBox

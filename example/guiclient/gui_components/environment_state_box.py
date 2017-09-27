@@ -3,9 +3,9 @@ from kivy.uix.image import Image
 from kivy.core.image import Image as CoreImage
 from kivy.uix.label import Label
 
-class EnvironmentStateColumn(BoxLayout):
+class EnvironmentStateBox(BoxLayout):
     def __init__(self, **kwargs):
-        super(EnvironmentStateColumn, self).__init__(**kwargs)
+        super(EnvironmentStateBox, self).__init__(**kwargs)
         self.build()
 
     def build(self):

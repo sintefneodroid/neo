@@ -5,9 +5,9 @@ from kivy.uix.slider import Slider
 from kivy.uix.textinput import TextInput
 
 
-class XMLColumn(BoxLayout):
+class XMLBox(BoxLayout):
   def __init__(self, **kwargs):
-    super(XMLColumn, self).__init__(**kwargs)
+    super(XMLBox, self).__init__(**kwargs)
     self.build()
 
   def build(self):
