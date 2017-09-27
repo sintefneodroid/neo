@@ -14,25 +14,27 @@ class ReactionBox(BoxLayout):
     self.build()
 
   def build(self):
+    self.uppper_spacer = Label()
+    self.actor_input = TextInput(text="Gripper")#, multiline=False)
+    self.motor_1 = MotionView("GripperSingleAxisX")
+    self.motor_2 = MotionView("GripperSingleAxisY")
+    self.motor_3 = MotionView("GripperSingleAxisZ")
+    self.motor_4 = MotionView("GripperSingleAxisRotX")
     self.step_button = Button(text='Step')
     self.reset_button = Button(text='Reset')
-    self.actor_input = TextInput(text="Player")#, multiline=False)
-    self.motor_1 = MotionView()
-    self.motor_2 = MotionView()
-    self.motor_3 = MotionView()
-    self.motor_4 = MotionView()
-    self.spacer = Label()
+    self.bottom_spacer = Label()
     self.step_button.bind(on_release=self.on_step_button)
     self.reset_button.bind(on_release=self.on_reset_button)
 
+    self.add_widget(self.uppper_spacer)
     self.add_widget(self.actor_input)
-    self.add_widget(self.step_button)
-    self.add_widget(self.reset_button)
     self.add_widget(self.motor_1)
     self.add_widget(self.motor_2)
     self.add_widget(self.motor_3)
     self.add_widget(self.motor_4)
-    self.add_widget(self.spacer)
+    self.add_widget(self.step_button)
+    self.add_widget(self.reset_button)
+    self.add_widget(self.bottom_spacer)
     return self
 
   def on_step_button(self, value):

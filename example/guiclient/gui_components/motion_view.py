@@ -5,12 +5,12 @@ from kivy.uix.slider import Slider
 from kivy.uix.textinput import TextInput
 
 class MotionView(BoxLayout):
-  def __init__(self, **kwargs):
+  def __init__(self, initial_text="SingleAxisX", **kwargs):
     super(MotionView, self).__init__(**kwargs)
-    self.build()
+    self.build(initial_text)
 
-  def build(self):
-    self.motor_input = TextInput(text="SingleAxisX")#, multiline=False)
+  def build(self, initial_text):
+    self.motor_input = TextInput(text=initial_text)#, multiline=False)
     self.motor_slider = Slider(min=-100, max=100, value=0)
     self.motor_value = TextInput(text='0.0')#, multiline=False)
 
