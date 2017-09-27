@@ -1,4 +1,6 @@
-import io
+from io import BytesIO
+from PIL import Image
+import numpy as np
 
 from .FlatBufferModels import *
 from neodroid.models import *
@@ -65,10 +67,10 @@ def create_observers(flat_state):
   return observers
 
 def create_data(flat_observer):
-  dataBytes = bytearray()
-  for i in range(1,flat_observer.DataLength()+1):
-    dataBytes.append(flat_observer.Data(i))
-  return bytes(dataBytes)
+  data = np.array([flat_observer.Data(i) for i in range(4,flat_observer.DataLength()-4)], dtype=np.uint8).tobytes() #Weird magic sizes
+  bytes_stream = BytesIO(data)
+  #bytes_stream.seek(0)
+  return bytes_stream
 
 def create_motors(flat_actor):
   motors = []

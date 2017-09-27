@@ -10,8 +10,9 @@ class EnvironmentStateColumn(BoxLayout):
 
     def build(self):
         self.depth_image = Image(source='images/default.png')
-        self.light_mask_image = Image(source='images/neo.jpg')
-        self.combined_image = Image(source='images/neodroid.jpg')
+        self.segmentation_image = Image(source='images/neo.jpg')
+        self.rgb_image = Image(source='images/neodroid.jpg')
+        self.infrared_shadow_image = Image(source='images/neodroid.jpg')
         self.position_label = Label(text='Position: ',size_hint=(1.0,0.05))
         self.rotation_label = Label(text='Rotation: ', size_hint=(1.0, 0.05))
         self.reward_label = Label(text='Reward: ', size_hint=(1.0, 0.05))
@@ -20,9 +21,10 @@ class EnvironmentStateColumn(BoxLayout):
 
         self.image_row_layout = BoxLayout(orientation='horizontal')
 
+        self.image_row_layout.add_widget(self.rgb_image)
+        self.image_row_layout.add_widget(self.segmentation_image)
         self.image_row_layout.add_widget(self.depth_image)
-        self.image_row_layout.add_widget(self.light_mask_image)
-        self.image_row_layout.add_widget(self.combined_image)
+        self.image_row_layout.add_widget(self.infrared_shadow_image)
 
         self.add_widget(self.image_row_layout)
         self.add_widget(self.position_label)
@@ -39,17 +41,24 @@ class EnvironmentStateColumn(BoxLayout):
         except:
             print('Image not valid')
 
-    def update_light_mask_image(self, light_mask_image_data):
+    def update_segmentation_image(self, segmentation_image_data):
         try:
-            light_mask_image = CoreImage(light_mask_image_data, ext='png')
-            self.light_mask_image.texture = light_mask_image.texture
+            segmentation_image = CoreImage(segmentation_image_data, ext='png')
+            self.segmentation_image.texture = segmentation_image.texture
         except:
             print('Image not valid')
 
-    def update_combined_image(self, combined_image_data):
+    def update_infrared_shadow_image(self, infrared_shadow_image_data):
         try:
-            combined_image = CoreImage(combined_image_data, ext='png')
-            self.combined_image.texture = combined_image.texture
+            infrared_shadow_image = CoreImage(infrared_shadow_image_data, ext='png')
+            self.infrared_shadow_image.texture = infrared_shadow_image.texture
+        except:
+            print('Image not valid')
+
+    def update_rgb_image(self, rgb_image_data):
+        try:
+            rgb_image = CoreImage(rgb_image_data, ext='png')
+            self.rgb_image.texture = rgb_image.texture
         except:
             print('Image not valid')
 

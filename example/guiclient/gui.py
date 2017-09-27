@@ -38,11 +38,14 @@ class NeoGUI(App):
     def update_depth_image(self, depth_image):
         self.state_column.update_depth_image(depth_image)
 
-    def update_light_mask_image(self, light_mask_image):
-      self.state_column.update_light_mask_image(light_mask_image)
+    def update_segmentation_image(self, segmentation_image):
+        self.state_column.update_segmentation_image(segmentation_image)
 
-    def update_combined_image(self, combined_image):
-      self.state_column.update_combined_image(combined_image)
+    def update_infrared_shadow_image(self, infrared_shadow_image):
+        self.state_column.update_infrared_shadow_image(infrared_shadow_image)
+
+    def update_rgb_image(self, rgb_image):
+        self.state_column.update_rgb_image(rgb_image)
 
     def update_position_label(self, value : str):
         self.state_column.update_position_label(value)
@@ -57,10 +60,10 @@ class NeoGUI(App):
         self.state_column.update_energi_label(value)
 
     def update_time_label(self, value: str):
-      self.state_column.update_time_label(value)
+        self.state_column.update_time_label(value)
 
     def update_connect_button(self, value : str):
         self.status_bar.update_connect_button(value)
 
     def update_xml_text_label(self, value:str):
-      self.xml_column.update_text_label(value)
+        self.xml_column.update_text_label(value)
