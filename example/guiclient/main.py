@@ -60,10 +60,11 @@ def update_environment_widgets(environment_state):
     print('Failed at updating rest of GUI')
 
   try:
-    _gui.update_depth_image(environment_state.get_observers()[0].get_data())
-    _gui.update_segmentation_image(environment_state.get_observers()[1].get_data())
-    _gui.update_rgb_image(environment_state.get_observers()[3].get_data())
-    _gui.update_infrared_shadow_image(environment_state.get_observers()[2].get_data())
+    _gui.update_depth_image(environment_state.get_observers()[1].get_data())
+    _gui.update_segmentation_image(environment_state.get_observers()[2].get_data())
+    _gui.update_instance_segmentation_image(environment_state.get_observers()[3].get_data())
+    _gui.update_rgb_image(environment_state.get_observers()[4].get_data())
+    _gui.update_infrared_shadow_image(environment_state.get_observers()[5].get_data())
     #combined_image = get_masked_depth_image(environment_state.get_observers()[0].get_data(),                             #           environment_state.get_observers()[1].get_data(), 50, 200)
     #_gui.update_combined_image(combined_image)
   except:

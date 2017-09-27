@@ -10,9 +10,10 @@ class EnvironmentStateBox(BoxLayout):
 
     def build(self):
         self.depth_image = Image(source='images/default.png')
-        self.segmentation_image = Image(source='images/neo.jpg')
-        self.rgb_image = Image(source='images/neodroid.jpg')
-        self.infrared_shadow_image = Image(source='images/neodroid.jpg')
+        self.segmentation_image = Image(source='images/default.png')
+        self.instance_segmentation_image = Image(source='images/default.png')
+        self.rgb_image = Image(source='images/default.png')
+        self.infrared_shadow_image = Image(source='images/default.png')
         self.position_label = Label(text='Position: ',size_hint=(1.0,0.05))
         self.rotation_label = Label(text='Rotation: ', size_hint=(1.0, 0.05))
         self.reward_label = Label(text='Reward: ', size_hint=(1.0, 0.05))
@@ -22,7 +23,8 @@ class EnvironmentStateBox(BoxLayout):
         self.image_row_layout = BoxLayout(orientation='horizontal')
 
         self.image_row_layout.add_widget(self.rgb_image)
-        self.image_row_layout.add_widget(self.segmentation_image)
+        self.image_row_layout.add_widget(self.segmentation_image)        
+        self.image_row_layout.add_widget(self.instance_segmentation_image)
         self.image_row_layout.add_widget(self.depth_image)
         self.image_row_layout.add_widget(self.infrared_shadow_image)
 
@@ -45,6 +47,13 @@ class EnvironmentStateBox(BoxLayout):
         try:
             segmentation_image = CoreImage(segmentation_image_data, ext='png')
             self.segmentation_image.texture = segmentation_image.texture
+        except:
+            print('Image not valid')
+
+    def update_instance_segmentation_image(self, instance_segmentation_image_data):
+        try:
+            instance_segmentation_image = CoreImage(instance_segmentation_image_data, ext='png')
+            self.instance_segmentation_image.texture = instance_segmentation_image.texture
         except:
             print('Image not valid')
 
