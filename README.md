@@ -15,6 +15,9 @@ The application diplays data received from the example application of the [Droid
 ### Screenshot
 ![neo](images/neo.png)
 
+# To Do's
+- [ ] ...
+- [ ] Reset properly
 
 # Other Components Of the Neodroid Platform
 
