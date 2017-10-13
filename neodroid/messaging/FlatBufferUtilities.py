@@ -10,13 +10,13 @@ def build_flat_reaction(input_reaction):
   builder = flatbuffers.Builder(0)
 
   motion_offsets = []
-  for input_motion in input_reaction.get_motions:
-    actor_string_offset = builder.CreateString(input_motion.get_actor_name)
-    motor_string_offset = builder.CreateString(input_motion.get_motor_name)
+  for input_motion in input_reaction.get_motions():
+    actor_string_offset = builder.CreateString(input_motion.get_actor_name())
+    motor_string_offset = builder.CreateString(input_motion.get_motor_name())
     FlatBufferMotionStart(builder)
     FlatBufferMotionAddActorName(builder, actor_string_offset)
     FlatBufferMotionAddMotorName(builder, motor_string_offset)
-    FlatBufferMotionAddStrength(builder, input_motion.get_strength)
+    FlatBufferMotionAddStrength(builder, input_motion.get_strength())
     motion_offset = FlatBufferMotionEnd(builder)
     motion_offsets.append(motion_offset)
 
@@ -26,7 +26,7 @@ def build_flat_reaction(input_reaction):
   motions = builder.EndVector(len(motion_offsets))
 
   FlatBufferReactionStart(builder)
-  FlatBufferReactionAddReset(builder, input_reaction.get_reset)
+  FlatBufferReactionAddReset(builder, input_reaction.get_reset())
   FlatBufferReactionAddMotions(builder, motions)
   flat_reaction = FlatBufferReactionEnd(builder)
   builder.Finish(flat_reaction)
