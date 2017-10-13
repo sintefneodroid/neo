@@ -3,7 +3,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 
-from gui_components.motion_view import MotionView
+from .motion_view import MotionView
 
 
 class ReactionBox(BoxLayout):
@@ -11,11 +11,8 @@ class ReactionBox(BoxLayout):
     super(ReactionBox, self).__init__(**kwargs)
     self._on_step_callback = on_step_callback
     self._on_reset_callback = on_reset_callback
-    self.build()
-
-  def build(self):
-    self.uppper_spacer = Label()
-    self.actor_input = TextInput(text="Gripper")#, multiline=False)
+    self.upper_spacer = Label()
+    self.actor_input = TextInput(text="Gripper")  # , multiline=False)
     self.motor_1 = MotionView("GripperSingleAxisX")
     self.motor_2 = MotionView("GripperSingleAxisY")
     self.motor_3 = MotionView("GripperSingleAxisZ")
@@ -23,10 +20,13 @@ class ReactionBox(BoxLayout):
     self.step_button = Button(text='Step')
     self.reset_button = Button(text='Reset')
     self.bottom_spacer = Label()
+    self.assemble_components()
+
+  def assemble_components(self):
     self.step_button.bind(on_release=self.on_step_button)
     self.reset_button.bind(on_release=self.on_reset_button)
 
-    self.add_widget(self.uppper_spacer)
+    self.add_widget(self.upper_spacer)
     self.add_widget(self.actor_input)
     self.add_widget(self.motor_1)
     self.add_widget(self.motor_2)
@@ -44,7 +44,6 @@ class ReactionBox(BoxLayout):
                (str(self.motor_4.motor_input.text), float(self.motor_4.motor_slider.value)),
                ]
     self._on_step_callback(self.actor_input.text, motions)
-
 
   def on_reset_button(self, value):
     self._on_reset_callback()

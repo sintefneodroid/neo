@@ -4,10 +4,12 @@
 
 """
 
-import main
+from example.guiclient.main import main
+
 
 def start():
-  main.main()
+  main()
+
 
 if __name__ == '__main__':
-    start()
+  start()

@@ -2,33 +2,31 @@ from threading import Thread
 
 import zmq
 
-from .FlatBufferModels import *
-
 from neodroid.models import Reaction
+from .FlatBufferModels import *
 from .FlatBufferUtilities import build_flat_reaction, create_state
 
 _connected = False
 _waiting_for_response = False
-ctx = zmq.Context.instance()
-_req_socket = ctx.socket(zmq.REQ)
+_ctx = zmq.Context.instance()
+_req_socket = _ctx.socket(zmq.REQ)
+_use_inter_process_communication = False
+
 
 def send_reaction(stream, reaction: Reaction, callback):
   global _waiting_for_response, _connected
-  #try:
   if _connected and not _waiting_for_response:
     flat_reaction = build_flat_reaction(reaction)
-    _req_socket.send(flat_reaction)
+    stream.send(flat_reaction)
     if callback:
       callback()
     _waiting_for_response = True
-  #except:
-    #print('Failed at sending reaction to environment')
 
 
-def synchronous_receive_message(_req_socket):
+def synchronous_receive_message(stream):
   global _waiting_for_response
   if _waiting_for_response:
-    by = _req_socket.recv()
+    by = stream.recv()
     _waiting_for_response = False
     reply = FlatBufferState.GetRootAsFlatBufferState(by, 0)
     state = create_state(reply)
@@ -49,7 +47,14 @@ def receive_environment_state(stream, callback=None):
 
 def setup_connection(tcp_address, tcp_port, on_connect_callback):
   global _connected
-  _req_socket.connect("tcp://localhost:%s" % tcp_port)
+  if _use_inter_process_communication:
+    # _req_socket.connect("inproc://neodroid")
+    _req_socket.connect("ipc:///tmp/neodroid/0")
+    print('using inter process communication protocol')
+  else:
+    # _req_socket.connect("tcp://localhost:%s" % tcp_port)
+    _req_socket.connect("tcp://%s:%s" % (tcp_address, tcp_port))
+    print('using tcp communication protocol')
   on_connect_callback(_req_socket)
   _connected = True
 

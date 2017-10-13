@@ -1,6 +1,8 @@
-from PIL import Image
-import numpy as np
 import io
+
+import numpy as np
+from PIL import Image
+
 
 def get_masked_depth_image(depth_image, light_mask_image, lower_limit, upper_limit):
   mask = Image.open(light_mask_image).convert('L')
@@ -20,7 +22,7 @@ def get_masked_depth_image(depth_image, light_mask_image, lower_limit, upper_lim
   depth_image_array[rest] = 0
   depth_image_array = depth_image_array.reshape(ori)
   final = Image.fromarray(depth_image_array)
-  imgByteArr = io.BytesIO()
-  final.save(imgByteArr, format='png')
-  imgByteArr.seek(0)
-  return imgByteArr
+  img_byte_array = io.BytesIO()
+  final.save(img_byte_array, format='png')
+  img_byte_array.seek(0)
+  return img_byte_array

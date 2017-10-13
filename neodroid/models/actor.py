@@ -1,14 +1,4 @@
-from typing import List
-
-from neodroid.models.motor import Motor
-
-
 class Actor(object):
-  #_name: str
-  #_position: List[float]
-  #_rotation: List[float]
-  #_motors: List[Motor]
-
   def __init__(self, name, position, rotation, motors):
     self._name = name
     self._position = position
@@ -31,9 +21,9 @@ class Actor(object):
            '      <name>' + self._name.decode('utf-8') + '</name>\n' + \
            '      <position>' + str(self._position) + '</position>\n' + \
            '      <rotation>' + str(self._rotation) + '</rotation>\n' + \
-           '      <Motors>\n' +\
-                  motors_str +\
-           '      </Mctors>\n'+\
+           '      <Motors>\n' + \
+           motors_str + \
+           '      </Motors>\n' + \
            '    </Actor>\n'
 
   def __str__(self):

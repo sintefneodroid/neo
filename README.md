@@ -10,9 +10,9 @@ Neo is a python package that enables deserialisation and an interface to the [Dr
 
 ## An Example Implementation Of Using The Interface
 In this repository an example application is included.
-The application diplays data received from the example application of the [Droid](https://github.com/sintefneodroid/droid) project repository.
+The application displays data received from the example application of the [Droid](https://github.com/sintefneodroid/droid) project repository.
 
-### Screenshot
+### Screenshots
 ![neo](images/neo.png)
 
 # To Do's
