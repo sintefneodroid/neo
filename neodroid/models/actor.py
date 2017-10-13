@@ -5,6 +5,9 @@ class Actor(object):
     self._rotation = rotation
     self._motors = motors
 
+  def get_name(self):
+    return self._name
+
   def get_position(self):
     return self._position
 

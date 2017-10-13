@@ -50,8 +50,8 @@ def on_reset_callback():
 def update_environment_widgets(environment_state):
   try:
     _gui.update_xml_text_label(str(environment_state))
-    _gui.update_position_label(str(environment_state.get_actors()[0].get_position()))
-    _gui.update_rotation_label(str(environment_state.get_actors()[0].get_rotation()))
+    _gui.update_position_label(str(environment_state.get_actor(b'RigidbodyGripper').get_position()))
+    _gui.update_rotation_label(str(environment_state.get_actor(b'RigidbodyGripper').get_rotation()))
     _gui.update_reward_label(str(environment_state.get_reward_for_last_step()))
     _gui.update_energy_label(str(environment_state.get_total_energy_spent_since_reset()))
     _gui.update_time_label(str(environment_state.get_time_since_reset()))
@@ -59,11 +59,12 @@ def update_environment_widgets(environment_state):
     print('Failed at updating rest of GUI')
 
   try:
-    _gui.update_depth_image(environment_state.get_observers()[1].get_data())
-    _gui.update_segmentation_image(environment_state.get_observers()[2].get_data())
-    _gui.update_instance_segmentation_image(environment_state.get_observers()[3].get_data())
-    _gui.update_rgb_image(environment_state.get_observers()[4].get_data())
-    _gui.update_infrared_shadow_image(environment_state.get_observers()[5].get_data())
+    _gui.update_depth_image(environment_state.get_observer(b'DepthCamera').get_data())
+    _gui.update_segmentation_image(environment_state.get_observer(b'SegmentationCamera').get_data())
+    _gui.update_instance_segmentation_image(environment_state.get_observer(
+        b'InstanceSegmentationCamera').get_data())
+    _gui.update_rgb_image(environment_state.get_observer(b'RGBCamera').get_data())
+    _gui.update_infrared_shadow_image(environment_state.get_observer(b'InfraredShadowCamera').get_data())
   except BaseException:
     print('Failed at updating Images')
 

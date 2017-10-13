@@ -45,22 +45,23 @@ def create_state(flat_state):
 
 
 def create_actors(flat_state):
-  actors = []
+  actors = {}
   for i in range(1, flat_state.ActorsLength() + 1):
     flat_actor = flat_state.Actors(i)
     motors = create_motors(flat_actor)
     pos_rot = flat_actor.Posrot()
     position = pos_rot.Position()
     rotation = pos_rot.Rotation()
-    input_actor = Actor(flat_actor.Name(), [position.X(), position.Y(), position.Z()],
-                  [rotation.X(), rotation.Y(), rotation.Z(),
-                   rotation.W()], motors)
-    actors.append(input_actor)
+    input_actor = Actor(flat_actor.Name(),
+                        [position.X(), position.Y(), position.Z()],
+                        [rotation.X(), rotation.Y(), rotation.Z(), rotation.W()],
+                        motors)
+    actors[input_actor.get_name()] = input_actor
   return actors
 
 
 def create_observers(flat_state):
-  observers = []
+  observers = {}
   for i in range(1, flat_state.ObserversLength() + 1):
     flat_observer = flat_state.Observers(i)
     pos_rot = flat_observer.Posrot()
@@ -70,7 +71,7 @@ def create_observers(flat_state):
     input_observer = Observer(flat_observer.Name(), data, [position.X(), position.Y(), position.Z()],
                               [rotation.X(), rotation.Y(), rotation.Z(),
                                rotation.W()], )
-    observers.append(input_observer)
+    observers[input_observer.get_name()] = input_observer
   return observers
 
 
@@ -83,10 +84,10 @@ def create_data(flat_observer):
 
 
 def create_motors(flat_actor):
-  motors = []
+  motors = {}
   for i in range(1, flat_actor.MotorsLength() + 1):
     flat_motor = flat_actor.Motors(i)
     input_motor = Motor(flat_motor.Name(), flat_motor.Binary(), flat_motor.EnergyCost(),
                         flat_motor.EnergySpentSinceReset())
-    motors.append(input_motor)
+    motors[input_motor.get_name()] = input_motor
   return motors
