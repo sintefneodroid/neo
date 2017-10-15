@@ -58,25 +58,28 @@ class FlatBufferActor(object):
     return 0
 
 
-def FlatBufferActorStart(builder): builder.StartObject(3)
+def FlatBufferActorStart(builder):
+  builder.StartObject(3)
 
 
-def FlatBufferActorAddName(builder, name): builder.PrependUOffsetTRelativeSlot(0,
-                                                                               flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                   name), 0)
+def FlatBufferActorAddName(builder, name):
+  builder.PrependUOffsetTRelativeSlot(
+      0, flatbuffers.number_types.UOffsetTFlags.py_type(name), 0)
 
 
-def FlatBufferActorAddPosrot(builder, posrot): builder.PrependUOffsetTRelativeSlot(1,
-                                                                                   flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                       posrot), 0)
+def FlatBufferActorAddPosrot(builder, posrot):
+  builder.PrependUOffsetTRelativeSlot(
+      1, flatbuffers.number_types.UOffsetTFlags.py_type(posrot), 0)
 
 
-def FlatBufferActorAddMotors(builder, motors): builder.PrependUOffsetTRelativeSlot(2,
-                                                                                   flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                       motors), 0)
+def FlatBufferActorAddMotors(builder, motors):
+  builder.PrependUOffsetTRelativeSlot(
+      2, flatbuffers.number_types.UOffsetTFlags.py_type(motors), 0)
 
 
-def FlatBufferActorStartMotorsVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def FlatBufferActorStartMotorsVector(builder, numElems):
+  return builder.StartVector(4, numElems, 4)
 
 
-def FlatBufferActorEnd(builder): return builder.EndObject()
+def FlatBufferActorEnd(builder):
+  return builder.EndObject()

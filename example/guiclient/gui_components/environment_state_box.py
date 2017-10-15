@@ -15,7 +15,8 @@ class EnvironmentStateBox(BoxLayout):
     self.position_label = Label(text='Position: ', size_hint=(1.0, 0.05))
     self.rotation_label = Label(text='Rotation: ', size_hint=(1.0, 0.05))
     self.reward_label = Label(text='Reward: ', size_hint=(1.0, 0.05))
-    self.energy_label = Label(text='Energy Spent Since Reset: ', size_hint=(1.0, 0.05))
+    self.energy_label = Label(text='Energy Spent Since Reset: ',
+                              size_hint=(1.0, 0.05))
     self.time_label = Label(text='Time Since Reset: ', size_hint=(1.0, 0.05))
 
     self.image_row_layout = BoxLayout(orientation='horizontal')
@@ -50,9 +51,11 @@ class EnvironmentStateBox(BoxLayout):
     except BaseException:
       print('Image not valid')
 
-  def update_instance_segmentation_image(self, instance_segmentation_image_data):
+  def update_instance_segmentation_image(self,
+                                         instance_segmentation_image_data):
     try:
-      instance_segmentation_image = CoreImage(instance_segmentation_image_data, ext='png')
+      instance_segmentation_image = CoreImage(instance_segmentation_image_data,
+                                              ext='png')
       self.instance_segmentation_image.texture = instance_segmentation_image.texture
     except BaseException:
       print('Image not valid')

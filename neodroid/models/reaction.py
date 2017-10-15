@@ -13,7 +13,11 @@ class Reaction(object):
     return self._reset
 
   def to_dict(self):
-    return {'_reset': self._reset, '_actor_motor_motions': [motion.to_dict() for motion in self._motions]}
+    return {
+      '_reset'              : self._reset,
+      '_actor_motor_motions':
+        [motion.to_dict() for motion in self._motions]
+    }
 
   def to_json(self):
     return json.dumps(self.to_dict())

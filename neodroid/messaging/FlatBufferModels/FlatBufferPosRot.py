@@ -45,14 +45,16 @@ class FlatBufferPosRot(object):
 def FlatBufferPosRotStart(builder): builder.StartObject(2)
 
 
-def FlatBufferPosRotAddPosition(builder, position): builder.PrependStructSlot(0,
-                                                                              flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                  position), 0)
+def FlatBufferPosRotAddPosition(builder, position): builder.PrependStructSlot(
+  0,
+  flatbuffers.number_types.UOffsetTFlags.py_type(
+      position), 0)
 
 
-def FlatBufferPosRotAddRotation(builder, rotation): builder.PrependStructSlot(1,
-                                                                              flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                  rotation), 0)
+def FlatBufferPosRotAddRotation(builder, rotation): builder.PrependStructSlot(
+  1,
+  flatbuffers.number_types.UOffsetTFlags.py_type(
+      rotation), 0)
 
 
 def FlatBufferPosRotEnd(builder): return builder.EndObject()

@@ -86,7 +86,8 @@ file in the top-level directory of your ASP.NET application.
     <requires>
       <section name="configuration">
         <section name="system.web">
-          <section name="httpHandlers" defaultBlockName="system.web.httpHandlers"/>
+          <section name="httpHandlers"
+                   defaultBlockName="system.web.httpHandlers"/>
         </section>
       </section>
     </requires>
@@ -128,7 +129,8 @@ file in the top-level directory of your ASP.NET application.
       <section name="configuration">
         <section name="system.web">
           <section name="pages" defaultBlockName="system.web.pages">
-            <section name="controls" defaultBlockName="system.web.pages.controls"/>
+            <section name="controls"
+                     defaultBlockName="system.web.pages.controls"/>
           </section>
         </section>
       </section>
@@ -146,8 +148,10 @@ file in the top-level directory of your ASP.NET application.
     <requires>
       <section name="configuration">
         <section name="system.web">
-          <section name="compilation" defaultBlockName="system.web.compilation">
-            <section name="assemblies" defaultBlockName="system.web.compilation.assemblies"/>
+          <section name="compilation"
+                   defaultBlockName="system.web.compilation">
+            <section name="assemblies"
+                     defaultBlockName="system.web.compilation.assemblies"/>
           </section>
         </section>
       </section>
@@ -168,7 +172,8 @@ file in the top-level directory of your ASP.NET application.
     <requires>
       <section name="configuration">
         <section name="system.web">
-          <section name="httpHandlers" defaultBlockName="system.web.httpHandlers"/>
+          <section name="httpHandlers"
+                   defaultBlockName="system.web.httpHandlers"/>
         </section>
       </section>
     </requires>
@@ -187,7 +192,8 @@ file in the top-level directory of your ASP.NET application.
     <requires>
       <section name="configuration">
         <section name="system.web">
-          <section name="httpModules" defaultBlockName="system.web.httpModules"/>
+          <section name="httpModules"
+                   defaultBlockName="system.web.httpModules"/>
         </section>
       </section>
     </requires>
@@ -203,7 +209,8 @@ file in the top-level directory of your ASP.NET application.
     <requires>
       <section name="configuration">
         <section name="system.codedom">
-          <section name="compilers" defaultBlockName="system.codedom.compilers"/>
+          <section name="compilers"
+                   defaultBlockName="system.codedom.compilers"/>
         </section>
       </section>
     </requires>
@@ -307,7 +314,8 @@ file in the top-level directory of your ASP.NET application.
       <section name="configuration">
         <section name="system.web">
           <section name="pages" defaultBlockName="system.web.pages">
-            <section name="controls" defaultBlockName="system.web.pages.controls"/>
+            <section name="controls"
+                     defaultBlockName="system.web.pages.controls"/>
           </section>
         </section>
       </section>
@@ -324,8 +332,10 @@ file in the top-level directory of your ASP.NET application.
     <requires>
       <section name="configuration">
         <section name="system.web">
-          <section name="compilation" defaultBlockName="system.web.compilation">
-            <section name="assemblies" defaultBlockName="system.web.compilation.assemblies"/>
+          <section name="compilation"
+                   defaultBlockName="system.web.compilation">
+            <section name="assemblies"
+                     defaultBlockName="system.web.compilation.assemblies"/>
           </section>
         </section>
       </section>
@@ -342,7 +352,8 @@ file in the top-level directory of your ASP.NET application.
     <requires>
       <section name="configuration">
         <section name="system.web">
-          <section name="httpHandlers" defaultBlockName="system.web.httpHandlers"/>
+          <section name="httpHandlers"
+                   defaultBlockName="system.web.httpHandlers"/>
         </section>
       </section>
     </requires>
@@ -361,7 +372,8 @@ file in the top-level directory of your ASP.NET application.
     <requires>
       <section name="configuration">
         <section name="system.web">
-          <section name="httpModules" defaultBlockName="system.web.httpModules"/>
+          <section name="httpModules"
+                   defaultBlockName="system.web.httpModules"/>
         </section>
       </section>
     </requires>
@@ -445,7 +457,8 @@ file in the top-level directory of your ASP.NET application.
       <section name="configuration">
         <section name="system.web">
           <section name="pages" defaultBlockName="system.web.pages">
-            <section name="controls" defaultBlockName="system.web.pages.controls"/>
+            <section name="controls"
+                     defaultBlockName="system.web.pages.controls"/>
           </section>
         </section>
       </section>
@@ -462,8 +475,10 @@ file in the top-level directory of your ASP.NET application.
     <requires>
       <section name="configuration">
         <section name="system.web">
-          <section name="compilation" defaultBlockName="system.web.compilation">
-            <section name="assemblies" defaultBlockName="system.web.compilation.assemblies"/>
+          <section name="compilation"
+                   defaultBlockName="system.web.compilation">
+            <section name="assemblies"
+                     defaultBlockName="system.web.compilation.assemblies"/>
           </section>
         </section>
       </section>
@@ -487,7 +502,8 @@ file in the top-level directory of your ASP.NET application.
     <requires>
       <section name="configuration">
         <section name="system.web">
-          <section name="httpModules" defaultBlockName="system.web.httpModules"/>
+          <section name="httpModules"
+                   defaultBlockName="system.web.httpModules"/>
         </section>
       </section>
     </requires>
@@ -609,7 +625,8 @@ file in the top-level directory of your ASP.NET application.
     <section name="configuration">
       <section name="system.web">
         <section name="compilation" defaultBlockName="system.web.compilation"/>
-        <section name="customErrors" defaultBlockName="system.web.customErrors"/>
+        <section name="customErrors"
+                 defaultBlockName="system.web.customErrors"/>
       </section>
     </section>
   </defaultConfigFile>

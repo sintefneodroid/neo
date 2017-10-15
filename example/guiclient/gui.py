@@ -6,7 +6,8 @@ from .gui_components import EnvironmentStateBox, ReactionBox, StatusBar, XMLBox
 
 
 class NeoGUI(App):
-  def __init__(self, on_step_callback, on_reset_callback, on_connect_callback, **kwargs):
+  def __init__(self, on_step_callback, on_reset_callback, on_connect_callback,
+               **kwargs):
     super(NeoGUI, self).__init__(**kwargs)
     self._on_step_callback = on_step_callback
     self._on_reset_callback = on_reset_callback
@@ -50,7 +51,8 @@ class NeoGUI(App):
     self.state_box.update_segmentation_image(segmentation_image)
 
   def update_instance_segmentation_image(self, instance_segmentation_image):
-    self.state_box.update_instance_segmentation_image(instance_segmentation_image)
+    self.state_box.update_instance_segmentation_image(
+      instance_segmentation_image)
 
   def update_infrared_shadow_image(self, infrared_shadow_image):
     self.state_box.update_infrared_shadow_image(infrared_shadow_image)

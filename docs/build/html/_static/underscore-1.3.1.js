@@ -21,7 +21,8 @@
     var breaker = {};
 
     // Save bytes in the minified (but not gzipped) version:
-    var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
+    var ArrayProto = Array.prototype, ObjProto = Object.prototype,
+        FuncProto = Function.prototype;
 
     // Create quick reference variables for speed access to core prototypes.
     var slice = ArrayProto.slice,
@@ -233,7 +234,10 @@
         var result = {computed: -Infinity};
         each(obj, function (value, index, list) {
             var computed = iterator ? iterator.call(context, value, index, list) : value;
-            computed >= result.computed && (result = {value: value, computed: computed});
+            computed >= result.computed && (result = {
+                value: value,
+                computed: computed
+            });
         });
         return result.value;
     };
@@ -245,7 +249,10 @@
         var result = {computed: Infinity};
         each(obj, function (value, index, list) {
             var computed = iterator ? iterator.call(context, value, index, list) : value;
-            computed < result.computed && (result = {value: value, computed: computed});
+            computed < result.computed && (result = {
+                value: value,
+                computed: computed
+            });
         });
         return result.value;
     };

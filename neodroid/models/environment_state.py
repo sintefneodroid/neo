@@ -1,9 +1,10 @@
 class EnvironmentState(object):
-  def __init__(self, time_since_reset: float = 0,
+  def __init__(self,
+               time_since_reset=0,
                total_energy_spent_since_reset=0,
                actors=None,
                observers=None,
-               reward_for_last_step: float = 0):
+               reward_for_last_step=0):
     if observers is None:
       observers = {}
     if actors is None:
@@ -36,8 +37,11 @@ class EnvironmentState(object):
     return self._reward_for_last_step
 
   def __repr__(self):
-    observers_str = ''.join([str(observer.__repr__()) for observer in self._observers.values()])
-    actors_str = ''.join([str(actor.__repr__()) for actor in self._actors.values()])
+    observers_str = ''.join([
+      str(observer.__repr__()) for observer in self._observers.values()
+    ])
+    actors_str = ''.join(
+        [str(actor.__repr__()) for actor in self._actors.values()])
 
     return '<EnvironmentState>\n' + \
            '  <time_since_reset>' + \

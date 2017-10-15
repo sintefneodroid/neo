@@ -17,12 +17,13 @@ class Motor(object):
   def get_energy_spent(self):
     return self._energy_spent
 
-
   def __repr__(self):
     return '        <Motor>\n' + \
-           '          <name>' + self._name.decode('utf-8') + '</name>\n' + \
+           '          <name>' + self._name.decode('utf-8') + \
+           '</name>\n' + \
            '          <binary>' + str(self._binary) + '</binary>\n' + \
-           '          <energy_cost>' + str(self._energy_cost) + '</energy_cost>\n' + \
+           '          <energy_cost>' + \
+           str(self._energy_cost) + '</energy_cost>\n' + \
            '        </Motor>\n'
 
   def __str__(self):

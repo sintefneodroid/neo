@@ -43,22 +43,29 @@ class FlatBufferReaction(object):
   def Reset(self):
     o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
     if o != 0:
-      return self._tab.Get(flatbuffers.number_types.BoolFlags, o + self._tab.Pos)
+      return self._tab.Get(flatbuffers.number_types.BoolFlags,
+                           o + self._tab.Pos)
     return 0
 
 
 def FlatBufferReactionStart(builder): builder.StartObject(2)
 
 
-def FlatBufferReactionAddMotions(builder, motions): builder.PrependUOffsetTRelativeSlot(0,
-                                                                                        flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                            motions), 0)
+def FlatBufferReactionAddMotions(builder,
+                                 motions): builder.PrependUOffsetTRelativeSlot(
+  0,
+  flatbuffers.number_types.UOffsetTFlags.py_type(
+      motions), 0)
 
 
-def FlatBufferReactionStartMotionsVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def FlatBufferReactionStartMotionsVector(builder,
+                                         numElems): return builder.StartVector(
+  4, numElems, 4)
 
 
-def FlatBufferReactionAddReset(builder, reset): builder.PrependBoolSlot(1, reset, 0)
+def FlatBufferReactionAddReset(builder, reset): builder.PrependBoolSlot(1,
+                                                                        reset,
+                                                                        0)
 
 
 def FlatBufferReactionEnd(builder): return builder.EndObject()

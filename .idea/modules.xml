@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../agent/.idea/agent.iml" filepath="$PROJECT_DIR$/../agent/.idea/agent.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/neo.iml" filepath="$PROJECT_DIR$/.idea/neo.iml" />
     </modules>
   </component>

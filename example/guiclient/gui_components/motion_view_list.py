@@ -5,7 +5,8 @@ from kivy.uix.label import Label
 from kivy.uix.listview import ListItemButton, ListItemLabel, \
   CompositeListItem, ListView
 
-integers_dict = {str(i): {'text': str(i), 'is_selected': False} for i in range(100)}
+integers_dict = {str(i): {'text': str(i), 'is_selected': False} for i in
+                 range(100)}
 
 
 class MotionViewList(GridLayout):

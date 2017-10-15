@@ -23,14 +23,16 @@ class FlatBufferState(object):
   def TimeSinceRest(self):
     o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
     if o != 0:
-      return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+      return self._tab.Get(flatbuffers.number_types.Float32Flags,
+                           o + self._tab.Pos)
     return 0.0
 
   # FlatBufferState
   def TotalEnergySpentSinceReset(self):
     o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
     if o != 0:
-      return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+      return self._tab.Get(flatbuffers.number_types.Float32Flags,
+                           o + self._tab.Pos)
     return 0.0
 
   # FlatBufferState
@@ -55,7 +57,8 @@ class FlatBufferState(object):
 
   # FlatBufferState
   def Observers(self, j):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(
+        self._tab.Offset(10))
     if o != 0:
       x = self._tab.Vector(o)
       x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
@@ -68,50 +71,56 @@ class FlatBufferState(object):
 
   # FlatBufferState
   def ObserversLength(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(
+        self._tab.Offset(10))
     if o != 0:
       return self._tab.VectorLen(o)
     return 0
 
   # FlatBufferState
   def RewardForLastStep(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(
+        self._tab.Offset(12))
     if o != 0:
-      return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+      return self._tab.Get(flatbuffers.number_types.Float32Flags,
+                           o + self._tab.Pos)
     return 0.0
 
 
-def FlatBufferStateStart(builder): builder.StartObject(5)
+def FlatBufferStateStart(builder):
+  builder.StartObject(5)
 
 
-def FlatBufferStateAddTimeSinceRest(builder, timeSinceRest): builder.PrependFloat32Slot(0, timeSinceRest, 0.0)
+def FlatBufferStateAddTimeSinceRest(builder, timeSinceRest):
+  builder.PrependFloat32Slot(0, timeSinceRest, 0.0)
 
 
 def FlatBufferStateAddTotalEnergySpentSinceReset(builder,
-                                                 totalEnergySpentSinceReset): builder.PrependFloat32Slot(1,
-                                                                                                         totalEnergySpentSinceReset,
-                                                                                                         0.0)
+                                                 totalEnergySpentSinceReset):
+  builder.PrependFloat32Slot(1, totalEnergySpentSinceReset, 0.0)
 
 
-def FlatBufferStateAddActors(builder, actors): builder.PrependUOffsetTRelativeSlot(2,
-                                                                                   flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                       actors), 0)
+def FlatBufferStateAddActors(builder, actors):
+  builder.PrependUOffsetTRelativeSlot(
+      2, flatbuffers.number_types.UOffsetTFlags.py_type(actors), 0)
 
 
-def FlatBufferStateStartActorsVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def FlatBufferStateStartActorsVector(builder, numElems):
+  return builder.StartVector(4, numElems, 4)
 
 
-def FlatBufferStateAddObservers(builder, observers): builder.PrependUOffsetTRelativeSlot(3,
-                                                                                         flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                             observers), 0)
+def FlatBufferStateAddObservers(builder, observers):
+  builder.PrependUOffsetTRelativeSlot(
+      3, flatbuffers.number_types.UOffsetTFlags.py_type(observers), 0)
 
 
-def FlatBufferStateStartObserversVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def FlatBufferStateStartObserversVector(builder, numElems):
+  return builder.StartVector(4, numElems, 4)
 
 
-def FlatBufferStateAddRewardForLastStep(builder, rewardForLastStep): builder.PrependFloat32Slot(4,
-                                                                                                rewardForLastStep,
-                                                                                                0.0)
+def FlatBufferStateAddRewardForLastStep(builder, rewardForLastStep):
+  builder.PrependFloat32Slot(4, rewardForLastStep, 0.0)
 
 
-def FlatBufferStateEnd(builder): return builder.EndObject()
+def FlatBufferStateEnd(builder):
+  return builder.EndObject()

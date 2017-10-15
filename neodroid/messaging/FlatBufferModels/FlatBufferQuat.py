@@ -14,19 +14,23 @@ class FlatBufferQuat(object):
 
   # FlatBufferQuat
   def X(self): return self._tab.Get(flatbuffers.number_types.Float32Flags,
-                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(0))
+                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
+                                      0))
 
   # FlatBufferQuat
   def Y(self): return self._tab.Get(flatbuffers.number_types.Float32Flags,
-                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(4))
+                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
+                                      4))
 
   # FlatBufferQuat
   def Z(self): return self._tab.Get(flatbuffers.number_types.Float32Flags,
-                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(8))
+                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
+                                      8))
 
   # FlatBufferQuat
   def W(self): return self._tab.Get(flatbuffers.number_types.Float32Flags,
-                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(12))
+                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
+                                      12))
 
 
 def CreateFlatBufferQuat(builder, x, y, z, w):

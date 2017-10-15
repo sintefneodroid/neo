@@ -30,41 +30,52 @@ class FlatBufferMotor(object):
   def Binary(self):
     o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
     if o != 0:
-      return self._tab.Get(flatbuffers.number_types.BoolFlags, o + self._tab.Pos)
+      return self._tab.Get(flatbuffers.number_types.BoolFlags,
+                           o + self._tab.Pos)
     return 0
 
   # FlatBufferMotor
   def EnergyCost(self):
     o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
     if o != 0:
-      return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+      return self._tab.Get(flatbuffers.number_types.Float32Flags,
+                           o + self._tab.Pos)
     return 0.0
 
   # FlatBufferMotor
   def EnergySpentSinceReset(self):
     o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
     if o != 0:
-      return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+      return self._tab.Get(flatbuffers.number_types.Float32Flags,
+                           o + self._tab.Pos)
     return 0.0
 
 
 def FlatBufferMotorStart(builder): builder.StartObject(4)
 
 
-def FlatBufferMotorAddName(builder, name): builder.PrependUOffsetTRelativeSlot(0,
-                                                                               flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                   name), 0)
+def FlatBufferMotorAddName(builder, name): builder.PrependUOffsetTRelativeSlot(
+  0,
+  flatbuffers.number_types.UOffsetTFlags.py_type(
+      name), 0)
 
 
-def FlatBufferMotorAddBinary(builder, binary): builder.PrependBoolSlot(1, binary, 0)
+def FlatBufferMotorAddBinary(builder, binary): builder.PrependBoolSlot(1,
+                                                                       binary,
+                                                                       0)
 
 
-def FlatBufferMotorAddEnergyCost(builder, energyCost): builder.PrependFloat32Slot(2, energyCost, 0.0)
+def FlatBufferMotorAddEnergyCost(builder,
+                                 energyCost): builder.PrependFloat32Slot(2,
+                                                                         energyCost,
+                                                                         0.0)
 
 
-def FlatBufferMotorAddEnergySpentSinceReset(builder, energySpentSinceReset): builder.PrependFloat32Slot(3,
-                                                                                                        energySpentSinceReset,
-                                                                                                        0.0)
+def FlatBufferMotorAddEnergySpentSinceReset(builder,
+                                            energySpentSinceReset): builder.PrependFloat32Slot(
+  3,
+  energySpentSinceReset,
+  0.0)
 
 
 def FlatBufferMotorEnd(builder): return builder.EndObject()

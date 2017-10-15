@@ -5,17 +5,21 @@ import shlex
 import subprocess
 import time
 
-from .messaging import *
+from .messaging import (send_reaction, start_connect_thread,
+                        synchronous_receive_message)
+from .utilities import debug_print
 
 
 class NeodroidEnvironment(object):
-  def __init__(self, ip="127.0.0.1",
+  def __init__(self,
+               ip="127.0.0.1",
                port=5555,
-               on_connected_callback=print,
+               on_connected_callback=debug_print,
                connect_to_running=False,
                name='carscene.exe',
-               path_to_executables_directory=os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                                          'environments')):
+               path_to_executables_directory=os.path.join(
+                   os.path.dirname(os.path.realpath(__file__)),
+                   'environments')):
 
     # Logging
     logging.basicConfig(filename='log.txt', level=logging.DEBUG)
@@ -31,8 +35,10 @@ class NeodroidEnvironment(object):
     self._awaiting_response = False
 
     if not connect_to_running and not self._simulation_instance:
-      if self._start_instance(name, path_to_executables_directory, ip, port):
-        self._logger.debug('successfully started environment ' + str(name))
+      if self._start_instance(name, path_to_executables_directory, ip,
+                              port):
+        self._logger.debug('successfully started environment ' + str(
+            name))
         time.sleep(8)
       else:
         self._logger.debug('could not start environment ' + str(name))
@@ -40,11 +46,14 @@ class NeodroidEnvironment(object):
 
   def _start_instance(self, name, path_to_executables_directory, ip, port):
     path_to_executable = os.path.join(path_to_executables_directory, name)
-    args = shlex.split('-ip ' + str(ip) + ' -port ' + str(
-        port) + ' -screen-fullscreen 0 -screen-height 500 -screen-width 500')  # -batchmode -nographics')
+    args = shlex.split(
+        '-ip ' + str(ip) + ' -port ' + str(port) +
+        ' -screen-fullscreen 0 -screen-height 500 -screen-width 500'
+    )  # -batchmode -nographics')
     print([path_to_executable] + args)
     self._simulation_instance = subprocess.Popen(
-        [path_to_executable] + args)  # Figure out have to parameterise unity executable
+        [path_to_executable] +
+        args)  # Figure out have to parameterise unity executable
     # time.sleep(8) # Not good a callback would be better.
     if self._simulation_instance:
       self._logger.debug('Started executable ' + str(name))
@@ -63,8 +72,10 @@ class NeodroidEnvironment(object):
 
   def _connect(self, ip, port, on_connected_callback):
     self._logger.debug('Connecting to server')
-    start_connect_thread(ip, port, functools.partial(self._internal_on_connected_callback,
-                                                     on_connected_callback=on_connected_callback))
+    start_connect_thread(ip, port,
+                         functools.partial(
+                             self._internal_on_connected_callback,
+                             on_connected_callback=on_connected_callback))
 
   def get_environment(self):
     message = synchronous_receive_message(self._stream)
@@ -72,7 +83,7 @@ class NeodroidEnvironment(object):
 
   def step(self, input_reaction, callback=None):
     self._logger.debug('Step')
-    sent_callback = print
+    sent_callback = debug_print
     self._awaiting_response = True
     send_reaction(self._stream, input_reaction, sent_callback)
     if callback:
@@ -83,9 +94,9 @@ class NeodroidEnvironment(object):
       self._awaiting_response = False
       return message
 
-  def reset(self, input_reaction, callback):
+  def reset(self, input_reaction, callback=None):
     self._logger.debug('Reset')
-    send_reaction(self._stream, input_reaction, print)
+    send_reaction(self._stream, input_reaction, callback)
     message = synchronous_receive_message(self._stream)
     return message
 

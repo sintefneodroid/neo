@@ -14,15 +14,18 @@ class FlatBufferVec3(object):
 
   # FlatBufferVec3
   def X(self): return self._tab.Get(flatbuffers.number_types.Float32Flags,
-                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(0))
+                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
+                                      0))
 
   # FlatBufferVec3
   def Y(self): return self._tab.Get(flatbuffers.number_types.Float32Flags,
-                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(4))
+                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
+                                      4))
 
   # FlatBufferVec3
   def Z(self): return self._tab.Get(flatbuffers.number_types.Float32Flags,
-                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(8))
+                                    self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
+                                      8))
 
 
 def CreateFlatBufferVec3(builder, x, y, z):

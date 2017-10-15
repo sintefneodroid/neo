@@ -6,8 +6,10 @@ setup(
     packages=find_packages(),
 
     package_data={
-      'neodroid': ['environments/**', 'environments/*/*', 'environments/*/*/*', 'environments/*/*/*/*',
-                   'environments/*/*/*/*/*', 'environments/*/*/*/*/*/*', 'environments/*/*/*/*/*/*/*'],
+      'neodroid': ['environments/**', 'environments/*/*', 'environments/*/*/*',
+                   'environments/*/*/*/*',
+                   'environments/*/*/*/*/*', 'environments/*/*/*/*/*/*',
+                   'environments/*/*/*/*/*/*/*'],
     },
 
     author='Christian Heider Nielsen',
@@ -18,6 +20,7 @@ setup(
                      'Game process for a feedback response loop',
     license='Apache License, Version 2.0',
     keywords='python reinforcement-learning interface api',
-    url='https://github.com/sintefneodroid/neo', install_requires=['kivy', 'pyzmq', 'numpy', 'flatbuffers',
-                                                                   'Pillow']
+    url='https://github.com/sintefneodroid/neo',
+    install_requires=['kivy', 'pyzmq', 'numpy', 'flatbuffers',
+                      'Pillow']
 )

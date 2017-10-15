@@ -1760,7 +1760,8 @@
                             } :
 
                             function (elem, context, xml) {
-                                var cache, uniqueCache, outerCache, node, nodeIndex, start,
+                                var cache, uniqueCache, outerCache, node,
+                                    nodeIndex, start,
                                     dir = simple !== forward ? "nextSibling" : "previousSibling",
                                     parent = elem.parentNode,
                                     name = ofType && elem.nodeName.toLowerCase(),
@@ -2114,7 +2115,13 @@
             Expr.pseudos["nth"] = Expr.pseudos["eq"];
 
 // Add button/input type pseudos
-            for (i in {radio: true, checkbox: true, file: true, password: true, image: true}) {
+            for (i in {
+                radio: true,
+                checkbox: true,
+                file: true,
+                password: true,
+                image: true
+            }) {
                 Expr.pseudos[i] = createInputPseudo(i);
             }
             for (i in {submit: true, reset: true}) {
@@ -5168,7 +5175,10 @@
 
             // Add the remaining (directly-bound) handlers
             if (delegateCount < handlers.length) {
-                handlerQueue.push({elem: this, handlers: handlers.slice(delegateCount)});
+                handlerQueue.push({
+                    elem: this,
+                    handlers: handlers.slice(delegateCount)
+                });
             }
 
             return handlerQueue;
@@ -6004,7 +6014,8 @@
             div = null;
         }
 
-        var pixelPositionVal, boxSizingReliableVal, pixelMarginRightVal, reliableMarginLeftVal,
+        var pixelPositionVal, boxSizingReliableVal, pixelMarginRightVal,
+            reliableMarginLeftVal,
             container = document.createElement("div"),
             div = document.createElement("div");
 
@@ -6117,7 +6128,11 @@
         // except "table", "table-cell", or "table-caption"
         // See here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
         rdisplayswap = /^(none|table(?!-c[ea]).+)/,
-        cssShow = {position: "absolute", visibility: "hidden", display: "block"},
+        cssShow = {
+            position: "absolute",
+            visibility: "hidden",
+            display: "block"
+        },
         cssNormalTransform = {
             letterSpacing: "0",
             fontWeight: "400"
@@ -6683,7 +6698,8 @@
     }
 
     function defaultPrefilter(elem, props, opts) {
-        var prop, value, toggle, hooks, oldfire, propTween, restoreDisplay, display,
+        var prop, value, toggle, hooks, oldfire, propTween, restoreDisplay,
+            display,
             isBox = "width" in props || "height" in props,
             anim = this,
             orig = {},
@@ -8128,7 +8144,10 @@
 // which is spec violation - http://www.w3.org/TR/DOM-Level-3-Events/#events-focusevent-event-order
 // Related ticket - https://bugs.chromium.org/p/chromium/issues/detail?id=449857
     if (!support.focusin) {
-        jQuery.each({focus: "focusin", blur: "focusout"}, function (orig, fix) {
+        jQuery.each({
+            focus: "focusin",
+            blur: "focusout"
+        }, function (orig, fix) {
 
             // Attach a single capturing handler on the document while someone wants focusin/focusout
             var handler = function (event) {
@@ -8296,9 +8315,15 @@
                         null :
                         jQuery.isArray(val) ?
                             jQuery.map(val, function (val) {
-                                return {name: elem.name, value: val.replace(rCRLF, "\r\n")};
+                                return {
+                                    name: elem.name,
+                                    value: val.replace(rCRLF, "\r\n")
+                                };
                             }) :
-                            {name: elem.name, value: val.replace(rCRLF, "\r\n")};
+                            {
+                                name: elem.name,
+                                value: val.replace(rCRLF, "\r\n")
+                            };
                 }).get();
         }
     });
@@ -9712,7 +9737,8 @@
 
     jQuery.offset = {
         setOffset: function (elem, options, i) {
-            var curPosition, curLeft, curCSSTop, curTop, curOffset, curCSSLeft, calculatePosition,
+            var curPosition, curLeft, curCSSTop, curTop, curOffset, curCSSLeft,
+                calculatePosition,
                 position = jQuery.css(elem, "position"),
                 curElem = jQuery(elem),
                 props = {};
@@ -9871,7 +9897,10 @@
     });
 
 // Create scrollLeft and scrollTop methods
-    jQuery.each({scrollLeft: "pageXOffset", scrollTop: "pageYOffset"}, function (method, prop) {
+    jQuery.each({
+        scrollLeft: "pageXOffset",
+        scrollTop: "pageYOffset"
+    }, function (method, prop) {
         var top = "pageYOffset" === prop;
 
         jQuery.fn[method] = function (val) {
@@ -9919,7 +9948,11 @@
 
 // Create innerHeight, innerWidth, height, width, outerHeight and outerWidth methods
     jQuery.each({Height: "height", Width: "width"}, function (name, type) {
-        jQuery.each({padding: "inner" + name, content: type, "": "outer" + name},
+        jQuery.each({
+                padding: "inner" + name,
+                content: type,
+                "": "outer" + name
+            },
             function (defaultExtra, funcName) {
 
                 // Margin is only for outerHeight, outerWidth

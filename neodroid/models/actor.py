@@ -18,7 +18,8 @@ class Actor(object):
     return self._motors
 
   def __repr__(self):
-    motors_str = ''.join([str(motor.__repr__()) for motor in self.get_motors()])
+    motors_str = ''.join(
+        [str(motor.__repr__()) for motor in self.get_motors()])
 
     return '    <Actor>\n' + \
            '      <name>' + self._name.decode('utf-8') + '</name>\n' + \
