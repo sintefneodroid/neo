@@ -3,6 +3,7 @@ from threading import Thread
 import zmq
 
 from neodroid.utilities import debug_print
+import neodroid.models as neomodels
 from .FlatBufferModels import FlatBufferState as FlatBufferState
 from .FlatBufferUtilities import build_flat_reaction, create_state
 
@@ -31,6 +32,8 @@ def synchronous_receive_message(stream):
     reply = FlatBufferState.GetRootAsFlatBufferState(by, 0)
     state = create_state(reply)
     return state
+  else:
+    return neomodels.EnvironmentState()
 
 
 def receive_environment_state(stream, callback=None):

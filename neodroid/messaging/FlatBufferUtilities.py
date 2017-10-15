@@ -51,6 +51,7 @@ def create_state(flat_state):
                                      flat_state.LastStepsFrameNumber(),
                                      flat_state.RewardForLastStep(),
                                      flat_state.Interrupted())
+
   return state
 
 

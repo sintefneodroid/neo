@@ -13,29 +13,351 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/../agent/perfect_information_navigator/utilities/depth_target_dataset.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../agent/perfect_information_navigator/utilities/processing.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../agent/utilities/simple-loop.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferPosRot.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene.exe" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/Assembly-CSharp.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/Mono.Security.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/MsgPack.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/System.Core.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/System.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/UnityEngine.Analytics.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/UnityEngine.Networking.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/UnityEngine.Timeline.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/UnityEngine.UI.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/UnityEngine.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/UnityEngine.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Managed/mscorlib.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/EmbedRuntime/MonoPosixHelper.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/EmbedRuntime/mono.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/etc/mono/1.0/machine.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/etc/mono/2.0/Browsers/Compat.browser" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/etc/mono/2.0/machine.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/etc/mono/2.0/settings.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/etc/mono/2.0/web.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/etc/mono/browscap.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/etc/mono/config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Mono/etc/mono/mconfig/config.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Resources/unity default resources" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/Resources/unity_builtin_extra" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/app.info" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/boot.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/globalgamemanagers" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/globalgamemanagers.assets" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/level0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/level0.resS" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/output_log.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/carscene_Data/sharedassets0.assets" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene.exe" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/Assembly-CSharp.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/Mono.Security.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/MsgPack.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/System.Core.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/System.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/UnityEngine.Analytics.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/UnityEngine.Networking.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/UnityEngine.Timeline.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/UnityEngine.UI.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/UnityEngine.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/UnityEngine.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Managed/mscorlib.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/EmbedRuntime/MonoPosixHelper.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/EmbedRuntime/mono.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/etc/mono/1.0/machine.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/etc/mono/2.0/Browsers/Compat.browser" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/etc/mono/2.0/machine.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/etc/mono/2.0/settings.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/etc/mono/2.0/web.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/etc/mono/browscap.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/etc/mono/config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Mono/etc/mono/mconfig/config.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Resources/unity default resources" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/Resources/unity_builtin_extra" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/app.info" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/boot.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/globalgamemanagers" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/globalgamemanagers.assets" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/level0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/dodgescene_Data/sharedassets0.assets" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping.x86_64" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32.x86" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/Accessibility.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/Assembly-CSharp.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/AsyncIO.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/FlatBuffers.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/JetBrains.Annotations.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/Mono.Data.Sqlite.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/Mono.Data.Tds.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/Mono.Messaging.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/Mono.Posix.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/Mono.Security.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/Mono.Web.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/Mono.WebBrowser.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/NetMQ.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/Priority Queue.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Configuration.Install.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Configuration.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Core.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Data.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Drawing.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.EnterpriseServices.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.IdentityModel.Selectors.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.IdentityModel.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Messaging.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Runtime.Serialization.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Security.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.ServiceModel.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Transactions.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Web.Services.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Web.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Windows.Forms.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.Xml.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/System.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.AIModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.AIModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ARModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ARModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.AccessibilityModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.AccessibilityModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.AnimationModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.AnimationModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.AudioModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.AudioModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ClothModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ClothModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ClusterInputModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ClusterInputModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ClusterRendererModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ClusterRendererModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.CoreModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.CoreModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.CrashReportingModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.CrashReportingModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.DirectorModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.DirectorModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.GameCenterModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.GameCenterModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.GridModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.GridModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.IMGUIModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.IMGUIModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ImageConversionModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ImageConversionModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.InputModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.InputModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.JSONSerializeModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.JSONSerializeModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.Networking.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ParticleSystemModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ParticleSystemModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ParticlesLegacyModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ParticlesLegacyModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.PerformanceReportingModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.PerformanceReportingModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.Physics2DModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.Physics2DModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.PhysicsModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.PhysicsModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ScreenCaptureModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.ScreenCaptureModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.SpriteMaskModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.SpriteMaskModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.StyleSheetsModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.StyleSheetsModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.TerrainModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.TerrainModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.TerrainPhysicsModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.TerrainPhysicsModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.TextRenderingModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.TextRenderingModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.TilemapModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.TilemapModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.Timeline.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UI.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UIElementsModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UIElementsModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UIModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UIModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UNETModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UNETModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityAnalyticsModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityAnalyticsModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityConnectModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityConnectModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityWebRequestModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityWebRequestModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.VRModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.VRModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.VehiclesModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.VehiclesModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.VideoModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.VideoModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.WebModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.WebModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.WindModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.WindModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/UnityEngine.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Managed/mscorlib.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Mono/etc/mono/1.0/machine.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Mono/etc/mono/2.0/Browsers/Compat.browser" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Mono/etc/mono/2.0/machine.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Mono/etc/mono/2.0/settings.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Mono/etc/mono/2.0/web.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Mono/etc/mono/browscap.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Mono/etc/mono/config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Mono/etc/mono/mconfig/config.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Resources/UnityPlayer.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Resources/unity default resources" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/Resources/unity_builtin_extra" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/boot.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/globalgamemanagers" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/globalgamemanagers.assets" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/level0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/sharedassets0.assets" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping32_Data/sharedassets0.assets.resS" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/Assembly-CSharp.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/AsyncIO.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/FlatBuffers.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/Mono.Security.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/NetMQ.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/Priority Queue.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/System.Core.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/System.Runtime.Serialization.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/System.ServiceModel.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/System.Xml.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/System.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.AIModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.AIModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ARModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ARModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.AccessibilityModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.AccessibilityModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.AnimationModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.AnimationModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.AudioModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.AudioModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ClothModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ClothModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ClusterInputModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ClusterInputModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ClusterRendererModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ClusterRendererModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.CoreModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.CoreModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.CrashReportingModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.CrashReportingModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.DirectorModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.DirectorModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.GameCenterModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.GameCenterModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.GridModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.GridModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.IMGUIModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.IMGUIModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ImageConversionModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ImageConversionModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.InputModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.InputModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.JSONSerializeModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.JSONSerializeModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.Networking.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ParticleSystemModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ParticleSystemModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ParticlesLegacyModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ParticlesLegacyModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.PerformanceReportingModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.PerformanceReportingModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.Physics2DModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.Physics2DModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.PhysicsModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.PhysicsModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ScreenCaptureModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.ScreenCaptureModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.SpatialTracking.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.SpriteMaskModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.SpriteMaskModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.StyleSheetsModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.StyleSheetsModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.TerrainModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.TerrainModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.TerrainPhysicsModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.TerrainPhysicsModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.TextRenderingModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.TextRenderingModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.TilemapModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.TilemapModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.Timeline.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UI.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UIElementsModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UIElementsModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UIModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UIModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UNETModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UNETModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityAnalyticsModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityAnalyticsModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityConnectModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityConnectModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityWebRequestModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityWebRequestModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.VRModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.VRModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.VehiclesModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.VehiclesModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.VideoModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.VideoModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.WebModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.WebModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.WindModule.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.WindModule.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/UnityEngine.dll.mdb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Managed/mscorlib.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Mono/etc/mono/1.0/machine.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Mono/etc/mono/2.0/Browsers/Compat.browser" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Mono/etc/mono/2.0/machine.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Mono/etc/mono/2.0/settings.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Mono/etc/mono/2.0/web.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Mono/etc/mono/browscap.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Mono/etc/mono/config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Mono/etc/mono/mconfig/config.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Resources/UnityPlayer.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Resources/unity default resources" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/Resources/unity_builtin_extra" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/boot.config" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/globalgamemanagers" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/globalgamemanagers.assets" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/level0" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/sharedassets0.assets" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/grasping_Data/sharedassets0.assets.resS" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/.idea/agent.iml" afterPath="$PROJECT_DIR$/../agent/.idea/agent.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/.idea/misc.xml" afterPath="$PROJECT_DIR$/../agent/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../agent/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/requirements.txt" afterPath="$PROJECT_DIR$/../agent/requirements.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/guiclient/gui.py" afterPath="$PROJECT_DIR$/example/guiclient/gui.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/guiclient/gui_components/environment_state_box.py" afterPath="$PROJECT_DIR$/example/guiclient/gui_components/environment_state_box.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/guiclient/main.py" afterPath="$PROJECT_DIR$/example/guiclient/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferActor.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferActor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferMotion.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferMotion.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferMotor.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferMotor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferObserver.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferObserver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferQuat.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferQuat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferReaction.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferReaction.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferState.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferState.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferVec3.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferVec3.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/__init__.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/models/actor.py" afterPath="$PROJECT_DIR$/neodroid/models/actor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/models/environment_state.py" afterPath="$PROJECT_DIR$/neodroid/models/environment_state.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/models/observer.py" afterPath="$PROJECT_DIR$/neodroid/models/observer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/models/reaction.py" afterPath="$PROJECT_DIR$/neodroid/models/reaction.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" afterPath="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/models/motion.py" afterPath="$PROJECT_DIR$/neodroid/models/motion.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/neodroid_environment.py" afterPath="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,8 +367,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/neo$gui.coverage" NAME="gui Coverage Results" MODIFIED="1508098480030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example/guiclient" />
-    <SUITE FILE_PATH="coverage/neo$random.coverage" NAME="random Coverage Results" MODIFIED="1508092296211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../agent/random_agent" />
+    <SUITE FILE_PATH="coverage/neo$gui.coverage" NAME="gui Coverage Results" MODIFIED="1508104332928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example/guiclient" />
+    <SUITE FILE_PATH="coverage/neo$random.coverage" NAME="random Coverage Results" MODIFIED="1508107091654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../agent/random_agent" />
     <SUITE FILE_PATH="coverage/neo$simple.coverage" NAME="simple Coverage Results" MODIFIED="1502737884592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example/guiclient" />
   </component>
   <component name="DatabaseView">
@@ -67,76 +389,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="environment_state.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="networking_utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/neodroid/messaging/networking_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sample_random_actions.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../agent/random_agent/sample_random_actions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="53" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="motion.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/neodroid/models/motion.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="environment_state.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/models/environment_state.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+            <state relative-caret-position="578">
+              <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="actor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/actor.py">
+      <file leaf-file-name="neodroid_environment.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FlatBufferUtilities.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="50" column="71" lean-forward="false" selection-start-line="50" selection-start-column="71" selection-end-line="50" selection-end-column="71" />
+            <state relative-caret-position="314">
+              <caret line="92" column="32" lean-forward="false" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="32" />
               <folding>
-                <element signature="e#0#22#0" expanded="true" />
+                <element signature="e#0#16#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FlatBufferState.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferState.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="75" column="28" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/guiclient/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="64" column="23" lean-forward="true" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gui.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/guiclient/gui.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="81" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="environment_state_box.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/guiclient/gui_components/environment_state_box.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="773">
-              <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="104" selection-end-column="53" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -158,7 +462,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../agent" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -175,27 +479,28 @@
         <option value="$PROJECT_DIR$/example/guiclient/gui_components/__init__.py" />
         <option value="$PROJECT_DIR$/example/guiclient/gui_components/reaction_box.py" />
         <option value="$PROJECT_DIR$/example/guiclient/utilities.py" />
-        <option value="$PROJECT_DIR$/neodroid/models/motion.py" />
-        <option value="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
         <option value="$PROJECT_DIR$/example/main.py" />
         <option value="$PROJECT_DIR$/example/guiclient/__init__.py" />
         <option value="$PROJECT_DIR$/neodroid/models/motor.py" />
         <option value="$PROJECT_DIR$/../agent/utilities/dqn-agent.py" />
         <option value="$PROJECT_DIR$/neodroid/utilities/debug.py" />
         <option value="$PROJECT_DIR$/../agent/requirements.txt" />
-        <option value="$PROJECT_DIR$/../agent/random_agent/sample_random_actions.py" />
-        <option value="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
         <option value="$PROJECT_DIR$/neodroid/models/reaction.py" />
         <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/architectures/navigator.py" />
         <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/architectures/dqn.py" />
         <option value="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/__init__.py" />
         <option value="$PROJECT_DIR$/neodroid/models/actor.py" />
         <option value="$PROJECT_DIR$/neodroid/models/observer.py" />
-        <option value="$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py" />
         <option value="$PROJECT_DIR$/neodroid/models/environment_state.py" />
         <option value="$PROJECT_DIR$/example/guiclient/gui_components/environment_state_box.py" />
         <option value="$PROJECT_DIR$/example/guiclient/gui.py" />
         <option value="$PROJECT_DIR$/example/guiclient/main.py" />
+        <option value="$PROJECT_DIR$/neodroid/models/motion.py" />
+        <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/test.py" />
+        <option value="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
+        <option value="$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py" />
+        <option value="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
+        <option value="$PROJECT_DIR$/../agent/random_agent/sample_random_actions.py" />
       </list>
     </option>
   </component>
@@ -236,45 +541,6 @@
           <expand>
             <path>
               <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="guiclient" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="guiclient" type="462c0819:PsiDirectoryNode" />
-              <item name="gui_components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="neodroid" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="neodroid" type="462c0819:PsiDirectoryNode" />
-              <item name="messaging" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="neodroid" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
               <item name="agent" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -287,6 +553,11 @@
               <item name="agent" type="462c0819:PsiDirectoryNode" />
               <item name="perfect_information_manipulator" type="462c0819:PsiDirectoryNode" />
               <item name="architectures" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="agent" type="462c0819:PsiDirectoryNode" />
+              <item name="random_agent" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -318,7 +589,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gui">
+  <component name="RunManager" selected="Python.random">
     <configuration name="gui" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -398,6 +669,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24958949" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991228" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24521072" sideWeight="0.35855263" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -423,27 +695,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/local/lib/python3.5/dist-packages/kivy/core/image/img_pygame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.5/dist-packages/flatbuffers/encode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.5/dist-packages/flatbuffers/table.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferVec3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -588,14 +839,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/models/motion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="18" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/models/motor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -625,13 +868,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../agent/random_agent/sample_random_actions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="10" lean-forward="false" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -690,14 +926,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/models/reaction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/guiclient/utilities.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -706,31 +934,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/messaging/networking_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -758,13 +966,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py">
+    <entry file="file://$PROJECT_DIR$/neodroid/models/actor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="50" column="71" lean-forward="false" selection-start-line="50" selection-start-column="71" selection-end-line="50" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="323">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -772,32 +978,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="75" column="28" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/guiclient/gui_components/environment_state_box.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="773">
-          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="104" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/guiclient/gui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="81" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/models/actor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -810,11 +990,113 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/example/guiclient/gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="81" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#24#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/guiclient/gui_components/environment_state_box.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="773">
+          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="104" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/test_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="41" column="51" lean-forward="true" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/train_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-714">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="92" column="32" lean-forward="false" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/models/environment_state.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+        <state relative-caret-position="578">
+          <caret line="34" column="26" lean-forward="false" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/models/motion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/models/reaction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/messaging/networking_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../agent/random_agent/sample_random_actions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="53" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
