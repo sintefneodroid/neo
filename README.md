@@ -17,7 +17,6 @@ The application displays data received from the example application of the [Droi
 
 # To Do's
 - [ ] ...
-- [ ] Reset properly
 
 # Other Components Of the Neodroid Platform
 
