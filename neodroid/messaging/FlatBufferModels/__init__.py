@@ -2,7 +2,7 @@ from .FlatBufferActor import *
 from .FlatBufferMotion import *
 from .FlatBufferMotor import *
 from .FlatBufferObserver import *
-from .FlatBufferPosRot import *
+from .FlatBufferPosRotDir import *
 from .FlatBufferQuat import *
 from .FlatBufferReaction import *
 from .FlatBufferState import *

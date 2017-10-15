@@ -18,6 +18,9 @@ class EnvironmentStateBox(BoxLayout):
     self.energy_label = Label(text='Energy Spent Since Reset: ',
                               size_hint=(1.0, 0.05))
     self.time_label = Label(text='Time Since Reset: ', size_hint=(1.0, 0.05))
+    self.frame_label = Label(text='Frame: ', size_hint=(1.0, 0.05))
+    self.interrupted_label = Label(text='Interrupted: ', size_hint=(1.0, 0.05))
+    self.direction_label = Label(text='Direction: ', size_hint=(1.0, 0.05))
 
     self.image_row_layout = BoxLayout(orientation='horizontal')
     self.assemble_components()
@@ -32,6 +35,9 @@ class EnvironmentStateBox(BoxLayout):
     self.add_widget(self.image_row_layout)
     self.add_widget(self.position_label)
     self.add_widget(self.rotation_label)
+    self.add_widget(self.direction_label)
+    self.add_widget(self.frame_label)
+    self.add_widget(self.interrupted_label)
     self.add_widget(self.reward_label)
     self.add_widget(self.energy_label)
     self.add_widget(self.time_label)
@@ -83,8 +89,17 @@ class EnvironmentStateBox(BoxLayout):
   def update_reward_label(self, value: str):
     self.reward_label.text = 'Reward: ' + value
 
+  def update_frame_label(self, value: str):
+    self.frame_label.text = 'Frame: ' + value
+
+  def update_interrupted_label(self, value: str):
+    self.interrupted_label.text = 'Interrupted: ' + value
+
   def update_energy_label(self, value: str):
     self.energy_label.text = 'Energy Spent Since Reset: ' + value
 
   def update_time_label(self, value: str):
     self.time_label.text = 'Time Since Reset: ' + value
+
+  def update_direction_label(self, value: str):
+    self.direction_label.text = 'Direction: ' + value

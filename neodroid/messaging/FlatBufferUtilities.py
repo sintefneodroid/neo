@@ -48,7 +48,9 @@ def create_state(flat_state):
                                      flat_state.TotalEnergySpentSinceReset(),
                                      create_actors(flat_state),
                                      create_observers(flat_state),
-                                     flat_state.RewardForLastStep())
+                                     flat_state.LastStepsFrameNumber(),
+                                     flat_state.RewardForLastStep(),
+                                     flat_state.Interrupted())
   return state
 
 
@@ -57,12 +59,15 @@ def create_actors(flat_state):
   for i in range(1, flat_state.ActorsLength() + 1):
     flat_actor = flat_state.Actors(i)
     motors = create_motors(flat_actor)
-    pos_rot = flat_actor.Posrot()
-    position = pos_rot.Position()
-    rotation = pos_rot.Rotation()
+    pos_rot_dir = flat_actor.Posrotdir()
+    position = pos_rot_dir.Position()
+    rotation = pos_rot_dir.Rotation()
+    direction = pos_rot_dir.Direction()
     input_actor = neomodels.Actor(
         flat_actor.Name(), [position.X(), position.Y(), position.Z()],
-        [rotation.X(), rotation.Y(), rotation.Z(), rotation.W()], motors)
+        [rotation.X(), rotation.Y(), rotation.Z()],
+        [direction.X(), direction.Y(), direction.Z()],
+        motors)
     actors[input_actor.get_name()] = input_actor
   return actors
 
@@ -71,15 +76,17 @@ def create_observers(flat_state):
   observers = {}
   for i in range(1, flat_state.ObserversLength() + 1):
     flat_observer = flat_state.Observers(i)
-    pos_rot = flat_observer.Posrot()
-    position = pos_rot.Position()
-    rotation = pos_rot.Rotation()
+    pos_rot_dir = flat_observer.Posrotdir()
+    position = pos_rot_dir.Position()
+    rotation = pos_rot_dir.Rotation()
+    direction = pos_rot_dir.Direction()
     data = create_data(flat_observer)
     input_observer = neomodels.Observer(
         flat_observer.Name(),
         data,
         [position.X(), position.Y(), position.Z()],
-        [rotation.X(), rotation.Y(), rotation.Z(), rotation.W()], )
+        [rotation.X(), rotation.Y(), rotation.Z()],
+        [direction.X(), direction.Y(), direction.Z()] )
     observers[input_observer.get_name()] = input_observer
   return observers
 

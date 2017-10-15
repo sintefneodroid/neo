@@ -1,8 +1,9 @@
 class Actor(object):
-  def __init__(self, name, position, rotation, motors):
+  def __init__(self, name, position, rotation, direction, motors):
     self._name = name
     self._position = position
     self._rotation = rotation
+    self._direction = direction
     self._motors = motors
 
   def get_name(self):
@@ -13,6 +14,9 @@ class Actor(object):
 
   def get_rotation(self):
     return self._rotation
+
+  def get_direction(self):
+    return self._direction
 
   def get_motors(self):
     return self._motors
@@ -25,6 +29,7 @@ class Actor(object):
            '      <name>' + self._name.decode('utf-8') + '</name>\n' + \
            '      <position>' + str(self._position) + '</position>\n' + \
            '      <rotation>' + str(self._rotation) + '</rotation>\n' + \
+           '      <direction>' + str(self._direction) + '</direction>\n' + \
            '      <Motors>\n' + \
            motors_str + \
            '      </Motors>\n' + \

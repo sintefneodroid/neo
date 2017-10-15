@@ -4,7 +4,9 @@ class EnvironmentState(object):
                total_energy_spent_since_reset=0,
                actors=None,
                observers=None,
-               reward_for_last_step=0):
+               last_steps_frame_number=0,
+               reward_for_last_step=0,
+               interrupted = False):
     if observers is None:
       observers = {}
     if actors is None:
@@ -14,6 +16,8 @@ class EnvironmentState(object):
     self._actors = actors
     self._observers = observers
     self._reward_for_last_step = reward_for_last_step
+    self._last_steps_frame_number = last_steps_frame_number
+    self._interrupted = interrupted
 
   def get_time_since_reset(self):
     return self._time_since_reset
@@ -36,6 +40,12 @@ class EnvironmentState(object):
   def get_reward_for_last_step(self):
     return self._reward_for_last_step
 
+  def get_last_steps_frame_number(self):
+    return self._last_steps_frame_number
+
+  def get_interrupted(self):
+    return self._interrupted
+
   def __repr__(self):
     observers_str = ''.join([
       str(observer.__repr__()) for observer in self._observers.values()
@@ -50,9 +60,15 @@ class EnvironmentState(object):
            '  <total_energy_spent_since_reset>' + \
            str(self._total_energy_spent_since_reset) + \
            '</total_energy_spent_since_reset>\n' + \
+           '  <last_steps_frame_number>' + \
+           str(self._last_steps_frame_number) + \
+           '</last_steps_frame_number>\n' + \
            '  <reward_for_last_step>' + \
            str(self._reward_for_last_step) + \
            '</reward_for_last_step>\n' + \
+           '  <interrupted>' + \
+           str(self._interrupted) + \
+           '</interrupted>\n' + \
            '  <Actors>\n' + \
            actors_str + \
            '  </Actors>\n' + \

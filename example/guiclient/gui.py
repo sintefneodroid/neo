@@ -72,6 +72,15 @@ class NeoGUI(App):
   def update_energy_label(self, value: str):
     self.state_box.update_energy_label(value)
 
+  def update_frame_label(self, value: str):
+    self.state_box.update_frame_label(value)
+
+  def update_interrupted_label(self, value: str):
+    self.state_box.update_interrupted_label(value)
+
+  def update_direction_label(self, value: str):
+    self.state_box.update_direction_label(value)
+
   def update_time_label(self, value: str):
     self.state_box.update_time_label(value)
 
