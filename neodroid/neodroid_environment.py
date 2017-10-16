@@ -86,10 +86,10 @@ class NeodroidEnvironment(object):
     sent_callback = debug_print
     self._awaiting_response = True
     send_reaction(self._stream, input_reaction, sent_callback)
-    #if callback:
-      # recv_msg(self._stream, callback)
+    # if callback:
+    # recv_msg(self._stream, callback)
     #  self._awaiting_response = False
-    #else:
+    # else:
     message = synchronous_receive_message(self._stream)
     self._awaiting_response = False
     return message

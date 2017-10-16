@@ -19,7 +19,7 @@ class Motor(object):
 
   def __repr__(self):
     return '        <Motor>\n' + \
-           '          <name>' + self._name.decode('utf-8') + \
+           '          <name>' + str(self._name.decode('utf-8')) + \
            '</name>\n' + \
            '          <binary>' + str(self._binary) + '</binary>\n' + \
            '          <energy_cost>' + \
