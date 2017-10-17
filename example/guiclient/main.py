@@ -25,7 +25,7 @@ def on_connect_callback(ip_address, port, launch_environment, environment):
                                                on_connected_callback=on_connected_callback,
                                                name=environment,
                                                connect_to_running=(
-                                               not launch_environment))
+                                                 not launch_environment))
 
 
 def update_callback(state):
@@ -52,14 +52,16 @@ def update_environment_widgets(environment_state):
   try:
     _gui.update_xml_text_label(str(environment_state))
     _gui.update_position_label(
-      str(environment_state.get_actor(b'RigidbodyGripper').get_position()))
+        str(environment_state.get_actor(b'RigidbodyGripper').get_position()))
     _gui.update_rotation_label(
-      str(environment_state.get_actor(b'RigidbodyGripper').get_rotation()))
+        str(environment_state.get_actor(b'RigidbodyGripper').get_rotation()))
     _gui.update_direction_label(
         str(environment_state.get_actor(b'RigidbodyGripper').get_direction()))
     _gui.update_reward_label(str(environment_state.get_reward_for_last_step()))
-    _gui.update_energy_label(str(environment_state.get_total_energy_spent_since_reset()))
-    _gui.update_frame_label(str(environment_state.get_last_steps_frame_number()))
+    _gui.update_energy_label(
+        str(environment_state.get_total_energy_spent_since_reset()))
+    _gui.update_frame_label(
+        str(environment_state.get_last_steps_frame_number()))
     _gui.update_interrupted_label(str(environment_state.get_interrupted()))
     _gui.update_time_label(str(environment_state.get_time_since_reset()))
   except BaseException:
@@ -67,15 +69,15 @@ def update_environment_widgets(environment_state):
 
   try:
     _gui.update_depth_image(
-      environment_state.get_observer(b'DepthCamera').get_data())
+        environment_state.get_observer(b'DepthCamera').get_data())
     _gui.update_segmentation_image(
-      environment_state.get_observer(b'SegmentationCamera').get_data())
+        environment_state.get_observer(b'SegmentationCamera').get_data())
     _gui.update_instance_segmentation_image(environment_state.get_observer(
         b'InstanceSegmentationCamera').get_data())
     _gui.update_rgb_image(
-      environment_state.get_observer(b'RGBCamera').get_data())
+        environment_state.get_observer(b'RGBCamera').get_data())
     _gui.update_infrared_shadow_image(
-      environment_state.get_observer(b'InfraredShadowCamera').get_data())
+        environment_state.get_observer(b'InfraredShadowCamera').get_data())
   except BaseException:
     print('Failed at updating Images')
 

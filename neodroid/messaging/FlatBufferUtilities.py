@@ -87,7 +87,7 @@ def create_observers(flat_state):
         data,
         [position.X(), position.Y(), position.Z()],
         [rotation.X(), rotation.Y(), rotation.Z()],
-        [direction.X(), direction.Y(), direction.Z()] )
+        [direction.X(), direction.Y(), direction.Z()])
     observers[input_observer.get_name()] = input_observer
   return observers
 

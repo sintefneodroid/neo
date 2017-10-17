@@ -52,7 +52,7 @@ class NeoGUI(App):
 
   def update_instance_segmentation_image(self, instance_segmentation_image):
     self.state_box.update_instance_segmentation_image(
-      instance_segmentation_image)
+        instance_segmentation_image)
 
   def update_infrared_shadow_image(self, infrared_shadow_image):
     self.state_box.update_infrared_shadow_image(infrared_shadow_image)

@@ -14,7 +14,7 @@ class Reaction(object):
 
   def to_dict(self):
     return {
-      '_reset': self._reset,
+      '_reset'              : self._reset,
       '_actor_motor_motions': [motion.to_dict() for motion in self._motions]
     }
 

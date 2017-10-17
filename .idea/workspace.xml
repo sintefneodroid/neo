@@ -13,302 +13,45 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/../agent/perfect_information_navigator/utilities/depth_target_dataset.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../agent/perfect_information_navigator/utilities/processing.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../agent/utilities/simple-loop.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation.x86" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/Accessibility.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/Assembly-CSharp.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/AsyncIO.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/FlatBuffers.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/JetBrains.Annotations.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/Mono.Data.Sqlite.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/Mono.Data.Tds.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/Mono.Messaging.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/Mono.Posix.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/Mono.Security.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/Mono.Web.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/Mono.WebBrowser.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/NetMQ.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/Priority Queue.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Configuration.Install.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Configuration.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Core.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Data.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Drawing.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.EnterpriseServices.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.IdentityModel.Selectors.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.IdentityModel.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Messaging.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Runtime.Serialization.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Security.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.ServiceModel.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Transactions.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Web.Services.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Web.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Windows.Forms.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.Xml.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/System.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.AIModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.AIModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ARModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ARModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.AccessibilityModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.AccessibilityModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.AnimationModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.AnimationModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.AudioModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.AudioModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ClothModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ClothModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ClusterInputModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ClusterInputModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ClusterRendererModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ClusterRendererModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.CoreModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.CoreModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.CrashReportingModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.CrashReportingModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.DirectorModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.DirectorModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.GameCenterModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.GameCenterModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.GridModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.GridModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.IMGUIModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.IMGUIModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ImageConversionModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ImageConversionModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.InputModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.InputModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.JSONSerializeModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.JSONSerializeModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.Networking.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ParticleSystemModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ParticleSystemModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ParticlesLegacyModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ParticlesLegacyModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.PerformanceReportingModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.PerformanceReportingModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.Physics2DModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.Physics2DModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.PhysicsModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.PhysicsModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ScreenCaptureModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.ScreenCaptureModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.SpriteMaskModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.SpriteMaskModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.StyleSheetsModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.StyleSheetsModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.TerrainModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.TerrainModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.TerrainPhysicsModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.TerrainPhysicsModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.TextRenderingModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.TextRenderingModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.TilemapModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.TilemapModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.Timeline.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UI.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UIElementsModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UIElementsModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UIModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UIModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UNETModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UNETModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityAnalyticsModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityAnalyticsModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityConnectModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityConnectModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityWebRequestModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityWebRequestModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.VRModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.VRModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.VehiclesModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.VehiclesModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.VideoModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.VideoModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.WebModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.WebModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.WindModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.WindModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/UnityEngine.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Managed/mscorlib.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Mono/etc/mono/1.0/machine.config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Mono/etc/mono/2.0/Browsers/Compat.browser" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Mono/etc/mono/2.0/machine.config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Mono/etc/mono/2.0/settings.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Mono/etc/mono/2.0/web.config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Mono/etc/mono/browscap.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Mono/etc/mono/config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Mono/etc/mono/mconfig/config.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Resources/UnityPlayer.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Resources/unity default resources" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/Resources/unity_builtin_extra" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/boot.config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/globalgamemanagers" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/globalgamemanagers.assets" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/level0" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/sharedassets0.assets" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_Data/sharedassets0.assets.resS" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps.x86" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/Accessibility.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/Assembly-CSharp.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/AsyncIO.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/FlatBuffers.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/JetBrains.Annotations.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/Mono.Data.Sqlite.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/Mono.Data.Tds.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/Mono.Messaging.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/Mono.Posix.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/Mono.Security.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/Mono.Web.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/Mono.WebBrowser.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/NetMQ.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/Priority Queue.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Configuration.Install.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Configuration.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Core.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Data.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Drawing.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.EnterpriseServices.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.IdentityModel.Selectors.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.IdentityModel.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Messaging.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Runtime.Serialization.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Security.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.ServiceModel.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Transactions.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Web.Services.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Web.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Windows.Forms.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.Xml.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/System.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.AIModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.AIModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ARModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ARModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.AccessibilityModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.AccessibilityModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.AnimationModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.AnimationModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.AudioModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.AudioModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ClothModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ClothModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ClusterInputModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ClusterInputModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ClusterRendererModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ClusterRendererModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.CoreModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.CoreModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.CrashReportingModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.CrashReportingModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.DirectorModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.DirectorModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.GameCenterModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.GameCenterModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.GridModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.GridModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.IMGUIModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.IMGUIModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ImageConversionModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ImageConversionModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.InputModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.InputModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.JSONSerializeModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.JSONSerializeModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.Networking.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ParticleSystemModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ParticleSystemModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ParticlesLegacyModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ParticlesLegacyModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.PerformanceReportingModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.PerformanceReportingModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.Physics2DModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.Physics2DModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.PhysicsModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.PhysicsModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ScreenCaptureModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.ScreenCaptureModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.SpriteMaskModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.SpriteMaskModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.StyleSheetsModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.StyleSheetsModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.TerrainModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.TerrainModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.TerrainPhysicsModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.TerrainPhysicsModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.TextRenderingModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.TextRenderingModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.TilemapModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.TilemapModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.Timeline.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UI.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UIElementsModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UIElementsModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UIModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UIModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UNETModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UNETModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityAnalyticsModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityAnalyticsModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityConnectModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityConnectModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityWebRequestModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityWebRequestModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.VRModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.VRModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.VehiclesModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.VehiclesModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.VideoModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.VideoModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.WebModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.WebModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.WindModule.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.WindModule.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/UnityEngine.dll.mdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Managed/mscorlib.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Mono/etc/mono/1.0/machine.config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Mono/etc/mono/2.0/Browsers/Compat.browser" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Mono/etc/mono/2.0/machine.config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Mono/etc/mono/2.0/settings.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Mono/etc/mono/2.0/web.config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Mono/etc/mono/browscap.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Mono/etc/mono/config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Mono/etc/mono/mconfig/config.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Resources/UnityPlayer.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Resources/unity default resources" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/Resources/unity_builtin_extra" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/boot.config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/globalgamemanagers" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/globalgamemanagers.assets" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/level0" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/sharedassets0.assets" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocationdiscretesteps_Data/sharedassets0.assets.resS" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_transform_Data/Managed/Assembly-CSharp.dll" afterPath="$PROJECT_DIR$/neodroid/environments/gotolocation_transform_Data/Managed/Assembly-CSharp.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_transform_Data/globalgamemanagers" afterPath="$PROJECT_DIR$/neodroid/environments/gotolocation_transform_Data/globalgamemanagers" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_transform_Data/level0" afterPath="$PROJECT_DIR$/neodroid/environments/gotolocation_transform_Data/level0" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/environments/gotolocation_transform_Data/sharedassets0.assets" afterPath="$PROJECT_DIR$/neodroid/environments/gotolocation_transform_Data/sharedassets0.assets" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/.idea/agent.iml" afterPath="$PROJECT_DIR$/../agent/.idea/agent.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/.idea/misc.xml" afterPath="$PROJECT_DIR$/../agent/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../agent/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/requirements.txt" afterPath="$PROJECT_DIR$/../agent/requirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/models/actor.py" afterPath="$PROJECT_DIR$/neodroid/models/actor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/models/motor.py" afterPath="$PROJECT_DIR$/neodroid/models/motor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/target_point_estimator/architectures/target_estimator.py" afterPath="$PROJECT_DIR$/../agent/target_point_estimator/architectures/target_estimator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/target_point_estimator/configs/default_config.py" afterPath="$PROJECT_DIR$/../agent/target_point_estimator/configs/default_config.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/target_point_estimator/test_model.py" afterPath="$PROJECT_DIR$/../agent/target_point_estimator/test_model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/target_point_estimator/train_model.py" afterPath="$PROJECT_DIR$/../agent/target_point_estimator/train_model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/target_point_estimator/utilities/depth_target_dataset.py" afterPath="$PROJECT_DIR$/../agent/target_point_estimator/utilities/depth_target_dataset.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/target_point_estimator/utilities/processing.py" afterPath="$PROJECT_DIR$/../agent/target_point_estimator/utilities/processing.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/utilities/display_3d_depth_image.py" afterPath="$PROJECT_DIR$/../agent/utilities/display_3d_depth_image.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/utilities/display_depth_image.py" afterPath="$PROJECT_DIR$/../agent/utilities/display_depth_image.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/utilities/dqn-agent.py" afterPath="$PROJECT_DIR$/../agent/utilities/dqn-agent.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/utilities/original.py" afterPath="$PROJECT_DIR$/../agent/utilities/original.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/utilities/plotting_sample.py" afterPath="$PROJECT_DIR$/../agent/utilities/plotting_sample.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/guiclient/gui.py" afterPath="$PROJECT_DIR$/example/guiclient/gui.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/guiclient/main.py" afterPath="$PROJECT_DIR$/example/guiclient/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferActor.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferActor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferConfiguration.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferConfiguration.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferMotion.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferMotion.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferMotor.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferMotor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferObserver.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferObserver.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferPosRotDir.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferPosRotDir.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferQuat.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferQuat.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferReaction.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferReaction.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferState.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferState.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferVec3.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferVec3.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py" afterPath="$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" afterPath="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/models/environment_state.py" afterPath="$PROJECT_DIR$/neodroid/models/environment_state.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/models/motion.py" afterPath="$PROJECT_DIR$/neodroid/models/motion.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/models/reaction.py" afterPath="$PROJECT_DIR$/neodroid/models/reaction.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/neodroid_environment.py" afterPath="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/utilities/debug.py" afterPath="$PROJECT_DIR$/neodroid/utilities/debug.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -318,10 +61,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/neo$gui.coverage" NAME="gui Coverage Results" MODIFIED="1508140958558" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example/guiclient" />
-    <SUITE FILE_PATH="coverage/neo$random.coverage" NAME="random Coverage Results" MODIFIED="1508140562989" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../agent/random_agent" />
+    <SUITE FILE_PATH="coverage/neo$gui.coverage" NAME="gui Coverage Results" MODIFIED="1508178601323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example/guiclient" />
+    <SUITE FILE_PATH="coverage/neo$random.coverage" NAME="random Coverage Results" MODIFIED="1508180408592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../agent/random_agent" />
     <SUITE FILE_PATH="coverage/neo$simple.coverage" NAME="simple Coverage Results" MODIFIED="1502737884592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example/guiclient" />
-    <SUITE FILE_PATH="coverage/neo$test.coverage" NAME="test Coverage Results" MODIFIED="1508144628186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../agent/perfect_information_manipulator" />
+    <SUITE FILE_PATH="coverage/neo$test.coverage" NAME="test Coverage Results" MODIFIED="1508270781486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../agent/perfect_information_manipulator" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -341,11 +84,60 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="reaction.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/reaction.py">
+      <file leaf-file-name="train_model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/train_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+            <state relative-caret-position="986">
+              <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default_config.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/configs/default_config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#73#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="neodroid_environment.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="354">
+              <caret line="84" column="26" lean-forward="true" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+                <element signature="e#1915#2617#0" expanded="false" />
+                <element signature="e#5423#5435#0" expanded="false" />
+                <element signature="e#5462#5492#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/neodroid/messaging/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="705">
+              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -354,94 +146,13 @@
       <file leaf-file-name="networking_utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/messaging/networking_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="275">
+              <caret line="28" column="23" lean-forward="false" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="debug.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/utilities/debug.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="40" lean-forward="false" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FlatBufferUtilities.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-519">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="actor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/actor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="52" lean-forward="false" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="observer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/observer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="74" lean-forward="false" selection-start-line="28" selection-start-column="74" selection-end-line="28" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="motion.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/motion.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="environment_state.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/environment_state.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="6" lean-forward="false" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="neodroid_environment.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="97" column="15" lean-forward="false" selection-start-line="97" selection-start-column="15" selection-end-line="97" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#16#0" expanded="true" />
+                <element signature="e#2045#2264#0" expanded="false" />
+                <element signature="e#2338#2568#0" expanded="false" />
+                <element signature="e#2646#2882#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -462,10 +173,15 @@
       <find>step</find>
       <find>_connect</find>
       <find>empty</find>
+      <find>_connected</find>
+      <find>_stream</find>
+      <find>logg</find>
+      <find>stream</find>
+      <find>__connect__</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../agent" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -488,7 +204,6 @@
         <option value="$PROJECT_DIR$/../agent/requirements.txt" />
         <option value="$PROJECT_DIR$/neodroid/models/reaction.py" />
         <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/architectures/navigator.py" />
-        <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/architectures/dqn.py" />
         <option value="$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/__init__.py" />
         <option value="$PROJECT_DIR$/neodroid/models/observer.py" />
         <option value="$PROJECT_DIR$/neodroid/models/environment_state.py" />
@@ -497,13 +212,16 @@
         <option value="$PROJECT_DIR$/example/guiclient/main.py" />
         <option value="$PROJECT_DIR$/neodroid/models/motion.py" />
         <option value="$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py" />
-        <option value="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
         <option value="$PROJECT_DIR$/../agent/random_agent/sample_random_actions.py" />
         <option value="$PROJECT_DIR$/neodroid/models/motor.py" />
         <option value="$PROJECT_DIR$/neodroid/models/actor.py" />
-        <option value="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
         <option value="$PROJECT_DIR$/neodroid/utilities/debug.py" />
+        <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/architectures/dqn.py" />
+        <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/train_model.py" />
+        <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/configs/default_config.py" />
         <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/test.py" />
+        <option value="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
+        <option value="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
       </list>
     </option>
   </component>
@@ -537,8 +255,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -549,24 +265,7 @@
             <path>
               <item name="neo" type="b2602c69:ProjectViewProjectNode" />
               <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="guiclient" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
               <item name="neodroid" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="neodroid" type="462c0819:PsiDirectoryNode" />
-              <item name="environments" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="neo" type="b2602c69:ProjectViewProjectNode" />
@@ -576,45 +275,36 @@
             </path>
             <path>
               <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="neodroid" type="462c0819:PsiDirectoryNode" />
+              <item name="agent" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="agent" type="462c0819:PsiDirectoryNode" />
+              <item name="perfect_information_manipulator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="agent" type="462c0819:PsiDirectoryNode" />
+              <item name="perfect_information_manipulator" type="462c0819:PsiDirectoryNode" />
+              <item name="configs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="agent" type="462c0819:PsiDirectoryNode" />
+              <item name="perfect_information_manipulator" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="neo" type="462c0819:PsiDirectoryNode" />
-              <item name="neodroid" type="462c0819:PsiDirectoryNode" />
-              <item name="utilities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="agent" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="agent" type="462c0819:PsiDirectoryNode" />
-              <item name="perfect_information_manipulator" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="agent" type="462c0819:PsiDirectoryNode" />
-              <item name="perfect_information_manipulator" type="462c0819:PsiDirectoryNode" />
-              <item name="utilities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="neo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="agent" type="462c0819:PsiDirectoryNode" />
-              <item name="random_agent" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../agent/perfect_information_manipulator/test.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../agent/perfect_information_manipulator/train_model.py" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
@@ -673,6 +363,24 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="test perfect" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.5" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../agent/perfect_information_manipulator" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="agent" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../agent/perfect_information_manipulator/test_model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -691,10 +399,30 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="3">
+    <configuration name="train perfect" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.5" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../agent/perfect_information_manipulator" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="agent" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../agent/perfect_information_manipulator/train_model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.gui" />
       <item index="1" class="java.lang.String" itemvalue="Python.random" />
       <item index="2" class="java.lang.String" itemvalue="Python.test" />
+      <item index="3" class="java.lang.String" itemvalue="Python.train perfect" />
+      <item index="4" class="java.lang.String" itemvalue="Python.test perfect" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -720,24 +448,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="24" y="25" width="1874" height="1058" extended-state="6" />
+    <frame x="23" y="-1" width="1874" height="1058" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24521072" sideWeight="0.35855263" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22003284" sideWeight="0.1754386" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31910235" sideWeight="0.8245614" order="5" side_tool="false" content_ui="tabs" x="33" y="646" width="1828" height="165" />
+      <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25396827" sideWeight="0.18201755" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25396827" sideWeight="0.81798244" order="5" side_tool="false" content_ui="tabs" x="33" y="646" width="1828" height="165" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32930845" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24521072" sideWeight="0.64144737" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09688013" sideWeight="0.63615817" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24958949" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1991001" sideWeight="0.3638418" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991228" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24521072" sideWeight="0.35855263" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -756,32 +484,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferVec3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferPosRot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-54">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferReaction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-205">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferModels/FlatBufferMotor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
@@ -831,7 +538,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -857,7 +563,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="32" column="29" lean-forward="false" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -872,7 +577,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -895,6 +599,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#194#1" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -948,29 +655,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#54#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/architectures/navigator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#20#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/architectures/dqn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="28" lean-forward="false" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#20#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -978,7 +662,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="27" column="23" lean-forward="false" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -986,7 +669,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1018,9 +700,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="620">
           <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="81" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#24#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1028,7 +707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="773">
           <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="104" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1036,19 +714,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#12#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/train_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-714">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1056,9 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="53" lean-forward="false" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1066,7 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="63" lean-forward="false" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1074,7 +735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="314">
           <caret line="51" column="6" lean-forward="true" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1082,25 +742,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-519">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/messaging/networking_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1112,13 +753,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
+    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/architectures/dqn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="97" column="15" lean-forward="false" selection-start-line="97" selection-start-column="15" selection-end-line="97" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/architectures/navigator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="57" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/utilities/action.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1126,15 +778,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="52" lean-forward="false" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/models/motion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1142,7 +785,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="74" lean-forward="false" selection-start-line="28" selection-start-column="74" selection-end-line="28" selection-end-column="74" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/models/motion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1154,12 +803,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#212#1464#0" expanded="false" />
+            <element signature="e#1499#1574#0" expanded="false" />
+            <element signature="e#1609#2100#0" expanded="false" />
+            <element signature="e#2136#2727#0" expanded="false" />
+            <element signature="e#2766#3398#0" expanded="false" />
+            <element signature="e#3435#3687#0" expanded="false" />
+            <element signature="e#3723#4126#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/train_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/configs/default_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#73#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/messaging/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../agent/perfect_information_manipulator/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state relative-caret-position="705">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/messaging/networking_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="28" column="23" lean-forward="false" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#2045#2264#0" expanded="false" />
+            <element signature="e#2338#2568#0" expanded="false" />
+            <element signature="e#2646#2882#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="84" column="26" lean-forward="true" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#1915#2617#0" expanded="false" />
+            <element signature="e#5423#5435#0" expanded="false" />
+            <element signature="e#5462#5492#0" expanded="false" />
           </folding>
         </state>
       </provider>

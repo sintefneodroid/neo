@@ -2,8 +2,6 @@ from threading import Thread
 
 import zmq
 
-from neodroid.utilities import debug_print
-import neodroid.models as neomodels
 from .FlatBufferModels import FlatBufferState as FlatBufferState
 from .FlatBufferUtilities import build_flat_reaction, create_state
 
@@ -12,67 +10,61 @@ _waiting_for_response = False
 _ctx = zmq.Context.instance()
 _req_socket = _ctx.socket(zmq.REQ)
 _use_inter_process_communication = False
+_time_out = 2000  # Milliseconds
 
 
-def send_reaction(stream, reaction, callback):
+def send_reaction(reaction):
   global _waiting_for_response, _connected
   if _connected and not _waiting_for_response:
     flat_reaction = build_flat_reaction(reaction)
-    stream.send(flat_reaction)
-    if callback:
-      callback()
+    _req_socket.send(flat_reaction)
     _waiting_for_response = True
 
 
-def synchronous_receive_message(stream):
+def receive_state(timeout_callback,
+                  on_step_done_callback=None):
   global _waiting_for_response
   if _waiting_for_response:
-    by = stream.recv()
+    if _req_socket.poll(timeout=_time_out) is 0:
+      timeout_callback()
+      return
+    by = _req_socket.recv()
     _waiting_for_response = False
-    reply = FlatBufferState.GetRootAsFlatBufferState(by, 0)
-    state = create_state(reply)
-    return state
-  else:
-    return neomodels.EnvironmentState()
+    flat_buffer_state = FlatBufferState.GetRootAsFlatBufferState(by, 0)
+    state = create_state(flat_buffer_state)
+    if on_step_done_callback:
+      on_step_done_callback(state)
+    else:
+      return state
 
 
-def receive_environment_state(stream, callback=None):
-  global _waiting_for_response, _connected
-  if _connected:
-    _waiting_for_response = True
-    reply = synchronous_receive_message(stream)
-    _waiting_for_response = False
-    if callback:
-      callback(reply)
-    return reply
-  return None
-
-
-def setup_connection(tcp_address, tcp_port, on_connect_callback):
-  global _connected
+def setup_connection(tcp_address, tcp_port, on_connected_callback=None):
+  global _connected, _req_socket
+  _req_socket = _ctx.socket(zmq.REQ)
   if _use_inter_process_communication:
+    _req_socket.connect("ipc:///tmp/neodroid/messages0")
     # _req_socket.connect("inproc://neodroid")
-    _req_socket.connect("ipc:///tmp/neodroid/0")
-    print('using inter process communication protocol')
+    print('using inter-process communication protocol')
   else:
-    # _req_socket.connect("tcp://localhost:%s" % tcp_port)
     _req_socket.connect("tcp://%s:%s" % (tcp_address, tcp_port))
     print('using tcp communication protocol')
-  on_connect_callback(_req_socket)
   _connected = True
+  if on_connected_callback:
+    on_connected_callback()
 
 
-def close_connection(stream, on_disconnect_callback):
-  global _connected
-  stream.shutdown(1)
-  stream.close()
-  on_disconnect_callback()
+def close_connection(on_disconnect_callback=None):
+  global _connected, _req_socket
+  _req_socket.setsockopt(zmq.LINGER, 0)
+  _req_socket.close()
   _connected = False
+  if on_disconnect_callback:
+    on_disconnect_callback()
 
 
-def start_connect_thread(tcp_ip_address='127.0.0.1',
-                         tcp_port=5555,
-                         on_connected_callback=debug_print):
+def start_setup_connection_thread(on_connected_callback,
+                                  tcp_ip_address='127.0.0.1',
+                                  tcp_port=5555):
   thread = Thread(
       target=setup_connection,
       args=(tcp_ip_address, tcp_port, on_connected_callback))
@@ -82,19 +74,19 @@ def start_connect_thread(tcp_ip_address='127.0.0.1',
   thread.start()
 
 
-def start_send_msg_thread(stream, action, on_connected_callback):
-  thread = Thread(
-      target=send_reaction, args=(stream, action, on_connected_callback))
-  thread.daemon = True
-  # Terminate with the rest of the program,
-  # is a Background Thread
+def start_send_reaction_thread(reaction, on_reaction_sent_callback):
+  thread = Thread(target=send_reaction,
+                  args=(action,
+                        on_reaction_sent_callback))
+  # Terminate with the rest of the program
+  thread.daemon = True  # is a Background Thread
   thread.start()
 
 
-def start_receive_environment_state_thread(stream, on_connected_callback):
-  thread = Thread(
-      target=receive_environment_state, args=(stream, on_connected_callback))
-  thread.daemon = True
+def start_receive_state_thread(on_step_done_callback, timeout_callback):
+  thread = Thread(target=receive_state,
+                  args=(timeout_callback,
+                        on_step_done_callback))
   # Terminate with the rest of the program
-  # is a Background Thread
+  thread.daemon = True  # is a Background Thread
   thread.start()

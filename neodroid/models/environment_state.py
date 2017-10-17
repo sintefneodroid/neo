@@ -6,7 +6,7 @@ class EnvironmentState(object):
                observers=None,
                last_steps_frame_number=0,
                reward_for_last_step=0,
-               interrupted = False):
+               interrupted=False):
     if observers is None:
       observers = {}
     if actors is None:
