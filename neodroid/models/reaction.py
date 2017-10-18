@@ -1,5 +1,7 @@
 import json
 
+from neodroid.models import Motion
+
 
 class Reaction(object):
   def __init__(self, reset, motions):
@@ -9,12 +11,15 @@ class Reaction(object):
   def get_motions(self):
     return self._motions
 
+  def set_motions(self, motions):
+    self._motions = motions
+
   def get_reset(self):
     return self._reset
 
   def to_dict(self):
     return {
-      '_reset'              : self._reset,
+      '_reset': self._reset,
       '_actor_motor_motions': [motion.to_dict() for motion in self._motions]
     }
 

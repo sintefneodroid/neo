@@ -5,6 +5,7 @@ import subprocess
 import time
 
 import neodroid.messaging as messaging
+from neodroid.utilities.reaction_factory import verify_reaction
 
 
 class NeodroidEnvironment(object):
@@ -39,6 +40,9 @@ class NeodroidEnvironment(object):
     self._external_on_connected_callback = on_connected_callback
     self._external_on_disconnected_callback = on_disconnected_callback
 
+    # Environment
+    self._latest_received_state = None
+
     if not connect_to_running and not self._simulation_instance:
       if self.__start_instance__(name, path_to_executables_directory, ip,
                                  port):
@@ -65,10 +69,12 @@ class NeodroidEnvironment(object):
         args)  # Figure out have to parameterise unity executable
     # time.sleep(8) # Not good a callback would be better.
     if self._simulation_instance:
-      self._logger.debug('Started executable ' + str(name))
+      if self._debug_logging:
+        self._logger.debug('Successfully started executable ' + str(name))
       return True
     else:
-      self._logger.debug('Failed to start executable ' + str(name))
+      if self._debug_logging:
+        self._logger.debug('Failed to start executable ' + str(name))
       return False
 
   def __on_connected_callback__(self):
@@ -76,13 +82,13 @@ class NeodroidEnvironment(object):
     if self._external_on_connected_callback:
       self._external_on_connected_callback()
 
-  def on_disconnected_callback(self):
+  def __on_disconnected_callback__(self):
     self._connected = False
     if self._external_on_disconnected_callback:
       self._external_on_disconnected_callback()
 
-  def is_connected(self):
-    return self._connected
+  def __on_step_done_callback__(self):
+    self._awaiting_response = False
 
   def __connect__(self):
     if self._debug_logging:
@@ -91,12 +97,40 @@ class NeodroidEnvironment(object):
                                             self._ip,
                                             self._port)
 
+  def __get_state__(self, on_step_done_callback=None):
+    if on_step_done_callback:
+      messaging.start_receive_state_thread(on_step_done_callback,
+                                           self.__timeout_callback__)
+    else:
+      return messaging.receive_state(self.__timeout_callback__)
+
+  def __timeout_callback__(self):
+    self._connected = False
+    print('Trying to reconnect to server')
+    messaging.close_connection(
+        on_disconnect_callback=self.__on_disconnected_callback__())
+    self.__connect__()
+
+  def __del__(self):
+    self.close()
+
+  def __str__(self):
+    return '<NeodroidEnvironment>'
+
+  def is_connected(self):
+    return self._connected
+
   def step(self,
-           input_reaction,
-           on_step_done_callback=None,
-           on_reaction_sent_callback=None):
+           input_reaction = None,
+           on_step_done_callback = None,
+           on_reaction_sent_callback = None):
     if self._debug_logging:
       self._logger.debug('Step')
+    if self._latest_received_state:
+      input_reaction = verify_reaction(input_reaction,
+                                       self._latest_received_state.get_actors().values())
+    else:
+      input_reaction = verify_reaction(input_reaction, None)
     self._awaiting_response = True
     if self._connected:
       if on_reaction_sent_callback:
@@ -105,35 +139,19 @@ class NeodroidEnvironment(object):
       else:
         messaging.send_reaction(input_reaction)
 
-      if on_step_done_callback:
-        messaging.start_receive_state_thread(on_step_done_callback,
-                                             self.__timeout_callback__)
+      message = self.__get_state__(on_step_done_callback)
+      if message:
         self._awaiting_response = False
-        return
-      else:
-        message = messaging.receive_state(self.__timeout_callback__)
-        self._awaiting_response = False
-        if message:
-          return (message.get_observers(),
-                  message.get_reward_for_last_step(),
-                  message.get_interrupted())
+        self._latest_received_state = message
+        return (message.get_observers(),
+                message.get_reward_for_last_step(),
+                message.get_interrupted())
     else:
       if self._debug_logging:
         self._logger.debug('Is not connected to environment')
     return (None,
             None,
             None)
-
-  def describe(self):
-    if self._debug_logging:
-      self._logger.debug('Describe')
-
-  def __timeout_callback__(self):
-    self._connected = False
-    print('Trying to reconnect to server')
-    messaging.close_connection(
-        on_disconnect_callback=self.on_disconnected_callback())
-    self.__connect__()
 
   def reset(self, input_configuration):  # , on_reset_callback=None):
     if self._debug_logging:
@@ -154,8 +172,3 @@ class NeodroidEnvironment(object):
       if callback:
         callback()
 
-  def __del__(self):
-    self.close()
-
-  def __str__(self):
-    return '<NeodroidEnvironment>'
