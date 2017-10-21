@@ -3,8 +3,10 @@ import os
 import shlex
 import subprocess
 import time
+import warnings
 
 import neodroid.messaging as messaging
+from neodroid.models import Reaction
 from neodroid.utilities.reaction_factory import verify_reaction
 
 
@@ -84,6 +86,7 @@ class NeodroidEnvironment(object):
 
   def __on_disconnected_callback__(self):
     self._connected = False
+    warnings.warn('Disconnected from server')
     if self._external_on_disconnected_callback:
       self._external_on_disconnected_callback()
 
@@ -120,6 +123,14 @@ class NeodroidEnvironment(object):
   def is_connected(self):
     return self._connected
 
+  def act(self,
+          input_reaction=None,
+          on_step_done_callback=None,
+          on_reaction_sent_callback=None):
+    return self.step(input_reaction=input_reaction,
+                     on_step_done_callback=on_step_done_callback,
+                     on_reaction_sent_callback=on_reaction_sent_callback)
+
   def step(self,
            input_reaction = None,
            on_step_done_callback = None,
@@ -131,6 +142,7 @@ class NeodroidEnvironment(object):
                                        self._latest_received_state.get_actors().values())
     else:
       input_reaction = verify_reaction(input_reaction, None)
+    print(input_reaction.get_motions())
     self._awaiting_response = True
     if self._connected:
       if on_reaction_sent_callback:
@@ -146,6 +158,10 @@ class NeodroidEnvironment(object):
         return (message.get_observers(),
                 message.get_reward_for_last_step(),
                 message.get_interrupted())
+      else:
+        return (None,
+                None,
+                None)
     else:
       if self._debug_logging:
         self._logger.debug('Is not connected to environment')
@@ -153,14 +169,30 @@ class NeodroidEnvironment(object):
             None,
             None)
 
-  def reset(self, input_configuration):  # , on_reset_callback=None):
+  def reset(self, input_configuration = None):  # , on_reset_callback=None):
     if self._debug_logging:
       self._logger.debug('Reset')
 
     # messaging.start_send_configuration_thread(input_configuration,
     #                                      on_reset_callback)
     # message = messaging.receive_state(self.__timeout_callback__())
-    return self.step(input_configuration)
+    messaging.send_reaction(Reaction(True, []))
+
+    message = self.__get_state__()
+
+    if message:
+      self._awaiting_response = False
+      self._latest_received_state = message
+      return (message.get_observers(),
+              message.get_reward_for_last_step(),
+              message.get_interrupted())
+    else:
+      return (None,
+              None,
+              None)
+
+  def quit(self, callback=None):
+    self.close(callback=callback)
 
   def close(self, callback=None):
     if self._debug_logging:

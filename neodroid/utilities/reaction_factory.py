@@ -31,9 +31,7 @@ def construct_motion_from_list(input_list, actors):
   actor_motor_tuples = [(actor.get_name(), motor.get_name())
                         for actor in actors
                         for motor in actor.get_motors().values()]
-  print(actor_motor_tuples)
   new_motions = [Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
                  for (list_val, actor_motor_tuple) in
                  zip(input_list, actor_motor_tuples)]
-  print(new_motions)
   return new_motions
