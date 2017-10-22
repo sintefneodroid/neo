@@ -142,7 +142,6 @@ class NeodroidEnvironment(object):
                                        self._latest_received_state.get_actors().values())
     else:
       input_reaction = verify_reaction(input_reaction, None)
-    print(input_reaction.get_motions())
     self._awaiting_response = True
     if self._connected:
       if on_reaction_sent_callback:
