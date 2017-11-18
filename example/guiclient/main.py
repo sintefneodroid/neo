@@ -1,6 +1,7 @@
 import neodroid as neo
 from example.guiclient.gui import NeoGUI
 from neodroid.models import Reaction, Motion
+from neodroid.models.configuration import Configuration
 
 _gui = None
 _neo_environment = None
@@ -39,12 +40,12 @@ def on_step_callback(actor_name, slider_values):
     Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
     Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
   ]
-  new_state = _neo_environment.step(Reaction(False, motions))
+  new_state = _neo_environment.step(Reaction(False, [], motions))
   update_callback(new_state)
 
 
 def on_reset_callback():
-  new_state = _neo_environment.step(Reaction(True, []))
+  new_state = _neo_environment.step(Reaction(True, [Configuration('ManipulatorSingleAxisConfigurableX', 1)], []))
   update_callback(new_state)
 
 

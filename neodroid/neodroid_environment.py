@@ -175,7 +175,7 @@ class NeodroidEnvironment(object):
     # messaging.start_send_configuration_thread(input_configuration,
     #                                      on_reset_callback)
     # message = messaging.receive_state(self.__timeout_callback__())
-    messaging.send_reaction(Reaction(True, []))
+    messaging.send_reaction(Reaction(True, [], []))
 
     message = self.__get_state__()
 

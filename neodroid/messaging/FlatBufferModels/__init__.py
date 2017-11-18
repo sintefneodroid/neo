@@ -7,3 +7,4 @@ from .FlatBufferQuat import *
 from .FlatBufferReaction import *
 from .FlatBufferState import *
 from .FlatBufferVec3 import *
+from .FlatBufferConfiguration import *

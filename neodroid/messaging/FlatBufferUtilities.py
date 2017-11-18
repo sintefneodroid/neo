@@ -30,9 +30,31 @@ def build_flat_reaction(input_reaction):
     builder.PrependUOffsetTRelative(input_motion)
   motions = builder.EndVector(len(motion_offsets))
 
+
+  configurations_offsets = []
+  for input_configuration in input_reaction.get_configurations():
+    name_string_offset = builder.CreateString(
+        input_configuration.get_configurable_name())
+    flbmodels.FlatBufferConfigurationStart(builder)
+    flbmodels.FlatBufferConfigurationAddConfigurableName(builder,
+                                                         name_string_offset)
+    flbmodels.FlatBufferConfigurationAddConfigurableValue(builder,
+                                          input_configuration.get_configurable_value())
+    configuration_offset = flbmodels.FlatBufferMotionEnd(builder)
+    configurations_offsets.append(configuration_offset)
+
+
+  flbmodels.FlatBufferReactionStartMotionsVector(builder,
+                                                 len(configurations_offsets))
+  for input_configuration in configurations_offsets:
+    builder.PrependUOffsetTRelative(input_configuration)
+  configurations = builder.EndVector(len(configurations_offsets))
+
+
   flbmodels.FlatBufferReactionStart(builder)
   flbmodels.FlatBufferReactionAddReset(builder, input_reaction.get_reset())
   flbmodels.FlatBufferReactionAddMotions(builder, motions)
+  flbmodels.FlatBufferReactionAddConfigurations(builder, configurations)
   flat_reaction = flbmodels.FlatBufferReactionEnd(builder)
   builder.Finish(flat_reaction)
   return builder.Output()
