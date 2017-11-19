@@ -168,6 +168,29 @@ class NeodroidEnvironment(object):
             None,
             None)
 
+  def get_state(self,
+           input_reaction = None,
+           on_step_done_callback = None,
+           on_reaction_sent_callback = None):
+    if self._debug_logging:
+      self._logger.debug('Get_state')
+    if self._latest_received_state:
+      input_reaction = verify_reaction(input_reaction,
+                                       self._latest_received_state.get_actors().values())
+    else:
+      input_reaction = verify_reaction(input_reaction, None)
+    self._awaiting_response = True
+    if self._connected:
+      if on_reaction_sent_callback:
+        messaging.start_send_reaction_thread(input_reaction,
+                                             on_reaction_sent_callback)
+      else:
+        messaging.send_reaction(input_reaction)
+
+      message = self.__get_state__(on_step_done_callback)
+      return message
+    return None
+
   def reset(self, input_configuration = None):  # , on_reset_callback=None):
     if self._debug_logging:
       self._logger.debug('Reset')

@@ -118,7 +118,8 @@ def create_data(flat_observer):
   data = np.array(
       [
         flat_observer.Data(i)
-        for i in range(4, flat_observer.DataLength() - 4)
+        for i in range(4, flat_observer.DataLength()-4) # 4 and -4 Strips
+        # non-png related data
       ],
       dtype=np.uint8).tobytes()  # Weird magic sizes
   bytes_stream = BytesIO(data)

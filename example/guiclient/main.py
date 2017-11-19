@@ -40,12 +40,13 @@ def on_step_callback(actor_name, slider_values):
     Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
     Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
   ]
-  new_state = _neo_environment.step(Reaction(False, [], motions))
+  new_state = _neo_environment.get_state(Reaction(False, [], motions))
   update_callback(new_state)
 
 
 def on_reset_callback():
-  new_state = _neo_environment.step(Reaction(True, [Configuration('ManipulatorSingleAxisConfigurableX', 1)], []))
+  new_state = _neo_environment.get_state(Reaction(True, [Configuration(
+      'ManipulatorSingleAxisConfigurableX', 1)], []))
   update_callback(new_state)
 
 
@@ -53,11 +54,12 @@ def update_environment_widgets(environment_state):
   try:
     _gui.update_xml_text_label(str(environment_state))
     _gui.update_position_label(
-        str(environment_state.get_actor(b'RigidbodyGripper').get_position()))
+        str(environment_state.get_actor(
+            b'ManipulatorActor').get_position()))
     _gui.update_rotation_label(
-        str(environment_state.get_actor(b'RigidbodyGripper').get_rotation()))
+        str(environment_state.get_actor(b'ManipulatorActor').get_rotation()))
     _gui.update_direction_label(
-        str(environment_state.get_actor(b'RigidbodyGripper').get_direction()))
+        str(environment_state.get_actor(b'ManipulatorActor').get_direction()))
     _gui.update_reward_label(str(environment_state.get_reward_for_last_step()))
     _gui.update_energy_label(
         str(environment_state.get_total_energy_spent_since_reset()))
@@ -69,6 +71,10 @@ def update_environment_widgets(environment_state):
     print('Failed at updating rest of GUI')
 
   try:
+    _gui.update_normal_image(
+        environment_state.get_observer(b'NormalCamera').get_data())
+    _gui.update_motion_image(
+        environment_state.get_observer(b'MotionCamera').get_data())
     _gui.update_depth_image(
         environment_state.get_observer(b'DepthCamera').get_data())
     _gui.update_segmentation_image(

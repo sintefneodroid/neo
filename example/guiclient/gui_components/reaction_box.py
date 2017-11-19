@@ -12,11 +12,11 @@ class ReactionBox(BoxLayout):
     self._on_step_callback = on_step_callback
     self._on_reset_callback = on_reset_callback
     self.upper_spacer = Label()
-    self.actor_input = TextInput(text="Gripper")  # , multiline=False)
-    self.motor_1 = MotionView("GripperSingleAxisX")
-    self.motor_2 = MotionView("GripperSingleAxisY")
-    self.motor_3 = MotionView("GripperSingleAxisZ")
-    self.motor_4 = MotionView("GripperSingleAxisRotX")
+    self.actor_input = TextInput(text="ManipulatorActor")  # , multiline=False)
+    self.motor_1 = MotionView("ManipulatorSingleAxisX")
+    self.motor_2 = MotionView("ManipulatorSingleAxisY")
+    self.motor_3 = MotionView("ManipulatorSingleAxisZ")
+    self.motor_4 = MotionView("ManipulatorSingleAxisRotX")
     self.step_button = Button(text='Step')
     self.reset_button = Button(text='Reset')
     self.bottom_spacer = Label()

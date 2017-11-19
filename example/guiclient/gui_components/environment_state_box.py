@@ -9,6 +9,8 @@ class EnvironmentStateBox(BoxLayout):
     super(EnvironmentStateBox, self).__init__(**kwargs)
     self.depth_image = Image(source='images/default.png')
     self.segmentation_image = Image(source='images/default.png')
+    self.normal_image = Image(source='images/default.png')
+    self.motion_image = Image(source='images/default.png')
     self.instance_segmentation_image = Image(source='images/default.png')
     self.rgb_image = Image(source='images/default.png')
     self.infrared_shadow_image = Image(source='images/default.png')
@@ -31,6 +33,8 @@ class EnvironmentStateBox(BoxLayout):
     self.image_row_layout.add_widget(self.instance_segmentation_image)
     self.image_row_layout.add_widget(self.depth_image)
     self.image_row_layout.add_widget(self.infrared_shadow_image)
+    self.image_row_layout.add_widget(self.normal_image)
+    self.image_row_layout.add_widget(self.motion_image)
 
     self.add_widget(self.image_row_layout)
     self.add_widget(self.position_label)
@@ -47,6 +51,20 @@ class EnvironmentStateBox(BoxLayout):
     try:
       depth_image = CoreImage(depth_image_data, ext='png')
       self.depth_image.texture = depth_image.texture
+    except BaseException:
+      print('Image not valid')
+
+  def update_normal_image(self, normal_image_data):
+    try:
+      normal_image = CoreImage(normal_image_data, ext='png')
+      self.normal_image.texture = normal_image.texture
+    except BaseException:
+      print('Image not valid')
+
+  def update_motion_image(self, motion_image_data):
+    try:
+      motion_image = CoreImage(motion_image_data, ext='png')
+      self.motion_image.texture = motion_image.texture
     except BaseException:
       print('Image not valid')
 

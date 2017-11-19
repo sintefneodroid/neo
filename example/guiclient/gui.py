@@ -47,6 +47,12 @@ class NeoGUI(App):
   def update_depth_image(self, depth_image):
     self.state_box.update_depth_image(depth_image)
 
+  def update_normal_image(self, normal_image):
+    self.state_box.update_normal_image(normal_image)
+
+  def update_motion_image(self, motion_image):
+    self.state_box.update_motion_image(motion_image)
+
   def update_segmentation_image(self, segmentation_image):
     self.state_box.update_segmentation_image(segmentation_image)
 
