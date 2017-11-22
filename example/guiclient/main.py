@@ -40,13 +40,15 @@ def on_step_callback(actor_name, slider_values):
     Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
     Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
   ]
-  new_state = _neo_environment.get_state(Reaction(False, [], motions))
+  new_state = _neo_environment.step(Reaction(False, [], motions))
   update_callback(new_state)
 
 
-def on_reset_callback():
-  new_state = _neo_environment.get_state(Reaction(True, [Configuration(
-      'ManipulatorSingleAxisConfigurableX', 1)], []))
+def on_reset_callback(slider_values):
+  configurations = [
+    Configuration(str(slider_values[0][0]), slider_values[0][1])
+  ]
+  new_state = _neo_environment.step(Reaction(True, configurations, []))
   update_callback(new_state)
 
 

@@ -18,6 +18,7 @@ class ReactionBox(BoxLayout):
     self.motor_3 = MotionView("ManipulatorSingleAxisZ")
     self.motor_4 = MotionView("ManipulatorSingleAxisRotX")
     self.step_button = Button(text='Step')
+    self.configuration_1 = MotionView("ManipulatorSingleAxisConfigurableX")
     self.reset_button = Button(text='Reset')
     self.bottom_spacer = Label()
     self.assemble_components()
@@ -33,6 +34,7 @@ class ReactionBox(BoxLayout):
     self.add_widget(self.motor_3)
     self.add_widget(self.motor_4)
     self.add_widget(self.step_button)
+    self.add_widget(self.configuration_1)
     self.add_widget(self.reset_button)
     self.add_widget(self.bottom_spacer)
     return self
@@ -50,4 +52,7 @@ class ReactionBox(BoxLayout):
     self._on_step_callback(self.actor_input.text, motions)
 
   def on_reset_button(self, value):
-    self._on_reset_callback()
+    configurations = [(str(self.configuration_1.motor_input.text),
+                float(self.configuration_1.motor_slider.value))
+               ]
+    self._on_reset_callback(configurations)
