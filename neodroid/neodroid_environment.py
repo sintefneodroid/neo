@@ -144,6 +144,7 @@ class NeodroidEnvironment(object):
         messaging.send_reaction(input_reaction)
 
       message = self.__get_state__(on_step_done_callback)
+      self._latest_received_state = message
       return message
     if self._debug_logging:
       self._logger.debug('Is not connected to environment')

@@ -3,22 +3,27 @@ from neodroid.models import Reaction, Motion
 def verify_reaction(input_reaction, actors):
   if actors:
     if isinstance(input_reaction, Reaction):
+      print('Reaction instance received')
       is_valid_motions = all(isinstance(m, Motion) for m in
                              input_reaction.get_motions())
       if is_valid_motions:
         return input_reaction
       else:
+        print('Invalid motions')
         input_reaction.set_motions(construct_motions_from_list(
             input_reaction.get_motions(), actors))
         return input_reaction
     elif isinstance(input_reaction, list):
+      print('list instance received')
       is_valid_motions = all(isinstance(m, Motion) for m in
                              input_reaction)
       if is_valid_motions:
         return Reaction(False, [], input_reaction)
       else:
+        print('Invalid motions')
         return construct_reaction_from_list(input_reaction, actors)
     elif isinstance(input_reaction, int):
+      print('int received')
       return construct_reaction_from_list([
         input_reaction], actors)
   print('Invalid reaction')
