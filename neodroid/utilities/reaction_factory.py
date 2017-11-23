@@ -18,17 +18,20 @@ def verify_reaction(input_reaction, actors):
         return Reaction(False, [], input_reaction)
       else:
         return construct_reaction_from_list(input_reaction, actors)
-    else:
-      return Reaction(False, [], [])
-  else:
-    return Reaction(False, [], [])
+    elif isinstance(input_reaction, int):
+      return construct_reaction_from_list([
+        input_reaction], actors)
+  print('Invalid reaction')
+  return Reaction(False, [], [])
 
 def construct_reaction_from_list(input_list, actors):
+  print('Constructing reaction from list')
   motions = construct_motions_from_list(input_list, actors)
-  configurations = construct_configurations_from_list(input_list, actors)
+  configurations = construct_configurations_from_list([], actors)
   return Reaction(False, configurations, motions)
 
 def construct_motions_from_list(input_list, actors):
+  print('Constructing motions from list')
   actor_motor_tuples = [(actor.get_name(), motor.get_name())
                         for actor in actors
                         for motor in actor.get_motors().values()]

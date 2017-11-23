@@ -9,3 +9,9 @@
 """
 
 from .neodroid_environment import NeodroidEnvironment
+from .models import Configuration
+from .models import Reaction
+from .models import Motion
+
+def make(environment,configuration=None):
+  return NeodroidEnvironment(name=environment)

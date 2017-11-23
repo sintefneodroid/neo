@@ -15,7 +15,7 @@ class NeodroidEnvironment(object):
                ip="127.0.0.1",
                port=5555,
                connect_to_running=False,
-               name='carscene.exe',
+               name='carscene',
                path_to_executables_directory=os.path.join(
                    os.path.dirname(os.path.realpath(__file__)),
                    'environments'),
@@ -60,7 +60,8 @@ class NeodroidEnvironment(object):
     self.__connect__()
 
   def __start_instance__(self, name, path_to_executables_directory, ip, port):
-    path_to_executable = os.path.join(path_to_executables_directory, name)
+    path_to_executable = os.path.join(path_to_executables_directory,
+                                      name+'.x86')
     args = shlex.split(
         '-ip ' + str(ip) + ' -port ' + str(port) +
         ' -screen-fullscreen 0 -screen-height 500 -screen-width 500'
@@ -123,55 +124,10 @@ class NeodroidEnvironment(object):
   def is_connected(self):
     return self._connected
 
-  def act(self,
-          input_reaction=None,
-          on_step_done_callback=None,
-          on_reaction_sent_callback=None):
-    return self.step(input_reaction=input_reaction,
-                     on_step_done_callback=on_step_done_callback,
-                     on_reaction_sent_callback=on_reaction_sent_callback)
-
-  def step(self,
-           input_reaction = None,
-           on_step_done_callback = None,
-           on_reaction_sent_callback = None):
-    if self._debug_logging:
-      self._logger.debug('Step')
-    if self._latest_received_state:
-      input_reaction = verify_reaction(input_reaction,
-                                       self._latest_received_state.get_actors().values())
-    else:
-      input_reaction = verify_reaction(input_reaction, None)
-    self._awaiting_response = True
-    if self._connected:
-      if on_reaction_sent_callback:
-        messaging.start_send_reaction_thread(input_reaction,
-                                             on_reaction_sent_callback)
-      else:
-        messaging.send_reaction(input_reaction)
-
-      message = self.__get_state__(on_step_done_callback)
-      if message:
-        self._awaiting_response = False
-        self._latest_received_state = message
-        return (message.get_observers(),
-                message.get_reward_for_last_step(),
-                message.get_interrupted())
-      else:
-        return (None,
-                None,
-                None)
-    else:
-      if self._debug_logging:
-        self._logger.debug('Is not connected to environment')
-    return (None,
-            None,
-            None)
-
-  def get_state(self,
-           input_reaction = None,
-           on_step_done_callback = None,
-           on_reaction_sent_callback = None):
+  def react(self,
+            input_reaction = None,
+            on_step_done_callback = None,
+            on_reaction_sent_callback = None):
     if self._debug_logging:
       self._logger.debug('Get_state')
     if self._latest_received_state:
@@ -189,16 +145,15 @@ class NeodroidEnvironment(object):
 
       message = self.__get_state__(on_step_done_callback)
       return message
+    if self._debug_logging:
+      self._logger.debug('Is not connected to environment')
     return None
 
-  def reset(self, input_configuration = None):  # , on_reset_callback=None):
+  def reset(self, input_configuration = []):  # , on_reset_callback=None):
     if self._debug_logging:
       self._logger.debug('Reset')
 
-    # messaging.start_send_configuration_thread(input_configuration,
-    #                                      on_reset_callback)
-    # message = messaging.receive_state(self.__timeout_callback__())
-    messaging.send_reaction(Reaction(True, [], []))
+    messaging.send_reaction(Reaction(True, input_configuration, []))
 
     message = self.__get_state__()
 
@@ -212,9 +167,6 @@ class NeodroidEnvironment(object):
       return (None,
               None,
               None)
-
-  def quit(self, callback=None):
-    self.close(callback=callback)
 
   def close(self, callback=None):
     if self._debug_logging:
