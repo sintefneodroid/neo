@@ -53,6 +53,6 @@ class ReactionBox(BoxLayout):
 
   def on_reset_button(self, value):
     configurations = [(str(self.configuration_1.motor_input.text),
-                float(self.configuration_1.motor_slider.value))
-               ]
+                       float(self.configuration_1.motor_slider.value))
+                      ]
     self._on_reset_callback(configurations)

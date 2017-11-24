@@ -1,4 +1,5 @@
 from .FlatBufferActor import *
+from .FlatBufferConfiguration import *
 from .FlatBufferMotion import *
 from .FlatBufferMotor import *
 from .FlatBufferObserver import *
@@ -7,4 +8,3 @@ from .FlatBufferQuat import *
 from .FlatBufferReaction import *
 from .FlatBufferState import *
 from .FlatBufferVec3 import *
-from .FlatBufferConfiguration import *

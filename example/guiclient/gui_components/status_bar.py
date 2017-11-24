@@ -14,7 +14,7 @@ class StatusBar(BoxLayout):
     self.launch_label = Label(text='Launch Environment', halign='right',
                               font_size=12)
     self.launch_check_box = CheckBox(active=True)
-    self.environment_input = TextInput(text='carscene.exe')
+    self.environment_input = TextInput(text='reaching-v0')
     self.connect_button = Button(text='Connect')
     self.assemble_components()
 

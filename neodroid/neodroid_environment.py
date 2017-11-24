@@ -21,13 +21,17 @@ class NeodroidEnvironment(object):
                    'environments'),
                seconds_before_connect=8,
                debug_logging=False,
+               logging_directory='logs',
                on_connected_callback=None,
                on_disconnected_callback=None):
 
     # Logging
     self._debug_logging = debug_logging
     if self._debug_logging:
-      logging.basicConfig(filename='log.txt', level=logging.DEBUG)
+      logging.basicConfig(format='%(asctime)s %(message)s',
+                          filename=os.path.join(logging_directory,
+                                                'neodroid-log.txt'), \
+                          level=logging.DEBUG)
       self._logger = logging.getLogger(__name__)
       self._logger.debug('Initializing Environment')
 
@@ -58,10 +62,17 @@ class NeodroidEnvironment(object):
         if self._debug_logging:
           self._logger.debug('could not start environment ' + str(name))
     self.__connect__()
+    self.reset()
+    self.reset()
+    self.reset()
+    time.sleep(seconds_before_connect/4)
+    self.reset()
+    self.reset()
+    self.reset()
 
   def __start_instance__(self, name, path_to_executables_directory, ip, port):
     path_to_executable = os.path.join(path_to_executables_directory,
-                                      name+'.x86')
+                                      name + '.x86')
     args = shlex.split(
         '-ip ' + str(ip) + ' -port ' + str(port) +
         ' -screen-fullscreen 0 -screen-height 500 -screen-width 500'
@@ -125,9 +136,9 @@ class NeodroidEnvironment(object):
     return self._connected
 
   def react(self,
-            input_reaction = None,
-            on_step_done_callback = None,
-            on_reaction_sent_callback = None):
+            input_reaction=None,
+            on_step_done_callback=None,
+            on_reaction_sent_callback=None):
     if self._debug_logging:
       self._logger.debug('Get_state')
     if self._latest_received_state:
@@ -150,7 +161,7 @@ class NeodroidEnvironment(object):
       self._logger.debug('Is not connected to environment')
     return None
 
-  def reset(self, input_configuration = []):  # , on_reset_callback=None):
+  def reset(self, input_configuration=[]):  # , on_reset_callback=None):
     if self._debug_logging:
       self._logger.debug('Reset')
 
@@ -178,4 +189,3 @@ class NeodroidEnvironment(object):
         self._simulation_instance.terminate()
       if callback:
         callback()
-

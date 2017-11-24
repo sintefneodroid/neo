@@ -1,4 +1,5 @@
 from .gym_wrapper import NeodroidGymWrapper
 
-def make(environment,configuration=None):
-  return NeodroidGymWrapper(name=environment)
+
+def make(environment, **kwargs):
+  return NeodroidGymWrapper(name=environment, **kwargs)

@@ -1,0 +1,5 @@
+kivy
+pyzmq
+numpy
+flatbuffers
+Pillow

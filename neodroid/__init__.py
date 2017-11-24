@@ -8,10 +8,11 @@
 
 """
 
-from .neodroid_environment import NeodroidEnvironment
 from .models import Configuration
-from .models import Reaction
 from .models import Motion
+from .models import Reaction
+from .neodroid_environment import NeodroidEnvironment
 
-def make(environment,configuration=None):
+
+def make(environment, configuration=None):
   return NeodroidEnvironment(name=environment)

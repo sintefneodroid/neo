@@ -30,7 +30,6 @@ def build_flat_reaction(input_reaction):
     builder.PrependUOffsetTRelative(input_motion)
   motions = builder.EndVector(len(motion_offsets))
 
-
   configurations_offsets = []
   for input_configuration in input_reaction.get_configurations():
     name_string_offset = builder.CreateString(
@@ -39,17 +38,15 @@ def build_flat_reaction(input_reaction):
     flbmodels.FlatBufferConfigurationAddConfigurableName(builder,
                                                          name_string_offset)
     flbmodels.FlatBufferConfigurationAddConfigurableValue(builder,
-                                          input_configuration.get_configurable_value())
+                                                          input_configuration.get_configurable_value())
     configuration_offset = flbmodels.FlatBufferMotionEnd(builder)
     configurations_offsets.append(configuration_offset)
-
 
   flbmodels.FlatBufferReactionStartMotionsVector(builder,
                                                  len(configurations_offsets))
   for input_configuration in configurations_offsets:
     builder.PrependUOffsetTRelative(input_configuration)
   configurations = builder.EndVector(len(configurations_offsets))
-
 
   flbmodels.FlatBufferReactionStart(builder)
   flbmodels.FlatBufferReactionAddReset(builder, input_reaction.get_reset())
@@ -118,7 +115,7 @@ def create_data(flat_observer):
   data = np.array(
       [
         flat_observer.Data(i)
-        for i in range(4, flat_observer.DataLength()-4) # 4 and -4 Strips
+        for i in range(4, flat_observer.DataLength() - 4)  # 4 and -4 Strips
         # non-png related data
       ],
       dtype=np.uint8).tobytes()  # Weird magic sizes
