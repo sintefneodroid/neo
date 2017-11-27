@@ -28,12 +28,13 @@ def verify_reaction(input_reaction, actors):
     elif isinstance(input_reaction, float):
       return construct_reaction_from_list([
         input_reaction], actors)
-    elif isinstance(input_reaction, np.array):
-      return construct_reaction_from_list([
-        input_reaction], actors)
-    else:
-      print(str(type(input_reaction))+' received')
-  print('Invalid reaction')
+    elif isinstance(input_reaction, (np.ndarray, np.generic) ):
+      a = construct_reaction_from_list(
+        input_reaction.astype(float).tolist(), actors)
+      return a
+    #else:
+    #  print(str(type(input_reaction))+' received')
+  #print('Invalid reaction')
   return Reaction(False, [], [])
 
 

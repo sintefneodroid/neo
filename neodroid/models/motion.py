@@ -20,3 +20,16 @@ class Motion(object):
       '_motor_name': self._motor_name,
       '_strength'  : self._strength
     }
+
+  def __repr__(self):
+    return '<Reaction>\n' + \
+           '  <actor_name>' + str(self._actor_name) + '</actor_name>\n' + \
+           '  <motor_name>' + str(self._motor_name)+ '</motor_name>\n' + \
+           '  <strength>\n' + str(self._strength) + '</strength>\n' + \
+           '</Reaction>\n'
+
+  def __str__(self):
+    return self.__repr__()
+
+  def __unicode__(self):
+    return self.__repr__()

@@ -4,6 +4,9 @@ import shlex
 import subprocess
 import time
 import warnings
+from collections import namedtuple
+
+import numpy as np
 
 import neodroid.messaging as messaging
 from neodroid.models import Reaction
@@ -30,7 +33,7 @@ class NeodroidEnvironment(object):
     if self._debug_logging:
       logging.basicConfig(format='%(asctime)s %(message)s',
                           filename=os.path.join(logging_directory,
-                                                'neodroid-log.txt'), \
+                                                'neodroid-log.txt'),
                           level=logging.DEBUG)
       self._logger = logging.getLogger(__name__)
       self._logger.debug('Initializing Environment')
@@ -48,6 +51,7 @@ class NeodroidEnvironment(object):
 
     # Environment
     self._latest_received_state = None
+    self._first_received_state = None
 
     if not connect_to_running and not self._simulation_instance:
       if self.__start_instance__(name, path_to_executables_directory, ip,
@@ -135,18 +139,54 @@ class NeodroidEnvironment(object):
   def is_connected(self):
     return self._connected
 
-  def react(self,
-            input_reaction=None,
-            on_step_done_callback=None,
-            on_reaction_sent_callback=None):
-    if self._debug_logging:
-      self._logger.debug('Get_state')
+  def flat_observation(self, message):
+    return np.array([obs.get_position()+ obs.get_rotation()+
+                        obs.get_direction() for
+                       obs in
+                       message.get_observers().values()]).flatten()
+
+  def seed(self, seed):
+    pass
+
+  def __observation_space__(self):
+    if self._first_received_state:
+      return self.flat_observation(self._first_received_state)
+    return np.zeros(1) # Do not crash
+
+  def __sample_action_space__(self):
+    return np.random.randint(0, self._num_actions, self._num_actions)
+
+  def __action_space__(self):
+    self._num_actions=0
+    if self._first_received_state:
+      for actor in self._first_received_state.get_actors().values():
+        for motor in actor.get_motors().values():
+          if motor.get_binary():
+            self._num_actions+=2
+          else:
+            self._num_actions+=1
+    else:
+      self._num_actions = 1 # Do not crash
+    action_space = namedtuple('action_space', ('n', 'sample'))
+    return action_space(self._num_actions, self.__sample_action_space__)
+
+  def maybe_infer_reaction(self, input_reaction):
     if self._latest_received_state:
-      input_reaction = verify_reaction(input_reaction,
-                                       self._latest_received_state.get_actors().values())
+      input_reaction = verify_reaction(input_reaction, self._latest_received_state.get_actors().values())
     else:
       input_reaction = verify_reaction(input_reaction, None)
-    self._awaiting_response = True
+    return input_reaction
+
+  def react(self,
+            input_reaction=None,
+            on_reaction_sent_callback=None,
+            on_step_done_callback=None):
+
+    if self._debug_logging:
+      self._logger.debug('Reacting')
+
+    input_reaction = self.maybe_infer_reaction(input_reaction)
+
     if self._connected:
       if on_reaction_sent_callback:
         messaging.start_send_reaction_thread(input_reaction,
@@ -154,31 +194,41 @@ class NeodroidEnvironment(object):
       else:
         messaging.send_reaction(input_reaction)
 
+      self._awaiting_response = True
+
       message = self.__get_state__(on_step_done_callback)
-      self._latest_received_state = message
-      return message
+      if message:
+        self._awaiting_response = False
+        self._latest_received_state = message
+        if self._first_received_state == None:
+          self._first_received_state = message
+        return message
     if self._debug_logging:
       self._logger.debug('Is not connected to environment')
     return None
 
-  def reset(self, input_configuration=[]):  # , on_reset_callback=None):
+  def reset(self, input_configuration=[], on_reset_callback=None):
     if self._debug_logging:
-      self._logger.debug('Reset')
+      self._logger.debug('Resetting')
 
-    messaging.send_reaction(Reaction(True, input_configuration, []))
+    if self._connected:
+      if on_reset_callback:
+        messaging.start_send_reaction_thread(Reaction(True, input_configuration, []),
+                                             on_reset_callback)
+      else:
+        messaging.send_reaction(Reaction(True, input_configuration, []))
 
-    message = self.__get_state__()
+      self._awaiting_response = True
 
-    if message:
-      self._awaiting_response = False
-      self._latest_received_state = message
-      return (message.get_observers(),
-              message.get_reward_for_last_step(),
-              message.get_interrupted())
-    else:
-      return (None,
-              None,
-              None)
+      message = self.__get_state__()
+
+      if message:
+        self._awaiting_response = False
+        self._latest_received_state = message
+        if self._first_received_state == None:
+          self._first_received_state = message
+        return message
+    return None
 
   def close(self, callback=None):
     if self._debug_logging:

@@ -1,5 +1,5 @@
 from .formal_wrapper import NeodroidFormalWrapper
 
 
-def make(environment, configuration=None):
-  return NeodroidFormalWrapper(name=environment)
+def make(environment,  **kwargs):
+  return NeodroidFormalWrapper(name=environment, **kwargs)

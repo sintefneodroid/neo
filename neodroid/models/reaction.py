@@ -32,3 +32,17 @@ class Reaction(object):
 
   def to_json(self):
     return json.dumps(self.to_dict())
+
+  def __repr__(self):
+    return '<Reaction>\n' + \
+           '  <reset>' + str(self._reset) + '</reset>\n' + \
+           '  <configurations>' + '' + '</configurations>\n' + \
+           '  <motions>\n' + str(self._motions) + \
+           '  </motions>\n' + \
+           '</Reaction>\n'
+
+  def __str__(self):
+    return self.__repr__()
+
+  def __unicode__(self):
+    return self.__repr__()
