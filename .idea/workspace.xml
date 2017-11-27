@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="55a5ffd4-1c68-46de-b057-46938746e93f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../agent/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/guiclient/gui_components/status_bar.py" afterPath="$PROJECT_DIR$/example/guiclient/gui_components/status_bar.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/environments/reaching-v0_Data/Managed/Assembly-CSharp.dll" afterPath="$PROJECT_DIR$/neodroid/environments/reaching-v0_Data/Managed/Assembly-CSharp.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/neodroid/environments/reaching-v0_Data/data.unity3d" afterPath="$PROJECT_DIR$/neodroid/environments/reaching-v0_Data/data.unity3d" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/Rec/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../agent/Rec/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/Rec/configs/default_config.py" afterPath="$PROJECT_DIR$/../agent/Rec/configs/default_config.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/Rec/train_model.py" afterPath="$PROJECT_DIR$/../agent/Rec/train_model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../agent/Rec/utilities/reinforment_learning/difficulty.py" afterPath="$PROJECT_DIR$/../agent/Rec/utilities/reinforment_learning/difficulty.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,7 +18,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/neo$train_perfect.coverage" NAME="train perfect Coverage Results" MODIFIED="1508684858392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../agent/perfect_information_manipulator" />
-    <SUITE FILE_PATH="coverage/neo$gui.coverage" NAME="gui Coverage Results" MODIFIED="1511465799661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example/guiclient" />
+    <SUITE FILE_PATH="coverage/neo$gui.coverage" NAME="gui Coverage Results" MODIFIED="1511774374647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example/guiclient" />
     <SUITE FILE_PATH="coverage/neo$random.coverage" NAME="random Coverage Results" MODIFIED="1508180408592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../agent/random_agent" />
     <SUITE FILE_PATH="coverage/neo$simple.coverage" NAME="simple Coverage Results" MODIFIED="1502737884592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/example/guiclient" />
     <SUITE FILE_PATH="coverage/neo$test.coverage" NAME="test Coverage Results" MODIFIED="1508590235532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../agent/perfect_information_manipulator" />
@@ -38,33 +42,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="neodroid_environment.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="neodroid_environment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="67" column="33" lean-forward="true" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+            <state relative-caret-position="408">
+              <caret line="67" column="22" lean-forward="false" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
-                <element signature="e#744#2001#0" expanded="true" />
-                <element signature="e#4298#4320#0" expanded="true" />
-                <element signature="e#4468#5297#0" expanded="true" />
-                <element signature="e#5378#5840#0" expanded="true" />
-                <element signature="e#5880#6123#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reaction_factory.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="reaction_factory.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/neodroid/utilities/reaction_factory.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
+            <state relative-caret-position="432">
               <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-              <folding>
-                <element signature="e#1199#1415#0" expanded="true" />
-                <element signature="e#1472#1889#0" expanded="true" />
-                <element signature="e#1960#1969#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -72,7 +67,7 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/guiclient/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
+            <state relative-caret-position="486">
               <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
               <folding>
                 <element signature="e#1135#1549#0" expanded="true" />
@@ -86,8 +81,8 @@
       <file leaf-file-name="status_bar.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/guiclient/gui_components/status_bar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+            <state relative-caret-position="108">
+              <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
                 <element signature="e#276#776#0" expanded="true" />
@@ -103,18 +98,9 @@
       <file leaf-file-name="gym_wrapper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/wrappers/gym_wrapper/gym_wrapper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1512">
-              <caret line="84" column="33" lean-forward="false" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-                <element signature="e#292#448#0" expanded="true" />
-                <element signature="e#592#1837#0" expanded="true" />
-                <element signature="e#1890#2576#0" expanded="true" />
-                <element signature="e#2606#2610#0" expanded="true" />
-                <element signature="e#2651#2674#0" expanded="true" />
-                <element signature="e#2783#2895#0" expanded="true" />
-                <element signature="e#2938#2942#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="252">
+              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -133,7 +119,7 @@
         <entry file="file://$PROJECT_DIR$/neodroid/models/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
-              <caret line="6" column="40" lean-forward="false" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+              <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -144,11 +130,10 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
+            <state relative-caret-position="72">
               <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
               <folding>
                 <element signature="e#0#194#1" expanded="true" />
-                <element signature="e#385#429#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -157,13 +142,9 @@
       <file leaf-file-name="ale_wrapper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/wrappers/ale_wrapper/ale_wrapper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
+            <state relative-caret-position="198">
               <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-              <folding>
-                <element signature="e#125#175#0" expanded="true" />
-                <element signature="e#318#322#0" expanded="true" />
-                <element signature="e#380#384#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -275,10 +256,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="24" />
-    <option name="y" value="25" />
-    <option name="width" value="936" />
-    <option name="height" value="1031" />
+    <option name="x" value="23" />
+    <option name="y" value="-1" />
+    <option name="width" value="1874" />
+    <option name="height" value="1058" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -298,8 +279,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -379,6 +358,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -575,7 +556,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="24" y="25" width="1874" height="1058" extended-state="6" />
+    <frame x="23" y="-1" width="1874" height="1058" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24521072" sideWeight="0.35855263" order="3" side_tool="true" content_ui="tabs" />
@@ -763,9 +744,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="29" column="93" lean-forward="false" selection-start-line="29" selection-start-column="93" selection-end-line="29" selection-end-column="93" />
-          <folding>
-            <element signature="e#373#400#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -868,23 +847,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/wrappers/ale_wrapper/ale_wrapper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
+        <state relative-caret-position="198">
           <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-          <folding>
-            <element signature="e#125#175#0" expanded="true" />
-            <element signature="e#318#322#0" expanded="true" />
-            <element signature="e#380#384#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
+        <state relative-caret-position="72">
           <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
           <folding>
             <element signature="e#0#194#1" expanded="true" />
-            <element signature="e#385#429#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -900,7 +874,7 @@
     <entry file="file://$PROJECT_DIR$/neodroid/models/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="6" column="40" lean-forward="false" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+          <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
@@ -909,24 +883,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/wrappers/gym_wrapper/gym_wrapper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1512">
-          <caret line="84" column="33" lean-forward="false" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-            <element signature="e#292#448#0" expanded="true" />
-            <element signature="e#592#1837#0" expanded="true" />
-            <element signature="e#1890#2576#0" expanded="true" />
-            <element signature="e#2606#2610#0" expanded="true" />
-            <element signature="e#2651#2674#0" expanded="true" />
-            <element signature="e#2783#2895#0" expanded="true" />
-            <element signature="e#2938#2942#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="252">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/guiclient/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
+        <state relative-caret-position="486">
           <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
           <folding>
             <element signature="e#1135#1549#0" expanded="true" />
@@ -938,8 +903,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/example/guiclient/gui_components/status_bar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+        <state relative-caret-position="108">
+          <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
             <element signature="e#276#776#0" expanded="true" />
@@ -951,30 +916,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/utilities/reaction_factory.py">
+    <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+        <state relative-caret-position="408">
+          <caret line="67" column="22" lean-forward="false" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
           <folding>
-            <element signature="e#1199#1415#0" expanded="true" />
-            <element signature="e#1472#1889#0" expanded="true" />
-            <element signature="e#1960#1969#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
+    <entry file="file://$PROJECT_DIR$/neodroid/utilities/reaction_factory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="67" column="33" lean-forward="true" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#744#2001#0" expanded="true" />
-            <element signature="e#4298#4320#0" expanded="true" />
-            <element signature="e#4468#5297#0" expanded="true" />
-            <element signature="e#5378#5840#0" expanded="true" />
-            <element signature="e#5880#6123#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="432">
+          <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
