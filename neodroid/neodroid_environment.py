@@ -154,7 +154,7 @@ class NeodroidEnvironment(object):
     return np.zeros(1) # Do not crash
 
   def __sample_action_space__(self):
-    return np.random.randint(0, self._num_actions, self._num_actions)
+    return np.random.random_sample(self._num_actions)
 
   def __action_space__(self):
     self._num_actions=0
