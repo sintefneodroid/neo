@@ -153,8 +153,11 @@ class NeodroidEnvironment(object):
       return self.flat_observation(self._first_received_state)
     return np.zeros(1) # Do not crash
 
-  def __sample_action_space__(self):
-    return np.random.random_sample(self._num_actions)
+  def sample_action_space(self, binary=True):
+    if binary:
+      return np.random.random_sample(int(self._num_actions/2))-0.5
+    else:
+      return np.random.random_sample(self._num_actions)
 
   def __action_space__(self):
     self._num_actions=0
@@ -168,7 +171,7 @@ class NeodroidEnvironment(object):
     else:
       self._num_actions = 1 # Do not crash
     action_space = namedtuple('action_space', ('n', 'sample'))
-    return action_space(self._num_actions, self.__sample_action_space__)
+    return action_space(self._num_actions, self.sample_action_space)
 
   def maybe_infer_reaction(self, input_reaction):
     if self._latest_received_state:

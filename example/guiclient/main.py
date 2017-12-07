@@ -76,7 +76,7 @@ def update_environment_widgets(environment_state):
     _gui.update_normal_image(
         environment_state.get_observer(b'NormalCamera').get_data())
     _gui.update_motion_image(
-        environment_state.get_observer(b'MotionCamera').get_data())
+        environment_state.get_observer(b'FlowCamera').get_data())
     _gui.update_depth_image(
         environment_state.get_observer(b'DepthCamera').get_data())
     _gui.update_segmentation_image(
