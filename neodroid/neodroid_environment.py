@@ -66,10 +66,10 @@ class NeodroidEnvironment(object):
         if self._debug_logging:
           self._logger.debug('could not start environment ' + str(name))
     self.__connect__()
-    self.reset()
-    self.reset()
-    self.reset()
     time.sleep(seconds_before_connect/4)
+    self.reset()
+    self.reset()
+    self.reset()
     self.reset()
     self.reset()
     self.reset()
@@ -153,11 +153,25 @@ class NeodroidEnvironment(object):
       return self.flat_observation(self._first_received_state)
     return np.zeros(1) # Do not crash
 
-  def sample_action_space(self, binary=True):
-    if binary:
-      return np.random.random_sample(int(self._num_actions/2))-0.5
+  def sample_action_space(self, binary=True, discrete=False, one_hot=False):
+    if one_hot:
+      idx = np.random.randint(0,self._num_actions)
+      zeros = np.zeros(self._num_actions)
+      zeros[idx]=1
+      return zeros
     else:
-      return np.random.random_sample(self._num_actions)
+      if discrete:
+        if binary:
+          return np.random.randint(-1,2,size=int(self._num_actions/2))
+        else:
+          return np.random.randint(0,2,size=self._num_actions)
+      else:
+        if binary:
+          return np.random.random_sample(int(self._num_actions/2))-0.5
+        else:
+          return np.random.random_sample(self._num_actions)
+
+
 
   def __action_space__(self):
     self._num_actions=0
