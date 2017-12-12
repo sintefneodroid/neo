@@ -6,7 +6,6 @@ Home-page: https://github.com/sintefneodroid/neo
 Author: Christian Heider Nielsen
 Author-email: chrini13@student.aau.dk
 License: Apache License, Version 2.0
-Description-Content-Type: UNKNOWN
 Description: Python interface for the Neodroid platform, an API for communicating with a Unity Game process for a feedback response loop
 Keywords: python reinforcement-learning interface api
 Platform: UNKNOWN

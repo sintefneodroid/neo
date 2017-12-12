@@ -3,7 +3,7 @@ import neodroid.wrappers.formal_wrapper as neo
 
 def main():
 
-  _environment = neo.make('3d_grid_world', connect_to_running=False)
+  _environment = neo.make('3d_grid_world_win', connect_to_running=False)
   _environment.seed(42)
 
   observations, info = _environment.configure()

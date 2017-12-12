@@ -7,6 +7,7 @@ import warnings
 from collections import namedtuple
 
 import numpy as np
+import sys
 
 import neodroid.messaging as messaging
 from neodroid.models import Reaction
@@ -76,6 +77,9 @@ class NeodroidEnvironment(object):
 
   def __start_instance__(self, name, path_to_executables_directory, ip, port):
     path_to_executable = os.path.join(path_to_executables_directory,
+                                      name + '.exe')
+    if sys.platform != 'win32':
+      path_to_executable = os.path.join(path_to_executables_directory,
                                       name + '.x86')
     args = shlex.split(
         '-ip ' + str(ip) + ' -port ' + str(port) +
