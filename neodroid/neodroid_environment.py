@@ -228,7 +228,15 @@ class NeodroidEnvironment(object):
       self._logger.debug('Is not connected to environment')
     return None
 
-  def reset(self, input_configuration=[], on_reset_callback=None):
+  def reset(self, input_configuration=[], environments=[], on_reset_callback=None):
+    """
+
+    The environments argument lets you specify which environments to reset.
+
+    :type input_configuration: object
+    :type environments: object
+    :type on_reset_callback: object
+    """
     if self._debug_logging:
       self._logger.debug('Resetting')
 
@@ -236,6 +244,8 @@ class NeodroidEnvironment(object):
       if on_reset_callback:
         messaging.start_send_reaction_thread(Reaction(True, input_configuration, []),
                                              on_reset_callback)
+        #enviroments=[True for i in range(_num_environments)]
+        #Reaction(environments, input_configuration, []), on_reset_callback)
       else:
         messaging.send_reaction(Reaction(True, input_configuration, []))
 
