@@ -39,7 +39,7 @@ def receive_state(timeout_callback,
 
 
 def setup_connection(tcp_address, tcp_port, on_connected_callback=None):
-  global _connected, _req_socket
+  global _ctx, _connected, _req_socket
   _req_socket = _ctx.socket(zmq.REQ)
   if _use_inter_process_communication:
     _req_socket.connect("ipc:///tmp/neodroid/messages0")
@@ -54,9 +54,12 @@ def setup_connection(tcp_address, tcp_port, on_connected_callback=None):
 
 
 def close_connection(on_disconnect_callback=None):
-  global _connected, _req_socket
+  global _ctx, _connected, _req_socket
   _req_socket.setsockopt(zmq.LINGER, 0)
   _req_socket.close()
+  del _req_socket
+  del _ctx
+  _ctx = zmq.Context.instance()
   _connected = False
   if on_disconnect_callback:
     on_disconnect_callback()
@@ -76,7 +79,7 @@ def start_setup_connection_thread(on_connected_callback,
 
 def start_send_reaction_thread(reaction, on_reaction_sent_callback):
   thread = Thread(target=send_reaction,
-                  args=(action,
+                  args=(reaction,
                         on_reaction_sent_callback))
   # Terminate with the rest of the program
   thread.daemon = True  # is a Background Thread

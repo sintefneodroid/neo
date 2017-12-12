@@ -221,7 +221,7 @@ class NeodroidEnvironment(object):
       if message:
         self._awaiting_response = False
         self._latest_received_state = message
-        if self._first_received_state == None:
+        if self._first_received_state is None:
           self._first_received_state = message
         return message
     if self._debug_logging:
@@ -246,7 +246,7 @@ class NeodroidEnvironment(object):
       if message:
         self._awaiting_response = False
         self._latest_received_state = message
-        if self._first_received_state == None:
+        if self._first_received_state is None:
           self._first_received_state = message
         return message
     return None

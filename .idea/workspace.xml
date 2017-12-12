@@ -3,18 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="55a5ffd4-1c68-46de-b057-46938746e93f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../agent/.idea/agent.iml" afterPath="$PROJECT_DIR$/../agent/.idea/agent.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/neo.iml" afterPath="$PROJECT_DIR$/.idea/neo.iml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Neodroid.egg-info/PKG-INFO" afterPath="$PROJECT_DIR$/Neodroid.egg-info/PKG-INFO" />
-      <change beforePath="$PROJECT_DIR$/Neodroid.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/Neodroid.egg-info/SOURCES.txt" />
-      <change beforePath="$PROJECT_DIR$/Neodroid.egg-info/dependency_links.txt" afterPath="$PROJECT_DIR$/Neodroid.egg-info/dependency_links.txt" />
-      <change beforePath="$PROJECT_DIR$/Neodroid.egg-info/requires.txt" afterPath="$PROJECT_DIR$/Neodroid.egg-info/requires.txt" />
-      <change beforePath="$PROJECT_DIR$/Neodroid.egg-info/top_level.txt" afterPath="$PROJECT_DIR$/Neodroid.egg-info/top_level.txt" />
       <change beforePath="$PROJECT_DIR$/example/minimal/minimal.py" afterPath="$PROJECT_DIR$/example/minimal/minimal.py" />
+      <change beforePath="$PROJECT_DIR$/neodroid/environments/3d_grid_world_win_Data/Managed/Assembly-CSharp.dll" afterPath="$PROJECT_DIR$/neodroid/environments/3d_grid_world_win_Data/Managed/Assembly-CSharp.dll" />
+      <change beforePath="$PROJECT_DIR$/neodroid/environments/3d_grid_world_win_Data/data.unity3d" afterPath="$PROJECT_DIR$/neodroid/environments/3d_grid_world_win_Data/data.unity3d" />
+      <change beforePath="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" afterPath="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
       <change beforePath="$PROJECT_DIR$/neodroid/neodroid_environment.py" afterPath="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
+      <change beforePath="$PROJECT_DIR$/neodroid/utilities/reaction_factory.py" afterPath="$PROJECT_DIR$/neodroid/utilities/reaction_factory.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,8 +47,8 @@
       <file leaf-file-name="neodroid_environment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="80" column="29" lean-forward="false" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
+            <state relative-caret-position="731">
+              <caret line="233" column="0" lean-forward="false" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -61,11 +56,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="networking_utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/neodroid/messaging/networking_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="62" column="20" lean-forward="false" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="reaction_factory.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/utilities/reaction_factory.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+            <state relative-caret-position="875">
+              <caret line="42" column="76" lean-forward="false" selection-start-line="42" selection-start-column="76" selection-end-line="42" selection-end-column="76" />
               <folding />
             </state>
           </provider>
@@ -74,8 +79,20 @@
       <file leaf-file-name="minimal.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/minimal/minimal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="44" lean-forward="false" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
+            <state relative-caret-position="650">
+              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="32" />
+              <folding>
+                <element signature="e#15#61#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FlatBufferUtilities.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="410">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -84,8 +101,8 @@
       <file leaf-file-name="formal_wrapper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/wrappers/formal_wrapper/formal_wrapper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="550">
+              <caret line="22" column="44" lean-forward="false" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -96,16 +113,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="100">
               <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/guiclient/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2250">
-              <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -128,16 +135,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="775">
               <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="configuration.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neodroid/models/configuration.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="19" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -204,7 +201,6 @@
         <option value="$PROJECT_DIR$/neodroid/models/motor.py" />
         <option value="$PROJECT_DIR$/neodroid/models/actor.py" />
         <option value="$PROJECT_DIR$/neodroid/utilities/debug.py" />
-        <option value="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
         <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/utilities/replay_memory.py" />
         <option value="$PROJECT_DIR$/../agent/requirements.txt" />
         <option value="$PROJECT_DIR$/../agent/perfect_information_manipulator/utilities/visualisation/__init__.py" />
@@ -238,8 +234,9 @@
         <option value="$PROJECT_DIR$/neodroid/models/__init__.py" />
         <option value="$PROJECT_DIR$/neodroid/__init__.py" />
         <option value="$PROJECT_DIR$/example/guiclient/main.py" />
-        <option value="$PROJECT_DIR$/neodroid/utilities/reaction_factory.py" />
         <option value="$PROJECT_DIR$/example/guiclient/gui_components/status_bar.py" />
+        <option value="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
+        <option value="$PROJECT_DIR$/neodroid/utilities/reaction_factory.py" />
         <option value="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
         <option value="$PROJECT_DIR$/example/minimal/minimal.py" />
       </list>
@@ -595,19 +592,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1056" extended-state="6" />
+    <frame x="-11" y="-11" width="3862" height="2137" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24521072" sideWeight="0.35855263" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.332786" sideWeight="0.4276316" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19351351" sideWeight="0.4958872" order="-1" side_tool="false" content_ui="tabs" x="0" y="0" width="435" height="856" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33783785" sideWeight="0.70505285" order="3" side_tool="false" content_ui="tabs" x="33" y="646" width="1828" height="165" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24456233" sideWeight="0.70701617" order="3" side_tool="false" content_ui="tabs" x="33" y="646" width="1828" height="165" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33783785" sideWeight="0.29494712" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24456233" sideWeight="0.2929838" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32930845" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14486487" sideWeight="0.63615817" order="0" side_tool="false" content_ui="combo" x="331" y="200" width="193" height="918" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07108753" sideWeight="0.63615817" order="0" side_tool="false" content_ui="combo" x="331" y="200" width="193" height="918" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32867494" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24958949" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991228" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -620,7 +618,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23026316" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -720,13 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/messaging/networking_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/models/reaction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -739,13 +729,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="121" column="17" lean-forward="false" selection-start-line="121" selection-start-column="17" selection-end-line="121" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -802,6 +785,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="17" column="19" lean-forward="false" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="19" />
+          <folding>
+            <element signature="e#458#475#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -837,24 +823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/models/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/wrappers/gym_wrapper/gym_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/guiclient/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2250">
@@ -873,18 +841,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/utilities/reaction_factory.py">
+    <entry file="file://$PROJECT_DIR$/neodroid/models/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-          <folding />
+        <state relative-caret-position="150">
+          <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/wrappers/formal_wrapper/formal_wrapper.py">
+    <entry file="file://$PROJECT_DIR$/neodroid/wrappers/gym_wrapper/gym_wrapper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="775">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -897,10 +867,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/messaging/FlatBufferUtilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/messaging/networking_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="62" column="20" lean-forward="false" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/wrappers/formal_wrapper/formal_wrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="22" column="44" lean-forward="false" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/utilities/reaction_factory.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="875">
+          <caret line="42" column="76" lean-forward="false" selection-start-line="42" selection-start-column="76" selection-end-line="42" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="80" column="29" lean-forward="false" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
+        <state relative-caret-position="731">
+          <caret line="233" column="0" lean-forward="false" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
@@ -909,9 +911,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/example/minimal/minimal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="44" lean-forward="false" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
-          <folding />
+        <state relative-caret-position="650">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="32" />
+          <folding>
+            <element signature="e#15#61#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
