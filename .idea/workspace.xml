@@ -5,9 +5,6 @@
       <change beforePath="$PROJECT_DIR$/../agent/.idea/agent.iml" afterPath="$PROJECT_DIR$/../agent/.idea/agent.iml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/example/minimal/minimal.py" afterPath="$PROJECT_DIR$/example/minimal/minimal.py" />
-      <change beforePath="$PROJECT_DIR$/neodroid/environments/3d_grid_world_win_Data/Managed/Assembly-CSharp.dll" afterPath="$PROJECT_DIR$/neodroid/environments/3d_grid_world_win_Data/Managed/Assembly-CSharp.dll" />
-      <change beforePath="$PROJECT_DIR$/neodroid/environments/3d_grid_world_win_Data/data.unity3d" afterPath="$PROJECT_DIR$/neodroid/environments/3d_grid_world_win_Data/data.unity3d" />
-      <change beforePath="$PROJECT_DIR$/neodroid/neodroid_environment.py" afterPath="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,11 +39,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="neodroid_environment.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="neodroid_environment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="831">
-              <caret line="246" column="60" lean-forward="false" selection-start-line="246" selection-start-column="60" selection-end-line="246" selection-end-column="60" />
+            <state relative-caret-position="256">
+              <caret line="223" column="46" lean-forward="true" selection-start-line="223" selection-start-column="46" selection-end-line="223" selection-end-column="46" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -74,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="minimal.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="minimal.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/minimal/minimal.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="625">
-              <caret line="25" column="8" lean-forward="false" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+              <caret line="25" column="8" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
               <folding>
                 <element signature="e#15#61#0" expanded="true" />
               </folding>
@@ -235,8 +232,8 @@
         <option value="$PROJECT_DIR$/example/guiclient/gui_components/status_bar.py" />
         <option value="$PROJECT_DIR$/neodroid/messaging/networking_utils.py" />
         <option value="$PROJECT_DIR$/neodroid/utilities/reaction_factory.py" />
-        <option value="$PROJECT_DIR$/example/minimal/minimal.py" />
         <option value="$PROJECT_DIR$/neodroid/neodroid_environment.py" />
+        <option value="$PROJECT_DIR$/example/minimal/minimal.py" />
       </list>
     </option>
   </component>
@@ -356,7 +353,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/example/minimal/minimal.py" />
-    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -885,22 +882,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/minimal/minimal.py">
+    <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="25" column="8" lean-forward="false" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+        <state relative-caret-position="256">
+          <caret line="223" column="46" lean-forward="true" selection-start-line="223" selection-start-column="46" selection-end-line="223" selection-end-column="46" />
           <folding>
-            <element signature="e#15#61#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
+    <entry file="file://$PROJECT_DIR$/example/minimal/minimal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="246" column="60" lean-forward="false" selection-start-line="246" selection-start-column="60" selection-end-line="246" selection-end-column="60" />
+        <state relative-caret-position="625">
+          <caret line="25" column="8" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#15#61#0" expanded="true" />
           </folding>
         </state>
       </provider>
