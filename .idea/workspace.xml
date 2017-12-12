@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="55a5ffd4-1c68-46de-b057-46938746e93f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../agent/.idea/agent.iml" afterPath="$PROJECT_DIR$/../agent/.idea/agent.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_static/Thumbs.db" afterPath="$PROJECT_DIR$/docs/build/html/_static/Thumbs.db" />
       <change beforePath="$PROJECT_DIR$/example/minimal/minimal.py" afterPath="$PROJECT_DIR$/example/minimal/minimal.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,8 +42,8 @@
       <file leaf-file-name="neodroid_environment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="223" column="46" lean-forward="true" selection-start-line="223" selection-start-column="46" selection-end-line="223" selection-end-column="46" />
+            <state relative-caret-position="106">
+              <caret line="223" column="46" lean-forward="false" selection-start-line="223" selection-start-column="46" selection-end-line="223" selection-end-column="46" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -74,8 +74,8 @@
       <file leaf-file-name="minimal.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/minimal/minimal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="625">
-              <caret line="25" column="8" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+            <state relative-caret-position="375">
+              <caret line="15" column="146" lean-forward="false" selection-start-line="15" selection-start-column="146" selection-end-line="15" selection-end-column="146" />
               <folding>
                 <element signature="e#15#61#0" expanded="true" />
               </folding>
@@ -824,16 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/models/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/wrappers/gym_wrapper/gym_wrapper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="775">
@@ -874,6 +864,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/models/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="223" column="46" lean-forward="false" selection-start-line="223" selection-start-column="46" selection-end-line="223" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/neodroid/utilities/reaction_factory.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="875">
@@ -882,20 +892,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neodroid/neodroid_environment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="223" column="46" lean-forward="true" selection-start-line="223" selection-start-column="46" selection-end-line="223" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/minimal/minimal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="25" column="8" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+        <state relative-caret-position="375">
+          <caret line="15" column="146" lean-forward="false" selection-start-line="15" selection-start-column="146" selection-end-line="15" selection-end-column="146" />
           <folding>
             <element signature="e#15#61#0" expanded="true" />
           </folding>
