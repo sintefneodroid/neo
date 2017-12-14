@@ -8,6 +8,7 @@ from .FBSUtilities import build_flat_reaction, create_state
 _connected = False
 _waiting_for_response = False
 _ctx = zmq.Context.instance()
+#_ctx = zmq.Context()
 _req_socket = _ctx.socket(zmq.REQ)
 _use_inter_process_communication = False
 _time_out = 2000  # Milliseconds
@@ -59,8 +60,11 @@ def close_connection(on_disconnect_callback=None):
   _req_socket.setsockopt(zmq.LINGER, 0)
   _req_socket.close()
   #del _req_socket
-  #del _ctx
-  #_ctx = zmq.Context.instance()
+  _ctx.destroy()
+  _ctx.term()
+  del _ctx
+  #_ctx = zmq.Context()
+  _ctx = zmq.Context.instance()
   _connected = False
   if on_disconnect_callback:
     on_disconnect_callback()

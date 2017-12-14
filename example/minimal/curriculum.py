@@ -4,24 +4,28 @@ from neodroid import Configuration
 import numpy as np
 import json
 
+rollout_horizon = 5
+memory = []
 
 def main():
   _environment = neo.make('3d_grid_world_win', connect_to_running=True)
   _environment.seed(42)
 
+  observations, info = _environment.configure()
+  memory.append(info)
   for i in range(1000):
-
-    observations, info = _environment.configure()
-    while info.get_interrupted():
-      print('Configuring')
-      configuration = sample_initial_state(info, i)
-      print(configuration)
+    interrupted=True
+    while interrupted:
+      configuration = sample_initial_state2(memory, i)
       observations, info = _environment.configure(configuration)
-      _,_,_,info=_environment.act()
+      for i in range(rollout_horizon):
+        actions = _environment.sample_action_space(binary=True, discrete=True)
+        _,_,interrupted,info=_environment.act(actions)
 
     for j in range(1000):
       actions = _environment.sample_action_space(binary=True, discrete=True)
       _, reward, interrupted, info = _environment.act(actions)
+      memory.append(info)
       if interrupted:
         print('Interrupted', reward)
         break
@@ -44,6 +48,13 @@ def sample_initial_state(info, i=1, reward=0):
   return [Configuration('PlayerTransformX', max(min_x,min(x + px, max_x))),
           Configuration('PlayerTransformY', max(min_y,min(y + py, max_y))),
           Configuration('PlayerTransformZ', max(min_z,min(z + pz, max_z)))]
+
+
+def sample_initial_state2(memory, i=0):
+  position = memory[i].get_observer(b'PlayerObserver').get_position()
+  return [Configuration('PlayerTransformX', position[0]),
+          Configuration('PlayerTransformY', position[1]),
+          Configuration('PlayerTransformZ', position[2])]
 
 
 if __name__ == '__main__':
