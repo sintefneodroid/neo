@@ -2,8 +2,8 @@ from threading import Thread
 
 import zmq
 
-from .FlatBufferModels import FlatBufferState as FlatBufferState
-from .FlatBufferUtilities import build_flat_reaction, create_state
+from .FBSModels import FBSState
+from .FBSUtilities import build_flat_reaction, create_state
 
 _connected = False
 _waiting_for_response = False
@@ -30,7 +30,7 @@ def receive_state(timeout_callback,
       return
     by = _req_socket.recv()
     _waiting_for_response = False
-    flat_buffer_state = FlatBufferState.GetRootAsFlatBufferState(by, 0)
+    flat_buffer_state = FBSState.GetRootAsFBSState(by, 0)
     state = create_state(flat_buffer_state)
     if on_step_done_callback:
       on_step_done_callback(state)

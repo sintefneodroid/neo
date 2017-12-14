@@ -1,4 +1,4 @@
-from neodroid.models import Reaction, Motion
+from neodroid.modeling import Reaction, Motion
 import numpy as np
 
 

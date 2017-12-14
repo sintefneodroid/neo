@@ -9,7 +9,7 @@ from collections import namedtuple
 import numpy as np
 
 import neodroid.messaging as messaging
-from neodroid.models import Reaction
+from neodroid.modeling import Reaction
 from neodroid.utilities.reaction_factory import verify_reaction
 
 
@@ -178,7 +178,7 @@ class NeodroidEnvironment(object):
     if self._first_received_state:
       for actor in self._first_received_state.get_actors().values():
         for motor in actor.get_motors().values():
-          if motor.get_binary():
+          if True: ########### FIXXXXX THISS #########
             self._num_actions+=2
           else:
             self._num_actions+=1

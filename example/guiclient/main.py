@@ -1,7 +1,7 @@
 import neodroid as neo
 from example.guiclient.gui import NeoGUI
-from neodroid.models import Reaction, Motion
-from neodroid.models.configuration import Configuration
+from neodroid.modeling import Reaction, Motion
+from neodroid.modeling.configuration import Configuration
 
 _gui = None
 _neo_environment = None

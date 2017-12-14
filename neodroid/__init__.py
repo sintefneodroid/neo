@@ -8,9 +8,9 @@
 
 """
 
-from .models import Configuration
-from .models import Motion
-from .models import Reaction
+from .modeling import Configuration
+from .modeling import Motion
+from .modeling import Reaction
 from .neodroid_environment import NeodroidEnvironment
 
 
