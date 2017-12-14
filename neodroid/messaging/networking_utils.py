@@ -38,6 +38,7 @@ def receive_state(timeout_callback,
       return state
 
 
+
 def setup_connection(tcp_address, tcp_port, on_connected_callback=None):
   global _ctx, _connected, _req_socket
   _req_socket = _ctx.socket(zmq.REQ)
@@ -57,9 +58,9 @@ def close_connection(on_disconnect_callback=None):
   global _ctx, _connected, _req_socket
   _req_socket.setsockopt(zmq.LINGER, 0)
   _req_socket.close()
-  del _req_socket
-  del _ctx
-  _ctx = zmq.Context.instance()
+  #del _req_socket
+  #del _ctx
+  #_ctx = zmq.Context.instance()
   _connected = False
   if on_disconnect_callback:
     on_disconnect_callback()
