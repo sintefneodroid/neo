@@ -21,16 +21,16 @@ def verify_reaction(input_reaction, actors):
         return Reaction(False, [], input_reaction)
       else:
         print('Invalid motions')
-        return construct_reaction_from_list(input_reaction, actors)
+        return construct_reaction_from_list(input_reaction,[], actors)
     elif isinstance(input_reaction, int):
       return construct_reaction_from_list([
-        input_reaction], actors)
+        input_reaction],[], actors)
     elif isinstance(input_reaction, float):
       return construct_reaction_from_list([
-        input_reaction], actors)
+        input_reaction],[], actors)
     elif isinstance(input_reaction, (np.ndarray, np.generic) ):
       a = construct_reaction_from_list(
-        input_reaction.astype(float).tolist(), actors)
+        input_reaction.astype(float).tolist(),[], actors)
       return a
     #else:
     #  print(str(type(input_reaction))+' received')
@@ -38,9 +38,9 @@ def verify_reaction(input_reaction, actors):
   return Reaction(False, [], [])
 
 
-def construct_reaction_from_list(input_list, actors):
-  motions = construct_motions_from_list(input_list, actors)
-  configurations = construct_configurations_from_list([], actors)
+def construct_reaction_from_list(motion_list, configuration_list, actors):
+  motions = construct_motions_from_list(motion_list, actors)
+  configurations = construct_configurations_from_list(configuration_list, [])
   return Reaction(False, configurations, motions)
 
 

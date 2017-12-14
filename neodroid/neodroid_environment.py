@@ -7,6 +7,7 @@ import warnings
 from collections import namedtuple
 
 import numpy as np
+import sys
 
 import neodroid.messaging as messaging
 from neodroid.modeling import Reaction
@@ -76,6 +77,9 @@ class NeodroidEnvironment(object):
 
   def __start_instance__(self, name, path_to_executables_directory, ip, port):
     path_to_executable = os.path.join(path_to_executables_directory,
+                                      name + '.exe')
+    if sys.platform != 'win32':
+      path_to_executable = os.path.join(path_to_executables_directory,
                                       name + '.x86')
     args = shlex.split(
         '-ip ' + str(ip) + ' -port ' + str(port) +
@@ -217,14 +221,22 @@ class NeodroidEnvironment(object):
       if message:
         self._awaiting_response = False
         self._latest_received_state = message
-        if self._first_received_state == None:
+        if self._first_received_state is None:
           self._first_received_state = message
         return message
     if self._debug_logging:
       self._logger.debug('Is not connected to environment')
     return None
 
-  def reset(self, input_configuration=[], on_reset_callback=None):
+  def reset(self, input_configuration=[], environments=[], on_reset_callback=None):
+    """
+
+    The environments argument lets you specify which environments to reset.
+
+    :type input_configuration: object
+    :type environments: object
+    :type on_reset_callback: object
+    """
     if self._debug_logging:
       self._logger.debug('Resetting')
 
@@ -232,6 +244,8 @@ class NeodroidEnvironment(object):
       if on_reset_callback:
         messaging.start_send_reaction_thread(Reaction(True, input_configuration, []),
                                              on_reset_callback)
+        #enviroments=[True for i in range(_num_environments)]
+        #Reaction(environments, input_configuration, []), on_reset_callback)
       else:
         messaging.send_reaction(Reaction(True, input_configuration, []))
 
@@ -242,7 +256,7 @@ class NeodroidEnvironment(object):
       if message:
         self._awaiting_response = False
         self._latest_received_state = message
-        if self._first_received_state == None:
+        if self._first_received_state is None:
           self._first_received_state = message
         return message
     return None
