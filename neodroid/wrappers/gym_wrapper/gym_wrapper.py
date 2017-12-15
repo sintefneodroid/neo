@@ -16,7 +16,7 @@ class NeodroidGymWrapper(NeodroidEnvironment):
                                                       on_step_done_callback)
     if message:
       return (self.flat_observation(message),
-              message.get_reward_for_last_step(),
+              message.get_reward(),
               message.get_interrupted(), message)
     return None, None, None, None
 

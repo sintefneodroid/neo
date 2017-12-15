@@ -8,7 +8,7 @@ rollout_horizon = 5
 memory = []
 
 def main():
-  _environment = neo.make('3d_grid_world_win', connect_to_running=True)
+  _environment = neo.make('3d_grid_world2', connect_to_running=False)
   _environment.seed(42)
 
   observations, info = _environment.configure()
