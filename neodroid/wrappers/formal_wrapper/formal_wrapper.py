@@ -12,19 +12,19 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
           on_step_done_callback=None,
           on_reaction_sent_callback=None):
     message = super(NeodroidFormalWrapper, self).react(input_reaction,
-                                                      on_reaction_sent_callback,
-                                                      on_step_done_callback)
+                                                       on_reaction_sent_callback,
+                                                       on_step_done_callback)
     if message:
-      return (self.flat_observation(message),
+      return (flat_observation(message),
               message.get_reward(),
               message.get_interrupted(), message)
     return None, None, None, None
 
   def configure(self, input_configuration=[], on_reset_callback=None):
     message = super(NeodroidFormalWrapper, self).reset(input_configuration,
-                                                    on_reset_callback)
+                                                       on_reset_callback)
     if message:
-      return self.flat_observation(message), message
+      return flat_observation(message), message
     return None, None
 
   def quit(self, callback=None):

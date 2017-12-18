@@ -4,28 +4,28 @@ from neodroid import Configuration
 import numpy as np
 import json
 
-rollout_horizon = 5
+random_motion_horizon = 5
 memory = []
 
 def main():
-  _environment = neo.make('3d_grid_world2', connect_to_running=False)
+  _environment = neo.make('3d_grid_world2', connect_to_running=True)
   _environment.seed(42)
 
   observations, info = _environment.configure()
-  memory.append(info)
+  memory.append(observations)
   for i in range(1000):
     interrupted=True
     while interrupted:
-      configuration = sample_initial_state2(memory, i)
+      configuration = sample_initial_state3(memory, i)
       observations, info = _environment.configure(configuration)
-      for i in range(rollout_horizon):
+      for j in range(random_motion_horizon):
         actions = _environment.sample_action_space(binary=True, discrete=True)
         _,_,interrupted,info=_environment.act(actions)
 
     for j in range(1000):
       actions = _environment.sample_action_space(binary=True, discrete=True)
-      _, reward, interrupted, info = _environment.act(actions)
-      memory.append(info)
+      observations, reward, interrupted, info = _environment.act(actions)
+      memory.append(observations)
       if interrupted:
         print('Interrupted', reward)
         break
@@ -55,6 +55,9 @@ def sample_initial_state2(memory, i=0):
   return [Configuration('PlayerTransformX', position[0]),
           Configuration('PlayerTransformY', position[1]),
           Configuration('PlayerTransformZ', position[2])]
+
+def sample_initial_state3(memory, i=0):
+  return memory[i]
 
 
 if __name__ == '__main__':

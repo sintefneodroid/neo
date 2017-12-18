@@ -156,9 +156,10 @@ def create_configurables(flat_environment_description):
       fbs_configurable = flat_environment_description.Configurables(i)
       configurable = N.Configurable(
           fbs_configurable.ConfigurableName(),
-          fbs_configurable.ValidInput())
-      configurables[configurable.get_configurable_name()] = fbs_configurable
-
+          N.InputRange(fbs_configurable.ValidInput().DecimalGranularity(),fbs_configurable.ValidInput().MinValue(),fbs_configurable.ValidInput().MaxValue()),
+          fbs_configurable.HasObserver(),
+          fbs_configurable.ObserverName())
+      configurables[configurable.get_configurable_name()] = configurable
   return configurables
 
 

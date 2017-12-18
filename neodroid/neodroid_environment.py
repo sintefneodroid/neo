@@ -10,8 +10,11 @@ from collections import namedtuple
 import numpy as np
 
 import neodroid.messaging as messaging
-from neodroid.modeling import Reaction
-from neodroid.utilities.reaction_factory import verify_motion_reaction
+from neodroid.utilities.reaction_factory import verify_motion_reaction, verify_configuration_reaction
+
+
+def flat_observation(message):
+  return np.array([obs.get_data() for obs in message.get_observers().values()]).flatten()
 
 
 class NeodroidEnvironment(object):
@@ -52,6 +55,7 @@ class NeodroidEnvironment(object):
 
     # Environment
     self._environment_description = None
+    self._state = None
     self._observation_space = np.zeros(1)
 
     if not connect_to_running and not self._simulation_instance:
@@ -138,11 +142,6 @@ class NeodroidEnvironment(object):
   def is_connected(self):
     return self._connected
 
-  def flat_observation(self, message):
-    return np.array([obs.get_data() for
-                     obs in
-                     message.get_observers().values()]).flatten()
-
   def seed(self, seed):
     pass
 
@@ -181,7 +180,7 @@ class NeodroidEnvironment(object):
     action_space = namedtuple('action_space', ('n', 'sample'))
     return action_space(self._num_actions, self.sample_action_space)
 
-  def maybe_infer_reaction(self, input_reaction):
+  def maybe_infer_motion_reaction(self, input_reaction):
     if self._environment_description:
       input_reaction = verify_motion_reaction(input_reaction,
                                               self._environment_description)
@@ -198,7 +197,7 @@ class NeodroidEnvironment(object):
     if self._debug_logging:
       self._logger.debug('Reacting')
 
-    input_reaction = self.maybe_infer_reaction(input_reaction)
+    input_reaction = self.maybe_infer_motion_reaction(input_reaction)
 
     if self._connected:
       if on_reaction_sent_callback:
@@ -212,7 +211,8 @@ class NeodroidEnvironment(object):
       message = self.__get_state__(on_step_done_callback)
       if message:
         self._awaiting_response = False
-        self._observation_space = self.flat_observation(message)
+        self._observation_space = flat_observation(message)
+        self._state = message
         if message.get_environment_description():
           self._environment_description = message.get_environment_description()
         return message
@@ -220,25 +220,34 @@ class NeodroidEnvironment(object):
       self._logger.debug('Is not connected to environment')
     return None
 
-  def reset(self, input_configuration=[], environments=[],
-            on_reset_callback=None):
+  def maybe_infer_configuration_reaction(self, input_reaction):
+    if self._environment_description:
+      input_reaction = verify_configuration_reaction(input_reaction,
+                                                     self._environment_description, self._state)
+    else:
+      input_reaction = verify_configuration_reaction(input_reaction, None, self._state)
+
+    return input_reaction
+
+  def reset(self, input_reaction=None, on_reset_callback=None):
     """
 
     The environments argument lets you specify which environments to reset.
 
-    :type input_configuration: object
-    :type environments: object
+    :param input_reaction:
     :type on_reset_callback: object
     """
     if self._debug_logging:
       self._logger.debug('Resetting')
 
     if self._connected:
+
+      input_reaction = self.maybe_infer_configuration_reaction(input_reaction)
+
       if on_reset_callback:
-        messaging.start_send_reaction_thread(Reaction(True, input_configuration, []),
-                                             on_reset_callback)
+        messaging.start_send_reaction_thread(input_reaction, on_reset_callback)
       else:
-        messaging.send_reaction(Reaction(True, input_configuration, []))
+        messaging.send_reaction(input_reaction)
 
       self._awaiting_response = True
 
@@ -246,7 +255,8 @@ class NeodroidEnvironment(object):
 
       if message:
         self._awaiting_response = False
-        self._observation_space = self.flat_observation(message)
+        self._observation_space = flat_observation(message)
+        self._state = message
         self._environment_description = message.get_environment_description()
         return message
     return None

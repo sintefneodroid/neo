@@ -24,7 +24,7 @@ class Motion(object):
   def __repr__(self):
     return '<Motion>\n' + \
            '  <actor_name>' + str(self._actor_name) + '</actor_name>\n' + \
-           '  <motor_name>' + str(self._motor_name)+ '</motor_name>\n' + \
+           '  <motor_name>' + str(self._motor_name) + '</motor_name>\n' + \
            '  <strength>\n' + str(self._strength) + '</strength>\n' + \
            '</Motion>\n'
 

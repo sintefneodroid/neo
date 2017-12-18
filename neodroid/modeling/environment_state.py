@@ -1,5 +1,5 @@
-from neodroid.messaging.FBSUtilities import  create_observers, \
-   create_description
+from neodroid.messaging.FBSUtilities import create_observers, \
+  create_description
 
 
 class EnvironmentState(object):

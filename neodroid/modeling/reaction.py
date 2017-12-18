@@ -2,7 +2,7 @@ import json
 
 
 class Reaction(object):
-  def __init__(self, reset, configurations, motions, environment_name = 'default'):
+  def __init__(self, reset, configurations, motions, environment_name='default'):
     self._environment_name = environment_name
     self._reset = reset
     self._configurations = configurations
@@ -28,7 +28,7 @@ class Reaction(object):
 
   def to_dict(self):
     return {
-      '_reset': self._reset,
+      '_reset'         : self._reset,
       '_configurations': [configuration.to_dict() for configuration in
                           self._configurations],
       '_motions'       : [motion.to_dict() for motion in self._motions]

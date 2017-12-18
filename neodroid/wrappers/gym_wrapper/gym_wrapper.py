@@ -12,10 +12,10 @@ class NeodroidGymWrapper(NeodroidEnvironment):
            on_reaction_sent_callback=None,
            on_step_done_callback=None):
     message = super(NeodroidGymWrapper, self).react(input_reaction,
-                                                      on_reaction_sent_callback,
-                                                      on_step_done_callback)
+                                                    on_reaction_sent_callback,
+                                                    on_step_done_callback)
     if message:
-      return (self.flat_observation(message),
+      return (flat_observation(message),
               message.get_reward(),
               message.get_interrupted(), message)
     return None, None, None, None
@@ -24,7 +24,7 @@ class NeodroidGymWrapper(NeodroidEnvironment):
     message = super(NeodroidGymWrapper, self).reset(input_configuration,
                                                     on_reset_callback)
     if message:
-      return self.flat_observation(message)
+      return flat_observation(message)
     return None
 
   def render(self, *args, **kwargs):
