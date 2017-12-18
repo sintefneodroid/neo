@@ -33,8 +33,28 @@ class FBSEnvironmentDescription(object):
         return 0.0
 
     # FBSEnvironmentDescription
-    def Configurables(self, j):
+    def Actors(self, j):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        if o != 0:
+            x = self._tab.Vector(o)
+            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
+            x = self._tab.Indirect(x)
+            from .FBSActor import FBSActor
+            obj = FBSActor()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+    # FBSEnvironmentDescription
+    def ActorsLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+    # FBSEnvironmentDescription
+    def Configurables(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
         if o != 0:
             x = self._tab.Vector(o)
             x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
@@ -47,14 +67,16 @@ class FBSEnvironmentDescription(object):
 
     # FBSEnvironmentDescription
     def ConfigurablesLength(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
         if o != 0:
             return self._tab.VectorLen(o)
         return 0
 
-def FBSEnvironmentDescriptionStart(builder): builder.StartObject(3)
+def FBSEnvironmentDescriptionStart(builder): builder.StartObject(4)
 def FBSEnvironmentDescriptionAddMaxEpisodeLength(builder, maxEpisodeLength): builder.PrependInt32Slot(0, maxEpisodeLength, 0)
 def FBSEnvironmentDescriptionAddSolvedThreshold(builder, solvedThreshold): builder.PrependFloat32Slot(1, solvedThreshold, 0.0)
-def FBSEnvironmentDescriptionAddConfigurables(builder, configurables): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(configurables), 0)
+def FBSEnvironmentDescriptionAddActors(builder, actors): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(actors), 0)
+def FBSEnvironmentDescriptionStartActorsVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def FBSEnvironmentDescriptionAddConfigurables(builder, configurables): builder.PrependUOffsetTRelativeSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(configurables), 0)
 def FBSEnvironmentDescriptionStartConfigurablesVector(builder, numElems): return builder.StartVector(4, numElems, 4)
 def FBSEnvironmentDescriptionEnd(builder): return builder.EndObject()

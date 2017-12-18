@@ -6,22 +6,22 @@ class Configurable(object):
   def get_configurable_name(self):
     return self._configurable_name
 
-  def get_configurable_value(self):
+  def get_valid_range(self):
     return self._valid_range
 
   def to_dict(self):
     return {
       '_configurable_name' : self._configurable_name,
-      '_configurable_value': self._configurable_value
+      '_configurable_value': self._valid_range
     }
 
   def __repr__(self):
-    return '<Configuration>\n' + \
+    return '<Configurable>\n' + \
            '  <configurable_name>' + str(self._configurable_name) + \
            '</configurable_name>\n' + \
-           '  <configurable_value>' + str(self._configurable_value) + \
-           '</configurable_value>\n' + \
-           '</Configuration>\n'
+           '  <_valid_range>' + str(self._valid_range) + \
+           '</_valid_range>\n' + \
+           '</Configurable>\n'
 
   def __str__(self):
     return self.__repr__()

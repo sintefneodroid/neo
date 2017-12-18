@@ -2,16 +2,16 @@ import logging
 import os
 import shlex
 import subprocess
+import sys
 import time
 import warnings
 from collections import namedtuple
 
 import numpy as np
-import sys
 
 import neodroid.messaging as messaging
 from neodroid.modeling import Reaction
-from neodroid.utilities.reaction_factory import verify_reaction
+from neodroid.utilities.reaction_factory import verify_motion_reaction
 
 
 class NeodroidEnvironment(object):
@@ -51,8 +51,8 @@ class NeodroidEnvironment(object):
     self._external_on_disconnected_callback = on_disconnected_callback
 
     # Environment
-    self._latest_received_state = None
-    self._first_received_state = None
+    self._environment_description = None
+    self._observation_space = np.zeros(1)
 
     if not connect_to_running and not self._simulation_instance:
       if self.__start_instance__(name, path_to_executables_directory, ip,
@@ -67,12 +67,7 @@ class NeodroidEnvironment(object):
         if self._debug_logging:
           self._logger.debug('could not start environment ' + str(name))
     self.__connect__()
-    time.sleep(seconds_before_connect/4)
-    self.reset()
-    self.reset()
-    self.reset()
-    self.reset()
-    self.reset()
+    time.sleep(seconds_before_connect / 4)
     self.reset()
 
   def __start_instance__(self, name, path_to_executables_directory, ip, port):
@@ -80,7 +75,7 @@ class NeodroidEnvironment(object):
                                       name + '.exe')
     if sys.platform != 'win32':
       path_to_executable = os.path.join(path_to_executables_directory,
-                                      name + '.x86')
+                                        name + '.x86')
     args = shlex.split(
         '-ip ' + str(ip) + ' -port ' + str(port) +
         ' -screen-fullscreen 0 -screen-height 500 -screen-width 500'
@@ -144,58 +139,55 @@ class NeodroidEnvironment(object):
     return self._connected
 
   def flat_observation(self, message):
-    return np.array([obs.get_position()+ obs.get_rotation()+
-                        obs.get_direction() for
-                       obs in
-                       message.get_observers().values()]).flatten()
+    return np.array([obs.get_data() for
+                     obs in
+                     message.get_observers().values()]).flatten()
 
   def seed(self, seed):
     pass
 
   def __observation_space__(self):
-    if self._first_received_state:
-      return self.flat_observation(self._first_received_state)
-    return np.zeros(1) # Do not crash
+    return self._observation_space
 
   def sample_action_space(self, binary=True, discrete=False, one_hot=False):
     if one_hot:
-      idx = np.random.randint(0,self._num_actions)
+      idx = np.random.randint(0, self._num_actions)
       zeros = np.zeros(self._num_actions)
-      zeros[idx]=1
+      zeros[idx] = 1
       return zeros
     else:
       if discrete:
         if binary:
-          return np.random.randint(-1,2,size=int(self._num_actions/2))
+          return np.random.randint(-1, 2, size=int(self._num_actions / 2))
         else:
-          return np.random.randint(0,2,size=self._num_actions)
+          return np.random.randint(0, 2, size=self._num_actions)
       else:
         if binary:
-          return np.random.random_sample(int(self._num_actions/2))-0.5
+          return np.random.random_sample(int(self._num_actions / 2)) - 0.5
         else:
           return np.random.random_sample(self._num_actions)
 
-
-
   def __action_space__(self):
-    self._num_actions=0
-    if self._first_received_state:
-      for actor in self._first_received_state.get_actors().values():
+    self._num_actions = 0
+    if self._environment_description:
+      for actor in self._environment_description.get_actors().values():
         for motor in actor.get_motors().values():
-          if True: ########### FIXXXXX THISS #########
-            self._num_actions+=2
+          if True:  ########### FIXXXXX THISS #########
+            self._num_actions += 2
           else:
-            self._num_actions+=1
+            self._num_actions += 1
     else:
-      self._num_actions = 1 # Do not crash
+      self._num_actions = 1  # Do not crash
     action_space = namedtuple('action_space', ('n', 'sample'))
     return action_space(self._num_actions, self.sample_action_space)
 
   def maybe_infer_reaction(self, input_reaction):
-    if self._latest_received_state:
-      input_reaction = verify_reaction(input_reaction, self._latest_received_state.get_actors().values())
+    if self._environment_description:
+      input_reaction = verify_motion_reaction(input_reaction,
+                                              self._environment_description)
     else:
-      input_reaction = verify_reaction(input_reaction, None)
+      input_reaction = verify_motion_reaction(input_reaction, None)
+
     return input_reaction
 
   def react(self,
@@ -220,15 +212,16 @@ class NeodroidEnvironment(object):
       message = self.__get_state__(on_step_done_callback)
       if message:
         self._awaiting_response = False
-        self._latest_received_state = message
-        if self._first_received_state is None:
-          self._first_received_state = message
+        self._observation_space = self.flat_observation(message)
+        if message.get_environment_description():
+          self._environment_description = message.get_environment_description()
         return message
     if self._debug_logging:
       self._logger.debug('Is not connected to environment')
     return None
 
-  def reset(self, input_configuration=[], environments=[], on_reset_callback=None):
+  def reset(self, input_configuration=[], environments=[],
+            on_reset_callback=None):
     """
 
     The environments argument lets you specify which environments to reset.
@@ -244,8 +237,6 @@ class NeodroidEnvironment(object):
       if on_reset_callback:
         messaging.start_send_reaction_thread(Reaction(True, input_configuration, []),
                                              on_reset_callback)
-        #enviroments=[True for i in range(_num_environments)]
-        #Reaction(environments, input_configuration, []), on_reset_callback)
       else:
         messaging.send_reaction(Reaction(True, input_configuration, []))
 
@@ -255,9 +246,8 @@ class NeodroidEnvironment(object):
 
       if message:
         self._awaiting_response = False
-        self._latest_received_state = message
-        if self._first_received_state is None:
-          self._first_received_state = message
+        self._observation_space = self.flat_observation(message)
+        self._environment_description = message.get_environment_description()
         return message
     return None
 

@@ -4,25 +4,22 @@
 
 import flatbuffers
 
-class FBSQuat(object):
+class FBSVector3(object):
     __slots__ = ['_tab']
 
-    # FBSQuat
+    # FBSVector3
     def Init(self, buf, pos):
         self._tab = flatbuffers.table.Table(buf, pos)
 
-    # FBSQuat
+    # FBSVector3
     def X(self): return self._tab.Get(flatbuffers.number_types.Float32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(0))
-    # FBSQuat
+    # FBSVector3
     def Y(self): return self._tab.Get(flatbuffers.number_types.Float32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(4))
-    # FBSQuat
+    # FBSVector3
     def Z(self): return self._tab.Get(flatbuffers.number_types.Float32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(8))
-    # FBSQuat
-    def W(self): return self._tab.Get(flatbuffers.number_types.Float32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(12))
 
-def CreateFBSQuat(builder, x, y, z, w):
-    builder.Prep(4, 16)
-    builder.PrependFloat32(w)
+def CreateFBSVector3(builder, x, y, z):
+    builder.Prep(4, 12)
     builder.PrependFloat32(z)
     builder.PrependFloat32(y)
     builder.PrependFloat32(x)

@@ -30,29 +30,21 @@ class FBSMotor(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
             x = o + self._tab.Pos
-            from .FBSInputRange import FBSInputRange
-            obj = FBSInputRange()
+            from .FBSRange import FBSRange
+            obj = FBSRange()
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
 
     # FBSMotor
-    def EnergyCost(self):
+    def EnergySpentSinceReset(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
         return 0.0
 
-    # FBSMotor
-    def EnergySpentSinceReset(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
-        if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
-        return 0.0
-
-def FBSMotorStart(builder): builder.StartObject(4)
+def FBSMotorStart(builder): builder.StartObject(3)
 def FBSMotorAddMotorName(builder, motorName): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(motorName), 0)
 def FBSMotorAddValidInput(builder, validInput): builder.PrependStructSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(validInput), 0)
-def FBSMotorAddEnergyCost(builder, energyCost): builder.PrependFloat32Slot(2, energyCost, 0.0)
-def FBSMotorAddEnergySpentSinceReset(builder, energySpentSinceReset): builder.PrependFloat32Slot(3, energySpentSinceReset, 0.0)
+def FBSMotorAddEnergySpentSinceReset(builder, energySpentSinceReset): builder.PrependFloat32Slot(2, energySpentSinceReset, 0.0)
 def FBSMotorEnd(builder): return builder.EndObject()

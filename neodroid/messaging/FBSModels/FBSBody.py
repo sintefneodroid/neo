@@ -7,29 +7,40 @@ import flatbuffers
 class FBSBody(object):
     __slots__ = ['_tab']
 
+    @classmethod
+    def GetRootAsFBSBody(cls, buf, offset):
+        n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
+        x = FBSBody()
+        x.Init(buf, n + offset)
+        return x
+
     # FBSBody
     def Init(self, buf, pos):
         self._tab = flatbuffers.table.Table(buf, pos)
 
     # FBSBody
-    def Velocity(self, obj):
-        obj.Init(self._tab.Bytes, self._tab.Pos + 0)
-        return obj
+    def Velocity(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+        if o != 0:
+            x = o + self._tab.Pos
+            from .FBSVector3 import FBSVector3
+            obj = FBSVector3()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
 
     # FBSBody
-    def AngularVelocity(self, obj):
-        obj.Init(self._tab.Bytes, self._tab.Pos + 12)
-        return obj
+    def AngularVelocity(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        if o != 0:
+            x = o + self._tab.Pos
+            from .FBSVector3 import FBSVector3
+            obj = FBSVector3()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
 
-
-def CreateFBSBody(builder, velocity_x, velocity_y, velocity_z, angular_velocity_x, angular_velocity_y, angular_velocity_z):
-    builder.Prep(4, 24)
-    builder.Prep(4, 12)
-    builder.PrependFloat32(angular_velocity_z)
-    builder.PrependFloat32(angular_velocity_y)
-    builder.PrependFloat32(angular_velocity_x)
-    builder.Prep(4, 12)
-    builder.PrependFloat32(velocity_z)
-    builder.PrependFloat32(velocity_y)
-    builder.PrependFloat32(velocity_x)
-    return builder.Offset()
+def FBSBodyStart(builder): builder.StartObject(2)
+def FBSBodyAddVelocity(builder, velocity): builder.PrependStructSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(velocity), 0)
+def FBSBodyAddAngularVelocity(builder, angularVelocity): builder.PrependStructSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(angularVelocity), 0)
+def FBSBodyEnd(builder): return builder.EndObject()

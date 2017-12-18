@@ -15,9 +15,6 @@ class Actor(object):
 
     return '    <Actor>\n' + \
            '      <name>' + self._name.decode('utf-8') + '</name>\n' + \
-           '      <position>' + str(self._position) + '</position>\n' + \
-           '      <rotation>' + str(self._rotation) + '</rotation>\n' + \
-           '      <direction>' + str(self._direction) + '</direction>\n' + \
            '      <Motors>\n' + \
            motors_str + \
            '      </Motors>\n' + \
