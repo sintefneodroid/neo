@@ -7,7 +7,9 @@ class FBSObserverData(object):
     FBSByteArray = 1
     FBSNumeral = 2
     FBSString = 3
-    FBSEulerTransform = 4
-    FBSQuaternionTransform = 5
-    FBSBody = 6
+    FBSPosition = 4
+    FBSRotation = 5
+    FBSEulerTransform = 6
+    FBSQuaternionTransform = 7
+    FBSBody = 8
 

@@ -12,7 +12,7 @@ def main():
     _, info = _environment.configure(np.random.randint(0, 3, 6))
     _environment.act()
     for j in range(1000):
-      actions = _environment.sample_action_space(binary=True, discrete=True)
+      actions = _environment.sample_action_space(binary=True, discrete=True)*30
       _, reward, interrupted, info = _environment.act(actions)
       if interrupted:
         print('Interrupted', reward)

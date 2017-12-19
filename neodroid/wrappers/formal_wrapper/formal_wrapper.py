@@ -1,4 +1,5 @@
 from neodroid import NeodroidEnvironment
+from neodroid.utilities.statics import flat_observation
 
 
 class NeodroidFormalWrapper(NeodroidEnvironment):

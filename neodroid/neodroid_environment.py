@@ -11,10 +11,7 @@ import numpy as np
 
 import neodroid.messaging as messaging
 from neodroid.utilities.reaction_factory import verify_motion_reaction, verify_configuration_reaction
-
-
-def flat_observation(message):
-  return np.array([obs.get_data() for obs in message.get_observers().values()]).flatten()
+from neodroid.utilities.statics import flat_observation
 
 
 class NeodroidEnvironment(object):
