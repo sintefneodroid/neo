@@ -1,18 +1,20 @@
 import json
 
+from neodroid.modeling.reaction_parameters import ReactionParameters
+
 
 class Reaction(object):
-  def __init__(self, reset, configurations, motions, environment_name='default'):
+  def __init__(self, parameters,configurations=[], motions=[], environment_name='all'):
     self._environment_name = environment_name
-    self._reset = reset
+    self._parameters = parameters
     self._configurations = configurations
     self._motions = motions
 
   def get_environment_name(self):
     return self._environment_name
 
-  def get_reset(self):
-    return self._reset
+  def get_parameters(self):
+    return self._parameters
 
   def get_motions(self):
     return self._motions
@@ -28,7 +30,6 @@ class Reaction(object):
 
   def to_dict(self):
     return {
-      '_reset'         : self._reset,
       '_configurations': [configuration.to_dict() for configuration in
                           self._configurations],
       '_motions'       : [motion.to_dict() for motion in self._motions]
@@ -39,8 +40,9 @@ class Reaction(object):
 
   def __repr__(self):
     return '<Reaction>\n' + \
-           '  <reset>\n' + str(self._reset) + '</reset>\n' + \
-           '  <configurations>\n' + str(self._configurations) + '</configurations>\n' + \
+          str(self._parameters)+\
+           '  <configurations>\n' + str(self._configurations) +\
+           '  </configurations>\n' + \
            '  <motions>\n' + str(self._motions) + \
            '  </motions>\n' + \
            '</Reaction>\n'

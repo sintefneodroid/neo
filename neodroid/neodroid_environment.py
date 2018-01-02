@@ -5,13 +5,15 @@ import subprocess
 import sys
 import time
 import warnings
-from collections import namedtuple
 
 import numpy as np
 
 import neodroid.messaging as messaging
+import neodroid.modeling as modeling
+from neodroid import Reaction
+from neodroid.modeling.reaction_parameters import ReactionParameters
 from neodroid.utilities.reaction_factory import verify_motion_reaction, verify_configuration_reaction
-from neodroid.utilities.statics import flat_observation
+from neodroid.utilities.statics import flattened_observation, contruct_action_space
 
 
 class NeodroidEnvironment(object):
@@ -69,7 +71,8 @@ class NeodroidEnvironment(object):
           self._logger.debug('could not start environment ' + str(name))
     self.__connect__()
     time.sleep(seconds_before_connect / 4)
-    self.reset()
+    reaction = modeling.Reaction(ReactionParameters(False,False,True,False,True))
+    self.reset(reaction)
 
   def __start_instance__(self, name, path_to_executables_directory, ip, port):
     path_to_executable = os.path.join(path_to_executables_directory,
@@ -140,42 +143,23 @@ class NeodroidEnvironment(object):
     return self._connected
 
   def seed(self, seed):
-    pass
+    np.random.seed(seed)
 
   def __observation_space__(self):
     return self._observation_space
 
-  def sample_action_space(self, binary=True, discrete=False, one_hot=False):
-    if one_hot:
-      idx = np.random.randint(0, self._num_actions)
-      zeros = np.zeros(self._num_actions)
-      zeros[idx] = 1
-      return zeros
-    else:
-      if discrete:
-        if binary:
-          return np.random.randint(-1, 2, size=int(self._num_actions / 2))
-        else:
-          return np.random.randint(0, 2, size=self._num_actions)
-      else:
-        if binary:
-          return np.random.random_sample(int(self._num_actions / 2)) - 0.5
-        else:
-          return np.random.random_sample(self._num_actions)
+  def sample_action_space(self):
+    return self._action_space.sample()
+
+  def run_brownian_motion(self, iterations=1):
+    message=None
+    for i in range(iterations):
+      self.react(self.sample_action_space())
+      message = self.__get_state__()
+    return message
 
   def __action_space__(self):
-    self._num_actions = 0
-    if self._environment_description:
-      for actor in self._environment_description.get_actors().values():
-        for motor in actor.get_motors().values():
-          if True:  ########### FIXXXXX THISS #########
-            self._num_actions += 2
-          else:
-            self._num_actions += 1
-    else:
-      self._num_actions = 1  # Do not crash
-    action_space = namedtuple('action_space', ('n', 'sample'))
-    return action_space(self._num_actions, self.sample_action_space)
+    return self._action_space
 
   def maybe_infer_motion_reaction(self, input_reaction):
     if self._environment_description:
@@ -201,14 +185,14 @@ class NeodroidEnvironment(object):
         messaging.start_send_reaction_thread(input_reaction,
                                              on_reaction_sent_callback)
       else:
-        messaging.send_reaction(input_reaction)
+        messaging.send_reaction(input_reaction, self._state)
 
       self._awaiting_response = True
 
       message = self.__get_state__(on_step_done_callback)
       if message:
         self._awaiting_response = False
-        self._observation_space = flat_observation(message)
+        self._observation_space = flattened_observation(message)
         self._state = message
         if message.get_environment_description():
           self._environment_description = message.get_environment_description()
@@ -220,11 +204,15 @@ class NeodroidEnvironment(object):
   def maybe_infer_configuration_reaction(self, input_reaction):
     if self._environment_description:
       input_reaction = verify_configuration_reaction(input_reaction,
-                                                     self._environment_description, self._state)
+                                                     self._environment_description)
     else:
-      input_reaction = verify_configuration_reaction(input_reaction, None, self._state)
+      input_reaction = verify_configuration_reaction(input_reaction, None)
 
     return input_reaction
+
+  def observe(self):
+    messaging.send_reaction(Reaction(ReactionParameters(False,False,False,False,True)), self._state)
+    return self.__get_state__()
 
   def reset(self, input_reaction=None, on_reset_callback=None):
     """
@@ -244,7 +232,7 @@ class NeodroidEnvironment(object):
       if on_reset_callback:
         messaging.start_send_reaction_thread(input_reaction, on_reset_callback)
       else:
-        messaging.send_reaction(input_reaction)
+        messaging.send_reaction(input_reaction, self._state)
 
       self._awaiting_response = True
 
@@ -252,9 +240,11 @@ class NeodroidEnvironment(object):
 
       if message:
         self._awaiting_response = False
-        self._observation_space = flat_observation(message)
+        self._observation_space = flattened_observation(message)
         self._state = message
-        self._environment_description = message.get_environment_description()
+        if message.get_environment_description():
+          self._environment_description = message.get_environment_description()
+          self._action_space = contruct_action_space(self._environment_description)
         return message
     return None
 

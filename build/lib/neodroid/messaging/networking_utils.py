@@ -1,7 +1,6 @@
-from threading import Thread
-
 import zmq
 from neodroid.models import Reaction
+from threading import Thread
 
 from .FlatBufferModels import *
 from .FlatBufferUtilities import build_flat_reaction, create_state

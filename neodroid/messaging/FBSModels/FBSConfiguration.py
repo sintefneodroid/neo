@@ -29,10 +29,10 @@ class FBSConfiguration(object):
     def ConfigurableValue(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+            return self._tab.Get(flatbuffers.number_types.Float64Flags, o + self._tab.Pos)
         return 0.0
 
 def FBSConfigurationStart(builder): builder.StartObject(2)
 def FBSConfigurationAddConfigurableName(builder, configurableName): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(configurableName), 0)
-def FBSConfigurationAddConfigurableValue(builder, configurableValue): builder.PrependFloat32Slot(1, configurableValue, 0.0)
+def FBSConfigurationAddConfigurableValue(builder, configurableValue): builder.PrependFloat64Slot(1, configurableValue, 0.0)
 def FBSConfigurationEnd(builder): return builder.EndObject()

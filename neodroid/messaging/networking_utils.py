@@ -14,10 +14,10 @@ _use_inter_process_communication = False
 _time_out = 2000  # Milliseconds
 
 
-def send_reaction(reaction):
+def send_reaction(reaction, info):
   global _waiting_for_response, _connected
   if _connected and not _waiting_for_response:
-    flat_reaction = build_flat_reaction(reaction)
+    flat_reaction = build_flat_reaction(reaction, info)
     _req_socket.send(flat_reaction)
     _waiting_for_response = True
 
@@ -43,7 +43,7 @@ def setup_connection(tcp_address, tcp_port, on_connected_callback=None):
   global _ctx, _connected, _req_socket
   _req_socket = _ctx.socket(zmq.REQ)
   if _use_inter_process_communication:
-    _req_socket.connect("ipc:///tmp/neodroid/messages0")
+    _req_socket.connect("ipc:///tmp/neodroid/messages")
     # _req_socket.connect("inproc://neodroid")
     print('using inter-process communication protocol')
   else:

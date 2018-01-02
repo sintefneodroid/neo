@@ -1,5 +1,5 @@
 from neodroid import NeodroidEnvironment
-from neodroid.utilities.statics import flat_observation
+from neodroid.utilities.statics import flattened_observation
 
 
 class NeodroidFormalWrapper(NeodroidEnvironment):
@@ -16,7 +16,7 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
                                                        on_reaction_sent_callback,
                                                        on_step_done_callback)
     if message:
-      return (flat_observation(message),
+      return (flattened_observation(message),
               message.get_reward(),
               message.get_interrupted(), message)
     return None, None, None, None
@@ -25,8 +25,16 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
     message = super(NeodroidFormalWrapper, self).reset(input_configuration,
                                                        on_reset_callback)
     if message:
-      return flat_observation(message), message
+      return flattened_observation(message), message
     return None, None
+
+  def observe(self):
+    message = super(NeodroidFormalWrapper, self).observe()
+    if message:
+      return (flattened_observation(message),
+              message.get_reward(),
+              message.get_interrupted(), message)
+
 
   def quit(self, callback=None):
     self.close(callback=callback)

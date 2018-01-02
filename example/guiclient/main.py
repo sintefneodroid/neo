@@ -2,6 +2,7 @@ import neodroid as neo
 from example.guiclient.gui import NeoGUI
 from neodroid.modeling import Reaction, Motion
 from neodroid.modeling.configuration import Configuration
+from neodroid.modeling.reaction_parameters import ReactionParameters
 
 _gui = None
 _neo_environment = None
@@ -40,7 +41,8 @@ def on_step_callback(actor_name, slider_values):
     Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
     Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
   ]
-  new_state = _neo_environment.react(Reaction(False, [], motions))
+  parameters = ReactionParameters(True, True, False, False,False)
+  new_state = _neo_environment.react(Reaction(parameters, [], motions))
   update_callback(new_state)
 
 
@@ -48,13 +50,15 @@ def on_reset_callback(slider_values):
   configurations = [
     Configuration(str(slider_values[0][0]), slider_values[0][1])
   ]
-  new_state = _neo_environment.react(Reaction(True, configurations, []))
+  parameters = ReactionParameters(False, False, True, True,True)
+  new_state = _neo_environment.react(Reaction(parameters, configurations, []))
   update_callback(new_state)
 
 
 def update_environment_widgets(environment_state):
+  _gui.update_xml_text_label(str(environment_state))
+
   try:
-    _gui.update_xml_text_label(str(environment_state))
     _gui.update_position_label(
         str(environment_state.get_actor(
             b'ManipulatorActor').get_position()))

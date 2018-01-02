@@ -26,32 +26,103 @@ class FBSReaction(object):
         return bytes()
 
     # FBSReaction
-    def Reset(self):
+    def Parameters(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.BoolFlags, o + self._tab.Pos)
-        return 0
-
-    # FBSReaction
-    def ActionType(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
-        if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Uint8Flags, o + self._tab.Pos)
-        return 0
-
-    # FBSReaction
-    def Action(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
-        if o != 0:
-            from flatbuffers.table import Table
-            obj = Table(bytearray(), 0)
-            self._tab.Union(obj, o)
+            x = o + self._tab.Pos
+            from .FBSReactionParameters import FBSReactionParameters
+            obj = FBSReactionParameters()
+            obj.Init(self._tab.Bytes, x)
             return obj
         return None
 
-def FBSReactionStart(builder): builder.StartObject(4)
+    # FBSReaction
+    def Poses(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        if o != 0:
+            x = self._tab.Vector(o)
+            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 56
+            from .FBSQuaternionTransform import FBSQuaternionTransform
+            obj = FBSQuaternionTransform()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+    # FBSReaction
+    def PosesLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+    # FBSReaction
+    def Bodies(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+        if o != 0:
+            x = self._tab.Vector(o)
+            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 48
+            from .FBSBody import FBSBody
+            obj = FBSBody()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+    # FBSReaction
+    def BodiesLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+    # FBSReaction
+    def Configurations(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+        if o != 0:
+            x = self._tab.Vector(o)
+            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
+            x = self._tab.Indirect(x)
+            from .FBSConfiguration import FBSConfiguration
+            obj = FBSConfiguration()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+    # FBSReaction
+    def ConfigurationsLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+    # FBSReaction
+    def Motions(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
+        if o != 0:
+            x = self._tab.Vector(o)
+            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
+            x = self._tab.Indirect(x)
+            from .FBSMotion import FBSMotion
+            obj = FBSMotion()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+    # FBSReaction
+    def MotionsLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+def FBSReactionStart(builder): builder.StartObject(6)
 def FBSReactionAddEnvironmentName(builder, environmentName): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(environmentName), 0)
-def FBSReactionAddReset(builder, reset): builder.PrependBoolSlot(1, reset, 0)
-def FBSReactionAddActionType(builder, actionType): builder.PrependUint8Slot(2, actionType, 0)
-def FBSReactionAddAction(builder, action): builder.PrependUOffsetTRelativeSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(action), 0)
+def FBSReactionAddParameters(builder, parameters): builder.PrependStructSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(parameters), 0)
+def FBSReactionAddPoses(builder, poses): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(poses), 0)
+def FBSReactionStartPosesVector(builder, numElems): return builder.StartVector(56, numElems, 8)
+def FBSReactionAddBodies(builder, bodies): builder.PrependUOffsetTRelativeSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(bodies), 0)
+def FBSReactionStartBodiesVector(builder, numElems): return builder.StartVector(48, numElems, 8)
+def FBSReactionAddConfigurations(builder, configurations): builder.PrependUOffsetTRelativeSlot(4, flatbuffers.number_types.UOffsetTFlags.py_type(configurations), 0)
+def FBSReactionStartConfigurationsVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def FBSReactionAddMotions(builder, motions): builder.PrependUOffsetTRelativeSlot(5, flatbuffers.number_types.UOffsetTFlags.py_type(motions), 0)
+def FBSReactionStartMotionsVector(builder, numElems): return builder.StartVector(4, numElems, 4)
 def FBSReactionEnd(builder): return builder.EndObject()

@@ -1,9 +1,12 @@
+import numpy as np
+
 from neodroid import Configuration
 from neodroid.modeling import Reaction, Motion
-import numpy as np
+from neodroid.modeling.reaction_parameters import ReactionParameters
 
 
 def verify_motion_reaction(input, environment_description):
+  parameters = ReactionParameters(True,True, False, False, False)
   if environment_description:
     actors = environment_description.get_actors().values()
     if actors:
@@ -20,7 +23,8 @@ def verify_motion_reaction(input, environment_description):
         is_valid_motions = all(isinstance(m, Motion) for m in
                                input)
         if is_valid_motions:
-          return Reaction(False, [], input)
+
+          return Reaction(parameters, [], input)
         else:
           return construct_reaction_from_list(input, actors)
       elif isinstance(input, int):
@@ -30,12 +34,15 @@ def verify_motion_reaction(input, environment_description):
       elif isinstance(input, (np.ndarray, np.generic)):
         a = construct_reaction_from_list(input.astype(float).tolist(), actors)
         return a
-  return Reaction(False, [], [])
+  if isinstance(input, Reaction):
+    return input
+  return Reaction(parameters)
 
 
 def construct_reaction_from_list(motion_list, actors):
   motions = construct_motions_from_list(motion_list, actors)
-  return Reaction(False, [], motions)
+  parameters = ReactionParameters(True, True, False, False, False)
+  return Reaction(parameters, [], motions)
 
 
 def construct_motions_from_list(input_list, actors):
@@ -48,42 +55,48 @@ def construct_motions_from_list(input_list, actors):
   return new_motions
 
 
-def verify_configuration_reaction(input, environment_description, state):
+def verify_configuration_reaction(input, environment_description):
+  parameters = ReactionParameters(False, False, True, False, True)
   if environment_description:
     configurables = environment_description.get_configurables().values()
     if configurables:
       if isinstance(input, Reaction):
         is_valid_configurations = all(isinstance(m, Configuration) for m in
-                               input.get_configurations())
+                                      input.get_configurations())
         if is_valid_configurations:
           return input
         else:
           input.set_motions(construct_configurations_from_known_observables(
-              input.get_configurations(), configurables,state))
+              input.get_configurations(), configurables))
           return input
       elif isinstance(input, list):
         is_valid_configurations = all(isinstance(c, Configuration) for c in
-                               input)
+                                      input)
         if is_valid_configurations:
-          return Reaction(True,input, [])
+
+          return Reaction(parameters, input, [])
         else:
-          return construct_configuration_reaction_from_list(input, configurables,state)
+          return construct_configuration_reaction_from_list(input, configurables)
       elif isinstance(input, int):
-        return construct_configuration_reaction_from_list([input], configurables,state)
+        return construct_configuration_reaction_from_list([input], configurables)
       elif isinstance(input, float):
-        return construct_configuration_reaction_from_list([input], configurables,state)
+        return construct_configuration_reaction_from_list([input], configurables)
       elif isinstance(input, (np.ndarray, np.generic)):
-        a = construct_configuration_reaction_from_list(input.astype(float).tolist(), configurables,state)
+        a = construct_configuration_reaction_from_list(input.astype(float).tolist(), configurables)
         return a
-  return Reaction(True, [], [])
+  if isinstance(input, Reaction):
+    return input
+  return Reaction(parameters)
 
-def construct_configuration_reaction_from_list(configuration_list, configurables, state):
-  configurations = construct_configurations_from_known_observables(configuration_list, configurables, state)
-  return Reaction(True, configurations, [])
 
-def construct_configurations_from_known_observables(input_list, configurables, state):
-  configurables_with_observers = [configurable for configurable in configurables if configurable.get_has_observer()]
+def construct_configuration_reaction_from_list(configuration_list, configurables):
+  configurations = construct_configurations_from_known_observables(configuration_list, configurables)
+  parameters = ReactionParameters(False, False, True, True, True)
+  return Reaction(parameters, configurations, [])
+
+
+def construct_configurations_from_known_observables(input_list, configurables):
   new_configurations = [Configuration(configurable.get_configurable_name(), list_val)
-                 for (list_val, configurable) in
-                 zip(input_list, configurables_with_observers)]
+                        for (list_val, configurable) in
+                        zip(input_list, configurables)]
   return new_configurations

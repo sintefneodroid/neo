@@ -1,5 +1,4 @@
 import io
-
 from neodroid.models import *
 
 from .FlatBufferModels import *

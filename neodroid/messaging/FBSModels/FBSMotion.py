@@ -36,11 +36,11 @@ class FBSMotion(object):
     def Strength(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+            return self._tab.Get(flatbuffers.number_types.Float64Flags, o + self._tab.Pos)
         return 0.0
 
 def FBSMotionStart(builder): builder.StartObject(3)
 def FBSMotionAddActorName(builder, actorName): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(actorName), 0)
 def FBSMotionAddMotorName(builder, motorName): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(motorName), 0)
-def FBSMotionAddStrength(builder, strength): builder.PrependFloat32Slot(2, strength, 0.0)
+def FBSMotionAddStrength(builder, strength): builder.PrependFloat64Slot(2, strength, 0.0)
 def FBSMotionEnd(builder): return builder.EndObject()

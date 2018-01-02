@@ -1,5 +1,7 @@
+import numpy as np
+
 from neodroid.messaging.FBSUtilities import create_observers, \
-  create_description
+  create_description, create_poses, create_bodies
 
 
 class EnvironmentState(object):
@@ -12,8 +14,20 @@ class EnvironmentState(object):
   def get_reward(self):
     return self._fbs_state.Reward()
 
+  def get_fbs_state(self):
+    return self._fbs_state
+
+  def get_poses_numpy(self):
+    return create_poses(self._fbs_state)
+
+  def get_bodies_numpy(self):
+    return create_bodies(self._fbs_state)
+
   def get_frame_number(self):
     return self._fbs_state.FrameNumber()
+
+  def get_state_configuration(self):
+    return np.array([self.get_poses_numpy().flatten(), self.get_bodies_numpy().flatten()]).flatten()
 
   def get_interrupted(self):
     return self._fbs_state.Interrupted()
@@ -22,7 +36,8 @@ class EnvironmentState(object):
     return self._fbs_state.TotalEnergySpent()
 
   def get_environment_description(self):
-    return create_description(self._fbs_state.EnvironmentDescription())
+    if self._fbs_state.EnvironmentDescription():
+      return create_description(self._fbs_state.EnvironmentDescription())
 
   def get_observers(self):
     return create_observers(self._fbs_state)
@@ -49,12 +64,16 @@ class EnvironmentState(object):
            '  <interrupted>' + \
            str(self.get_interrupted()) + \
            '</interrupted>\n' + \
+           '  <Poses>\n' + \
+           str(self.get_poses_numpy()) + \
+           '  </Poses>\n' + \
+           '  <Bodies>\n' + \
+           str(self.get_bodies_numpy()) + \
+           '  </Bodies>\n' + \
            '  <Observers>\n' + \
            observers_str + \
            '  </Observers>\n' + \
-           '  <EnvironmentDescriptions>\n' + \
            description_str + \
-           '  </EnvironmentDescriptions>\n' + \
            '</EnvironmentState>\n'
 
   def __str__(self):

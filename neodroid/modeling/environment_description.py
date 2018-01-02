@@ -1,5 +1,4 @@
-
-from neodroid.messaging.FBSUtilities import create_actors,create_configurables
+from neodroid.messaging.FBSUtilities import create_actors, create_configurables
 
 
 class EnvironmentDescription(object):
@@ -33,9 +32,10 @@ class EnvironmentDescription(object):
 
     return '<EnvironmentDescription>\n' + \
            '  <MaxEpisodeLength>' + str(
-      self.get_max_episode_length()) + '</MaxEpisodeLength>\n' \
-                              '  <SolvedThreshold>'+ str(self.get_solved_threshold()) + '</SolvedThreshold>\n' \
-           '  <Actors>\n' + \
+        self.get_max_episode_length()) + '</MaxEpisodeLength>\n' \
+                                         '  <SolvedThreshold>' + str(
+      self.get_solved_threshold()) + '</SolvedThreshold>\n' \
+                                     '  <Actors>\n' + \
            actors_str + \
            '  </Actors>\n' + \
            '  <Configurables>\n' + \

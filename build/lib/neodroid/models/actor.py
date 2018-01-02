@@ -1,6 +1,5 @@
-from typing import List
-
 from neodroid.models.motor import Motor
+from typing import List
 
 
 class Actor(object):

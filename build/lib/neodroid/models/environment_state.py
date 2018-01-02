@@ -1,7 +1,6 @@
-from typing import Dict, List
-
 from neodroid.models.actor import Actor
 from neodroid.models.observer import Observer
+from typing import Dict, List
 
 
 class EnvironmentState(object):

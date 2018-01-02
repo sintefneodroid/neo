@@ -1,5 +1,3 @@
-import numpy as np
-
 class Space(object):
   def __init__(self, **kwargs):
     pass

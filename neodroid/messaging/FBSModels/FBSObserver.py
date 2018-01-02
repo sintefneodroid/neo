@@ -26,14 +26,14 @@ class FBSObserver(object):
         return bytes()
 
     # FBSObserver
-    def DataType(self):
+    def ObservationType(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Uint8Flags, o + self._tab.Pos)
         return 0
 
     # FBSObserver
-    def Data(self):
+    def Observation(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         if o != 0:
             from flatbuffers.table import Table
@@ -42,16 +42,8 @@ class FBSObserver(object):
             return obj
         return None
 
-    # FBSObserver
-    def IsConfigurable(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
-        if o != 0:
-            return self._tab.Get(flatbuffers.number_types.BoolFlags, o + self._tab.Pos)
-        return 0
-
-def FBSObserverStart(builder): builder.StartObject(4)
+def FBSObserverStart(builder): builder.StartObject(3)
 def FBSObserverAddObserverName(builder, observerName): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(observerName), 0)
-def FBSObserverAddDataType(builder, dataType): builder.PrependUint8Slot(1, dataType, 0)
-def FBSObserverAddData(builder, data): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(data), 0)
-def FBSObserverAddIsConfigurable(builder, isConfigurable): builder.PrependBoolSlot(3, isConfigurable, 0)
+def FBSObserverAddObservationType(builder, observationType): builder.PrependUint8Slot(1, observationType, 0)
+def FBSObserverAddObservation(builder, observation): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(observation), 0)
 def FBSObserverEnd(builder): return builder.EndObject()

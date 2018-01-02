@@ -1,9 +1,8 @@
 class Configurable(object):
-  def __init__(self, configurable_name, valid_range, has_observer, observer_name):
+  def __init__(self, configurable_name, valid_range, current_value):
     self._configurable_name = configurable_name
     self._valid_range = valid_range
-    self._has_observer = has_observer
-    self._observer_name = observer_name
+    self._current_value = current_value
 
   def get_configurable_name(self):
     return self._configurable_name
@@ -11,11 +10,8 @@ class Configurable(object):
   def get_valid_range(self):
     return self._valid_range
 
-  def get_observer_name(self):
-    return self._observer_name
-
-  def get_has_observer(self):
-    return self._has_observer
+  def get_current_value(self):
+    return self._current_value
 
   def to_dict(self):
     return {
@@ -27,12 +23,10 @@ class Configurable(object):
     return '<Configurable>\n' + \
            '  <configurable_name>' + str(self._configurable_name) + \
            '</configurable_name>\n' + \
-           '  <has_observer>' + str(self._has_observer) + \
-           '</has_observer>\n' + \
-           '  <observer_name>' + str(self._observer_name) + \
-           '</observer_name>\n' + \
            '  <valid_range>\n' + str(self._valid_range) + \
            '</valid_range>\n' + \
+           '  <current_value>\n' + str(self._current_value) + \
+           '</current_value>\n' + \
            '</Configurable>\n'
 
   def __str__(self):

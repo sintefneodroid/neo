@@ -40,22 +40,60 @@ class FBSState(object):
         return 0.0
 
     # FBSState
-    def Interrupted(self):
+    def Poses(self, j):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+        if o != 0:
+            x = self._tab.Vector(o)
+            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 56
+            from .FBSQuaternionTransform import FBSQuaternionTransform
+            obj = FBSQuaternionTransform()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+    # FBSState
+    def PosesLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+    # FBSState
+    def Bodies(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+        if o != 0:
+            x = self._tab.Vector(o)
+            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 48
+            from .FBSBody import FBSBody
+            obj = FBSBody()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+    # FBSState
+    def BodiesLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+    # FBSState
+    def Interrupted(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.BoolFlags, o + self._tab.Pos)
         return 0
 
     # FBSState
     def TotalEnergySpent(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
         return 0.0
 
     # FBSState
     def Observers(self, j):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
         if o != 0:
             x = self._tab.Vector(o)
             x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
@@ -68,14 +106,14 @@ class FBSState(object):
 
     # FBSState
     def ObserversLength(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
         if o != 0:
             return self._tab.VectorLen(o)
         return 0
 
     # FBSState
     def EnvironmentDescription(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(20))
         if o != 0:
             x = self._tab.Indirect(o + self._tab.Pos)
             from .FBSEnvironmentDescription import FBSEnvironmentDescription
@@ -86,19 +124,23 @@ class FBSState(object):
 
     # FBSState
     def DebugMessage(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(22))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
         return bytes()
 
-def FBSStateStart(builder): builder.StartObject(8)
+def FBSStateStart(builder): builder.StartObject(10)
 def FBSStateAddEnvironmentName(builder, environmentName): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(environmentName), 0)
 def FBSStateAddFrameNumber(builder, frameNumber): builder.PrependInt32Slot(1, frameNumber, 0)
 def FBSStateAddReward(builder, reward): builder.PrependFloat32Slot(2, reward, 0.0)
-def FBSStateAddInterrupted(builder, interrupted): builder.PrependBoolSlot(3, interrupted, 0)
-def FBSStateAddTotalEnergySpent(builder, totalEnergySpent): builder.PrependFloat32Slot(4, totalEnergySpent, 0.0)
-def FBSStateAddObservers(builder, observers): builder.PrependUOffsetTRelativeSlot(5, flatbuffers.number_types.UOffsetTFlags.py_type(observers), 0)
+def FBSStateAddPoses(builder, poses): builder.PrependUOffsetTRelativeSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(poses), 0)
+def FBSStateStartPosesVector(builder, numElems): return builder.StartVector(56, numElems, 8)
+def FBSStateAddBodies(builder, bodies): builder.PrependUOffsetTRelativeSlot(4, flatbuffers.number_types.UOffsetTFlags.py_type(bodies), 0)
+def FBSStateStartBodiesVector(builder, numElems): return builder.StartVector(48, numElems, 8)
+def FBSStateAddInterrupted(builder, interrupted): builder.PrependBoolSlot(5, interrupted, 0)
+def FBSStateAddTotalEnergySpent(builder, totalEnergySpent): builder.PrependFloat32Slot(6, totalEnergySpent, 0.0)
+def FBSStateAddObservers(builder, observers): builder.PrependUOffsetTRelativeSlot(7, flatbuffers.number_types.UOffsetTFlags.py_type(observers), 0)
 def FBSStateStartObserversVector(builder, numElems): return builder.StartVector(4, numElems, 4)
-def FBSStateAddEnvironmentDescription(builder, environmentDescription): builder.PrependUOffsetTRelativeSlot(6, flatbuffers.number_types.UOffsetTFlags.py_type(environmentDescription), 0)
-def FBSStateAddDebugMessage(builder, debugMessage): builder.PrependUOffsetTRelativeSlot(7, flatbuffers.number_types.UOffsetTFlags.py_type(debugMessage), 0)
+def FBSStateAddEnvironmentDescription(builder, environmentDescription): builder.PrependUOffsetTRelativeSlot(8, flatbuffers.number_types.UOffsetTFlags.py_type(environmentDescription), 0)
+def FBSStateAddDebugMessage(builder, debugMessage): builder.PrependUOffsetTRelativeSlot(9, flatbuffers.number_types.UOffsetTFlags.py_type(debugMessage), 0)
 def FBSStateEnd(builder): return builder.EndObject()

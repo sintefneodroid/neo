@@ -1,7 +1,6 @@
 import json
-from typing import List
-
 from neodroid.models.motion import Motion
+from typing import List
 
 
 class Reaction(object):
