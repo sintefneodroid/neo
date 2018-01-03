@@ -148,13 +148,10 @@ class NeodroidEnvironment(object):
   def __observation_space__(self):
     return self._observation_space
 
-  def sample_action_space(self):
-    return self._action_space.sample()
-
   def run_brownian_motion(self, iterations=1):
     message=None
     for i in range(iterations):
-      self.react(self.sample_action_space())
+      self.react(self._action_space.sample())
       message = self.__get_state__()
     return message
 

@@ -12,12 +12,13 @@ def main():
 
   #observations, info = _environment.configure()
   #memory.append(info.get_state_configuration())
-  memory.append(_environment.generate_inital_states())
+  memory.extend(_environment.generate_inital_states(4,5))
   for i in range(1000):
     #interrupted = True
     #while interrupted:
-    configuration = sample_initial_state(memory, i).get_state_configuration()
-    _environment.configure(configuration)
+    init = sample_initial_state(memory, i)
+    configuration = init.get_state_configuration()
+    _environment.configure(init)
     #  _environment.run_brownian_motion(5)
     #  _,_,interrupted,_ = _environment.observe()
     #  print(interrupted)

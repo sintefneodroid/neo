@@ -2,18 +2,18 @@
 <mconfig>
   <configuration>
     <handlers>
-      <handler section="feature"
-               storageType="System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Mono.MonoConfig.FeatureNode, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-               type="Mono.MonoConfig.FeatureNodeHandler, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null"/>
+      <handler section="feature" 
+	       type="Mono.MonoConfig.FeatureNodeHandler, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null"
+	       storageType="System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Mono.MonoConfig.FeatureNode, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
       <handler section="configBlock"
-               storageType="System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Mono.MonoConfig.ConfigBlockBlock, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-               type="Mono.MonoConfig.ConfigBlockNodeHandler, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null"/>
+	       type="Mono.MonoConfig.ConfigBlockNodeHandler, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null"
+	       storageType="System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Mono.MonoConfig.ConfigBlockBlock, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
       <handler section="default"
-               storageType="System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Mono.MonoConfig.DefaultNode, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-               type="Mono.MonoConfig.DefaultNodeHandler, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null"/>
+	       type="Mono.MonoConfig.DefaultNodeHandler, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null"
+	       storageType="System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Mono.MonoConfig.DefaultNode, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
       <handler section="defaultConfigFile"
-               storageType="System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Mono.MonoConfig.DefaultConfigFile, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-               type="Mono.MonoConfig.DefaultConfigFileNodeHandler, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null"/>
+	       type="Mono.MonoConfig.DefaultConfigFileNodeHandler, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null"
+	       storageType="System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Mono.MonoConfig.DefaultConfigFile, mconfig, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
     </handlers>
   </configuration>
 
@@ -30,7 +30,7 @@
       <block name="AJAX CodeDOM 3.5 settings"/>
       <block name="AJAX runtime settings"/>
       <block name="AJAX system.webServer"/>
-      <block name=""/>
+      <block name="" />
     </blocks>
   </feature>
 
@@ -46,7 +46,7 @@
       <block name="AJAX1 HTTP modules"/>
       <block name="AJAX1 system.web.extensions"/>
       <block name="AJAX1 system.webServer"/>
-      <block name=""/>
+      <block name="" />
     </blocks>
   </feature>
 
@@ -63,9 +63,9 @@
       <block name="AJAX system.web.extensions"/>
       <block name="AJAX system.webServer"/>
 
-      <block name="DynamicData controls registration"/>
-      <block name="DynamicData compilation"/>
-      <block name="DynamicData HTTP modules"/>
+      <block name="DynamicData controls registration" />
+      <block name="DynamicData compilation" />
+      <block name="DynamicData HTTP modules" />
     </blocks>
   </feature>
 
@@ -85,9 +85,9 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="SettingsMap Handler">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="httpHandlers" defaultBlockName="system.web.httpHandlers"/>
-        </section>
+	<section name="system.web">
+	  <section name="httpHandlers" defaultBlockName="system.web.httpHandlers"/>
+	</section>
       </section>
     </requires>
 
@@ -102,7 +102,7 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX config sections">
     <requires>
       <section name="configuration">
-        <section name="configSections" attachPoint="true"/>
+	<section name="configSections" attachPoint="true"/>
       </section>
     </requires>
 
@@ -126,11 +126,11 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX controls registration">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="pages" defaultBlockName="system.web.pages">
-            <section name="controls" defaultBlockName="system.web.pages.controls"/>
-          </section>
-        </section>
+	<section name="system.web">
+	  <section name="pages" defaultBlockName="system.web.pages">
+	    <section name="controls" defaultBlockName="system.web.pages.controls"/>
+	  </section>
+	</section>
       </section>
     </requires>
 
@@ -145,11 +145,11 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX compilation">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="compilation" defaultBlockName="system.web.compilation">
-            <section name="assemblies" defaultBlockName="system.web.compilation.assemblies"/>
-          </section>
-        </section>
+	<section name="system.web">
+	  <section name="compilation" defaultBlockName="system.web.compilation">
+	    <section name="assemblies" defaultBlockName="system.web.compilation.assemblies"/>
+	  </section>
+	</section>
       </section>
     </requires>
 
@@ -167,18 +167,18 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX HTTP handlers">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="httpHandlers" defaultBlockName="system.web.httpHandlers"/>
-        </section>
+	<section name="system.web">
+	  <section name="httpHandlers" defaultBlockName="system.web.httpHandlers"/>
+	</section>
       </section>
     </requires>
-
+    
     <contents>
       <![CDATA[
 	<remove verb="*" path="*.asmx"/>
         <add verb="*" path="*.asmx" validate="false" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
         <add verb="*" path="*_AppService.axd" validate="false" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
-        <add verb="GET,HEAD" path="ScriptResource.axd" type="System.Web.Handlers.ScriptResourceHandler, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" validate="false"/>
+        <add verb="GET,HEAD" path="ScriptResource.axd" type="System.Web.Handlers.ScriptResourceHandler, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" validate="false"/>   
 ]]>
     </contents>
   </configBlock>
@@ -186,9 +186,9 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX HTTP modules">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="httpModules" defaultBlockName="system.web.httpModules"/>
-        </section>
+	<section name="system.web">
+	  <section name="httpModules" defaultBlockName="system.web.httpModules"/>
+	</section>
       </section>
     </requires>
 
@@ -202,9 +202,9 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX CodeDOM 3.5 settings">
     <requires>
       <section name="configuration">
-        <section name="system.codedom">
-          <section name="compilers" defaultBlockName="system.codedom.compilers"/>
-        </section>
+	<section name="system.codedom">
+	  <section name="compilers" defaultBlockName="system.codedom.compilers"/>
+	</section>
       </section>
     </requires>
 
@@ -228,7 +228,7 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX runtime settings">
     <requires>
       <section name="configuration">
-        <section name="runtime"/>
+	<section name="runtime"/>
       </section>
     </requires>
 
@@ -251,7 +251,7 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX system.webServer">
     <requires>
       <section name="configuration">
-        <section name="system.webServer"/>
+	<section name="system.webServer"/>
       </section>
     </requires>
 
@@ -282,7 +282,7 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX1 config sections">
     <requires>
       <section name="configuration">
-        <section name="configSections" attachPoint="true"/>
+	<section name="configSections" attachPoint="true"/>
       </section>
     </requires>
 
@@ -305,11 +305,11 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX1 controls registration">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="pages" defaultBlockName="system.web.pages">
-            <section name="controls" defaultBlockName="system.web.pages.controls"/>
-          </section>
-        </section>
+	<section name="system.web">
+	  <section name="pages" defaultBlockName="system.web.pages">
+	    <section name="controls" defaultBlockName="system.web.pages.controls"/>
+	  </section>
+	</section>
       </section>
     </requires>
 
@@ -323,11 +323,11 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX1 compilation">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="compilation" defaultBlockName="system.web.compilation">
-            <section name="assemblies" defaultBlockName="system.web.compilation.assemblies"/>
-          </section>
-        </section>
+	<section name="system.web">
+	  <section name="compilation" defaultBlockName="system.web.compilation">
+	    <section name="assemblies" defaultBlockName="system.web.compilation.assemblies"/>
+	  </section>
+	</section>
       </section>
     </requires>
 
@@ -341,12 +341,12 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX1 HTTP handlers">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="httpHandlers" defaultBlockName="system.web.httpHandlers"/>
-        </section>
+	<section name="system.web">
+	  <section name="httpHandlers" defaultBlockName="system.web.httpHandlers"/>
+	</section>
       </section>
     </requires>
-
+    
     <contents>
       <![CDATA[
 <remove verb="*" path="*.asmx"/>
@@ -360,9 +360,9 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX1 HTTP modules">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="httpModules" defaultBlockName="system.web.httpModules"/>
-        </section>
+	<section name="system.web">
+	  <section name="httpModules" defaultBlockName="system.web.httpModules"/>
+	</section>
       </section>
     </requires>
 
@@ -376,7 +376,7 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX1 system.web.extensions">
     <requires>
       <section name="configuration">
-        <section name="system.web.extensions"/>
+	<section name="system.web.extensions"/>
       </section>
     </requires>
 
@@ -417,7 +417,7 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="AJAX1 system.webServer">
     <requires>
       <section name="configuration">
-        <section name="system.webServer"/>
+	<section name="system.webServer"/>
       </section>
     </requires>
 
@@ -443,11 +443,11 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="DynamicData controls registration">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="pages" defaultBlockName="system.web.pages">
-            <section name="controls" defaultBlockName="system.web.pages.controls"/>
-          </section>
-        </section>
+	<section name="system.web">
+	  <section name="pages" defaultBlockName="system.web.pages">
+	    <section name="controls" defaultBlockName="system.web.pages.controls"/>
+	  </section>
+	</section>
       </section>
     </requires>
 
@@ -461,11 +461,11 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="DynamicData compilation">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="compilation" defaultBlockName="system.web.compilation">
-            <section name="assemblies" defaultBlockName="system.web.compilation.assemblies"/>
-          </section>
-        </section>
+	<section name="system.web">
+	  <section name="compilation" defaultBlockName="system.web.compilation">
+	    <section name="assemblies" defaultBlockName="system.web.compilation.assemblies"/>
+	  </section>
+	</section>
       </section>
     </requires>
 
@@ -486,9 +486,9 @@ file in the top-level directory of your ASP.NET application.
   <configBlock name="DynamicData HTTP modules">
     <requires>
       <section name="configuration">
-        <section name="system.web">
-          <section name="httpModules" defaultBlockName="system.web.httpModules"/>
-        </section>
+	<section name="system.web">
+	  <section name="httpModules" defaultBlockName="system.web.httpModules"/>
+	</section>
       </section>
     </requires>
 
@@ -608,8 +608,8 @@ file in the top-level directory of your ASP.NET application.
   <defaultConfigFile name="web.config" fileName="Web.config" target="web">
     <section name="configuration">
       <section name="system.web">
-        <section name="compilation" defaultBlockName="system.web.compilation"/>
-        <section name="customErrors" defaultBlockName="system.web.customErrors"/>
+	<section name="compilation" defaultBlockName="system.web.compilation"/>
+	<section name="customErrors" defaultBlockName="system.web.customErrors"/>
       </section>
     </section>
   </defaultConfigFile>

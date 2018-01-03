@@ -11,7 +11,7 @@ def main():
     _, info = _environment.configure()
     _environment.act()
     for j in range(100):
-      actions = _environment.sample_action_space()
+      actions = _environment.action_space.one_hot_sample()
       _, reward, interrupted, info = _environment.act(actions)
       if interrupted:
         print('Interrupted', reward)
