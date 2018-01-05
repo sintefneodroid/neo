@@ -18,7 +18,7 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
     if message:
       return (flattened_observation(message),
               message.get_reward(),
-              message.get_interrupted(), message)
+              message.get_terminated(), message)
     return None, None, None, None
 
   def configure(self, input_configuration=[], on_reset_callback=None):
@@ -33,7 +33,7 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
     if message:
       return (flattened_observation(message),
               message.get_reward(),
-              message.get_interrupted(), message)
+              message.get_terminated(), message)
 
 
   def quit(self, callback=None):

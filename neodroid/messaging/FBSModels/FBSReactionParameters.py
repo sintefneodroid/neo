@@ -12,7 +12,7 @@ class FBSReactionParameters(object):
         self._tab = flatbuffers.table.Table(buf, pos)
 
     # FBSReactionParameters
-    def Interruptible(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(0))
+    def Terminable(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(0))
     # FBSReactionParameters
     def Step(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(1))
     # FBSReactionParameters
@@ -21,12 +21,15 @@ class FBSReactionParameters(object):
     def Configure(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(3))
     # FBSReactionParameters
     def Describe(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(4))
+    # FBSReactionParameters
+    def EpisodeCount(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(5))
 
-def CreateFBSReactionParameters(builder, interruptible, step, reset, configure, describe):
-    builder.Prep(1, 5)
+def CreateFBSReactionParameters(builder, terminable, step, reset, configure, describe, episodeCount):
+    builder.Prep(1, 6)
+    builder.PrependBool(episodeCount)
     builder.PrependBool(describe)
     builder.PrependBool(configure)
     builder.PrependBool(reset)
     builder.PrependBool(step)
-    builder.PrependBool(interruptible)
+    builder.PrependBool(terminable)
     return builder.Offset()

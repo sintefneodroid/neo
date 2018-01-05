@@ -7,15 +7,10 @@ from neodroid import modeling as N
 from neodroid.messaging import FBSModels as F
 
 
-def build_flat_reaction(input_reaction, info=None):
+def build_reaction(input_reaction):
   B = flb.Builder(0)
 
-  bodies = None
-  poses = None
-  if info:
-    state = info.get_fbs_state()
-    bodies = build_bodies(B, input_reaction, state)
-    poses = build_poses(B, input_reaction, state)
+  unobservables = build_unobservables(B,input_reaction)
 
   configurations = build_configurations(B, input_reaction)
   motions = build_motions(B, input_reaction)
@@ -25,7 +20,7 @@ def build_flat_reaction(input_reaction, info=None):
   F.FBSReactionStart(B)
   F.FBSReactionAddParameters(B,
                              F.CreateFBSReactionParameters(B,
-                                                           input_reaction.get_parameters().get_interruptible(),
+                                                           input_reaction.get_parameters().get_terminable(),
                                                            input_reaction.get_parameters().get_step(),
                                                            input_reaction.get_parameters().get_reset(),
                                                            input_reaction.get_parameters().get_configure(),
@@ -33,21 +28,27 @@ def build_flat_reaction(input_reaction, info=None):
   F.FBSReactionAddEnvironmentName(B, environment_string_offset)
   F.FBSReactionAddMotions(B, motions)
   F.FBSReactionAddConfigurations(B, configurations)
-
-  if bodies:
-    F.FBSReactionAddPoses(B, poses)
-  if poses:
-    F.FBSReactionAddBodies(B, bodies)
+  F.FBSReactionAddUnobservables(B, unobservables)
 
   flat_reaction = F.FBSReactionEnd(B)
   B.Finish(flat_reaction)
 
   return B.Output()
 
+def build_unobservables(B,
+                        input_reaction,
+                        bodies=None,
+                        poses=None):
+  F.FBSUnobservablesStart(B)
+  if bodies:
+    F.FBSUnobservablesAddPoses(B, poses)
+  if poses:
+    F.FBSUnobservablesAddBodies(B, bodies)
+  return F.FBSUnobservablesEnd(B)
 
 def build_poses(B, input_reaction, state):
   pl = state.PosesLength()
-  F.FBSReactionStartPosesVector(B, pl)
+  F.FBSUnobservablesStartPosesVector(B, pl)
   for i in range(pl):
     pose = state.Poses(i)
     pos = pose.Position(F.FBSVector3())
@@ -58,7 +59,7 @@ def build_poses(B, input_reaction, state):
 
 def build_bodies(B, input_reaction, state):
   bl = state.BodiesLength()
-  F.FBSReactionStartBodiesVector(B, bl)
+  F.FBSUnobservablesStartBodiesVector(B, bl)
   for i in range(bl):
     body = state.Bodies(i)
     vel = body.Velocity(F.FBSVector3())

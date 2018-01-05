@@ -16,6 +16,9 @@ class Reaction(object):
   def get_parameters(self):
     return self._parameters
 
+  def set_parameters(self, parameters):
+    self._parameters = parameters
+
   def get_motions(self):
     return self._motions
 

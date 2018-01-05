@@ -17,7 +17,7 @@ class NeodroidGymWrapper(NeodroidEnvironment):
     if message:
       return (flat_observation(message),
               message.get_reward(),
-              message.get_interrupted(), message)
+              message.get_terminated(), message)
     return None, None, None, None
 
   def reset(self, input_configuration=[], on_reset_callback=None):

@@ -71,7 +71,7 @@ def update_environment_widgets(environment_state):
         str(environment_state.get_total_energy_spent_since_reset()))
     _gui.update_frame_label(
         str(environment_state.get_last_steps_frame_number()))
-    _gui.update_interrupted_label(str(environment_state.get_interrupted()))
+    _gui.update_interrupted_label(str(environment_state.get_terminated()))
     _gui.update_time_label(str(environment_state.get_time_since_reset()))
   except BaseException:
     print('Failed at updating rest of GUI')

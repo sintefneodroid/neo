@@ -12,6 +12,7 @@ import neodroid.messaging as messaging
 import neodroid.modeling as modeling
 from neodroid import Reaction
 from neodroid.modeling.reaction_parameters import ReactionParameters
+from neodroid.utilities.action_space import ActionSpace
 from neodroid.utilities.reaction_factory import verify_motion_reaction, verify_configuration_reaction
 from neodroid.utilities.statics import flattened_observation, contruct_action_space
 
@@ -45,8 +46,6 @@ class NeodroidEnvironment(object):
     self._simulation_instance = None
 
     # Networking
-    self._connected = False
-    self._awaiting_response = False
     self._ip = ip
     self._port = port
     self._external_on_connected_callback = on_connected_callback
@@ -56,6 +55,7 @@ class NeodroidEnvironment(object):
     self._environment_description = None
     self._state = None
     self._observation_space = np.zeros(1)
+    self._action_space = ActionSpace()
 
     if not connect_to_running and not self._simulation_instance:
       if self.__start_instance__(name, path_to_executables_directory, ip,
@@ -69,7 +69,11 @@ class NeodroidEnvironment(object):
       else:
         if self._debug_logging:
           self._logger.debug('could not start environment ' + str(name))
-    self.__connect__()
+
+
+    self._message_server = messaging.MessageServer(self._ip,self._port)
+    self._message_server.setup_connection()
+
     time.sleep(seconds_before_connect / 4)
     reaction = modeling.Reaction(ReactionParameters(False,False,True,False,True))
     self.reset(reaction)
@@ -99,39 +103,29 @@ class NeodroidEnvironment(object):
       return False
 
   def __on_connected_callback__(self):
-    self._connected = True
     if self._external_on_connected_callback:
       self._external_on_connected_callback()
 
   def __on_disconnected_callback__(self):
-    self._connected = False
     warnings.warn('Disconnected from server')
     if self._external_on_disconnected_callback:
       self._external_on_disconnected_callback()
 
   def __on_step_done_callback__(self):
-    self._awaiting_response = False
-
-  def __connect__(self):
-    if self._debug_logging:
-      self._logger.debug('Connecting to server')
-    messaging.start_setup_connection_thread(self.__on_connected_callback__,
-                                            self._ip,
-                                            self._port)
+    pass
 
   def __get_state__(self, on_step_done_callback=None):
     if on_step_done_callback:
-      messaging.start_receive_state_thread(on_step_done_callback,
+      self._message_server.start_receive_state_thread(on_step_done_callback,
                                            self.__timeout_callback__)
     else:
-      return messaging.receive_state(self.__timeout_callback__)
+      return self._message_server.receive_state(self.__timeout_callback__)
 
   def __timeout_callback__(self):
-    self._connected = False
-    print('Trying to reconnect to server')
-    messaging.close_connection(
-        on_disconnect_callback=self.__on_disconnected_callback__())
-    self.__connect__()
+    warnings.warn('Timeout')
+    #self._message_server.close_connection(
+    #    on_disconnect_callback=self.__on_disconnected_callback__())
+    #self.__connect__()
 
   def __del__(self):
     self.close()
@@ -140,7 +134,7 @@ class NeodroidEnvironment(object):
     return '<NeodroidEnvironment>'
 
   def is_connected(self):
-    return self._connected
+    return self._message_server.is_connected()
 
   def seed(self, seed):
     np.random.seed(seed)
@@ -151,8 +145,8 @@ class NeodroidEnvironment(object):
   def run_brownian_motion(self, iterations=1):
     message=None
     for i in range(iterations):
-      self.react(self._action_space.sample())
-      message = self.__get_state__()
+      rp = ReactionParameters(True,True)
+      message = self.react(self._action_space.sample(), rp)
     return message
 
   def __action_space__(self):
@@ -169,6 +163,7 @@ class NeodroidEnvironment(object):
 
   def react(self,
             input_reaction=None,
+            parameters=None,
             on_reaction_sent_callback=None,
             on_step_done_callback=None):
 
@@ -176,19 +171,18 @@ class NeodroidEnvironment(object):
       self._logger.debug('Reacting')
 
     input_reaction = self.maybe_infer_motion_reaction(input_reaction)
+    if parameters is not None:
+      input_reaction.set_parameters(parameters)
 
-    if self._connected:
+    if self._message_server.is_connected():
       if on_reaction_sent_callback:
-        messaging.start_send_reaction_thread(input_reaction,
+        self._message_server.start_send_reaction_thread(input_reaction,
                                              on_reaction_sent_callback)
       else:
-        messaging.send_reaction(input_reaction, self._state)
-
-      self._awaiting_response = True
+        self._message_server.send_reaction(input_reaction)
 
       message = self.__get_state__(on_step_done_callback)
       if message:
-        self._awaiting_response = False
         self._observation_space = flattened_observation(message)
         self._state = message
         if message.get_environment_description():
@@ -208,7 +202,7 @@ class NeodroidEnvironment(object):
     return input_reaction
 
   def observe(self):
-    messaging.send_reaction(Reaction(ReactionParameters(False,False,False,False,True)), self._state)
+    self._message_server.send_reaction(Reaction(ReactionParameters(True,False,False,False,True)))
     return self.__get_state__()
 
   def reset(self, input_reaction=None, on_reset_callback=None):
@@ -222,21 +216,18 @@ class NeodroidEnvironment(object):
     if self._debug_logging:
       self._logger.debug('Resetting')
 
-    if self._connected:
+    if self._message_server.is_connected():
 
       input_reaction = self.maybe_infer_configuration_reaction(input_reaction)
 
       if on_reset_callback:
-        messaging.start_send_reaction_thread(input_reaction, on_reset_callback)
+        self._message_server.start_send_reaction_thread(input_reaction, on_reset_callback)
       else:
-        messaging.send_reaction(input_reaction, self._state)
-
-      self._awaiting_response = True
+        self._message_server.send_reaction(input_reaction)
 
       message = self.__get_state__()
 
       if message:
-        self._awaiting_response = False
         self._observation_space = flattened_observation(message)
         self._state = message
         if message.get_environment_description():
@@ -248,8 +239,9 @@ class NeodroidEnvironment(object):
   def close(self, callback=None):
     if self._debug_logging:
       self._logger.debug('Close')
-    if self._connected:
-      self._connected = False
+    #if self._message_server:
+    #  self._message_server.__del__()
+    if self._message_server.is_connected():
       if self._simulation_instance is not None:
         self._simulation_instance.terminate()
       if callback:

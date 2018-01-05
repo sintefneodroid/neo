@@ -19,7 +19,7 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
     if message:
       return (flattened_observation(message),
               message.get_reward(),
-              message.get_interrupted(), message)
+              message.get_terminated(), message)
     return None, None, None, None
 
   def configure(self, input_configuration=[], on_reset_callback=None):
@@ -57,6 +57,13 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
 
 
     return initial_states
+
+  def observe(self):
+    message = super(NeodroidCurriculumWrapper, self).observe()
+    if message:
+      return (flattened_observation(message),
+              message.get_reward(),
+              message.get_terminated(), message)
 
   def quit(self, callback=None):
     self.close(callback=callback)

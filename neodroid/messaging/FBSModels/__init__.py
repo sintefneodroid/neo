@@ -22,3 +22,4 @@ from .FBSString import *
 from .FBSReactionParameters import *
 from .FBSPosition import *
 from .FBSVector3 import *
+from .FBSUnobservables import *

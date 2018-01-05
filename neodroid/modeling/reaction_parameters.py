@@ -2,8 +2,8 @@ import json
 
 
 class ReactionParameters(object):
-  def __init__(self, interruptible=True, step=False, reset = False,configure=False,describe=False):
-    self._interruptible = interruptible
+  def __init__(self, terminable=True, step=False, reset = False, configure=False, describe=False):
+    self._terminable = terminable
     self._configure = configure
     self._step = step
     self._reset = reset
@@ -21,8 +21,8 @@ class ReactionParameters(object):
   def get_step(self):
     return self._step
 
-  def get_interruptible(self):
-    return self._interruptible
+  def get_terminable(self):
+    return self._terminable
 
   def to_dict(self):
     return {
@@ -34,7 +34,7 @@ class ReactionParameters(object):
 
   def __repr__(self):
     return '<ReactionParameters>\n' + \
-           '  <interruptible>' + str(self._interruptible) + '</interruptible>\n' + \
+           '  <terminable>' + str(self._terminable) + '</terminable>\n' + \
            '  <step>' + str(self._step) + '</step>\n' + \
            '  <reset>' + str(self._reset) + '</reset>\n' + \
            '  <configure>' + str(self._configure) + '</configure>\n' + \

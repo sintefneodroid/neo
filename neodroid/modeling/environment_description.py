@@ -1,4 +1,4 @@
-from neodroid.messaging.FBSUtilities import create_actors, create_configurables
+from neodroid.messaging import create_actors, create_configurables
 
 
 class EnvironmentDescription(object):

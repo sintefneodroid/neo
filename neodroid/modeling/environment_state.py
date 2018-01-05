@@ -1,7 +1,6 @@
 import numpy as np
 
-from neodroid.messaging.FBSUtilities import create_observers, \
-  create_description, create_poses, create_bodies
+from neodroid.messaging import create_observers, create_description, create_poses, create_bodies
 
 
 class EnvironmentState(object):
@@ -29,8 +28,8 @@ class EnvironmentState(object):
   def get_state_configuration(self):
     return np.array([self.get_poses_numpy().flatten(), self.get_bodies_numpy().flatten()]).flatten()
 
-  def get_interrupted(self):
-    return self._fbs_state.Interrupted()
+  def get_terminated(self):
+    return self._fbs_state.Terminated()
 
   def get_total_energy_spent_since_reset(self):
     return self._fbs_state.TotalEnergySpent()
@@ -62,7 +61,7 @@ class EnvironmentState(object):
            str(self.get_reward()) + \
            '</reward>\n' + \
            '  <interrupted>' + \
-           str(self.get_interrupted()) + \
+           str(self.get_terminated()) + \
            '</interrupted>\n' + \
            '  <Poses>\n' + \
            str(self.get_poses_numpy()) + \
