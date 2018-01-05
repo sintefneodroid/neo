@@ -1,7 +1,7 @@
 # Byte-compiled / optimized / DLL files
 # C extensions
 # Distribution / packaging
-#build/
+build/
 dist/
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -25,3 +25,16 @@ dist/
 # mkdocs documentation
 # mypy
 .vscode
+__pycache__
+.installed.cfg
+bin
+develop-eggs
+dist
+downloads
+eggs
+parts
+src/*.egg-info
+lib
+lib64
+*.pyc
+*.pyo
