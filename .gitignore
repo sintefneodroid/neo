@@ -25,7 +25,6 @@ dist/
 # mkdocs documentation
 # mypy
 .vscode
-__pycache__
 .installed.cfg
 bin
 develop-eggs
@@ -36,5 +35,8 @@ parts
 src/*.egg-info
 lib
 lib64
-*.pyc
-*.pyo
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
