@@ -24,11 +24,13 @@ def build_reaction(input_reaction):
                                                            input_reaction.get_parameters().get_step(),
                                                            input_reaction.get_parameters().get_reset(),
                                                            input_reaction.get_parameters().get_configure(),
-                                                           input_reaction.get_parameters().get_describe()))
+                                                           input_reaction.get_parameters().get_describe(),
+                                                           input_reaction.get_parameters().get_episode_count()))
   F.FBSReactionAddEnvironmentName(B, environment_string_offset)
   F.FBSReactionAddMotions(B, motions)
   F.FBSReactionAddConfigurations(B, configurations)
-  F.FBSReactionAddUnobservables(B, unobservables)
+  if unobservables is not None:
+    F.FBSReactionAddUnobservables(B, unobservables)
 
   flat_reaction = F.FBSReactionEnd(B)
   B.Finish(flat_reaction)
@@ -36,32 +38,35 @@ def build_reaction(input_reaction):
   return B.Output()
 
 def build_unobservables(B,
-                        input_reaction,
-                        bodies=None,
-                        poses=None):
-  F.FBSUnobservablesStart(B)
-  if bodies:
-    F.FBSUnobservablesAddPoses(B, poses)
-  if poses:
-    F.FBSUnobservablesAddBodies(B, bodies)
-  return F.FBSUnobservablesEnd(B)
+                        input_reaction):
+  unobservables = input_reaction.get_unobservables()
+  if unobservables:
+    poses = build_poses(B,unobservables)
+    bodies = build_bodies(B,unobservables)
 
-def build_poses(B, input_reaction, state):
-  pl = state.PosesLength()
+    F.FBSUnobservablesStart(B)
+    F.FBSUnobservablesAddPoses(B, poses)
+    F.FBSUnobservablesAddBodies(B, bodies)
+    return F.FBSUnobservablesEnd(B)
+
+def build_poses(B, unobservables):
+  fu = unobservables._unobservables
+  pl = fu.PosesLength()
   F.FBSUnobservablesStartPosesVector(B, pl)
   for i in range(pl):
-    pose = state.Poses(i)
+    pose = fu.Poses(i)
     pos = pose.Position(F.FBSVector3())
     rot = pose.Rotation(F.FBSQuaternion())
     F.CreateFBSQuaternionTransform(B, pos.X(), pos.Y(), pos.Z(), rot.X(), rot.Y(), rot.Z(), rot.W())
   return B.EndVector(pl)
 
 
-def build_bodies(B, input_reaction, state):
-  bl = state.BodiesLength()
+def build_bodies(B, unobservables):
+  fu = unobservables._unobservables
+  bl = fu.BodiesLength()
   F.FBSUnobservablesStartBodiesVector(B, bl)
   for i in range(bl):
-    body = state.Bodies(i)
+    body = fu.Bodies(i)
     vel = body.Velocity(F.FBSVector3())
     ang = body.AngularVelocity(F.FBSVector3())
     F.CreateFBSBody(B, vel.X(), vel.Y(), vel.Z(), ang.X(), ang.Y(), ang.Z())
@@ -134,28 +139,33 @@ def create_observers(flat_state):
   for i in range(flat_state.ObserversLength()):
     flat_observer = flat_state.Observers(i)
     if flat_observer.ObservationType() is F.FBSObserverData.FBSEulerTransform:
-      observers[flat_observer.ObserverName()] = create_euler_transform(flat_observer)
+      data = create_euler_transform(flat_observer)
     elif flat_observer.ObservationType() is F.FBSObserverData.FBSBodyObservation:
-      observers[flat_observer.ObserverName()] = create_body(flat_observer)
+      data = create_body(flat_observer)
     elif flat_observer.ObservationType() is F.FBSObserverData.FBSByteArray:
-      observers[flat_observer.ObserverName()] = create_data(flat_observer)
+      data = create_data(flat_observer)
+
+      observers[flat_observer.ObserverName()] = N.Observer(
+          flat_observer.ObserverName(),data)
   return observers
 
+def create_unobservables(state):
+  return N.Unobservables(state.Unobservables())
 
-def create_poses(flat_state):
-  poses = np.zeros((flat_state.PosesLength(), 7))
-  for i in range(flat_state.PosesLength()):
-    pose = flat_state.Poses(i)
+def create_poses(unobservables):
+  poses = np.zeros((unobservables.PosesLength(), 7))
+  for i in range(unobservables.PosesLength()):
+    pose = unobservables.Poses(i)
     pos = pose.Position(F.FBSVector3())
     rot = pose.Rotation(F.FBSQuaternion())
     poses[i] = [pos.X(), pos.Y(), pos.Z(), rot.X(), rot.Y(), rot.Z(), rot.W()]
   return poses
 
 
-def create_bodies(flat_state):
-  bodies = np.zeros((flat_state.PosesLength(), 6))
-  for i in range(flat_state.BodiesLength()):
-    body = flat_state.Bodies(i)
+def create_bodies(unobservables):
+  bodies = np.zeros((unobservables.PosesLength(), 6))
+  for i in range(unobservables.BodiesLength()):
+    body = unobservables.Bodies(i)
     vel = body.Velocity(F.FBSVector3())
     ang = body.AngularVelocity(F.FBSVector3())
     bodies[i] = [vel.X(), vel.Y(), vel.Z(), ang.X(), ang.Y(), ang.Z()]
@@ -168,14 +178,10 @@ def create_euler_transform(flat_observer):
   position = transform.Position()
   rotation = transform.Rotation()
   direction = transform.Direction()
-  data = [[position.X(), position.Y(), position.Z()],
-          [rotation.X(), rotation.Y(), rotation.Z()],
-          [direction.X(), direction.Y(), direction.Z()]]
-  input_observer = N.Observer(
-      flat_observer.ObserverName(),
-      data
-  )
-  return input_observer
+  return [[position.X(), position.Y(), position.Z()],
+          [direction.X(), direction.Y(), direction.Z()],
+          [rotation.X(), rotation.Y(), rotation.Z()]
+          ]
 
 
 def create_body(flat_observer):
@@ -183,19 +189,13 @@ def create_body(flat_observer):
   body.Init(flat_observer.Data().Bytes, flat_observer.Data().Pos)
   velocity = body.Velocity(F.FBSVector3())
   angular_velocity = body.AngularVelocity(F.FBSVector3())
-  data = [[velocity.X(), velocity.Y(), velocity.Z()],
+  return [[velocity.X(), velocity.Y(), velocity.Z()],
           [angular_velocity.X(), angular_velocity.Y(),
            angular_velocity.Z()]]
-  input_observer = N.Observer(
-      flat_observer.ObserverName(),
-      data
-  )
-  return input_observer
-
 
 def create_position(fbs_configurable):
   pos = F.FBSPosition()
-  pos.Init(fbs_configurable.CurrentValue().Bytes, fbs_configurable.CurrentValue().Pos)
+  pos.Init(fbs_configurable.Observation().Bytes, fbs_configurable.Observation().Pos)
   position = pos.Position()
   data = [position.X(), position.Y(), position.Z()]
   return data
@@ -208,8 +208,10 @@ def create_configurables(flat_environment_description):
       fbs_configurable = flat_environment_description.Configurables(i)
       current_value = None
 
-      if fbs_configurable.CurrentValueType() is F.FBSObserverData.FBSPosition:
+      if fbs_configurable.ObservationType() is F.FBSObserverData.FBSPosition:
         current_value = create_position(fbs_configurable)
+      if fbs_configurable.ObservationType() is F.FBSObserverData.FBSEulerTransform:
+        current_value = create_euler_transform(fbs_configurable)
 
       configurable = N.Configurable(
           fbs_configurable.ConfigurableName(),

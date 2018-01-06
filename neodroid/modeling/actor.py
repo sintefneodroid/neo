@@ -11,6 +11,10 @@ class Actor(object):
   def get_alive(self):
     return self._flat_actor.Alive()
 
+  def get_motor(self,key):
+    if key in create_motors(self._flat_actor):
+      return create_motors(self._flat_actor)[key]
+
   def get_motors(self):
     return create_motors(self._flat_actor)
 

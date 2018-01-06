@@ -1,6 +1,6 @@
 import numpy as np
 
-from neodroid.messaging import create_observers, create_description, create_poses, create_bodies
+from neodroid.messaging import create_observers, create_description, create_poses, create_bodies,create_unobservables
 
 
 class EnvironmentState(object):
@@ -16,17 +16,15 @@ class EnvironmentState(object):
   def get_fbs_state(self):
     return self._fbs_state
 
-  def get_poses_numpy(self):
-    return create_poses(self._fbs_state)
+  def get_unobservables(self):
+    return create_unobservables(self._fbs_state)
 
-  def get_bodies_numpy(self):
-    return create_bodies(self._fbs_state)
+
 
   def get_frame_number(self):
     return self._fbs_state.FrameNumber()
 
-  def get_state_configuration(self):
-    return np.array([self.get_poses_numpy().flatten(), self.get_bodies_numpy().flatten()]).flatten()
+
 
   def get_terminated(self):
     return self._fbs_state.Terminated()
@@ -42,7 +40,8 @@ class EnvironmentState(object):
     return create_observers(self._fbs_state)
 
   def get_observer(self, key):
-    return create_observers(self._fbs_state)[key]
+    if key in create_observers(self._fbs_state):
+      return create_observers(self._fbs_state)[key]
 
   def __repr__(self):
     observers_str = ''.join([
@@ -63,16 +62,11 @@ class EnvironmentState(object):
            '  <interrupted>' + \
            str(self.get_terminated()) + \
            '</interrupted>\n' + \
-           '  <Poses>\n' + \
-           str(self.get_poses_numpy()) + \
-           '  </Poses>\n' + \
-           '  <Bodies>\n' + \
-           str(self.get_bodies_numpy()) + \
-           '  </Bodies>\n' + \
            '  <Observers>\n' + \
            observers_str + \
            '  </Observers>\n' + \
-           description_str + \
+           str(self.get_environment_description()) + \
+           str(self.get_unobservables()) + \
            '</EnvironmentState>\n'
 
   def __str__(self):

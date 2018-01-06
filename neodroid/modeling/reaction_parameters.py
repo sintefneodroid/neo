@@ -2,12 +2,13 @@ import json
 
 
 class ReactionParameters(object):
-  def __init__(self, terminable=True, step=False, reset = False, configure=False, describe=False):
+  def __init__(self, terminable=True, step=False, reset = False, configure=False, describe=False, episode_count=True):
     self._terminable = terminable
     self._configure = configure
     self._step = step
     self._reset = reset
     self._describe = describe
+    self._episode_count = episode_count
 
   def get_reset(self):
     return self._reset
@@ -20,6 +21,9 @@ class ReactionParameters(object):
 
   def get_step(self):
     return self._step
+
+  def get_episode_count(self):
+    return self._episode_count
 
   def get_terminable(self):
     return self._terminable
@@ -39,6 +43,7 @@ class ReactionParameters(object):
            '  <reset>' + str(self._reset) + '</reset>\n' + \
            '  <configure>' + str(self._configure) + '</configure>\n' + \
            '  <describe>' + str(self._describe) + '</describe>\n' + \
+           '  <episode_count>' + str(self._episode_count) + '</episode_count>\n' + \
            '</ReactionParameters>\n'
 
   def __str__(self):

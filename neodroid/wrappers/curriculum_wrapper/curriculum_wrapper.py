@@ -4,66 +4,69 @@ from neodroid.utilities.statics import flattened_observation
 
 
 class NeodroidCurriculumWrapper(NeodroidEnvironment):
-  def __init__(self, **kwargs):
-    super(NeodroidCurriculumWrapper, self).__init__(**kwargs)
+  def __init__(self, *args, **kwargs):
+    super(NeodroidCurriculumWrapper, self).__init__(*args,**kwargs)
     self.observation_space = self.__observation_space__()
     self.action_space = self.__action_space__()
 
-  def act(self,
-          input_reaction=None,
-          on_step_done_callback=None,
-          on_reaction_sent_callback=None):
-    message = super(NeodroidCurriculumWrapper, self).react(input_reaction,
-                                                       on_reaction_sent_callback,
-                                                       on_step_done_callback)
+  def act(self,*args, **kwargs):
+    message = super(NeodroidCurriculumWrapper, self).react(*args, **kwargs)
     if message:
       return (flattened_observation(message),
               message.get_reward(),
               message.get_terminated(), message)
     return None, None, None, None
 
-  def configure(self, input_configuration=[], on_reset_callback=None):
-    message = super(NeodroidCurriculumWrapper, self).reset(input_configuration,
-                                                       on_reset_callback)
+  def configure(self, *args, **kwargs):
+    message = super(NeodroidCurriculumWrapper, self).reset(*args, **kwargs)
     if message:
       return flattened_observation(message), message
     return None, None
 
-  def get_goal_configuration(self):
-    message = super(NeodroidCurriculumWrapper, self).observe()
-    if message:
-      goal_x = message.get_environment_description().get_configurable(b'GoalTransformX').get_current_value()
-      goal_y = message.get_environment_description().get_configurable(b'GoalTransformY').get_current_value()
-      goal_z = message.get_environment_description().get_configurable(b'GoalTransformZ').get_current_value()
-      return goal_z
+  def generate_inital_states_from_goal_state(self, initial_configuration, motion_horizon=10, num=10):
 
-  def generate_inital_states(self, motion_horizon=99, num=999):
-    goal_pos = self.get_goal_configuration()
     initial_states=[]
     while len(initial_states) < num:
-      params = ReactionParameters(False,False,True,True,True)
-      init = Reaction(params,[Configuration('ActorTransformX',goal_pos[0]),
-                              Configuration('ActorTransformY',goal_pos[1]),
-                              Configuration('ActorTransformZ',goal_pos[2])])
+      params = ReactionParameters(terminable=False,episode_count=False,reset=True,configure=True)
+      init = Reaction(params,initial_configuration)
       _, info = self.configure(init)
-      terminated = False
 
+      params = ReactionParameters(terminable=False,episode_count=False,reset=False,configure=False,step=True)
       for i in range(motion_horizon):
-        _,_,terminated,info =  self.act(self.run_brownian_motion(1))
-        if not terminated:
-          initial_states.append(info)
-        else:
-          break
-
+        self.act(self.action_space.sample(),params)
+      _, _, terminated, info = self.observe()
+      if not terminated:
+        initial_states.append(info)
 
     return initial_states
 
-  def observe(self):
+  def generate_inital_states_from_state(self, state, motion_horizon=10, num=10):
+    initial_states=[]
+    params = ReactionParameters(terminable=True,
+                                episode_count=False,
+                                reset=False,
+                                configure=False,
+                                step=True)
+    while len(initial_states) < num:
+      _, info = self.configure(None,state)
+
+      terminated=False
+      for i in range(motion_horizon):
+        _, _, terminated, info = self.act(self.action_space.sample(),params)
+        if terminated:
+          break
+      if not terminated:
+        initial_states.append(info)
+
+    return initial_states
+
+  def observe(self, *args, **kwargs):
     message = super(NeodroidCurriculumWrapper, self).observe()
     if message:
       return (flattened_observation(message),
               message.get_reward(),
               message.get_terminated(), message)
+    return None,None,None,None
 
-  def quit(self, callback=None):
-    self.close(callback=callback)
+  def quit(self, *args, **kwargs):
+    self.close(*args, **kwargs)

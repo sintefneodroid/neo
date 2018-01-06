@@ -75,8 +75,8 @@ class NeodroidEnvironment(object):
     self._message_server.setup_connection()
 
     time.sleep(seconds_before_connect / 4)
-    reaction = modeling.Reaction(ReactionParameters(False,False,True,False,True))
-    self.reset(reaction)
+    self.reset()
+    self.observe()
 
   def __start_instance__(self, name, path_to_executables_directory, ip, port):
     path_to_executable = os.path.join(path_to_executables_directory,
@@ -123,9 +123,6 @@ class NeodroidEnvironment(object):
 
   def __timeout_callback__(self):
     warnings.warn('Timeout')
-    #self._message_server.close_connection(
-    #    on_disconnect_callback=self.__on_disconnected_callback__())
-    #self.__connect__()
 
   def __del__(self):
     self.close()
@@ -142,13 +139,6 @@ class NeodroidEnvironment(object):
   def __observation_space__(self):
     return self._observation_space
 
-  def run_brownian_motion(self, iterations=1):
-    message=None
-    for i in range(iterations):
-      rp = ReactionParameters(True,True)
-      message = self.react(self._action_space.sample(), rp)
-    return message
-
   def __action_space__(self):
     return self._action_space
 
@@ -160,6 +150,9 @@ class NeodroidEnvironment(object):
       input_reaction = verify_motion_reaction(input_reaction, None)
 
     return input_reaction
+
+  def get_environment_description(self):
+    return self._environment_description
 
   def react(self,
             input_reaction=None,
@@ -201,11 +194,16 @@ class NeodroidEnvironment(object):
 
     return input_reaction
 
-  def observe(self):
-    self._message_server.send_reaction(Reaction(ReactionParameters(True,False,False,False,True)))
+  def observe(self,
+              parameters=ReactionParameters(
+                  terminable=True,
+                  describe=True,
+                  episode_count=False)
+              ):
+    self._message_server.send_reaction(Reaction(parameters))
     return self.__get_state__()
 
-  def reset(self, input_reaction=None, on_reset_callback=None):
+  def reset(self, input_reaction=None, state=None, on_reset_callback=None):
     """
 
     The environments argument lets you specify which environments to reset.
@@ -219,6 +217,8 @@ class NeodroidEnvironment(object):
     if self._message_server.is_connected():
 
       input_reaction = self.maybe_infer_configuration_reaction(input_reaction)
+      if state:
+        input_reaction.set_unobservables(state.get_unobservables())
 
       if on_reset_callback:
         self._message_server.start_send_reaction_thread(input_reaction, on_reset_callback)

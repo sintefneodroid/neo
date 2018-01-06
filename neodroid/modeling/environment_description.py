@@ -15,13 +15,15 @@ class EnvironmentDescription(object):
     return create_actors(self._fbs_description)
 
   def get_actor(self, key):
-    return create_actors(self._fbs_description)[key]
+    if key in create_actors(self._fbs_description):
+      return create_actors(self._fbs_description)[key]
 
   def get_configurables(self):
     return create_configurables(self._fbs_description)
 
   def get_configurable(self, key):
-    return create_configurables(self._fbs_description)[key]
+    if key in create_configurables(self._fbs_description):
+      return create_configurables(self._fbs_description)[key]
 
   def __repr__(self):
     actors_str = ''.join(

@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class ActionSpace(object):
 
   def __init__(self, valid_inputs = []):
@@ -36,11 +35,18 @@ class ActionSpace(object):
         zeros[idx+self.num_actions()] = 1
     return zeros
 
+  def discrete_one_hot_sample(self):
+    idx = np.random.randint(0, self.num_actions())
+    zeros = np.zeros(self.num_binary_actions())
+    if len(self._valid_inputs)>0:
+      val = np.random.random_integers(self._valid_inputs[idx].get_min_value(), self._valid_inputs[idx].get_max_value(),1)
+      zeros[idx] = val
+    return zeros
+
   def one_hot_sample(self):
 
     idx = np.random.randint(0, self.num_actions())
     zeros = np.zeros(self.num_actions())
     if len(self._valid_inputs)>0:
-      sample = np.random.uniform(self._valid_inputs[idx].get_min_value(), self._valid_inputs[idx].get_max_value(), 1)
       zeros[idx] = 1
     return zeros

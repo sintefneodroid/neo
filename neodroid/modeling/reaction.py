@@ -4,11 +4,17 @@ from neodroid.modeling.reaction_parameters import ReactionParameters
 
 
 class Reaction(object):
-  def __init__(self, parameters,configurations=[], motions=[], environment_name='all'):
+  def __init__(self,
+               parameters,
+               configurations=[],
+               motions=[],
+               unobservables=None,
+               environment_name='all'):
     self._environment_name = environment_name
     self._parameters = parameters
     self._configurations = configurations
     self._motions = motions
+    self._unobservables = unobservables
 
   def get_environment_name(self):
     return self._environment_name
@@ -31,6 +37,12 @@ class Reaction(object):
   def set_configurations(self, configurations):
     self._configurations = configurations
 
+  def get_unobservables(self):
+    return self._unobservables
+
+  def set_unobservables(self, unobservables):
+    self._unobservables = unobservables
+
   def to_dict(self):
     return {
       '_configurations': [configuration.to_dict() for configuration in
@@ -48,6 +60,7 @@ class Reaction(object):
            '  </configurations>\n' + \
            '  <motions>\n' + str(self._motions) + \
            '  </motions>\n' + \
+           str(self.get_unobservables()) + \
            '</Reaction>\n'
 
   def __str__(self):

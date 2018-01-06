@@ -56,7 +56,7 @@ def construct_motions_from_list(input_list, actors):
 
 
 def verify_configuration_reaction(input, environment_description):
-  parameters = ReactionParameters(False, False, True, False, True)
+  parameters = ReactionParameters(False, False, True, True, True,False)
   if environment_description:
     configurables = environment_description.get_configurables().values()
     if configurables:
@@ -91,7 +91,7 @@ def verify_configuration_reaction(input, environment_description):
 
 def construct_configuration_reaction_from_list(configuration_list, configurables):
   configurations = construct_configurations_from_known_observables(configuration_list, configurables)
-  parameters = ReactionParameters(False, False, True, True, True)
+  parameters = ReactionParameters(False, False, True, True, True,False)
   return Reaction(parameters, configurations, [])
 
 
