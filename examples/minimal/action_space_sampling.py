@@ -8,6 +8,8 @@ def main():
   _environment.seed(42)
 
   for i in range(1000):
+    if not _environment.is_connected():
+      break
     _, info = _environment.configure()
     _environment.act()
     for j in range(_environment.get_environment_description().get_max_episode_length()):

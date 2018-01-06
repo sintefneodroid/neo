@@ -9,7 +9,6 @@ import warnings
 import numpy as np
 
 import neodroid.messaging as messaging
-import neodroid.modeling as modeling
 from neodroid import Reaction
 from neodroid.modeling.reaction_parameters import ReactionParameters
 from neodroid.utilities.action_space import ActionSpace
@@ -51,6 +50,8 @@ class NeodroidEnvironment(object):
     self._external_on_connected_callback = on_connected_callback
     self._external_on_disconnected_callback = on_disconnected_callback
 
+    self._connected_to_server = True
+
     # Environment
     self._environment_description = None
     self._state = None
@@ -70,13 +71,14 @@ class NeodroidEnvironment(object):
         if self._debug_logging:
           self._logger.debug('could not start environment ' + str(name))
 
+    self._message_server = messaging.MessageClient(self._ip,
+                                                   self._port,
+                                                   on_timeout_callback=self.__on_timeout_callback__,
+                                                   on_disconnected_callback=self.__on_disconnected_callback__)
 
-    self._message_server = messaging.MessageServer(self._ip,self._port)
-    self._message_server.setup_connection()
+    # time.sleep(seconds_before_connect / 4)
 
-    time.sleep(seconds_before_connect / 4)
     self.reset()
-    self.observe()
 
   def __start_instance__(self, name, path_to_executables_directory, ip, port):
     path_to_executable = os.path.join(path_to_executables_directory,
@@ -103,35 +105,24 @@ class NeodroidEnvironment(object):
       return False
 
   def __on_connected_callback__(self):
+    warnings.warn('Connected to server')
     if self._external_on_connected_callback:
       self._external_on_connected_callback()
 
   def __on_disconnected_callback__(self):
+    self._connected_to_server = False
     warnings.warn('Disconnected from server')
     if self._external_on_disconnected_callback:
       self._external_on_disconnected_callback()
 
-  def __on_step_done_callback__(self):
-    pass
-
-  def __get_state__(self, on_step_done_callback=None):
-    if on_step_done_callback:
-      self._message_server.start_receive_state_thread(on_step_done_callback,
-                                           self.__timeout_callback__)
-    else:
-      return self._message_server.receive_state(self.__timeout_callback__)
-
-  def __timeout_callback__(self):
-    warnings.warn('Timeout')
-
-  def __del__(self):
-    self.close()
-
-  def __str__(self):
-    return '<NeodroidEnvironment>'
+  def __on_timeout_callback__(self):
+    warnings.warn('Connection timeout')
 
   def is_connected(self):
-    return self._message_server.is_connected()
+    return self._connected_to_server
+
+  def __str__(self):
+    return '<NeodroidEnvironment></NeodroidEnvironment>'
 
   def seed(self, seed):
     np.random.seed(seed)
@@ -161,29 +152,22 @@ class NeodroidEnvironment(object):
             on_step_done_callback=None):
 
     if self._debug_logging:
-      self._logger.debug('Reacting')
+      self._logger.debug('Reacting in environment')
 
     input_reaction = self.maybe_infer_motion_reaction(input_reaction)
     if parameters is not None:
       input_reaction.set_parameters(parameters)
 
-    if self._message_server.is_connected():
-      if on_reaction_sent_callback:
-        self._message_server.start_send_reaction_thread(input_reaction,
-                                             on_reaction_sent_callback)
-      else:
-        self._message_server.send_reaction(input_reaction)
+    message = self._message_server.send_reaction(input_reaction)
 
-      message = self.__get_state__(on_step_done_callback)
-      if message:
-        self._observation_space = flattened_observation(message)
-        self._state = message
-        if message.get_environment_description():
-          self._environment_description = message.get_environment_description()
-        return message
+    if message:
+      self._observation_space = flattened_observation(message)
+      self._state = message
+      if message.get_environment_description():
+        self._environment_description = message.get_environment_description()
+      return message
     if self._debug_logging:
-      self._logger.debug('Is not connected to environment')
-    return None
+      self._logger.debug('No valid was message received')
 
   def maybe_infer_configuration_reaction(self, input_reaction):
     if self._environment_description:
@@ -200,8 +184,7 @@ class NeodroidEnvironment(object):
                   describe=True,
                   episode_count=False)
               ):
-    self._message_server.send_reaction(Reaction(parameters))
-    return self.__get_state__()
+    return self._message_server.send_reaction(Reaction(parameters))
 
   def reset(self, input_reaction=None, state=None, on_reset_callback=None):
     """
@@ -212,37 +195,30 @@ class NeodroidEnvironment(object):
     :type on_reset_callback: object
     """
     if self._debug_logging:
-      self._logger.debug('Resetting')
+      self._logger.debug('Resetting enviroment')
 
-    if self._message_server.is_connected():
+    input_reaction = self.maybe_infer_configuration_reaction(input_reaction)
+    if state:
+      input_reaction.set_unobservables(state.get_unobservables())
 
-      input_reaction = self.maybe_infer_configuration_reaction(input_reaction)
-      if state:
-        input_reaction.set_unobservables(state.get_unobservables())
+    message = self._message_server.send_reaction(input_reaction)
 
-      if on_reset_callback:
-        self._message_server.start_send_reaction_thread(input_reaction, on_reset_callback)
-      else:
-        self._message_server.send_reaction(input_reaction)
-
-      message = self.__get_state__()
-
-      if message:
-        self._observation_space = flattened_observation(message)
-        self._state = message
-        if message.get_environment_description():
-          self._environment_description = message.get_environment_description()
-          self._action_space = contruct_action_space(self._environment_description)
-        return message
-    return None
+    if message:
+      self._observation_space = flattened_observation(message)
+      self._state = message
+      if message.get_environment_description():
+        self._environment_description = message.get_environment_description()
+        self._action_space = contruct_action_space(self._environment_description)
+      return message
+    if self._debug_logging:
+      self._logger.debug('No valid was message received')
 
   def close(self, callback=None):
     if self._debug_logging:
       self._logger.debug('Close')
-    #if self._message_server:
+    # if self._message_server:
     #  self._message_server.__del__()
-    if self._message_server.is_connected():
-      if self._simulation_instance is not None:
-        self._simulation_instance.terminate()
-      if callback:
-        callback()
+    if self._simulation_instance is not None:
+      self._simulation_instance.terminate()
+    if callback:
+      callback()

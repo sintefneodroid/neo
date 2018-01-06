@@ -34,7 +34,7 @@ def get_goal_configuration(environment):
       Configuration('SatelliteRigidbodyAngZ', 0)]
 
 def main():
-  _environment = neo.make('lunarlander', connect_to_running=False)
+  _environment = neo.make('lunarlander', connect_to_running=True)
   _environment.seed(42)
 
   initial_configuration = get_goal_configuration(_environment)
@@ -42,6 +42,8 @@ def main():
 
   for i in range(300):
       state = sample_initial_state(_memory)
+      if not _environment.is_connected():
+        break
       _environment.configure(state=state)
 
       if i % 20 == 19:

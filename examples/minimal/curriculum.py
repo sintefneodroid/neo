@@ -29,6 +29,8 @@ def main():
 
   for i in range(300):
       state = sample_initial_state(_memory)
+      if not _environment.is_connected():
+        break
       _environment.configure(state=state)
 
       if i % 20 == 19:
