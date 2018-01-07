@@ -4,43 +4,54 @@
 
 import flatbuffers
 
+
 class FBSNumeralArray(object):
-    __slots__ = ['_tab']
+  __slots__ = ['_tab']
 
-    @classmethod
-    def GetRootAsFBSNumeralArray(cls, buf, offset):
-        n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-        x = FBSNumeralArray()
-        x.Init(buf, n + offset)
-        return x
+  @classmethod
+  def GetRootAsFBSNumeralArray(cls, buf, offset):
+    n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
+    x = FBSNumeralArray()
+    x.Init(buf, n + offset)
+    return x
 
-    # FBSNumeralArray
-    def Init(self, buf, pos):
-        self._tab = flatbuffers.table.Table(buf, pos)
+  # FBSNumeralArray
+  def Init(self, buf, pos):
+    self._tab = flatbuffers.table.Table(buf, pos)
 
-    # FBSNumeralArray
-    def Vector(self, j):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-        if o != 0:
-            a = self._tab.Vector(o)
-            return self._tab.Get(flatbuffers.number_types.Float64Flags, a + flatbuffers.number_types.UOffsetTFlags.py_type(j * 8))
-        return 0
+  # FBSNumeralArray
+  def Vector(self, j):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+    if o != 0:
+      a = self._tab.Vector(o)
+      return self._tab.Get(flatbuffers.number_types.Float64Flags,
+                           a + flatbuffers.number_types.UOffsetTFlags.py_type(j * 8))
+    return 0
 
-    # FBSNumeralArray
-    def VectorAsNumpy(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-        if o != 0:
-            return self._tab.GetVectorAsNumpy(flatbuffers.number_types.Float64Flags, o)
-        return 0
+  # FBSNumeralArray
+  def VectorAsNumpy(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+    if o != 0:
+      return self._tab.GetVectorAsNumpy(flatbuffers.number_types.Float64Flags, o)
+    return 0
 
-    # FBSNumeralArray
-    def VectorLength(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-        if o != 0:
-            return self._tab.VectorLen(o)
-        return 0
+  # FBSNumeralArray
+  def VectorLength(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+    if o != 0:
+      return self._tab.VectorLen(o)
+    return 0
+
 
 def FBSNumeralArrayStart(builder): builder.StartObject(1)
-def FBSNumeralArrayAddVector(builder, vector): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(vector), 0)
+
+
+def FBSNumeralArrayAddVector(builder, vector): builder.PrependUOffsetTRelativeSlot(0,
+                                                                                   flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                     vector), 0)
+
+
 def FBSNumeralArrayStartVectorVector(builder, numElems): return builder.StartVector(8, numElems, 8)
+
+
 def FBSNumeralArrayEnd(builder): return builder.EndObject()

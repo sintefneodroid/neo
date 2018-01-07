@@ -1,8 +1,9 @@
-import neodroid as neo
 from example.guiclient.gui import NeoGUI
 from neodroid.modeling import Reaction, Motion
 from neodroid.modeling.configuration import Configuration
 from neodroid.modeling.reaction_parameters import ReactionParameters
+
+import neodroid as neo
 
 _gui = None
 _neo_environment = None
@@ -41,7 +42,7 @@ def on_step_callback(actor_name, slider_values):
     Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
     Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
   ]
-  parameters = ReactionParameters(True, True, False, False,False)
+  parameters = ReactionParameters(True, True, False, False, False)
   new_state = _neo_environment.react(Reaction(parameters, [], motions))
   update_callback(new_state)
 
@@ -50,7 +51,7 @@ def on_reset_callback(slider_values):
   configurations = [
     Configuration(str(slider_values[0][0]), slider_values[0][1])
   ]
-  parameters = ReactionParameters(False, False, True, True,True)
+  parameters = ReactionParameters(False, False, True, True, True)
   new_state = _neo_environment.react(Reaction(parameters, configurations, []))
   update_callback(new_state)
 
@@ -60,37 +61,37 @@ def update_environment_widgets(environment_state):
 
   try:
     _gui.update_position_label(
-        str(environment_state.get_actor(
+        str(environment_state.actor(
             b'ManipulatorActor').get_position()))
     _gui.update_rotation_label(
-        str(environment_state.get_actor(b'ManipulatorActor').get_rotation()))
+        str(environment_state.actor(b'ManipulatorActor').get_rotation()))
     _gui.update_direction_label(
-        str(environment_state.get_actor(b'ManipulatorActor').get_direction()))
+        str(environment_state.actor(b'ManipulatorActor').get_direction()))
     _gui.update_reward_label(str(environment_state.get_reward_for_last_step()))
     _gui.update_energy_label(
-        str(environment_state.get_total_energy_spent_since_reset()))
+        str(environment_state.total_energy_spent_since_reset()))
     _gui.update_frame_label(
         str(environment_state.get_last_steps_frame_number()))
-    _gui.update_interrupted_label(str(environment_state.get_terminated()))
+    _gui.update_interrupted_label(str(environment_state.terminated()))
     _gui.update_time_label(str(environment_state.get_time_since_reset()))
   except BaseException:
     print('Failed at updating rest of GUI')
 
   try:
     _gui.update_normal_image(
-        environment_state.get_observer(b'NormalCamera').get_data())
+        environment_state.observer(b'NormalCamera').data())
     _gui.update_motion_image(
-        environment_state.get_observer(b'FlowCamera').get_data())
+        environment_state.observer(b'FlowCamera').data())
     _gui.update_depth_image(
-        environment_state.get_observer(b'DepthCamera').get_data())
+        environment_state.observer(b'DepthCamera').data())
     _gui.update_segmentation_image(
-        environment_state.get_observer(b'SegmentationCamera').get_data())
-    _gui.update_instance_segmentation_image(environment_state.get_observer(
-        b'InstanceSegmentationCamera').get_data())
+        environment_state.observer(b'SegmentationCamera').data())
+    _gui.update_instance_segmentation_image(environment_state.observer(
+        b'InstanceSegmentationCamera').data())
     _gui.update_rgb_image(
-        environment_state.get_observer(b'RGBCamera').get_data())
+        environment_state.observer(b'RGBCamera').data())
     _gui.update_infrared_shadow_image(
-        environment_state.get_observer(b'InfraredShadowCamera').get_data())
+        environment_state.observer(b'InfraredShadowCamera').data())
   except BaseException:
     print('Failed at updating Images')
 

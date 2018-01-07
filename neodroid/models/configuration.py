@@ -3,10 +3,12 @@ class Configuration(object):
     self._configurable_name = configurable_name
     self._configurable_value = configurable_value
 
-  def get_configurable_name(self):
+  @property
+  def configurable_name(self):
     return self._configurable_name
 
-  def get_configurable_value(self):
+  @property
+  def configurable_value(self):
     return self._configurable_value
 
   def to_dict(self):

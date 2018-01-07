@@ -1,7 +1,5 @@
 import json
 
-from neodroid.modeling.reaction_parameters import ReactionParameters
-
 
 class Reaction(object):
   def __init__(self,
@@ -16,31 +14,40 @@ class Reaction(object):
     self._motions = motions
     self._unobservables = unobservables
 
-  def get_environment_name(self):
+  @property
+  def environment_name(self):
     return self._environment_name
 
-  def get_parameters(self):
+  @property
+  def parameters(self):
     return self._parameters
 
-  def set_parameters(self, parameters):
+  @parameters.setter
+  def parameters(self, parameters):
     self._parameters = parameters
 
-  def get_motions(self):
+  @property
+  def motions(self):
     return self._motions
 
-  def set_motions(self, motions):
+  @motions.setter
+  def motions(self, motions):
     self._motions = motions
 
-  def get_configurations(self):
+  @property
+  def configurations(self):
     return self._configurations
 
-  def set_configurations(self, configurations):
+  @configurations.setter
+  def configurations(self, configurations):
     self._configurations = configurations
 
-  def get_unobservables(self):
+  @property
+  def unobservables(self):
     return self._unobservables
 
-  def set_unobservables(self, unobservables):
+  @unobservables.setter
+  def unobservables(self, unobservables):
     self._unobservables = unobservables
 
   def to_dict(self):
@@ -55,12 +62,12 @@ class Reaction(object):
 
   def __repr__(self):
     return '<Reaction>\n' + \
-          str(self._parameters)+\
-           '  <configurations>\n' + str(self._configurations) +\
+           str(self._parameters) + \
+           '  <configurations>\n' + str(self._configurations) + \
            '  </configurations>\n' + \
            '  <motions>\n' + str(self._motions) + \
            '  </motions>\n' + \
-           str(self.get_unobservables()) + \
+           str(self.unobservables()) + \
            '</Reaction>\n'
 
   def __str__(self):

@@ -1,18 +1,19 @@
-import math
-
 class InputRange(object):
   def __init__(self, decimal_granularity, min_value, max_value):
     self._decimal_granularity = decimal_granularity
     self._min_value = min_value
     self._max_value = max_value
 
-  def get_decimal_granularity(self):
+  @property
+  def decimal_granularity(self):
     return self._decimal_granularity
 
-  def get_min_value(self):
+  @property
+  def min_value(self):
     return self._min_value
 
-  def get_max_value(self):
+  @property
+  def max_value(self):
     return self._max_value
 
   def to_dict(self):

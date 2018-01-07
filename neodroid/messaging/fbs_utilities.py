@@ -3,14 +3,14 @@ from io import BytesIO
 import flatbuffers as flb
 import numpy as np
 
-from neodroid import modeling as N
+from neodroid import models as N
 from neodroid.messaging import FBSModels as F
 
 
 def build_reaction(input_reaction):
   B = flb.Builder(0)
 
-  unobservables = build_unobservables(B,input_reaction)
+  unobservables = build_unobservables(B, input_reaction)
 
   configurations = build_configurations(B, input_reaction)
   motions = build_motions(B, input_reaction)
@@ -20,12 +20,12 @@ def build_reaction(input_reaction):
   F.FBSReactionStart(B)
   F.FBSReactionAddParameters(B,
                              F.CreateFBSReactionParameters(B,
-                                                           input_reaction.get_parameters().get_terminable(),
-                                                           input_reaction.get_parameters().get_step(),
-                                                           input_reaction.get_parameters().get_reset(),
-                                                           input_reaction.get_parameters().get_configure(),
-                                                           input_reaction.get_parameters().get_describe(),
-                                                           input_reaction.get_parameters().get_episode_count()))
+                                                           input_reaction.parameters.terminable,
+                                                           input_reaction.parameters.step,
+                                                           input_reaction.parameters.reset,
+                                                           input_reaction.parameters.configure,
+                                                           input_reaction.parameters.describe,
+                                                           input_reaction.parameters.episode_count))
   F.FBSReactionAddEnvironmentName(B, environment_string_offset)
   F.FBSReactionAddMotions(B, motions)
   F.FBSReactionAddConfigurations(B, configurations)
@@ -37,17 +37,19 @@ def build_reaction(input_reaction):
 
   return B.Output()
 
+
 def build_unobservables(B,
                         input_reaction):
-  unobservables = input_reaction.get_unobservables()
+  unobservables = input_reaction.unobservables
   if unobservables:
-    poses = build_poses(B,unobservables)
-    bodies = build_bodies(B,unobservables)
+    poses = build_poses(B, unobservables)
+    bodies = build_bodies(B, unobservables)
 
     F.FBSUnobservablesStart(B)
     F.FBSUnobservablesAddPoses(B, poses)
     F.FBSUnobservablesAddBodies(B, bodies)
     return F.FBSUnobservablesEnd(B)
+
 
 def build_poses(B, unobservables):
   fu = unobservables._unobservables
@@ -75,15 +77,15 @@ def build_bodies(B, unobservables):
 
 def build_motions(B, input_reaction):
   motion_offsets = []
-  for input_motion in input_reaction.get_motions():
+  for input_motion in input_reaction.motions:
     actor_string_offset = B.CreateString(
-        input_motion.get_actor_name())
+        input_motion.actor_name)
     motor_string_offset = B.CreateString(
-        input_motion.get_motor_name())
+        input_motion.motor_name)
     F.FBSMotionStart(B)
     F.FBSMotionAddActorName(B, actor_string_offset)
     F.FBSMotionAddMotorName(B, motor_string_offset)
-    F.FBSMotionAddStrength(B, input_motion.get_strength())
+    F.FBSMotionAddStrength(B, input_motion.strength)
     motion_offset = F.FBSMotionEnd(B)
     motion_offsets.append(motion_offset)
 
@@ -95,12 +97,12 @@ def build_motions(B, input_reaction):
 
 def build_configurations(B, input_reaction):
   configurations_offsets = []
-  for input_configuration in input_reaction.get_configurations():
+  for input_configuration in input_reaction.configurations:
     name_string_offset = B.CreateString(
-        input_configuration.get_configurable_name())
+        input_configuration.configurable_name)
     F.FBSConfigurationStart(B)
     F.FBSConfigurationAddConfigurableName(B, name_string_offset)
-    F.FBSConfigurationAddConfigurableValue(B, input_configuration.get_configurable_value())
+    F.FBSConfigurationAddConfigurableValue(B, input_configuration.configurable_value)
     configuration_offset = F.FBSConfigurationEnd(B)
     configurations_offsets.append(configuration_offset)
 
@@ -129,7 +131,7 @@ def create_actors(flat_environment_description):
     for i in range(flat_environment_description.ActorsLength()):
       flat_actor = flat_environment_description.Actors(i)
       actor = N.Actor(flat_actor)
-      actors[actor.get_name()] = actor
+      actors[actor.name] = actor
   return actors
 
 
@@ -146,11 +148,13 @@ def create_observers(flat_state):
       data = create_data(flat_observer)
 
       observers[flat_observer.ObserverName()] = N.Observer(
-          flat_observer.ObserverName(),data)
+          flat_observer.ObserverName(), data)
   return observers
+
 
 def create_unobservables(state):
   return N.Unobservables(state.Unobservables())
+
 
 def create_poses(unobservables):
   poses = np.zeros((unobservables.PosesLength(), 7))
@@ -193,6 +197,7 @@ def create_body(flat_observer):
           [angular_velocity.X(), angular_velocity.Y(),
            angular_velocity.Z()]]
 
+
 def create_position(fbs_configurable):
   pos = F.FBSPosition()
   pos.Init(fbs_configurable.Observation().Bytes, fbs_configurable.Observation().Pos)
@@ -219,7 +224,7 @@ def create_configurables(flat_environment_description):
                        fbs_configurable.ValidInput().MinValue(),
                        fbs_configurable.ValidInput().MaxValue()),
           current_value)
-      configurables[configurable.get_configurable_name()] = configurable
+      configurables[configurable.configurable_name] = configurable
   return configurables
 
 
@@ -245,7 +250,7 @@ def create_motors(flat_actor):
     input_motor = N.Motor(flat_motor.MotorName(),
                           flat_motor.ValidInput(),
                           flat_motor.EnergySpentSinceReset())
-    motors[input_motor.get_name()] = input_motor
+    motors[input_motor.name] = input_motor
   return motors
 
 

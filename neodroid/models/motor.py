@@ -1,4 +1,4 @@
-from neodroid.messaging import create_valid_range
+import neodroid.messaging
 
 
 class Motor(object):
@@ -7,13 +7,16 @@ class Motor(object):
     self._valid_input = valid_input
     self._energy_spent = energy_spent
 
-  def get_name(self):
+  @property
+  def name(self):
     return self._name
 
-  def get_valid_input(self):
-    return create_valid_range(self._valid_input)
+  @property
+  def valid_input(self):
+    return neodroid.messaging.create_valid_range(self._valid_input)
 
-  def get_energy_spent(self):
+  @property
+  def energy_spent(self):
     return self._energy_spent
 
   def __repr__(self):

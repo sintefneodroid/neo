@@ -3,10 +3,12 @@ class Observer(object):
     self._name = name
     self._data = data
 
-  def get_name(self):
+  @property
+  def name(self):
     return self._name
 
-  def get_data(self):
+  @property
+  def data(self):
     return self._data
 
   def __repr__(self):

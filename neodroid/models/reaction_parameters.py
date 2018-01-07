@@ -2,7 +2,8 @@ import json
 
 
 class ReactionParameters(object):
-  def __init__(self, terminable=True, step=False, reset = False, configure=False, describe=False, episode_count=True):
+  def __init__(self, terminable=True, step=False, reset=False, configure=False, describe=False,
+               episode_count=True):
     self._terminable = terminable
     self._configure = configure
     self._step = step
@@ -10,27 +11,33 @@ class ReactionParameters(object):
     self._describe = describe
     self._episode_count = episode_count
 
-  def get_reset(self):
+  @property
+  def reset(self):
     return self._reset
 
-  def get_configure(self):
+  @property
+  def configure(self):
     return self._configure
 
-  def get_describe(self):
+  @property
+  def describe(self):
     return self._describe
 
-  def get_step(self):
+  @property
+  def step(self):
     return self._step
 
-  def get_episode_count(self):
+  @property
+  def episode_count(self):
     return self._episode_count
 
-  def get_terminable(self):
+  @property
+  def terminable(self):
     return self._terminable
 
   def to_dict(self):
     return {
-      '_reset'         : self._reset
+      '_reset': self._reset
     }
 
   def to_json(self):

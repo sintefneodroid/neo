@@ -4,79 +4,106 @@
 
 import flatbuffers
 
+
 class FBSEnvironmentDescription(object):
-    __slots__ = ['_tab']
+  __slots__ = ['_tab']
 
-    @classmethod
-    def GetRootAsFBSEnvironmentDescription(cls, buf, offset):
-        n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-        x = FBSEnvironmentDescription()
-        x.Init(buf, n + offset)
-        return x
+  @classmethod
+  def GetRootAsFBSEnvironmentDescription(cls, buf, offset):
+    n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
+    x = FBSEnvironmentDescription()
+    x.Init(buf, n + offset)
+    return x
 
-    # FBSEnvironmentDescription
-    def Init(self, buf, pos):
-        self._tab = flatbuffers.table.Table(buf, pos)
+  # FBSEnvironmentDescription
+  def Init(self, buf, pos):
+    self._tab = flatbuffers.table.Table(buf, pos)
 
-    # FBSEnvironmentDescription
-    def MaxEpisodeLength(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-        if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
-        return 0
+  # FBSEnvironmentDescription
+  def MaxEpisodeLength(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+    if o != 0:
+      return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
+    return 0
 
-    # FBSEnvironmentDescription
-    def SolvedThreshold(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
-        if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
-        return 0.0
+  # FBSEnvironmentDescription
+  def SolvedThreshold(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+    if o != 0:
+      return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+    return 0.0
 
-    # FBSEnvironmentDescription
-    def Actors(self, j):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
-        if o != 0:
-            x = self._tab.Vector(o)
-            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
-            x = self._tab.Indirect(x)
-            from .FBSActor import FBSActor
-            obj = FBSActor()
-            obj.Init(self._tab.Bytes, x)
-            return obj
-        return None
+  # FBSEnvironmentDescription
+  def Actors(self, j):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+    if o != 0:
+      x = self._tab.Vector(o)
+      x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
+      x = self._tab.Indirect(x)
+      from .FBSActor import FBSActor
+      obj = FBSActor()
+      obj.Init(self._tab.Bytes, x)
+      return obj
+    return None
 
-    # FBSEnvironmentDescription
-    def ActorsLength(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
-        if o != 0:
-            return self._tab.VectorLen(o)
-        return 0
+  # FBSEnvironmentDescription
+  def ActorsLength(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+    if o != 0:
+      return self._tab.VectorLen(o)
+    return 0
 
-    # FBSEnvironmentDescription
-    def Configurables(self, j):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
-        if o != 0:
-            x = self._tab.Vector(o)
-            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
-            x = self._tab.Indirect(x)
-            from .FBSConfigurable import FBSConfigurable
-            obj = FBSConfigurable()
-            obj.Init(self._tab.Bytes, x)
-            return obj
-        return None
+  # FBSEnvironmentDescription
+  def Configurables(self, j):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+    if o != 0:
+      x = self._tab.Vector(o)
+      x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
+      x = self._tab.Indirect(x)
+      from .FBSConfigurable import FBSConfigurable
+      obj = FBSConfigurable()
+      obj.Init(self._tab.Bytes, x)
+      return obj
+    return None
 
-    # FBSEnvironmentDescription
-    def ConfigurablesLength(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
-        if o != 0:
-            return self._tab.VectorLen(o)
-        return 0
+  # FBSEnvironmentDescription
+  def ConfigurablesLength(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+    if o != 0:
+      return self._tab.VectorLen(o)
+    return 0
+
 
 def FBSEnvironmentDescriptionStart(builder): builder.StartObject(4)
-def FBSEnvironmentDescriptionAddMaxEpisodeLength(builder, maxEpisodeLength): builder.PrependInt32Slot(0, maxEpisodeLength, 0)
-def FBSEnvironmentDescriptionAddSolvedThreshold(builder, solvedThreshold): builder.PrependFloat32Slot(1, solvedThreshold, 0.0)
-def FBSEnvironmentDescriptionAddActors(builder, actors): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(actors), 0)
+
+
+def FBSEnvironmentDescriptionAddMaxEpisodeLength(builder, maxEpisodeLength): builder.PrependInt32Slot(0,
+                                                                                                      maxEpisodeLength,
+                                                                                                      0)
+
+
+def FBSEnvironmentDescriptionAddSolvedThreshold(builder, solvedThreshold): builder.PrependFloat32Slot(1,
+                                                                                                      solvedThreshold,
+                                                                                                      0.0)
+
+
+def FBSEnvironmentDescriptionAddActors(builder, actors): builder.PrependUOffsetTRelativeSlot(2,
+                                                                                             flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                               actors), 0)
+
+
 def FBSEnvironmentDescriptionStartActorsVector(builder, numElems): return builder.StartVector(4, numElems, 4)
-def FBSEnvironmentDescriptionAddConfigurables(builder, configurables): builder.PrependUOffsetTRelativeSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(configurables), 0)
-def FBSEnvironmentDescriptionStartConfigurablesVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+
+
+def FBSEnvironmentDescriptionAddConfigurables(builder, configurables): builder.PrependUOffsetTRelativeSlot(3,
+                                                                                                           flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                                             configurables),
+                                                                                                           0)
+
+
+def FBSEnvironmentDescriptionStartConfigurablesVector(builder, numElems): return builder.StartVector(4,
+                                                                                                     numElems,
+                                                                                                     4)
+
+
 def FBSEnvironmentDescriptionEnd(builder): return builder.EndObject()

@@ -1,20 +1,24 @@
-from neodroid import NeodroidEnvironment, Reaction, Configuration
 from neodroid.modeling.reaction_parameters import ReactionParameters
+
+from neodroid import NeodroidEnvironment, Reaction
 from neodroid.utilities.statics import flattened_observation
 
 
 class NeodroidCurriculumWrapper(NeodroidEnvironment):
   def __init__(self, *args, **kwargs):
-    super(NeodroidCurriculumWrapper, self).__init__(*args,**kwargs)
+    super(NeodroidCurriculumWrapper, self).__init__(*args, **kwargs)
     self.observation_space = self.__observation_space__()
     self.action_space = self.__action_space__()
 
-  def act(self,*args, **kwargs):
+  def __next__(self):
+    return self.act()
+
+  def act(self, *args, **kwargs):
     message = super(NeodroidCurriculumWrapper, self).react(*args, **kwargs)
     if message:
       return (flattened_observation(message),
-              message.get_reward(),
-              message.get_terminated(), message)
+              message.reward,
+              message.terminated, message)
     return None, None, None, None
 
   def configure(self, *args, **kwargs):
@@ -25,15 +29,16 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
 
   def generate_inital_states_from_goal_state(self, initial_configuration, motion_horizon=10, num=10):
 
-    initial_states=[]
+    initial_states = []
     while len(initial_states) < num:
-      params = ReactionParameters(terminable=False,episode_count=False,reset=True,configure=True)
-      init = Reaction(params,initial_configuration)
+      params = ReactionParameters(terminable=False, episode_count=False, reset=True, configure=True)
+      init = Reaction(params, initial_configuration)
       _, info = self.configure(init)
 
-      params = ReactionParameters(terminable=False,episode_count=False,reset=False,configure=False,step=True)
+      params = ReactionParameters(terminable=False, episode_count=False, reset=False, configure=False,
+                                  step=True)
       for i in range(motion_horizon):
-        self.act(self.action_space.sample(),params)
+        self.act(self.action_space.sample(), params)
       _, _, terminated, info = self.observe()
       if not terminated:
         initial_states.append(info)
@@ -41,18 +46,18 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
     return initial_states
 
   def generate_inital_states_from_state(self, state, motion_horizon=10, num=10):
-    initial_states=[]
+    initial_states = []
     params = ReactionParameters(terminable=True,
                                 episode_count=False,
                                 reset=False,
                                 configure=False,
                                 step=True)
     while len(initial_states) < num:
-      _, info = self.configure(None,state)
+      _, info = self.configure(None, state)
 
-      terminated=False
+      terminated = False
       for i in range(motion_horizon):
-        _, _, terminated, info = self.act(self.action_space.sample(),params)
+        _, _, terminated, info = self.act(self.action_space.sample(), params)
         if terminated:
           break
       if not terminated:
@@ -64,9 +69,9 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
     message = super(NeodroidCurriculumWrapper, self).observe()
     if message:
       return (flattened_observation(message),
-              message.get_reward(),
-              message.get_terminated(), message)
-    return None,None,None,None
+              message.reward,
+              message.terminated, message)
+    return None, None, None, None
 
   def quit(self, *args, **kwargs):
     self.close(*args, **kwargs)

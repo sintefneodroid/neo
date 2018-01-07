@@ -8,4 +8,5 @@ from .motion import Motion
 from .motor import Motor
 from .observer import Observer
 from .reaction import Reaction
+from .reaction_parameters import ReactionParameters
 from .unobservables import Unobservables

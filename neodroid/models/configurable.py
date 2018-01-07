@@ -1,16 +1,20 @@
+# @pretty_print
 class Configurable(object):
   def __init__(self, configurable_name, valid_range, current_value):
     self._configurable_name = configurable_name
     self._valid_range = valid_range
     self._current_value = current_value
 
-  def get_configurable_name(self):
+  @property
+  def configurable_name(self):
     return self._configurable_name
 
-  def get_valid_range(self):
+  @property
+  def valid_range(self):
     return self._valid_range
 
-  def get_current_value(self):
+  @property
+  def current_value(self):
     return self._current_value
 
   def to_dict(self):

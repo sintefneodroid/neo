@@ -6,7 +6,9 @@ develop-eggs
 downloads
 eggs
 parts
-src/*.egg-info
+*.egg-info
+.idea
+
 __pycache__/
 #*.py[cod]
 

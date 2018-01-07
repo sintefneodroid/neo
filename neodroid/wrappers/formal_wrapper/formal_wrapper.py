@@ -8,6 +8,9 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
     self.observation_space = self.__observation_space__()
     self.action_space = self.__action_space__()
 
+  def __next__(self):
+    return self.act()
+
   def act(self,
           input_reaction=None,
           on_step_done_callback=None,
@@ -17,8 +20,8 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
                                                        on_step_done_callback)
     if message:
       return (flattened_observation(message),
-              message.get_reward(),
-              message.get_terminated(), message)
+              message.reward,
+              message.terminated, message)
     return None, None, None, None
 
   def configure(self, input_configuration=[], on_reset_callback=None):
@@ -28,13 +31,12 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
       return flattened_observation(message), message
     return None, None
 
-  def observe(self):
-    message = super(NeodroidFormalWrapper, self).observe()
+  def observe(self, **kwargs):
+    message = super(NeodroidFormalWrapper, self).observe(**kwargs)
     if message:
       return (flattened_observation(message),
-              message.get_reward(),
-              message.get_terminated(), message)
-
+              message.reward(),
+              message.terminated(), message)
 
   def quit(self, callback=None):
     self.close(callback=callback)

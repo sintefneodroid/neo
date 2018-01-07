@@ -5,12 +5,12 @@ import subprocess
 import sys
 import time
 import warnings
+from types import coroutine
 
 import numpy as np
 
 import neodroid.messaging as messaging
-from neodroid import Reaction
-from neodroid.modeling.reaction_parameters import ReactionParameters
+import neodroid.models as M
 from neodroid.utilities.action_space import ActionSpace
 from neodroid.utilities.reaction_factory import verify_motion_reaction, verify_configuration_reaction
 from neodroid.utilities.statics import flattened_observation, contruct_action_space
@@ -18,7 +18,7 @@ from neodroid.utilities.statics import flattened_observation, contruct_action_sp
 
 class NeodroidEnvironment(object):
   def __init__(self,
-               ip="127.0.0.1",
+               ip="localhost",
                port=5555,
                connect_to_running=False,
                name='carscene',
@@ -53,7 +53,7 @@ class NeodroidEnvironment(object):
     self._connected_to_server = True
 
     # Environment
-    self._environment_description = None
+    self._description = None
     self._state = None
     self._observation_space = np.zeros(1)
     self._action_space = ActionSpace()
@@ -76,9 +76,21 @@ class NeodroidEnvironment(object):
                                                    on_timeout_callback=self.__on_timeout_callback__,
                                                    on_disconnected_callback=self.__on_disconnected_callback__)
 
-    # time.sleep(seconds_before_connect / 4)
-
     self.reset()
+
+  @property
+  def description(self):
+    return self._description
+
+  def __iter__(self):
+    return self
+
+  def __next__(self):
+    return self.react()
+
+  @coroutine
+  def coroutine_generator(self):
+    return self
 
   def __start_instance__(self, name, path_to_executables_directory, ip, port):
     path_to_executable = os.path.join(path_to_executables_directory,
@@ -134,16 +146,16 @@ class NeodroidEnvironment(object):
     return self._action_space
 
   def maybe_infer_motion_reaction(self, input_reaction):
-    if self._environment_description:
+    if self._description:
       input_reaction = verify_motion_reaction(input_reaction,
-                                              self._environment_description)
+                                              self._description)
     else:
       input_reaction = verify_motion_reaction(input_reaction, None)
 
     return input_reaction
 
   def get_environment_description(self):
-    return self._environment_description
+    return self._description
 
   def react(self,
             input_reaction=None,
@@ -156,35 +168,35 @@ class NeodroidEnvironment(object):
 
     input_reaction = self.maybe_infer_motion_reaction(input_reaction)
     if parameters is not None:
-      input_reaction.set_parameters(parameters)
+      input_reaction.parameters = parameters
 
     message = self._message_server.send_reaction(input_reaction)
 
     if message:
       self._observation_space = flattened_observation(message)
       self._state = message
-      if message.get_environment_description():
-        self._environment_description = message.get_environment_description()
+      if message.description:
+        self._description = message.description
       return message
     if self._debug_logging:
       self._logger.debug('No valid was message received')
 
   def maybe_infer_configuration_reaction(self, input_reaction):
-    if self._environment_description:
+    if self._description:
       input_reaction = verify_configuration_reaction(input_reaction,
-                                                     self._environment_description)
+                                                     self._description)
     else:
       input_reaction = verify_configuration_reaction(input_reaction, None)
 
     return input_reaction
 
   def observe(self,
-              parameters=ReactionParameters(
+              parameters=M.ReactionParameters(
                   terminable=True,
                   describe=True,
                   episode_count=False)
               ):
-    return self._message_server.send_reaction(Reaction(parameters))
+    return self._message_server.send_reaction(M.Reaction(parameters))
 
   def reset(self, input_reaction=None, state=None, on_reset_callback=None):
     """
@@ -199,16 +211,16 @@ class NeodroidEnvironment(object):
 
     input_reaction = self.maybe_infer_configuration_reaction(input_reaction)
     if state:
-      input_reaction.set_unobservables(state.get_unobservables())
+      input_reaction.unobservables = state.unobservables
 
     message = self._message_server.send_reaction(input_reaction)
 
     if message:
       self._observation_space = flattened_observation(message)
       self._state = message
-      if message.get_environment_description():
-        self._environment_description = message.get_environment_description()
-        self._action_space = contruct_action_space(self._environment_description)
+      if message.description:
+        self._description = message.description
+        self._action_space = contruct_action_space(self._description)
       return message
     if self._debug_logging:
       self._logger.debug('No valid was message received')

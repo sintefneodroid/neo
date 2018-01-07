@@ -12,14 +12,14 @@ from .FBSMotor import *
 from .FBSNumeral import *
 from .FBSObserver import *
 from .FBSObserverData import *
+from .FBSPosition import *
 from .FBSQuaternion import *
 from .FBSQuaternionTransform import *
 from .FBSQuaternionTransformObservation import *
 from .FBSRange import *
 from .FBSReaction import *
+from .FBSReactionParameters import *
 from .FBSState import *
 from .FBSString import *
-from .FBSReactionParameters import *
-from .FBSPosition import *
-from .FBSVector3 import *
 from .FBSUnobservables import *
+from .FBSVector3 import *

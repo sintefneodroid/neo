@@ -5,13 +5,16 @@ class Motion(object):
     self._strength = strength
     # Strength has a possible direction given by the sign of the float
 
-  def get_actor_name(self):
+  @property
+  def actor_name(self):
     return self._actor_name
 
-  def get_motor_name(self):
+  @property
+  def motor_name(self):
     return self._motor_name
 
-  def get_strength(self):
+  @property
+  def strength(self):
     return self._strength
 
   def to_dict(self):
