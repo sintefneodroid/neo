@@ -140,6 +140,7 @@ def create_observers(flat_state):
 
   for i in range(flat_state.ObserversLength()):
     flat_observer = flat_state.Observers(i)
+    data=None
     if flat_observer.ObservationType() is F.FBSObserverData.FBSEulerTransform:
       data = create_euler_transform(flat_observer)
     elif flat_observer.ObservationType() is F.FBSObserverData.FBSBodyObservation:
@@ -147,8 +148,8 @@ def create_observers(flat_state):
     elif flat_observer.ObservationType() is F.FBSObserverData.FBSByteArray:
       data = create_data(flat_observer)
 
-      observers[flat_observer.ObserverName()] = N.Observer(
-          flat_observer.ObserverName(), data)
+    observers[flat_observer.ObserverName()] = N.Observer(
+        flat_observer.ObserverName(), data)
   return observers
 
 
@@ -190,7 +191,7 @@ def create_euler_transform(flat_observer):
 
 def create_body(flat_observer):
   body = F.FBSBody()
-  body.Init(flat_observer.Data().Bytes, flat_observer.Data().Pos)
+  body.Init(flat_observer.Observation().Bytes, flat_observer.Observation().Pos)
   velocity = body.Velocity(F.FBSVector3())
   angular_velocity = body.AngularVelocity(F.FBSVector3())
   return [[velocity.X(), velocity.Y(), velocity.Z()],

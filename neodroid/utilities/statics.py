@@ -4,7 +4,10 @@ from neodroid.utilities.action_space import ActionSpace
 
 
 def flattened_observation(message):
-  return np.array([obs.data for obs in message.observers.values()]).flatten()
+  flat = [obs.data for obs in message.observers.values() if obs.data is not None]
+  flatter = np.hstack(flat).flatten()
+  flatest = flatter
+  return  flatest
 
 
 def contruct_action_space(environment_description):

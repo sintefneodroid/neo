@@ -1,16 +1,15 @@
-from neodroid.modeling.reaction_parameters import ReactionParameters
-
-from neodroid import NeodroidEnvironment, Reaction
+from neodroid import NeodroidEnvironment
+from neodroid.models import ReactionParameters, Reaction
 from neodroid.utilities.statics import flattened_observation
 
 
 class NeodroidCurriculumWrapper(NeodroidEnvironment):
   def __init__(self, *args, **kwargs):
     super(NeodroidCurriculumWrapper, self).__init__(*args, **kwargs)
-    self.observation_space = self.__observation_space__()
-    self.action_space = self.__action_space__()
 
   def __next__(self):
+    if not self._connected_to_server:
+      raise StopIteration
     return self.act()
 
   def act(self, *args, **kwargs):
@@ -19,15 +18,13 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
       return (flattened_observation(message),
               message.reward,
               message.terminated, message)
-    return None, None, None, None
 
   def configure(self, *args, **kwargs):
     message = super(NeodroidCurriculumWrapper, self).reset(*args, **kwargs)
     if message:
       return flattened_observation(message), message
-    return None, None
 
-  def generate_inital_states_from_goal_state(self, initial_configuration, motion_horizon=10, num=10):
+  def generate_inital_states_from_configuration(self, initial_configuration, motion_horizon=10, num=10):
 
     initial_states = []
     while len(initial_states) < num:
@@ -71,7 +68,6 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
       return (flattened_observation(message),
               message.reward,
               message.terminated, message)
-    return None, None, None, None
 
   def quit(self, *args, **kwargs):
     self.close(*args, **kwargs)

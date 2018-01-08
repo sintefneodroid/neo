@@ -12,6 +12,7 @@ import numpy as np
 import neodroid.messaging as messaging
 import neodroid.models as M
 from neodroid.utilities.action_space import ActionSpace
+from neodroid.utilities.debug import ClientEvents, message_client_event
 from neodroid.utilities.reaction_factory import verify_motion_reaction, verify_configuration_reaction
 from neodroid.utilities.statics import flattened_observation, contruct_action_space
 
@@ -25,11 +26,11 @@ class NeodroidEnvironment(object):
                path_to_executables_directory=os.path.join(
                    os.path.dirname(os.path.realpath(__file__)),
                    'environments'),
-               seconds_before_connect=8,
                debug_logging=False,
                logging_directory='logs',
                on_connected_callback=None,
-               on_disconnected_callback=None):
+               on_disconnected_callback=None,
+   on_timeout_callback = None):
 
     # Logging
     self._debug_logging = debug_logging
@@ -49,12 +50,12 @@ class NeodroidEnvironment(object):
     self._port = port
     self._external_on_connected_callback = on_connected_callback
     self._external_on_disconnected_callback = on_disconnected_callback
+    self._external_on_timeout_callback = on_timeout_callback
 
     self._connected_to_server = True
 
     # Environment
     self._description = None
-    self._state = None
     self._observation_space = np.zeros(1)
     self._action_space = ActionSpace()
 
@@ -64,9 +65,6 @@ class NeodroidEnvironment(object):
         if self._debug_logging:
           self._logger.debug('successfully started environment ' + str(
               name))
-          self._logger.debug('waiting ' + str(seconds_before_connect) +
-                             'seconds for ' + str(name) + ' to accept clients')
-        time.sleep(seconds_before_connect)
       else:
         if self._debug_logging:
           self._logger.debug('could not start environment ' + str(name))
@@ -75,8 +73,10 @@ class NeodroidEnvironment(object):
                                                    self._port,
                                                    on_timeout_callback=self.__on_timeout_callback__,
                                                    on_disconnected_callback=self.__on_disconnected_callback__)
+    time.sleep(5)
 
     self.reset()
+
 
   @property
   def description(self):
@@ -86,6 +86,8 @@ class NeodroidEnvironment(object):
     return self
 
   def __next__(self):
+    if not self._connected_to_server:
+      raise StopIteration
     return self.react()
 
   @coroutine
@@ -116,20 +118,23 @@ class NeodroidEnvironment(object):
         self._logger.debug('Failed to start executable ' + str(name))
       return False
 
+  @message_client_event(event=ClientEvents.CONNECTED)
   def __on_connected_callback__(self):
-    warnings.warn('Connected to server')
     if self._external_on_connected_callback:
       self._external_on_connected_callback()
 
+  @message_client_event(event=ClientEvents.DISCONNECTED)
   def __on_disconnected_callback__(self):
     self._connected_to_server = False
-    warnings.warn('Disconnected from server')
     if self._external_on_disconnected_callback:
       self._external_on_disconnected_callback()
 
+  @message_client_event(event=ClientEvents.TIMEOUT)
   def __on_timeout_callback__(self):
-    warnings.warn('Connection timeout')
+    if self._external_on_timeout_callback:
+      self._external_on_timeout_callback()
 
+  @property
   def is_connected(self):
     return self._connected_to_server
 
@@ -139,10 +144,11 @@ class NeodroidEnvironment(object):
   def seed(self, seed):
     np.random.seed(seed)
 
-  def __observation_space__(self):
+  @property
+  def observation_space(self):
     return self._observation_space
-
-  def __action_space__(self):
+  @property
+  def action_space(self):
     return self._action_space
 
   def maybe_infer_motion_reaction(self, input_reaction):
@@ -154,8 +160,6 @@ class NeodroidEnvironment(object):
 
     return input_reaction
 
-  def get_environment_description(self):
-    return self._description
 
   def react(self,
             input_reaction=None,
@@ -173,11 +177,13 @@ class NeodroidEnvironment(object):
     message = self._message_server.send_reaction(input_reaction)
 
     if message:
-      self._observation_space = flattened_observation(message)
-      self._state = message
+      flatm = flattened_observation(message)
+      if flatm is not None:
+        self._observation_space = flatm.size
       if message.description:
         self._description = message.description
       return message
+    warnings.warn('No valid was message received')
     if self._debug_logging:
       self._logger.debug('No valid was message received')
 
@@ -216,12 +222,14 @@ class NeodroidEnvironment(object):
     message = self._message_server.send_reaction(input_reaction)
 
     if message:
-      self._observation_space = flattened_observation(message)
-      self._state = message
+      flatm = flattened_observation(message)
+      if flatm is not None:
+        self._observation_space = flatm.size
       if message.description:
         self._description = message.description
         self._action_space = contruct_action_space(self._description)
       return message
+    warnings.warn('No valid was message received')
     if self._debug_logging:
       self._logger.debug('No valid was message received')
 

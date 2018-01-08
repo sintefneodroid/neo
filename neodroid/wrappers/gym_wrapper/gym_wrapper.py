@@ -26,4 +26,6 @@ class NeodroidGymWrapper(NeodroidEnvironment):
     pass
 
   def __next__(self):
+    if not self._connected_to_server:
+      raise StopIteration
     return self.step()

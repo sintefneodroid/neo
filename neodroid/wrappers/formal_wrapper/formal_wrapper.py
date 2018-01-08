@@ -5,38 +5,30 @@ from neodroid.utilities.statics import flattened_observation
 class NeodroidFormalWrapper(NeodroidEnvironment):
   def __init__(self, **kwargs):
     super(NeodroidFormalWrapper, self).__init__(**kwargs)
-    self.observation_space = self.__observation_space__()
-    self.action_space = self.__action_space__()
 
   def __next__(self):
+    if not self._connected_to_server:
+      raise StopIteration
     return self.act()
 
-  def act(self,
-          input_reaction=None,
-          on_step_done_callback=None,
-          on_reaction_sent_callback=None):
-    message = super(NeodroidFormalWrapper, self).react(input_reaction,
-                                                       on_reaction_sent_callback,
-                                                       on_step_done_callback)
+  def act(self, *args, **kwargs):
+    message = super(NeodroidFormalWrapper, self).react(*args, **kwargs)
     if message:
       return (flattened_observation(message),
               message.reward,
               message.terminated, message)
-    return None, None, None, None
 
-  def configure(self, input_configuration=[], on_reset_callback=None):
-    message = super(NeodroidFormalWrapper, self).reset(input_configuration,
-                                                       on_reset_callback)
+  def configure(self,*args, **kwargs):
+    message = super(NeodroidFormalWrapper, self).reset(*args, **kwargs)
     if message:
       return flattened_observation(message), message
-    return None, None
 
-  def observe(self, **kwargs):
-    message = super(NeodroidFormalWrapper, self).observe(**kwargs)
+  def observe(self,*args, **kwargs):
+    message = super(NeodroidFormalWrapper, self).observe(*args, **kwargs)
     if message:
       return (flattened_observation(message),
-              message.reward(),
-              message.terminated(), message)
+              message.reward,
+              message.terminated, message)
 
-  def quit(self, callback=None):
-    self.close(callback=callback)
+  def quit(self,*args, **kwargs):
+    self.close(*args, **kwargs)

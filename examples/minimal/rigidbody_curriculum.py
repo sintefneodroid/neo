@@ -2,7 +2,7 @@
 import numpy as np
 
 import neodroid.wrappers.curriculum_wrapper as neo
-from neodroid import Configuration
+from neodroid.models import Configuration
 
 random_motion_horizon = 5
 _memory = []
@@ -11,20 +11,20 @@ _sampled_initial_state_values = []
 
 def get_goal_configuration(environment):
   _, _, _, message = environment.observe()
-  if message:
-    goal_transform = message.description.configurable(b'GoalTransformX')
+  if message and message.description:
+    goal_transform = message.description.configurable(b'GoalEulerTransform')
     if goal_transform:
       goal_transform = goal_transform.current_value
       return [
-        Configuration('LunarLanderTransformX', goal_transform[0][0]),
-        Configuration('LunarLanderTransformY', goal_transform[0][1]),
-        Configuration('LunarLanderTransformZ', goal_transform[0][2]),
-        Configuration('LunarLanderTransformDirX', goal_transform[1][0]),
-        Configuration('LunarLanderTransformDirY', goal_transform[1][1]),
-        Configuration('LunarLanderTransformDirZ', goal_transform[1][2]),
-        Configuration('LunarLanderTransformRotX', goal_transform[2][0]),
-        Configuration('LunarLanderTransformRotY', goal_transform[2][1]),
-        Configuration('LunarLanderTransformRotZ', goal_transform[2][2])]
+        Configuration('LunarLanderEulerTransformX', goal_transform[0][0]),
+        Configuration('LunarLanderEulerTransformY', goal_transform[0][1]),
+        Configuration('LunarLanderEulerTransformZ', goal_transform[0][2]),
+        Configuration('LunarLanderEulerTransformDirX', goal_transform[1][0]),
+        Configuration('LunarLanderEulerTransformDirY', goal_transform[1][1]),
+        Configuration('LunarLanderEulerTransformDirZ', goal_transform[1][2]),
+        Configuration('LunarLanderEulerTransformRotX', goal_transform[2][0]),
+        Configuration('LunarLanderEulerTransformRotY', goal_transform[2][1]),
+        Configuration('LunarLanderEulerTransformRotZ', goal_transform[2][2])]
     else:
       return [
         Configuration('SatelliteRigidbodyVelX', 0),
@@ -36,21 +36,23 @@ def get_goal_configuration(environment):
 
 
 def main():
-  _environment = neo.make('lunarlander', connect_to_running=False)
+  _environment = neo.make('satellite', connect_to_running=False)
   _environment.seed(42)
 
   initial_configuration = get_goal_configuration(_environment)
-  _memory.extend(_environment.generate_inital_states_from_goal_state(initial_configuration))
+  _memory.extend(_environment.generate_inital_states_from_configuration(initial_configuration))
 
   for i in range(300):
     state = sample_initial_state(_memory)
-    if not _environment.is_connected():
+    if not _environment.is_connected:
       break
-    _environment.configure(state=state)
 
     if i % 20 == 19:
       new_initial_states = _environment.generate_inital_states_from_state(state)
       _memory.extend(new_initial_states)
+    _environment.configure(state=state)
+
+
 
     terminated = False
     while not terminated:
