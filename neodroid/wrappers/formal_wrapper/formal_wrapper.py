@@ -17,11 +17,13 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
       return (flattened_observation(message),
               message.reward,
               message.terminated, message)
+    return None,None,None,None
 
   def configure(self,*args, **kwargs):
     message = super(NeodroidFormalWrapper, self).reset(*args, **kwargs)
     if message:
       return flattened_observation(message), message
+    return None,None
 
   def observe(self,*args, **kwargs):
     message = super(NeodroidFormalWrapper, self).observe(*args, **kwargs)
@@ -29,6 +31,7 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
       return (flattened_observation(message),
               message.reward,
               message.terminated, message)
+    return None,None,None,None
 
   def quit(self,*args, **kwargs):
-    self.close(*args, **kwargs)
+    return self.close(*args, **kwargs)

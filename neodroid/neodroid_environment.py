@@ -1,8 +1,5 @@
 import logging
 import os
-import shlex
-import subprocess
-import sys
 import time
 import warnings
 from types import coroutine
@@ -13,9 +10,9 @@ import neodroid.messaging as messaging
 import neodroid.models as M
 from neodroid.utilities.action_space import ActionSpace
 from neodroid.utilities.debug import ClientEvents, message_client_event
+from neodroid.utilities.environment_launcher import launch_environment
 from neodroid.utilities.reaction_factory import verify_motion_reaction, verify_configuration_reaction
 from neodroid.utilities.statics import flattened_observation, contruct_action_space
-
 
 class NeodroidEnvironment(object):
   def __init__(self,
@@ -31,6 +28,8 @@ class NeodroidEnvironment(object):
                on_connected_callback=None,
                on_disconnected_callback=None,
    on_timeout_callback = None):
+
+    self._neodroid_api_version = '0.1.2'
 
     # Logging
     self._debug_logging = debug_logging
@@ -52,16 +51,16 @@ class NeodroidEnvironment(object):
     self._external_on_disconnected_callback = on_disconnected_callback
     self._external_on_timeout_callback = on_timeout_callback
 
-    self._connected_to_server = True
+
 
     # Environment
     self._description = None
-    self._observation_space = np.zeros(1)
-    self._action_space = ActionSpace()
+    self._observation_space = None
+    self._action_space = None
 
     if not connect_to_running and not self._simulation_instance:
-      if self.__start_instance__(name, path_to_executables_directory, ip,
-                                 port):
+      self._simulation_instance = launch_environment(name, path_to_executables_directory, ip, port)
+      if self._simulation_instance:
         if self._debug_logging:
           self._logger.debug('successfully started environment ' + str(
               name))
@@ -73,9 +72,15 @@ class NeodroidEnvironment(object):
                                                    self._port,
                                                    on_timeout_callback=self.__on_timeout_callback__,
                                                    on_disconnected_callback=self.__on_disconnected_callback__)
-    time.sleep(5)
-
+    self._connected_to_server = True
     self.reset()
+    print('Using Neodroid API version %s' % self._neodroid_api_version)
+
+    server_version = self._description.api_version
+    if self._neodroid_api_version != server_version:
+      if server_version == '':
+        server_version = '*Unspecified*'
+      warnings.warn('Server is using different version %s, complications may occur!' % server_version)
 
 
   @property
@@ -93,30 +98,6 @@ class NeodroidEnvironment(object):
   @coroutine
   def coroutine_generator(self):
     return self
-
-  def __start_instance__(self, name, path_to_executables_directory, ip, port):
-    path_to_executable = os.path.join(path_to_executables_directory,
-                                      name + '.exe')
-    if sys.platform != 'win32':
-      path_to_executable = os.path.join(path_to_executables_directory,
-                                        name + '.x86')
-    args = shlex.split(
-        '-ip ' + str(ip) + ' -port ' + str(port) +
-        ' -screen-fullscreen 0 -screen-height 500 -screen-width 500'
-    )  # -batchmode -nographics')
-    print([path_to_executable] + args)
-    self._simulation_instance = subprocess.Popen(
-        [path_to_executable] +
-        args)  # Figure out have to parameterise unity executable
-    # time.sleep(8) # Not good a callback would be better.
-    if self._simulation_instance:
-      if self._debug_logging:
-        self._logger.debug('Successfully started executable ' + str(name))
-      return True
-    else:
-      if self._debug_logging:
-        self._logger.debug('Failed to start executable ' + str(name))
-      return False
 
   @message_client_event(event=ClientEvents.CONNECTED)
   def __on_connected_callback__(self):
@@ -179,7 +160,7 @@ class NeodroidEnvironment(object):
     if message:
       flatm = flattened_observation(message)
       if flatm is not None:
-        self._observation_space = flatm.size
+        self._observation_space = len(flatm)
       if message.description:
         self._description = message.description
       return message
@@ -224,7 +205,7 @@ class NeodroidEnvironment(object):
     if message:
       flatm = flattened_observation(message)
       if flatm is not None:
-        self._observation_space = flatm.size
+        self._observation_space = len(flatm)
       if message.description:
         self._description = message.description
         self._action_space = contruct_action_space(self._description)
@@ -242,3 +223,4 @@ class NeodroidEnvironment(object):
       self._simulation_instance.terminate()
     if callback:
       callback()
+    return 0

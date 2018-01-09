@@ -5,8 +5,8 @@ from neodroid.utilities.action_space import ActionSpace
 
 def flattened_observation(message):
   flat = [obs.data for obs in message.observers.values() if obs.data is not None]
-  flatter = np.hstack(flat).flatten()
-  flatest = flatter
+  flatter = np.hstack(flat).flatten().astype(np.float)
+  flatest = np.nan_to_num(flatter).tolist()
   return  flatest
 
 

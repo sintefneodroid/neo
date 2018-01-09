@@ -18,11 +18,13 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
       return (flattened_observation(message),
               message.reward,
               message.terminated, message)
+    return None,None,None,None
 
   def configure(self, *args, **kwargs):
     message = super(NeodroidCurriculumWrapper, self).reset(*args, **kwargs)
     if message:
       return flattened_observation(message), message
+    return None,None
 
   def generate_inital_states_from_configuration(self, initial_configuration, motion_horizon=10, num=10):
 
@@ -68,6 +70,7 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
       return (flattened_observation(message),
               message.reward,
               message.terminated, message)
+    return None,None,None,None
 
   def quit(self, *args, **kwargs):
-    self.close(*args, **kwargs)
+    return self.close(*args, **kwargs)

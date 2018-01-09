@@ -148,8 +148,8 @@ def create_observers(flat_state):
     elif flat_observer.ObservationType() is F.FBSObserverData.FBSByteArray:
       data = create_data(flat_observer)
 
-    observers[flat_observer.ObserverName()] = N.Observer(
-        flat_observer.ObserverName(), data)
+    observers[flat_observer.ObserverName().decode()] = N.Observer(
+        flat_observer.ObserverName().decode(), data)
   return observers
 
 
@@ -220,7 +220,7 @@ def create_configurables(flat_environment_description):
         current_value = create_euler_transform(fbs_configurable)
 
       configurable = N.Configurable(
-          fbs_configurable.ConfigurableName(),
+          fbs_configurable.ConfigurableName().decode(),
           N.InputRange(fbs_configurable.ValidInput().DecimalGranularity(),
                        fbs_configurable.ValidInput().MinValue(),
                        fbs_configurable.ValidInput().MaxValue()),
@@ -238,7 +238,7 @@ def create_data(flat_observer):
   # data = byte_array.ByteArrayAsNumpy()
   data = BytesIO(data)
   input_observer = N.Observer(
-      flat_observer.ObserverName(),
+      flat_observer.ObserverName().decode(),
       data
   )
   return input_observer
@@ -248,7 +248,7 @@ def create_motors(flat_actor):
   motors = {}
   for i in range(flat_actor.MotorsLength()):
     flat_motor = flat_actor.Motors(i)
-    input_motor = N.Motor(flat_motor.MotorName(),
+    input_motor = N.Motor(flat_motor.MotorName().decode(),
                           flat_motor.ValidInput(),
                           flat_motor.EnergySpentSinceReset())
     motors[input_motor.name] = input_motor

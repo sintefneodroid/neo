@@ -2,8 +2,8 @@
 
 # namespace: FBS
 
-class FBSByteDataType(object):
-    PNG = 0
-    JPEG = 1
-    Other = 2
+class WaitOn(object):
+    Never = 0
+    Update = 1
+    FixedUpdate = 2
 

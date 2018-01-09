@@ -6,6 +6,14 @@ class EnvironmentDescription(object):
     self._fbs_description = fbs_description
 
   @property
+  def simulator_configuration(self):
+    return self._fbs_description.SimulatorConfiguration()
+
+  @property
+  def api_version(self):
+    return self._fbs_description.ApiVersion().decode()
+
+  @property
   def max_episode_length(self):
     return self._fbs_description.MaxEpisodeLength()
 

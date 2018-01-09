@@ -11,12 +11,12 @@ _sampled_initial_state_values = []
 
 def get_goal_configuration(environment):
   if environment:
-    goal_pos = environment.description.configurable(b'GoalPosition').current_value
+    goal_pos = environment.description.configurable('GoalPosition').current_value
     return goal_pos
 
 
 def main():
-  _environment = neo.make('grid_world', connect_to_running=True)
+  _environment = neo.make('3d_grid_world', connect_to_running=False)
   _environment.seed(42)
 
   goal_pos = get_goal_configuration(_environment)

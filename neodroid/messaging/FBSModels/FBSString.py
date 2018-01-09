@@ -4,35 +4,27 @@
 
 import flatbuffers
 
-
 class FBSString(object):
-  __slots__ = ['_tab']
+    __slots__ = ['_tab']
 
-  @classmethod
-  def GetRootAsFBSString(cls, buf, offset):
-    n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-    x = FBSString()
-    x.Init(buf, n + offset)
-    return x
+    @classmethod
+    def GetRootAsFBSString(cls, buf, offset):
+        n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
+        x = FBSString()
+        x.Init(buf, n + offset)
+        return x
 
-  # FBSString
-  def Init(self, buf, pos):
-    self._tab = flatbuffers.table.Table(buf, pos)
+    # FBSString
+    def Init(self, buf, pos):
+        self._tab = flatbuffers.table.Table(buf, pos)
 
-  # FBSString
-  def Value(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-    if o != 0:
-      return self._tab.String(o + self._tab.Pos)
-    return bytes()
-
+    # FBSString
+    def Value(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+        if o != 0:
+            return self._tab.String(o + self._tab.Pos)
+        return bytes()
 
 def FBSStringStart(builder): builder.StartObject(1)
-
-
-def FBSStringAddValue(builder, value): builder.PrependUOffsetTRelativeSlot(0,
-                                                                           flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                             value), 0)
-
-
+def FBSStringAddValue(builder, value): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(value), 0)
 def FBSStringEnd(builder): return builder.EndObject()

@@ -4,40 +4,31 @@
 
 import flatbuffers
 
-
 class FBSQuaternionTransformObservation(object):
-  __slots__ = ['_tab']
+    __slots__ = ['_tab']
 
-  @classmethod
-  def GetRootAsFBSQuaternionTransformObservation(cls, buf, offset):
-    n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-    x = FBSQuaternionTransformObservation()
-    x.Init(buf, n + offset)
-    return x
+    @classmethod
+    def GetRootAsFBSQuaternionTransformObservation(cls, buf, offset):
+        n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
+        x = FBSQuaternionTransformObservation()
+        x.Init(buf, n + offset)
+        return x
 
-  # FBSQuaternionTransformObservation
-  def Init(self, buf, pos):
-    self._tab = flatbuffers.table.Table(buf, pos)
+    # FBSQuaternionTransformObservation
+    def Init(self, buf, pos):
+        self._tab = flatbuffers.table.Table(buf, pos)
 
-  # FBSQuaternionTransformObservation
-  def Transform(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-    if o != 0:
-      x = o + self._tab.Pos
-      from .FBSQuaternionTransform import FBSQuaternionTransform
-      obj = FBSQuaternionTransform()
-      obj.Init(self._tab.Bytes, x)
-      return obj
-    return None
-
+    # FBSQuaternionTransformObservation
+    def Transform(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+        if o != 0:
+            x = o + self._tab.Pos
+            from .FBSQuaternionTransform import FBSQuaternionTransform
+            obj = FBSQuaternionTransform()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
 
 def FBSQuaternionTransformObservationStart(builder): builder.StartObject(1)
-
-
-def FBSQuaternionTransformObservationAddTransform(builder, transform): builder.PrependStructSlot(0,
-                                                                                                 flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                   transform),
-                                                                                                 0)
-
-
+def FBSQuaternionTransformObservationAddTransform(builder, transform): builder.PrependStructSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(transform), 0)
 def FBSQuaternionTransformObservationEnd(builder): return builder.EndObject()

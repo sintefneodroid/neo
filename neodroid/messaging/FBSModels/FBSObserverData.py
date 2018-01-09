@@ -3,13 +3,14 @@
 # namespace: FBS
 
 class FBSObserverData(object):
-  NONE = 0
-  FBSByteArray = 1
-  FBSNumeral = 2
-  FBSNumeralArray = 3
-  FBSString = 4
-  FBSPosition = 5
-  FBSRotation = 6
-  FBSEulerTransform = 7
-  FBSQuaternionTransformObservation = 8
-  FBSBodyObservation = 9
+    NONE = 0
+    FBSByteArray = 1
+    FBSNumeral = 2
+    FBSNumeralArray = 3
+    FBSString = 4
+    FBSPosition = 5
+    FBSRotation = 6
+    FBSEulerTransform = 7
+    FBSQuaternionTransformObservation = 8
+    FBSBodyObservation = 9
+

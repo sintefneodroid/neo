@@ -5,7 +5,7 @@ import zmq
 from .FBSModels import FBSState
 from .fbs_utilities import build_reaction, create_state
 
-REQUEST_TIMEOUT = 2500  # Milliseconds
+REQUEST_TIMEOUT = 8000  # Milliseconds
 REQUEST_RETRIES = 9
 
 
@@ -69,6 +69,7 @@ class MessageClient(object):
     if not self._request_socket:
       raise RuntimeError('Failed to create ZMQ socket!')
 
+    print('Connecting to server')
     if self._use_ipc_medium:
       self._request_socket.connect("ipc:///tmp/neodroid/messages")
     else:
