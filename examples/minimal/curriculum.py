@@ -11,20 +11,20 @@ _sampled_initial_state_values = []
 
 def get_goal_configuration(environment):
   if environment:
-    goal_pos = environment.description.configurable('GoalPosition').current_value
-    return goal_pos
+    goal_pos_x = environment.description.configurable('GoalTransformX').observation
+    goal_pos_z = environment.description.configurable('GoalTransformZ').observation
+    return goal_pos_x,goal_pos_z
 
 
 def main():
-  _environment = neo.make('3d_grid_world', connect_to_running=False)
+  _environment = neo.make('3d_grid_world', connect_to_running=True)
   _environment.seed(42)
 
-  goal_pos = get_goal_configuration(_environment)
+  goal_pos_x,goal_pos_z = get_goal_configuration(_environment)
 
 
-  initial_configuration = [Configuration('ActorPositionX', goal_pos[0]),
-                           Configuration('ActorPositionY', goal_pos[1]),
-                           Configuration('ActorPositionZ', goal_pos[2])]
+  initial_configuration = [Configuration('ActorTransformX', goal_pos_x),
+                           Configuration('ActorTransformZ', goal_pos_z)]
   _memory.extend(_environment.generate_inital_states_from_configuration(initial_configuration))
 
   for i in range(300):

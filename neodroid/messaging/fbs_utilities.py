@@ -206,6 +206,10 @@ def create_position(fbs_configurable):
   data = [position.X(), position.Y(), position.Z()]
   return data
 
+def create_observation_value(fbs_configurable):
+  val = F.FBSNumeral()
+  val.Init(fbs_configurable.Observation().Bytes, fbs_configurable.Observation().Pos)
+  return val.Value()
 
 def create_configurables(flat_environment_description):
   configurables = {}
@@ -216,7 +220,9 @@ def create_configurables(flat_environment_description):
 
       if fbs_configurable.ObservationType() is F.FBSObserverData.FBSPosition:
         current_value = create_position(fbs_configurable)
-      if fbs_configurable.ObservationType() is F.FBSObserverData.FBSEulerTransform:
+      elif fbs_configurable.ObservationType() is F.FBSObserverData.FBSNumeral:
+        current_value = create_observation_value(fbs_configurable)
+      elif fbs_configurable.ObservationType() is F.FBSObserverData.FBSEulerTransform:
         current_value = create_euler_transform(fbs_configurable)
 
       configurable = N.Configurable(

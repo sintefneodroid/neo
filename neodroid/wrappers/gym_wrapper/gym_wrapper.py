@@ -5,8 +5,6 @@ from neodroid.utilities.statics import flattened_observation
 class NeodroidGymWrapper(NeodroidEnvironment):
   def __init__(self, **kwargs):
     super(NeodroidGymWrapper, self).__init__(**kwargs)
-    self.observation_space = self.__observation_space__()
-    self.action_space = self.__action_space__()
 
   def step(self, **kwargs):
     message = super(NeodroidGymWrapper, self).react(**kwargs)
