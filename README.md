@@ -3,6 +3,16 @@
 # Neo
 Neo is a python package that enables deserialisation and an interface to the [Droid](https://github.com/sintefneodroid/droid) counterpart of the [Neodroid](https://github.com/sintefneodroid) platform
 
+## Installation
+```bash
+pip3 install -U neodroid  
+```
+
+## Usage
+```py
+import neodroid as neo
+```
+
 ## Features
 
 (Many... and more to come, exhaustive list in the works)
