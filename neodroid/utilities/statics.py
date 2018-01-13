@@ -1,6 +1,7 @@
 import numpy as np
 
 from neodroid.utilities.action_space import ActionSpace
+from neodroid.utilities.observation_space import ObservationSpace
 
 
 def flattened_observation(message):
@@ -9,10 +10,12 @@ def flattened_observation(message):
   flatest = np.nan_to_num(flatter).tolist()
   return  flatest
 
-
 def contruct_action_space(environment_description):
-  valid_inputs = []
+  motion_spaces = []
   for actor in environment_description.actors.values():
     for motor in actor.motors.values():
-      valid_inputs.append(motor.motion_space)
-  return ActionSpace(valid_inputs)
+      motion_spaces.append(motor.motion_space)
+  return ActionSpace(motion_spaces)
+
+def contruct_observation_space(state):
+  return ObservationSpace(state)

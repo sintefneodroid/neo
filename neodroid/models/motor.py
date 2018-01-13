@@ -13,7 +13,7 @@ class Motor(object):
 
   @property
   def motion_space(self):
-    return neodroid.messaging.create_valid_range(self._motion_space)
+    return neodroid.messaging.create_motion_space(self._motion_space)
 
   @property
   def energy_spent(self):

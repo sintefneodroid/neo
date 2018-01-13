@@ -278,5 +278,5 @@ def create_motors(flat_actor):
   return motors
 
 
-def create_valid_range(flat_range):
-  return N.InputRange(flat_range.DecimalGranularity(), flat_range.MinValue(), flat_range.MaxValue())
+def create_motion_space(flat_range):
+  return N.Space(flat_range.DecimalGranularity(), flat_range.MinValue(), flat_range.MaxValue())

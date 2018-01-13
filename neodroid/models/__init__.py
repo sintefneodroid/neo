@@ -3,7 +3,7 @@ from .configurable import Configurable
 from .configuration import Configuration
 from .environment_description import EnvironmentDescription
 from .environment_state import EnvironmentState
-from .input_range import InputRange
+from .input_range import Space
 from .motion import Motion
 from .motor import Motor
 from .observation import Observation

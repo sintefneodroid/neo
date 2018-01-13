@@ -12,7 +12,9 @@ from neodroid.utilities.action_space import ActionSpace
 from neodroid.utilities.debug import ClientEvents, message_client_event
 from neodroid.utilities.environment_launcher import launch_environment
 from neodroid.utilities.reaction_factory import verify_motion_reaction, verify_configuration_reaction
-from neodroid.utilities.statics import flattened_observation, contruct_action_space
+from neodroid.utilities.statics import flattened_observation, contruct_action_space, \
+  contruct_observation_space
+
 
 class NeodroidEnvironment(object):
   def __init__(self,
@@ -133,10 +135,12 @@ class NeodroidEnvironment(object):
   def action_space(self):
     return self._action_space
 
-  def maybe_infer_motion_reaction(self, input_reaction):
+
+
+  def maybe_infer_motion_reaction(self, input_reaction, normalise):
     if self._description:
       input_reaction = verify_motion_reaction(input_reaction,
-                                              self._description)
+                                              self._description, normalise)
     else:
       input_reaction = verify_motion_reaction(input_reaction, None)
 
@@ -146,13 +150,16 @@ class NeodroidEnvironment(object):
   def react(self,
             input_reaction=None,
             parameters=None,
+            normalise=True,
             on_reaction_sent_callback=None,
             on_step_done_callback=None):
 
     if self._debug_logging:
       self._logger.debug('Reacting in environment')
 
-    input_reaction = self.maybe_infer_motion_reaction(input_reaction)
+
+
+    input_reaction = self.maybe_infer_motion_reaction(input_reaction, normalise)
     if parameters is not None:
       input_reaction.parameters = parameters
 
@@ -161,7 +168,7 @@ class NeodroidEnvironment(object):
     if message:
       flatm = flattened_observation(message)
       if flatm is not None:
-        self._observation_space = len(flatm)
+        self._observation_space = contruct_observation_space(flatm)
       if message.description:
         self._description = message.description
       return message
@@ -206,7 +213,7 @@ class NeodroidEnvironment(object):
     if message:
       flatm = flattened_observation(message)
       if flatm is not None:
-        self._observation_space = len(flatm)
+        self._observation_space = contruct_observation_space(flatm)
       if message.description:
         self._description = message.description
         self._action_space = contruct_action_space(self._description)

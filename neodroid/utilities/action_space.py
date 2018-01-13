@@ -14,11 +14,20 @@ class ActionSpace(object):
     return actions
 
   @property
+  def shape(self):
+    return [self.num_actions]
+
+  @property
+  def low(self):
+    return [motion_space.min_value() for motion_space in self._valid_inputs]
+
+  @property
+  def high(self):
+    return [motion_space.max_value() for motion_space in self._valid_inputs]
+
+  @property
   def num_actions(self):
-    if len(self._valid_inputs) > 0:
-      return len(self._valid_inputs)
-    else:
-      return 1
+    return len(self._valid_inputs)
 
   @property
   def num_binary_actions(self):

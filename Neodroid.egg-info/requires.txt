@@ -1,5 +1,7 @@
-kivy
 pyzmq
 numpy
 flatbuffers
 Pillow
+
+[GUI]
+kivy

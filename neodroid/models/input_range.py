@@ -1,4 +1,4 @@
-class InputRange(object):
+class Space(object):
   def __init__(self, decimal_granularity, min_value, max_value):
     self._decimal_granularity = decimal_granularity
     self._min_value = min_value
