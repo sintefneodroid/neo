@@ -44,7 +44,7 @@ def construct_reaction_from_list(motion_list, actors):
 
 
 def construct_motions_from_list(input_list, actors):
-  actor_motor_tuples = [(actor.name, motor.name)
+  actor_motor_tuples = [(actor.actor_name, motor.motor_name)
                         for actor in actors
                         for motor in actor.motors.values()]
   new_motions = [M.Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
@@ -59,13 +59,14 @@ def verify_configuration_reaction(input, environment_description):
     configurables = environment_description.configurables.values()
     if configurables:
       if isinstance(input, M.Reaction):
-        is_valid_configurations = all(isinstance(m, M.Configuration) for m in
-                                      input.configurations)
-        if is_valid_configurations:
-          return input
-        else:
-          input.motions(construct_configurations_from_known_observables(
-              input.configurations, configurables))
+        if input.configurations:
+          is_valid_configurations = all(isinstance(m, M.Configuration) for m in
+                                        input.configurations)
+          if is_valid_configurations:
+            return input
+          else:
+            input.motions(construct_configurations_from_known_observables(
+                input.configurations, configurables))
           return input
       elif isinstance(input, list):
         is_valid_configurations = all(isinstance(c, M.Configuration) for c in

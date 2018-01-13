@@ -2,7 +2,7 @@ import functools
 
 import zmq
 
-from .FBSModels import FBSState
+from .FBSModels import FState
 from .fbs_utilities import build_reaction, create_state
 
 REQUEST_TIMEOUT = 8000  # Milliseconds
@@ -104,7 +104,7 @@ class MessageClient(object):
 
           self._expecting_response = False
 
-          flat_buffer_state = FBSState.GetRootAsFBSState(response, 0)
+          flat_buffer_state = FState.GetRootAsFState(response, 0)
           state = create_state(flat_buffer_state)
           return state
 

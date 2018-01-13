@@ -6,7 +6,7 @@ from .environment_state import EnvironmentState
 from .input_range import InputRange
 from .motion import Motion
 from .motor import Motor
-from .observer import Observer
+from .observation import Observation
 from .reaction import Reaction
 from .reaction_parameters import ReactionParameters
 from .unobservables import Unobservables

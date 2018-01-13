@@ -6,7 +6,7 @@ class Actor(object):
     self._flat_actor = flat_actor
 
   @property
-  def name(self):
+  def actor_name(self):
     return self._flat_actor.ActorName()
 
   @property
@@ -26,7 +26,7 @@ class Actor(object):
                           self.motors.values()])
 
     return '    <Actor>\n' + \
-           '      <name>' + self.name.decode('utf-8') + '</name>\n' + \
+           '      <name>' + self.actor_name.decode('utf-8') + '</name>\n' + \
            '      <alive>' + str(self.is_alive) + '</alive>\n' + \
            '      <Motors>\n' + \
            motors_str + \

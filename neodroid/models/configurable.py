@@ -1,17 +1,12 @@
 # @pretty_print
 class Configurable(object):
-  def __init__(self, configurable_name, valid_range, observation):
+  def __init__(self, configurable_name, observation):
     self._configurable_name = configurable_name
-    self._valid_range = valid_range
     self._observation = observation
 
   @property
   def configurable_name(self):
     return self._configurable_name
-
-  @property
-  def valid_range(self):
-    return self._valid_range
 
   @property
   def observation(self):
@@ -27,10 +22,8 @@ class Configurable(object):
     return '<Configurable>\n' + \
            '  <configurable_name>' + str(self._configurable_name) + \
            '</configurable_name>\n' + \
-           '  <valid_range>\n' + str(self._valid_range) + \
-           '</valid_range>\n' + \
-           '  <current_value>\n' + str(self._observation) + \
-           '</current_value>\n' + \
+           '  <observation>\n' + str(self._observation) + \
+           '</observation>\n' + \
            '</Configurable>\n'
 
   def __str__(self):

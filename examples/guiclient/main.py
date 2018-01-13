@@ -1,7 +1,7 @@
-from example.guiclient.gui import NeoGUI
-from neodroid.modeling import Reaction, Motion
-from neodroid.modeling.configuration import Configuration
-from neodroid.modeling.reaction_parameters import ReactionParameters
+from gui import NeoGUI
+from neodroid.models import Reaction, Motion
+from neodroid.models.configuration import Configuration
+from neodroid.models.reaction_parameters import ReactionParameters
 
 import neodroid as neo
 
@@ -20,7 +20,7 @@ def on_disconnected_callback():
 
 def on_connect_callback(ip_address, port, launch_environment, environment):
   global _neo_environment
-  if _neo_environment and _neo_environment.is_connected():
+  if _neo_environment and _neo_environment.is_connected:
     _neo_environment.close(on_disconnected_callback)
   else:
     _neo_environment = neo.NeodroidEnvironment(ip_address,
@@ -79,19 +79,19 @@ def update_environment_widgets(environment_state):
 
   try:
     _gui.update_normal_image(
-        environment_state.observer(b'NormalCamera').data())
+        environment_state.observer(b'NormalCamera').observation_value())
     _gui.update_motion_image(
-        environment_state.observer(b'FlowCamera').data())
+        environment_state.observer(b'FlowCamera').observation_value())
     _gui.update_depth_image(
-        environment_state.observer(b'DepthCamera').data())
+        environment_state.observer(b'DepthCamera').observation_value())
     _gui.update_segmentation_image(
-        environment_state.observer(b'SegmentationCamera').data())
+        environment_state.observer(b'SegmentationCamera').observation_value())
     _gui.update_instance_segmentation_image(environment_state.observer(
-        b'InstanceSegmentationCamera').data())
+        b'InstanceSegmentationCamera').observation_value())
     _gui.update_rgb_image(
-        environment_state.observer(b'RGBCamera').data())
+        environment_state.observer(b'RGBCamera').observation_value())
     _gui.update_infrared_shadow_image(
-        environment_state.observer(b'InfraredShadowCamera').data())
+        environment_state.observer(b'InfraredShadowCamera').observation_value())
   except BaseException:
     print('Failed at updating Images')
 

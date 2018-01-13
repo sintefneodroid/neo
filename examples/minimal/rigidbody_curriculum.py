@@ -12,7 +12,7 @@ _sampled_initial_state_values = []
 def get_goal_configuration(environment):
   _, _, _, message = environment.observe()
   if message and message.description:
-    goal_transform = message.description.configurable(b'GoalEulerTransform')
+    goal_transform = message.description.configurable('GoalEulerTransform')
     if goal_transform:
       goal_transform = goal_transform.observation
       return [
@@ -36,7 +36,7 @@ def get_goal_configuration(environment):
 
 
 def main():
-  _environment = neo.make('satellite', connect_to_running=False)
+  _environment = neo.make('lunarlander', connect_to_running=False)
   _environment.seed(42)
 
   initial_configuration = get_goal_configuration(_environment)
@@ -51,8 +51,6 @@ def main():
       new_initial_states = _environment.generate_inital_states_from_state(state)
       _memory.extend(new_initial_states)
     _environment.configure(state=state)
-
-
 
     terminated = False
     while not terminated:

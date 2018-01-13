@@ -2,7 +2,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 
-from .gui_components import EnvironmentStateBox, ReactionBox, StatusBar, XMLBox
+from gui_components import EnvironmentStateBox, ReactionBox, StatusBar, XMLBox
 
 
 class NeoGUI(App):

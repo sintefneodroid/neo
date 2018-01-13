@@ -2,18 +2,18 @@ import neodroid.messaging
 
 
 class Motor(object):
-  def __init__(self, name, valid_input, energy_spent):
-    self._name = name
-    self._valid_input = valid_input
+  def __init__(self, motor_name, motion_space, energy_spent):
+    self._motor_name = motor_name
+    self._motion_space = motion_space
     self._energy_spent = energy_spent
 
   @property
-  def name(self):
-    return self._name
+  def motor_name(self):
+    return self._motor_name
 
   @property
-  def valid_input(self):
-    return neodroid.messaging.create_valid_range(self._valid_input)
+  def motion_space(self):
+    return neodroid.messaging.create_valid_range(self._motion_space)
 
   @property
   def energy_spent(self):
@@ -21,12 +21,9 @@ class Motor(object):
 
   def __repr__(self):
     return '        <Motor>\n' + \
-           '          <name>' + str(self._name.decode('utf-8')) + \
-           '</name>\n' + \
-           '          <valid_input>' + str(self._valid_input) + \
-           '</valid_input>\n' + \
-           '          <energy_spent>' + str(self._energy_spent) + \
-           '</energy_spent>\n' + \
+           '          <name>' + str(self.motor_name.decode('utf-8')) + '</name>\n' + \
+           '          <motion_space>' + str(self.motion_space) +  '</motion_space>\n' + \
+           '          <energy_spent>' + str(self.energy_spent) + '</energy_spent>\n' + \
            '        </Motor>\n'
 
   def __str__(self):
