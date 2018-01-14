@@ -13,10 +13,9 @@ pip3 install -U neodroid
 import neodroid as neo
 ```
 
-## Features
-
-(Many... and more to come, exhaustive list in the works)
-
+<!---
+ ## Features
+-->
 
 ## An Example Implementation Of Using The Interface
 In this repository an example application is included.
@@ -26,7 +25,7 @@ The application displays data received from the example application of the [Droi
 ![neo](images/neo.png)
 
 # To Do's
-- [ ] ...
+- [ ] Be able to select and/or parameterise an objective/evaluation (None,ReachGoal,Stabilise,..) function for an environment
 
 # Other Components Of the Neodroid Platform
 
