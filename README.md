@@ -17,12 +17,23 @@ import neodroid as neo
  ## Features
 -->
 
-## An Example Implementation Of Using The Interface
-In this repository an example application is included.
-The application displays data received from the example application of the [Droid](https://github.com/sintefneodroid/droid) project repository.
+## Examples
+We have included some  example applications in this repository.
 
-### Screenshots
+### Observation Generator
+
+### Random Agent
+
+### Curriculum
+
+### An Example Implementation Of Using An Interface
+
+The application displays data received from the example application of the [Droid](https://github.com/sintefneodroid/droid) project repository.
 ![neo](images/neo.png)
+
+<!---
+## Screenshots
+-->
 
 # To Do's
 - [ ] Be able to select and/or parameterise an objective/evaluation (None,ReachGoal,Stabilise,..) function for an environment
