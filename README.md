@@ -45,3 +45,10 @@ The application displays data received from the example application of the [Droi
 - [agent](https://github.com/sintefneodroid/agent)
 - [simulation](https://github.com/sintefneodroid/simulation)
 - [droid](https://github.com/sintefneodroid/droid)
+
+# FAQ
+- My iteration per second are maxed out at ~60
+  - Ensure that you have disabled vsync, for optimus users you can use ```vblank_mode=0 optirun ..```.
+
+## Other Problems
+Please contact us or add an issue if have a problem that is not listed in the FAQ
