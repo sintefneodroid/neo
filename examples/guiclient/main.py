@@ -1,9 +1,9 @@
 from gui import NeoGUI
-from neodroid.models import Reaction, Motion
-from neodroid.models.configuration import Configuration
-from neodroid.models.reaction_parameters import ReactionParameters
 
 import neodroid as neo
+from neodroid.models import Motion, Reaction
+from neodroid.models.configuration import Configuration
+from neodroid.models.reaction_parameters import ReactionParameters
 
 _gui = None
 _neo_environment = None
@@ -38,10 +38,10 @@ def update_callback(state):
 def on_step_callback(actor_name, slider_values):
   motions = [
     Motion(str(actor_name), str(slider_values[0][0]), slider_values[0][1]),
-    Motion(str(actor_name), str(slider_values[1][0]), slider_values[1][1]),
-    Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
-    Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
-  ]
+    Motion(str(actor_name), str(slider_values[1][0]), slider_values[1][1])
+    # Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
+    # Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
+    ]
   parameters = ReactionParameters(True, True, False, False, False)
   new_state = _neo_environment.react(Reaction(parameters, [], motions))
   update_callback(new_state)
@@ -50,48 +50,33 @@ def on_step_callback(actor_name, slider_values):
 def on_reset_callback(slider_values):
   configurations = [
     Configuration(str(slider_values[0][0]), slider_values[0][1])
-  ]
+    ]
   parameters = ReactionParameters(False, False, True, True, True)
   new_state = _neo_environment.react(Reaction(parameters, configurations, []))
   update_callback(new_state)
 
 
-def update_environment_widgets(environment_state):
-  _gui.update_xml_text_label(str(environment_state))
+def update_environment_widgets(state):
+  _gui.update_xml_text_label(str(state))
 
   try:
-    _gui.update_position_label(
-        str(environment_state.actor(
-            b'ManipulatorActor').get_position()))
-    _gui.update_rotation_label(
-        str(environment_state.actor(b'ManipulatorActor').get_rotation()))
-    _gui.update_direction_label(
-        str(environment_state.actor(b'ManipulatorActor').get_direction()))
-    _gui.update_reward_label(str(environment_state.get_reward_for_last_step()))
-    _gui.update_energy_label(
-        str(environment_state.total_energy_spent_since_reset()))
-    _gui.update_frame_label(
-        str(environment_state.get_last_steps_frame_number()))
-    _gui.update_interrupted_label(str(environment_state.terminated()))
-    _gui.update_time_label(str(environment_state.get_time_since_reset()))
+    _gui.update_reward_label(str(state.signal))
+    _gui.update_energy_label(str(state.total_energy_spent))
+    _gui.update_frame_label(str(state.frame_number))
+    _gui.update_interrupted_label(str(state.terminated))
+    #_gui.update_time_label(str(state.get_time_since_reset))
   except BaseException:
     print('Failed at updating rest of GUI')
 
   try:
-    _gui.update_normal_image(
-        environment_state.observer(b'NormalCamera').observation_value())
-    _gui.update_motion_image(
-        environment_state.observer(b'FlowCamera').observation_value())
-    _gui.update_depth_image(
-        environment_state.observer(b'DepthCamera').observation_value())
-    _gui.update_segmentation_image(
-        environment_state.observer(b'SegmentationCamera').observation_value())
-    _gui.update_instance_segmentation_image(environment_state.observer(
-        b'InstanceSegmentationCamera').observation_value())
-    _gui.update_rgb_image(
-        environment_state.observer(b'RGBCamera').observation_value())
-    _gui.update_infrared_shadow_image(
-        environment_state.observer(b'InfraredShadowCamera').observation_value())
+
+    _gui.update_normal_image(state.observer('NormalCamera').observation_value)
+    _gui.update_motion_image(state.observer('FlowCamera').observation_value)
+    _gui.update_depth_image(state.observer('DepthCamera').observation_value)
+    _gui.update_segmentation_image(state.observer('SegmentationCamera').observation_value)
+    _gui.update_instance_segmentation_image(state.observer('InstanceSegmentationCamera').observation_value)
+    _gui.update_rgb_image(state.observer('RGBCamera').observation_value)
+    _gui.update_infrared_shadow_image(state.observer('InfraredShadowCamera').observation_value)
   except BaseException:
     print('Failed at updating Images')
 

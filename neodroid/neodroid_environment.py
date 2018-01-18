@@ -1,6 +1,5 @@
 import logging
 import os
-import time
 import warnings
 from types import coroutine
 
@@ -8,7 +7,6 @@ import numpy as np
 
 import neodroid.messaging as messaging
 import neodroid.models as M
-from neodroid.utilities.action_space import ActionSpace
 from neodroid.utilities.debug import ClientEvents, message_client_event
 from neodroid.utilities.environment_launcher import launch_environment
 from neodroid.utilities.reaction_factory import verify_motion_reaction, verify_configuration_reaction
@@ -84,7 +82,6 @@ class NeodroidEnvironment(object):
         server_version = '*Unspecified*'
       warnings.warn('Server is using different version %s, complications may occur!' % server_version)
 
-
   @property
   def description(self):
     return self._description
@@ -136,13 +133,12 @@ class NeodroidEnvironment(object):
     return self._action_space
 
 
-
   def maybe_infer_motion_reaction(self, input_reaction, normalise):
     if self._description:
       input_reaction = verify_motion_reaction(input_reaction,
                                               self._description, normalise)
     else:
-      input_reaction = verify_motion_reaction(input_reaction, None)
+      input_reaction = verify_motion_reaction(input_reaction, None,False)
 
     return input_reaction
 
@@ -150,7 +146,7 @@ class NeodroidEnvironment(object):
   def react(self,
             input_reaction=None,
             parameters=None,
-            normalise=True,
+            normalise=False,
             on_reaction_sent_callback=None,
             on_step_done_callback=None):
 

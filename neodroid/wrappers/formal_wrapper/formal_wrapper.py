@@ -15,7 +15,7 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
     message = super(NeodroidFormalWrapper, self).react(*args, **kwargs)
     if message:
       return (flattened_observation(message),
-              message.reward,
+              message.signal,
               message.terminated, message)
     return None,None,None,None
 
@@ -29,7 +29,7 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
     message = super(NeodroidFormalWrapper, self).observe(*args, **kwargs)
     if message:
       return (flattened_observation(message),
-              message.reward,
+              message.signal,
               message.terminated, message)
     return None,None,None,None
 

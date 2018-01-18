@@ -26,3 +26,5 @@ from .FUnobservables import *
 from .FVector3 import *
 from .FSimulatorConfiguration import *
 from .FArray import *
+from .FDouble import *
+from .FQuadruple import *

@@ -18,6 +18,10 @@ class ActionSpace(object):
     return [self.num_actions]
 
   @property
+  def n(self):
+    return self.num_actions
+
+  @property
   def low(self):
     return [motion_space.min_value() for motion_space in self._valid_inputs]
 

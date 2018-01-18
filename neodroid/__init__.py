@@ -7,9 +7,11 @@
 
 
 """
-
+import numpy as np
 from .neodroid_environment import NeodroidEnvironment
-
 
 def make(environment, configuration=None):
   return NeodroidEnvironment(name=environment)
+
+def seed(seed):
+  np.random.seed(seed)

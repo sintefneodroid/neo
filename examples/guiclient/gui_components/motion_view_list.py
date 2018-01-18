@@ -53,7 +53,7 @@ class MotionViewList(GridLayout):
 
     self.step_button = Button(text='Step')
     self.reset_button = Button(text='Reset')
-    self.spacer = Label()
+    #self.spacer = Label()
     self.assemble_components()
 
   def assemble_components(self):
@@ -63,7 +63,7 @@ class MotionViewList(GridLayout):
     self.add_widget(self.list_view)
     self.add_widget(self.step_button)
     self.add_widget(self.reset_button)
-    self.add_widget(self.spacer)
+    #self.add_widget(self.spacer)
     return self
 
   def on_step_button(self):

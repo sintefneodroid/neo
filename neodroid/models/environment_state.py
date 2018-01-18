@@ -11,8 +11,12 @@ class EnvironmentState(object):
     return self._fbs_state.EnvironmentName()
 
   @property
-  def reward(self):
-    return self._fbs_state.Reward()
+  def signal(self):
+    return self._fbs_state.Signal()
+
+  @property
+  def observables(self):
+    return neodroid.messaging.create_observables(self._fbs_state)
 
   @property
   def unobservables(self):
@@ -27,7 +31,15 @@ class EnvironmentState(object):
     return self._fbs_state.Terminated()
 
   @property
-  def total_energy_spent_since_reset(self):
+  def termination_reason(self):
+    return self._fbs_state.TerminationReason().decode()
+
+  @property
+  def debug_message(self):
+    return self._fbs_state.DebugMessage().decode()
+
+  @property
+  def total_energy_spent(self):
     return self._fbs_state.TotalEnergySpent()
 
   @property
@@ -46,18 +58,18 @@ class EnvironmentState(object):
   def __repr__(self):
     observers_str = ''.join([
       str(observer.__repr__()) for observer in self.observers.values()
-    ])
+      ])
 
     description_str = str(self.description)
     return '<EnvironmentState>\n' + \
            '  <total_energy_spent>' + \
-           str(self.total_energy_spent_since_reset) + \
+           str(self.total_energy_spent) + \
            '</total_energy_spent>\n' + \
            '  <frame_number>' + \
            str(self.frame_number) + \
            '</frame_number>\n' + \
            '  <reward>' + \
-           str(self.reward) + \
+           str(self.signal) + \
            '</reward>\n' + \
            '  <interrupted>' + \
            str(self.terminated) + \

@@ -21,7 +21,7 @@ class Motor(object):
 
   def __repr__(self):
     return '        <Motor>\n' + \
-           '          <name>' + str(self.motor_name.decode('utf-8')) + '</name>\n' + \
+           '          <name>' + self.motor_name + '</name>\n' + \
            '          <motion_space>' + str(self.motion_space) +  '</motion_space>\n' + \
            '          <energy_spent>' + str(self.energy_spent) + '</energy_spent>\n' + \
            '        </Motor>\n'

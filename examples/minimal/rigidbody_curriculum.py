@@ -40,7 +40,7 @@ def main():
   _environment.seed(42)
 
   initial_configuration = get_goal_configuration(_environment)
-  _memory.extend(_environment.generate_inital_states_from_configuration(initial_configuration))
+  _memory.extend(_environment.generate_initial_states_from_configuration(initial_configuration))
 
   for i in range(300):
     state = sample_initial_state(_memory)
@@ -48,7 +48,7 @@ def main():
       break
 
     if i % 20 == 19:
-      new_initial_states = _environment.generate_inital_states_from_state(state)
+      new_initial_states = _environment.generate_initial_states_from_state(state)
       _memory.extend(new_initial_states)
     _environment.configure(state=state)
 

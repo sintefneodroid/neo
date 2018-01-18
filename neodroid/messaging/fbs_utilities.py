@@ -38,12 +38,12 @@ def build_reaction(input_reaction):
   return B.Output()
 
 
-def build_unobservables(B,
-                        input_reaction):
-  unobservables = input_reaction.unobservables
-  if unobservables:
-    poses = build_poses(B, unobservables)
-    bodies = build_bodies(B, unobservables)
+def build_unobservables(B, input_reaction):
+  unobs = input_reaction.unobservables
+  if unobs:
+    unobs= unobs.unobservables
+    poses = build_poses(B, unobs)
+    bodies = build_bodies(B, unobs)
 
     F.FUnobservablesStart(B)
     F.FUnobservablesAddPoses(B, poses)
@@ -51,8 +51,7 @@ def build_unobservables(B,
     return F.FUnobservablesEnd(B)
 
 
-def build_poses(B, unobservables):
-  fu = unobservables._unobservables
+def build_poses(B, fu):
   pl = fu.PosesLength()
   F.FUnobservablesStartPosesVector(B, pl)
   for i in range(pl):
@@ -63,8 +62,7 @@ def build_poses(B, unobservables):
   return B.EndVector(pl)
 
 
-def build_bodies(B, unobservables):
-  fu = unobservables._unobservables
+def build_bodies(B, fu):
   bl = fu.BodiesLength()
   F.FUnobservablesStartBodiesVector(B, bl)
   for i in range(bl):
@@ -135,41 +133,59 @@ def create_actors(flat_environment_description):
   return actors
 
 
-def create_quaternion_transform(flat_observer):
-  pass
+def create_observables(state):
+  return [state.Observables(i) for i in range(state.ObservablesLength())]
 
 
-def create_double(flat_observer):
-  pass
+def create_configurables(flat_environment_description):
+  configurables = {}
+  if flat_environment_description:
+    for i in range(flat_environment_description.ConfigurablesLength()):
+      f_conf = flat_environment_description.Configurables(i)
+      observation = None
+
+      if f_conf.ObservationType() is F.FObservation.FTriple:
+        observation = create_triple(f_conf)
+      elif f_conf.ObservationType() is F.FObservation.FSingle:
+        observation = create_single(f_conf)
+      elif f_conf.ObservationType() is F.FObservation.FET:
+        observation = create_euler_transform(f_conf)
+
+      configurable = N.Configurable(
+          f_conf.ConfigurableName().decode(),
+          observation)
+      configurables[configurable.configurable_name] = configurable
+  return configurables
 
 
 def create_observers(flat_state):
   observers = {}
 
   for i in range(flat_state.ObservationsLength()):
-    flat_observer = flat_state.Observations(i)
+    f_obs = flat_state.Observations(i)
     data=None
-    valid_range=None
-    if flat_observer.ObservationType() is F.FObservation.FSingle:
-      data = create_single(flat_observer)
-      valid_range=flat_observer.ValidRange()
-    elif flat_observer.ObservationType() is F.FObservation.FDouble:
-      data = create_double(flat_observer)
-    elif flat_observer.ObservationType() is F.FObservation.FTriple:
-      data = create_euler_transform(flat_observer)
-    elif flat_observer.ObservationType() is F.FObservation.FQuadruple:
-      data = create_euler_transform(flat_observer)
-    elif flat_observer.ObservationType() is F.FObservation.FET:
-      data = create_euler_transform(flat_observer)
-    elif flat_observer.ObservationType() is F.FObservation.FRB:
-      data = create_body(flat_observer)
-    elif flat_observer.ObservationType() is F.FObservation.FQT:
-      data = create_quaternion_transform(flat_observer)
-    elif flat_observer.ObservationType() is F.FObservation.FByteArray:
-      data = create_data(flat_observer)
+    observation_space=None
+    if f_obs.ObservationType() is F.FObservation.FSingle:
+      data = create_single(f_obs)
+    elif f_obs.ObservationType() is F.FObservation.FDouble:
+      data = create_double(f_obs)
+    elif f_obs.ObservationType() is F.FObservation.FTriple:
+      data = create_triple(f_obs)
+    elif f_obs.ObservationType() is F.FObservation.FQuadruple:
+      data = create_quadruple(f_obs)
+    elif f_obs.ObservationType() is F.FObservation.FArray:
+      data = create_array(f_obs)
+    elif f_obs.ObservationType() is F.FObservation.FET:
+      data = create_euler_transform(f_obs)
+    elif f_obs.ObservationType() is F.FObservation.FRB:
+      data = create_body(f_obs)
+    elif f_obs.ObservationType() is F.FObservation.FQT:
+      data = create_quaternion_transform(f_obs)
+    elif f_obs.ObservationType() is F.FObservation.FByteArray:
+      data = create_data(f_obs)
 
-    name = flat_observer.ObservationName().decode()
-    observers[name] = N.Observation(name,valid_range, data)
+    name = f_obs.ObservationName().decode()
+    observers[name] = N.Observation(name,observation_space, data)
   return observers
 
 
@@ -197,9 +213,9 @@ def create_bodies(unobservables):
   return bodies
 
 
-def create_euler_transform(flat_observer):
+def create_euler_transform(f_obs):
   transform = F.FEulerTransform()
-  transform.Init(flat_observer.Observation().Bytes, flat_observer.Observation().Pos)
+  transform.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   position = transform.Position(F.FVector3())
   rotation = transform.Rotation(F.FVector3())
   direction = transform.Direction(F.FVector3())
@@ -209,62 +225,65 @@ def create_euler_transform(flat_observer):
           ]
 
 
-def create_body(flat_observer):
+def create_body(f_obs):
   body = F.FBody()
-  body.Init(flat_observer.Observation().Bytes, flat_observer.Observation().Pos)
+  body.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   velocity = body.Velocity(F.FVector3())
   angular_velocity = body.AngularVelocity(F.FVector3())
   return [[velocity.X(), velocity.Y(), velocity.Z()],
           [angular_velocity.X(), angular_velocity.Y(),
            angular_velocity.Z()]]
 
+def create_quadruple(f_obs):
+  q = F.FQuadruple()
+  q.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  quad = q.Quat()
+  data = [quad.X(), quad.Y(), quad.Z(), quad.W()]
+  return data
 
-def create_triple(fbs_configurable):
+def create_triple(f_obs):
   pos = F.FTriple()
-  pos.Init(fbs_configurable.Observation().Bytes, fbs_configurable.Observation().Pos)
+  pos.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   position = pos.Vec3()
   data = [position.X(), position.Y(), position.Z()]
   return data
 
-def create_single(fbs_configurable):
+def create_double(f_obs):
+  pos = F.FDouble()
+  pos.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  position = pos.Vec2()
+  data = [position.X(), position.Y()]
+  return data
+
+def create_single(f_obs):
   val = F.FSingle()
-  val.Init(fbs_configurable.Observation().Bytes, fbs_configurable.Observation().Pos)
+  val.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   return val.Value()
 
-def create_configurables(flat_environment_description):
-  configurables = {}
-  if flat_environment_description:
-    for i in range(flat_environment_description.ConfigurablesLength()):
-      fbs_configurable = flat_environment_description.Configurables(i)
-      observation = None
+def create_quaternion_transform(f_obs):
+  qt = F.FQT()
+  qt.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  position = qt.Transform().Position(F.FVector3())
+  rotation = qt.Transform().Rotation(  F.FQuaternion())
+  data = [position.X(), position.Y(), position.Z(), rotation.X(),rotation.Y(),rotation.Z(),rotation.W()]
+  return data
 
-      if fbs_configurable.ObservationType() is F.FObservation.FTriple:
-        observation = create_triple(fbs_configurable)
-      elif fbs_configurable.ObservationType() is F.FObservation.FSingle:
-        observation = create_single(fbs_configurable)
-      elif fbs_configurable.ObservationType() is F.FObservation.FET:
-        observation = create_euler_transform(fbs_configurable)
-
-      configurable = N.Configurable(
-          fbs_configurable.ConfigurableName().decode(),
-          observation)
-      configurables[configurable.configurable_name] = configurable
-  return configurables
-
-
-def create_data(flat_observer):
+def create_data(f_obs):
   byte_array = F.FByteArray()
-  byte_array.Init(flat_observer.Observation().Bytes, flat_observer.Observation().Pos)
-  #data = np.array(
-  #    [byte_array.Bytes(i) for i in range(byte_array.BytesLength())],
-  #    dtype=np.uint8).tobytes()
-  data = byte_array.BytesAsNumpy()
-  data = BytesIO(data)
-  input_observer = N.Observation(
-      flat_observer.ObserverName().decode(),
-      data
-  )
-  return input_observer
+  byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  data = np.array(
+      [byte_array.Bytes(i) for i in range(byte_array.BytesLength())],
+      dtype=np.uint8)
+  #data = byte_array.VectorAsNumpy()
+  data = BytesIO(data.tobytes())
+  return data
+
+def create_array(f_obs):
+  array = F.FArray()
+  array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  data = np.array([array.Array(i) for i in range(array.ArrayLength())])
+  #data = byte_array.VectorAsNumpy()
+  return data
 
 
 def create_motors(flat_actor):
@@ -276,7 +295,6 @@ def create_motors(flat_actor):
                           flat_motor.EnergySpentSinceReset())
     motors[input_motor.motor_name] = input_motor
   return motors
-
 
 def create_motion_space(flat_range):
   return N.Space(flat_range.DecimalGranularity(), flat_range.MinValue(), flat_range.MaxValue())

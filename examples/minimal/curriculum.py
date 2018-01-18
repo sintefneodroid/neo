@@ -11,21 +11,23 @@ _sampled_initial_state_values = []
 
 def get_goal_configuration(environment):
   if environment:
-    goal_pos_x = environment.description.configurable('GoalTransformX').observation
-    goal_pos_z = environment.description.configurable('GoalTransformZ').observation
-    return goal_pos_x,goal_pos_z
+    #goal_pos_x = environment.description.configurable('GoalTransformX').observation
+    #goal_pos_z = environment.description.configurable('GoalTransformZ').observation
+    #return goal_pos_x,goal_pos_z
+    return environment.description.configurable('GoalPosition').observation
 
 
 def main():
-  _environment = neo.make('3d_grid_world', connect_to_running=True)
+  _environment = neo.make('maze', connect_to_running=True)
   _environment.seed(42)
 
-  goal_pos_x,goal_pos_z = get_goal_configuration(_environment)
+  goal_pos = get_goal_configuration(_environment)
 
 
-  initial_configuration = [Configuration('ActorTransformX', goal_pos_x),
-                           Configuration('ActorTransformZ', goal_pos_z)]
-  _memory.extend(_environment.generate_inital_states_from_configuration(initial_configuration))
+  initial_configuration = [Configuration('ActorPositionX', goal_pos[0]),
+                           Configuration('ActorPositionY', goal_pos[1]),
+                           Configuration('ActorPositionZ', goal_pos[2])]
+  _memory.extend(_environment.generate_initial_states_from_configuration(initial_configuration))
 
   for i in range(300):
     state = sample_initial_state(_memory)
@@ -33,11 +35,9 @@ def main():
       break
 
     if i % 20 == 19:
-      _memory.extend(_environment.generate_inital_states_from_state(state))
+      _memory.extend(_environment.generate_initial_states_from_state(state))
 
     _environment.configure(state=state)
-
-
 
     terminated = False
     while not terminated:

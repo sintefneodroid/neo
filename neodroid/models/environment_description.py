@@ -14,12 +14,16 @@ class EnvironmentDescription(object):
     return self._fbs_description.ApiVersion().decode()
 
   @property
+  def objective_name(self):
+    return self._fbs_description.Objective().ObjectiveName()
+
+  @property
   def max_episode_length(self):
-    return self._fbs_description.MaxEpisodeLength()
+    return self._fbs_description.Objective().MaxEpisodeLength()
 
   @property
   def solved_threshold(self):
-    return self._fbs_description.SolvedThreshold()
+    return self._fbs_description.Objective().SolvedThreshold()
 
   @property
   def actors(self):
@@ -45,6 +49,8 @@ class EnvironmentDescription(object):
 
     configurables_str = ''.join(
         [str(configurable.__repr__()) for configurable in self.configurables.values()])
+
+    # '  <objective_name>' +  self.objective_name + '</objective_name>\n' \
 
     return '<EnvironmentDescription>\n' + \
            '  <MaxEpisodeLength>' + str(

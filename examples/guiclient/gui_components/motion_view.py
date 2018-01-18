@@ -4,7 +4,7 @@ from kivy.uix.textinput import TextInput
 
 
 class MotionView(BoxLayout):
-  def __init__(self, initial_text="SingleAxisX", **kwargs):
+  def __init__(self, initial_text='Motor', **kwargs):
     super(MotionView, self).__init__(**kwargs)
     self.motor_input = TextInput(text=initial_text)  # , multiline=False)
     self.motor_slider = Slider(min=-100, max=100, value=0)

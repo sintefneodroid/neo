@@ -1,12 +1,14 @@
 # coding=utf-8
+from tqdm import tqdm
 
 import neodroid.wrappers.formal_wrapper as neo
 
 
 def main():
-  _environment = neo.make('lunarlander', connect_to_running=False)
+  _environment = neo.make('grid_world', connect_to_running=False)
 
-  for (observation, reward, terminated, info) in _environment:
+  observation_session = tqdm(_environment)
+  for (observation, reward, terminated, info) in observation_session:
     if terminated:
       print('Interrupted', reward)
 

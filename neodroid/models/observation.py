@@ -1,4 +1,4 @@
-import neodroid
+import neodroid.messaging
 
 
 class Observation(object):
@@ -13,7 +13,8 @@ class Observation(object):
 
   @property
   def observation_space(self):
-    return neodroid.messaging.create_valid_range(self._observation_space)
+    if self._observation_space:
+      return neodroid.messaging.create_motion_space(self._observation_space)
 
   @property
   def observation_value(self):

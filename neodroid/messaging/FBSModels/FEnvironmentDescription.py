@@ -19,18 +19,35 @@ class FEnvironmentDescription(object):
         self._tab = flatbuffers.table.Table(buf, pos)
 
     # FEnvironmentDescription
-    def MaxEpisodeLength(self):
+    def Objective(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
-        return 0
+            x = self._tab.Indirect(o + self._tab.Pos)
+            from .FObjective import FObjective
+            obj = FObjective()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
 
     # FEnvironmentDescription
-    def SolvedThreshold(self):
+    def AvailableObjectives(self, j):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
-        return 0.0
+            x = self._tab.Vector(o)
+            x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
+            x = self._tab.Indirect(x)
+            from .FObjective import FObjective
+            obj = FObjective()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+    # FEnvironmentDescription
+    def AvailableObjectivesLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
 
     # FEnvironmentDescription
     def ApiVersion(self):
@@ -91,8 +108,9 @@ class FEnvironmentDescription(object):
         return 0
 
 def FEnvironmentDescriptionStart(builder): builder.StartObject(6)
-def FEnvironmentDescriptionAddMaxEpisodeLength(builder, maxEpisodeLength): builder.PrependInt32Slot(0, maxEpisodeLength, 0)
-def FEnvironmentDescriptionAddSolvedThreshold(builder, solvedThreshold): builder.PrependFloat32Slot(1, solvedThreshold, 0.0)
+def FEnvironmentDescriptionAddObjective(builder, objective): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(objective), 0)
+def FEnvironmentDescriptionAddAvailableObjectives(builder, availableObjectives): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(availableObjectives), 0)
+def FEnvironmentDescriptionStartAvailableObjectivesVector(builder, numElems): return builder.StartVector(4, numElems, 4)
 def FEnvironmentDescriptionAddApiVersion(builder, apiVersion): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(apiVersion), 0)
 def FEnvironmentDescriptionAddSimulatorConfiguration(builder, simulatorConfiguration): builder.PrependStructSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(simulatorConfiguration), 0)
 def FEnvironmentDescriptionAddActors(builder, actors): builder.PrependUOffsetTRelativeSlot(4, flatbuffers.number_types.UOffsetTFlags.py_type(actors), 0)

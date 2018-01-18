@@ -8,6 +8,10 @@ class Unobservables(object):
     self._unobservables = unobservables
 
   @property
+  def unobservables(self):
+    return self._unobservables
+
+  @property
   def poses_numpy(self):
     return neodroid.messaging.create_poses(self._unobservables)
 

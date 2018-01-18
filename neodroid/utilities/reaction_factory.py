@@ -14,7 +14,7 @@ def _reverse_action(self, action):
   return act_k_inv * (action - act_b)
 
 
-def verify_motion_reaction(input, environment_description, normalise):
+def verify_motion_reaction(input, environment_description, normalise=False):
   parameters = M.ReactionParameters(True, True, False, False, False)
   if environment_description:
     actors = environment_description.actors.values()
@@ -26,7 +26,7 @@ def verify_motion_reaction(input, environment_description, normalise):
           return input
         else:
           input.motions(construct_motions_from_list(
-              input.motions, actors))
+              input.motions, actors,normalise))
           return input
       elif isinstance(input, list):
         is_valid_motions = all(isinstance(m, M.Motion) for m in
@@ -35,34 +35,39 @@ def verify_motion_reaction(input, environment_description, normalise):
 
           return M.Reaction(parameters, [], input)
         else:
-          return construct_reaction_from_list(input, actors)
+          return construct_reaction_from_list(input, actors,normalise)
       elif isinstance(input, int):
-        return construct_reaction_from_list([input], actors)
+        return construct_reaction_from_list([input], actors,normalise)
       elif isinstance(input, float):
-        return construct_reaction_from_list([input], actors)
+        return construct_reaction_from_list([input], actors,normalise)
       elif isinstance(input, (np.ndarray, np.generic)):
-        a = construct_reaction_from_list(input.astype(float).tolist(), actors)
+        a = construct_reaction_from_list(input.astype(float).tolist(), actors,normalise)
         return a
   if isinstance(input, M.Reaction):
     return input
   return M.Reaction(parameters)
 
 
-def construct_reaction_from_list(motion_list, actors):
-  motions = construct_motions_from_list(motion_list, actors)
+def construct_reaction_from_list(motion_list, actors, normalise):
+  motions = construct_motions_from_list(motion_list, actors, normalise)
   parameters = M.ReactionParameters(True, True, False, False, False)
   return M.Reaction(parameters, [], motions)
 
 
-def construct_motions_from_list(input_list, actors):
+def construct_motions_from_list(input_list, actors, normalise):
   actor_motor_tuples = [(actor.actor_name, motor.motor_name, motor.motion_space)
                         for actor in actors
                         for motor in actor.motors.values()]
-  new_motions = [M.Motion(actor_motor_tuple[0], actor_motor_tuple[1], _action(list_val, actor_motor_tuple[2]))
-                 for (list_val, actor_motor_tuple) in
-                 zip(input_list, actor_motor_tuples)]
-  return new_motions
-
+  if normalise:
+    new_motions = [M.Motion(actor_motor_tuple[0], actor_motor_tuple[1], _action(list_val, actor_motor_tuple[2]))
+                   for (list_val, actor_motor_tuple) in
+                   zip(input_list, actor_motor_tuples)]
+    return new_motions
+  else:
+    new_motions = [M.Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
+                   for (list_val, actor_motor_tuple) in
+                   zip(input_list, actor_motor_tuples)]
+    return new_motions
 
 def verify_configuration_reaction(input, environment_description):
   parameters = M.ReactionParameters(False, False, True, True, True, False)
