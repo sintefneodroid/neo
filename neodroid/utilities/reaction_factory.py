@@ -25,8 +25,8 @@ def verify_motion_reaction(input, environment_description, normalise=False):
         if is_valid_motions:
           return input
         else:
-          input.motions(construct_motions_from_list(
-              input.motions, actors,normalise))
+          input.motions =construct_motions_from_list(
+              input.motions, actors, normalise)
           return input
       elif isinstance(input, list):
         is_valid_motions = all(isinstance(m, M.Motion) for m in

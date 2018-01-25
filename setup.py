@@ -2,7 +2,9 @@ from setuptools import setup, find_packages
 
 packages = find_packages(exclude=['neodroid/environments'])
 package_data = {
-      'neodroid': ['environments/grid_world*'],
+      'neodroid': ['environments/grid_world*',
+                   #glob.glob('environments/**', recursive=True)
+                   ],
     }
 
 setup(

@@ -26,27 +26,35 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
       return np.array(flattened_observation(message))
     return None,None
 
-  def generate_initial_states_from_configuration(self, initial_configuration, motion_horizon=6, num=30):
-
-    initial_states = []
+  def generate_trajectory_from_configuration(self, initial_configuration, motion_horizon=6, non_terminable_horizon = 10):
     configure_params = ReactionParameters(terminable=False, episode_count=False, reset=True, configure=True)
     init = Reaction(configure_params, initial_configuration)
 
-    while len(initial_states) < num:
+    non_terminable_params = ReactionParameters(terminable=False, episode_count=False, reset=False,
+                                             configure=False,step=True)
+
+    initial_states = []
+    self.configure()
+    while len(initial_states) < 1:
       self.configure(init)
+      for i in range(non_terminable_horizon):
+        reac = Reaction(non_terminable_params, [], self.action_space.sample())
+        _, _, terminated, info = self.act(reac)
+
 
       for i in range(motion_horizon):
         _, _, terminated, info = self.act(self.action_space.sample())
 
         if not terminated:
           initial_states.append(info)
+      non_terminable_horizon+=1
 
     return initial_states
 
-  def generate_initial_states_from_state(self, state, motion_horizon=10, num=100):
+  def generate_trajectory_from_state(self, state, motion_horizon=10):
     initial_states = []
-
-    while len(initial_states) < num:
+    self.configure()
+    while len(initial_states) < 1:
       self.configure(state=state)
 
       for i in range(motion_horizon):
@@ -54,6 +62,7 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
 
         if not terminated:
           initial_states.append(info)
+      motion_horizon += 1
 
     return initial_states
 
