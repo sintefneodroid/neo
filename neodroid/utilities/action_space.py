@@ -13,6 +13,12 @@ class ActionSpace(object):
       actions.append(np.round(sample, valid_input.decimal_granularity))
     return actions
 
+  def validate(self, actions):
+    for i in range(len(actions)):
+      clipped = np.clip(self._valid_inputs[i].min_value, self._valid_inputs[i].max_value, actions[i])
+      actions[i] = np.round(clipped, self._valid_inputs[i].decimal_granularity)
+    return actions
+
   @property
   def shape(self):
     return [self.num_actions]
@@ -79,3 +85,15 @@ class ActionSpace(object):
     if len(self._valid_inputs) > 0:
       zeros[idx] = 1
     return zeros
+
+  def __call__(self, *args, **kwargs):
+    return self.shape
+
+  def __len__(self):
+    return len(self.shape)
+
+  def __repr__(self):
+    return str(self.shape)
+
+  #def __int__(self):
+  #  return int(sum(self.shape))

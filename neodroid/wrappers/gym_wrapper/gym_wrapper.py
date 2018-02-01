@@ -8,7 +8,7 @@ class NeodroidGymWrapper(NeodroidEnvironment):
     super(NeodroidGymWrapper, self).__init__(*args, **kwargs)
 
   def step(self, action, *args, **kwargs):
-    action = action.flatten()
+    #action = action.flatten()
     message = super(NeodroidGymWrapper, self).react(action, *args, **kwargs)
     if message:
       return (np.array(flattened_observation(message)),

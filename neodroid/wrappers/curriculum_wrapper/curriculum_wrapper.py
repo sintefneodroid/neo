@@ -23,10 +23,10 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
   def configure(self, *args, **kwargs):
     message = super(NeodroidCurriculumWrapper, self).reset(*args, **kwargs)
     if message:
-      return np.array(flattened_observation(message))
+      return np.array(flattened_observation(message)), message
     return None,None
 
-  def generate_trajectory_from_configuration(self, initial_configuration, motion_horizon=6, non_terminable_horizon = 10):
+  def generate_trajectory_from_configuration(self, initial_configuration, motion_horizon=6, non_terminable_horizon = 10, random_process=None):
     configure_params = ReactionParameters(terminable=False, episode_count=False, reset=True, configure=True)
     init = Reaction(configure_params, initial_configuration)
 
@@ -36,14 +36,20 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
     initial_states = []
     self.configure()
     while len(initial_states) < 1:
-      self.configure(init)
+      s,_ =self.configure(init)
       for i in range(non_terminable_horizon):
         reac = Reaction(non_terminable_params, [], self.action_space.sample())
-        _, _, terminated, info = self.act(reac)
+        s, _, terminated, info = self.act(reac)
 
 
       for i in range(motion_horizon):
-        _, _, terminated, info = self.act(self.action_space.sample())
+        if random_process is not None:
+          actions = random_process.sample()
+          actions = self.action_space.validate(actions)
+        else:
+          actions = self.action_space.sample()
+
+        s, _, terminated, info = self.act(actions)
 
         if not terminated:
           initial_states.append(info)
@@ -51,14 +57,19 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
 
     return initial_states
 
-  def generate_trajectory_from_state(self, state, motion_horizon=10):
+  def generate_trajectory_from_state(self, state, motion_horizon=10, random_process=None):
     initial_states = []
     self.configure()
     while len(initial_states) < 1:
-      self.configure(state=state)
-
+      s,_ = self.configure(state=state)
       for i in range(motion_horizon):
-        _, _, terminated, info = self.act(self.action_space.sample())
+        if random_process is not None:
+          actions = random_process.sample()
+          actions = self.action_space.validate(actions)
+        else:
+          actions = self.action_space.sample()
+
+        s, _, terminated, info = self.act(actions)
 
         if not terminated:
           initial_states.append(info)
