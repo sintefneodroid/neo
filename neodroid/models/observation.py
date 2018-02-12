@@ -32,3 +32,18 @@ class Observation(object):
 
   def __unicode__(self):
     return self.__repr__()
+
+  def __float__(self):
+    return float(self.observation_value)
+
+  def __int__(self):
+    return int(self.observation_value)
+
+  def __call__(self, *args, **kwargs):
+    return self.observation_value
+
+  def __cmp__(self, other):
+    return self.observation_value == other
+
+  def __next__(self):
+    return self.observation_value

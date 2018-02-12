@@ -271,18 +271,18 @@ def create_quaternion_transform(f_obs):
 def create_data(f_obs):
   byte_array = F.FByteArray()
   byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
-  data = np.array(
-      [byte_array.Bytes(i) for i in range(byte_array.BytesLength())],
-      dtype=np.uint8)
-  #data = byte_array.VectorAsNumpy()
+  #data = np.array(
+  #    [byte_array.Bytes(i) for i in range(byte_array.BytesLength())],
+  #    dtype=np.uint8)
+  data = byte_array.BytesAsNumpy()
   data = BytesIO(data.tobytes())
   return data
 
 def create_array(f_obs):
   array = F.FArray()
   array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
-  data = np.array([array.Array(i) for i in range(array.ArrayLength())])
-  #data = byte_array.VectorAsNumpy()
+  #data = np.array([array.Array(i) for i in range(array.ArrayLength())])
+  data = array.ArrayAsNumpy()
   return data
 
 

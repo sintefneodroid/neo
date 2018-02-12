@@ -25,6 +25,11 @@ class NeodroidGymWrapper(NeodroidEnvironment):
   def render(self, *args, **kwargs):
     pass
 
+  def sensor(self, key):
+    if self._last_message:
+      return self._last_message.observer(key)
+    return None
+
   def __next__(self):
     if not self._connected_to_server:
       raise StopIteration

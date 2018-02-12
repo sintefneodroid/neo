@@ -55,6 +55,7 @@ class NeodroidEnvironment(object):
 
     # Environment
     self._description = None
+    self._last_message = None
     self._observation_space = None
     self._action_space = None
 
@@ -162,6 +163,7 @@ class NeodroidEnvironment(object):
     message = self._message_server.send_reaction(input_reaction)
 
     if message:
+      self._last_message = message
       flatm = flattened_observation(message)
       if flatm is not None:
         self._observation_space = contruct_observation_space(flatm)
@@ -187,7 +189,10 @@ class NeodroidEnvironment(object):
                   describe=True,
                   episode_count=False)
               ):
-    return self._message_server.send_reaction(M.Reaction(parameters))
+    message = self._message_server.send_reaction(M.Reaction(parameters))
+    if message:
+      self._last_message = message
+    return message
 
   def reset(self, input_reaction=None, state=None, on_reset_callback=None):
     """
@@ -207,6 +212,7 @@ class NeodroidEnvironment(object):
     message = self._message_server.send_reaction(input_reaction)
 
     if message:
+      self._last_message = message
       flatm = flattened_observation(message)
       if flatm is not None:
         self._observation_space = contruct_observation_space(flatm)
