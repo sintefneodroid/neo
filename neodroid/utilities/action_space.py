@@ -15,7 +15,7 @@ class ActionSpace(object):
 
   def validate(self, actions):
     for i in range(len(actions)):
-      clipped = np.clip(self._valid_inputs[i].min_value, self._valid_inputs[i].max_value, actions[i])
+      clipped = np.clip(actions[i], self._valid_inputs[i].min_value, self._valid_inputs[i].max_value)
       actions[i] = np.round(clipped, self._valid_inputs[i].decimal_granularity)
     return actions
 
