@@ -1,6 +1,6 @@
 pyzmq
 numpy
-flatbuffers==20180212162815
+flatbuffers>=20180212162815
 Pillow
 
 [GUI]

@@ -30,8 +30,7 @@ def version():
     # Publications using datetime versions should only be made from master
     # to represent the HEAD moving forward.
     version = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
-    print("VERSION environment variable not set, using datetime instead: {}"
-          .format(version))
+    print(f'VERSION environment variable not set, using datetime instead: {version}')
 
   return version
 
@@ -52,9 +51,9 @@ setup(
     url='https://github.com/sintefneodroid/neo',
     install_requires=['pyzmq',
                       'numpy',
-                      'flatbuffers==20180212162815', #version()
+                      'flatbuffers>=20180212162815', #version()
                       'Pillow'],
-    dependency_links=['https://github.com/google/flatbuffers/tarball/master#egg=flatbuffers-20180212162815'], #version()
+    dependency_links=['https://github.com/sintefneodroid/flatbuffers/tarball/master#egg=flatbuffers-20180212162815'], #version()
     extras_require={
             'GUI': ['kivy']
         }

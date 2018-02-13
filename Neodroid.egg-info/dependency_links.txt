@@ -1,1 +1,1 @@
-https://github.com/google/flatbuffers/tarball/master#egg=flatbuffers-20180212162815
+https://github.com/sintefneodroid/flatbuffers/tarball/master#egg=flatbuffers-20180212162815

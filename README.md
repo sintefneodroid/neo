@@ -7,7 +7,7 @@ This project is very similar to Unity's own project [Unity Machine Learning Agen
 
 ## Installation
 ```bash
-pip3 install -U neodroid  
+pip3 install -U neodroid --process-dependency-links
 ```
 
 ## Usage
