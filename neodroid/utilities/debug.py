@@ -1,12 +1,13 @@
 from functools import wraps
 import warnings
 
-from enum import Enum, auto
+from enum import Enum
+#from enum import auto
 
 class ClientEvents(Enum):
-   CONNECTED = auto()
-   DISCONNECTED = auto()
-   TIMEOUT = auto()
+   CONNECTED = 1#auto()
+   DISCONNECTED =2# auto()
+   TIMEOUT = 3#auto()
 
 
 def debug_print(msg='empty debug message'):
