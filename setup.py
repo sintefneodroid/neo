@@ -29,7 +29,7 @@ def version():
     #
     # Publications using datetime versions should only be made from master
     # to represent the HEAD moving forward.
-    version = datetime.utcnow().strftime('%Y%m%d%H%M%S')
+    version = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
     print("VERSION environment variable not set, using datetime instead: {}"
           .format(version))
 
@@ -37,7 +37,7 @@ def version():
 
 setup(
     name='Neodroid',
-    version=0.3,
+    version=version(),
     packages=packages,
     include_package_data=True,
     #package_data=package_data,
