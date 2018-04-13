@@ -12,18 +12,23 @@ class FrameSkippingWrapper(gym.Wrapper):
 
   def _step(self, action):
 
-    self._state_buffer=[]
+    state_buffer=[]
+    reward_buffer=[]
+    info_buffer=[]
+    terminated=False
 
     for _ in range(self._skips):
 
-      observation, reward, done, info = self.env.step(action[0, 0])
+      observation, signal, terminated, info = self.env.step(action[0, 0])
       next_state = self.env.get_screen()
-      self._state_buffer.append(next_state)
+      state_buffer.append(next_state)
+      reward_buffer.append(signal)
+      info_buffer.append(info)
 
-      if done:
+      if terminated:
         break
 
-    return np.array(self._state_buffer)
+    return state_buffer, reward_buffer, terminated, info_buffer
 
   def _reset(self):
     return self.env.reset()

@@ -3,6 +3,16 @@
 # Neo
 Neo is a python package that enables deserialisation and an interface to the [Droid](https://github.com/sintefneodroid/droid) counterpart of the [Neodroid](https://github.com/sintefneodroid) platform
 
+<table>
+<tr>
+  <td>[![https://travis-ci.org/sintefneodroid/neo.svg?branch=master](https://travis-ci.org/sintefneodroid/neo.svg?branch=master)](https://travis-ci.org/sintefneodroid/neo)</td>
+  <td>[![https://coveralls.io/repos/sintefneodroid/neo/badge.png](https://coveralls.io/repos/sintefneodroid/neo/badge.png)](https://coveralls.io/repos/sintefneodroid/neo)</td>
+  <td>[![https://pypip.in/v/neodroid/badge.png](https://pypip.in/v/neodroid/badge.png)](https://pypi.python.org/pypi/Neodroid)</td>
+  <td>[![https://pypip.in/d/neodroid/badge.png](https://pypip.in/d/neodroid/badge.png)](https://pypi.python.org/pypi/Neodroid)</td>
+  <td>[![https://pypip.in/wheel/neodroid/badge.png](https://pypip.in/wheel/neodroid/badge.png)](https://pypi.python.org/pypi/Neodroid)</td>
+</tr>
+</table>
+
 <p align="center" width="100%">
   <a href="https://www.python.org/">
   <img alt="python" src="RepoAssets/images/python.svg" height="40" align="left">
