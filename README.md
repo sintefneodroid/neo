@@ -4,13 +4,57 @@
 Neo is a python package that enables deserialisation and an interface to the [Droid](https://github.com/sintefneodroid/droid) counterpart of the [Neodroid](https://github.com/sintefneodroid) platform
 
 <table>
-<tr>
-  <td>[![https://travis-ci.org/sintefneodroid/neo.svg?branch=master](https://travis-ci.org/sintefneodroid/neo.svg?branch=master)](https://travis-ci.org/sintefneodroid/neo)</td>
-  <td>[![https://coveralls.io/repos/sintefneodroid/neo/badge.png](https://coveralls.io/repos/sintefneodroid/neo/badge.png)](https://coveralls.io/repos/sintefneodroid/neo)</td>
-  <td>[![https://pypip.in/v/neodroid/badge.png](https://pypip.in/v/neodroid/badge.png)](https://pypi.python.org/pypi/Neodroid)</td>
-  <td>[![https://pypip.in/d/neodroid/badge.png](https://pypip.in/d/neodroid/badge.png)](https://pypi.python.org/pypi/Neodroid)</td>
-  <td>[![https://pypip.in/wheel/neodroid/badge.png](https://pypip.in/wheel/neodroid/badge.png)](https://pypi.python.org/pypi/Neodroid)</td>
-</tr>
+  <tr>
+    <td>
+      <a href='https://travis-ci.org/sintefneodroid/neo'>
+        <img src='https://travis-ci.org/sintefneodroid/neo.svg?branch=master' alt='Build Status' />
+      </a>
+    </td>
+    <td>
+      <a href='https://coveralls.io/github/sintefneodroid/neo?branch=master'>
+        <img src='https://coveralls.io/repos/github/sintefneodroid/neo/badge.svg?branch=master' alt='Coverage Status' />
+      </a>
+    </td>
+    <td>
+      <a href='https://github.com/sintefneodroid/neo/issues'>
+        <img src='https://img.shields.io/github/issues/sintefneodroid/neo.svg?style=flat' alt='GitHub Issues' />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://github.com/sintefneodroid/neo/network'>
+        <img src='https://img.shields.io/github/forks/sintefneodroid/neo.svg?style=flat' alt='GitHub Forks' />
+      </a>
+    </td>
+      <td>
+      <a href='https://github.com/sintefneodroid/neo/stargazers'>
+        <img src='https://img.shields.io/github/stars/sintefneodroid/neo.svg?style=flat' alt='GitHub Stars' />
+      </a>
+    </td>
+      <td>
+      <a href='https://github.com/sintefneodroid/neo/blob/master/LICENSE.md'>
+        <img src='https://img.shields.io/github/license/sintefneodroid/neo.svg?style=flat' alt='GitHub License' />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://pypi.python.org/pypi/Neodroid'>
+        <img src='https://pypip.in/v/neodroid/badge.png' alt='Pypi Version' />
+      </a>
+    </td>
+      <td>
+      <a href='https://pypi.python.org/pypi/Neodroid'>
+        <img src='https://pypip.in/d/neodroid/badge.png' alt='Pypi Downloads' />
+      </a>
+    </td>
+    <td>
+      <a href='https://pypi.python.org/pypi/Neodroid'>
+        <img src='https://pypip.in/wheel/neodroid/badge.png' alt='Pypi Wheel' />
+      </a>
+    </td>
+  </tr>
 </table>
 
 <p align="center" width="100%">
