@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 import logging
 import os
 import warnings
@@ -12,8 +16,7 @@ from neodroid.utilities.environment import Environment
 from neodroid.utilities.environment_launcher import launch_environment
 from neodroid.utilities.reaction_factory import verify_configuration_reaction, verify_motion_reaction
 from neodroid.utilities.statics import (contruct_action_space, contruct_observation_space,
-                                        flattened_observation,
-                                        )
+                                        flattened_observation)
 
 
 class NeodroidEnvironment(Environment):
@@ -21,7 +24,7 @@ class NeodroidEnvironment(Environment):
                ip="localhost",
                port=9584,
                connect_to_running=False,
-               name='carscene',
+               name='grid_world',
                path_to_executables_directory=os.path.join(
                    os.path.dirname(os.path.realpath(__file__)),
                    'environments'),
@@ -302,3 +305,21 @@ class NeodroidEnvironment(Environment):
     if callback:
       callback()
     return 0
+
+
+if __name__ == '__main__':
+  import argparse
+  from tqdm import tqdm
+
+  parser = argparse.ArgumentParser(description='PG Agent')
+  parser.add_argument('ENVIRONMENT_NAME', type=str, nargs='+',
+                      metavar='ENVIRONMENT_NAME',
+                      help='name of the environment to run')
+  args = parser.parse_args()
+
+  env = NeodroidEnvironment(name=args.ENVIRONMENT_NAME[0])
+
+  observation_session = tqdm(env)
+  for state in observation_session:
+    if state.terminated:
+      print('Interrupted', state.signal)

@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 import warnings
 from enum import Enum
 from functools import wraps

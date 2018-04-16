@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 class Configuration(object):
   def __init__(self, configurable_name, configurable_value):
     self._configurable_name = configurable_name

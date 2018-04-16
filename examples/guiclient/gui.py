@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 from gui_components import EnvironmentStateBox, ReactionBox, StatusBar, XMLBox
 from kivy.app import App
 from kivy.core.window import Window

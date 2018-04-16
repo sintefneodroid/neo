@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 from neodroid import NeodroidEnvironment
 from neodroid.utilities.statics import flattened_observation
 

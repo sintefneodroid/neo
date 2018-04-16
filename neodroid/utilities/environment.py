@@ -1,9 +1,16 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 import numpy as np
 
 from neodroid.utilities import Space
 
 
 class Environment(object):
+
+  def _close(self):
+    raise NotImplementedError
 
   def _configure(self):
     raise NotImplementedError

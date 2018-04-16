@@ -1,15 +1,22 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 import os
 import shlex
 import subprocess
 import sys
+from abc import abstractmethod
+
+from baselines import logger
 
 
 def launch_environment(name, path_to_executables_directory, ip, port):
   path_to_executable = os.path.join(path_to_executables_directory,
-                                    name + '.exe')
+                                    f'{name}.exe')
   if sys.platform != 'win32':
     path_to_executable = os.path.join(path_to_executables_directory,
-                                      name + '.x86')
+                                      f'{name}.x86')
   args = shlex.split(
       '-ip ' + str(ip) + ' -port ' + str(port) +
       ' -screen-fullscreen 0 -screen-height 500 -screen-width 500'

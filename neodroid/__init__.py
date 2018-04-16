@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 """
 .. module:: neodroid
    :platform: Unix, Windows
@@ -12,9 +16,16 @@ import numpy as np
 from .neodroid_environment import NeodroidEnvironment
 
 
-def make(environment, configuration=None):
-  return NeodroidEnvironment(name=environment)
+def make(environment, *args, **kwargs):
+  return NeodroidEnvironment(name=environment,*args,**kwargs)
 
 
 def seed(seed):
   np.random.seed(seed)
+
+def get_available_environments():
+  return environments
+
+@property
+def environments():
+  return 'All of them ;)'

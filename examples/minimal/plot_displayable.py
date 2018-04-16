@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 import neodroid.wrappers.formal_wrapper as neo
 from neodroid import messaging
 import numpy as np

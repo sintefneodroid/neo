@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 class Motion(object):
   def __init__(self, actor_name, motor_name, strength):
     self._actor_name = actor_name

@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# coding=utf-8
+__author__ = 'cnheider'
+
 from kivy.adapters.dictadapter import DictAdapter
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
