@@ -35,7 +35,7 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
   def generate_trajectory_from_configuration(self, initial_configuration, motion_horizon=6,
                                              non_terminable_horizon=10, random_process=None):
     configure_params = ReactionParameters(terminable=False, episode_count=False, reset=True, configure=True)
-    init = Reaction(configure_params, initial_configuration)
+    init = Reaction(parameters=configure_params, configurations=initial_configuration)
 
     non_terminable_params = ReactionParameters(terminable=False, episode_count=False, reset=False,
                                                configure=False, step=True)
@@ -43,10 +43,10 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
     initial_states = []
     self.configure()
     while len(initial_states) < 1:
-      s, _ = self.configure(init)
+      state, _ = self.configure(init)
       for i in range(non_terminable_horizon):
-        reac = Reaction(non_terminable_params, [], self.action_space.sample())
-        s, _, terminated, info = self.act(reac)
+        reaction = Reaction( self.action_space.sample(), parameters=non_terminable_params)
+        state, _, terminated, info = self.act(reaction)
 
       for i in range(motion_horizon):
         if random_process is not None:
@@ -55,7 +55,7 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
         else:
           actions = self.action_space.sample()
 
-        s, _, terminated, info = self.act(actions)
+        state, _, terminated, info = self.act(actions)
 
         if not terminated:
           initial_states.append(info)

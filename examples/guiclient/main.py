@@ -47,7 +47,7 @@ def on_step_callback(actor_name, slider_values):
     # Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
     ]
   parameters = ReactionParameters(True, True, False, False, False)
-  new_state = _neo_environment.react(Reaction(parameters, [], motions))
+  new_state = _neo_environment.react(Reaction( motions, parameters=parameters))
   update_callback(new_state)
 
 
@@ -56,7 +56,7 @@ def on_reset_callback(slider_values):
     Configuration(str(slider_values[0][0]), slider_values[0][1])
     ]
   parameters = ReactionParameters(False, False, True, True, True)
-  new_state = _neo_environment.react(Reaction(parameters, configurations, []))
+  new_state = _neo_environment.react(Reaction(parameters=parameters, configurations=configurations))
   update_callback(new_state)
 
 

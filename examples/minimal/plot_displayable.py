@@ -19,8 +19,8 @@ def main():
     d2 = messaging.N.Displayable('TextDisplayer', f'YEAH {i}')
     d3 = messaging.N.Displayable('BarDisplayer', (i%1000)/1000.0)
     d4 = messaging.N.Displayable('ScatterPlotDisplayer',  np.cos(np.arange(0, 1, step=0.001)*i))
-    r = messaging.N.Reaction(displayables=[d1, d2, d3,d4],serialised_message='YEEEEEEEEP')
-    _, reward, terminated, info = _environment.act(r)
+    reaction = messaging.N.Reaction(displayables=[d1, d2, d3,d4],serialised_message='YEEEEEEEEP')
+    _, reward, terminated, info = _environment.act(reaction)
     if terminated:
       print(info.termination_reason)
 

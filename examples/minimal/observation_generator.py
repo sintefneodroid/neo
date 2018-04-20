@@ -7,7 +7,7 @@ import neodroid.wrappers.formal_wrapper as neo
 
 
 def main():
-  _environment = neo.make('grid_world', connect_to_running=False)
+  _environment = neo.make('grid_world', connect_to_running=True)
 
   observation_session = tqdm(_environment)
   for (observation, reward, terminated, info) in observation_session:

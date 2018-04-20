@@ -22,7 +22,7 @@ from neodroid.utilities.statics import (contruct_action_space, contruct_observat
 class NeodroidEnvironment(Environment):
   def __init__(self,
                ip="localhost",
-               port=9584,
+               port=6969,
                connect_to_running=False,
                name='grid_world',
                path_to_executables_directory=os.path.join(
@@ -35,7 +35,7 @@ class NeodroidEnvironment(Environment):
                on_disconnected_callback=None,
                on_timeout_callback=None):
 
-    self._neodroid_api_version = '0.1.4'
+    self._neodroid_api_version = '0.1.6'
 
     self.seed(seed)
 
@@ -249,7 +249,7 @@ class NeodroidEnvironment(Environment):
     :return:
     :rtype:
     """
-    message = self._message_server.send_reaction(M.Reaction(parameters))
+    message = self._message_server.send_reaction(M.Reaction(parameters=parameters))
     if message:
       self._last_message = message
     return message

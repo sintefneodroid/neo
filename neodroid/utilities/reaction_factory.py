@@ -56,7 +56,7 @@ def verify_motion_reaction(input, environment_description, normalise=False):
 def construct_reaction_from_list(motion_list, actors, normalise):
   motions = construct_motions_from_list(motion_list, actors, normalise)
   parameters = M.ReactionParameters(True, True, False, False, False)
-  return M.Reaction(parameters, [], motions)
+  return M.Reaction(motions, parameters=parameters)
 
 
 def construct_motions_from_list(input_list, actors, normalise):

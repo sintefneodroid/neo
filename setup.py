@@ -9,8 +9,9 @@ from setuptools import find_packages, setup
 
 packages = find_packages(exclude=['neodroid/environments'])
 package_data = {
-  'neodroid': ['environments/grid_world*',
-               # glob.glob('environments/**', recursive=True)
+  'neodroid': [
+                #'environments/grid_world*',
+                # glob.glob('environments/**', recursive=True)
                ],
   }
 
@@ -20,7 +21,7 @@ def get_readme():
     return ''
 
 def get_keyword():
-    with open('KEYWORDS') as f:
+    with open('KEYWORDS.md') as f:
         return f.read()
     return ''
 
