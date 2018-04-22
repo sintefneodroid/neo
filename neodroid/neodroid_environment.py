@@ -20,7 +20,7 @@ from neodroid.utilities.statics import (contruct_action_space, contruct_observat
 
 
 class NeodroidEnvironment(Environment):
-  def __init__(self,
+  def __init__(self,*,
                ip="localhost",
                port=6969,
                connect_to_running=False,
@@ -29,6 +29,7 @@ class NeodroidEnvironment(Environment):
                    os.path.dirname(os.path.realpath(__file__)),
                    'environments'),
                debug_logging=False,
+               verbose=False,
                logging_directory='logs',
                seed=3,
                on_connected_callback=None,
@@ -36,7 +37,7 @@ class NeodroidEnvironment(Environment):
                on_timeout_callback=None):
 
     self._neodroid_api_version = '0.1.6'
-
+    self._verbose=verbose
     self.seed(seed)
 
     # Logging
@@ -130,9 +131,11 @@ class NeodroidEnvironment(Environment):
     np.random.seed(seed)
 
   @staticmethod
-  def maybe_infer_motion_reaction(input_reaction, normalise, description):
+  def maybe_infer_motion_reaction(input_reaction, normalise, description, verbose=False):
     """
 
+    :param verbose:
+    :type verbose:
     :param input_reaction:
     :type input_reaction:
     :param normalise:
@@ -144,9 +147,9 @@ class NeodroidEnvironment(Environment):
     """
     if description:
       input_reaction = verify_motion_reaction(input_reaction,
-                                              description, normalise)
+                                              description, normalise, verbose=verbose)
     else:
-      input_reaction = verify_motion_reaction(input_reaction, None, False)
+      input_reaction = verify_motion_reaction(input_reaction, None, False, verbose=verbose)
     return input_reaction
 
   @coroutine
@@ -208,7 +211,7 @@ class NeodroidEnvironment(Environment):
     if self._debug_logging:
       self._logger.debug('Reacting in environment')
 
-    input_reaction = self.maybe_infer_motion_reaction(input_reaction, normalise, self._description)
+    input_reaction = self.maybe_infer_motion_reaction(input_reaction, normalise, self._description,verbose=self._verbose)
     if parameters is not None:
       input_reaction.parameters = parameters
 
@@ -227,12 +230,12 @@ class NeodroidEnvironment(Environment):
       self._logger.debug('No valid was message received')
 
   @staticmethod
-  def maybe_infer_configuration_reaction(input_reaction, description):
+  def maybe_infer_configuration_reaction(input_reaction, description,verbose=False):
     if description:
       input_reaction = verify_configuration_reaction(input_reaction,
-                                                     description)
+                                                     description,verbose=verbose)
     else:
-      input_reaction = verify_configuration_reaction(input_reaction, None)
+      input_reaction = verify_configuration_reaction(input_reaction, None,verbose=verbose)
 
     return input_reaction
 
@@ -268,7 +271,7 @@ class NeodroidEnvironment(Environment):
     if self._debug_logging:
       self._logger.debug('Resetting environment')
 
-    input_reaction = self.maybe_infer_configuration_reaction(input_reaction, self._description)
+    input_reaction = self.maybe_infer_configuration_reaction(input_reaction, self._description, verbose=self._verbose)
     if state:
       input_reaction.unobservables = state.unobservables
 

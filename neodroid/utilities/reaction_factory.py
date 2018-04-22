@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # coding=utf-8
+from neodroid.utilities.debug import print_return
+
 __author__ = 'cnheider'
 
 import numpy as np
@@ -19,7 +21,8 @@ def _reverse_action(self, action):
   return act_k_inv * (action - act_b)
 
 
-def verify_motion_reaction(input, environment_description, normalise=False):
+@print_return
+def verify_motion_reaction(input, environment_description, normalise=False, verbose=False):
   parameters = M.ReactionParameters(True, True, False, False, False)
   if environment_description:
     actors = environment_description.actors.values()
@@ -75,38 +78,38 @@ def construct_motions_from_list(input_list, actors, normalise):
                    zip(input_list, actor_motor_tuples)]
     return new_motions
 
-
-def verify_configuration_reaction(input, environment_description):
+@print_return
+def verify_configuration_reaction(input_reaction, environment_description, verbose=False):
   parameters = M.ReactionParameters(False, False, True, True, True, False)
   if environment_description:
     configurables = environment_description.configurables.values()
     if configurables:
-      if isinstance(input, M.Reaction):
-        if input.configurations:
+      if isinstance(input_reaction, M.Reaction):
+        if input_reaction.configurations:
           is_valid_configurations = all(isinstance(m, M.Configuration) for m in
-                                        input.configurations)
+                                        input_reaction.configurations)
           if is_valid_configurations:
-            return input
+            return input_reaction
           else:
-            input.motions(construct_configurations_from_known_observables(
-                input.configurations, configurables))
-          return input
-      elif isinstance(input, list):
+            input_reaction.motions(construct_configurations_from_known_observables(
+                input_reaction.configurations, configurables))
+          return input_reaction
+      elif isinstance(input_reaction, list):
         is_valid_configurations = all(isinstance(c, M.Configuration) for c in
-                                      input)
+                                      input_reaction)
         if is_valid_configurations:
-          return M.Reaction(parameters=parameters, configurations=input, motions=[])
+          return M.Reaction(parameters=parameters, configurations=input_reaction, motions=[])
         else:
-          return construct_configuration_reaction_from_list(input, configurables)
-      elif isinstance(input, int):
-        return construct_configuration_reaction_from_list([input], configurables)
-      elif isinstance(input, float):
-        return construct_configuration_reaction_from_list([input], configurables)
-      elif isinstance(input, (np.ndarray, np.generic)):
-        a = construct_configuration_reaction_from_list(input.astype(float).tolist(), configurables)
+          return construct_configuration_reaction_from_list(input_reaction, configurables)
+      elif isinstance(input_reaction, int):
+        return construct_configuration_reaction_from_list([input_reaction], configurables)
+      elif isinstance(input_reaction, float):
+        return construct_configuration_reaction_from_list([input_reaction], configurables)
+      elif isinstance(input_reaction, (np.ndarray, np.generic)):
+        a = construct_configuration_reaction_from_list(input_reaction.astype(float).tolist(), configurables)
         return a
-  if isinstance(input, M.Reaction):
-    return input
+  if isinstance(input_reaction, M.Reaction):
+    return input_reaction
   return M.Reaction(parameters=parameters)
 
 
