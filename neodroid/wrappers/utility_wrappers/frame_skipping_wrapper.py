@@ -3,10 +3,11 @@
 __author__ = 'cnheider'
 
 import logging
-import numpy as np
+
 import gym
 
 _logger = logging.getLogger(__name__)
+
 
 class FrameSkippingWrapper(gym.Wrapper):
 
@@ -16,10 +17,10 @@ class FrameSkippingWrapper(gym.Wrapper):
 
   def _step(self, action):
 
-    state_buffer=[]
-    reward_buffer=[]
-    info_buffer=[]
-    terminated=False
+    state_buffer = []
+    reward_buffer = []
+    info_buffer = []
+    terminated = False
 
     for _ in range(self._skips):
 

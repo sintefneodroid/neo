@@ -6,7 +6,6 @@ from io import BytesIO
 
 import flatbuffers as flb
 import numpy as np
-from thinc.api import foreach
 
 from neodroid import models as N
 from neodroid.messaging import FBSModels as F
@@ -23,7 +22,6 @@ def build_reaction(input_reaction):
   environment_string_offset = B.CreateString(input_reaction.environment_name)
   serialised_message_string_offset = B.CreateString(input_reaction.serialised_message)
 
-
   F.FReactionStart(B)
   F.FReactionAddParameters(B,
                            F.CreateFReactionParameters(B,
@@ -37,7 +35,7 @@ def build_reaction(input_reaction):
   F.FReactionAddMotions(B, motions)
   F.FReactionAddConfigurations(B, configurations)
   F.FReactionAddDisplayables(B, displayables)
-  F.FReactionAddSerialisedMessage(B,serialised_message_string_offset)
+  F.FReactionAddSerialisedMessage(B, serialised_message_string_offset)
   if unobservables is not None:
     F.FReactionAddUnobservables(B, unobservables)
 
@@ -101,6 +99,7 @@ def build_motions(B, input_reaction):
     B.PrependUOffsetTRelative(input_motion)
   return B.EndVector(len(motion_offsets))
 
+
 def build_displayables(B, input_reaction):
   displayables_offsets = []
   if input_reaction.displayables is not None:
@@ -108,31 +107,30 @@ def build_displayables(B, input_reaction):
       name_string_offset = B.CreateString(
           input_displayable.displayable_name)
 
-      displayable_value_type=F.FDisplayableValue.NONE
-      displayable_value_offset=None
+      displayable_value_type = F.FDisplayableValue.NONE
+      displayable_value_offset = None
       input_value = input_displayable.displayable_value
       if type(input_value) is float or type(input_value) is int:
         displayable_value_type = F.FDisplayableValue.FValue
         F.FValueStart(B)
-        F.FValueAddVal(B,float(input_value))
+        F.FValueAddVal(B, float(input_value))
         displayable_value_offset = F.FValueEnd(B)
       elif type(input_value) is str:
         displayable_value_type = F.FDisplayableValue.FString
         v = B.CreateString(input_value)
         F.FStringStart(B)
-        F.FStringAddStr(B,v)
+        F.FStringAddStr(B, v)
         displayable_value_offset = F.FStringEnd(B)
       elif type(input_value) is list or type(input_value) is np.ndarray:
         displayable_value_type = F.FDisplayableValue.FValues
         F.FValuesStartValuesVector(B, len(input_value))
         for v_ in reversed(input_value):
           B.PrependFloat64(v_)
-        iv=B.EndVector(len(input_value))
+        iv = B.EndVector(len(input_value))
 
         F.FValuesStart(B)
-        F.FValuesAddValues(B,iv)
+        F.FValuesAddValues(B, iv)
         displayable_value_offset = F.FValuesEnd(B)
-
 
       F.FDisplayableStart(B)
       F.FDisplayableAddDisplayableName(B, name_string_offset)
@@ -145,6 +143,7 @@ def build_displayables(B, input_reaction):
   for offset in displayables_offsets:
     B.PrependUOffsetTRelative(offset)
   return B.EndVector(len(displayables_offsets))
+
 
 def build_configurations(B, input_reaction):
   configurations_offsets = []

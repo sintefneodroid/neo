@@ -59,7 +59,7 @@ def verify_motion_reaction(input, environment_description, normalise=False, verb
 def construct_reaction_from_list(motion_list, actors, normalise):
   motions = construct_motions_from_list(motion_list, actors, normalise)
   parameters = M.ReactionParameters(True, True, False, False, False)
-  return M.Reaction(motions, parameters=parameters)
+  return M.Reaction(motions=motions, parameters=parameters)
 
 
 def construct_motions_from_list(input_list, actors, normalise):
@@ -77,6 +77,7 @@ def construct_motions_from_list(input_list, actors, normalise):
                    for (list_val, actor_motor_tuple) in
                    zip(input_list, actor_motor_tuples)]
     return new_motions
+
 
 @print_return
 def verify_configuration_reaction(input_reaction, environment_description, verbose=False):

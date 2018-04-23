@@ -2,9 +2,10 @@
 # coding=utf-8
 __author__ = 'cnheider'
 
-import collections
 import threading
 from contextlib import contextmanager
+
+import collections
 
 _tls = threading.local()
 

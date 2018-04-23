@@ -9,6 +9,7 @@ from .reaction_parameters import ReactionParameters
 
 class Reaction(object):
   def __init__(self,
+               *,
                motions=[],
                configurations=[],
                parameters=None,

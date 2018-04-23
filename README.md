@@ -1,4 +1,4 @@
-![neodroid](RepoAssets/images/header.png)
+![neodroid](.github/images/header.png)
 
 # Neo
 Neo is a python package that enables deserialisation and an interface to the [Droid](https://github.com/sintefneodroid/droid) counterpart of the [Neodroid](https://github.com/sintefneodroid) platform
@@ -59,13 +59,13 @@ Neo is a python package that enables deserialisation and an interface to the [Dr
 
 <p align="center" width="100%">
   <a href="https://www.python.org/">
-  <img alt="python" src="RepoAssets/images/python.svg" height="40" align="left">
+  <img alt="python" src=".github/images/python.svg" height="40" align="left">
   </a>
   <a href="https://github.com/google/flatbuffers">
-  <img alt="flatbuffers" src="RepoAssets/images/flatbuffers.svg" height="40"  align="center">
+  <img alt="flatbuffers" src=".github/images/flatbuffers.svg" height="40"  align="center">
   </a>
   <a href="https://github.com/zeromq/pyzmq" >
-  <img alt="pyzmq" src="RepoAssets/images/pyzmq.png" height="40" align="right">
+  <img alt="pyzmq" src=".github/images/pyzmq.png" height="40" align="right">
   </a>
 </p>
 
@@ -97,7 +97,7 @@ We have included some  example applications in this repository.
 ### An Example Implementation Of Using An Interface
 
 The application displays data received from the example application of the [Droid](https://github.com/sintefneodroid/droid) project repository.
-![neo](RepoAssets/images/neo.png)
+![neo](.github/images/neo.png)
 
 <!---
 ## Screenshots

@@ -6,9 +6,6 @@ import os
 import shlex
 import subprocess
 import sys
-from abc import abstractmethod
-
-from baselines import logger
 
 
 def launch_environment(name, path_to_executables_directory, ip, port):
@@ -26,6 +23,8 @@ def launch_environment(name, path_to_executables_directory, ip, port):
       [path_to_executable] +
       args)  # Figure out have to parameterise unity executable
 
+
+'''
   cwd = os.getcwd()
   file_name = (file_name.strip()
                .replace('.app', '').replace('.exe', '').replace('.x86_64', '').replace('.x86', ''))
@@ -58,3 +57,5 @@ def launch_environment(name, path_to_executables_directory, ip, port):
       candidates = glob.glob(file_name + '.exe')
     if len(candidates) > 0:
       launch_string = candidates[0]
+
+'''

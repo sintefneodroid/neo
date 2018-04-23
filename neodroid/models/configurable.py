@@ -2,6 +2,7 @@
 # coding=utf-8
 __author__ = 'cnheider'
 
+
 # @pretty_print
 class Configurable(object):
   def __init__(self, configurable_name, observation):

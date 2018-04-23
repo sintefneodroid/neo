@@ -5,6 +5,8 @@ from .FByteArray import *
 from .FByteDataType import *
 from .FConfigurable import *
 from .FConfiguration import *
+from .FDisplayable import *
+from .FDisplayableValue import *
 from .FDouble import *
 from .FET import *
 from .FEnvironmentDescription import *
@@ -27,10 +29,8 @@ from .FState import *
 from .FString import *
 from .FTriple import *
 from .FUnobservables import *
-from .FVector3 import *
-from .FDisplayable import *
-from .FDisplayableValue import *
 from .FValue import *
-from .FValues import *
-from .FVector3s import *
 from .FValuedVector3s import *
+from .FValues import *
+from .FVector3 import *
+from .FVector3s import *

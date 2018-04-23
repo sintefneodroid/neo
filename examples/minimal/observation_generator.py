@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # coding=utf-8
-__author__='cnheider'
+__author__ = 'cnheider'
 from tqdm import tqdm
 
 import neodroid.wrappers.formal_wrapper as neo

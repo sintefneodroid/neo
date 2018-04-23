@@ -45,7 +45,7 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
     while len(initial_states) < 1:
       state, _ = self.configure(init)
       for i in range(non_terminable_horizon):
-        reaction = Reaction( self.action_space.sample(), parameters=non_terminable_params)
+        reaction = Reaction(self.action_space.sample(), parameters=non_terminable_params)
         state, _, terminated, info = self.act(reaction)
 
       for i in range(motion_horizon):

@@ -2,6 +2,7 @@
 # coding=utf-8
 __author__ = 'cnheider'
 
+
 class ObservationSpace(object):
 
   def __init__(self, valid_inputs):

@@ -8,6 +8,7 @@ eggs
 parts
 *.egg-info
 .idea
+docs/build/
 
 __pycache__/
 #*.py[cod]
