@@ -13,7 +13,7 @@ class NeodroidGymWrapper(NeodroidEnvironment):
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
 
-  def step(self, action, *args, **kwargs):
+  def step(self, action=0, *args, **kwargs):
     # action = action.flatten()
     message = super(NeodroidGymWrapper, self).react(action, *args, **kwargs)
     if message:

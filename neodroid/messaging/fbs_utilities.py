@@ -183,7 +183,15 @@ def create_actors(flat_environment_description):
       flat_actor = flat_environment_description.Actors(i)
       actor = N.Actor(flat_actor)
       actors[actor.actor_name] = actor
-  return actors
+
+  out_actors = {} # All dictionaries in python3.6+ are insertion ordered, actors are sorted by key and
+  # inserted so that the order of actor key-value pairs are always the same for all instances the same environment. This is
+  # useful when descriptions are used for inference what value (motion strength) in a numeric vector
+  # corresponds to what actor.
+  for key in sorted(actors.keys()):
+    out_actors[key]= actors[key]
+
+  return out_actors
 
 
 def create_observables(state):
@@ -354,6 +362,14 @@ def create_motors(flat_actor):
                           flat_motor.ValidInput(),
                           flat_motor.EnergySpentSinceReset())
     motors[input_motor.motor_name] = input_motor
+
+  out_motors = {} # All dictionaries in python3.6+ are insertion ordered, motors are sorted by key and
+  # inserted so that the order of motor key-value pairs are always the same for all instances the same environment. This is
+  # useful when descriptions are used for inference what value (motion strength) in a numeric vector
+  # corresponds to what motor.
+  for key in sorted(motors.keys()):
+    out_motors[key]= motors[key]
+
   return motors
 
 

@@ -40,7 +40,7 @@ class MessageClient(object):
 
   def __init__(self,
                tcp_address='localhost',
-               tcp_port=5555,
+               tcp_port=6969,
                on_timeout_callback=None,
                on_step_done_callback=None,
                on_connected_callback=None,
@@ -75,9 +75,11 @@ class MessageClient(object):
 
     print('Connecting to server')
     if self._use_ipc_medium:
-      self._request_socket.connect("ipc:///tmp/neodroid/messages")
+      self._request_socket.connect('ipc:///tmp/neodroid/messages')
+      print('Using IPC protocol')
     else:
-      self._request_socket.connect("tcp://%s:%s" % (self._tcp_address, self._tcp_port))
+      self._request_socket.connect(f'tcp://{self._tcp_address}:{self._tcp_port}')
+      print('Using TCP protocol')
 
     self._poller.register(self._request_socket, zmq.POLLIN)
 

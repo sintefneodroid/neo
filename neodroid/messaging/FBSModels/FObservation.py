@@ -3,14 +3,15 @@
 # namespace: State
 
 class FObservation(object):
-  NONE = 0
-  FSingle = 1
-  FDouble = 2
-  FTriple = 3
-  FQuadruple = 4
-  FArray = 5
-  FRB = 6
-  FET = 7
-  FQT = 8
-  FString = 9
-  FByteArray = 10
+    NONE = 0
+    FSingle = 1
+    FDouble = 2
+    FTriple = 3
+    FQuadruple = 4
+    FArray = 5
+    FRB = 6
+    FET = 7
+    FQT = 8
+    FString = 9
+    FByteArray = 10
+

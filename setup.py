@@ -44,7 +44,7 @@ setup(
                       'numpy',
                       'neodroid-flatbuffers',
                       'Pillow',
-                      'gym'],
+                      'gym', 'tqdm'],
     extras_require={
       'GUI': ['kivy']
       }
