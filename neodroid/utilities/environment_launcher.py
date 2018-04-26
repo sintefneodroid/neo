@@ -9,19 +9,20 @@ import sys
 
 
 def launch_environment(name, path_to_executables_directory, ip, port):
-  path_to_executable = os.path.join(path_to_executables_directory,
-                                    f'{name}.exe')
+  path_to_executable = os.path.join(path_to_executables_directory, f'{name}.exe')
   if sys.platform != 'win32':
-    path_to_executable = os.path.join(path_to_executables_directory,
-                                      f'{name}.x86')
+    path_to_executable = os.path.join(path_to_executables_directory, f'{name}.x86')
   args = shlex.split(
-      '-ip ' + str(ip) + ' -port ' + str(port) +
-      ' -screen-fullscreen 0 -screen-height 500 -screen-width 500'
+      '-ip '
+      + str(ip)
+      + ' -port '
+      + str(port)
+      + ' -screen-fullscreen 0 -screen-height 500 -screen-width 500'
       )  # -batchmode -nographics')
   print([path_to_executable] + args)
   return subprocess.Popen(
-      [path_to_executable] +
-      args)  # Figure out have to parameterise unity executable
+      [path_to_executable] + args
+      )  # Figure out have to parameterise unity executable
 
 
 '''
@@ -30,7 +31,7 @@ def launch_environment(name, path_to_executables_directory, ip, port):
                .replace('.app', '').replace('.exe', '').replace('.x86_64', '').replace('.x86', ''))
   true_filename = os.path.basename(os.path.normpath(file_name))
   launch_string = None
-  if platform == "linux" or platform == "linux2":
+  if platform == 'linux' or platform == 'linux2':
     candidates = glob.glob(os.path.join(cwd, file_name) + '.x86_64')
     if len(candidates) == 0:
       candidates = glob.glob(os.path.join(cwd, file_name) + '.x86')

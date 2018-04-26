@@ -38,14 +38,15 @@ def singleton(cls):
 # @singleton
 class MessageClient(object):
 
-  def __init__(self,
-               tcp_address='localhost',
-               tcp_port=6969,
-               on_timeout_callback=None,
-               on_step_done_callback=None,
-               on_connected_callback=None,
-               on_disconnected_callback=None
-               ):
+  def __init__(
+      self,
+      tcp_address='localhost',
+      tcp_port=6969,
+      on_timeout_callback=None,
+      on_step_done_callback=None,
+      on_connected_callback=None,
+      on_disconnected_callback=None,
+      ):
 
     self._tcp_address = tcp_address
     self._tcp_port = tcp_port
@@ -128,6 +129,9 @@ class MessageClient(object):
             break
 
           else:
-            print('Retrying sending reaction, attempt: %d/%d' % (retries_left, REQUEST_RETRIES))
+            print(
+                'Retrying sending reaction, attempt: %d/%d'
+                % (retries_left, REQUEST_RETRIES)
+                )
             self.open_connection()
             self._request_socket.send(serialised_reaction)

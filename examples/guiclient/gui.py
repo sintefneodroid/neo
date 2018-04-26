@@ -9,8 +9,10 @@ from kivy.uix.boxlayout import BoxLayout
 
 
 class NeoGUI(App):
-  def __init__(self, on_step_callback, on_reset_callback, on_connect_callback,
-               **kwargs):
+
+  def __init__(
+      self, on_step_callback, on_reset_callback, on_connect_callback, **kwargs
+      ):
     super(NeoGUI, self).__init__(**kwargs)
     self._on_step_callback = on_step_callback
     self._on_reset_callback = on_reset_callback
@@ -24,18 +26,22 @@ class NeoGUI(App):
     # Upper Part(Columns)
     self.xml_column = XMLBox(size_hint=(0.5, 1.0))
     self.state_box = EnvironmentStateBox(orientation='vertical')
-    self.reaction_column = ReactionBox(on_step_callback=self._on_step_callback,
-                                       on_reset_callback=self._on_reset_callback,
-                                       orientation='vertical',
-                                       # size_hint=(0.2,1.0),
-                                       spacing=10,
-                                       padding=10)
+    self.reaction_column = ReactionBox(
+        on_step_callback=self._on_step_callback,
+        on_reset_callback=self._on_reset_callback,
+        orientation='vertical',
+        # size_hint=(0.2,1.0),
+        spacing=10,
+        padding=10,
+        )
 
     # Status Bar
 
-    self.status_bar = StatusBar(on_connect_callback=self._on_connect_callback,
-                                orientation='horizontal',
-                                size_hint=(1.0, 0.05))
+    self.status_bar = StatusBar(
+        on_connect_callback=self._on_connect_callback,
+        orientation='horizontal',
+        size_hint=(1.0, 0.05),
+        )
 
   def build(self):
     self.inner_rows.add_widget(self.state_box)
@@ -60,8 +66,7 @@ class NeoGUI(App):
     self.state_box.update_segmentation_image(segmentation_image)
 
   def update_instance_segmentation_image(self, instance_segmentation_image):
-    self.state_box.update_instance_segmentation_image(
-        instance_segmentation_image)
+    self.state_box.update_instance_segmentation_image(instance_segmentation_image)
 
   def update_infrared_shadow_image(self, infrared_shadow_image):
     self.state_box.update_infrared_shadow_image(infrared_shadow_image)

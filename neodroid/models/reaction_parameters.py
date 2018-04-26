@@ -6,8 +6,16 @@ import json
 
 
 class ReactionParameters(object):
-  def __init__(self, terminable=True, step=False, reset=False, configure=False, describe=False,
-               episode_count=True):
+
+  def __init__(
+      self,
+      terminable=True,
+      step=False,
+      reset=False,
+      configure=False,
+      describe=False,
+      episode_count=True,
+      ):
     self._terminable = terminable
     self._configure = configure
     self._step = step
@@ -40,22 +48,25 @@ class ReactionParameters(object):
     return self._terminable
 
   def to_dict(self):
-    return {
-      '_reset': self._reset
-      }
+    return {'_reset': self._reset}
 
   def to_json(self):
     return json.dumps(self.to_dict())
 
   def __repr__(self):
-    return '<ReactionParameters>\n' + \
-           '  <terminable>' + str(self._terminable) + '</terminable>\n' + \
-           '  <step>' + str(self._step) + '</step>\n' + \
-           '  <reset>' + str(self._reset) + '</reset>\n' + \
-           '  <configure>' + str(self._configure) + '</configure>\n' + \
-           '  <describe>' + str(self._describe) + '</describe>\n' + \
-           '  <episode_count>' + str(self._episode_count) + '</episode_count>\n' + \
-           '</ReactionParameters>\n'
+    return '<ReactionParameters>\n' + '  <terminable>' + str(
+        self._terminable
+        ) + '</terminable>\n' + '  <step>' + str(
+        self._step
+        ) + '</step>\n' + '  <reset>' + str(
+        self._reset
+        ) + '</reset>\n' + '  <configure>' + str(
+        self._configure
+        ) + '</configure>\n' + '  <describe>' + str(
+        self._describe
+        ) + '</describe>\n' + '  <episode_count>' + str(
+        self._episode_count
+        ) + '</episode_count>\n' + '</ReactionParameters>\n'
 
   def __str__(self):
     return self.__repr__()

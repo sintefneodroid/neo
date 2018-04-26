@@ -26,7 +26,8 @@ def get_goal_configuration(environment):
         Configuration('LunarLanderEulerTransformDirZ', goal_transform[1][2]),
         Configuration('LunarLanderEulerTransformRotX', goal_transform[2][0]),
         Configuration('LunarLanderEulerTransformRotY', goal_transform[2][1]),
-        Configuration('LunarLanderEulerTransformRotZ', goal_transform[2][2])]
+        Configuration('LunarLanderEulerTransformRotZ', goal_transform[2][2]),
+        ]
     else:
       return [
         Configuration('SatelliteRigidbodyVelX', 0),
@@ -34,7 +35,8 @@ def get_goal_configuration(environment):
         Configuration('SatelliteRigidbodyVelZ', 0),
         Configuration('SatelliteRigidbodyAngX', 0),
         Configuration('SatelliteRigidbodyAngY', 0),
-        Configuration('SatelliteRigidbodyAngZ', 0)]
+        Configuration('SatelliteRigidbodyAngZ', 0),
+        ]
 
 
 def main():
@@ -42,7 +44,9 @@ def main():
   _environment.seed(42)
 
   initial_configuration = get_goal_configuration(_environment)
-  _memory.extend(_environment.generate_initial_states_from_configuration(initial_configuration))
+  _memory.extend(
+      _environment.generate_initial_states_from_configuration(initial_configuration)
+      )
 
   for i in range(300):
     state = sample_initial_state(_memory)

@@ -7,13 +7,12 @@ __author__ = 'cnheider'
 import datetime
 import json
 import os
+import os.path as osp
 import shutil
 import sys
 import tempfile
 import time
 from collections import defaultdict
-
-import os.path as osp
 
 LOG_OUTPUT_FORMATS = ['stdout', 'log', 'csv']
 # Also valid: json, tensorboard
@@ -147,9 +146,9 @@ class CSVOutputFormat(KVWriter):
 
 
 class TensorBoardOutputFormat(KVWriter):
-  """
+  '''
   Dumps key/value pairs into TensorBoard's numeric format.
-  """
+  '''
 
   def __init__(self, dir):
     os.makedirs(dir, exist_ok=True)
@@ -205,36 +204,36 @@ def make_output_format(format, ev_dir, log_suffix=''):
 # ================================================================
 
 def logkv(key, val):
-  """
+  '''
   Log a value of some diagnostic
   Call this once for each diagnostic quantity, each iteration
   If called many times, last value will be used.
-  """
+  '''
   Logger.CURRENT.logkv(key, val)
 
 
 def logkv_mean(key, val):
-  """
+  '''
   The same as logkv(), but if called many times, values averaged.
-  """
+  '''
   Logger.CURRENT.logkv_mean(key, val)
 
 
 def logkvs(d):
-  """
+  '''
   Log a dictionary of key-value pairs
-  """
+  '''
   for (k, v) in d.items():
     logkv(k, v)
 
 
 def dumpkvs():
-  """
+  '''
   Write all of the diagnostics from the current iteration
 
   level: int. (see logger.py docs) If the global logger level is higher than
               the level argument here, don't print to stdout.
-  """
+  '''
   Logger.CURRENT.dumpkvs()
 
 
@@ -243,10 +242,10 @@ def getkvs():
 
 
 def log(*args, level=INFO):
-  """
+  '''
   Write the sequence of args, with no separators, to the console and output files (if you've configured an
   output file).
-  """
+  '''
   Logger.CURRENT.log(*args, level=level)
 
 
@@ -267,17 +266,17 @@ def error(*args):
 
 
 def set_level(level):
-  """
+  '''
   Set logging threshold on current logger.
-  """
+  '''
   Logger.CURRENT.set_level(level)
 
 
 def get_dir():
-  """
+  '''
   Get directory that log files are being written to.
   will be None if there is no output directory (i.e., if you didn't call start)
-  """
+  '''
   return Logger.CURRENT.get_dir()
 
 
@@ -286,14 +285,14 @@ dump_tabular = dumpkvs
 
 
 class ProfileKV:
-  """
+  '''
   Usage:
-  with logger.ProfileKV("interesting_scope"):
+  with logger.ProfileKV('interesting_scope'):
       code
-  """
+  '''
 
   def __init__(self, n):
-    self.n = "wait_" + n
+    self.n = 'wait_' + n
 
   def __enter__(self):
     self.t1 = time.time()
@@ -303,11 +302,11 @@ class ProfileKV:
 
 
 def profile(n):
-  """
+  '''
   Usage:
-  @profile("my_func")
+  @profile('my_func')
   def my_func(): code
-  """
+  '''
 
   def decorator_with_name(func):
     def func_wrapper(*args, **kwargs):
@@ -389,7 +388,7 @@ def configure(dir=None, format_strs=None):
     dir = os.getenv('OPENAI_LOGDIR')
   if dir is None:
     dir = osp.join(tempfile.gettempdir(),
-                   datetime.datetime.now().strftime("openai-%Y-%m-%d-%H-%M-%S-%f"))
+                   datetime.datetime.now().strftime('openai-%Y-%m-%d-%H-%M-%S-%f'))
   assert isinstance(dir, str)
   os.makedirs(dir, exist_ok=True)
 
@@ -427,37 +426,40 @@ class scoped_configure(object):
 # ================================================================
 
 def _demo():
-  info("hi")
-  debug("shouldn't appear")
+  info('hi')
+  debug('shouldn'
+  t
+  appear
+  ')
   set_level(DEBUG)
-  debug("should appear")
-  dir = "/tmp/testlogging"
+  debug('should appear')
+  dir = '/tmp/testlogging'
   if os.path.exists(dir):
     shutil.rmtree(dir)
   configure(dir=dir)
-  logkv("a", 3)
-  logkv("b", 2.5)
+  logkv('a', 3)
+  logkv('b', 2.5)
   dumpkvs()
-  logkv("b", -2.5)
-  logkv("a", 5.5)
+  logkv('b', -2.5)
+  logkv('a', 5.5)
   dumpkvs()
-  info("^^^ should see a = 5.5")
-  logkv_mean("b", -22.5)
-  logkv_mean("b", -44.4)
-  logkv("a", 5.5)
+  info('^^^ should see a = 5.5')
+  logkv_mean('b', -22.5)
+  logkv_mean('b', -44.4)
+  logkv('a', 5.5)
   dumpkvs()
-  info("^^^ should see b = 33.3")
+  info('^^^ should see b = 33.3')
 
-  logkv("b", -2.5)
-  dumpkvs()
-
-  logkv("a", "longasslongasslongasslongasslongasslongassvalue")
+  logkv('b', -2.5)
   dumpkvs()
 
+  logkv('a', 'longasslongasslongasslongasslongasslongassvalue')
+  dumpkvs()
 
-# ================================================================
-# Readers
-# ================================================================
+  # ================================================================
+  # Readers
+  # ================================================================
+
 
 def read_json(fname):
   import pandas
@@ -474,21 +476,21 @@ def read_csv(fname):
 
 
 def read_tb(path):
-  """
+  '''
   path : a tensorboard file OR a directory, where we will find all TB files
          of the form events.*
-  """
+  '''
   import pandas
   import numpy as np
   from glob import glob
   from collections import defaultdict
   import tensorflow as tf
   if osp.isdir(path):
-    fnames = glob(osp.join(path, "events.*"))
-  elif osp.basename(path).startswith("events."):
+    fnames = glob(osp.join(path, 'events.*'))
+  elif osp.basename(path).startswith('events.'):
     fnames = [path]
   else:
-    raise NotImplementedError("Expected tensorboard file or directory containing them. Got %s" % path)
+    raise NotImplementedError('Expected tensorboard file or directory containing them. Got %s' % path)
   tag2pairs = defaultdict(list)
   maxstep = 0
   for fname in fnames:
@@ -508,5 +510,5 @@ def read_tb(path):
   return pandas.DataFrame(data, columns=tags)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   _demo()

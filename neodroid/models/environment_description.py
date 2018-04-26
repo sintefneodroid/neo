@@ -6,6 +6,7 @@ import neodroid.messaging
 
 
 class EnvironmentDescription(object):
+
   def __init__(self, fbs_description):
     self._fbs_description = fbs_description
 
@@ -48,26 +49,23 @@ class EnvironmentDescription(object):
       return configurables[key]
 
   def __repr__(self):
-    actors_str = ''.join(
-        [str(actor.__repr__()) for actor in self.actors.values()])
+    actors_str = ''.join([str(actor.__repr__()) for actor in self.actors.values()])
 
     configurables_str = ''.join(
-        [str(configurable.__repr__()) for configurable in self.configurables.values()])
+        [
+          str(configurable.__repr__())
+          for configurable in self.configurables.values()
+          ]
+        )
 
     # '  <objective_name>' +  self.objective_name + '</objective_name>\n' \
 
-    return '<EnvironmentDescription>\n' + \
-           '  <MaxEpisodeLength>' + str(
-        self.max_episode_length) + '</MaxEpisodeLength>\n' \
-                                   '  <SolvedThreshold>' + str(
-        self.solved_threshold) + '</SolvedThreshold>\n' \
-                                 '  <Actors>\n' + \
-           actors_str + \
-           '  </Actors>\n' + \
-           '  <Configurables>\n' + \
-           configurables_str + \
-           '  </Configurables>\n' + \
-           '</EnvironmentDescription>\n'
+    return '<EnvironmentDescription>\n' + '  <MaxEpisodeLength>' + str(
+        self.max_episode_length
+        ) + '</MaxEpisodeLength>\n' '  <SolvedThreshold>' + str(
+        self.solved_threshold
+        ) + '</SolvedThreshold>\n' '  <Actors>\n' + actors_str + '  </Actors>\n' + '  <Configurables>\n' + \
+           configurables_str + '  </Configurables>\n' + '</EnvironmentDescription>\n'
 
   def __str__(self):
     return self.__repr__()

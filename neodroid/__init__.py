@@ -2,7 +2,7 @@
 # coding=utf-8
 __author__ = 'cnheider'
 __version__ = None
-"""
+'''
 .. module:: neodroid
    :platform: Unix, Windows
    :synopsis: An API for communicating with a Unity Game process.
@@ -10,7 +10,7 @@ __version__ = None
 .. moduleauthor:: Christian Heider Nielsen <chrini13@student.aau.dk>
 
 
-"""
+'''
 import numpy as np
 
 from .neodroid_environment import NeodroidEnvironment

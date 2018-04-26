@@ -9,6 +9,7 @@ from kivy.uix.label import Label
 
 
 class EnvironmentStateBox(BoxLayout):
+
   def __init__(self, **kwargs):
     super(EnvironmentStateBox, self).__init__(**kwargs)
 
@@ -21,8 +22,9 @@ class EnvironmentStateBox(BoxLayout):
     self.infrared_shadow_image = Image(source='images/default.png')
 
     self.reward_label = Label(text='Reward: ', size_hint=(1.0, 0.05))
-    self.energy_label = Label(text='Energy Spent Since Reset: ',
-                              size_hint=(1.0, 0.05))
+    self.energy_label = Label(
+        text='Energy Spent Since Reset: ', size_hint=(1.0, 0.05)
+        )
     self.time_label = Label(text='Time Since Reset: ', size_hint=(1.0, 0.05))
     self.frame_label = Label(text='Frame: ', size_hint=(1.0, 0.05))
     self.interrupted_label = Label(text='Interrupted: ', size_hint=(1.0, 0.05))
@@ -86,12 +88,12 @@ class EnvironmentStateBox(BoxLayout):
     except BaseException:
       print('Image not valid')
 
-  def update_instance_segmentation_image(self,
-                                         instance_segmentation_image_data):
+  def update_instance_segmentation_image(self, instance_segmentation_image_data):
     try:
 
-      instance_segmentation_image = CoreImage(instance_segmentation_image_data,
-                                              ext='png')
+      instance_segmentation_image = CoreImage(
+          instance_segmentation_image_data, ext='png'
+          )
       self.instance_segmentation_image.texture = instance_segmentation_image.texture
     except BaseException:
       print('Image not valid')

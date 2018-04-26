@@ -19,7 +19,11 @@ class ActionSpace(object):
 
   def validate(self, actions):
     for i in range(len(actions)):
-      clipped = np.clip(actions[i], self._valid_inputs[i].min_value, self._valid_inputs[i].max_value)
+      clipped = np.clip(
+          actions[i],
+          self._valid_inputs[i].min_value,
+          self._valid_inputs[i].max_value,
+          )
       actions[i] = np.round(clipped, self._valid_inputs[i].decimal_granularity)
     return actions
 
@@ -55,7 +59,9 @@ class ActionSpace(object):
     idx = np.random.randint(0, self.num_actions)
     zeros = np.zeros(self.num_ternary_actions)
     if len(self._valid_inputs) > 0:
-      sample = np.random.uniform(self._valid_inputs[idx].min_value, self._valid_inputs[idx].max_value, 1)
+      sample = np.random.uniform(
+          self._valid_inputs[idx].min_value, self._valid_inputs[idx].max_value, 1
+          )
       if sample > 0:
         zeros[idx] = 1
       else:
@@ -66,7 +72,9 @@ class ActionSpace(object):
     idx = np.random.randint(0, self.num_actions)
     zeros = np.zeros(self.num_binary_actions)
     if len(self._valid_inputs) > 0:
-      sample = np.random.uniform(self._valid_inputs[idx].min_value, self._valid_inputs[idx].max_value, 1)
+      sample = np.random.uniform(
+          self._valid_inputs[idx].min_value, self._valid_inputs[idx].max_value, 1
+          )
       if sample > 0:
         zeros[idx] = 1
       else:
@@ -77,8 +85,11 @@ class ActionSpace(object):
     idx = np.random.randint(0, self.num_actions)
     zeros = np.zeros(self.num_actions)
     if len(self._valid_inputs) > 0:
-      val = np.random.random_integers(self._valid_inputs[idx].min_value(),
-                                      self._valid_inputs[idx].max_value(), 1)
+      val = np.random.random_integers(
+          self._valid_inputs[idx].min_value(),
+          self._valid_inputs[idx].max_value(),
+          1,
+          )
       zeros[idx] = val
     return zeros
 

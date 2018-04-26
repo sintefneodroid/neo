@@ -4,6 +4,7 @@ __author__ = 'cnheider'
 
 
 class Configuration(object):
+
   def __init__(self, configurable_name, configurable_value):
     self._configurable_name = configurable_name
     self._configurable_value = configurable_value
@@ -19,16 +20,15 @@ class Configuration(object):
   def to_dict(self):
     return {
       '_configurable_name':  self._configurable_name,
-      '_configurable_value': self._configurable_value
+      '_configurable_value': self._configurable_value,
       }
 
   def __repr__(self):
-    return '<Configuration>\n' + \
-           '  <configurable_name>' + str(self._configurable_name) + \
-           '</configurable_name>\n' + \
-           '  <configurable_value>' + str(self._configurable_value) + \
-           '</configurable_value>\n' + \
-           '</Configuration>\n'
+    return '<Configuration>\n' + '  <configurable_name>' + str(
+        self._configurable_name
+        ) + '</configurable_name>\n' + '  <configurable_value>' + str(
+        self._configurable_value
+        ) + '</configurable_value>\n' + '</Configuration>\n'
 
   def __str__(self):
     return self.__repr__()

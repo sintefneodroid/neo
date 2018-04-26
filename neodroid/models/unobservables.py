@@ -8,6 +8,7 @@ import neodroid.messaging
 
 
 class Unobservables(object):
+
   def __init__(self, unobservables):
     self._unobservables = unobservables
 
@@ -25,17 +26,16 @@ class Unobservables(object):
 
   @property
   def state_configuration(self):
-    return np.array([self.poses_numpy().flatten(), self.bodies_numpy().flatten()]).flatten()
+    return np.array(
+        [self.poses_numpy().flatten(), self.bodies_numpy().flatten()]
+        ).flatten()
 
   def __repr__(self):
-    return '<Unobservables>\n' + \
-           '  <Poses>\n' + \
-           str(self.poses_numpy) + \
-           '  </Poses>\n' + \
-           '  <Bodies>\n' + \
-           str(self.bodies_numpy) + \
-           '  </Bodies>\n' + \
-           '</Unobservables>\n'
+    return '<Unobservables>\n' + '  <Poses>\n' + str(
+        self.poses_numpy
+        ) + '  </Poses>\n' + '  <Bodies>\n' + str(
+        self.bodies_numpy
+        ) + '  </Bodies>\n' + '</Unobservables>\n'
 
   def __str__(self):
     return self.__repr__()

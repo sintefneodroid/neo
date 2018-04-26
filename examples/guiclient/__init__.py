@@ -2,11 +2,11 @@
 # coding=utf-8
 __author__ = 'cnheider'
 
-"""A sample of using the neodroid api.
+'''A sample of using the neodroid api.
 
 .. moduleauthor:: Christian Heider Nielsen <chrini13@student.aau.com>
 
-"""
+'''
 
 from example.guiclient.main import main
 

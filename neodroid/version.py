@@ -7,6 +7,7 @@ from warnings import warn
 __author__ = 'cnheider'
 __version__ = None
 
+
 def get_version():
   version = os.getenv('VERSION', None)
   if version:
@@ -18,7 +19,7 @@ def get_version():
     # Default version is an ISO8601 compiliant datetime. PyPI doesn't allow
     # the colon ':' character in its versions, and time is required to allow
     # for multiple publications to master in one day. This datetime string
-    # uses the "basic" ISO8601 format for both its date and time components
+    # uses the 'basic' ISO8601 format for both its date and time components
     # to avoid issues with the colon character (ISO requires that date and
     # time components of a date-time string must be uniformly basic or
     # extended, which is why the date component does not have dashes.

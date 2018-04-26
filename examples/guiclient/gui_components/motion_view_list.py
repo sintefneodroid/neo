@@ -5,13 +5,13 @@ __author__ = 'cnheider'
 from kivy.adapters.dictadapter import DictAdapter
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.listview import (CompositeListItem, ListItemButton, ListItemLabel, ListView)
+from kivy.uix.listview import CompositeListItem, ListItemButton, ListItemLabel, ListView
 
-integers_dict = {str(i): {'text': str(i), 'is_selected': False} for i in
-                 range(100)}
+integers_dict = {str(i): {'text': str(i), 'is_selected': False} for i in range(100)}
 
 
 class MotionViewList(GridLayout):
+
   def __init__(self, **kwargs):
     kwargs['cols'] = 2
     super(MotionViewList, self).__init__(**kwargs)
@@ -22,37 +22,40 @@ class MotionViewList(GridLayout):
         'size_hint_y': None,
         'height':      25,
         'cls_dicts':   [
-          {'cls':    ListItemLabel,
-           'kwargs': {'text':                row_data['text'],
-                      'is_representing_cls': True
-                      }
-           },
-          {'cls':    ListItemLabel,
-           'kwargs': {
-             'text':                "Middle-{0}".format(row_data['text']),
-             'is_representing_cls': True
-             }
-           },
-          {'cls':    ListItemLabel,
-           'kwargs': {
-             'text':                "End-{0}".format(row_data['text']),
-             'is_representing_cls': True
-             }
-           },
-          {'cls':    ListItemButton,
-           'kwargs': {'text': row_data['text']}
-           },
-          ]
+          {
+            'cls':    ListItemLabel,
+            'kwargs': {
+              'text': row_data['text'], 'is_representing_cls': True
+              },
+            },
+          {
+            'cls':    ListItemLabel,
+            'kwargs': {
+              'text':                'Middle-{0}'.format(row_data['text']),
+              'is_representing_cls': True,
+              },
+            },
+          {
+            'cls':    ListItemLabel,
+            'kwargs': {
+              'text':                'End-{0}'.format(row_data['text']),
+              'is_representing_cls': True,
+              },
+            },
+          {'cls': ListItemButton, 'kwargs': {'text': row_data['text']}},
+          ],
         }
 
-    item_strings = ["{0}".format(index) for index in range(100)]
+    item_strings = ['{0}'.format(index) for index in range(100)]
 
-    dict_adapter = DictAdapter(sorted_keys=item_strings,
-                               data=integers_dict,
-                               args_converter=args_converter,
-                               selection_mode='single',
-                               allow_empty_selection=False,
-                               cls=CompositeListItem)
+    dict_adapter = DictAdapter(
+        sorted_keys=item_strings,
+        data=integers_dict,
+        args_converter=args_converter,
+        selection_mode='single',
+        allow_empty_selection=False,
+        cls=CompositeListItem,
+        )
 
     self.list_view = ListView(adapter=dict_adapter)
 

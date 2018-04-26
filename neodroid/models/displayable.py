@@ -5,6 +5,7 @@ __author__ = 'cnheider'
 
 # @pretty_print
 class Displayable(object):
+
   def __init__(self, displayable_name, displayable_value):
     self._displayable_name = displayable_name
     self._displayable_value = displayable_value
@@ -20,16 +21,15 @@ class Displayable(object):
   def to_dict(self):
     return {
       '_displayable_name':  self._displayable_name,
-      '_displayable_value': self._displayable_value
+      '_displayable_value': self._displayable_value,
       }
 
   def __repr__(self):
-    return '<Displayable>\n' + \
-           '  <displayable_name>' + str(self._displayable_name) + \
-           '</displayable_name>\n' + \
-           '  <displayable_value>\n' + str(self._displayable_value) + \
-           '</displayable_value>\n' + \
-           '</Displayable>\n'
+    return '<Displayable>\n' + '  <displayable_name>' + str(
+        self._displayable_name
+        ) + '</displayable_name>\n' + '  <displayable_value>\n' + str(
+        self._displayable_value
+        ) + '</displayable_value>\n' + '</Displayable>\n'
 
   def __str__(self):
     return self.__repr__()

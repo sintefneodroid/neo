@@ -11,7 +11,7 @@ package_data = {
   'neodroid': [
     # 'environments/grid_world*',
     # glob.glob('environments/**', recursive=True)
-    ],
+    ]
   }
 
 
@@ -40,12 +40,8 @@ setup(
     license='Apache License, Version 2.0',
     keywords=get_keyword(),
     url='https://github.com/sintefneodroid/neo',
-    install_requires=['pyzmq',
-                      'numpy',
-                      'neodroid-flatbuffers',
-                      'Pillow',
-                      'gym', 'tqdm'],
-    extras_require={
-      'GUI': ['kivy']
-      }
+    install_requires=[
+      'pyzmq', 'numpy', 'neodroid-flatbuffers', 'Pillow', 'gym', 'tqdm'
+      ],
+    extras_require={'GUI': ['kivy']},
     )

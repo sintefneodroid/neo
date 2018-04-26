@@ -23,14 +23,18 @@ def build_reaction(input_reaction):
   serialised_message_string_offset = B.CreateString(input_reaction.serialised_message)
 
   F.FReactionStart(B)
-  F.FReactionAddParameters(B,
-                           F.CreateFReactionParameters(B,
-                                                       input_reaction.parameters.terminable,
-                                                       input_reaction.parameters.step,
-                                                       input_reaction.parameters.reset,
-                                                       input_reaction.parameters.configure,
-                                                       input_reaction.parameters.describe,
-                                                       input_reaction.parameters.episode_count))
+  F.FReactionAddParameters(
+      B,
+      F.CreateFReactionParameters(
+          B,
+          input_reaction.parameters.terminable,
+          input_reaction.parameters.step,
+          input_reaction.parameters.reset,
+          input_reaction.parameters.configure,
+          input_reaction.parameters.describe,
+          input_reaction.parameters.episode_count,
+          ),
+      )
   F.FReactionAddEnvironmentName(B, environment_string_offset)
   F.FReactionAddMotions(B, motions)
   F.FReactionAddConfigurations(B, configurations)
@@ -65,7 +69,9 @@ def build_poses(B, fu):
     pose = fu.Poses(i)
     pos = pose.Position(F.FVector3())
     rot = pose.Rotation(F.FQuaternion())
-    F.CreateFQuaternionTransform(B, pos.X(), pos.Y(), pos.Z(), rot.X(), rot.Y(), rot.Z(), rot.W())
+    F.CreateFQuaternionTransform(
+        B, pos.X(), pos.Y(), pos.Z(), rot.X(), rot.Y(), rot.Z(), rot.W()
+        )
   return B.EndVector(pl)
 
 
@@ -83,10 +89,8 @@ def build_bodies(B, fu):
 def build_motions(B, input_reaction):
   motion_offsets = []
   for input_motion in input_reaction.motions:
-    actor_string_offset = B.CreateString(
-        input_motion.actor_name)
-    motor_string_offset = B.CreateString(
-        input_motion.motor_name)
+    actor_string_offset = B.CreateString(input_motion.actor_name)
+    motor_string_offset = B.CreateString(input_motion.motor_name)
     F.FMotionStart(B)
     F.FMotionAddActorName(B, actor_string_offset)
     F.FMotionAddMotorName(B, motor_string_offset)
@@ -104,8 +108,7 @@ def build_displayables(B, input_reaction):
   displayables_offsets = []
   if input_reaction.displayables is not None:
     for input_displayable in input_reaction.displayables:
-      name_string_offset = B.CreateString(
-          input_displayable.displayable_name)
+      name_string_offset = B.CreateString(input_displayable.displayable_name)
 
       displayable_value_type = F.FDisplayableValue.NONE
       displayable_value_offset = None
@@ -149,11 +152,12 @@ def build_configurations(B, input_reaction):
   configurations_offsets = []
   if input_reaction.configurations is not None:
     for input_configuration in input_reaction.configurations:
-      name_string_offset = B.CreateString(
-          input_configuration.configurable_name)
+      name_string_offset = B.CreateString(input_configuration.configurable_name)
       F.FConfigurationStart(B)
       F.FConfigurationAddConfigurableName(B, name_string_offset)
-      F.FConfigurationAddConfigurableValue(B, input_configuration.configurable_value)
+      F.FConfigurationAddConfigurableValue(
+          B, input_configuration.configurable_value
+          )
       configuration_offset = F.FConfigurationEnd(B)
       configurations_offsets.append(configuration_offset)
 
@@ -184,12 +188,13 @@ def create_actors(flat_environment_description):
       actor = N.Actor(flat_actor)
       actors[actor.actor_name] = actor
 
-  out_actors = {} # All dictionaries in python3.6+ are insertion ordered, actors are sorted by key and
-  # inserted so that the order of actor key-value pairs are always the same for all instances the same environment. This is
+  out_actors = {}  # All dictionaries in python3.6+ are insertion ordered, actors are sorted by key and
+  # inserted so that the order of actor key-value pairs are always the same for all instances the same
+  # environment. This is
   # useful when descriptions are used for inference what value (motion strength) in a numeric vector
   # corresponds to what actor.
   for key in sorted(actors.keys()):
-    out_actors[key]= actors[key]
+    out_actors[key] = actors[key]
 
   return out_actors
 
@@ -213,8 +218,8 @@ def create_configurables(flat_environment_description):
         observation = create_euler_transform(f_conf)
 
       configurable = N.Configurable(
-          f_conf.ConfigurableName().decode(),
-          observation)
+          f_conf.ConfigurableName().decode(), observation
+          )
       configurables[configurable.configurable_name] = configurable
   return configurables
 
@@ -280,10 +285,11 @@ def create_euler_transform(f_obs):
   position = transform.Position(F.FVector3())
   rotation = transform.Rotation(F.FVector3())
   direction = transform.Direction(F.FVector3())
-  return [[position.X(), position.Y(), position.Z()],
-          [direction.X(), direction.Y(), direction.Z()],
-          [rotation.X(), rotation.Y(), rotation.Z()]
-          ]
+  return [
+    [position.X(), position.Y(), position.Z()],
+    [direction.X(), direction.Y(), direction.Z()],
+    [rotation.X(), rotation.Y(), rotation.Z()],
+    ]
 
 
 def create_body(f_obs):
@@ -291,9 +297,10 @@ def create_body(f_obs):
   body.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   velocity = body.Velocity(F.FVector3())
   angular_velocity = body.AngularVelocity(F.FVector3())
-  return [[velocity.X(), velocity.Y(), velocity.Z()],
-          [angular_velocity.X(), angular_velocity.Y(),
-           angular_velocity.Z()]]
+  return [
+    [velocity.X(), velocity.Y(), velocity.Z()],
+    [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
+    ]
 
 
 def create_quadruple(f_obs):
@@ -331,7 +338,15 @@ def create_quaternion_transform(f_obs):
   qt.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   position = qt.Transform().Position(F.FVector3())
   rotation = qt.Transform().Rotation(F.FQuaternion())
-  data = [position.X(), position.Y(), position.Z(), rotation.X(), rotation.Y(), rotation.Z(), rotation.W()]
+  data = [
+    position.X(),
+    position.Y(),
+    position.Z(),
+    rotation.X(),
+    rotation.Y(),
+    rotation.Z(),
+    rotation.W(),
+    ]
   return data
 
 
@@ -358,20 +373,25 @@ def create_motors(flat_actor):
   motors = {}
   for i in range(flat_actor.MotorsLength()):
     flat_motor = flat_actor.Motors(i)
-    input_motor = N.Motor(flat_motor.MotorName().decode(),
-                          flat_motor.ValidInput(),
-                          flat_motor.EnergySpentSinceReset())
+    input_motor = N.Motor(
+        flat_motor.MotorName().decode(),
+        flat_motor.ValidInput(),
+        flat_motor.EnergySpentSinceReset(),
+        )
     motors[input_motor.motor_name] = input_motor
 
-  out_motors = {} # All dictionaries in python3.6+ are insertion ordered, motors are sorted by key and
-  # inserted so that the order of motor key-value pairs are always the same for all instances the same environment. This is
+  out_motors = {}  # All dictionaries in python3.6+ are insertion ordered, motors are sorted by key and
+  # inserted so that the order of motor key-value pairs are always the same for all instances the same
+  # environment. This is
   # useful when descriptions are used for inference what value (motion strength) in a numeric vector
   # corresponds to what motor.
   for key in sorted(motors.keys()):
-    out_motors[key]= motors[key]
+    out_motors[key] = motors[key]
 
   return motors
 
 
 def create_motion_space(flat_range):
-  return N.Space(flat_range.DecimalGranularity(), flat_range.MinValue(), flat_range.MaxValue())
+  return N.Space(
+      flat_range.DecimalGranularity(), flat_range.MinValue(), flat_range.MaxValue()
+      )

@@ -10,13 +10,15 @@ from kivy.uix.textinput import TextInput
 
 
 class StatusBar(BoxLayout):
+
   def __init__(self, on_connect_callback, **kwargs):
     super(StatusBar, self).__init__(**kwargs)
     self._on_connect_callback = on_connect_callback
     self.ip_address_input = TextInput(text='127.0.0.1')
     self.port_input = TextInput(text='5555')
-    self.launch_label = Label(text='Launch Environment', halign='right',
-                              font_size=12)
+    self.launch_label = Label(
+        text='Launch Environment', halign='right', font_size=12
+        )
     self.launch_check_box = CheckBox(active=True)
     self.environment_input = TextInput(text='reaching-v0')
     self.connect_button = Button(text='Connect')
@@ -42,9 +44,12 @@ class StatusBar(BoxLayout):
       self.environment_input.disabled = True
 
   def on_connect_button(self, value):
-    self._on_connect_callback(self.ip_address_input.text, self.port_input.text,
-                              self.launch_check_box.active,
-                              self.environment_input.text)
+    self._on_connect_callback(
+        self.ip_address_input.text,
+        self.port_input.text,
+        self.launch_check_box.active,
+        self.environment_input.text,
+        )
 
   def update_connect_button(self, value: str):
     self.connect_button.text = value

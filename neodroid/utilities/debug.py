@@ -9,6 +9,7 @@ from functools import wraps
 
 # from enum import auto
 
+
 class ClientEvents(Enum):
   CONNECTED = 1  # auto()
   DISCONNECTED = 2  # auto()
@@ -32,6 +33,7 @@ def print_return(f):
 
 def message_client_event(event):
   def receive_f(f):
+
     @wraps(f)
     def call_f(ctx, *args, **kwargs):
       if event is ClientEvents.CONNECTED:

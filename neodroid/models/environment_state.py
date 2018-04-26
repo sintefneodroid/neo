@@ -7,6 +7,7 @@ import neodroid.messaging
 
 # @pretty_print
 class EnvironmentState(object):
+
   def __init__(self, fbs_state):
     self._fbs_state = fbs_state
 
@@ -49,7 +50,9 @@ class EnvironmentState(object):
   @property
   def description(self):
     if self._fbs_state.EnvironmentDescription():
-      return neodroid.messaging.create_description(self._fbs_state.EnvironmentDescription())
+      return neodroid.messaging.create_description(
+          self._fbs_state.EnvironmentDescription()
+          )
 
   @property
   def observers(self):
@@ -60,30 +63,24 @@ class EnvironmentState(object):
       return neodroid.messaging.create_observers(self._fbs_state)[key]
 
   def __repr__(self):
-    observers_str = ''.join([
-      str(observer.__repr__()) for observer in self.observers.values()
-      ])
+    observers_str = ''.join(
+        [str(observer.__repr__()) for observer in self.observers.values()]
+        )
 
     description_str = str(self.description)
-    return '<EnvironmentState>\n' + \
-           '  <total_energy_spent>' + \
-           str(self.total_energy_spent) + \
-           '</total_energy_spent>\n' + \
-           '  <frame_number>' + \
-           str(self.frame_number) + \
-           '</frame_number>\n' + \
-           '  <reward>' + \
-           str(self.signal) + \
-           '</reward>\n' + \
-           '  <interrupted>' + \
-           str(self.terminated) + \
-           '</interrupted>\n' + \
-           '  <Observers>\n' + \
-           observers_str + \
-           '  </Observers>\n' + \
-           str(self.description) + \
-           str(self.unobservables) + \
-           '</EnvironmentState>\n'
+    return '<EnvironmentState>\n' + '  <total_energy_spent>' + str(
+        self.total_energy_spent
+        ) + '</total_energy_spent>\n' + '  <frame_number>' + str(
+        self.frame_number
+        ) + '</frame_number>\n' + '  <reward>' + str(
+        self.signal
+        ) + '</reward>\n' + '  <interrupted>' + str(
+        self.terminated
+        ) + '</interrupted>\n' + '  <Observers>\n' + observers_str + '  </Observers>\n' + str(
+        self.description
+        ) + str(
+        self.unobservables
+        ) + '</EnvironmentState>\n'
 
   def __str__(self):
     return self.__repr__()

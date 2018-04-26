@@ -4,6 +4,7 @@ __author__ = 'cnheider'
 
 
 class Motion(object):
+
   def __init__(self, actor_name, motor_name, strength):
     self._actor_name = actor_name
     self._motor_name = motor_name
@@ -26,15 +27,17 @@ class Motion(object):
     return {
       '_actor_name': self._actor_name,
       '_motor_name': self._motor_name,
-      '_strength':   self._strength
+      '_strength':   self._strength,
       }
 
   def __repr__(self):
-    return '<Motion>\n' + \
-           '  <actor_name>' + str(self._actor_name) + '</actor_name>\n' + \
-           '  <motor_name>' + str(self._motor_name) + '</motor_name>\n' + \
-           '  <strength>\n' + str(self._strength) + '</strength>\n' + \
-           '</Motion>\n'
+    return '<Motion>\n' + '  <actor_name>' + str(
+        self._actor_name
+        ) + '</actor_name>\n' + '  <motor_name>' + str(
+        self._motor_name
+        ) + '</motor_name>\n' + '  <strength>\n' + str(
+        self._strength
+        ) + '</strength>\n' + '</Motion>\n'
 
   def __str__(self):
     return self.__repr__()
