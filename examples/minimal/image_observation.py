@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # coding=utf-8
+import time
+
 __author__ = 'cnheider'
 
 # import cv2
@@ -16,7 +18,7 @@ def grab_video_frame(cap):
 
 
 def grab_new_images(environment):
-  image_color = environment.sensor('ColorCamera').observation_value
+  image_color = environment.sensor('RGBCamera').observation_value
   image_depth = environment.sensor('DepthCamera').observation_value
   image_segmentation = environment.sensor('SegmentationCamera').observation_value
 
@@ -36,7 +38,7 @@ obs, rew, term, info = env.step(0)
 print(obs)
 image_color, image_depth, image_segmentation, *_ = grab_new_images(env)
 
-ax1.set_title('Color')
+ax1.set_title('RGB')
 im1 = ax1.imshow(image_color)
 ax2.set_title('Depth')
 im2 = ax2.imshow(image_depth)
@@ -45,14 +47,23 @@ im3 = ax3.imshow(image_segmentation)
 
 
 def update_figures(i):
-  obs, rew, term, info = env.step(0)
-  print(obs)
+  global time_s
+  _, _, _, info = env.step()
   image_color, image_depth, image_segmentation, *_ = grab_new_images(env)
+
+  time_now = time.time()
+
+  fps = (1/(time_now - time_s))
+
+  time_s = time_now
+
+  plt.title(f'FPS: {fps}')
 
   im1.set_data(image_color)
   im2.set_data(image_depth)
   im3.set_data(image_segmentation)
 
 
+time_s = time.time()
 ani = animation.FuncAnimation(fig, update_figures)
 plt.show()

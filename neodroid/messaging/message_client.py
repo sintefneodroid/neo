@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # coding=utf-8
+import warnings
+
 __author__ = 'cnheider'
 
 import functools
@@ -46,8 +48,9 @@ class MessageClient(object):
       on_step_done_callback=None,
       on_connected_callback=None,
       on_disconnected_callback=None,
-      ):
+      verbose=False):
 
+    self._verbose = verbose
     self._tcp_address = tcp_address
     self._tcp_port = tcp_port
 
@@ -56,6 +59,7 @@ class MessageClient(object):
     # self._socket_type = zmq.PAIR
 
     self._on_timeout_callback = on_timeout_callback
+    self._on_connected_callback = on_connected_callback
     self._on_disconnected_callback = on_disconnected_callback
 
     self._context = zmq.Context.instance()
@@ -74,13 +78,18 @@ class MessageClient(object):
     if not self._request_socket:
       raise RuntimeError('Failed to create ZMQ socket!')
 
-    print('Connecting to server')
+    if self._verbose:
+      warnings.warn('Connecting to server')
     if self._use_ipc_medium:
       self._request_socket.connect('ipc:///tmp/neodroid/messages')
-      print('Using IPC protocol')
+      if self._verbose:
+        warnings.warn('Using IPC protocol')
     else:
       self._request_socket.connect(f'tcp://{self._tcp_address}:{self._tcp_port}')
-      print('Using TCP protocol')
+      if self._verbose:
+        warnings.warn('Using TCP protocol')
+
+    self._on_connected_callback()
 
     self._poller.register(self._request_socket, zmq.POLLIN)
 
@@ -122,16 +131,16 @@ class MessageClient(object):
           retries_left -= 1
 
           if retries_left <= 0:
-            print('Out of retries, tearing down client')
+            if self._verbose:
+              warnings.warn('Out of retries, tearing down client')
             self.teardown()
             if self._on_disconnected_callback:
               self._on_disconnected_callback()
-            break
+            raise ConnectionError
 
           else:
-            print(
-                'Retrying sending reaction, attempt: %d/%d'
-                % (retries_left, REQUEST_RETRIES)
+            warnings.warn(
+                f'\nRetrying, attempt: {retries_left:d}/{REQUEST_RETRIES:d}'
                 )
             self.open_connection()
             self._request_socket.send(serialised_reaction)

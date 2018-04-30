@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # coding=utf-8
+import time
+
 __author__ = 'cnheider'
 
 import logging
@@ -58,7 +60,7 @@ class NeodroidEnvironment(Environment):
       debug_logging=False,
       verbose=False,
       logging_directory='logs',
-      seed=3,
+      seed=8,
       on_connected_callback=None,
       on_disconnected_callback=None,
       on_timeout_callback=None,
@@ -110,19 +112,28 @@ class NeodroidEnvironment(Environment):
         self._ip,
         self._port,
         on_timeout_callback=self.__on_timeout_callback__,
+        on_connected_callback=self.__on_connected_callback__,
         on_disconnected_callback=self.__on_disconnected_callback__,
-        )
+        verbose=self._verbose)
+
+    if self._verbose:
+      warnings.warn(f'Using Neodroid API version {self._neodroid_api_version}')
+
+    warnings.warn('Connecting to server')
+    while self._description is None:
+      print('.')
+      self.reset()
+      time.sleep(0.2)
+
     self._connected_to_server = True
-    self.reset()
-    print(f'Using Neodroid API version {self._neodroid_api_version}')
 
     server_version = self._description.api_version
     if self._neodroid_api_version != server_version:
       if server_version == '':
         server_version = '*Unspecified*'
-      warnings.warn(
-          f'Server is using different version {server_version}, complications may occur!'
-          )
+      if self._verbose:
+        warnings.warn(f'Server is using different version {server_version}, complications may occur!')
+
 
   @property
   def description(self):
@@ -209,6 +220,8 @@ class NeodroidEnvironment(Environment):
     if self._external_on_connected_callback:
       self._external_on_connected_callback()
 
+
+
   @message_client_event(event=ClientEvents.DISCONNECTED)
   def __on_disconnected_callback__(self):
     '''
@@ -249,7 +262,8 @@ class NeodroidEnvironment(Environment):
 :return:
 :rtype:
 '''
-    warnings.warn('Reacting in environment')
+    if self._verbose:
+      warnings.warn('Reacting in environment')
     if self._debug_logging:
       self._logger.debug('Reacting in environment')
 
@@ -269,7 +283,8 @@ class NeodroidEnvironment(Environment):
       if message.description:
         self._description = message.description
       return message
-    warnings.warn('No valid was message received')
+    if self._verbose:
+      warnings.warn('No valid was message received')
     if self._debug_logging:
       self._logger.debug('No valid was message received')
 
@@ -314,7 +329,8 @@ The environments argument lets you specify which environments to reset.
 :param input_reaction:
 :type on_reset_callback: object
 '''
-    warnings.warn('Resetting environment')
+    if self._verbose:
+      warnings.warn('Resetting environment')
     if self._debug_logging:
       self._logger.debug('Resetting environment')
 
@@ -335,7 +351,8 @@ The environments argument lets you specify which environments to reset.
         self._description = message.description
         self._action_space = contruct_action_space(self._description)
       return message
-    warnings.warn('No valid was message received')
+    if self._verbose:
+      warnings.warn('No valid was message received')
     if self._debug_logging:
       self._logger.debug('No valid was message received')
 
@@ -347,7 +364,8 @@ The environments argument lets you specify which environments to reset.
 :return:
 :rtype:
 '''
-    warnings.warn('Closing')
+    if self._verbose:
+      warnings.warn('Closing')
     if self._debug_logging:
       self._logger.debug('Closing')
     # if self._message_server:
@@ -375,7 +393,7 @@ if __name__ == '__main__':
 
   env = NeodroidEnvironment(name=args.ENVIRONMENT_NAME[0])
 
-  observation_session = tqdm(env)
+  observation_session = tqdm(env,leave=False)
   for state in observation_session:
     if state.terminated:
       print('Interrupted', state.signal)

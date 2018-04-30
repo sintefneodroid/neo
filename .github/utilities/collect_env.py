@@ -79,8 +79,7 @@ def get_lsb_version(run_lambda):
 
 def check_release_file(run_lambda):
   return run_and_parse_first_match(run_lambda, 'cat /etc/*-release',
-                                   r'PRETTY_NAME='(. *)
-  '')
+                                   r'PRETTY_NAME="(. *)"')
 
   def get_os(run_lambda):
     platform = get_platform()
@@ -113,9 +112,7 @@ def check_release_file(run_lambda):
   def get_pip_packages(run_lambda):
     # People generally have `pip` as `pip` or `pip3`
     def run_with_pip(pip):
-      return run_and_read_all(run_lambda, pip + ' list --format=legacy | grep '
-      neo\ | numpy
-      '')
+      return run_and_read_all(run_lambda, pip + ' list - -format=legacy | grep "neo\ | numpy"')
 
       if not PY3:
         return 'pip', run_with_pip('pip')
@@ -144,7 +141,8 @@ def check_release_file(run_lambda):
       return SystemEnv(
           neo_version=neo.__version__,
           is_debug_build=neo.version.debug,
-          python_version='{}.{}'.format(sys.version_info[0], sys.version_info[1]),
+          python_version='{}.{}'.format(
+            sys.version_info[0], sys.version_info[1]),
           pip_version=pip_version,
           pip_packages=pip_list_output,
           os=get_os(run_lambda),
@@ -200,7 +198,8 @@ Versions of relevant libraries:
       mutable_dict = replace_nones(mutable_dict)
 
       # If either of these are '', replace with 'No relevant packages'
-      mutable_dict['pip_packages'] = replace_if_empty(mutable_dict['pip_packages'])
+      mutable_dict['pip_packages'] = replace_if_empty(
+        mutable_dict['pip_packages'])
 
       if mutable_dict['pip_packages']:
         mutable_dict['pip_packages'] = prepend(mutable_dict['pip_packages'],

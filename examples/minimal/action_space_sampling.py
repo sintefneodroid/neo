@@ -6,7 +6,7 @@ import neodroid.wrappers.formal_wrapper as neo
 
 
 def main():
-  _environment = neo.make('multienv', connect_to_running=False)
+  _environment = neo.make('multienv', connect_to_running=True)
   _environment.reset()
   while _environment.is_connected:
     actions = _environment.action_space.sample()
