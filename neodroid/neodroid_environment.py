@@ -74,7 +74,7 @@ class NeodroidEnvironment(Environment):
     self._debug_logging = debug_logging
     if self._debug_logging:
       logging.basicConfig(
-          format='%(asctime)s %(message)s',
+          format='%(asctime)s %(new_state)s',
           filename=os.path.join(logging_directory, 'neodroid-log.txt'),
           level=logging.DEBUG,
           )
@@ -273,20 +273,20 @@ class NeodroidEnvironment(Environment):
     if parameters is not None:
       input_reaction.parameters = parameters
 
-    message = self._message_server.send_reaction(input_reaction)
+    new_state = self._message_server.send_reaction(input_reaction)
 
-    if message:
-      self._last_message = message
-      flat_message = flattened_observation(message)
+    if new_state:
+      self._last_message = new_state
+      flat_message = flattened_observation(new_state)
       if flat_message is not None:
         self._observation_space = contruct_observation_space(flat_message)
-      if message.description:
-        self._description = message.description
-      return message
-    if self._verbose:
-      warnings.warn('No valid was message received')
+      if new_state.description:
+        self._description = new_state.description
+      return new_state
+
+    warnings.warn('No valid was new_state received')
     if self._debug_logging:
-      self._logger.debug('No valid was message received')
+      self._logger.debug('No valid was new_state received')
 
   @staticmethod
   def maybe_infer_configuration_reaction(input_reaction, description, verbose=False):
@@ -314,10 +314,10 @@ class NeodroidEnvironment(Environment):
 :return:
 :rtype:
 '''
-    message = self._message_server.send_reaction(M.Reaction(parameters=parameters))
-    if message:
-      self._last_message = message
-    return message
+    new_state = self._message_server.send_reaction(M.Reaction(parameters=parameters))
+    if new_state:
+      self._last_message = new_state
+    return new_state
 
   def reset(self, input_reaction=None, state=None, on_reset_callback=None):
     '''
@@ -340,21 +340,21 @@ The environments argument lets you specify which environments to reset.
     if state:
       input_reaction.unobservables = state.unobservables
 
-    message = self._message_server.send_reaction(input_reaction)
+    new_state = self._message_server.send_reaction(input_reaction)
 
-    if message:
-      self._last_message = message
-      flat_message = flattened_observation(message)
+    if new_state:
+      self._last_message = new_state
+      flat_message = flattened_observation(new_state)
       if flat_message is not None:
         self._observation_space = contruct_observation_space(flat_message)
-      if message.description:
-        self._description = message.description
+      if new_state.description:
+        self._description = new_state.description
         self._action_space = contruct_action_space(self._description)
-      return message
+      return new_state
     if self._verbose:
-      warnings.warn('No valid was message received')
+      warnings.warn('No valid was new_state received')
     if self._debug_logging:
-      self._logger.debug('No valid was message received')
+      self._logger.debug('No valid was new_state received')
 
   def close(self, callback=None):
     '''

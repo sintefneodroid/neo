@@ -14,6 +14,7 @@ from .fbs_utilities import build_reaction, create_state
 REQUEST_TIMEOUT = 8000  # Milliseconds
 REQUEST_RETRIES = 9
 
+LAST_RECEIVED_FRAME_NUMBER=0
 
 def singleton(cls):
   ''' Use class as singleton. '''
@@ -103,6 +104,7 @@ class MessageClient(object):
     self._context.term()
 
   def send_reaction(self, reaction):
+    global LAST_RECEIVED_FRAME_NUMBER
     if not self._expecting_response:
       serialised_reaction = build_reaction(reaction)
       self._request_socket.send(serialised_reaction)
@@ -115,13 +117,17 @@ class MessageClient(object):
 
         if sockets.get(self._request_socket):
           response = self._request_socket.recv()
-          if not response:
-            break
+          if not response or len(response)<4:
+            continue
 
           self._expecting_response = False
 
           flat_buffer_state = FState.GetRootAsFState(response, 0)
+
           state = create_state(flat_buffer_state)
+          if LAST_RECEIVED_FRAME_NUMBER==state.frame_number:
+            warnings.warn(f'Received a duplicate frame on frame number: {state.frame_number}')
+          LAST_RECEIVED_FRAME_NUMBER=state.frame_number
           return state
 
         else:
