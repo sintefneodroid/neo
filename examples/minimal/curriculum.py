@@ -16,7 +16,7 @@ def get_goal_configuration(environment):
     # goal_pos_x = environment.description.configurable('GoalTransformX').observation
     # goal_pos_z = environment.description.configurable('GoalTransformZ').observation
     # return goal_pos_x,goal_pos_z
-    return environment.description.configurable('GoalPosition').observation
+    return environment.description.configurable('GoalPosition').configurable_value
 
 
 def main():

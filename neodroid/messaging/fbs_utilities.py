@@ -124,15 +124,54 @@ def build_displayables(B, input_reaction):
         F.FStringStart(B)
         F.FStringAddStr(B, v)
         displayable_value_offset = F.FStringEnd(B)
+      elif type(input_value) is tuple:
+        displayable_value_type = F.FDisplayableValue.FValuedVector3s
+        _length = len(input_value[0])
+
+        a0 = input_value[0]
+        a1 = input_value[1]
+
+        F.FValuedVector3sStartValsVector(B, _length)
+        for v_ in reversed(a0):
+          v=np.float64(v_)
+          B.PrependFloat64(v)
+        values_offset = B.EndVector(_length)
+
+        F.FValuedVector3sStartPointsVector(B, _length)
+        for p in reversed(a1):
+          x, y, z = np.float64(p)
+          F.CreateFVector3(B, x, y, z)
+        points = B.EndVector(_length)
+
+        F.FValuedVector3sStart(B)
+        F.FValuedVector3sAddVals(B, values_offset)
+        F.FValuedVector3sAddPoints(B, points)
+        displayable_value_offset = F.FValuedVector3sEnd(B)
+
+      elif type(input_value) is list or type(input_value) is np.ndarray and len(input_value[0]) == 3:
+        displayable_value_type = F.FDisplayableValue.FVector3s
+        _length = len(input_value)
+
+        F.FVector3sStartPointsVector(B, _length)
+        for p in reversed(input_value):
+          x, y, z = p
+          F.CreateFVector3(B, x, y, z)
+        points = B.EndVector(_length)
+
+        F.FVector3sStart(B)
+        F.FVector3sAddPoints(B, points)
+        displayable_value_offset = F.FVector3sEnd(B)
+
       elif type(input_value) is list or type(input_value) is np.ndarray:
         displayable_value_type = F.FDisplayableValue.FValues
-        F.FValuesStartValuesVector(B, len(input_value))
+        _length = len(input_value)
+        F.FValuesStartValsVector(B, _length)
         for v_ in reversed(input_value):
-          B.PrependFloat64(v_)
-        iv = B.EndVector(len(input_value))
+          B.PrependFloat64(np.float64(v_))
+        values_offset = B.EndVector(_length)
 
         F.FValuesStart(B)
-        F.FValuesAddValues(B, iv)
+        F.FValuesAddVals(B, values_offset)
         displayable_value_offset = F.FValuesEnd(B)
 
       F.FDisplayableStart(B)
@@ -208,20 +247,40 @@ def create_configurables(flat_environment_description):
   if flat_environment_description:
     for i in range(flat_environment_description.ConfigurablesLength()):
       f_conf = flat_environment_description.Configurables(i)
-      observation = None
-
-      if f_conf.ObservationType() is F.FObservation.FTriple:
-        observation = create_triple(f_conf)
-      elif f_conf.ObservationType() is F.FObservation.FSingle:
-        observation = create_single(f_conf)
-      elif f_conf.ObservationType() is F.FObservation.FET:
-        observation = create_euler_transform(f_conf)
+      observation_value, observation_space = unpack_observation(f_conf)
 
       configurable = N.Configurable(
-          f_conf.ConfigurableName().decode(), observation
+          f_conf.ConfigurableName().decode(),
+          observation_value,
+          observation_space
           )
       configurables[configurable.configurable_name] = configurable
   return configurables
+
+
+def unpack_observation(f_obs):
+  value = None
+  value_range = None
+  if f_obs.ObservationType() is F.FObservation.FSingle:
+    value, value_range = create_single(f_obs)
+  elif f_obs.ObservationType() is F.FObservation.FDouble:
+    value, value_range = create_double(f_obs)
+  elif f_obs.ObservationType() is F.FObservation.FTriple:
+    value, value_range = create_triple(f_obs)
+  elif f_obs.ObservationType() is F.FObservation.FQuadruple:
+    value, *_ = create_quadruple(f_obs)
+  elif f_obs.ObservationType() is F.FObservation.FArray:
+    value, *_ = create_array(f_obs)
+  elif f_obs.ObservationType() is F.FObservation.FET:
+    value, *_ = create_euler_transform(f_obs)
+  elif f_obs.ObservationType() is F.FObservation.FRB:
+    value, *_ = create_body(f_obs)
+  elif f_obs.ObservationType() is F.FObservation.FQT:
+    value, *_ = create_quaternion_transform(f_obs)
+  elif f_obs.ObservationType() is F.FObservation.FByteArray:
+    value, *_ = create_data(f_obs)
+
+  return value, value_range
 
 
 def create_observers(flat_state):
@@ -229,29 +288,10 @@ def create_observers(flat_state):
 
   for i in range(flat_state.ObservationsLength()):
     f_obs = flat_state.Observations(i)
-    data = None
-    observation_space = None
-    if f_obs.ObservationType() is F.FObservation.FSingle:
-      data = create_single(f_obs)
-    elif f_obs.ObservationType() is F.FObservation.FDouble:
-      data = create_double(f_obs)
-    elif f_obs.ObservationType() is F.FObservation.FTriple:
-      data = create_triple(f_obs)
-    elif f_obs.ObservationType() is F.FObservation.FQuadruple:
-      data = create_quadruple(f_obs)
-    elif f_obs.ObservationType() is F.FObservation.FArray:
-      data = create_array(f_obs)
-    elif f_obs.ObservationType() is F.FObservation.FET:
-      data = create_euler_transform(f_obs)
-    elif f_obs.ObservationType() is F.FObservation.FRB:
-      data = create_body(f_obs)
-    elif f_obs.ObservationType() is F.FObservation.FQT:
-      data = create_quaternion_transform(f_obs)
-    elif f_obs.ObservationType() is F.FObservation.FByteArray:
-      data = create_data(f_obs)
+    observation_value, observation_space = unpack_observation(f_obs)
 
     name = f_obs.ObservationName().decode()
-    observers[name] = N.Observation(name, observation_space, data)
+    observers[name] = N.Observation(name, observation_space, observation_value)
   return observers
 
 
@@ -315,22 +355,25 @@ def create_triple(f_obs):
   pos = F.FTriple()
   pos.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   position = pos.Vec3()
-  data = [position.X(), position.Y(), position.Z()]
-  return data
+  value = [position.X(), position.Y(), position.Z()]
+  value_range = [pos.XRange(), pos.YRange(), pos.ZRange()]
+  return value, value_range
 
 
 def create_double(f_obs):
   pos = F.FDouble()
   pos.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   position = pos.Vec2()
-  data = [position.X(), position.Y()]
-  return data
+  value = [position.X(), position.Y()]
+  value_range = [pos.XRange(), pos.YRange()]
+  return value, value_range
 
 
 def create_single(f_obs):
   val = F.FSingle()
   val.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
-  return val.Value()
+  value, value_range = val.Value(), val.Range()
+  return value, value_range
 
 
 def create_quaternion_transform(f_obs):
@@ -391,7 +434,8 @@ def create_motors(flat_actor):
   return motors
 
 
-def create_motion_space(flat_range):
-  return N.Space(
+def create_space(flat_range):
+  space = N.Space(
       flat_range.DecimalGranularity(), flat_range.MinValue(), flat_range.MaxValue()
       )
+  return space

@@ -1,35 +1,45 @@
 #!/usr/bin/env python3
 # coding=utf-8
-__author__ = 'cnheider'
+import neodroid
+import neodroid.messaging
 
+__author__ = 'cnheider'
 
 # @pretty_print
 class Configurable(object):
 
-  def __init__(self, configurable_name, observation):
+  def __init__(self, configurable_name, configurable_value, space):
     self._configurable_name = configurable_name
-    self._observation = observation
+    self._configurable_value = configurable_value
+    self._configurable_space = space
 
   @property
   def configurable_name(self):
     return self._configurable_name
 
   @property
-  def observation(self):
-    return self._observation
+  def configurable_value(self):
+    return self._configurable_value
+
+  @property
+  def configurable_space(self):
+    if self._configurable_space:
+      space = neodroid.messaging.create_space(self._configurable_space)
+      return space
 
   def to_dict(self):
     return {
-      '_configurable_name':  self._configurable_name,
-      '_configurable_value': self._valid_range,
+      '_configurable_name': self._configurable_name,
+      '_configurable_value':self._configurable_value,
+      '_configurable_space':self._configurable_space
       }
 
   def __repr__(self):
-    return '<Configurable>\n' + '  <configurable_name>' + str(
-        self._configurable_name
-        ) + '</configurable_name>\n' + '  <observation>\n' + str(
-        self._observation
-        ) + '</observation>\n' + '</Configurable>\n'
+    return f'<Configurable>\n  ' \
+           f'<configurable_name>{self._configurable_name}</configurable_name>\n  ' \
+           f'<configurable_value>{self._configurable_value}</configurable_value>\n  ' \
+           f'<configurable_space>{self._configurable_space}</configurable_space>\n' \
+           f'</Configurable>\n'
 
   def __str__(self):
     return self.__repr__()

@@ -19,7 +19,8 @@ class Observation(object):
   @property
   def observation_space(self):
     if self._observation_space:
-      return neodroid.messaging.create_motion_space(self._observation_space)
+      space = neodroid.messaging.create_space(self._observation_space)
+      return space
 
   @property
   def observation_value(self):

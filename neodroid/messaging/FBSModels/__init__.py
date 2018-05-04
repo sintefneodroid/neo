@@ -30,6 +30,7 @@ from .FString import *
 from .FTriple import *
 from .FUnobservables import *
 from .FValue import *
+from .FValuedVector3Point import *
 from .FValuedVector3s import *
 from .FValues import *
 from .FVector3 import *

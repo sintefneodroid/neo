@@ -16,7 +16,7 @@ def get_goal_configuration(environment):
   if message and message.description:
     goal_transform = message.description.configurable('GoalEulerTransform')
     if goal_transform:
-      goal_transform = goal_transform.observation
+      goal_transform = goal_transform.configurable_value
       return [
         Configuration('LunarLanderEulerTransformX', goal_transform[0][0]),
         Configuration('LunarLanderEulerTransformY', goal_transform[0][1]),

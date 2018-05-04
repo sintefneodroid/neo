@@ -13,7 +13,7 @@ class NeodroidFormalWrapper(NeodroidEnvironment):
 
   def __next__(self):
     if not self._connected_to_server:
-      raise StopIteration
+      return
     return self.act()
 
   def act(self, *args, **kwargs):

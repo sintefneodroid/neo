@@ -4,39 +4,39 @@
 
 import flatbuffers
 
-class FSingle(object):
+class FValuedVector3Point(object):
     __slots__ = ['_tab']
 
     @classmethod
-    def GetRootAsFSingle(cls, buf, offset):
+    def GetRootAsFValuedVector3Point(cls, buf, offset):
         n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-        x = FSingle()
+        x = FValuedVector3Point()
         x.Init(buf, n + offset)
         return x
 
-    # FSingle
+    # FValuedVector3Point
     def Init(self, buf, pos):
         self._tab = flatbuffers.table.Table(buf, pos)
 
-    # FSingle
-    def Value(self):
+    # FValuedVector3Point
+    def Val(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             return self._tab.Get(flatbuffers.number_types.Float64Flags, o + self._tab.Pos)
         return 0.0
 
-    # FSingle
-    def Range(self):
+    # FValuedVector3Point
+    def Point(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
             x = o + self._tab.Pos
-            from .FRange import FRange
-            obj = FRange()
+            from .FVector3 import FVector3
+            obj = FVector3()
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
 
-def FSingleStart(builder): builder.StartObject(2)
-def FSingleAddValue(builder, value): builder.PrependFloat64Slot(0, value, 0.0)
-def FSingleAddRange(builder, range): builder.PrependStructSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(range), 0)
-def FSingleEnd(builder): return builder.EndObject()
+def FValuedVector3PointStart(builder): builder.StartObject(2)
+def FValuedVector3PointAddVal(builder, val): builder.PrependFloat64Slot(0, val, 0.0)
+def FValuedVector3PointAddPoint(builder, point): builder.PrependStructSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(point), 0)
+def FValuedVector3PointEnd(builder): return builder.EndObject()
