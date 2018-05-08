@@ -117,7 +117,7 @@ class MessageClient(object):
 
         if sockets.get(self._request_socket):
           response = self._request_socket.recv()
-          if not response or len(response)<4:
+          if not response:# or len(response)<4:
             continue
 
           self._expecting_response = False

@@ -31,7 +31,7 @@ class NeodroidCurriculumWrapper(NeodroidEnvironment):
     return None, None, None, None
 
   def configure(self, *args, **kwargs):
-    message = super(NeodroidCurriculumWrapper, self).reset(*args, **kwargs)
+    message = super().reset(*args, **kwargs)
     if message:
       return np.array(flattened_observation(message)), message
     return None, None

@@ -2,6 +2,8 @@
 # coding=utf-8
 import time
 
+from neodroid.models import Reaction
+
 __author__ = 'cnheider'
 
 import logging
@@ -301,11 +303,24 @@ class NeodroidEnvironment(Environment):
 
     return input_reaction
 
+  def describe(self):
+    return self.observe(      parameters=M.ReactionParameters(
+          terminable=False, describe=True, episode_count=False
+          ))
+
+  def display(self,displayables):
+    conf_reaction = Reaction(
+        displayables=displayables
+        )
+    message = self.reset(conf_reaction)
+    if message:
+      return np.array(flattened_observation(message)), message
+
   def observe(
       self,
       parameters=M.ReactionParameters(
           terminable=True, describe=True, episode_count=False
-          ),
+          )
       ):
     '''
 
@@ -315,6 +330,8 @@ class NeodroidEnvironment(Environment):
 :rtype:
 '''
     new_state = self._message_server.send_reaction(M.Reaction(parameters=parameters))
+    if new_state.description:
+      self._description = new_state.description
     if new_state:
       self._last_message = new_state
     return new_state

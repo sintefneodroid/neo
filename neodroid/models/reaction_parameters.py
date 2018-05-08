@@ -9,12 +9,13 @@ class ReactionParameters(object):
 
   def __init__(
       self,
-      terminable=True,
+      *,
+      terminable=False,
       step=False,
       reset=False,
       configure=False,
       describe=False,
-      episode_count=True,
+      episode_count=False,
       ):
     self._terminable = terminable
     self._configure = configure

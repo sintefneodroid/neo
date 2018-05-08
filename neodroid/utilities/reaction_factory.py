@@ -25,7 +25,8 @@ def _reverse_action(self, action):
 def verify_motion_reaction(
     input, environment_description, normalise=False, verbose=False
     ):
-  parameters = M.ReactionParameters(True, True, False, False, False)
+  parameters = M.ReactionParameters(terminable=True, step=True, reset=False, configure=False,
+                                    describe=False,episode_count=True)
   if environment_description:
     actors = environment_description.actors.values()
     if actors:
@@ -63,7 +64,8 @@ def verify_motion_reaction(
 
 def construct_reaction_from_list(motion_list, actors, normalise):
   motions = construct_motions_from_list(motion_list, actors, normalise)
-  parameters = M.ReactionParameters(True, True, False, False, False)
+  parameters = M.ReactionParameters(terminable=True, step=True, reset=False, configure=False,
+                                    describe=False, episode_count=True)
   return M.Reaction(motions=motions, parameters=parameters)
 
 
@@ -95,7 +97,12 @@ def construct_motions_from_list(input_list, actors, normalise):
 def verify_configuration_reaction(
     input_reaction, environment_description, verbose=False
     ):
-  parameters = M.ReactionParameters(False, False, True, True, True, False)
+  parameters = M.ReactionParameters(terminable=False,
+                                    step=False,
+                                    reset=True,
+                                    configure=True,
+                                    describe=True,
+                                    episode_count=False)
   if environment_description:
     configurables = environment_description.configurables.values()
     if configurables:
@@ -148,7 +155,8 @@ def construct_configuration_reaction_from_list(configuration_list, configurables
   configurations = construct_configurations_from_known_observables(
       configuration_list, configurables
       )
-  parameters = M.ReactionParameters(False, False, True, True, True, False)
+  parameters = M.ReactionParameters(terminable=False, step=False, reset=True, configure=True,
+                                    describe=True, episode_count=False)
   return M.Reaction(parameters=parameters, configurations=configurations, motions=[])
 
 
