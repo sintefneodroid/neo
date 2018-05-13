@@ -29,9 +29,12 @@ class FSimulatorConfiguration(object):
     def FrameSkips(self): return self._tab.Get(flatbuffers.number_types.Int32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(28))
     # FSimulatorConfiguration
     def ResetIterations(self): return self._tab.Get(flatbuffers.number_types.Int32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(32))
+    # FSimulatorConfiguration
+    def NumOfEnvironments(self): return self._tab.Get(flatbuffers.number_types.Int32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(36))
 
-def CreateFSimulatorConfiguration(builder, width, height, fullScreen, qualityLevel, timeScale, targetFrameRate, waitEvery, frameSkips, resetIterations):
-    builder.Prep(4, 36)
+def CreateFSimulatorConfiguration(builder, width, height, fullScreen, qualityLevel, timeScale, targetFrameRate, waitEvery, frameSkips, resetIterations, numOfEnvironments):
+    builder.Prep(4, 40)
+    builder.PrependInt32(numOfEnvironments)
     builder.PrependInt32(resetIterations)
     builder.PrependInt32(frameSkips)
     builder.PrependInt32(waitEvery)

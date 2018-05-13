@@ -19,12 +19,12 @@ class Actor(object):
     return self._flat_actor.Alive()
 
   def motor(self, key):
-    if key in neodroid.messaging.create_motors(self._flat_actor):
-      return neodroid.messaging.create_motors(self._flat_actor)[key]
+    if key in neodroid.messaging.deserialise_motors(self._flat_actor):
+      return neodroid.messaging.deserialise_motors(self._flat_actor)[key]
 
   @property
   def motors(self):
-    return neodroid.messaging.create_motors(self._flat_actor)
+    return neodroid.messaging.deserialise_motors(self._flat_actor)
 
   def __repr__(self):
     motors_str = ''.join([str(motor.__repr__()) for motor in self.motors.values()])

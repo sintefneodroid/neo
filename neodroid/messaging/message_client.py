@@ -2,14 +2,16 @@
 # coding=utf-8
 import warnings
 
+from neodroid.messaging.fbs_state_utilties import deserialise_states
+
 __author__ = 'cnheider'
 
 import functools
 
 import zmq
 
-from .FBSModels import FState
-from .fbs_utilities import build_reaction, create_state
+from .FBSModels import FStates
+from .fbs_reaction_utilities import serialise_reaction, serialise_reactions
 
 REQUEST_TIMEOUT = 8000  # Milliseconds
 REQUEST_RETRIES = 9
@@ -103,10 +105,10 @@ class MessageClient(object):
   def teardown(self):
     self._context.term()
 
-  def send_reaction(self, reaction):
+  def send_reactions(self, reactions):
     global LAST_RECEIVED_FRAME_NUMBER
     if not self._expecting_response:
-      serialised_reaction = build_reaction(reaction)
+      serialised_reaction = serialise_reactions(reactions)
       self._request_socket.send(serialised_reaction)
       self._expecting_response = True
 
@@ -122,13 +124,14 @@ class MessageClient(object):
 
           self._expecting_response = False
 
-          flat_buffer_state = FState.GetRootAsFState(response, 0)
+          flat_buffer_states = FStates.GetRootAsFStates(response, 0)
 
-          state = create_state(flat_buffer_state)
-          if LAST_RECEIVED_FRAME_NUMBER==state.frame_number:
-            warnings.warn(f'Received a duplicate frame on frame number: {state.frame_number}')
-          LAST_RECEIVED_FRAME_NUMBER=state.frame_number
-          return state
+          states,simulator_configuration = deserialise_states(flat_buffer_states)
+          #if LAST_RECEIVED_FRAME_NUMBER==states.frame_number:
+          #  warnings.warn(f'Received a duplicate frame on frame number: {states.frame_number}')
+          #LAST_RECEIVED_FRAME_NUMBER=states.frame_number
+
+          return states,simulator_configuration
 
         else:
           if self._on_timeout_callback:

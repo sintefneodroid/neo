@@ -23,8 +23,8 @@ from neodroid.utilities.reaction_factory import (
   verify_motion_reaction,
   )
 from neodroid.utilities.statics import (
-  contruct_action_space,
-  contruct_observation_space,
+  construct_action_space,
+  construct_observation_space,
   flattened_observation,
   )
 
@@ -95,6 +95,7 @@ class NeodroidEnvironment(Environment):
 
     # Environment
     self._description = None
+    self._simulator_configuration = None
     self._last_message = None
     self._observation_space = None
     self._action_space = None
@@ -129,13 +130,12 @@ class NeodroidEnvironment(Environment):
 
     self._connected_to_server = True
 
-    server_version = self._description.api_version
+    server_version = self._simulator_configuration.api_version
     if self._neodroid_api_version != server_version:
       if server_version == '':
         server_version = '*Unspecified*'
       if self._verbose:
         warnings.warn(f'Server is using different version {server_version}, complications may occur!')
-
 
   @property
   def description(self):
@@ -222,8 +222,6 @@ class NeodroidEnvironment(Environment):
     if self._external_on_connected_callback:
       self._external_on_connected_callback()
 
-
-
   @message_client_event(event=ClientEvents.DISCONNECTED)
   def __on_disconnected_callback__(self):
     '''
@@ -248,6 +246,7 @@ class NeodroidEnvironment(Environment):
       normalise=False,
       on_reaction_sent_callback=None,
       on_step_done_callback=None,
+      single_env=True
       ):
     '''
 
@@ -264,31 +263,30 @@ class NeodroidEnvironment(Environment):
 :return:
 :rtype:
 '''
-    if self._verbose:
-      warnings.warn('Reacting in environment')
-    if self._debug_logging:
-      self._logger.debug('Reacting in environment')
+    if single_env:
+      if self._verbose:
+        warnings.warn('Reacting in environment')
+      if self._debug_logging:
+        self._logger.debug('Reacting in environment')
 
-    input_reaction = self.maybe_infer_motion_reaction(
-        input_reaction, normalise, self._description, verbose=self._verbose
-        )
-    if parameters is not None:
-      input_reaction.parameters = parameters
+      input_reaction = self.maybe_infer_motion_reaction(
+          input_reaction, normalise, self._description, verbose=self._verbose
+          )
+      if parameters is not None:
+        input_reaction.parameters = parameters
 
-    new_state = self._message_server.send_reaction(input_reaction)
+      new_states, simulator_configuration = self._message_server.send_reactions([input_reaction])
 
-    if new_state:
-      self._last_message = new_state
-      flat_message = flattened_observation(new_state)
-      if flat_message is not None:
-        self._observation_space = contruct_observation_space(flat_message)
-      if new_state.description:
-        self._description = new_state.description
-      return new_state
+      if new_states:
+        self.update_interface_statics(new_states, simulator_configuration)
+        return new_states
 
-    warnings.warn('No valid was new_state received')
-    if self._debug_logging:
-      self._logger.debug('No valid was new_state received')
+      warnings.warn('No valid was new_state received')
+      if self._debug_logging:
+        self._logger.debug('No valid was new_state received')
+
+    else:
+      raise NotImplementedError
 
   @staticmethod
   def maybe_infer_configuration_reaction(input_reaction, description, verbose=False):
@@ -304,23 +302,26 @@ class NeodroidEnvironment(Environment):
     return input_reaction
 
   def describe(self):
-    return self.observe(      parameters=M.ReactionParameters(
-          terminable=False, describe=True, episode_count=False
-          ))
+    return self.observe(parameters=M.ReactionParameters(
+        terminable=False, describe=True, episode_count=False
+        ))
 
-  def display(self,displayables):
-    conf_reaction = Reaction(
-        displayables=displayables
-        )
-    message = self.reset(conf_reaction)
-    if message:
-      return np.array(flattened_observation(message)), message
+  def display(self, displayables, single_env=True):
+    if single_env:
+      conf_reaction = Reaction(
+          displayables=displayables
+          )
+      message = self.reset(conf_reaction)
+      if message:
+        return np.array(flattened_observation(message)), message
+    else:
+      raise NotImplementedError
 
   def observe(
       self,
       parameters=M.ReactionParameters(
           terminable=True, describe=True, episode_count=False
-          )
+          ), single_env=True
       ):
     '''
 
@@ -329,14 +330,17 @@ class NeodroidEnvironment(Environment):
 :return:
 :rtype:
 '''
-    new_state = self._message_server.send_reaction(M.Reaction(parameters=parameters))
-    if new_state.description:
-      self._description = new_state.description
-    if new_state:
-      self._last_message = new_state
-    return new_state
+    if single_env:
+      new_states, simulator_configuration = self._message_server.send_reactions(
+          [M.Reaction(parameters=parameters)])
+      if new_states:
 
-  def reset(self, input_reaction=None, state=None, on_reset_callback=None):
+        self.update_interface_statics(new_states, simulator_configuration)
+        return new_states
+    else:
+      raise NotImplementedError
+
+  def reset(self, input_reaction=None, state=None, on_reset_callback=None, single_env=True):
     '''
 
 The environments argument lets you specify which environments to reset.
@@ -346,32 +350,32 @@ The environments argument lets you specify which environments to reset.
 :param input_reaction:
 :type on_reset_callback: object
 '''
-    if self._verbose:
-      warnings.warn('Resetting environment')
-    if self._debug_logging:
-      self._logger.debug('Resetting environment')
+    if single_env:
+      if self._verbose:
+        warnings.warn('Resetting environment')
+      if self._debug_logging:
+        self._logger.debug('Resetting environment')
 
-    input_reaction = self.maybe_infer_configuration_reaction(
-        input_reaction, self._description, verbose=self._verbose
-        )
-    if state:
-      input_reaction.unobservables = state.unobservables
+      input_reaction = self.maybe_infer_configuration_reaction(
+          input_reaction, self._description, verbose=self._verbose
+          )
+      if state:
+        input_reaction.unobservables = state.unobservables
 
-    new_state = self._message_server.send_reaction(input_reaction)
+      input_reactions = [input_reaction]  # TODO: Only accepting a single reaction for now
+      new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
 
-    if new_state:
-      self._last_message = new_state
-      flat_message = flattened_observation(new_state)
-      if flat_message is not None:
-        self._observation_space = contruct_observation_space(flat_message)
-      if new_state.description:
-        self._description = new_state.description
-        self._action_space = contruct_action_space(self._description)
-      return new_state
-    if self._verbose:
-      warnings.warn('No valid was new_state received')
-    if self._debug_logging:
-      self._logger.debug('No valid was new_state received')
+      if new_states:
+        self.update_interface_statics(new_states, simulator_configuration)
+        return new_states
+      if self._verbose:
+        warnings.warn('No valid was new_state received')
+      if self._debug_logging:
+        self._logger.debug('No valid was new_state received')
+    else:
+      raise NotImplementedError
+      input_reactions = None
+      new_states = self._message_server.send_reactions(input_reactions)
 
   def close(self, callback=None):
     '''
@@ -393,6 +397,18 @@ The environments argument lets you specify which environments to reset.
       callback()
     return 0
 
+  def update_interface_statics(self, new_states, new_simulator_configuration):
+    self._last_message = new_states
+    # flat_message = flattened_observation(new_state)
+    self._simulator_configuration=new_simulator_configuration
+    first_environment = list(self._last_message.values())[0]
+    observables = first_environment.observables
+    if observables is not None:
+      self._observation_space = construct_observation_space(observables)
+    if first_environment.description:
+      self._description = first_environment.description
+      self._action_space = construct_action_space(self._description)
+
 
 if __name__ == '__main__':
   import argparse
@@ -408,9 +424,9 @@ if __name__ == '__main__':
       )
   args = parser.parse_args()
 
-  env = NeodroidEnvironment(name=args.ENVIRONMENT_NAME[0])
+  env = NeodroidEnvironment(name=args.ENVIRONMENT_NAME)
 
-  observation_session = tqdm(env,leave=False)
+  observation_session = tqdm(env, leave=False)
   for state in observation_session:
     if state.terminated:
       print('Interrupted', state.signal)

@@ -41,7 +41,7 @@ setup(
     keywords=get_keyword(),
     url='https://github.com/sintefneodroid/neo',
     install_requires=[
-      'pyzmq', 'numpy', 'neodroid-flatbuffers', 'Pillow', 'gym', 'tqdm', 'matplotlib'
+      'pyzmq', 'numpy', 'neodroid-flatbuffers', 'Pillow', 'gym', 'tqdm', 'matplotlib', 'flatbuffers'
       ],
     extras_require={'GUI': ['kivy']},
     )

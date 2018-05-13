@@ -24,7 +24,7 @@ class Configurable(object):
   @property
   def configurable_space(self):
     if self._configurable_space:
-      space = neodroid.messaging.create_space(self._configurable_space)
+      space = neodroid.messaging.deserialise_space(self._configurable_space)
       return space
 
   def to_dict(self):

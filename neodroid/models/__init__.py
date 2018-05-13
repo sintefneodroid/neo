@@ -15,3 +15,4 @@ from .reaction import Reaction
 from .reaction_parameters import ReactionParameters
 from .space import Space
 from .unobservables import Unobservables
+from .simulator_configuration import SimulatorConfiguration

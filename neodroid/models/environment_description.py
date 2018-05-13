@@ -11,14 +11,6 @@ class EnvironmentDescription(object):
     self._fbs_description = fbs_description
 
   @property
-  def simulator_configuration(self):
-    return self._fbs_description.SimulatorConfiguration()
-
-  @property
-  def api_version(self):
-    return self._fbs_description.ApiVersion().decode()
-
-  @property
   def objective_name(self):
     return self._fbs_description.Objective().ObjectiveName()
 
@@ -32,7 +24,7 @@ class EnvironmentDescription(object):
 
   @property
   def actors(self):
-    return neodroid.messaging.create_actors(self._fbs_description)
+    return neodroid.messaging.deserialise_actors(self._fbs_description)
 
   def actor(self, key):
     actors = self.actors
@@ -41,7 +33,7 @@ class EnvironmentDescription(object):
 
   @property
   def configurables(self):
-    return neodroid.messaging.create_configurables(self._fbs_description)
+    return neodroid.messaging.deserialise_configurables(self._fbs_description)
 
   def configurable(self, key):
     configurables = self.configurables

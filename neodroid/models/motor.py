@@ -18,7 +18,7 @@ class Motor(object):
 
   @property
   def motion_space(self):
-    return neodroid.messaging.create_space(self._motion_space)
+    return neodroid.messaging.deserialise_space(self._motion_space)
 
   @property
   def energy_spent(self):

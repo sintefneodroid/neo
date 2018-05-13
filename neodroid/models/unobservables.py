@@ -18,11 +18,11 @@ class Unobservables(object):
 
   @property
   def poses_numpy(self):
-    return neodroid.messaging.create_poses(self._unobservables)
+    return neodroid.messaging.deserialise_poses(self._unobservables)
 
   @property
   def bodies_numpy(self):
-    return neodroid.messaging.create_bodies(self._unobservables)
+    return neodroid.messaging.deserialise_bodies(self._unobservables)
 
   @property
   def state_configuration(self):

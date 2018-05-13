@@ -21,11 +21,11 @@ class EnvironmentState(object):
 
   @property
   def observables(self):
-    return neodroid.messaging.create_observables(self._fbs_state)
+    return neodroid.messaging.deserialise_observables(self._fbs_state)
 
   @property
   def unobservables(self):
-    return neodroid.messaging.create_unobservables(self._fbs_state)
+    return neodroid.messaging.deserialise_unobservables(self._fbs_state)
 
   @property
   def frame_number(self):
@@ -50,17 +50,17 @@ class EnvironmentState(object):
   @property
   def description(self):
     if self._fbs_state.EnvironmentDescription():
-      return neodroid.messaging.create_description(
+      return neodroid.messaging.deserialise_description(
           self._fbs_state.EnvironmentDescription()
           )
 
   @property
   def observers(self):
-    return neodroid.messaging.create_observers(self._fbs_state)
+    return neodroid.messaging.deserialise_observers(self._fbs_state)
 
   def observer(self, key):
-    if key in neodroid.messaging.create_observers(self._fbs_state):
-      return neodroid.messaging.create_observers(self._fbs_state)[key]
+    if key in neodroid.messaging.deserialise_observers(self._fbs_state):
+      return neodroid.messaging.deserialise_observers(self._fbs_state)[key]
 
   def __repr__(self):
     observers_str = ''.join(

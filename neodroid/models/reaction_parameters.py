@@ -49,7 +49,7 @@ class ReactionParameters(object):
     return self._terminable
 
   def to_dict(self):
-    return {'_reset': self._reset}
+    return {'_reset':self._reset}
 
   def to_json(self):
     return json.dumps(self.to_dict())

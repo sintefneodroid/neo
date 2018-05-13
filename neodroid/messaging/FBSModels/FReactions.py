@@ -38,7 +38,27 @@ class FReactions(object):
             return self._tab.VectorLen(o)
         return 0
 
-def FReactionsStart(builder): builder.StartObject(1)
+    # FReactions
+    def ApiVersion(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        if o != 0:
+            return self._tab.String(o + self._tab.Pos)
+        return bytes()
+
+    # FReactions
+    def SimulatorConfiguration(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        if o != 0:
+            x = o + self._tab.Pos
+            from .FSimulatorConfiguration import FSimulatorConfiguration
+            obj = FSimulatorConfiguration()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
+
+def FReactionsStart(builder): builder.StartObject(3)
 def FReactionsAddReactions(builder, reactions): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(reactions), 0)
 def FReactionsStartReactionsVector(builder, numElems): return builder.StartVector(4, numElems, 4)
+def FReactionsAddApiVersion(builder, apiVersion): builder.PrependUOffsetTRelativeSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(apiVersion), 0)
+def FReactionsAddSimulatorConfiguration(builder, simulatorConfiguration): builder.PrependStructSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(simulatorConfiguration), 0)
 def FReactionsEnd(builder): return builder.EndObject()

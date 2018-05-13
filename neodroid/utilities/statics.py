@@ -16,7 +16,7 @@ def flattened_observation(message):
   return obs
 
 
-def contruct_action_space(environment_description):
+def construct_action_space(environment_description):
   motion_spaces = []
   for actor in environment_description.actors.values():
     for motor in actor.motors.values():
@@ -24,5 +24,5 @@ def contruct_action_space(environment_description):
   return ActionSpace(motion_spaces)
 
 
-def contruct_observation_space(state):
+def construct_observation_space(state):
   return ObservationSpace(state)

@@ -5,7 +5,7 @@ import os
 from warnings import warn
 
 __author__ = 'cnheider'
-__version__ = None
+__version__ = 0.4
 
 
 def get_version():
@@ -31,8 +31,8 @@ def get_version():
 
   return version
 
-
-__version__ = get_version()
+if __version__ is None:
+  __version__ = get_version()
 _debug = False
 
 
