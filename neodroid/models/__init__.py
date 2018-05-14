@@ -13,6 +13,6 @@ from .motor import Motor
 from .observation import Observation
 from .reaction import Reaction
 from .reaction_parameters import ReactionParameters
+from .simulator_configuration import SimulatorConfiguration
 from .space import Space
 from .unobservables import Unobservables
-from .simulator_configuration import SimulatorConfiguration

@@ -42,17 +42,18 @@ def grab_new_images(environment):
   satellite = environment.sensor('SatelliteCamera').observation_value
   satellite_im = Image.open(satellite)
 
-  return rgb_im, depth_im, segmentation_im,instance_segmentation_im,infrared_im,flow_im,normal_im,satellite_im
+  return rgb_im, depth_im, segmentation_im, instance_segmentation_im, infrared_im, flow_im, normal_im, \
+         satellite_im
 
 
 env = neogym.make('camera_observation', connect_to_running=True)
 fig = plt.figure()
 
 (ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8), *_ = fig.subplots(2, 4, sharey='all')
-frame_i=0
+frame_i = 0
 obs, rew, term, info = env.step(0)
 image_color, image_depth, image_segmentation, image_instance, image_infrared, image_flow, image_normal, \
-image_satellite  \
+image_satellite \
   = grab_new_images(env)
 
 ax1.set_title('RGB')
@@ -82,7 +83,7 @@ def update_figures(i):
 
   time_now = time.time()
 
-  fps = (1/(time_now - time_s))
+  fps = (1 / (time_now - time_s))
 
   time_s = time_now
 
@@ -99,9 +100,9 @@ def update_figures(i):
 
   if terminated:
     env.reset()
-    frame_i=0
+    frame_i = 0
   else:
-    frame_i+=1
+    frame_i += 1
 
 
 time_s = time.time()

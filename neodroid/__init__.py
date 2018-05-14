@@ -13,12 +13,12 @@ __version__ = None
 '''
 import numpy as np
 
-from .neodroid_environment import NeodroidEnvironment
+from .neodroid_environments import NeodroidEnvironments
 from .version import __version__
 
 
-def make(environment, *args, **kwargs):
-  return NeodroidEnvironment(name=environment, *args, **kwargs)
+def make(environment, clones=0, *args, **kwargs):
+  return NeodroidEnvironments(name=environment, clones=clones, *args, **kwargs)
 
 
 def seed(seed):

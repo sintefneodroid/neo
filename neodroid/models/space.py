@@ -23,21 +23,24 @@ class Space(object):
   @property
   def max_value(self):
     return self._max_value
+
   @property
   def discrete_step_size(self):
     return 1 / (1 + self.decimal_granularity)
+
   @property
   def span(self):
-    return self.max_value -self.min_value
+    return self.max_value - self.min_value
+
   @property
   def discrete_steps(self):
-    return math.floor(self.span / self.discrete_step_size)+1
+    return math.floor(self.span / self.discrete_step_size) + 1
 
   def to_dict(self):
     return {
-      'decimal_granularity':  self._decimal_granularity,
-      'min_value': self._min_value,
-      'max_value':self._max_value,
+      'decimal_granularity':self._decimal_granularity,
+      'min_value':          self._min_value,
+      'max_value':          self._max_value,
       }
 
   def __repr__(self):

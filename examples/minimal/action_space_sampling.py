@@ -6,15 +6,14 @@ import neodroid.wrappers.formal_wrapper as neo
 
 
 def main():
-  _environment = neo.make('multienv', connect_to_running=True)
-  _environment.reset()
-  while _environment.is_connected:
-    actions = _environment.action_space.sample()
+  _environments = neo.make('multienv', connect_to_running=True)
+  _environments.reset()
+  while _environments.is_connected:
+    actions = _environments.action_space.sample()
     print(actions)
-    _, reward, terminated, info = _environment.act(actions)
-    if terminated:
-      print(info.termination_reason)
-      _environment.reset()
+    observations, rewards, terminateds, infos = _environments.act(actions)
+
+    _environments.reset(terminateds)
 
 
 if __name__ == '__main__':

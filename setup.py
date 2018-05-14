@@ -8,7 +8,7 @@ from setuptools import find_packages, setup
 
 packages = find_packages(exclude=['neodroid/environments'])
 package_data = {
-  'neodroid': [
+  'neodroid':[
     # 'environments/grid_world*',
     # glob.glob('environments/**', recursive=True)
     ]
@@ -43,5 +43,5 @@ setup(
     install_requires=[
       'pyzmq', 'numpy', 'neodroid-flatbuffers', 'Pillow', 'gym', 'tqdm', 'matplotlib', 'flatbuffers'
       ],
-    extras_require={'GUI': ['kivy']},
+    extras_require={'GUI':['kivy']},
     )

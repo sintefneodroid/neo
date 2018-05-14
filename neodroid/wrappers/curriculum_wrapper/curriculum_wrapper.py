@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 # coding=utf-8
+from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+
 __author__ = 'cnheider'
 
 import numpy as np
 
-from neodroid import NeodroidEnvironment
 from neodroid.models import Reaction, ReactionParameters
 from neodroid.utilities.statics import flattened_observation
 
 
-class NeodroidCurriculumWrapper(NeodroidEnvironment):
+class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
 
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
 
   def __next__(self):
-    if not self._connected_to_server:
+    if not self._is_connected_to_server:
       return
     return self.act()
 

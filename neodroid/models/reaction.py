@@ -20,6 +20,18 @@ class Reaction(object):
       environment_name='all',
       serialised_message=''
       ):
+
+    '''
+
+The environment_name argument lets you specify which environments to react in, 'all' means all environment
+receives the same reaction.
+
+:param state:
+:type state:
+:param input_reaction:
+:type on_reset_callback: object
+'''
+
     self._serialised_message = serialised_message
     self._environment_name = environment_name
     if parameters is None:
@@ -84,32 +96,26 @@ class Reaction(object):
 
   def to_dict(self):
     return {
-      '_configurations': [
+      '_configurations':[
         configuration.to_dict() for configuration in self._configurations
         ],
-      '_motions':        [motion.to_dict() for motion in self._motions],
+      '_motions':       [motion.to_dict() for motion in self._motions],
       }
 
   def to_json(self):
     return json.dumps(self.to_dict())
 
   def __repr__(self):
-    return '<Reaction>\n' + str(self._parameters) + '  <configurations>\n' + str(
-        self.configurations
-        ) + '  </configurations>\n' + '  <motions>\n' + str(
-        self.motions
-        ) + '  </motions>\n' + '  <parameters>\n' + str(
-        self.parameters
-        ) + '  </parameters>\n' + '  <configurations>\n' + str(
-        self.configurations
-        ) + '  </configurations>\n' + '  <displayables>\n' + str(
-        self.displayables
-        ) + '  </displayables>\n' + '  <unobservables>\n' + str(
-        self.unobservables
-        ) + '  </unobservables>\n' + '  <serialised_message>\n' + str(
-        self.serialised_message
-        ) + '  </serialised_message>\n' + '</Reaction>\n'
-
+    return f'<Reaction>\n' \
+           f'<environment_name>{self.environment_name}</environment_name>\n  ' \
+           f'<configurations>\n{self.configurations}</configurations>\n  ' \
+           f'<motions>\n{self.motions}</motions>\n  ' \
+           f'<parameters>\n{self.parameters}</parameters>\n  ' \
+           f'<configurations>\n{self.configurations}</configurations>\n  ' \
+           f'<displayables>\n{self.displayables}</displayables>\n  ' \
+           f'<unobservables>\n{self.unobservables}</unobservables>\n  ' \
+           f'<serialised_message>{self.serialised_message}</serialised_message>\n' \
+           f'</Reaction>\n'
   def __str__(self):
     return self.__repr__()
 

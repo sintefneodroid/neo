@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # coding=utf-8
+from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+
 __author__ = 'cnheider'
 
-from neodroid import NeodroidEnvironment
 
-
-class NeodroidALEWrapper(NeodroidEnvironment):
+class NeodroidALEWrapper(SingleEnvironmentWrapper):
 
   def __init__(self, **kwargs):
     super(NeodroidALEWrapper, self).__init__(**kwargs)

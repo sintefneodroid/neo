@@ -2,12 +2,9 @@
 # coding=utf-8
 __author__ = 'cnheider'
 
-from io import BytesIO
-
 import flatbuffers as flb
 import numpy as np
 
-from neodroid import models as N
 from neodroid.messaging import FBSModels as F
 
 

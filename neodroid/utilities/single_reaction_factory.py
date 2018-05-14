@@ -9,13 +9,13 @@ import numpy as np
 from neodroid import models as M
 
 
-def _action(action, motion_space):
+def _norm_action(action, motion_space):
   act_k = (motion_space.max_value - motion_space.min_value) / 2.
   act_b = (motion_space.max_value + motion_space.min_value) / 2.
   return act_k * action + act_b
 
 
-def _reverse_action(self, action):
+def _reverse_norm_action(self, action):
   act_k_inv = 2. / (self.action_space.high - self.action_space.low)
   act_b = (self.action_space.high + self.action_space.low) / 2.
   return act_k_inv * (action - act_b)
@@ -26,7 +26,7 @@ def verify_motion_reaction(
     input, environment_description, normalise=False, verbose=False
     ):
   parameters = M.ReactionParameters(terminable=True, step=True, reset=False, configure=False,
-                                    describe=False,episode_count=True)
+                                    describe=False, episode_count=True)
   if environment_description:
     actors = environment_description.actors.values()
     if actors:
@@ -80,7 +80,7 @@ def construct_motions_from_list(input_list, actors, normalise):
       M.Motion(
           actor_motor_tuple[0],
           actor_motor_tuple[1],
-          _action(list_val, actor_motor_tuple[2]),
+          _norm_action(list_val, actor_motor_tuple[2]),
           )
       for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
       ]

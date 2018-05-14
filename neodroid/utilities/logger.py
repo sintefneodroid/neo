@@ -167,7 +167,7 @@ class TensorBoardOutputFormat(KVWriter):
 
   def writekvs(self, kvs):
     def summary_val(k, v):
-      kwargs = {'tag': k, 'simple_value': float(v)}
+      kwargs = {'tag':k, 'simple_value':float(v)}
       return self.tf.Summary.Value(**kwargs)
 
     summary = self.tf.Summary(value=[summary_val(k, v) for k, v in kvs.items()])

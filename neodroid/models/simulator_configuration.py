@@ -2,6 +2,7 @@
 # coding=utf-8
 __author__ = 'cnheider'
 
+
 class SimulatorConfiguration(object):
 
   def __init__(self, fbs_configuration, api_version):
@@ -11,7 +12,6 @@ class SimulatorConfiguration(object):
   @property
   def simulator_configuration(self):
     return self._fbs_configuration
-
 
   @property
   def api_version(self):

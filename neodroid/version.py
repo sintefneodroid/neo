@@ -31,6 +31,7 @@ def get_version():
 
   return version
 
+
 if __version__ is None:
   __version__ = get_version()
 _debug = False

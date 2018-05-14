@@ -23,9 +23,11 @@ from .FRB import *
 from .FRange import *
 from .FReaction import *
 from .FReactionParameters import *
+from .FReactions import *
 from .FSimulatorConfiguration import *
 from .FSingle import *
 from .FState import *
+from .FStates import *
 from .FString import *
 from .FTriple import *
 from .FUnobservables import *
@@ -35,5 +37,3 @@ from .FValuedVector3s import *
 from .FValues import *
 from .FVector3 import *
 from .FVector3s import *
-from .FStates import *
-from .FReactions import *

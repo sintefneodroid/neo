@@ -27,11 +27,10 @@ def on_connect_callback(ip_address, port, launch_environment, environment):
   if _neo_environment and _neo_environment.is_connected:
     _neo_environment.close(on_disconnected_callback)
   else:
-    _neo_environment = neo.NeodroidEnvironment(
+    _neo_environment = neo.NeodroidEnvironments(
         ip=ip_address,
         port=int(port),
         on_connected_callback=on_connected_callback,
-        name=environment,
         connect_to_running=(not launch_environment),
         )
 

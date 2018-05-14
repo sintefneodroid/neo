@@ -3,5 +3,5 @@
 __author__ = 'cnheider'
 
 from .debug import debug_print
-from .reaction_factory import *
+from .single_reaction_factory import *
 from .space import Space

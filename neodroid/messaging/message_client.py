@@ -11,12 +11,13 @@ import functools
 import zmq
 
 from .FBSModels import FStates
-from .fbs_reaction_utilities import serialise_reaction, serialise_reactions
+from .fbs_reaction_utilities import serialise_reactions
 
 REQUEST_TIMEOUT = 8000  # Milliseconds
 REQUEST_RETRIES = 9
 
-LAST_RECEIVED_FRAME_NUMBER=0
+LAST_RECEIVED_FRAME_NUMBER = 0
+
 
 def singleton(cls):
   ''' Use class as singleton. '''
@@ -119,19 +120,19 @@ class MessageClient(object):
 
         if sockets.get(self._request_socket):
           response = self._request_socket.recv()
-          if not response:# or len(response)<4:
+          if not response:  # or len(response)<4:
             continue
 
           self._expecting_response = False
 
           flat_buffer_states = FStates.GetRootAsFStates(response, 0)
 
-          states,simulator_configuration = deserialise_states(flat_buffer_states)
-          #if LAST_RECEIVED_FRAME_NUMBER==states.frame_number:
+          states, simulator_configuration = deserialise_states(flat_buffer_states)
+          # if LAST_RECEIVED_FRAME_NUMBER==states.frame_number:
           #  warnings.warn(f'Received a duplicate frame on frame number: {states.frame_number}')
-          #LAST_RECEIVED_FRAME_NUMBER=states.frame_number
+          # LAST_RECEIVED_FRAME_NUMBER=states.frame_number
 
-          return states,simulator_configuration
+          return states, simulator_configuration
 
         else:
           if self._on_timeout_callback:

@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 # coding=utf-8
+from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+
 __author__ = 'cnheider'
 
 import gym
 import numpy as np
 
-from neodroid import NeodroidEnvironment
 from neodroid.utilities.statics import flattened_observation
 
 
-class NeodroidGymWrapper(NeodroidEnvironment):
+class NeodroidGymWrapper(SingleEnvironmentWrapper):
 
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
 
-  def step(self, action=0, *args, **kwargs):
+  def step(self, *args, action=0, **kwargs):
     # action = action.flatten()
     message = super(NeodroidGymWrapper, self).react(action, *args, **kwargs)
     if message:
@@ -41,7 +42,7 @@ class NeodroidGymWrapper(NeodroidEnvironment):
     return None
 
   def __next__(self):
-    if not self._connected_to_server:
+    if not self._is_connected_to_server:
       return
     return self.step()
 

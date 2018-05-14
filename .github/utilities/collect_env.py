@@ -142,7 +142,7 @@ def check_release_file(run_lambda):
           neo_version=neo.__version__,
           is_debug_build=neo.version.debug,
           python_version='{}.{}'.format(
-            sys.version_info[0], sys.version_info[1]),
+              sys.version_info[0], sys.version_info[1]),
           pip_version=pip_version,
           pip_packages=pip_list_output,
           os=get_os(run_lambda),
@@ -199,7 +199,7 @@ Versions of relevant libraries:
 
       # If either of these are '', replace with 'No relevant packages'
       mutable_dict['pip_packages'] = replace_if_empty(
-        mutable_dict['pip_packages'])
+          mutable_dict['pip_packages'])
 
       if mutable_dict['pip_packages']:
         mutable_dict['pip_packages'] = prepend(mutable_dict['pip_packages'],

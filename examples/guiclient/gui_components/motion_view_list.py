@@ -7,7 +7,7 @@ from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.listview import CompositeListItem, ListItemButton, ListItemLabel, ListView
 
-integers_dict = {str(i): {'text': str(i), 'is_selected': False} for i in range(100)}
+integers_dict = {str(i):{'text':str(i), 'is_selected':False} for i in range(100)}
 
 
 class MotionViewList(GridLayout):
@@ -18,31 +18,31 @@ class MotionViewList(GridLayout):
 
     def args_converter(row_index, row_data):
       return {
-        'text':        row_data['text'],
-        'size_hint_y': None,
-        'height':      25,
-        'cls_dicts':   [
+        'text':       row_data['text'],
+        'size_hint_y':None,
+        'height':     25,
+        'cls_dicts':  [
           {
-            'cls':    ListItemLabel,
-            'kwargs': {
-              'text': row_data['text'], 'is_representing_cls': True
+            'cls':   ListItemLabel,
+            'kwargs':{
+              'text':row_data['text'], 'is_representing_cls':True
               },
             },
           {
-            'cls':    ListItemLabel,
-            'kwargs': {
-              'text':                'Middle-{0}'.format(row_data['text']),
-              'is_representing_cls': True,
+            'cls':   ListItemLabel,
+            'kwargs':{
+              'text':               'Middle-{0}'.format(row_data['text']),
+              'is_representing_cls':True,
               },
             },
           {
-            'cls':    ListItemLabel,
-            'kwargs': {
-              'text':                'End-{0}'.format(row_data['text']),
-              'is_representing_cls': True,
+            'cls':   ListItemLabel,
+            'kwargs':{
+              'text':               'End-{0}'.format(row_data['text']),
+              'is_representing_cls':True,
               },
             },
-          {'cls': ListItemButton, 'kwargs': {'text': row_data['text']}},
+          {'cls':ListItemButton, 'kwargs':{'text':row_data['text']}},
           ],
         }
 

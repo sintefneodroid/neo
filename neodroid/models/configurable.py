@@ -5,6 +5,7 @@ import neodroid.messaging
 
 __author__ = 'cnheider'
 
+
 # @pretty_print
 class Configurable(object):
 

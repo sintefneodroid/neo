@@ -7,7 +7,7 @@ __author__ = 'cnheider'
 from neodroid.utilities.statics import flattened_observation
 
 
-class NeodroidFormalWrapper(SingleEnvironmentWrapper):
+class FlaskWrapper(SingleEnvironmentWrapper):
 
   def __init__(self, *args,**kwargs):
     super().__init__(*args,**kwargs)
