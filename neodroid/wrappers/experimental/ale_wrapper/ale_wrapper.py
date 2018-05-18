@@ -8,7 +8,7 @@ __author__ = 'cnheider'
 class NeodroidALEWrapper(SingleEnvironmentWrapper):
 
   def __init__(self, **kwargs):
-    super(NeodroidALEWrapper, self).__init__(**kwargs)
+    super().__init__(**kwargs)
 
   def act(
       self,

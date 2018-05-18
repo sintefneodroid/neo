@@ -6,45 +6,59 @@ from neodroid.utilities.single_reaction_factory import _norm_action
 __author__ = 'cnheider'
 
 import numpy as np
+import warnings
 
 from neodroid import models as M
 
+
 @print_return
 def verify_motion_reactions(
-    input, environment_description, normalise=False, verbose=False
+    inputs,
+    environment_descriptions,
+    normalise=False,
+    verbose=False
     ):
-  parameters = M.ReactionParameters(terminable=True, step=True, reset=False, configure=False,
-                                    describe=False, episode_count=True)
-  if environment_description:
-    actors = environment_description.actors.values()
-    if actors:
-      if isinstance(input, M.Reaction):
-        is_valid_motions = all(isinstance(m, M.Motion) for m in input.motions)
-        if is_valid_motions:
-          return input
-        else:
-          input.motions = construct_motions_from_list(
-              input.motions, actors, normalise
-              )
-          return input
-      elif isinstance(input, list):
-        is_valid_motions = all(isinstance(m, M.Motion) for m in input)
-        if is_valid_motions:
+  parameters = M.ReactionParameters(
+      terminable=True,
+      step=True,
+      reset=False,
+      configure=False,
+      describe=False,
+      episode_count=True)
 
-          return M.Reaction(
-              parameters=parameters, configurations=[], motions=input
+  if environment_descriptions:
+    if len(inputs) is not len(environment_descriptions):
+      warnings.warn(f'Inputs({len(inputs)}) and environment descriptions({len(environment_descriptions)}) are not the same length')
+    for input, env_desc in zip(inputs,environment_descriptions):
+      actors = env_desc.actors.values()
+      if actors:
+        if isinstance(input, M.Reaction):
+          is_valid_motions = all(isinstance(m, M.Motion) for m in input.motions)
+          if is_valid_motions:
+            return input
+          else:
+            input.motions = construct_motions_from_list(
+                input.motions, actors, normalise
+                )
+            return input
+        elif isinstance(input, list):
+          is_valid_motions = all(isinstance(m, M.Motion) for m in input)
+          if is_valid_motions:
+
+            return M.Reaction(
+                parameters=parameters, configurations=[], motions=input
+                )
+          else:
+            return construct_individual_reactions_from_list(input, actors, normalise)
+        elif isinstance(input, int):
+          return construct_individual_reactions_from_list([input], actors, normalise)
+        elif isinstance(input, float):
+          return construct_individual_reactions_from_list([input], actors, normalise)
+        elif isinstance(input, (np.ndarray, np.generic)):
+          a = construct_individual_reactions_from_list(
+              input.astype(float).tolist(), actors, normalise
               )
-        else:
-          return construct_individual_reactions_from_list(input, actors, normalise)
-      elif isinstance(input, int):
-        return construct_individual_reactions_from_list([input], actors, normalise)
-      elif isinstance(input, float):
-        return construct_individual_reactions_from_list([input], actors, normalise)
-      elif isinstance(input, (np.ndarray, np.generic)):
-        a = construct_individual_reactions_from_list(
-            input.astype(float).tolist(), actors, normalise
-            )
-        return a
+          return a
   if isinstance(input, M.Reaction):
     return input
   return M.Reaction(parameters=parameters)

@@ -12,7 +12,7 @@ from kivy.uix.textinput import TextInput
 class StatusBar(BoxLayout):
 
   def __init__(self, on_connect_callback, **kwargs):
-    super(StatusBar, self).__init__(**kwargs)
+    super().__init__(**kwargs)
     self._on_connect_callback = on_connect_callback
     self.ip_address_input = TextInput(text='127.0.0.1')
     self.port_input = TextInput(text='5555')

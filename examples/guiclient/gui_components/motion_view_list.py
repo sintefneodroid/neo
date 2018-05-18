@@ -14,7 +14,7 @@ class MotionViewList(GridLayout):
 
   def __init__(self, **kwargs):
     kwargs['cols'] = 2
-    super(MotionViewList, self).__init__(**kwargs)
+    super().__init__(**kwargs)
 
     def args_converter(row_index, row_data):
       return {

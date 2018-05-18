@@ -21,7 +21,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
     return self.act()
 
   def act(self, *args, **kwargs):
-    message = super(NeodroidCurriculumWrapper, self).react(*args, **kwargs)
+    message = super().react(*args, **kwargs)
     if message:
       return (
         np.array(flattened_observation(message)),
@@ -107,7 +107,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
     return initial_states
 
   def observe(self, *args, **kwargs):
-    message = super(NeodroidCurriculumWrapper, self).observe()
+    message = super().observe()
     if message:
       return (
         flattened_observation(message),

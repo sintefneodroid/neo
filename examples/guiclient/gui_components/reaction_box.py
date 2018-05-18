@@ -12,7 +12,7 @@ from .motion_view import MotionView
 class ReactionBox(BoxLayout):
 
   def __init__(self, on_step_callback, on_reset_callback, **kwargs):
-    super(ReactionBox, self).__init__(**kwargs)
+    super().__init__(**kwargs)
     self._on_step_callback = on_step_callback
     self._on_reset_callback = on_reset_callback
     # self.upper_spacer = Label()

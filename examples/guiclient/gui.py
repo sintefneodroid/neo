@@ -13,7 +13,7 @@ class NeoGUI(App):
   def __init__(
       self, on_step_callback, on_reset_callback, on_connect_callback, **kwargs
       ):
-    super(NeoGUI, self).__init__(**kwargs)
+    super().__init__(**kwargs)
     self._on_step_callback = on_step_callback
     self._on_reset_callback = on_reset_callback
     self._on_connect_callback = on_connect_callback

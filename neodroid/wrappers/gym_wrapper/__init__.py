@@ -7,8 +7,8 @@ import numpy as np
 from .gym_wrapper import NeodroidGymWrapper
 
 
-def make(environment, *args, **kwargs):
-  return NeodroidGymWrapper(name=environment, *args, **kwargs)
+def make(environment_name, *args, **kwargs):
+  return NeodroidGymWrapper(environment_name=environment_name, *args, **kwargs)
 
 
 def seed(seed):

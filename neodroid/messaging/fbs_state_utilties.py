@@ -17,7 +17,7 @@ def deserialise_states(flat_states):
   for key in sorted(states.keys()):  # Sort states by key, ensures the same order every time
     out_states[key] = states[key]
 
-    simulator_configuration = N.SimulatorConfiguration(flat_states.SimulatorConfiguration(),
+  simulator_configuration = N.SimulatorConfiguration(flat_states.SimulatorConfiguration(),
                                                        flat_states.ApiVersion())
 
   return out_states, simulator_configuration

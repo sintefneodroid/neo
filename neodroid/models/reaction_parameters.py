@@ -48,6 +48,10 @@ class ReactionParameters(object):
   def terminable(self):
     return self._terminable
 
+  @reset.setter
+  def reset(self, value):
+    self._reset = value
+
   def to_dict(self):
     return {'_reset':self._reset}
 

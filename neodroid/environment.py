@@ -32,6 +32,27 @@ class Environment(ABC):
       self._logger = logging.getLogger(__name__)
       self._logger.debug('Initializing Environment')
 
+  def close(self, *args, **kwargs):
+    return self._close(*args, **kwargs)
+
+  def configure(self, *args, **kwargs):
+    return self._configure(*args, **kwargs)
+
+  def reset(self, *args, **kwargs):
+    return self._reset(*args, **kwargs)
+
+  def react(self, *args, **kwargs):
+    return self._react(*args, **kwargs)
+
+  def observe(self, *args, **kwargs):
+    return self._describe(*args, **kwargs)
+
+  def display(self, *args, **kwargs):
+    return self._close(*args, **kwargs)
+
+  def describe(self, *args, **kwargs):
+    self._describe(*args, **kwargs)
+
   @abstractmethod
   def _close(self, *args, **kwargs):
     raise NotImplementedError
@@ -49,7 +70,7 @@ class Environment(ABC):
     raise NotImplementedError
 
   @abstractmethod
-  def _observe(self, *args, **kwargs):
+  def _describe(self, *args, **kwargs):
     raise NotImplementedError
 
   @abstractmethod

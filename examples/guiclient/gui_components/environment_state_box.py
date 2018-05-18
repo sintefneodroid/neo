@@ -11,7 +11,7 @@ from kivy.uix.label import Label
 class EnvironmentStateBox(BoxLayout):
 
   def __init__(self, **kwargs):
-    super(EnvironmentStateBox, self).__init__(**kwargs)
+    super().__init__(**kwargs)
 
     self.depth_image = Image(source='images/default.png')
     self.segmentation_image = Image(source='images/default.png')

@@ -8,17 +8,21 @@ import subprocess
 import sys
 
 
-def launch_environment(name, path_to_executables_directory, ip, port):
-  path_to_executable = os.path.join(path_to_executables_directory, f'{name}.exe')
+def launch_environment(environment_name, path_to_executables_directory, ip, port, full_screen='0',
+                       screen_height=500, screen_width=500):
+  path_to_executable = os.path.join(path_to_executables_directory, f'{environment_name}.exe')
   if sys.platform != 'win32':
-    path_to_executable = os.path.join(path_to_executables_directory, f'{name}.x86')
+    path_to_executable = os.path.join(path_to_executables_directory, f'{environment_name}.x86')
+    # path_to_executable = os.path.join(path_to_executables_directory, f'{environment_name}.x64')
   args = shlex.split(
-      '-ip '
-      + str(ip)
-      + ' -port '
-      + str(port)
-      + ' -screen-fullscreen 0 -screen-height 500 -screen-width 500'
-      )  # -batchmode -nographics')
+      f'-ip {ip}'
+      f' -port {port}'
+      f' -screen-fullscreen {full_screen}'
+      f' -screen-height {screen_height}'
+      f' -screen-width {screen_width}'
+      #f' -batchmode'
+      #f' -nographics'
+      )
   print([path_to_executable] + args)
   return subprocess.Popen(
       [path_to_executable] + args

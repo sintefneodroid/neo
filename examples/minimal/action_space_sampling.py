@@ -11,9 +11,10 @@ def main():
   while _environments.is_connected:
     actions = _environments.action_space.sample()
     print(actions)
-    observations, rewards, terminateds, infos = _environments.act(actions)
+    observations, rewards, terminated, infos = _environments.act(actions)
 
-    _environments.reset(terminateds)
+    if terminated:
+      _environments.reset()
 
 
 if __name__ == '__main__':

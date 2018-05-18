@@ -46,28 +46,10 @@ class NeodroidEnvironments(NetworkingEnvironment):
   def simulator_configuration(self):
     return self._simulator_configuration
 
-  def close(self, *args, **kwargs):
-    return self._close(*args, **kwargs)
-
-  def configure(self, *args, **kwargs):
-    return self._configure(*args, **kwargs)
-
-  def reset(self, *args, **kwargs):
-    return self._reset(*args, **kwargs)
-
-  def react(self, *args, **kwargs):
-    return self._react(*args, **kwargs)
-
-  def observe(self, *args, **kwargs):
-    return self._observe(*args, **kwargs)
-
-  def display(self, *args, **kwargs):
-    return self._close(*args, **kwargs)
-
   def __init__(
       self,
       *,
-      name='small_grid_world',
+      environment_name='small_grid_world',
       clones=0,
       path_to_executables_directory=os.path.join(
           os.path.dirname(os.path.realpath(__file__)), 'environments'
@@ -92,14 +74,14 @@ class NeodroidEnvironments(NetworkingEnvironment):
 
     if not self._connect_to_running and not self._simulation_instance:
       self._simulation_instance = launch_environment(
-          name, path_to_executables_directory, self._ip, self._port
+          environment_name, path_to_executables_directory, self._ip, self._port
           )
       if self._simulation_instance:
         if self._debug_logging:
-          self._logger.debug(f'successfully started environment {name}')
+          self._logger.debug(f'successfully started environment {environment_name}')
       else:
         if self._debug_logging:
-          self._logger.debug(f'could not start environment {name}')
+          self._logger.debug(f'could not start environment {environment_name}')
 
     self._setup_connection()
 
@@ -179,31 +161,6 @@ class NeodroidEnvironments(NetworkingEnvironment):
 
     return input_reaction
 
-  def describe(self):
-    return self.observe(parameters=M.ReactionParameters(
-        terminable=False, describe=True, episode_count=False
-        ))
-
-  def _observe(
-      self,
-      parameters=M.ReactionParameters(
-          terminable=True, describe=True, episode_count=False
-          )
-      ):
-    '''
-
-:param parameters:
-:type parameters:
-:return:
-:rtype:
-'''
-    new_states, simulator_configuration = self._message_server.send_reactions(
-        [M.Reaction(parameters=parameters)])
-    if new_states:
-
-      self.update_interface_statics(new_states, simulator_configuration)
-      return new_states
-
   def _reset(self, input_reactions=None, state=None, on_reset_callback=None):
     self._warn_reset()
 
@@ -236,28 +193,16 @@ class NeodroidEnvironments(NetworkingEnvironment):
       callback()
     return 0
 
-  def update_interface_statics(self, new_states, new_simulator_configuration):
-    self._last_message = new_states
-    # flat_message = flattened_observation(new_state)
-    self._simulator_configuration = new_simulator_configuration
-    first_environment = list(self._last_message.values())[0]
-    observables = first_environment.observables
-    if observables is not None:
-      self._observation_space = construct_observation_space(observables)
-    if first_environment.description:
-      self._description = first_environment.description
-      self._action_space = construct_action_space(self._description)
-
   @staticmethod
   def maybe_infer_motion_reaction(
-      input_reaction, normalise, description, verbose=False
+      in_reaction, normalise, description, verbose=False
       ):
     '''
 
 :param verbose:
 :type verbose:
-:param input_reaction:
-:type input_reaction:
+:param in_reaction:
+:type in_reaction:
 :param normalise:
 :type normalise:
 :param description:
@@ -266,14 +211,14 @@ class NeodroidEnvironments(NetworkingEnvironment):
 :rtype:
 '''
     if description:
-      input_reaction = verify_motion_reaction(
-          input_reaction, description, normalise, verbose=verbose
+      out_reaction = verify_motion_reaction(
+          in_reaction, description, normalise, verbose=verbose
           )
     else:
-      input_reaction = verify_motion_reaction(
-          input_reaction, None, False, verbose=verbose
+      out_reaction = verify_motion_reaction(
+          in_reaction, None, False, verbose=verbose
           )
-    return input_reaction
+    return out_reaction
 
   def _warn_closing(self):
     if self._verbose:
@@ -313,7 +258,7 @@ if __name__ == '__main__':
   import argparse
   from tqdm import tqdm
 
-  parser = argparse.ArgumentParser(description='PG Agent')
+  parser = argparse.ArgumentParser(description='Neodroid Environments')
   parser.add_argument(
       '--ENVIRONMENT_NAME',
       type=str,

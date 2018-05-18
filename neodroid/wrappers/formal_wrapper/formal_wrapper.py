@@ -19,7 +19,7 @@ class NeodroidFormalWrapper(SingleEnvironmentWrapper):
 
   def act(self, *args, **kwargs):
     message = super().react(*args, **kwargs)
-    first_environment = list(message.values())[0]  # TODO: Only exposing first environments state
+    first_environment = message
     if first_environment:
       return (
         flattened_observation(first_environment),
