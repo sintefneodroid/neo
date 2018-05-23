@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # coding=utf-8
+from functools import wraps
+
 __author__ = 'cnheider'
 
 # Borrowed from Baselines repo
@@ -26,12 +28,12 @@ DISABLED = 50
 
 
 class KVWriter(object):
-  def writekvs(self, kvs):
+  def write_kvs(self, kvs):
     raise NotImplementedError
 
 
 class SeqWriter(object):
-  def writeseq(self, seq):
+  def write_seq(self, seq):
     raise NotImplementedError
 
 
@@ -45,7 +47,7 @@ class HumanOutputFormat(KVWriter, SeqWriter):
       self.file = filename_or_file
       self.own_file = False
 
-  def writekvs(self, kvs):
+  def write_kvs(self, kvs):
     # Create strings for printing
     key2str = {}
     for (key, val) in sorted(kvs.items()):
@@ -82,7 +84,7 @@ class HumanOutputFormat(KVWriter, SeqWriter):
   def _truncate(self, s):
     return s[:20] + '...' if len(s) > 23 else s
 
-  def writeseq(self, seq):
+  def write_seq(self, seq):
     for arg in seq:
       self.file.write(arg)
     self.file.write('\n')
@@ -97,7 +99,7 @@ class JSONOutputFormat(KVWriter):
   def __init__(self, filename):
     self.file = open(filename, 'wt')
 
-  def writekvs(self, kvs):
+  def write_kvs(self, kvs):
     for k, v in sorted(kvs.items()):
       if hasattr(v, 'dtype'):
         v = v.tolist()
@@ -115,7 +117,7 @@ class CSVOutputFormat(KVWriter):
     self.keys = []
     self.sep = ','
 
-  def writekvs(self, kvs):
+  def write_kvs(self, kvs):
     # Add our current row to the history
     extra_keys = kvs.keys() - self.keys
     if extra_keys:
@@ -165,7 +167,7 @@ class TensorBoardOutputFormat(KVWriter):
     self.pywrap_tensorflow = pywrap_tensorflow
     self.writer = pywrap_tensorflow.EventsWriter(compat.as_bytes(path))
 
-  def writekvs(self, kvs):
+  def write_kvs(self, kvs):
     def summary_val(k, v):
       kwargs = {'tag':k, 'simple_value':float(v)}
       return self.tf.Summary.Value(**kwargs)
@@ -308,7 +310,10 @@ def profile(n):
   def my_func(): code
   '''
 
+
   def decorator_with_name(func):
+
+    @wraps(func)
     def func_wrapper(*args, **kwargs):
       with ProfileKV(n):
         return func(*args, **kwargs)
@@ -352,7 +357,7 @@ class Logger(object):
       return
     for fmt in self.output_formats:
       if isinstance(fmt, KVWriter):
-        fmt.writekvs(self.name2val)
+        fmt.write_kvs(self.name2val)
     self.name2val.clear()
     self.name2cnt.clear()
 
@@ -377,7 +382,7 @@ class Logger(object):
   def _do_log(self, args):
     for fmt in self.output_formats:
       if isinstance(fmt, SeqWriter):
-        fmt.writeseq(map(str, args))
+        fmt.write_seq(map(str, args))
 
 
 Logger.DEFAULT = Logger.CURRENT = Logger(dir=None, output_formats=[HumanOutputFormat(sys.stdout)])
@@ -427,10 +432,7 @@ class scoped_configure(object):
 
 def _demo():
   info('hi')
-  debug('shouldn'
-  t
-  appear
-  ')
+  debug('should not appear')
   set_level(DEBUG)
   debug('should appear')
   dir = '/tmp/testlogging'
