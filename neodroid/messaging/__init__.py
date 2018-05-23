@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# coding=utf-8
+#!/usr/bin/env python3 
+# -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
 from .fbs_reaction_utilities import *

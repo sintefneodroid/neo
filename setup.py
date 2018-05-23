@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# coding=utf-8
+#!/usr/bin/env python3 
+# -*- coding: utf-8 -*-
 from neodroid.version import get_version
 
 __author__ = 'cnheider'

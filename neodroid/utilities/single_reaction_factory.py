@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# coding=utf-8
+# -*- coding: utf-8 -*-
 from neodroid.utilities.debug import print_return
 
 __author__ = 'cnheider'

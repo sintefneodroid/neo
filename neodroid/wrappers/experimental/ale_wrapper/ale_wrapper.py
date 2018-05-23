@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# coding=utf-8
+#!/usr/bin/env python3 
+# -*- coding: utf-8 -*-
 from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'

@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# coding=utf-8
+#!/usr/bin/env python3 
+# -*- coding: utf-8 -*-
 from neodroid.utilities.debug import print_return
 from neodroid.utilities.single_reaction_factory import _norm_action
 

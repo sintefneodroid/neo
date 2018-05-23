@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# coding=utf-8
+# -*- coding: utf-8 -*-
 import typing
 from collections import namedtuple
 from typing import Callable
