@@ -8,8 +8,6 @@ eggs
 parts
 *.egg-info
 .idea
-docs/build/
-
 __pycache__/
 #*.py[cod]
 
@@ -18,3 +16,5 @@ venv/
 
 environments/
 *.log
+/.ropeproject/
+/.pyre/

@@ -48,7 +48,7 @@ class Environment(ABC):
     return self._describe(*args, **kwargs)
 
   def display(self, *args, **kwargs):
-    return self._close(*args, **kwargs)
+    return self._display(*args, **kwargs)
 
   def describe(self, *args, **kwargs):
     self._describe(*args, **kwargs)
@@ -98,7 +98,13 @@ class Environment(ABC):
     return NotImplementedError
 
   def __next__(self):
-    return self._react()
+    state = self._react()
+    while state:
+      state = self._react()
+      yield state
+    while 1:
+      raise StopIteration
+
 
   def __iter__(self):
     return self
