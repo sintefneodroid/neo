@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.version import get_version
 
@@ -41,7 +41,8 @@ setup(
     keywords=get_keyword(),
     url='https://github.com/sintefneodroid/neo',
     install_requires=[
-      'pyzmq', 'numpy', 'neodroid-flatbuffers', 'Pillow', 'gym', 'tqdm', 'matplotlib', 'flatbuffers'
+      'pyzmq', 'numpy', 'neodroid-flatbuffers', 'Pillow', 'gym', 'tqdm', 'matplotlib', 'flatbuffers',
+      'cloudpickle'
       ],
     extras_require={'GUI':['kivy']},
     )

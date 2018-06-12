@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
@@ -23,6 +23,8 @@ def serialise_reactions(input_reactions):
 
   F.FReactionsStart(B)
   F.FReactionsAddReactions(B, reactions_vector_offset)
+  #F.FReactionsAddSimulatorConfiguration(B,None)
+  F.FReactionsAddApiVersion(B,'0.1.0')
   flat_reactions = F.FReactionsEnd(B)
 
   B.Finish(flat_reactions)
@@ -48,7 +50,7 @@ def serialise_reaction(B, input_reaction):
           input_reaction.parameters.reset,
           input_reaction.parameters.configure,
           input_reaction.parameters.describe,
-          input_reaction.parameters.episode_count,
+          input_reaction.parameters.episode_count
           ),
       )
   F.FReactionAddEnvironmentName(B, environment_string_offset)

@@ -3,6 +3,8 @@
 __author__ = 'cnheider'
 from tqdm import tqdm
 
+tqdm.monitor_interval = 0
+
 import neodroid.wrappers.formal_wrapper as neo
 
 
@@ -10,6 +12,7 @@ def main():
   _environment = neo.make('grid_world', connect_to_running=True)
 
   frame_i = 0
+  update_description_interval = 100
 
   appended_text = ''
   diverged = False
@@ -20,7 +23,8 @@ def main():
     if not diverged and frame_i != info.frame_number:
       appended_text += ', Diverged!'
       diverged = True
-    observation_session.set_description(
+    if frame_i % update_description_interval == 0:
+      observation_session.set_description(
         f'Local frame: {frame_i}, Unity frame: {info.frame_number}' + appended_text)
 
     if terminated:

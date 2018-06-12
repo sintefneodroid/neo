@@ -97,6 +97,9 @@ class Environment(ABC):
   def signal_space(self):
     return NotImplementedError
 
+  def sample_action(self):
+    return self.action_space.sample()
+
   def __next__(self):
     state = self._react()
     while state:

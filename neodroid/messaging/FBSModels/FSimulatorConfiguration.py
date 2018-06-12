@@ -31,9 +31,16 @@ class FSimulatorConfiguration(object):
     def ResetIterations(self): return self._tab.Get(flatbuffers.number_types.Int32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(32))
     # FSimulatorConfiguration
     def NumOfEnvironments(self): return self._tab.Get(flatbuffers.number_types.Int32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(36))
+    # FSimulatorConfiguration
+    def DoSerialiseIndidualObservables(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(40))
+    # FSimulatorConfiguration
+    def DoSerialiseUnobservables(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(41))
 
-def CreateFSimulatorConfiguration(builder, width, height, fullScreen, qualityLevel, timeScale, targetFrameRate, waitEvery, frameSkips, resetIterations, numOfEnvironments):
-    builder.Prep(4, 40)
+def CreateFSimulatorConfiguration(builder, width, height, fullScreen, qualityLevel, timeScale, targetFrameRate, waitEvery, frameSkips, resetIterations, numOfEnvironments, doSerialiseIndidualObservables, doSerialiseUnobservables):
+    builder.Prep(4, 44)
+    builder.Pad(2)
+    builder.PrependBool(doSerialiseUnobservables)
+    builder.PrependBool(doSerialiseIndidualObservables)
     builder.PrependInt32(numOfEnvironments)
     builder.PrependInt32(resetIterations)
     builder.PrependInt32(frameSkips)
