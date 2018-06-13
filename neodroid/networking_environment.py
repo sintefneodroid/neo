@@ -7,7 +7,7 @@ import neodroid.models as M
 from neodroid import messaging
 from neodroid.environment import Environment
 from neodroid.utilities.debug import ClientEvents, message_client_event
-from neodroid.utilities.statics import construct_observation_space, construct_action_space
+from neodroid.utilities.statics import construct_action_space, construct_observation_space
 
 CONNECT_TRY_TIMES = 100
 CONNECT_TRY_INTERVAL = 0.1
@@ -59,6 +59,9 @@ class NetworkingEnvironment(Environment):
       connect_tries.update()
       if connect_tries.n is CONNECT_TRY_TIMES:
         raise ConnectionError
+
+    # TODO: WARN ABOUT WHEN INDIVIDUAL OBSERVATIONS AND UNOBSERVABLES ARE UNAVAILABLE
+    # due to simulator configuration
 
     self._is_connected_to_server = True
 

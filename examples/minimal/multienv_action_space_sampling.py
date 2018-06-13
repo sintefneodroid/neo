@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.models import Reaction, Motion, ReactionParameters
+from neodroid.models import Motion, Reaction, ReactionParameters
 
 __author__ = 'cnheider'
 
 import neodroid.neodroid_environments as neo
+
 
 def construct_reactions(env):
   parameters = ReactionParameters(terminable=True, step=True, reset=False, configure=False,
@@ -17,9 +18,9 @@ def construct_reactions(env):
                         motions=motions)]
 
   for i in range(19):
-    action1,action2 = env.action_space.sample()
-    motions = [Motion('ActorActor','ActorTransformX_',action1),
-                                                        Motion('ActorActor','ActorTransformZ_',action2)]
+    action1, action2 = env.action_space.sample()
+    motions = [Motion('ActorActor', 'ActorTransformX_', action1),
+               Motion('ActorActor', 'ActorTransformZ_', action2)]
 
     reaction = Reaction(environment_name=f'Environment(Clone){i}PrototypingEnvironment',
                         parameters=parameters,

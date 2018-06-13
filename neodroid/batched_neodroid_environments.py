@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid import NeodroidEnvironments
 
@@ -16,12 +16,12 @@ class BatchedNeodroidEnvironments(NeodroidEnvironments):
 
   def _react(self, reactions=None, **kwargs):
 
-    if self._resets and len(self._resets)>0:
+    if self._resets and len(self._resets) > 0:
       i = 0
       for reset in self._resets:
         reactions[i].parameters.reset = reset
         i += 1
-      self._resets=[]
+      self._resets = []
 
     environment_states = super()._react(reactions)
 

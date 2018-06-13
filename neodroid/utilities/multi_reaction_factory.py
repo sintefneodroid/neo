@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.utilities.debug import print_return
 from neodroid.utilities.single_reaction_factory import _norm_action
@@ -28,8 +28,10 @@ def verify_motion_reactions(
 
   if environment_descriptions:
     if len(inputs) is not len(environment_descriptions):
-      warnings.warn(f'Inputs({len(inputs)}) and environment descriptions({len(environment_descriptions)}) are not the same length')
-    for input, env_desc in zip(inputs,environment_descriptions):
+      warnings.warn(
+        f'Inputs({len(inputs)}) and environment descriptions({len(environment_descriptions)}) are not the '
+        f'same length')
+    for input, env_desc in zip(inputs, environment_descriptions):
       actors = env_desc.actors.values()
       if actors:
         if isinstance(input, M.Reaction):

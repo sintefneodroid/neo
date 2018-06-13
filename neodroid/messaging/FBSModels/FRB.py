@@ -4,31 +4,39 @@
 
 import flatbuffers
 
+
 class FRB(object):
-    __slots__ = ['_tab']
+  __slots__ = ['_tab']
 
-    @classmethod
-    def GetRootAsFRB(cls, buf, offset):
-        n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-        x = FRB()
-        x.Init(buf, n + offset)
-        return x
+  @classmethod
+  def GetRootAsFRB(cls, buf, offset):
+    n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
+    x = FRB()
+    x.Init(buf, n + offset)
+    return x
 
-    # FRB
-    def Init(self, buf, pos):
-        self._tab = flatbuffers.table.Table(buf, pos)
+  # FRB
+  def Init(self, buf, pos):
+    self._tab = flatbuffers.table.Table(buf, pos)
 
-    # FRB
-    def Body(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-        if o != 0:
-            x = o + self._tab.Pos
-            from .FBody import FBody
-            obj = FBody()
-            obj.Init(self._tab.Bytes, x)
-            return obj
-        return None
+  # FRB
+  def Body(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+    if o != 0:
+      x = o + self._tab.Pos
+      from .FBody import FBody
+      obj = FBody()
+      obj.Init(self._tab.Bytes, x)
+      return obj
+    return None
+
 
 def FRBStart(builder): builder.StartObject(1)
-def FRBAddBody(builder, body): builder.PrependStructSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(body), 0)
+
+
+def FRBAddBody(builder, body): builder.PrependStructSlot(0,
+                                                         flatbuffers.number_types.UOffsetTFlags.py_type(body),
+                                                         0)
+
+
 def FRBEnd(builder): return builder.EndObject()

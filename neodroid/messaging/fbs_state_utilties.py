@@ -18,7 +18,7 @@ def deserialise_states(flat_states):
     out_states[key] = states[key]
 
   simulator_configuration = N.SimulatorConfiguration(flat_states.SimulatorConfiguration(),
-                                                       flat_states.ApiVersion())
+                                                     flat_states.ApiVersion())
 
   return out_states, simulator_configuration
 

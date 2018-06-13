@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import typing
 from collections import namedtuple
 from typing import Callable
 
@@ -105,7 +104,7 @@ if __name__ == '__main__':
 
   class d(Base):
 
-    @staticmethod #Note no the debug func attribute is no applied to this static method
+    @staticmethod  # Note no the debug func attribute is no applied to this static method
     def add(a, b):
       return a + b
 

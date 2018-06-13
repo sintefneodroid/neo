@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 from types import coroutine
 
 __author__ = 'cnheider'
@@ -107,7 +107,6 @@ class Environment(ABC):
       yield state
     while 1:
       raise StopIteration
-
 
   def __iter__(self):
     return self

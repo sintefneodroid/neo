@@ -116,6 +116,7 @@ receives the same reaction.
            f'<unobservables>\n{self.unobservables}</unobservables>\n  ' \
            f'<serialised_message>{self.serialised_message}</serialised_message>\n' \
            f'</Reaction>\n'
+
   def __str__(self):
     return self.__repr__()
 

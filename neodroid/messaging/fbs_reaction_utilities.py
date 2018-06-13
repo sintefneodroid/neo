@@ -23,8 +23,9 @@ def serialise_reactions(input_reactions):
 
   F.FReactionsStart(B)
   F.FReactionsAddReactions(B, reactions_vector_offset)
-  #F.FReactionsAddSimulatorConfiguration(B,None)
-  F.FReactionsAddApiVersion(B,'0.1.0')
+  # F.FReactionsAddSimulatorConfiguration(B,None)
+  #TODO: int should be a string in api version  F.FReactionsAddApiVersion(B, '0.1.0')
+  # also use create string before constructing reactions datatype.
   flat_reactions = F.FReactionsEnd(B)
 
   B.Finish(flat_reactions)

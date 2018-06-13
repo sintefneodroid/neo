@@ -310,9 +310,7 @@ def profile(n):
   def my_func(): code
   '''
 
-
   def decorator_with_name(func):
-
     @wraps(func)
     def func_wrapper(*args, **kwargs):
       with ProfileKV(n):

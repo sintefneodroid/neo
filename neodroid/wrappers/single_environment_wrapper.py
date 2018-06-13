@@ -1,9 +1,8 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
 from neodroid import NeodroidEnvironments
-from neodroid.utilities.statics import flattened_observation
 
 
 class SingleEnvironmentWrapper(NeodroidEnvironments):
@@ -89,7 +88,8 @@ if __name__ == '__main__':
       help='Connect to already running environment instead of starting another instance')
   proc_args = parser.parse_args()
 
-  env = SingleEnvironmentWrapper(name=proc_args.ENVIRONMENT_NAME, connect_to_running=proc_args.CONNECT_TO_RUNNING)
+  env = SingleEnvironmentWrapper(name=proc_args.ENVIRONMENT_NAME,
+                                 connect_to_running=proc_args.CONNECT_TO_RUNNING)
 
   observation_session = tqdm(env, leave=False)
   for environment_state in observation_session:

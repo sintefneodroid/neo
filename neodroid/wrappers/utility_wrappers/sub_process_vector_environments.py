@@ -1,7 +1,9 @@
 from multiprocessing import Pipe, Process
 
 import numpy as np
+
 from neodroid.wrappers.utility_wrappers import CloudPickleWrapper, VectorEnvironments
+
 
 def worker(remote, parent_remote, env_fn_wrapper):
   parent_remote.close()
@@ -28,6 +30,7 @@ def worker(remote, parent_remote, env_fn_wrapper):
       env.render()
     else:
       raise NotImplementedError
+
 
 class SubProcessVectorEnvironments(VectorEnvironments):
   def __init__(self, env_fns, render_interval):

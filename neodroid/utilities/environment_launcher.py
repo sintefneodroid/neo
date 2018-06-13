@@ -20,8 +20,8 @@ def launch_environment(environment_name, path_to_executables_directory, ip, port
       f' -screen-fullscreen {full_screen}'
       f' -screen-height {screen_height}'
       f' -screen-width {screen_width}'
-      #f' -batchmode'
-      #f' -nographics'
+      # f' -batchmode'
+      # f' -nographics'
       )
   print([path_to_executable] + args)
   return subprocess.Popen(

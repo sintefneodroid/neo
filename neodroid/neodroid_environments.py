@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from neodroid.models import Reaction
@@ -18,8 +18,6 @@ from neodroid.utilities.single_reaction_factory import (
   verify_motion_reaction,
   )
 from neodroid.utilities.statics import (
-  construct_action_space,
-  construct_observation_space,
   flattened_observation,
   )
 
@@ -128,9 +126,9 @@ class NeodroidEnvironments(NetworkingEnvironment):
 
     if input_reactions is None:
       parameters = M.ReactionParameters(
-          episode_count=True,step=True,terminable=True
+          episode_count=True, step=True, terminable=True
           )
-      input_reactions=[M.Reaction(parameters=parameters)]
+      input_reactions = [M.Reaction(parameters=parameters)]
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
 
@@ -166,9 +164,9 @@ class NeodroidEnvironments(NetworkingEnvironment):
 
     if input_reactions is None:
       parameters = M.ReactionParameters(
-          terminable=True, describe=True, episode_count=False,reset=True
+          terminable=True, describe=True, episode_count=False, reset=True
           )
-      input_reactions=[M.Reaction(parameters=parameters)]
+      input_reactions = [M.Reaction(parameters=parameters)]
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
     if new_states:
@@ -277,11 +275,11 @@ if __name__ == '__main__':
   env = NeodroidEnvironments(name=args.ENVIRONMENT_NAME, connect_to_running=args.CONNECT_TO_RUNNING)
 
   observation_session = tqdm(env, leave=False)
-  i=0
+  i = 0
   for environment_state in observation_session:
     first_environment_state = list(environment_state.values())[0]
-    i+=1
+    i += 1
     if first_environment_state.terminated:
       print(f'Interrupted, local frame number: {i}, remote:{first_environment_state.frame_number}')
       env.reset()
-      i=0
+      i = 0

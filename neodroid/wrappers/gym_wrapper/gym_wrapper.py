@@ -4,7 +4,6 @@ from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrappe
 
 __author__ = 'cnheider'
 
-import gym
 import numpy as np
 
 from neodroid.utilities.statics import flattened_observation
@@ -44,6 +43,4 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper):
   def __next__(self):
     if not self._is_connected_to_server:
       return
-    return self.step()
-
-
+    return self.react()

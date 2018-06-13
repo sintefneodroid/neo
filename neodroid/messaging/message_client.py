@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import warnings
 
@@ -149,8 +149,6 @@ class MessageClient(object):
             raise ConnectionError
 
           else:
-            warnings.warn(
-                f'\nRetrying, attempt: {retries_left:d}/{REQUEST_RETRIES:d}'
-                )
+            warnings.warn(f'\nRetrying, attempt: {retries_left:d}/{REQUEST_RETRIES:d}')
             self.open_connection()
             self._request_socket.send(serialised_reaction)

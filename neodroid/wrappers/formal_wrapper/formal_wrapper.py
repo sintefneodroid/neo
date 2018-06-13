@@ -9,8 +9,8 @@ from neodroid.utilities.statics import flattened_observation
 
 class NeodroidFormalWrapper(SingleEnvironmentWrapper):
 
-  def __init__(self, *args,**kwargs):
-    super().__init__(*args,**kwargs)
+  def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
 
   def __next__(self):
     if not self._is_connected_to_server:
