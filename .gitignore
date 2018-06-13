@@ -7,7 +7,6 @@ downloads
 eggs
 parts
 *.egg-info
-.idea
 __pycache__/
 #*.py[cod]
 
@@ -16,5 +15,6 @@ venv/
 
 environments/
 *.log
-/.ropeproject/
-/.pyre/
+.ropeproject/
+.pyre/
+#.idea
