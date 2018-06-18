@@ -106,6 +106,19 @@ The application displays data received from the example application of the [Droi
 # To Do's
 - [ ] Be able to select and/or parameterise an objective/evaluation (None,ReachGoal,Stabilise,..) function for an environment
 
+# Citation
+
+For citation you may use the following bibtex entry:
+
+@misc{neodroid,
+  author = {Heider, Christian},
+  title = {Neodroid Platform},
+  year = {2018},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/sintefneodroid}},
+}
+
 # Other Components Of the Neodroid Platform
 
 - [agent](https://github.com/sintefneodroid/agent)
