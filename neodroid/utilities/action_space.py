@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
@@ -54,6 +54,18 @@ class ActionSpace(object):
   @property
   def num_ternary_actions(self):
     return len(self._valid_inputs) * 3
+
+  @property
+  def is_singular(self):
+    return False # TODO: Implement
+
+  @property
+  def is_discrete(self):
+    return True # TODO: Implement
+
+  @property
+  def is_continuous(self):
+    return True # TODO: Implement
 
   def discrete_ternary_one_hot_sample(self):
     idx = np.random.randint(0, self.num_actions)

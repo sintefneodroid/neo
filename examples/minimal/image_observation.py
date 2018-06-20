@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import io
 import time
 
 __author__ = 'cnheider'
@@ -46,12 +47,13 @@ def grab_new_images(environment):
          satellite_im
 
 
-env = neogym.make('camera_observation', connect_to_running=True)
+env = neogym.make(environment_name='obs', connect_to_running=True)
 fig = plt.figure()
 
 (ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8), *_ = fig.subplots(2, 4, sharey='all')
 frame_i = 0
-obs, rew, term, info = env.step(0)
+env.reset()
+obs, rew, term, info = env.step()
 image_color, image_depth, image_segmentation, image_instance, image_infrared, image_flow, image_normal, \
 image_satellite \
   = grab_new_images(env)

@@ -2,6 +2,7 @@
 
 # namespace: State
 
+# noinspection PyUnresolvedReferences
 import flatbuffers
 
 
@@ -37,6 +38,7 @@ class FOBS(object):
   def Observation(self):
     o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
     if o != 0:
+      # noinspection PyUnresolvedReferences
       from flatbuffers.table import Table
       obj = Table(bytearray(), 0)
       self._tab.Union(obj, o)

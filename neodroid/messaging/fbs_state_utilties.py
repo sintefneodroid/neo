@@ -1,4 +1,5 @@
 from io import BytesIO
+from typing import Tuple, Any
 
 import numpy as np
 
@@ -69,24 +70,25 @@ def deserialise_configurables(flat_environment_description):
 def deserialise_observation(f_obs):
   value = None
   value_range = None
-  if f_obs.ObservationType() is F.FObservation.FSingle:
+  obs_type = f_obs.ObservationType()
+  if obs_type is F.FObservation.FSingle:
     value, value_range = deserialise_single(f_obs)
-  elif f_obs.ObservationType() is F.FObservation.FDouble:
+  elif obs_type is F.FObservation.FDouble:
     value, value_range = deserialise_double(f_obs)
-  elif f_obs.ObservationType() is F.FObservation.FTriple:
+  elif obs_type is F.FObservation.FTriple:
     value, value_range = deserialise_triple(f_obs)
-  elif f_obs.ObservationType() is F.FObservation.FQuadruple:
+  elif obs_type is F.FObservation.FQuadruple:
     value, *_ = deserialise_quadruple(f_obs)
-  elif f_obs.ObservationType() is F.FObservation.FArray:
+  elif obs_type is F.FObservation.FArray:
     value, *_ = deserialise_array(f_obs)
-  elif f_obs.ObservationType() is F.FObservation.FET:
+  elif obs_type is F.FObservation.FET:
     value, *_ = deserialise_euler_transform(f_obs)
-  elif f_obs.ObservationType() is F.FObservation.FRB:
+  elif obs_type is F.FObservation.FRB:
     value, *_ = deserialise_body(f_obs)
-  elif f_obs.ObservationType() is F.FObservation.FQT:
+  elif obs_type is F.FObservation.FQT:
     value, *_ = deserialise_quaternion_transform(f_obs)
-  elif f_obs.ObservationType() is F.FObservation.FByteArray:
-    value, *_ = deserialise_data(f_obs)
+  elif obs_type is F.FObservation.FByteArray:
+    value, *_ = deserialise_byte_array(f_obs)
 
   return value, value_range
 
@@ -151,12 +153,12 @@ def deserialise_body(f_obs):
     ]
 
 
-def deserialise_quadruple(f_obs):
+def deserialise_quadruple(f_obs) -> Tuple[Any,Any]:
   q = F.FQuadruple()
   q.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   quad = q.Quat()
   data = [quad.X(), quad.Y(), quad.Z(), quad.W()]
-  return data
+  return data, None
 
 
 def deserialise_triple(f_obs):
@@ -198,18 +200,32 @@ def deserialise_quaternion_transform(f_obs):
     rotation.Z(),
     rotation.W(),
     ]
-  return data
+  return data, None
 
 
-def deserialise_data(f_obs):
+def deserialise_byte_array(f_obs):
+  return deserialise_byte_array_fast(f_obs), None
+
+def deserialise_byte_array_fast(f_obs):
   byte_array = F.FByteArray()
   byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   # data = np.array(
   #    [byte_array.Bytes(i) for i in range(byte_array.BytesLength())],
   #    dtype=np.uint8)
   data = byte_array.BytesAsNumpy()
-  data = BytesIO(data.tobytes())
-  return data
+  b = data.tobytes()
+  bio = BytesIO(b)
+  return bio
+
+def deserialise_byte_array_slow(f_obs):
+  byte_array = F.FByteArray()
+  byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  data = np.array(
+    [byte_array.Bytes(i) for i in range(byte_array.BytesLength())],
+    dtype=np.uint8)
+  b = data.tobytes()
+  bio = BytesIO(b)
+  return bio
 
 
 def deserialise_array(f_obs):

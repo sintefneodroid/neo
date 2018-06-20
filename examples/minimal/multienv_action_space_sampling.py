@@ -31,7 +31,7 @@ def construct_reactions(env):
 
 
 def main():
-  _environments = neo.NeodroidEnvironments(connect_to_running=True)
+  _environments = neo.NeodroidEnvironments(name='multienv',connect_to_running=True)
 
   while _environments.is_connected:
     reactions = construct_reactions(_environments)

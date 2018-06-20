@@ -9,16 +9,16 @@ from neodroid.utilities.statics import flattened_observation
 
 class NeodroidFormalWrapper(SingleEnvironmentWrapper):
 
-  def __init__(self, *args, **kwargs):
-    super().__init__(*args, **kwargs)
+  def __init__(self, **kwargs):
+    super().__init__(**kwargs)
 
   def __next__(self):
     if not self._is_connected_to_server:
       return
     return self.act()
 
-  def act(self, *args, **kwargs):
-    message = super().react(*args, **kwargs)
+  def act(self, **kwargs):
+    message = super().react(**kwargs)
     first_environment = message
     if first_environment:
       return (

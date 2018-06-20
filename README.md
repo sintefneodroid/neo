@@ -109,7 +109,7 @@ The application displays data received from the example application of the [Droi
 # Citation
 
 For citation you may use the following bibtex entry:
-
+````
 @misc{neodroid,
   author = {Heider, Christian},
   title = {Neodroid Platform},
@@ -118,7 +118,7 @@ For citation you may use the following bibtex entry:
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/sintefneodroid}},
 }
-
+````
 # Other Components Of the Neodroid Platform
 
 - [agent](https://github.com/sintefneodroid/agent)

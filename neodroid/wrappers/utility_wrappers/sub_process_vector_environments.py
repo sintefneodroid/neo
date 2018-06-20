@@ -58,7 +58,7 @@ class SubProcessVectorEnvironments(VectorEnvironments):
     for remote, action in zip(self.remotes, actions):
       remote.send(('step', action))
     results = [remote.recv() for remote in self.remotes]
-    obs, rews, dones, infos = zip(*results)
+    obs, rews, dones, info = zip(*results)
 
     self.render_timer += 1
     if self.render_timer == self.render_interval:
@@ -66,7 +66,7 @@ class SubProcessVectorEnvironments(VectorEnvironments):
         remote.send(('render', None))
       self.render_timer = 0
 
-    return np.stack(obs), np.stack(rews), np.stack(dones), infos
+    return np.stack(obs), np.stack(rews), np.stack(dones), info
 
   def reset(self):
     for remote in self.remotes:

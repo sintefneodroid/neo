@@ -22,7 +22,7 @@ def _reverse_norm_action(self, action):
 
 
 @print_return
-def verify_motion_reaction(
+def construct_step_reaction(
     input, environment_description, normalise=False, verbose=False
     ):
   parameters = M.ReactionParameters(terminable=True, step=True, reset=False, configure=False,

@@ -47,11 +47,11 @@ class VectorEnvironments(ABC):
     """
     Wait for the step taken with step_async().
 
-    Returns (obs, rews, dones, infos):
+    Returns (obs, rews, dones, info):
      - obs: an array of observations
      - rews: an array of rewards
      - dones: an array of "episode done" booleans
-     - infos: an array of info objects
+     - info: an array of info objects
     """
     pass
 

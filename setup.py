@@ -6,13 +6,51 @@ __author__ = 'cnheider'
 
 from setuptools import find_packages, setup
 
-packages = find_packages(exclude=['neodroid/environments'])
-package_data = {
-  'neodroid':[
-    # 'environments/grid_world*',
-    # glob.glob('environments/**', recursive=True)
+
+def get_packages():
+  return find_packages(exclude=['neodroid/environments'])
+
+
+def get_package_data():
+  return {
+    'neodroid':[
+      # 'environments/grid_world*',
+      # glob.glob('environments/**', recursive=True)
+      ]
+    }
+
+
+def get_entry_points():
+  return {
+    'console_scripts':[
+      # "name_of_executable = module.with:function_to_execute"
+      'neodroid = examples.minimal.action_space_sampling:main',
+      ]
+    }
+
+
+def get_extras():
+  return {'GUI':['kivy']}
+
+
+def get_requirements():
+  return [
+    'pyzmq',
+    'numpy',
+    'neodroid-flatbuffers',
+    # 'flatbuffers',
+    'Pillow',
+    'gym',
+    'tqdm',
+    'matplotlib',
+    'cloudpickle'
     ]
-  }
+
+
+def get_description():
+  return 'Python interface for the Neodroid platform,' \
+         ' an API for communicating with a Unity Game ' \
+         'process for a feedback response loop'
 
 
 def get_readme():
@@ -25,30 +63,43 @@ def get_keyword():
     return f.read()
 
 
+def get_license():
+  return 'Apache License, Version 2.0'
+
+
+def get_classifiers():
+  return [
+           'Development Status :: 4 - Beta',
+           'Environment :: Console',
+           'Intended Audience :: End Users/Desktop',
+           'Intended Audience :: Developers',
+           'License :: OSI Approved :: Apache Software License',
+           'Operating System :: MacOS :: MacOS X',
+           'Operating System :: Microsoft :: Windows',
+           'Operating System :: POSIX',
+           'Programming Language :: Python',
+           'Topic :: Software Development :: Bug Tracking',
+           ]
+
+
 setup(
     name='Neodroid',
     version=get_version(),
-    packages=packages,
+    packages=get_packages(),
     include_package_data=True,
-    # package_data=package_data,
+    # package_data=get_package_data(),
     author='Christian Heider Nielsen',
     author_email='chrini13@student.aau.dk',
-    description='Python interface for the Neodroid platform, '
-                'an API for communicating with a Unity '
-                'Game process for a feedback response loop',
+    maintainer='Christian Heider Nielsen',
+    maintainer_email='chrini13@student.aau.dk',
+    description=get_description(),
     long_description=get_readme(),
-    license='Apache License, Version 2.0',
+    license=get_license(),
     keywords=get_keyword(),
     url='https://github.com/sintefneodroid/neo',
-    install_requires=[
-      'pyzmq',
-      'numpy',
-      'neodroid-flatbuffers',
-      'Pillow',
-      'gym',
-      'tqdm',
-      'matplotlib',
-      'cloudpickle'
-      ],
-    extras_require={'GUI':['kivy']},
+    download_url='https://github.com/sintefneodroid/neo/releases',
+    install_requires=get_requirements(),
+    extras_require=get_extras(),
+    entry_points=get_entry_points(),
+    classifiers=get_classifiers()
     )

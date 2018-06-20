@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from warnings import warn
+
 __author__ = 'cnheider'
 
 from neodroid import NeodroidEnvironments
@@ -7,15 +9,15 @@ from neodroid import NeodroidEnvironments
 
 class SingleEnvironmentWrapper(NeodroidEnvironments):
 
-  def __init__(self, *args, **kwargs):
-    super().__init__(*args, **kwargs)
+  def __init__(self, **kwargs):
+    super().__init__(**kwargs)
 
   def __next__(self):
     if not self._is_connected_to_server:
       return
     return self.react()
 
-  def _react(self,
+  def _react(self,*,
              input_reaction=None,
              parameters=None,
              normalise=False,
@@ -29,9 +31,9 @@ class SingleEnvironmentWrapper(NeodroidEnvironments):
 
     input_reactions = [input_reaction]
 
-    message = super()._react(input_reactions, **kwargs)
+    env_states = super()._react(input_reactions=input_reactions, **kwargs)
 
-    first_environment = list(message.values())[0]
+    first_environment = list(env_states.values())[0]
     if first_environment:
       return first_environment
     return None
@@ -63,6 +65,13 @@ class SingleEnvironmentWrapper(NeodroidEnvironments):
       return message
 
     return None
+
+  def _observer(self, name, *args, **kwargs):
+    state_env_0 = list(self._last_message.values())[0]
+    observer = state_env_0.observer(name)
+    if not observer:
+      warn('Observer was not found!')
+    return observer
 
   def _close(self, *args, **kwargs):
     return self._close(*args, **kwargs)

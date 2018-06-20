@@ -23,7 +23,7 @@ class BatchedNeodroidEnvironments(NeodroidEnvironments):
         i += 1
       self._resets = []
 
-    environment_states = super()._react(reactions)
+    environment_states = super()._react(input_reactions=reactions)
 
     observables = [environment_state.observables for environment_state in environment_states.values()]
     signals = [environment_state.signal for environment_state in environment_states.values()]

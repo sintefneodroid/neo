@@ -15,7 +15,7 @@ import neodroid.models as M
 from neodroid.utilities.environment_launcher import launch_environment
 from neodroid.utilities.single_reaction_factory import (
   verify_configuration_reaction,
-  verify_motion_reaction,
+  construct_step_reaction,
   )
 from neodroid.utilities.statics import (
   flattened_observation,
@@ -96,11 +96,10 @@ class NeodroidEnvironments(NetworkingEnvironment):
   def _configure(self, *args, **kwargs):
     return self._reset()
 
-  def _observer(self, name, *args, **kwargs):
-    return self._last_message.observer(name)
 
   def _react(
       self,
+      *,
       input_reactions=None,
       parameters=None,
       normalise=False,
@@ -209,11 +208,11 @@ class NeodroidEnvironments(NetworkingEnvironment):
 :rtype:
 '''
     if description:
-      out_reaction = verify_motion_reaction(
+      out_reaction = construct_step_reaction(
           in_reaction, description, normalise, verbose=verbose
           )
     else:
-      out_reaction = verify_motion_reaction(
+      out_reaction = construct_step_reaction(
           in_reaction, None, False, verbose=verbose
           )
     return out_reaction
