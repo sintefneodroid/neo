@@ -139,7 +139,7 @@ def FStateStart(builder): builder.StartObject(11)
 
 def FStateAddEnvironmentName(builder, environmentName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                             flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                              environmentName),
+                                                                                                environmentName),
                                                                                             0)
 
 
@@ -154,7 +154,7 @@ def FStateAddTerminated(builder, terminated): builder.PrependBoolSlot(3, termina
 
 def FStateAddTerminationReason(builder, terminationReason): builder.PrependUOffsetTRelativeSlot(4,
                                                                                                 flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                  terminationReason),
+                                                                                                    terminationReason),
                                                                                                 0)
 
 
@@ -163,7 +163,7 @@ def FStateAddTotalEnergySpent(builder, totalEnergySpent): builder.PrependFloat32
 
 def FStateAddObservations(builder, observations): builder.PrependUOffsetTRelativeSlot(6,
                                                                                       flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                        observations), 0)
+                                                                                          observations), 0)
 
 
 def FStateStartObservationsVector(builder, numElems): return builder.StartVector(4, numElems, 4)
@@ -171,7 +171,7 @@ def FStateStartObservationsVector(builder, numElems): return builder.StartVector
 
 def FStateAddObservables(builder, observables): builder.PrependUOffsetTRelativeSlot(7,
                                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                      observables), 0)
+                                                                                        observables), 0)
 
 
 def FStateStartObservablesVector(builder, numElems): return builder.StartVector(4, numElems, 4)
@@ -179,18 +179,18 @@ def FStateStartObservablesVector(builder, numElems): return builder.StartVector(
 
 def FStateAddUnobservables(builder, unobservables): builder.PrependUOffsetTRelativeSlot(8,
                                                                                         flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                          unobservables), 0)
+                                                                                            unobservables), 0)
 
 
 def FStateAddEnvironmentDescription(builder, environmentDescription): builder.PrependUOffsetTRelativeSlot(9,
                                                                                                           flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                            environmentDescription),
+                                                                                                              environmentDescription),
                                                                                                           0)
 
 
 def FStateAddSerialisedMessage(builder, serialisedMessage): builder.PrependUOffsetTRelativeSlot(10,
                                                                                                 flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                  serialisedMessage),
+                                                                                                    serialisedMessage),
                                                                                                 0)
 
 

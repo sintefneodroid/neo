@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
-
 import flatbuffers
 import numpy as np
 
@@ -25,7 +24,7 @@ def serialise_reactions(input_reactions):
   F.FReactionsStart(B)
   F.FReactionsAddReactions(B, reactions_vector_offset)
   # F.FReactionsAddSimulatorConfiguration(B,None)
-  #TODO: int should be a string in api version  F.FReactionsAddApiVersion(B, '0.1.0')
+  # TODO: int should be a string in api version  F.FReactionsAddApiVersion(B, '0.1.0')
   # also use create string before constructing reactions datatype.
   flat_reactions = F.FReactionsEnd(B)
 

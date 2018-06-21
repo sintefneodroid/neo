@@ -55,7 +55,7 @@ def FByteArrayStart(builder): builder.StartObject(2)
 
 def FByteArrayAddBytes(builder, bytes): builder.PrependUOffsetTRelativeSlot(0,
                                                                             flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                              bytes), 0)
+                                                                                bytes), 0)
 
 
 def FByteArrayStartBytesVector(builder, numElems): return builder.StartVector(1, numElems, 1)

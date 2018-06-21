@@ -1,27 +1,28 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+
 
 __author__ = 'cnheider'
 
 import numpy as np
 
-from neodroid.models import Reaction, ReactionParameters
-from neodroid.utilities.statics import flattened_observation
+from neodroid import Reaction, ReactionParameters
+from neodroid.utilities import flattened_observation
+from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 
 class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
 
-  def __init__(self, *args, **kwargs):
-    super().__init__(*args, **kwargs)
+  def __init__(self, **kwargs):
+    super().__init__(**kwargs)
 
   def __next__(self):
     if not self._is_connected_to_server:
       return
     return self.act()
 
-  def act(self, *args, **kwargs):
-    message = super().react(*args, **kwargs)
+  def act(self,  **kwargs):
+    message = super().react(**kwargs)
     if message:
       return (
         np.array(flattened_observation(message)),
@@ -44,18 +45,13 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
       non_terminable_horizon=10,
       random_process=None,
       ):
-    configure_params = ReactionParameters(
-        terminable=False, episode_count=False, reset=True, configure=True
+    configure_params = ReactionParameters( reset=True, configure=True
         )
     init = Reaction(
         parameters=configure_params, configurations=initial_configuration
         )
 
     non_terminable_params = ReactionParameters(
-        terminable=False,
-        episode_count=False,
-        reset=False,
-        configure=False,
         step=True,
         )
 
@@ -67,7 +63,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
         reaction = Reaction(
             motions=self.action_space.sample(), parameters=non_terminable_params
             )
-        state, _, terminated, info = self.act(reaction)
+        state, _, terminated, info = self.act(actions=reaction)
 
       for i in range(motion_horizon):
         if random_process is not None:
@@ -76,7 +72,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
         else:
           actions = self.action_space.sample()
 
-        state, _, terminated, info = self.act(actions)
+        state, _, terminated, info = self.act(actions=actions)
 
         if not terminated:
           initial_states.append(info)
@@ -98,7 +94,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
         else:
           actions = self.action_space.sample()
 
-        s, _, terminated, info = self.act(actions)
+        s, _, terminated, info = self.act(actions=actions)
 
         if not terminated:
           initial_states.append(info)

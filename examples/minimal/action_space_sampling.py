@@ -11,8 +11,8 @@ def main():
   _environments = neo.make(environment_name='obs', connect_to_running=False)
   _environments.reset()
 
-  i=0
-  freq=100
+  i = 0
+  freq = 100
   time_s = time.time()
   while _environments.is_connected:
     actions = _environments.action_space.sample()

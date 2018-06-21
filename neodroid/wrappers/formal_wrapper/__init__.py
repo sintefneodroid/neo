@@ -7,8 +7,8 @@ import numpy as np
 from .formal_wrapper import NeodroidFormalWrapper
 
 
-def make(environment_name,**kwargs):
-  return NeodroidFormalWrapper(environment_name=environment_name,**kwargs)
+def make(environment_name, **kwargs):
+  return NeodroidFormalWrapper(environment_name=environment_name, **kwargs)
 
 
 def seed(s):

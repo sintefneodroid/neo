@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.models import Motion, Reaction, ReactionParameters
+from neodroid import Motion, Reaction, ReactionParameters
 
 __author__ = 'cnheider'
 
@@ -31,7 +31,7 @@ def construct_reactions(env):
 
 
 def main():
-  _environments = neo.NeodroidEnvironments(name='multienv',connect_to_running=True)
+  _environments = neo.NeodroidEnvironments(name='multienv', connect_to_running=True)
 
   while _environments.is_connected:
     reactions = construct_reactions(_environments)

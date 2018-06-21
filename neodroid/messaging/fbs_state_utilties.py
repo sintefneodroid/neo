@@ -1,5 +1,5 @@
 from io import BytesIO
-from typing import Tuple, Any
+from typing import Any, Tuple
 
 import numpy as np
 
@@ -153,7 +153,7 @@ def deserialise_body(f_obs):
     ]
 
 
-def deserialise_quadruple(f_obs) -> Tuple[Any,Any]:
+def deserialise_quadruple(f_obs) -> Tuple[Any, Any]:
   q = F.FQuadruple()
   q.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   quad = q.Quat()
@@ -206,6 +206,7 @@ def deserialise_quaternion_transform(f_obs):
 def deserialise_byte_array(f_obs):
   return deserialise_byte_array_fast(f_obs), None
 
+
 def deserialise_byte_array_fast(f_obs):
   byte_array = F.FByteArray()
   byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
@@ -217,12 +218,13 @@ def deserialise_byte_array_fast(f_obs):
   bio = BytesIO(b)
   return bio
 
+
 def deserialise_byte_array_slow(f_obs):
   byte_array = F.FByteArray()
   byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   data = np.array(
-    [byte_array.Bytes(i) for i in range(byte_array.BytesLength())],
-    dtype=np.uint8)
+      [byte_array.Bytes(i) for i in range(byte_array.BytesLength())],
+      dtype=np.uint8)
   b = data.tobytes()
   bio = BytesIO(b)
   return bio

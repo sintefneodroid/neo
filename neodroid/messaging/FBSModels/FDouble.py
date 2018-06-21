@@ -58,17 +58,17 @@ def FDoubleStart(builder): builder.StartObject(3)
 
 def FDoubleAddVec2(builder, vec2): builder.PrependStructSlot(0,
                                                              flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                               vec2), 0)
+                                                                 vec2), 0)
 
 
 def FDoubleAddXRange(builder, xRange): builder.PrependStructSlot(1,
                                                                  flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                   xRange), 0)
+                                                                     xRange), 0)
 
 
 def FDoubleAddYRange(builder, yRange): builder.PrependStructSlot(2,
                                                                  flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                   yRange), 0)
+                                                                     yRange), 0)
 
 
 def FDoubleEnd(builder): return builder.EndObject()

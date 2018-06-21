@@ -51,7 +51,7 @@ def FOBSStart(builder): builder.StartObject(3)
 
 def FOBSAddObservationName(builder, observationName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                           flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                            observationName),
+                                                                                              observationName),
                                                                                           0)
 
 
@@ -60,7 +60,7 @@ def FOBSAddObservationType(builder, observationType): builder.PrependUint8Slot(1
 
 def FOBSAddObservation(builder, observation): builder.PrependUOffsetTRelativeSlot(2,
                                                                                   flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                    observation), 0)
+                                                                                      observation), 0)
 
 
 def FOBSEnd(builder): return builder.EndObject()

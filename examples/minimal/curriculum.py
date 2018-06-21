@@ -1,10 +1,10 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 import numpy as np
 
 import neodroid.wrappers.curriculum_wrapper as neo
-from neodroid.models import Configuration
+from neodroid import Configuration
 
 random_motion_horizon = 5
 _memory = []
@@ -31,8 +31,8 @@ def main():
     Configuration('ActorPositionZ', goal_pos[2]),
     ]
   _memory.extend(
-      _environment.generate_initial_states_from_configuration(initial_configuration)
-      )
+    _environment.generate_initial_states_from_configuration(initial_configuration)
+    )
 
   for i in range(300):
     state = sample_initial_state(_memory)

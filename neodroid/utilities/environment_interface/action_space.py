@@ -57,15 +57,15 @@ class ActionSpace(object):
 
   @property
   def is_singular(self):
-    return False # TODO: Implement
+    return False  # TODO: Implement
 
   @property
   def is_discrete(self):
-    return True # TODO: Implement
+    return True  # TODO: Implement
 
   @property
   def is_continuous(self):
-    return True # TODO: Implement
+    return True  # TODO: Implement
 
   def discrete_ternary_one_hot_sample(self):
     idx = np.random.randint(0, self.num_actions)

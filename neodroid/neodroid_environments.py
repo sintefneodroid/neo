@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from neodroid.models import Reaction
+from neodroid import Reaction
 from neodroid.networking_environment import NetworkingEnvironment
 
 __author__ = 'cnheider'
@@ -12,13 +12,11 @@ import warnings
 import numpy as np
 
 import neodroid.models as M
-from neodroid.utilities.environment_launcher import launch_environment
-from neodroid.utilities.single_reaction_factory import (
+from neodroid.utilities import (
   verify_configuration_reaction,
   construct_step_reaction,
-  )
-from neodroid.utilities.statics import (
   flattened_observation,
+  launch_environment,
   )
 
 
@@ -96,7 +94,6 @@ class NeodroidEnvironments(NetworkingEnvironment):
   def _configure(self, *args, **kwargs):
     return self._reset()
 
-
   def _react(
       self,
       *,
@@ -148,13 +145,11 @@ class NeodroidEnvironments(NetworkingEnvironment):
   @staticmethod
   def maybe_infer_configuration_reaction(input_reaction, description, verbose=False):
     if description:
-      input_reaction = verify_configuration_reaction(
-          input_reaction, description, verbose=verbose
-          )
+      input_reaction = verify_configuration_reaction(input_reaction=input_reaction,
+                                                     environment_description=description,
+                                                     verbose=verbose)
     else:
-      input_reaction = verify_configuration_reaction(
-          input_reaction, None, verbose=verbose
-          )
+      input_reaction = verify_configuration_reaction(input_reaction=input_reaction, verbose=verbose)
 
     return input_reaction
 
@@ -191,9 +186,9 @@ class NeodroidEnvironments(NetworkingEnvironment):
     return 0
 
   @staticmethod
-  def maybe_infer_motion_reaction(
-      in_reaction, normalise, description, verbose=False
-      ):
+  def maybe_infer_motion_reaction(*,
+                                  in_reaction, normalise, description, verbose=False
+                                  ):
     '''
 
 :param verbose:

@@ -69,22 +69,22 @@ def FTripleStart(builder): builder.StartObject(4)
 
 def FTripleAddVec3(builder, vec3): builder.PrependStructSlot(0,
                                                              flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                               vec3), 0)
+                                                                 vec3), 0)
 
 
 def FTripleAddXRange(builder, xRange): builder.PrependStructSlot(1,
                                                                  flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                   xRange), 0)
+                                                                     xRange), 0)
 
 
 def FTripleAddYRange(builder, yRange): builder.PrependStructSlot(2,
                                                                  flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                   yRange), 0)
+                                                                     yRange), 0)
 
 
 def FTripleAddZRange(builder, zRange): builder.PrependStructSlot(3,
                                                                  flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                   zRange), 0)
+                                                                     zRange), 0)
 
 
 def FTripleEnd(builder): return builder.EndObject()

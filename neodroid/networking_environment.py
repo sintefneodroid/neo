@@ -6,8 +6,9 @@ from tqdm import tqdm
 import neodroid.models as M
 from neodroid import messaging
 from neodroid.environment import Environment
-from neodroid.utilities.debug import ClientEvents, message_client_event
-from neodroid.utilities.statics import construct_action_space, construct_observation_space
+from neodroid.utilities import (ClientEvents, construct_action_space, construct_observation_space,
+                                message_client_event,
+                                )
 
 CONNECT_TRY_TIMES = 100
 CONNECT_TRY_INTERVAL = 0.1

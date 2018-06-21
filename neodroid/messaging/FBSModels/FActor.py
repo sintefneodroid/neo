@@ -59,7 +59,7 @@ def FActorStart(builder): builder.StartObject(3)
 
 def FActorAddActorName(builder, actorName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                 flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                  actorName), 0)
+                                                                                    actorName), 0)
 
 
 def FActorAddAlive(builder, alive): builder.PrependBoolSlot(1, alive, 0)
@@ -67,7 +67,7 @@ def FActorAddAlive(builder, alive): builder.PrependBoolSlot(1, alive, 0)
 
 def FActorAddMotors(builder, motors): builder.PrependUOffsetTRelativeSlot(2,
                                                                           flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                            motors), 0)
+                                                                              motors), 0)
 
 
 def FActorStartMotorsVector(builder, numElems): return builder.StartVector(4, numElems, 4)

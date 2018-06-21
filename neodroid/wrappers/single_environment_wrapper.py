@@ -9,22 +9,22 @@ from neodroid import NeodroidEnvironments
 
 class SingleEnvironmentWrapper(NeodroidEnvironments):
 
-  def __init__(self, **kwargs):
-    super().__init__(**kwargs)
-
   def __next__(self):
     if not self._is_connected_to_server:
       return
     return self.react()
 
-  def _react(self,*,
+  def _react(self, *,
              input_reaction=None,
              parameters=None,
              normalise=False,
              **kwargs):
 
     input_reaction = self.maybe_infer_motion_reaction(
-        input_reaction, normalise, self._description, verbose=self._verbose
+        in_reaction=input_reaction,
+        normalise=normalise,
+        description=self._description,
+        verbose=self._verbose
         )
     if parameters is not None:
       input_reaction.parameters = parameters
@@ -41,7 +41,9 @@ class SingleEnvironmentWrapper(NeodroidEnvironments):
   def _reset(self, input_reaction=None, state=None, on_reset_callback=None):
 
     input_reaction = self.maybe_infer_configuration_reaction(
-        input_reaction, self._description, verbose=self._verbose
+        input_reaction=input_reaction,
+        description=self._description,
+        verbose=self._verbose
         )
     if state:
       input_reaction.unobservables = state.unobservables

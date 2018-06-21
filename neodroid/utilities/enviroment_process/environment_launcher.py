@@ -8,8 +8,13 @@ import subprocess
 import sys
 
 
-def launch_environment(environment_name, path_to_executables_directory, ip, port, full_screen='0',
-                       screen_height=500, screen_width=500):
+def launch_environment(environment_name,
+                       path_to_executables_directory,
+                       ip,
+                       port,
+                       full_screen='0',
+                       screen_height=500,
+                       screen_width=500):
   path_to_executable = os.path.join(path_to_executables_directory, f'{environment_name}.exe')
   if sys.platform != 'win32':
     path_to_executable = os.path.join(path_to_executables_directory, f'{environment_name}.x86')

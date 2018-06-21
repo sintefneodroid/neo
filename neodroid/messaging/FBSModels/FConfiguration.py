@@ -39,7 +39,7 @@ def FConfigurationStart(builder): builder.StartObject(2)
 
 def FConfigurationAddConfigurableName(builder, configurableName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                                       flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                        configurableName),
+                                                                                                          configurableName),
                                                                                                       0)
 
 

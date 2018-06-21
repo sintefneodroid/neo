@@ -5,7 +5,7 @@ __author__ = 'cnheider'
 from gui import NeoGUI
 
 import neodroid as neo
-from neodroid.models import Motion, Reaction
+from neodroid import Motion, Reaction
 from neodroid.models.configuration import Configuration
 from neodroid.models.reaction_parameters import ReactionParameters
 
@@ -28,11 +28,11 @@ def on_connect_callback(ip_address, port, launch_environment, environment):
     _neo_environment.close(on_disconnected_callback)
   else:
     _neo_environment = neo.NeodroidEnvironments(
-        ip=ip_address,
-        port=int(port),
-        on_connected_callback=on_connected_callback,
-        connect_to_running=(not launch_environment),
-        )
+      ip=ip_address,
+      port=int(port),
+      on_connected_callback=on_connected_callback,
+      connect_to_running=(not launch_environment),
+      )
 
 
 def update_callback(state):
@@ -56,8 +56,8 @@ def on_reset_callback(slider_values):
   configurations = [Configuration(str(slider_values[0][0]), slider_values[0][1])]
   parameters = ReactionParameters(terminable=False, step=False, reset=True, configure=True, describe=True)
   new_state = _neo_environment.react(
-      Reaction(parameters=parameters, configurations=configurations)
-      )
+    Reaction(parameters=parameters, configurations=configurations)
+    )
   update_callback(new_state)
 
 
@@ -79,15 +79,15 @@ def update_environment_widgets(state):
     _gui.update_motion_image(state.observer('FlowCamera').observation_value)
     _gui.update_depth_image(state.observer('DepthCamera').observation_value)
     _gui.update_segmentation_image(
-        state.observer('SegmentationCamera').observation_value
-        )
+      state.observer('SegmentationCamera').observation_value
+      )
     _gui.update_instance_segmentation_image(
-        state.observer('InstanceSegmentationCamera').observation_value
-        )
+      state.observer('InstanceSegmentationCamera').observation_value
+      )
     _gui.update_rgb_image(state.observer('RGBCamera').observation_value)
     _gui.update_infrared_shadow_image(
-        state.observer('InfraredShadowCamera').observation_value
-        )
+      state.observer('InfraredShadowCamera').observation_value
+      )
   except BaseException:
     print('Failed at updating Images')
 
@@ -95,10 +95,10 @@ def update_environment_widgets(state):
 def main():
   global _gui
   _gui = NeoGUI(
-      on_connect_callback=on_connect_callback,
-      on_step_callback=on_step_callback,
-      on_reset_callback=on_reset_callback,
-      )
+    on_connect_callback=on_connect_callback,
+    on_step_callback=on_step_callback,
+    on_reset_callback=on_reset_callback,
+    )
   _gui.run()
 
 

@@ -33,7 +33,7 @@ def get_extras():
   return {'GUI':['kivy']}
 
 
-def get_requirements():
+def get_requirements() ->list:
   return [
     'pyzmq',
     'numpy',
@@ -69,17 +69,17 @@ def get_license():
 
 def get_classifiers():
   return [
-           'Development Status :: 4 - Beta',
-           'Environment :: Console',
-           'Intended Audience :: End Users/Desktop',
-           'Intended Audience :: Developers',
-           'License :: OSI Approved :: Apache Software License',
-           'Operating System :: MacOS :: MacOS X',
-           'Operating System :: Microsoft :: Windows',
-           'Operating System :: POSIX',
-           'Programming Language :: Python',
-           'Topic :: Software Development :: Bug Tracking',
-           ]
+    'Development Status :: 4 - Beta',
+    'Environment :: Console',
+    'Intended Audience :: End Users/Desktop',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: Apache Software License',
+    'Operating System :: MacOS :: MacOS X',
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: POSIX',
+    'Programming Language :: Python',
+    'Topic :: Software Development :: Bug Tracking',
+    ]
 
 
 setup(

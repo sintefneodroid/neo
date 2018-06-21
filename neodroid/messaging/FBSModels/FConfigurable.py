@@ -49,7 +49,7 @@ def FConfigurableStart(builder): builder.StartObject(3)
 
 def FConfigurableAddConfigurableName(builder, configurableName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                                      flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                       configurableName),
+                                                                                                         configurableName),
                                                                                                      0)
 
 
@@ -58,7 +58,8 @@ def FConfigurableAddObservationType(builder, observationType): builder.PrependUi
 
 def FConfigurableAddObservation(builder, observation): builder.PrependUOffsetTRelativeSlot(2,
                                                                                            flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                             observation), 0)
+                                                                                               observation),
+                                                                                           0)
 
 
 def FConfigurableEnd(builder): return builder.EndObject()

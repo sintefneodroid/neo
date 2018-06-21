@@ -63,7 +63,7 @@ def FStatesStart(builder): builder.StartObject(3)
 
 def FStatesAddStates(builder, states): builder.PrependUOffsetTRelativeSlot(0,
                                                                            flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                             states), 0)
+                                                                               states), 0)
 
 
 def FStatesStartStatesVector(builder, numElems): return builder.StartVector(4, numElems, 4)
@@ -71,12 +71,12 @@ def FStatesStartStatesVector(builder, numElems): return builder.StartVector(4, n
 
 def FStatesAddApiVersion(builder, apiVersion): builder.PrependUOffsetTRelativeSlot(1,
                                                                                    flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                     apiVersion), 0)
+                                                                                       apiVersion), 0)
 
 
 def FStatesAddSimulatorConfiguration(builder, simulatorConfiguration): builder.PrependStructSlot(2,
                                                                                                  flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                   simulatorConfiguration),
+                                                                                                     simulatorConfiguration),
                                                                                                  0)
 
 

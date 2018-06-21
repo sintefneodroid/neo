@@ -8,13 +8,10 @@ __author__ = 'cnheider'
 
 import numpy as np
 
-from neodroid.utilities.statics import flattened_observation
+from neodroid.utilities import flattened_observation
 
 
 class NeodroidGymWrapper(SingleEnvironmentWrapper):
-
-  def __init__(self, **kwargs):
-    super().__init__(**kwargs)
 
   def step(self, action=None, *args, **kwargs):
     # action = action.flatten()

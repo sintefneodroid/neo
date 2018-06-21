@@ -4,7 +4,7 @@ from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrappe
 
 __author__ = 'cnheider'
 
-from neodroid.utilities.statics import flattened_observation
+from neodroid.utilities import flattened_observation
 
 
 class NeodroidFormalWrapper(SingleEnvironmentWrapper):

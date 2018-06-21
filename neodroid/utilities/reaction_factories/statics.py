@@ -1,9 +1,9 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
-from neodroid.utilities.action_space import ActionSpace
-from neodroid.utilities.observation_space import ObservationSpace
+from neodroid.utilities.environment_interface.action_space import ActionSpace
+from neodroid.utilities.environment_interface.observation_space import ObservationSpace
 
 
 def flattened_observation(message):

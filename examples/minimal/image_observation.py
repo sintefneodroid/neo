@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import io
 import time
 
 __author__ = 'cnheider'
@@ -10,7 +9,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from matplotlib import animation
 
-import neodroid.wrappers.gym_wrapper as neogym
+from neodroid.wrappers.gym_wrapper import NeodroidGymWrapper as neogym
 
 
 def grab_video_frame(cap):
@@ -47,7 +46,7 @@ def grab_new_images(environment):
          satellite_im
 
 
-env = neogym.make(environment_name='obs', connect_to_running=True)
+env = neogym(environment_name='obs', connect_to_running=True)
 fig = plt.figure()
 
 (ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8), *_ = fig.subplots(2, 4, sharey='all')

@@ -50,12 +50,12 @@ def FMotorStart(builder): builder.StartObject(3)
 
 def FMotorAddMotorName(builder, motorName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                 flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                  motorName), 0)
+                                                                                    motorName), 0)
 
 
 def FMotorAddValidInput(builder, validInput): builder.PrependStructSlot(1,
                                                                         flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                          validInput), 0)
+                                                                            validInput), 0)
 
 
 def FMotorAddEnergySpentSinceReset(builder, energySpentSinceReset): builder.PrependFloat32Slot(2,

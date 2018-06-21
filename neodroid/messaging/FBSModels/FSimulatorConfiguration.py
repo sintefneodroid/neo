@@ -23,56 +23,57 @@ class FSimulatorConfiguration(object):
   # FSimulatorConfiguration
   def FullScreen(self): return self._tab.Get(flatbuffers.number_types.BoolFlags,
                                              self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
-                                               8))
+                                                 8))
 
   # FSimulatorConfiguration
   def QualityLevel(self): return self._tab.Get(flatbuffers.number_types.Int32Flags,
                                                self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                 12))
+                                                   12))
 
   # FSimulatorConfiguration
   def TimeScale(self): return self._tab.Get(flatbuffers.number_types.Float32Flags,
                                             self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
-                                              16))
+                                                16))
 
   # FSimulatorConfiguration
   def TargetFrameRate(self): return self._tab.Get(flatbuffers.number_types.Float32Flags,
                                                   self._tab.Pos +
                                                   flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                    20))
+                                                      20))
 
   # FSimulatorConfiguration
   def WaitEvery(self): return self._tab.Get(flatbuffers.number_types.Int32Flags,
                                             self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
-                                              24))
+                                                24))
 
   # FSimulatorConfiguration
   def FrameSkips(self): return self._tab.Get(flatbuffers.number_types.Int32Flags,
                                              self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
-                                               28))
+                                                 28))
 
   # FSimulatorConfiguration
   def ResetIterations(self): return self._tab.Get(flatbuffers.number_types.Int32Flags,
                                                   self._tab.Pos +
                                                   flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                    32))
+                                                      32))
 
   # FSimulatorConfiguration
   def NumOfEnvironments(self): return self._tab.Get(flatbuffers.number_types.Int32Flags,
                                                     self._tab.Pos +
                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                      36))
+                                                        36))
 
   # FSimulatorConfiguration
   def DoSerialiseIndidualObservables(self): return self._tab.Get(flatbuffers.number_types.BoolFlags,
                                                                  self._tab.Pos +
                                                                  flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                   40))
+                                                                     40))
 
   # FSimulatorConfiguration
   def DoSerialiseUnobservables(self): return self._tab.Get(flatbuffers.number_types.BoolFlags,
-                                                           self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                             41))
+                                                           self._tab.Pos +
+                                                           flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                               41))
 
 
 def CreateFSimulatorConfiguration(builder, width, height, fullScreen, qualityLevel, timeScale,
