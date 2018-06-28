@@ -18,13 +18,15 @@ from .neodroid_environments import NeodroidEnvironments
 # from .utilities import *
 from .version import __version__
 
+_environments = None
 
-def make(environment, clones=0, *args, **kwargs):
-  return NeodroidEnvironments(name=environment, clones=clones, *args, **kwargs)
+def make(environment_name, clones=0, *args, **kwargs):
+  _environments = NeodroidEnvironments(environment_name=environment_name, clones=clones, *args, **kwargs)
+  return _environments
 
 
-def seed(seed):
-  np.random.seed(seed)
+def seed(random_seed):
+  np.random.seed(random_seed)
 
 
 def get_available_environments():
@@ -33,4 +35,4 @@ def get_available_environments():
 
 @property
 def environments():
-  return 'All of them ;)'
+  return _environments

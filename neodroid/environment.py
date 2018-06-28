@@ -41,8 +41,8 @@ class Environment(ABC):
   def reset(self, *args, **kwargs):
     return self._reset(*args, **kwargs)
 
-  def react(self, **kwargs):
-    return self._react(**kwargs)
+  def react(self,input_reactions, **kwargs):
+    return self._react(input_reactions, **kwargs)
 
   def observe(self, *args, **kwargs):
     return self._describe(*args, **kwargs)

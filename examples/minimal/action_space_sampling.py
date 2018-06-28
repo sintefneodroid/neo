@@ -4,7 +4,7 @@ import time
 
 __author__ = 'cnheider'
 
-import neodroid.wrappers.formal_wrapper as neo
+import neodroid as neo
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
   time_s = time.time()
   while _environments.is_connected:
     actions = _environments.action_space.sample()
-    observations, rewards, terminated, info = _environments.act(input_reaction=actions)
+    states = _environments.react(actions)
 
     time_now = time.time()
     if i % freq == 0:
@@ -26,6 +26,7 @@ def main():
     i += 1
     time_s = time_now
 
+    terminated=False
     if terminated:
       _environments.reset()
 

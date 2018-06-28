@@ -26,10 +26,6 @@ class Reaction(object):
 The environment_name argument lets you specify which environments to react in, 'all' means all environment
 receives the same reaction.
 
-:param state:
-:type state:
-:param input_reaction:
-:type on_reset_callback: object
 '''
 
     self._serialised_message = serialised_message
