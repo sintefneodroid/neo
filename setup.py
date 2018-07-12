@@ -101,5 +101,5 @@ setup(
     install_requires=get_requirements(),
     extras_require=get_extras(),
     entry_points=get_entry_points(),
-    classifiers=get_classifiers(), install_requires=['pyzmq']
+    classifiers=get_classifiers()
     )

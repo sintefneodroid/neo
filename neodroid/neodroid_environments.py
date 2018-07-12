@@ -125,7 +125,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
           episode_count=True, step=True, terminable=True
           )
       input_reactions = [M.Reaction(parameters=parameters)]
-    #elif type(input_reactions) is list:
+    # elif type(input_reactions) is list:
     #  pass
     elif type(input_reactions) is not Reaction:
       input_reaction = self.maybe_infer_motion_reaction(
@@ -134,8 +134,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
           description=self._description,
           verbose=self._verbose
           )
-      input_reactions=[input_reaction]
-
+      input_reactions = [input_reaction]
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
 
@@ -198,7 +197,10 @@ class NeodroidEnvironments(NetworkingEnvironment):
 
   @staticmethod
   def maybe_infer_motion_reaction(*,
-                                  in_reaction, normalise, description, verbose=False
+                                  in_reaction,
+                                  normalise,
+                                  description,
+                                  verbose=False
                                   ):
     '''
 

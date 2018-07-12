@@ -8,7 +8,7 @@ import neodroid as neo
 
 
 def main():
-  _environments = neo.make(environment_name='obs', connect_to_running=False)
+  _environments = neo.make(environment_name='obs', connect_to_running=True)
   _environments.reset()
 
   i = 0
@@ -17,6 +17,8 @@ def main():
   while _environments.is_connected:
     actions = _environments.action_space.sample()
     states = _environments.react(actions)
+    state = next(iter(states.values()))
+    terminated = state.terminated
 
     time_now = time.time()
     if i % freq == 0:
@@ -26,7 +28,6 @@ def main():
     i += 1
     time_s = time_now
 
-    terminated=False
     if terminated:
       _environments.reset()
 
