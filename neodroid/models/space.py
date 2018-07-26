@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import math
 
@@ -7,7 +7,7 @@ __author__ = 'cnheider'
 
 class Space(object):
 
-  def __init__(self, decimal_granularity, min_value, max_value):
+  def __init__(self, decimal_granularity=0, min_value=0, max_value=0):
     self._decimal_granularity = decimal_granularity
     self._min_value = min_value
     self._max_value = max_value

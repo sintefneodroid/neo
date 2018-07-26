@@ -21,6 +21,7 @@ from .version import __version__
 _environments = None
 
 def make(environment_name, clones=0, *args, **kwargs):
+  global _environments
   _environments = NeodroidEnvironments(environment_name=environment_name, clones=clones, *args, **kwargs)
   return _environments
 

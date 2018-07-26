@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid import Space
+
 __author__ = 'cnheider'
 
 import numpy as np
 
 
-class ActionSpace(object):
+class ActionSpace(Space):
 
-  def __init__(self, valid_inputs):
+  def parse_valid_inputs(self, valid_inputs):
     self._valid_inputs = valid_inputs
 
   def sample(self):

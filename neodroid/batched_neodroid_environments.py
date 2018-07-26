@@ -40,7 +40,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--ENVIRONMENT_NAME',
       type=str,
-      default='small_grid_world',
+      default='mab',
       metavar='ENVIRONMENT_NAME',
       help='name of the environment to run',
       )

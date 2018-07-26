@@ -24,7 +24,7 @@ def get_entry_points():
   return {
     'console_scripts':[
       # "name_of_executable = module.with:function_to_execute"
-      'neodroid = examples.minimal.action_space_sampling:main',
+      'neodroid = examples.minimal.multi_armed_bandit:main',
       ]
     }
 
@@ -33,7 +33,7 @@ def get_extras():
   return {'GUI':['kivy']}
 
 
-def get_requirements() ->list:
+def get_requirements() -> list:
   return [
     'pyzmq',
     'numpy',
@@ -77,7 +77,10 @@ def get_classifiers():
     'Operating System :: MacOS :: MacOS X',
     'Operating System :: Microsoft :: Windows',
     'Operating System :: POSIX',
-    'Programming Language :: Python',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3',
+    'Natural Language :: English',
+    'Topic :: Scientific/Engineering :: Artificial Intelligence'
     'Topic :: Software Development :: Bug Tracking',
     ]
 
@@ -101,5 +104,8 @@ setup(
     install_requires=get_requirements(),
     extras_require=get_extras(),
     entry_points=get_entry_points(),
-    classifiers=get_classifiers()
+    classifiers=get_classifiers(),
+    long_description_content_type='text/markdown',
+    tests_require=['pytest'],
+    python_requires='>=3'
     )

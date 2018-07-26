@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid import Space
+
 __author__ = 'cnheider'
 
 
-class ObservationSpace(object):
-
-  def __init__(self, valid_inputs):
-    self._valid_inputs = valid_inputs
+class ObservationSpace(Space):
 
   @property
   def shape(self):
-    return [len(self._valid_inputs)]
+    return [len(self._state)]
+
+  def parse_observation_space(self, state):
+    self._state = state

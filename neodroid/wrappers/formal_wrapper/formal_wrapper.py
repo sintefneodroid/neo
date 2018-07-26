@@ -12,10 +12,10 @@ class NeodroidFormalWrapper(SingleEnvironmentWrapper):
   def __next__(self):
     if not self._is_connected_to_server:
       return
-    return self.act()
+    return self.act(None)
 
-  def act(self, **kwargs):
-    message = super().react(**kwargs)
+  def act(self, input_reaction, **kwargs):
+    message = super().react(in_reaction=input_reaction, **kwargs)
     first_environment = message
     if first_environment:
       return (

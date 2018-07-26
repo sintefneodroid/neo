@@ -125,8 +125,11 @@ class NeodroidEnvironments(NetworkingEnvironment):
           episode_count=True, step=True, terminable=True
           )
       input_reactions = [M.Reaction(parameters=parameters)]
-    # elif type(input_reactions) is list:
-    #  pass
+    elif type(input_reactions) is list:
+      if isinstance(input_reactions[0], M.Reaction):
+        pass
+      else:
+        raise ValueError
     elif type(input_reactions) is not Reaction:
       input_reaction = self.maybe_infer_motion_reaction(
           in_reaction=input_reactions,
@@ -267,7 +270,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--ENVIRONMENT_NAME',
       type=str,
-      default='small_grid_world',
+      default='mab',
       metavar='ENVIRONMENT_NAME',
       help='name of the environment to run',
       )

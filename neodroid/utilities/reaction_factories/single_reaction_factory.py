@@ -30,6 +30,11 @@ def construct_step_reaction(reaction_input, environment_description, normalise=F
   :param normalise:
   :type reaction_input: object
   """
+  if isinstance(reaction_input, M.Reaction):
+    return reaction_input
+  if isinstance(reaction_input, list):
+    if isinstance(reaction_input[0], M.Reaction):
+      return reaction_input
   if environment_description:
     parameters = M.ReactionParameters(terminable=True, step=True,
                                       episode_count=True)
@@ -56,8 +61,7 @@ def construct_step_reaction(reaction_input, environment_description, normalise=F
       elif isinstance(reaction_input, (np.ndarray, np.generic)):
         a = construct_reaction_from_list(reaction_input.astype(float).tolist(), actors, normalise)
         return a
-  if isinstance(reaction_input, M.Reaction):
-    return reaction_input
+
   parameters = M.ReactionParameters(describe=True)
   return M.Reaction(parameters=parameters)
 

@@ -15,13 +15,13 @@ class SingleEnvironmentWrapper(NeodroidEnvironments):
     return self.react()
 
   def _react(self, *,
-             input_reaction=None,
+             in_reaction=None,
              parameters=None,
              normalise=False,
              **kwargs):
 
     input_reaction = self.maybe_infer_motion_reaction(
-        in_reaction=input_reaction,
+        in_reaction=in_reaction,
         normalise=normalise,
         description=self._description,
         verbose=self._verbose
