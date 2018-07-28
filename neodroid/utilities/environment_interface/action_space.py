@@ -31,11 +31,11 @@ class ActionSpace(Space):
 
   @property
   def shape(self):
-    return [self.num_actions]
+    return [self.num_motors]
 
   @property
   def n(self):
-    return self.num_actions
+    return self.num_motors
 
   @property
   def low(self):
@@ -46,8 +46,18 @@ class ActionSpace(Space):
     return [motion_space.max_value() for motion_space in self._valid_inputs]
 
   @property
-  def num_actions(self):
+  def num_motors(self):
     return len(self._valid_inputs)
+
+  @property
+  def discrete_actions(self):
+    a = self._valid_inputs[0]
+    discrete_actions = np.arange(a.min, a.max+1, np.power(10,a.decimal_granularity))
+    return discrete_actions
+
+  @property
+  def num_discrete_actions(self):
+    return len(self.discrete_actions)
 
   @property
   def num_binary_actions(self):
@@ -70,7 +80,7 @@ class ActionSpace(Space):
     return True  # TODO: Implement
 
   def discrete_ternary_one_hot_sample(self):
-    idx = np.random.randint(0, self.num_actions)
+    idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_ternary_actions)
     if len(self._valid_inputs) > 0:
       sample = np.random.uniform(
@@ -79,11 +89,11 @@ class ActionSpace(Space):
       if sample > 0:
         zeros[idx] = 1
       else:
-        zeros[idx + self.num_actions] = 1
+        zeros[idx + self.num_motors] = 1
     return zeros
 
   def discrete_binary_one_hot_sample(self):
-    idx = np.random.randint(0, self.num_actions)
+    idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_binary_actions)
     if len(self._valid_inputs) > 0:
       sample = np.random.uniform(
@@ -92,12 +102,12 @@ class ActionSpace(Space):
       if sample > 0:
         zeros[idx] = 1
       else:
-        zeros[idx + self.num_actions] = 1
+        zeros[idx + self.num_motors] = 1
     return zeros
 
   def discrete_one_hot_sample(self):
-    idx = np.random.randint(0, self.num_actions)
-    zeros = np.zeros(self.num_actions)
+    idx = np.random.randint(0, self.num_motors)
+    zeros = np.zeros(self.num_motors)
     if len(self._valid_inputs) > 0:
       val = np.random.random_integers(
           self._valid_inputs[idx].min_value(),
@@ -109,8 +119,8 @@ class ActionSpace(Space):
 
   def one_hot_sample(self):
 
-    idx = np.random.randint(0, self.num_actions)
-    zeros = np.zeros(self.num_actions)
+    idx = np.random.randint(0, self.num_motors)
+    zeros = np.zeros(self.num_motors)
     if len(self._valid_inputs) > 0:
       zeros[idx] = 1
     return zeros

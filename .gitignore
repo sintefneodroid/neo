@@ -118,4 +118,6 @@ ENV/
 .pyre
 logs/*.csv
 
+exclude/
+
 

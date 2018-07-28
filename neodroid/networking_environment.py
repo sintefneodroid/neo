@@ -1,5 +1,6 @@
 import time
 import warnings
+from abc import ABC
 
 from tqdm import tqdm
 
@@ -14,7 +15,7 @@ CONNECT_TRY_TIMES = 100
 CONNECT_TRY_INTERVAL = 0.1
 
 
-class NetworkingEnvironment(Environment):
+class NetworkingEnvironment(Environment, ABC):
 
   def __init__(self,
                *,

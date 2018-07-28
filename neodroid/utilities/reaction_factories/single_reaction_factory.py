@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.utilities.unused.debug import print_return
+from neodroid.utilities import print_return
 
 __author__ = 'cnheider'
 

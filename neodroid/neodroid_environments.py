@@ -48,7 +48,8 @@ class NeodroidEnvironments(NetworkingEnvironment):
       environment_name='small_grid_world',
       clones=0,
       path_to_executables_directory=os.path.join(
-          os.path.dirname(os.path.realpath(__file__)), 'environments'
+          os.path.dirname(os.path.realpath(__file__)),
+          'environments'
           ),
       **kwargs
       ):

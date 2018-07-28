@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from warnings import warn
+from neodroid.version import __version__
 
 from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
@@ -10,6 +11,7 @@ import numpy as np
 
 from neodroid.utilities import flattened_observation
 
+warn(f"This module is deprecated in version {__version__}", DeprecationWarning)
 
 class NeodroidGymWrapper(SingleEnvironmentWrapper):
 

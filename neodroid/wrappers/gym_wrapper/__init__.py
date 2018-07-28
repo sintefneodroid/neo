@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import warnings
+
+from neodroid.wrappers.gym_wrapper.gym_wrapper import NeodroidGymWrapper
+
 __author__ = 'cnheider'
 
 import numpy as np
 
-from .gym_wrapper import NeodroidGymWrapper
+
+
 
 
 def make(environment_name, **kwargs):

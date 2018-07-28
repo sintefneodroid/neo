@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.utilities.reaction_factories.single_reaction_factory import _norm_action
-from neodroid.utilities.unused.debug import print_return
+from neodroid.utilities.debugging.print_return import print_return
 
 __author__ = 'cnheider'
 

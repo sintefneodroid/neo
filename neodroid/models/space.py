@@ -21,8 +21,16 @@ class Space(object):
     return self._min_value
 
   @property
+  def min(self):
+    return self.min_value
+
+  @property
   def max_value(self):
     return self._max_value
+
+  @property
+  def max(self):
+    return self.max_value
 
   @property
   def discrete_step_size(self):
