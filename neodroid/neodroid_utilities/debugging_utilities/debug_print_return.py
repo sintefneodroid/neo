@@ -1,7 +1,7 @@
 from functools import wraps
 
 
-def print_return(f):
+def print_return(f: callable) -> callable:
   @wraps(f)
   def call_f(*args, **kwargs):
     call_return = f(*args, **kwargs)

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.utilities.reaction_factories.single_reaction_factory import _norm_action
-from neodroid.utilities.debugging.print_return import print_return
+from neodroid.neodroid_utilities.debugging_utilities import print_return
 
 __author__ = 'cnheider'
 
@@ -61,8 +60,8 @@ def verify_motion_reactions(
               input.astype(float).tolist(), actors, normalise
               )
           return a
-  if isinstance(input, M.Reaction):
-    return input
+  if isinstance(inputs, M.Reaction):
+    return inputs
   return M.Reaction(parameters=parameters)
 
 
@@ -84,7 +83,7 @@ def construct_motions_from_list(input_list, actors, normalise):
       M.Motion(
           actor_motor_tuple[0],
           actor_motor_tuple[1],
-          _norm_action(list_val, actor_motor_tuple[2]),
+          normalise_action(list_val, actor_motor_tuple[2]),
           )
       for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
       ]

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.utilities import print_return
+from neodroid.neodroid_utilities import print_return, normalise_action
 
 __author__ = 'cnheider'
 
@@ -9,19 +9,7 @@ import numpy as np
 from neodroid import models as M
 
 
-def _norm_action(action, motion_space):
-  act_k = (motion_space.max_value - motion_space.min_value) / 2.
-  act_b = (motion_space.max_value + motion_space.min_value) / 2.
-  return act_k * action + act_b
-
-
-def _reverse_norm_action(self, action):
-  act_k_inv = 2. / (self.action_space.high - self.action_space.low)
-  act_b = (self.action_space.high + self.action_space.low) / 2.
-  return act_k_inv * (action - act_b)
-
-
-@print_return
+#@debug_print_return
 def construct_step_reaction(reaction_input, environment_description, normalise=False, verbose=False):
   """
 
@@ -83,7 +71,7 @@ def construct_motions_from_list(input_list, actors, normalise):
       M.Motion(
           actor_motor_tuple[0],
           actor_motor_tuple[1],
-          _norm_action(list_val, actor_motor_tuple[2]),
+          normalise_action(list_val, actor_motor_tuple[2]),
           )
       for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
       ]

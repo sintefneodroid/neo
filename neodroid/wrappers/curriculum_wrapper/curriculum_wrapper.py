@@ -7,7 +7,7 @@ __author__ = 'cnheider'
 import numpy as np
 
 from neodroid import Reaction, ReactionParameters
-from neodroid.utilities import flattened_observation
+from neodroid.neodroid_utilities import flattened_observation
 from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 

@@ -15,7 +15,6 @@ import numpy as np
 
 from .models import *
 from .neodroid_environments import NeodroidEnvironments
-# from .utilities import *
 from .version import __version__
 
 _environments = None

@@ -12,7 +12,7 @@ import warnings
 import numpy as np
 
 import neodroid.models as M
-from neodroid.utilities import (
+from neodroid.neodroid_utilities import (
   verify_configuration_reaction,
   construct_step_reaction,
   flattened_observation,
