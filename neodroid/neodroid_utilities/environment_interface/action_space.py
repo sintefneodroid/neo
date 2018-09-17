@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid import Space
+import random
+
+from neodroid.models.space import Space
 
 __author__ = 'cnheider'
 
@@ -52,7 +54,7 @@ class ActionSpace(Space):
   @property
   def discrete_actions(self):
     a = self._valid_inputs[0]
-    discrete_actions = np.arange(a.min, a.max+1, np.power(10,a.decimal_granularity))
+    discrete_actions = np.arange(a.min, a.max + 1, np.power(10, a.decimal_granularity))
     return discrete_actions
 
   @property
@@ -97,13 +99,19 @@ class ActionSpace(Space):
     zeros = np.zeros(self.num_binary_actions)
     if len(self._valid_inputs) > 0:
       sample = np.random.uniform(
-          self._valid_inputs[idx].min_value, self._valid_inputs[idx].max_value, 1
+          self._valid_inputs[idx].min_value,
+          self._valid_inputs[idx].max_value,
+          1
           )
       if sample > 0:
         zeros[idx] = 1
       else:
         zeros[idx + self.num_motors] = 1
     return zeros
+
+  def signed_one_hot_sample(self):
+    num = self.num_binary_actions
+    return random.randrange(num)
 
   def discrete_one_hot_sample(self):
     idx = np.random.randint(0, self.num_motors)
@@ -116,6 +124,10 @@ class ActionSpace(Space):
           )
       zeros[idx] = val
     return zeros
+
+  def discrete_sample(self):
+    idx = np.random.randint(0, self.num_binary_actions)
+    return idx
 
   def one_hot_sample(self):
 

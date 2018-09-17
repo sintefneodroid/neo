@@ -110,8 +110,9 @@ def deserialise_unobservables(state):
 
 
 def deserialise_poses(unobservables):
-  poses = np.zeros((unobservables.PosesLength(), 7))
-  for i in range(unobservables.PosesLength()):
+  pl = unobservables.PosesLength()
+  poses = np.zeros((pl, 7))
+  for i in range(pl):
     pose = unobservables.Poses(i)
     pos = pose.Position(F.FVector3())
     rot = pose.Rotation(F.FQuaternion())
@@ -120,8 +121,9 @@ def deserialise_poses(unobservables):
 
 
 def deserialise_bodies(unobservables):
-  bodies = np.zeros((unobservables.PosesLength(), 6))
-  for i in range(unobservables.BodiesLength()):
+  bl = unobservables.BodiesLength()
+  bodies = np.zeros((bl, 6))
+  for i in range(bl):
     body = unobservables.Bodies(i)
     vel = body.Velocity(F.FVector3())
     ang = body.AngularVelocity(F.FVector3())

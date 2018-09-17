@@ -21,7 +21,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
       return
     return self.act()
 
-  def act(self,  **kwargs):
+  def act(self, **kwargs):
     message = super().react(**kwargs)
     if message:
       return (
@@ -45,8 +45,8 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
       non_terminable_horizon=10,
       random_process=None,
       ):
-    configure_params = ReactionParameters( reset=True, configure=True
-        )
+    configure_params = ReactionParameters(reset=True, configure=True
+                                          )
     init = Reaction(
         parameters=configure_params, configurations=initial_configuration
         )

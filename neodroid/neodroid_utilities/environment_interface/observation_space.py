@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid import Space
+from neodroid.models.space import Space
 
 __author__ = 'cnheider'
 

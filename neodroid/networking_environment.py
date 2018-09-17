@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+__author__ = 'cnheider'
+
 import time
 import warnings
 from abc import ABC
@@ -7,8 +12,8 @@ from tqdm import tqdm
 import neodroid.models as M
 from neodroid import messaging
 from neodroid.environment import Environment
-from neodroid.neodroid_utilities import (message_client_event, ClientEvents, construct_observation_space,
-                                         construct_action_space,
+from neodroid.neodroid_utilities import (ClientEvents, construct_action_space, construct_observation_space,
+                                         message_client_event,
                                          )
 
 CONNECT_TRY_TIMES = 100

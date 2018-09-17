@@ -31,8 +31,8 @@ def main():
     Configuration('ActorPositionZ', goal_pos[2]),
     ]
   _memory.extend(
-    _environment.generate_initial_states_from_configuration(initial_configuration)
-    )
+      _environment.generate_initial_states_from_configuration(initial_configuration)
+      )
 
   for i in range(300):
     state = sample_initial_state(_memory)

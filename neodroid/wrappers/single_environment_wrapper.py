@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
+from neodroid.neodroid_utilities import NoEnvironment
+
 __author__ = 'cnheider'
 
 from neodroid import NeodroidEnvironments
@@ -14,8 +16,9 @@ class SingleEnvironmentWrapper(NeodroidEnvironments):
       return
     return self.react()
 
-  def _react(self, *,
-             in_reaction=None,
+  def _react(self, in_reaction=None,
+             *,
+
              parameters=None,
              normalise=False,
              **kwargs):
@@ -36,7 +39,7 @@ class SingleEnvironmentWrapper(NeodroidEnvironments):
     first_environment = list(env_states.values())[0]
     if first_environment:
       return first_environment
-    return None
+    raise NoEnvironment()
 
   def _reset(self, input_reaction=None, state=None, on_reset_callback=None):
 
@@ -75,9 +78,6 @@ class SingleEnvironmentWrapper(NeodroidEnvironments):
       warn('Observer was not found!')
     return observer
 
-  def _close(self, *args, **kwargs):
-    return self._close(*args, **kwargs)
-
 
 if __name__ == '__main__':
   import argparse
@@ -87,7 +87,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--ENVIRONMENT_NAME',
       type=str,
-      default='small_grid_world',
+      default='grd',
       metavar='ENVIRONMENT_NAME',
       help='name of the environment to run',
       )

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.neodroid_utilities import NoUnobservablesException
+
 __author__ = 'cnheider'
 
 import flatbuffers
@@ -69,6 +71,10 @@ def serialise_unobservables(B, input_reaction):
   unobservables = input_reaction.unobservables
   if unobservables:
     unobservables = unobservables.unobservables
+    if not unobservables:
+      raise NoUnobservablesException('You probably did not receive any unobservables, check you simulator '
+                                     'configuration, maybe you want to always serialise unobservables. If '
+                                     'so you need check the corresponding option.')
     poses = serialise_poses(B, unobservables)
     bodies = serialise_bodies(B, unobservables)
 

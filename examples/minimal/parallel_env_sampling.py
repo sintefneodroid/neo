@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+__author__ = 'cnheider'
+
 import random
 import time
 from multiprocessing import Process, Queue, current_process, freeze_support

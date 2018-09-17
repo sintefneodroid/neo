@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from warnings import warn
+
 from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
 
-from neodroid.utilities import flattened_observation
+from neodroid.neodroid_utilities import flattened_observation
 
 
 class NeodroidFormalWrapper(SingleEnvironmentWrapper):
@@ -24,10 +26,19 @@ class NeodroidFormalWrapper(SingleEnvironmentWrapper):
         first_environment.terminated,
         first_environment
         )
-    return None, None, None, None
+    raise ValueError('Did not receive any message.')
+
+  def step(self, input_reaction, **kwargs):
+    return self.act(input_reaction, **kwargs)
 
   def realise(self):
     pass
+
+  def observer(self, key):
+    if self._last_message:
+      return self._observer(key)
+    warn('No message available')
+    return None
 
   def configure(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)

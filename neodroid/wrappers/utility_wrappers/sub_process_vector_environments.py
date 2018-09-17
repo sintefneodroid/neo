@@ -2,7 +2,8 @@ from multiprocessing import Pipe, Process
 
 import numpy as np
 
-from neodroid.wrappers.utility_wrappers import CloudPickleWrapper, VectorEnvironments
+from neodroid.wrappers.utility_wrappers.cloud_pickle_wrapper import CloudPickleWrapper
+from neodroid.wrappers.utility_wrappers.vector_environments import VectorEnvironments
 
 
 def worker(remote, parent_remote, env_fn_wrapper):

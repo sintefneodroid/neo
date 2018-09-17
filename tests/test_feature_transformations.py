@@ -1,5 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+__author__ = 'cnheider'
 import pytest
-from neodroid import utilities, Space
+
+from neodroid import Space
 
 
 def inc(x):
@@ -9,7 +14,8 @@ def inc(x):
 def test_answer():
   assert inc(3) == 5
 
+
 @pytest.mark.slow
 def test_space():
-  space = Space(1,-1,1)
+  space = Space(1, -1, 1)
   assert space.min_value != 0

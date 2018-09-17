@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from neodroid import Reaction
-from neodroid.networking_environment import NetworkingEnvironment
-
 __author__ = 'cnheider'
 
 import os
@@ -12,12 +9,11 @@ import warnings
 import numpy as np
 
 import neodroid.models as M
-from neodroid.neodroid_utilities import (
-  verify_configuration_reaction,
-  construct_step_reaction,
-  flattened_observation,
-  launch_environment,
-  )
+from neodroid.models import Reaction
+from neodroid.neodroid_utilities import (construct_step_reaction, flattened_observation, launch_environment,
+                                         verify_configuration_reaction,
+                                         )
+from neodroid.networking_environment import NetworkingEnvironment
 
 
 class NeodroidEnvironments(NetworkingEnvironment):
@@ -45,7 +41,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
   def __init__(
       self,
       *,
-      environment_name='small_grid_world',
+      environment_name='grd',
       clones=0,
       path_to_executables_directory=os.path.join(
           os.path.dirname(os.path.realpath(__file__)),
@@ -102,7 +98,8 @@ class NeodroidEnvironments(NetworkingEnvironment):
       parameters=None,
       normalise=False,
       on_reaction_sent_callback=None,
-      on_step_done_callback=None
+      on_step_done_callback=None,
+      **kwargs
       ):
     '''
 
@@ -121,24 +118,22 @@ class NeodroidEnvironments(NetworkingEnvironment):
 '''
     self._warn_react()
 
-    if input_reactions is None:
-      parameters = M.ReactionParameters(
-          episode_count=True, step=True, terminable=True
-          )
-      input_reactions = [M.Reaction(parameters=parameters)]
-    elif type(input_reactions) is list:
-      if isinstance(input_reactions[0], M.Reaction):
-        pass
-      else:
-        raise ValueError
-    elif type(input_reactions) is not Reaction:
-      input_reaction = self.maybe_infer_motion_reaction(
-          in_reaction=input_reactions,
-          normalise=normalise,
-          description=self._description,
-          verbose=self._verbose
-          )
-      input_reactions = [input_reaction]
+    if type(input_reactions) is list and isinstance(input_reactions[0], M.Reaction):
+      pass
+    else:
+      if input_reactions is None:
+        parameters = M.ReactionParameters(
+            episode_count=True, step=True, terminable=True
+            )
+        input_reactions = [M.Reaction(parameters=parameters)]
+      elif type(input_reactions) is not Reaction:
+        input_reaction = self.maybe_infer_motion_reaction(
+            in_reaction=input_reactions,
+            normalise=normalise,
+            description=self._description,
+            verbose=self._verbose
+            )
+        input_reactions = [input_reaction]
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
 

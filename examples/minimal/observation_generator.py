@@ -9,7 +9,7 @@ import neodroid.wrappers.formal_wrapper as neo
 
 
 def main():
-  _environment = neo.make(environment_name='small_grid_world', connect_to_running=False)
+  _environment = neo.make(environment_name='grd', connect_to_running=False)
 
   frame_i = 0
   update_description_interval = 100

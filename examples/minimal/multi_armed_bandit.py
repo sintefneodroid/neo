@@ -9,6 +9,7 @@ __author__ = 'cnheider'
 import neodroid.wrappers.formal_wrapper as neo
 from neodroid import messaging, ReactionParameters
 
+
 def construct_displayables(normed, tries):
   d1 = messaging.N.Displayable('BeliefBarLeftDisplayer', normed[0])
   d2 = messaging.N.Displayable('BeliefBarMiddleDisplayer', normed[1])
@@ -21,15 +22,16 @@ def construct_displayables(normed, tries):
   d33 = messaging.N.Displayable('CountTextRightDisplayer', tries[2])
   return [d1, d2, d3, d12, d22, d32, d13, d23, d33]
 
+
 def main():
   _environment = neo.make('mab', connect_to_running=False)
 
   num_arms = _environment.action_space.num_discrete_actions
 
-  beliefs = [1/num_arms]*num_arms
-  totals = [0]*num_arms
-  tries = [0]*num_arms
-  normed = [1/num_arms]*num_arms
+  beliefs = [1 / num_arms] * num_arms
+  totals = [0] * num_arms
+  tries = [0] * num_arms
+  normed = [1 / num_arms] * num_arms
 
   ucb1 = UCB1(num_arms)
 
@@ -39,16 +41,15 @@ def main():
 
     index_0 = int(action_0)
 
-    motions = [messaging.N.Motion('MultiArmedBanditKillableActor','MultiArmedBanditMultiArmedBanditMotor',
+    motions = [messaging.N.Motion('MultiArmedBanditKillableActor', 'MultiArmedBanditMultiArmedBanditMotor',
                                   action_0)]
 
     i += 1
 
-
     reaction = messaging.N.Reaction(
         motions=motions,
-        displayables=construct_displayables(normed,tries),
-        parameters=ReactionParameters(step=True,episode_count=True),
+        displayables=construct_displayables(normed, tries),
+        parameters=ReactionParameters(step=True, episode_count=True),
         serialised_message='this is a serialised_message'
         )
 
@@ -58,10 +59,10 @@ def main():
 
     tries[index_0] += 1
     totals[index_0] += reward
-    beliefs[index_0] = float(totals[index_0])/tries[index_0]
+    beliefs[index_0] = float(totals[index_0]) / tries[index_0]
 
     for i in range(len(beliefs)):
-      normed[i] = beliefs[i]/(sum(beliefs) + sys.float_info.epsilon)
+      normed[i] = beliefs[i] / (sum(beliefs) + sys.float_info.epsilon)
 
     if terminated:
       print(info.termination_reason)
@@ -69,5 +70,3 @@ def main():
 
 if __name__ == '__main__':
   main()
-
-

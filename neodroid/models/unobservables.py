@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
@@ -18,11 +18,13 @@ class Unobservables(object):
 
   @property
   def poses_numpy(self):
-    return neodroid.messaging.deserialise_poses(self._unobservables)
+    if self._unobservables:
+      return neodroid.messaging.deserialise_poses(self._unobservables)
 
   @property
   def bodies_numpy(self):
-    return neodroid.messaging.deserialise_bodies(self._unobservables)
+    if self._unobservables:
+      return neodroid.messaging.deserialise_bodies(self._unobservables)
 
   @property
   def state_configuration(self):
