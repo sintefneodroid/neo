@@ -18,12 +18,14 @@ def launch_environment(environment_name,
                        screen_width=500):
   system_arch = struct.calcsize("P") * 8
   print(system_arch)
-  path_to_executable = os.path.join(path_to_executables_directory, f'{environment_name}.exe')
+  path = os.path.join(path_to_executables_directory, f'{environment_name}')
+  path_to_executable = os.path.join(path,
+                                    f'{environment_name}.exe')
   if sys.platform != 'win32':
     if system_arch == 32:
-      path_to_executable = os.path.join(path_to_executables_directory, f'{environment_name}.x86')
+      path_to_executable = os.path.join(path, f'{environment_name}.x86')
     else:
-      path_to_executable = os.path.join(path_to_executables_directory, f'{environment_name}.x86_64')
+      path_to_executable = os.path.join(path, f'{environment_name}.x86_64')
   # new_env = os.environ.copy()
   # new_env['vblank_mode'] = '0'
   # pre_args = ['vblank_mode=0','optirun']

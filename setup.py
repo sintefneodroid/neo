@@ -96,7 +96,6 @@ setup(
     maintainer='Christian Heider Nielsen',
     maintainer_email='chrini13@student.aau.dk',
     description=get_description(),
-    long_description=get_readme(),
     license=get_license(),
     keywords=get_keyword(),
     url='https://github.com/sintefneodroid/neo',
@@ -106,6 +105,7 @@ setup(
     entry_points=get_entry_points(),
     classifiers=get_classifiers(),
     long_description_content_type='text/markdown',
+    long_description=get_readme(),
     tests_require=['pytest'],
     python_requires='>=3'
     )
