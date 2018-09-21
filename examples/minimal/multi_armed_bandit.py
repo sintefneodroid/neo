@@ -41,7 +41,8 @@ def main():
 
     index_0 = int(action_0)
 
-    motions = [messaging.N.Motion('MultiArmedBanditKillableActor', 'MultiArmedBanditMultiArmedBanditMotor',
+    motions = [messaging.N.Motion('MultiArmedBanditKillableActor',
+                                  'MultiArmedBanditMultiArmedBanditMotor',
                                   action_0)]
 
     i += 1

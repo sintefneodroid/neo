@@ -15,17 +15,22 @@ def launch_environment(environment_name,
                        port,
                        full_screen='0',
                        screen_height=500,
-                       screen_width=500):
+                       screen_width=500,
+                       headless=False):
   system_arch = struct.calcsize("P") * 8
   print(system_arch)
   path = os.path.join(path_to_executables_directory, f'{environment_name}')
+
+  env_name = f'{environment_name}' if not headless else f'{environment_name}_headless'
+
   path_to_executable = os.path.join(path,
-                                    f'{environment_name}.exe')
+                                    f'{env_name}.exe')
   if sys.platform != 'win32':
     if system_arch == 32:
-      path_to_executable = os.path.join(path, f'{environment_name}.x86')
+      path_to_executable = os.path.join(path, f'{env_name}.x86')
     else:
-      path_to_executable = os.path.join(path, f'{environment_name}.x86_64')
+      path_to_executable = os.path.join(path, f'{env_name}.x86_64')
+
   # new_env = os.environ.copy()
   # new_env['vblank_mode'] = '0'
   # pre_args = ['vblank_mode=0','optirun']

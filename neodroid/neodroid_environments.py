@@ -38,6 +38,10 @@ class NeodroidEnvironments(NetworkingEnvironment):
   def simulator_configuration(self):
     return self._simulator_configuration
 
+  @property
+  def neodroid_api_version(self):
+    return '0.1.6'
+
   def __init__(
       self,
       *,
@@ -47,11 +51,10 @@ class NeodroidEnvironments(NetworkingEnvironment):
           os.path.dirname(os.path.realpath(__file__)),
           'environments'
           ),
+      headless=False,
       **kwargs
       ):
     super().__init__(**kwargs)
-
-    self._neodroid_api_version = '0.1.6'
 
     # Environment
     self._description = None
@@ -68,7 +71,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
     if not self._connect_to_running and not self._simulation_instance:
       self._simulation_instance = launch_environment(
           environment_name, path_to_executables_directory, self._ip, self._port
-          )
+      ,headless=headless)
       if self._simulation_instance:
         if self._debug_logging:
           self._logger.debug(f'successfully started environment {environment_name}')
@@ -79,14 +82,17 @@ class NeodroidEnvironments(NetworkingEnvironment):
     self._setup_connection()
 
     if self._verbose:
-      warnings.warn(f'Using Neodroid API version {self._neodroid_api_version}')
+      warnings.warn(f'Using Neodroid API version {self.neodroid_api_version}')
 
     server_version = self._simulator_configuration.api_version
-    if self._neodroid_api_version != server_version:
+    if self.neodroid_api_version != server_version:
       if server_version == '':
         server_version = '*Unspecified*'
       if self._verbose:
         warnings.warn(f'Server is using different version {server_version}, complications may occur!')
+
+    print(f'Server API version: {server_version}, \n'
+          f'\t{self.simulator_configuration.simulator_info}')
 
   def _configure(self, *args, **kwargs):
     return self._reset()

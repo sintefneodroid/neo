@@ -1,4 +1,4 @@
-![neodroid](.github/images/header.png)
+![neodroid](https://media.githubusercontent.com/media/sintefneodroid/neo/master/.github/images/header.png)
 
 # Neo
 Neo is a python package that enables deserialisation and an interface to the [Droid](https://github.com/sintefneodroid/droid) counterpart of the [Neodroid](https://github.com/sintefneodroid) platform
@@ -59,13 +59,13 @@ Neo is a python package that enables deserialisation and an interface to the [Dr
 
 <p align="center" width="100%">
   <a href="https://www.python.org/">
-  <img alt="python" src=".github/images/python.svg" height="40" align="left">
+  <img alt="python" src="https://media.githubusercontent.com/media/sintefneodroid/neo/master/.github/images/python.svg" height="40" align="left">
   </a>
   <a href="https://github.com/google/flatbuffers">
-  <img alt="flatbuffers" src=".github/images/flatbuffers.svg" height="40"  align="center">
+  <img alt="flatbuffers" src="https://media.githubusercontent.com/media/sintefneodroid/neo/master/.github/images/flatbuffers.svg" height="40"  align="center">
   </a>
   <a href="https://github.com/zeromq/pyzmq" >
-  <img alt="pyzmq" src=".github/images/pyzmq.png" height="40" align="right">
+  <img alt="pyzmq" src="https://media.githubusercontent.com/media/sintefneodroid/neo/master/.github/images/pyzmq.png" height="40" align="right">
   </a>
 </p>
 
