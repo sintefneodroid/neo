@@ -24,7 +24,7 @@ def launch_environment(environment_name,
   env_name = f'{environment_name}' if not headless else f'{environment_name}_headless'
 
   path_to_executable = os.path.join(path,
-                                    f'{env_name}.exe')
+                                    f'{env_name}_win/Neodroid.exe')
   if sys.platform != 'win32':
     if system_arch == 32:
       path_to_executable = os.path.join(path, f'{env_name}.x86')

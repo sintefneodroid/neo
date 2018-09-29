@@ -15,6 +15,8 @@ from neodroid.neodroid_utilities import (construct_step_reaction, flattened_obse
                                          )
 from neodroid.networking_environment import NetworkingEnvironment
 
+file_dir = os.path.dirname(os.path.realpath(__file__))
+environments_dir = os.path.abspath(os.path.join(file_dir, '..', 'environments'))
 
 class NeodroidEnvironments(NetworkingEnvironment):
 
@@ -45,12 +47,9 @@ class NeodroidEnvironments(NetworkingEnvironment):
   def __init__(
       self,
       *,
-      environment_name='grd',
+      environment_name='mab',
       clones=0,
-      path_to_executables_directory=os.path.join(
-          os.path.dirname(os.path.realpath(__file__)),
-          'environments'
-          ),
+      path_to_executables_directory=environments_dir,
       headless=False,
       **kwargs
       ):
@@ -124,7 +123,8 @@ class NeodroidEnvironments(NetworkingEnvironment):
 '''
     self._warn_react()
 
-    if type(input_reactions) is list and isinstance(input_reactions[0], M.Reaction):
+    if type(input_reactions) is list and len(input_reactions) > 0 and isinstance(input_reactions[0],
+                                                                               M.Reaction):
       pass
     else:
       if input_reactions is None:

@@ -18,42 +18,44 @@ def grab_video_frame(cap):
 
 
 def grab_new_images(environment):
-  rgb = environment.sensor('RGBCamera')
+  rgb = environment.sensor('RGBCameraObserver')
   rgb_im = None
   if rgb:
     rgb_im = Image.open(rgb.observation_value)
 
-  depth = environment.sensor('DepthCamera')
+  depth = environment.sensor('DepthCameraObserver')
   depth_im = None
   if depth:
     depth_im = Image.open(depth.observation_value)
 
-  segmentation = environment.sensor('SegmentationCamera')
+  segmentation = environment.sensor('SegmentationCameraObserver')
   segmentation_im = None
   if segmentation:
     segmentation_im = Image.open(segmentation.observation_value)
+  print(environment.sensor('SegmentationSegmentationObserver'))
 
-  instance_segmentation = environment.sensor('InstanceSegmentationCamera')
+  instance_segmentation = environment.sensor('InstanceSegmentationCameraObserver')
   instance_segmentation_im = None
   if instance_segmentation:
     instance_segmentation_im = Image.open(instance_segmentation.observation_value)
+  print(environment.sensor('InstanceSegmentationSegmentationObserver'))
 
-  infrared = environment.sensor('InfraredShadowCamera')
+  infrared = environment.sensor('InfraredShadowCameraObserver')
   infrared_im = None
   if infrared:
     infrared_im = Image.open(infrared.observation_value)
 
-  flow = environment.sensor('FlowCamera')
+  flow = environment.sensor('FlowCameraObserver')
   flow_im = None
   if flow:
     flow_im = Image.open(flow.observation_value)
 
-  normal = environment.sensor('NormalCamera')
+  normal = environment.sensor('NormalCameraObserver')
   normal_im = None
   if normal:
     normal_im = Image.open(normal.observation_value)
 
-  satellite = environment.sensor('SatelliteCamera')
+  satellite = environment.sensor('SatelliteCameraObserver')
   satellite_im = None
   if satellite:
     satellite_im = Image.open(satellite.observation_value)
@@ -62,13 +64,14 @@ def grab_new_images(environment):
          satellite_im
 
 
-env = neogym(environment_name='saa', connect_to_running=False)
+env = neogym(environment_name='seg', connect_to_running=True)
 fig = plt.figure()
 
 (ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8), *_ = fig.subplots(2, 4, sharey='all')
 frame_i = 0
 env.reset()
-obs, rew, term, info = env.step()
+sample= env.action_space.sample()
+obs, rew, term, info = env.step(sample)
 image_color, image_depth, image_segmentation, image_instance, image_infrared, image_flow, image_normal, \
 image_satellite \
   = grab_new_images(env)
@@ -109,7 +112,8 @@ if image_satellite:
 
 def update_figures(i):
   global time_s, frame_i
-  _, signal, terminated, info = env.step(env.action_space.sample())
+  sample = env.action_space.sample()
+  _, signal, terminated, info = env.step(sample)
   image_color, image_depth, image_segmentation, image_instance, image_infrared, image_flow, image_normal, \
   image_satellite \
     = grab_new_images(env)

@@ -89,6 +89,8 @@ def deserialise_observation(f_obs):
     value, *_ = deserialise_quaternion_transform(f_obs)
   elif obs_type is F.FObservation.FByteArray:
     value, *_ = deserialise_byte_array(f_obs)
+  elif obs_type is F.FObservation.FString:
+    value, *_ = deserialise_string(f_obs)
 
   return value, value_range
 
@@ -186,6 +188,12 @@ def deserialise_single(f_obs):
   val.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   value, value_range = val.Value(), val.Range()
   return value, value_range
+
+def deserialise_string(f_obs):
+  val = F.FString()
+  val.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  value= val.Str()
+  return value, None
 
 
 def deserialise_quaternion_transform(f_obs):

@@ -8,7 +8,7 @@ import neodroid as neo
 
 
 def main():
-  _environments = neo.make(environment_name='grd', connect_to_running=False)
+  _environments = neo.make(environment_name='mab', connect_to_running=True)
   _environments.reset()
 
   i = 0

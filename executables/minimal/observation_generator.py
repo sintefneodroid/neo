@@ -9,7 +9,7 @@ import neodroid.wrappers.formal_wrapper as neo
 
 
 def main():
-  _environment = neo.make(environment_name='grd', connect_to_running=False)
+  _environment = neo.make(environment_name='grd_camera', connect_to_running=True)
 
   frame_i = 0
   update_description_interval = 100

@@ -1,3 +1,5 @@
-recursive-include neodroid/environments/grid_world_Data *
-recursive-include neodroid/environments grid_world*
-recursive-include neodroid/environments UnityPlayer.dll
+# recursive-include neodroid/environments/grid_world_Data *
+# recursive-include neodroid/environments grid_world*
+# recursive-include neodroid/environments/mab *
+# recursive-include neodroid/environments/mab/windows/ *
+# recursive-include neodroid/environments UnityPlayer.dll
