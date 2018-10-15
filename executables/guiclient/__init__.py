@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from executables.guiclient.main import main
+
 __author__ = 'cnheider'
 
 '''A sample of using the neodroid api.
@@ -7,8 +9,6 @@ __author__ = 'cnheider'
 .. moduleauthor:: Christian Heider Nielsen <chrini13@student.aau.com>
 
 '''
-
-from example.guiclient.main import main
 
 
 def start():

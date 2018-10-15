@@ -189,10 +189,11 @@ def deserialise_single(f_obs):
   value, value_range = val.Value(), val.Range()
   return value, value_range
 
+
 def deserialise_string(f_obs):
   val = F.FString()
   val.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
-  value= val.Str()
+  value = val.Str()
   return value, None
 
 

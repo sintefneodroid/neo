@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from executables.guiclient.gui import NeoGUI
+
 __author__ = 'cnheider'
 
-from gui import NeoGUI
 
 import neodroid as neo
 from neodroid import Motion, Reaction

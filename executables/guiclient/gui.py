@@ -1,8 +1,9 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from executables.guiclient.gui_components import EnvironmentStateBox, XMLBox, ReactionBox, StatusBar
+
 __author__ = 'cnheider'
 
-from gui_components import EnvironmentStateBox, ReactionBox, StatusBar, XMLBox
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout

@@ -5,18 +5,18 @@ from neodroid.version import get_version
 class NeodroidPackage:
 
   @property
-  def test_dependencies(self):
+  def test_dependencies(self)->list:
     return [
       'pytest',
       'mock'
       ]
 
   @property
-  def package_name(self):
+  def package_name(self)->str:
     return 'Neodroid'
 
   @property
-  def url(self):
+  def url(self)->str:
     return 'https://github.com/sintefneodroid/neo'
 
   @property
@@ -94,17 +94,14 @@ class NeodroidPackage:
 
   @property
   def requirements(self) -> list:
-    return [
-      'pyzmq',
-      'numpy',
-      'neodroid-flatbuffers',
-      # 'flatbuffers ',
-      'Pillow',
-      'gym',
-      'tqdm',
-      'matplotlib',
-      'cloudpickle'
-      ]
+    requirements_out = []
+    with open('requirements.txt') as f:
+      requirements = f.readlines()
+
+      for requirement in requirements:
+        requirements_out.append(requirement.strip())
+
+    return requirements_out
 
   @property
   def description(self):

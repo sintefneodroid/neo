@@ -1,0 +1,8 @@
+pyzmq
+numpy
+neodroid-flatbuffers
+Pillow
+gym
+tqdm
+matplotlib
+cloudpickle

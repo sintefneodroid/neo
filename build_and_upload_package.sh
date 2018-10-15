@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-rm -rf dist build */*.egg-info *.egg-info
+./clean_package.sh
 #python2 setup.py bdist
 #python2 setup.py bdist_wheel
 python3 setup.py bdist

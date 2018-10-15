@@ -53,6 +53,12 @@ class Environment(ABC):
   def describe(self, *args, **kwargs):
     self._describe(*args, **kwargs)
 
+  def is_solved(self, *args, **kwargs):
+    return self._is_solved()
+
+  def _is_solved(self, *args, **kwargs):
+    raise False
+
   @abstractmethod
   def _close(self, *args, **kwargs):
     raise NotImplementedError

@@ -76,7 +76,7 @@ image_color, image_depth, image_segmentation, image_instance, image_infrared, im
 image_satellite \
   = grab_new_images(env)
 
-ax1.set_title('RGB')
+
 im1 = None
 im2 = None
 im3 = None
@@ -85,6 +85,8 @@ im5 = None
 im6 = None
 im7 = None
 im8 = None
+
+ax1.set_title('RGB')
 if image_color:
   im1 = ax1.imshow(image_color)
 ax2.set_title('Depth')
