@@ -69,9 +69,9 @@ class NeodroidPackage:
     return {
       'console_scripts':[
         # "name_of_executable = module.with:function_to_execute"
-        'neodroid = executables.minimal.action_space_sampling:main'
-        'neodroid-mab = executables.minimal.multi_armed_bandit:main',
-        'neodroid-grd = executables.minimal.grid_world:main',
+        'neodroid = samples.minimal.action_space_sampling:main'
+        'neodroid-mab = samples.minimal.multi_armed_bandit:main',
+        'neodroid-grd = samples.minimal.grid_world:main',
         ]
       }
 
