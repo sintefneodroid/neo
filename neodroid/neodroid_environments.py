@@ -16,7 +16,8 @@ from neodroid.neodroid_utilities import (construct_step_reaction, flattened_obse
 from neodroid.networking_environment import NetworkingEnvironment
 
 file_dir = os.path.dirname(os.path.realpath(__file__))
-environments_dir = os.path.abspath(os.path.join(file_dir, '..', 'environments'))
+default_environments_dir = os.path.abspath(os.path.join(file_dir, 'environments'))
+
 
 class NeodroidEnvironments(NetworkingEnvironment):
 
@@ -49,7 +50,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
       *,
       environment_name='mab',
       clones=0,
-      path_to_executables_directory=environments_dir,
+      path_to_executables_directory=default_environments_dir,
       headless=False,
       **kwargs
       ):
@@ -69,8 +70,11 @@ class NeodroidEnvironments(NetworkingEnvironment):
 
     if not self._connect_to_running and not self._simulation_instance:
       self._simulation_instance = launch_environment(
-          environment_name, path_to_executables_directory, self._ip, self._port
-      ,headless=headless)
+          environment_name,
+          ip=self._ip,
+          port=self._port,
+          path_to_executables_directory=path_to_executables_directory,
+          headless=headless)
       if self._simulation_instance:
         if self._debug_logging:
           self._logger.debug(f'successfully started environment {environment_name}')
@@ -124,7 +128,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
     self._warn_react()
 
     if type(input_reactions) is list and len(input_reactions) > 0 and isinstance(input_reactions[0],
-                                                                               M.Reaction):
+                                                                                 M.Reaction):
       pass
     else:
       if input_reactions is None:

@@ -7,29 +7,48 @@ import shlex
 import struct
 import subprocess
 import sys
+import tqdm
 
 
 def launch_environment(environment_name,
-                       path_to_executables_directory,
+                       *,
                        ip,
                        port,
+                       path_to_executables_directory,
                        full_screen='0',
                        screen_height=500,
                        screen_width=500,
                        headless=False):
   system_arch = struct.calcsize("P") * 8
-  print(system_arch)
-  path = os.path.join(path_to_executables_directory, f'{environment_name}')
+  print(f'\nSystem Architecture: {system_arch}')
 
-  env_name = f'{environment_name}' if not headless else f'{environment_name}_headless'
 
-  path_to_executable = os.path.join(path,
-                                    f'{env_name}_win/Neodroid.exe')
+  variation_name = f'{environment_name}' if not headless else f'{environment_name}_headless'
+
+
+  if sys.platform == 'win32':
+    variation_name= f'{variation_name}_win'
+
+  j = os.path.join(
+        path_to_executables_directory,environment_name)
+  path = os.path.join(j ,variation_name)
+
+  if not os.path.exists(j):
+    old_mask = os.umask(000)
+    try:
+      os.makedirs(j, 0o777, exist_ok=True)
+    finally:
+      os.umask(old_mask)
+
+  if not os.path.exists(path):
+    download_environment(variation_name,path_to_executables_directory=j)
+
+  path_to_executable = os.path.join(path,'Neodroid.exe')
   if sys.platform != 'win32':
     if system_arch == 32:
-      path_to_executable = os.path.join(path, f'{env_name}.x86')
+      path_to_executable = os.path.join(path, f'{variation_name}.x86')
     else:
-      path_to_executable = os.path.join(path, f'{env_name}.x86_64')
+      path_to_executable = os.path.join(path, f'{variation_name}.x86_64')
 
   # new_env = os.environ.copy()
   # new_env['vblank_mode'] = '0'
@@ -50,6 +69,38 @@ def launch_environment(environment_name,
       cmd
       # ,env=new_env
       )
+
+
+def available_environments(repository='neodroid.ml/environments'):
+  environments_m = {'mab_win':'1rtASDyZ0YPe20XAU-5PJQdF9QNP_4D1-'}
+  return environments_m
+
+
+class DownloadProgress(tqdm.tqdm):
+  last_block = 0
+
+  def __init__(self, unit='B', unit_scale=True, min_iters=1, desc='Download', **kwargs):
+    super().__init__(unit=unit, unit_scale=unit_scale, miniters=min_iters, desc=desc, **kwargs)
+
+  def hook(self, block_num=1, block_size=1, total_size=None):
+    self.total = total_size
+    self.update((block_num - self.last_block) * block_size)
+    self.last_block = block_num
+
+
+def download_environment(name='mab_win', path_to_executables_directory='/tmp'):
+  from urllib.request import urlretrieve
+  import zipfile
+  download_format = 'https://drive.google.com/uc?export=download&confirm=NezD&id={FILE_ID}'
+  formatted = download_format.format(FILE_ID=available_environments()[name])#+'.tmp')
+
+  with DownloadProgress(desc=name) as progress_bar:
+    file_name, headers = urlretrieve(formatted,
+                                     #os.path.join(path_to_executables_directory,f'{name}.tmp'),
+                                     progress_bar.hook)
+
+  with zipfile.ZipFile(file_name, "r") as zip_ref:
+    zip_ref.extractall(path_to_executables_directory)
 
 
 '''
@@ -87,3 +138,6 @@ def launch_environment(environment_name,
       launch_string = candidates[0]
 
 '''
+
+if __name__ == '__main__':
+  download_environment()
