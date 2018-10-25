@@ -28,6 +28,10 @@ def launch_environment(environment_name,
 
   if sys.platform == 'win32':
     variation_name= f'{variation_name}_win'
+  elif sys.platform == 'darwin':
+    variation_name = f'{variation_name}_mac'
+  else:
+    variation_name = f'{variation_name}_linux'
 
   j = os.path.join(
         path_to_executables_directory,environment_name)
@@ -72,7 +76,8 @@ def launch_environment(environment_name,
 
 
 def available_environments(repository='neodroid.ml/environments'):
-  environments_m = {'mab_win':'1rtASDyZ0YPe20XAU-5PJQdF9QNP_4D1-'}
+  environments_m = {'mab_win':'1rtASDyZ0YPe20XAU-5PJQdF9QNP_4D1-',
+                    'mab_linux': '1qYHkzDCWoETLmYfyxTdfLk0d0t5wjUp3'}
   return environments_m
 
 
