@@ -64,7 +64,7 @@ def grab_new_images(environment):
          satellite_im
 
 
-env = neogym(environment_name='seg', connect_to_running=True)
+env = neogym(environment_name='dmr', connect_to_running=False)
 fig = plt.figure()
 
 (ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8), *_ = fig.subplots(2, 4, sharey='all')

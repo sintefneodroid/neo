@@ -12,9 +12,9 @@ import tqdm
 
 def launch_environment(environment_name,
                        *,
-                       ip,
-                       port,
                        path_to_executables_directory,
+                       ip='127.0.0.1',
+                       port=5252,
                        full_screen='0',
                        screen_height=500,
                        screen_width=500,
@@ -50,9 +50,9 @@ def launch_environment(environment_name,
   path_to_executable = os.path.join(path,'Neodroid.exe')
   if sys.platform != 'win32':
     if system_arch == 32:
-      path_to_executable = os.path.join(path, f'{variation_name}.x86')
+      path_to_executable = os.path.join(path, f'{environment_name}.x86')
     else:
-      path_to_executable = os.path.join(path, f'{variation_name}.x86_64')
+      path_to_executable = os.path.join(path, f'{environment_name}.x86_64')
 
   # new_env = os.environ.copy()
   # new_env['vblank_mode'] = '0'
@@ -75,9 +75,14 @@ def launch_environment(environment_name,
       )
 
 
-def available_environments(repository='neodroid.ml/environments'):
-  environments_m = {'mab_win':'1rtASDyZ0YPe20XAU-5PJQdF9QNP_4D1-',
-                    'mab_linux': '1qYHkzDCWoETLmYfyxTdfLk0d0t5wjUp3'}
+def available_environments(repository='http://boot.ml/environments'):
+  from urllib.request import Request, urlopen
+  import csv
+  req = Request(repository, headers={'User-Agent': 'Mozilla/5.0'})
+  environments_m_csv = urlopen(req).read()
+  environments_m_csv = environments_m_csv.decode('utf-8')
+  reader = csv.reader(environments_m_csv.split('\n'), delimiter=',')
+  environments_m = {row[0]: row[1] for row in reader}
   return environments_m
 
 
@@ -145,4 +150,4 @@ def download_environment(name='mab_win', path_to_executables_directory='/tmp'):
 '''
 
 if __name__ == '__main__':
-  download_environment()
+  available_environments()
