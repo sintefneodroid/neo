@@ -19,6 +19,7 @@ def launch_environment(environment_name,
                        screen_height=500,
                        screen_width=500,
                        headless=False):
+  import stat
   system_arch = struct.calcsize("P") * 8
   print(f'\nSystem Architecture: {system_arch}')
 
@@ -54,6 +55,10 @@ def launch_environment(environment_name,
     else:
       path_to_executable = os.path.join(path, f'{environment_name}.x86_64')
 
+  #Ensure file is executable
+  st = os.stat(path_to_executable)
+  os.chmod(path_to_executable, st.st_mode | stat.S_IEXEC)
+
   # new_env = os.environ.copy()
   # new_env['vblank_mode'] = '0'
   # pre_args = ['vblank_mode=0','optirun']
@@ -82,7 +87,7 @@ def available_environments(repository='http://boot.ml/environments'):
   environments_m_csv = urlopen(req).read()
   environments_m_csv = environments_m_csv.decode('utf-8')
   reader = csv.reader(environments_m_csv.split('\n'), delimiter=',')
-  environments_m = {row[0]: row[1] for row in reader}
+  environments_m = {row[0].strip(): row[1].strip() for row in reader}
   return environments_m
 
 
@@ -102,12 +107,13 @@ def download_environment(name='mab_win', path_to_executables_directory='/tmp'):
   from urllib.request import urlretrieve
   import zipfile
   download_format = 'https://drive.google.com/uc?export=download&confirm=NezD&id={FILE_ID}'
-  formatted = download_format.format(FILE_ID=available_environments()[name])#+'.tmp')
+  hash_id =available_environments()[name]
+  formatted = download_format.format(FILE_ID=hash_id)#+'.tmp')
 
   with DownloadProgress(desc=name) as progress_bar:
     file_name, headers = urlretrieve(formatted,
                                      #os.path.join(path_to_executables_directory,f'{name}.tmp'),
-                                     progress_bar.hook)
+                                     reporthook=progress_bar.hook)
 
   with zipfile.ZipFile(file_name, "r") as zip_ref:
     zip_ref.extractall(path_to_executables_directory)
