@@ -3,3 +3,4 @@
 # recursive-include neodroid/environments/mab *
 # recursive-include neodroid/environments/mab/windows/ *
 # recursive-include neodroid/environments UnityPlayer.dll
+include neodroid/environments .trackfolder
