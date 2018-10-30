@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.neodroid_utilities.enviroment_process.download_environment import download_environment
+
 __author__ = 'cnheider'
 
 import os
@@ -21,22 +23,20 @@ def launch_environment(environment_name,
                        headless=False):
   import stat
   system_arch = struct.calcsize("P") * 8
-  print(f'\nSystem Architecture: {system_arch}')
-
+  #print(f'\nSystem Architecture: {system_arch}')
 
   variation_name = f'{environment_name}' if not headless else f'{environment_name}_headless'
 
-
   if sys.platform == 'win32':
-    variation_name= f'{variation_name}_win'
+    variation_name = f'{variation_name}_win'
   elif sys.platform == 'darwin':
     variation_name = f'{variation_name}_mac'
   else:
     variation_name = f'{variation_name}_linux'
 
   j = os.path.join(
-        path_to_executables_directory,environment_name)
-  path = os.path.join(j ,variation_name)
+      path_to_executables_directory, environment_name)
+  path = os.path.join(j, variation_name)
 
   if not os.path.exists(j):
     old_mask = os.umask(000)
@@ -46,16 +46,16 @@ def launch_environment(environment_name,
       os.umask(old_mask)
 
   if not os.path.exists(path):
-    download_environment(variation_name,path_to_executables_directory=j)
+    download_environment(variation_name, path_to_executables_directory=j)
 
-  path_to_executable = os.path.join(path,'Neodroid.exe')
+  path_to_executable = os.path.join(path, 'Neodroid.exe')
   if sys.platform != 'win32':
     if system_arch == 32:
       path_to_executable = os.path.join(path, f'{environment_name}.x86')
     else:
       path_to_executable = os.path.join(path, f'{environment_name}.x86_64')
 
-  #Ensure file is executable
+  # Ensure file is executable
   st = os.stat(path_to_executable)
   os.chmod(path_to_executable, st.st_mode | stat.S_IEXEC)
 
@@ -78,45 +78,6 @@ def launch_environment(environment_name,
       cmd
       # ,env=new_env
       )
-
-
-def available_environments(repository='http://boot.ml/environments'):
-  from urllib.request import Request, urlopen
-  import csv
-  req = Request(repository, headers={'User-Agent': 'Mozilla/5.0'})
-  environments_m_csv = urlopen(req).read()
-  environments_m_csv = environments_m_csv.decode('utf-8')
-  reader = csv.reader(environments_m_csv.split('\n'), delimiter=',')
-  environments_m = {row[0].strip(): row[1].strip() for row in reader}
-  return environments_m
-
-
-class DownloadProgress(tqdm.tqdm):
-  last_block = 0
-
-  def __init__(self, unit='B', unit_scale=True, min_iters=1, desc='Download', **kwargs):
-    super().__init__(unit=unit, unit_scale=unit_scale, miniters=min_iters, desc=desc, **kwargs)
-
-  def hook(self, block_num=1, block_size=1, total_size=None):
-    self.total = total_size
-    self.update((block_num - self.last_block) * block_size)
-    self.last_block = block_num
-
-
-def download_environment(name='mab_win', path_to_executables_directory='/tmp'):
-  from urllib.request import urlretrieve
-  import zipfile
-  download_format = 'https://drive.google.com/uc?export=download&confirm=NezD&id={FILE_ID}'
-  hash_id =available_environments()[name]
-  formatted = download_format.format(FILE_ID=hash_id)#+'.tmp')
-
-  with DownloadProgress(desc=name) as progress_bar:
-    file_name, headers = urlretrieve(formatted,
-                                     #os.path.join(path_to_executables_directory,f'{name}.tmp'),
-                                     reporthook=progress_bar.hook)
-
-  with zipfile.ZipFile(file_name, "r") as zip_ref:
-    zip_ref.extractall(path_to_executables_directory)
 
 
 '''
@@ -154,6 +115,3 @@ def download_environment(name='mab_win', path_to_executables_directory='/tmp'):
       launch_string = candidates[0]
 
 '''
-
-if __name__ == '__main__':
-  available_environments()
