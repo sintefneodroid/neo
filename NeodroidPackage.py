@@ -72,6 +72,7 @@ class NeodroidPackage:
         'neodroid = samples.minimal.action_space_sampling:main'
         'neodroid-mab = samples.minimal.multi_armed_bandit:main',
         'neodroid-grd = samples.minimal.grid_world:main',
+        'neodroid-dmr = samples.minimal.image_observation:main',
         ]
       }
 

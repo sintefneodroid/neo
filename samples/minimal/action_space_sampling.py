@@ -8,7 +8,7 @@ import neodroid as neo
 
 
 def main():
-  _environments = neo.make(environment_name='dmr', connect_to_running=False)
+  _environments = neo.make(environment_name='dmr', connect_to_running=True)
   _environments.reset()
 
   i = 0
