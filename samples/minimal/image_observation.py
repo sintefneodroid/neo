@@ -30,10 +30,62 @@ im6 = None
 im7 = None
 im8 = None
 
+env = neogym(environment_name='dmr', connect_to_running=False)
+fig = plt.figure()
+
+def update_figures(i):
+  global time_s, frame_i, im1, im2, im3, im4, im5, im6, im7, im8
+
+  sample = env.action_space.sample()
+  _, signal, terminated, info = env.step(sample)
+
+  (image_color,
+   image_depth,
+   image_segmentation,
+   image_instance,
+   image_infrared,
+   image_flow,
+   image_normal,
+   image_satellite) = extract_neodroid_camera_images(env)
+
+  time_now = time.time()
+  if time_s:
+    fps = (1 / (time_now - time_s))
+  else:
+    fps = 0
+
+  time_s = time_now
+
+  fig.suptitle(f'Update{i}, '
+               f'Frame: {frame_i}, '
+               f'FPS: {fps}, '
+               f'Signal: {signal}, '
+               f'Terminated: {bool(terminated)}')
+  if im1:
+    im1.set_data(image_color)
+  if im2:
+    im2.set_data(image_depth)
+  if im3:
+    im3.set_data(image_segmentation)
+  if im4:
+    im4.set_data(image_instance)
+  if im5:
+    im5.set_data(image_infrared)
+  if im6:
+    im6.set_data(image_flow)
+  if im7:
+    im7.set_data(image_normal)
+  if im8:
+    im8.set_data(image_satellite)
+
+  if terminated:
+    env.reset()
+    frame_i = 0
+  else:
+    frame_i += 1
 
 def main():
-  env = neogym(environment_name='dmr', connect_to_running=False)
-  fig = plt.figure()
+  global im1, im2, im3, im4, im5, im6, im7, im8
 
   ((ax1,
     ax2,
@@ -82,56 +134,7 @@ def main():
   if image_satellite:
     im8 = ax8.imshow(image_satellite)
 
-  def update_figures(i):
-    global time_s, frame_i, im1, im2, im3, im4, im5, im6, im7, im8
 
-    sample = env.action_space.sample()
-    _, signal, terminated, info = env.step(sample)
-
-    (image_color,
-     image_depth,
-     image_segmentation,
-     image_instance,
-     image_infrared,
-     image_flow,
-     image_normal,
-     image_satellite) = extract_neodroid_camera_images(env)
-
-    time_now = time.time()
-    if time_s:
-      fps = (1 / (time_now - time_s))
-    else:
-      fps = 0
-
-    time_s = time_now
-
-    fig.suptitle(f'Update{i}, '
-                 f'Frame: {frame_i}, '
-                 f'FPS: {fps}, '
-                 f'Signal: {signal}, '
-                 f'Terminated: {bool(terminated)}')
-    if im1:
-      im1.set_data(image_color)
-    if im2:
-      im2.set_data(image_depth)
-    if im3:
-      im3.set_data(image_segmentation)
-    if im4:
-      im4.set_data(image_instance)
-    if im5:
-      im5.set_data(image_infrared)
-    if im6:
-      im6.set_data(image_flow)
-    if im7:
-      im7.set_data(image_normal)
-    if im8:
-      im8.set_data(image_satellite)
-
-    if terminated:
-      env.reset()
-      frame_i = 0
-    else:
-      frame_i += 1
 
   _ = animation.FuncAnimation(fig, update_figures)
   plt.show()
