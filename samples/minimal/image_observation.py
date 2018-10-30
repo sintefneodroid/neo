@@ -2,90 +2,60 @@
 # -*- coding: utf-8 -*-
 import time
 
+from neodroid.neodroid_utilities.environment_interface.neodroid_camera import extract_neodroid_camera_images
+
 __author__ = 'cnheider'
 
 # import cv2
 import matplotlib.pyplot as plt
-from PIL import Image
 from matplotlib import animation
 
 from neodroid.wrappers.gym_wrapper import NeodroidGymWrapper as neogym
 
 
+def grab_video_frame(cap):
+  ret, frame = cap.read()
+  return cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+
+frame_i = 0
+time_s = time.time()
+
+im1 = None
+im2 = None
+im3 = None
+im4 = None
+im5 = None
+im6 = None
+im7 = None
+im8 = None
+
+
 def main():
-  def grab_video_frame(cap):
-    ret, frame = cap.read()
-    return cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-
-  def grab_new_images(environment):
-    rgb = environment.sensor('RGBCameraObserver')
-    rgb_im = None
-    if rgb:
-      rgb_im = Image.open(rgb.observation_value)
-
-    depth = environment.sensor('DepthCameraObserver')
-    depth_im = None
-    if depth:
-      depth_im = Image.open(depth.observation_value)
-
-    segmentation = environment.sensor('SegmentationCameraObserver')
-    segmentation_im = None
-    if segmentation:
-      segmentation_im = Image.open(segmentation.observation_value)
-    print(environment.sensor('SegmentationSegmentationObserver'))
-
-    instance_segmentation = environment.sensor('InstanceSegmentationCameraObserver')
-    instance_segmentation_im = None
-    if instance_segmentation:
-      instance_segmentation_im = Image.open(instance_segmentation.observation_value)
-    print(environment.sensor('InstanceSegmentationSegmentationObserver'))
-
-    infrared = environment.sensor('InfraredShadowCameraObserver')
-    infrared_im = None
-    if infrared:
-      infrared_im = Image.open(infrared.observation_value)
-
-    flow = environment.sensor('FlowCameraObserver')
-    flow_im = None
-    if flow:
-      flow_im = Image.open(flow.observation_value)
-
-    normal = environment.sensor('NormalCameraObserver')
-    normal_im = None
-    if normal:
-      normal_im = Image.open(normal.observation_value)
-
-    satellite = environment.sensor('SatelliteCameraObserver')
-    satellite_im = None
-    if satellite:
-      satellite_im = Image.open(satellite.observation_value)
-
-    return rgb_im, depth_im, segmentation_im, instance_segmentation_im, infrared_im, flow_im, normal_im, \
-           satellite_im
-
-
   env = neogym(environment_name='dmr', connect_to_running=False)
   fig = plt.figure()
 
-  (ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8), *_ = fig.subplots(2, 4, sharey='all')
-  frame_i = 0
+  ((ax1,
+    ax2,
+    ax3,
+    ax4),
+   (ax5,
+    ax6,
+    ax7,
+    ax8),
+   *_) = fig.subplots(2, 4, sharey='all')
+
   env.reset()
-  sample= env.action_space.sample()
-  obs, rew, term, info = env.step(sample)
-  image_color, image_depth, image_segmentation, image_instance, image_infrared, image_flow, image_normal, \
-  image_satellite \
-    = grab_new_images(env)
+  obs, rew, term, info = env.step(env.action_space.sample())
 
-
-  im1 = None
-  im2 = None
-  im3 = None
-  im4 = None
-  im5 = None
-  im6 = None
-  im7 = None
-  im8 = None
+  (image_color,
+   image_depth,
+   image_segmentation,
+   image_instance,
+   image_infrared,
+   image_flow,
+   image_normal,
+   image_satellite) = extract_neodroid_camera_images(env)
 
   ax1.set_title('RGB')
   if image_color:
@@ -112,22 +82,34 @@ def main():
   if image_satellite:
     im8 = ax8.imshow(image_satellite)
 
-
   def update_figures(i):
-    global time_s, frame_i
+    global time_s, frame_i, im1, im2, im3, im4, im5, im6, im7, im8
+
     sample = env.action_space.sample()
     _, signal, terminated, info = env.step(sample)
-    image_color, image_depth, image_segmentation, image_instance, image_infrared, image_flow, image_normal, \
-    image_satellite \
-      = grab_new_images(env)
+
+    (image_color,
+     image_depth,
+     image_segmentation,
+     image_instance,
+     image_infrared,
+     image_flow,
+     image_normal,
+     image_satellite) = extract_neodroid_camera_images(env)
 
     time_now = time.time()
-
-    fps = (1 / (time_now - time_s))
+    if time_s:
+      fps = (1 / (time_now - time_s))
+    else:
+      fps = 0
 
     time_s = time_now
 
-    fig.suptitle(f'Frame: {frame_i}, FPS: {fps}, Signal: {signal}, Terminated: {bool(terminated)}')
+    fig.suptitle(f'Update{i}, '
+                 f'Frame: {frame_i}, '
+                 f'FPS: {fps}, '
+                 f'Signal: {signal}, '
+                 f'Terminated: {bool(terminated)}')
     if im1:
       im1.set_data(image_color)
     if im2:
@@ -151,10 +133,9 @@ def main():
     else:
       frame_i += 1
 
-
-  time_s = time.time()
-  ani = animation.FuncAnimation(fig, update_figures)
+  _ = animation.FuncAnimation(fig, update_figures)
   plt.show()
+
 
 if __name__ == '__main__':
   main()

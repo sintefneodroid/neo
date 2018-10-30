@@ -18,6 +18,7 @@ def download_environment(name='mab_win', path_to_executables_directory='/tmp'):
   import zipfile
   download_format = 'https://drive.google.com/uc?export=download&confirm=NezD&id={FILE_ID}'
   hash_id =available_environments()[name]
+  print(f'\nFetching {name} environment\n')
   formatted = download_format.format(FILE_ID=hash_id)#+'.tmp')
 
   with DownloadProgress(desc=name) as progress_bar:
