@@ -10,7 +10,7 @@ __version__ = 0.4
 
 
 def get_version():
-  version = os.getenv('VERSION', __version__)
+  version = os.getenv('VERSION', None)
   if version:
     # Most git tags are prefixed with 'v' (example: v1.2.3) this is
     # never desirable for artifact repositories, so we strip the
@@ -28,13 +28,12 @@ def get_version():
     # Publications using datetime versions should only be made from master
     # to represent the HEAD moving forward.
 
-    #now = datetime.datetime.utcnow()
+    now = datetime.datetime.utcnow()
+    version = now.strftime('%Y%m%d%H%M%S')
+    warn(f'Environment variable VERSION is not set, using datetime: {version}')
 
-    #version = now.strftime('%Y%m%d%H%M%S')
-    #warn(f'Environment variable VERSION is not set, using datetime: {version}')
-
-    version = time.time()
-    warn(f'Environment variable VERSION is not set, using timestamp: {version}')
+    #version = time.time()
+    #warn(f'Environment variable VERSION is not set, using timestamp: {version}')
 
   return version
 
