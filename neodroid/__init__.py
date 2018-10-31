@@ -21,7 +21,7 @@ _environments = None
 
 
 def draw_logo():
-  with open('.ascii') as f:
+  with open('data/.ascii') as f:
     print(f.read())
 
 

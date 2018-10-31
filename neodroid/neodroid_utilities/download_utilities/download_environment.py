@@ -1,3 +1,5 @@
+import os
+
 from tqdm import tqdm
 
 
@@ -13,28 +15,37 @@ class DownloadProgress(tqdm):
     self.last_block = block_num
 
 
-def download_environment(name='mab_win', path_to_executables_directory='/tmp'):
+def download_environment(name:str='mab_win', path_to_executables_directory: str = '/tmp')-> str:
+  """
+
+  :param path_to_executables_directory:
+  :return:
+  :type name: object
+  """
   from urllib.request import urlretrieve
   import zipfile
   download_format = 'https://drive.google.com/uc?export=download&confirm=NezD&id={FILE_ID}'
-  hash_id =available_environments()[name]
+  hash_id = available_environments()[name]
   print(f'\nFetching {name} environment\n')
-  formatted = download_format.format(FILE_ID=hash_id)#+'.tmp')
+  formatted = download_format.format(FILE_ID=hash_id)  # +'.tmp')
 
   with DownloadProgress(desc=name) as progress_bar:
     file_name, headers = urlretrieve(formatted,
-                                     #os.path.join(path_to_executables_directory,f'{name}.tmp'),
+                                     # os.path.join(path_to_executables_directory,f'{name}.tmp'),
                                      reporthook=progress_bar.hook)
 
   with zipfile.ZipFile(file_name, "r") as zip_ref:
     zip_ref.extractall(path_to_executables_directory)
 
+  return os.path.join(path_to_executables_directory, file_name)
+
+
 def available_environments(repository='http://environments.neodroid.ml/ls'):
   from urllib.request import Request, urlopen
   import csv
-  req = Request(repository, headers={'User-Agent': 'Mozilla/5.0'})
+  req = Request(repository, headers={'User-Agent':'Mozilla/5.0'})
   environments_m_csv = urlopen(req).read()
   environments_m_csv = environments_m_csv.decode('utf-8')
   reader = csv.reader(environments_m_csv.split('\n'), delimiter=',')
-  environments_m = {row[0].strip(): row[1].strip() for row in reader}
+  environments_m = {row[0].strip():row[1].strip() for row in reader}
   return environments_m

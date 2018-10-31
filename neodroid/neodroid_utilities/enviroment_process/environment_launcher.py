@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.neodroid_utilities.enviroment_process.download_environment import download_environment
+from neodroid.neodroid_utilities.download_utilities.download_environment import download_environment
 
 __author__ = 'cnheider'
 
@@ -9,7 +9,6 @@ import shlex
 import struct
 import subprocess
 import sys
-import tqdm
 
 
 def launch_environment(environment_name,

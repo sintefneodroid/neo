@@ -1,7 +1,8 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import datetime
 import os
+import time
 from warnings import warn
 
 __author__ = 'cnheider'
@@ -9,12 +10,12 @@ __version__ = 0.4
 
 
 def get_version():
-  version = os.getenv('VERSION', None)
+  version = os.getenv('VERSION', __version__)
   if version:
     # Most git tags are prefixed with 'v' (example: v1.2.3) this is
     # never desirable for artifact repositories, so we strip the
     # leading 'v' if it's present.
-    return version[1:] if version.startswith('v') else version
+    return version[1:] if type(version) is str and version.startswith('v') else version
   else:
     # Default version is an ISO8601 compiliant datetime. PyPI doesn't allow
     # the colon ':' character in its versions, and time is required to allow
@@ -26,14 +27,21 @@ def get_version():
     #
     # Publications using datetime versions should only be made from master
     # to represent the HEAD moving forward.
-    version = datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
-    warn(f'Environment variable VERSION is not set, using datetime: {version}')
+
+    #now = datetime.datetime.utcnow()
+
+    #version = now.strftime('%Y%m%d%H%M%S')
+    #warn(f'Environment variable VERSION is not set, using datetime: {version}')
+
+    version = time.time()
+    warn(f'Environment variable VERSION is not set, using timestamp: {version}')
 
   return version
 
 
 if __version__ is None:
   __version__ = get_version()
+
 _debug = False
 
 
