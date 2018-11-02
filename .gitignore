@@ -119,5 +119,4 @@ ENV/
 logs/*.csv
 
 exclude/
-
-
+!/neodroid/environments/.trackfolder

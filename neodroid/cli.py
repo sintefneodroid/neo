@@ -28,6 +28,9 @@ class NeodroidCLI(object):
 
     print(f'Updated {env_name} at {path_}')
 
+  def clean(self):
+    print(f'clean')
+
   def ls_local(self):
     print(os.listdir('/tmp'))
 
