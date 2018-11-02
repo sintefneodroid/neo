@@ -41,7 +41,7 @@ class NeodroidPackage:
 
   @property
   def author_email(self):
-    return 'cnheider@yandex.ru'
+    return 'cnheider@yandex.com'
 
   @property
   def maintainer_name(self):
