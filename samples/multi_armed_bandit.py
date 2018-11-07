@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import sys
 
-from samples.minimal.example_algorithms.ucb1 import UCB1
+from samples.example_algorithms import UCB1
 
 __author__ = 'cnheider'
 
@@ -23,8 +23,8 @@ def construct_displayables(normed, tries):
   return [d1, d2, d3, d12, d22, d32, d13, d23, d33]
 
 
-def main():
-  _environment = neo.make('mab', connect_to_running=False)
+def main(connect_to_running=False):
+  _environment = neo.make('mab', connect_to_running=connect_to_running)
 
   num_arms = _environment.action_space.num_discrete_actions
 
@@ -42,7 +42,7 @@ def main():
     index_0 = int(action_0)
 
     motions = [messaging.N.Motion('MultiArmedBanditKillableActor',
-                                  'MultiArmedBanditMultiArmedBanditMotor',
+                                  'MultiArmedBanditMotor',
                                   action_0)]
 
     i += 1
@@ -56,6 +56,8 @@ def main():
 
     _, reward, terminated, info = _environment.act(reaction)
 
+    print(reward)
+
     ucb1.update_belief(action_0, reward)
 
     tries[index_0] += 1
@@ -65,9 +67,10 @@ def main():
     for i in range(len(beliefs)):
       normed[i] = beliefs[i] / (sum(beliefs) + sys.float_info.epsilon)
 
+
     if terminated:
       print(info.termination_reason)
 
 
 if __name__ == '__main__':
-  main()
+  main(connect_to_running=True)

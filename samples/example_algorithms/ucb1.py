@@ -43,7 +43,9 @@ class UCB1:
   def values(self):
     return self._values
 
-  def train(self, arms, trials=1000):
+  def train(self,
+            arms,
+            trials=1000):
     for t in range(trials):
       chosen_arm = self.select_arm()
       reward = arms[chosen_arm].draw()

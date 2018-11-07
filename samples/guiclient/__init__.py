@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from executables.guiclient.main import main
+from .main import main
 
 __author__ = 'cnheider'
 

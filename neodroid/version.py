@@ -7,7 +7,7 @@ from warnings import warn
 
 __author__ = 'cnheider'
 __version__ = 0.4
-  
+
 def get_version():
   version = os.getenv('VERSION', __version__)
   now = datetime.datetime.utcnow()
@@ -35,8 +35,8 @@ def get_version():
 
     #warn(f'Environment variable VERSION is not set, only using timestamp: {version}')
 
-  version = f'{version}-{date_version}'
-  
+  version = f'{version}.{date_version}'
+
   return version
 
 if __version__ is None:

@@ -48,5 +48,20 @@ def extract_neodroid_camera_images(environment):
   if satellite:
     satellite_im = Image.open(satellite.observation_value)
 
+  object_space = environment.sensor('ObjectSpaceCameraObserver')
+  object_space_im = None
+  if object_space:
+    object_space_im = Image.open(object_space.observation_value)
+
+  uvs = environment.sensor('UVsCameraObserver')
+  uvs_im = None
+  if uvs:
+    uvs_im = Image.open(uvs.observation_value)
+
+  tangents = environment.sensor('TangentsCameraObserver')
+  tangents_im = None
+  if tangents:
+    tangents_im = Image.open(tangents.observation_value)
+
   return rgb_im, depth_im, segmentation_im, instance_segmentation_im, infrared_im, flow_im, normal_im, \
-         satellite_im
+         satellite_im, object_space_im, uvs_im, tangents_im

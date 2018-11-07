@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import cv2
 import time
 
 from neodroid.neodroid_utilities.environment_interface.neodroid_camera import extract_neodroid_camera_images
@@ -46,7 +47,7 @@ def update_figures(i):
    image_infrared,
    image_flow,
    image_normal,
-   image_satellite) = extract_neodroid_camera_images(env)
+   image_satellite,*_) = extract_neodroid_camera_images(env)
 
   time_now = time.time()
   if time_s:
@@ -107,7 +108,7 @@ def main():
    image_infrared,
    image_flow,
    image_normal,
-   image_satellite) = extract_neodroid_camera_images(env)
+   image_satellite,*_) = extract_neodroid_camera_images(env)
 
   ax1.set_title('RGB')
   if image_color:

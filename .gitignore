@@ -118,5 +118,5 @@ ENV/
 .pyre
 logs/*.csv
 
-exclude/
+exclude
 !/neodroid/environments/.trackfolder

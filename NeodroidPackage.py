@@ -71,9 +71,9 @@ class NeodroidPackage:
         # "name_of_executable = module.with:function_to_execute"
         'neodroid = neodroid.cli:main',
         'neodroid-sample = samples.minimal.action_space_sampling:main',
-        'neodroid-mab = samples.minimal.multi_armed_bandit:main',
-        'neodroid-grd = samples.minimal.grid_world:main',
+        'neodroid-mab = samples.multi_armed_bandit:main',
         'neodroid-dmr = samples.minimal.image_observation:main'
+        'neodroid-gui = samples.guiclient.main:main'
         ]
       }
 

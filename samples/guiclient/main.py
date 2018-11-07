@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from executables.guiclient.gui import NeoGUI
+from .gui import NeoGUI
 
 __author__ = 'cnheider'
 
