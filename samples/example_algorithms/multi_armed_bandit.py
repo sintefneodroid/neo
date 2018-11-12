@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import sys
 
-from samples.example_algorithms import UCB1
+from .ucb1 import UCB1
 
 __author__ = 'cnheider'
 
