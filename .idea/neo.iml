@@ -10,6 +10,7 @@
       <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/exclude" />
       <excludeFolder url="file://$MODULE_DIR$/neodroid/utilities/exclude" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/guiclient/audio" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
