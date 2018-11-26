@@ -81,6 +81,10 @@ class ActionSpace(Space):
   def is_continuous(self):
     return True  # TODO: Implement
 
+  @property
+  def is_mixed(self):
+    return True  # TODO: Implement
+
   def discrete_ternary_one_hot_sample(self):
     idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_ternary_actions)
