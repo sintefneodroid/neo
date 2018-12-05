@@ -78,9 +78,25 @@ class NeodroidPackage:
       }
 
   @property
-  def extras(self):
+  def extras(self) -> dict:
+    requirements_gui = []
+    with open('requirements-gui.txt') as f:
+      requirements = f.readlines()
+
+      for requirement in requirements:
+        requirements_gui.append(requirement.strip())
+
+    requirements_tests = []
+    with open('requirements-tests.txt') as f:
+      requirements = f.readlines()
+
+      for requirement in requirements:
+        requirements_tests.append(requirement.strip())
+
     these_extras = {
-      'GUI':['kivy'],
+      'gui':requirements_gui,
+      'tests':requirements_tests
+
       #'mab':['neodroid-linux-mab; platform_system == "Linux"',
       #       'neodroid-win-mab platform_system == "Windows"']
 
