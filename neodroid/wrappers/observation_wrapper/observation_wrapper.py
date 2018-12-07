@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.wrappers.utility_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
 

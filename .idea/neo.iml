@@ -19,6 +19,10 @@
   <component name="PyDocumentationSettings">
     <option name="renderExternalDocumentation" value="true" />
   </component>
+  <component name="ReSTService">
+    <option name="workdir" value="$MODULE_DIR$/docs/source" />
+    <option name="DOC_DIR" value="$MODULE_DIR$/docs/source" />
+  </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Nosetests" />
     <option name="PROJECT_TEST_RUNNER" value="Nosetests" />

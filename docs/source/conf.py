@@ -59,8 +59,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Neo'
-copyright = '2017, Christian Heider Nielsen'
 author = 'Christian Heider Nielsen'
+copyright = '2017, {author}'.format(author=author)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -229,16 +229,16 @@ def patched_make_field(self, types, domain, items, **kw):
     par += content
     return par
 
-  fieldname = nodes.field_name('', self.label)
+  field_name = nodes.field_name('', self.label)
   if len(items) == 1 and self.can_collapse:
-    fieldarg, content = items[0]
-    bodynode = handle_item(fieldarg, content)
+    field_arg, content = items[0]
+    body_node = handle_item(field_arg, content)
   else:
-    bodynode = self.list_type()
-    for fieldarg, content in items:
-      bodynode += nodes.list_item('', handle_item(fieldarg, content))
-  fieldbody = nodes.field_body('', bodynode)
-  return nodes.field('', fieldname, fieldbody)
+    body_node = self.list_type()
+    for field_arg, content in items:
+      body_node += nodes.list_item('', handle_item(field_arg, content))
+  field_body = nodes.field_body('', body_node)
+  return nodes.field('', field_name, field_body)
 
 
 TypedField.make_field = patched_make_field

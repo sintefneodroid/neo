@@ -8,7 +8,7 @@ import numpy as np
 
 from neodroid import Reaction, ReactionParameters
 from neodroid.neodroid_utilities import flattened_observation
-from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.wrappers.utility_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 
 class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):

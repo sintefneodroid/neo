@@ -11,11 +11,11 @@ __version__ = None
 
 
 '''
-import numpy as np
 
 from .models import *
 from .neodroid_environments import NeodroidEnvironments
 from .version import __version__
+from .wrappers import *
 
 _environments = None
 
