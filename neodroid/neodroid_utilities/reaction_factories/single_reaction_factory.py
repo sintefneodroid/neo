@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.neodroid_utilities import print_return_value
-from neodroid.neodroid_utilities.transformations import normalise_action
+from neodroid.neodroid_utilities.debugging_utilities.debug_print_return import print_return_value
+from neodroid.neodroid_utilities.transformations.action_transformations import normalise_action
 
 __author__ = 'cnheider'
 
@@ -22,7 +22,8 @@ def construct_step_reaction(reaction_input, environment_description, normalise=F
   if reaction_input is not None:
     if verbose:
       print('empty reaction')
-    parameters = M.ReactionParameters(terminable=True, step=True,
+    parameters = M.ReactionParameters(terminable=True,
+                                      step=True,
                                         episode_count=True)
     return M.Reaction(parameters=parameters)
 
@@ -32,7 +33,8 @@ def construct_step_reaction(reaction_input, environment_description, normalise=F
     if len(reaction_input) > 0 and isinstance(reaction_input[0], M.Reaction):
       return reaction_input
   if environment_description:
-    parameters = M.ReactionParameters(terminable=True, step=True,
+    parameters = M.ReactionParameters(terminable=True,
+                                      step=True,
                                       episode_count=True)
     actors = environment_description.actors.values()
     if actors:

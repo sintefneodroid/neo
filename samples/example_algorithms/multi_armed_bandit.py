@@ -6,11 +6,11 @@ from .ucb1 import UCB1
 
 __author__ = 'cnheider'
 
-import neodroid.wrappers.formal_wrapper as neo
+import neodroid.wrappers.utility_wrappers.single_environment_wrapper as neo
 from neodroid import messaging, ReactionParameters
 
 
-def construct_displayables(normed, tries,totals):
+def construct_displayables(normed, tries, totals):
   d1 = messaging.N.Displayable('BeliefBarLeftDisplayer', normed[0])
   d2 = messaging.N.Displayable('BeliefBarMiddleDisplayer', normed[1])
   d3 = messaging.N.Displayable('BeliefBarRightDisplayer', normed[2])
@@ -24,7 +24,7 @@ def construct_displayables(normed, tries,totals):
 
 
 def main(connect_to_running=False):
-  _environment = neo.make('mab', connect_to_running=connect_to_running)
+  _environment = neo.SingleEnvironmentWrapper(environment_name='mab', connect_to_running=connect_to_running)
 
   num_arms = _environment.action_space.num_discrete_actions
 
@@ -37,36 +37,34 @@ def main(connect_to_running=False):
 
   i = 0
   while _environment.is_connected:
-    action_0 = ucb1.select_arm()
-
-    index_0 = int(action_0)
+    action = int(ucb1.select_arm())
 
     motions = [messaging.N.Motion('MultiArmedBanditKillableActor',
                                   'MultiArmedBanditMotor',
-                                  action_0)]
+                                  action)]
 
     i += 1
 
-    reaction = messaging.N.Reaction(
-        motions=motions,
-        displayables=construct_displayables(normed, tries,totals),
-        parameters=ReactionParameters(step=True, episode_count=True),
-        serialised_message='this is a serialised_message'
-        )
+    reaction = messaging.N.Reaction(motions=motions,
+                                    displayables=construct_displayables(normed, tries, totals),
+                                    parameters=ReactionParameters(step=True,
+                                                                  episode_count=True,
+                                                                  terminable=True),
+                                    serialised_message='this is a serialised_message'
+                                    )
 
-    _, reward, terminated, info = _environment.act(reaction)
+    _, signal, terminated, info = _environment.react(reaction).to_gym()
 
-    print(reward)
+    print(signal)
 
-    ucb1.update_belief(action_0, reward)
+    ucb1.update_belief(action, signal)
 
-    tries[index_0] += 1
-    totals[index_0] += reward
-    beliefs[index_0] = float(totals[index_0]) / tries[index_0]
+    tries[action] += 1
+    totals[action] += signal
+    beliefs[action] = float(totals[action]) / tries[action]
 
     for i in range(len(beliefs)):
       normed[i] = beliefs[i] / (sum(beliefs) + sys.float_info.epsilon)
-
 
     if terminated:
       print(info.termination_reason)

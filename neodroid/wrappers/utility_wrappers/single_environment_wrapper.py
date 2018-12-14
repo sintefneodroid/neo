@@ -6,7 +6,7 @@ from neodroid.neodroid_utilities import NoEnvironment
 
 __author__ = 'cnheider'
 
-from neodroid import NeodroidEnvironments
+from neodroid import NeodroidEnvironments, Reaction
 
 
 class SingleEnvironmentWrapper(NeodroidEnvironments):
@@ -16,19 +16,18 @@ class SingleEnvironmentWrapper(NeodroidEnvironments):
       return
     return self.react()
 
-  def _react(self, in_reaction=None,
+  def _react(self,
+             input_reaction=None,
              *,
-
              parameters=None,
              normalise=False,
              **kwargs):
-
-    input_reaction = self.maybe_infer_motion_reaction(
-        in_reaction=in_reaction,
-        normalise=normalise,
-        description=self._description,
-        verbose=self._verbose
-        )
+    if not isinstance(input_reaction, Reaction):
+      input_reaction = self.maybe_infer_motion_reaction(in_reaction=input_reaction,
+                                                        normalise=normalise,
+                                                        description=self._description,
+                                                        verbose=self._verbose
+                                                        )
     if parameters is not None:
       input_reaction.parameters = parameters
 
@@ -99,7 +98,7 @@ if __name__ == '__main__':
       help='Connect to already running environment instead of starting another instance')
   proc_args = parser.parse_args()
 
-  env = SingleEnvironmentWrapper(name=proc_args.ENVIRONMENT_NAME,
+  env = SingleEnvironmentWrapper(environment_name=proc_args.ENVIRONMENT_NAME,
                                  connect_to_running=proc_args.CONNECT_TO_RUNNING)
 
   observation_session = tqdm(env, leave=False)

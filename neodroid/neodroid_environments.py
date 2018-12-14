@@ -225,13 +225,17 @@ class NeodroidEnvironments(NetworkingEnvironment):
 :rtype:
 '''
     if description:
-      out_reaction = construct_step_reaction(
-          in_reaction, description, normalise, verbose=verbose
-          )
+      out_reaction = construct_step_reaction(in_reaction,
+                                             description,
+                                             normalise,
+                                             verbose=verbose
+                                             )
     else:
-      out_reaction = construct_step_reaction(
-          in_reaction, None, False, verbose=verbose
-          )
+      out_reaction = construct_step_reaction(in_reaction,
+                                             None,
+                                             False,
+                                             verbose=verbose
+                                             )
     return out_reaction
 
   def _warn_closing(self):
@@ -260,12 +264,12 @@ class NeodroidEnvironments(NetworkingEnvironment):
 
   def __str__(self):
     return f'<NeodroidEnvironment>\n' \
-           f'  <ObservationSpace>{self.observation_space}</ObservationSpace>\n' \
-           f'  <ActionSpace>{self.action_space}</ActionSpace>\n' \
-           f'  <Description>{self.description}</Description>\n' \
-           f'  <SimulatorConfiguration>{self.simulator_configuration}</SimulatorConfiguration>\n' \
-           f'  <IsConnected>{self.is_connected}</IsConnected>\n' \
-           f'</NeodroidEnvironment>'
+      f'  <ObservationSpace>{self.observation_space}</ObservationSpace>\n' \
+      f'  <ActionSpace>{self.action_space}</ActionSpace>\n' \
+      f'  <Description>{self.description}</Description>\n' \
+      f'  <SimulatorConfiguration>{self.simulator_configuration}</SimulatorConfiguration>\n' \
+      f'  <IsConnected>{self.is_connected}</IsConnected>\n' \
+      f'</NeodroidEnvironment>'
 
 
 if __name__ == '__main__':
