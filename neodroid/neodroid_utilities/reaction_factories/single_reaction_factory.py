@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.neodroid_utilities import print_return
+from neodroid.neodroid_utilities import print_return_value
 from neodroid.neodroid_utilities.transformations import normalise_action
 
 __author__ = 'cnheider'
@@ -10,7 +10,7 @@ import numpy as np
 from neodroid import models as M
 
 
-# @debug_print_return
+# @debug_print_return_value
 def construct_step_reaction(reaction_input, environment_description, normalise=False, verbose=False):
   """
 
@@ -92,7 +92,7 @@ def construct_motions_from_list(input_list, actors, normalise):
     return new_motions
 
 
-@print_return
+@print_return_value
 def verify_configuration_reaction(*, input_reaction, environment_description, verbose=False):
   if environment_description:
     parameters = M.ReactionParameters(reset=True,
