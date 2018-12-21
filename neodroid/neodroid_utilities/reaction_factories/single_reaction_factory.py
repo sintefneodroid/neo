@@ -19,12 +19,12 @@ def construct_step_reaction(reaction_input, environment_description, normalise=F
   :param normalise:
   :type reaction_input: object
   """
-  if reaction_input is not None:
+  if reaction_input is None:
     if verbose:
       print('empty reaction')
     parameters = M.ReactionParameters(terminable=True,
                                       step=True,
-                                        episode_count=True)
+                                      episode_count=True)
     return M.Reaction(parameters=parameters)
 
   if isinstance(reaction_input, M.Reaction):

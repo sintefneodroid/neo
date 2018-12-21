@@ -69,12 +69,11 @@ class NeodroidEnvironments(NetworkingEnvironment):
     self._clones = clones
 
     if not self._connect_to_running and not self._simulation_instance:
-      self._simulation_instance = launch_environment(
-          environment_name,
-          ip=self._ip,
-          port=self._port,
-          path_to_executables_directory=path_to_executables_directory,
-          headless=headless)
+      self._simulation_instance = launch_environment(environment_name,
+                                                     ip=self._ip,
+                                                     port=self._port,
+                                                     path_to_executables_directory=path_to_executables_directory,
+                                                     headless=headless)
       if self._simulation_instance:
         if self._debug_logging:
           self._logger.debug(f'successfully started environment {environment_name}')
@@ -108,8 +107,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
       normalise=False,
       on_reaction_sent_callback=None,
       on_step_done_callback=None,
-      **kwargs
-      ):
+      **kwargs      ):
     '''
 
 :param input_reactions:
@@ -137,12 +135,10 @@ class NeodroidEnvironments(NetworkingEnvironment):
             )
         input_reactions = [M.Reaction(parameters=parameters)]
       elif type(input_reactions) is not Reaction:
-        input_reaction = self.maybe_infer_motion_reaction(
-            in_reaction=input_reactions,
-            normalise=normalise,
-            description=self._description,
-            verbose=self._verbose
-            )
+        input_reaction = self.maybe_infer_motion_reaction(input_reactions=input_reactions,
+                                                          normalise=normalise,
+                                                          description=self._description,
+                                                          verbose=self._verbose)
         input_reactions = [input_reaction]
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
@@ -206,17 +202,16 @@ class NeodroidEnvironments(NetworkingEnvironment):
 
   @staticmethod
   def maybe_infer_motion_reaction(*,
-                                  in_reaction,
+                                  input_reactions,
                                   normalise,
                                   description,
-                                  verbose=False
-                                  ):
+                                  verbose=False                                  ):
     '''
 
 :param verbose:
 :type verbose:
-:param in_reaction:
-:type in_reaction:
+:param input_reactions:
+:type input_reactions:
 :param normalise:
 :type normalise:
 :param description:
@@ -225,17 +220,19 @@ class NeodroidEnvironments(NetworkingEnvironment):
 :rtype:
 '''
     if description:
-      out_reaction = construct_step_reaction(in_reaction,
+      out_reaction = construct_step_reaction(input_reactions,
                                              description,
                                              normalise,
-                                             verbose=verbose
-                                             )
+                                             verbose=verbose)
     else:
-      out_reaction = construct_step_reaction(in_reaction,
+      out_reaction = construct_step_reaction(input_reactions,
                                              None,
                                              False,
-                                             verbose=verbose
-                                             )
+                                             verbose=verbose)
+
+    if verbose:
+      print(out_reaction)
+
     return out_reaction
 
   def _warn_closing(self):

@@ -23,7 +23,7 @@ class SingleEnvironmentWrapper(NeodroidEnvironments):
              normalise=False,
              **kwargs):
     if not isinstance(input_reaction, Reaction):
-      input_reaction = self.maybe_infer_motion_reaction(in_reaction=input_reaction,
+      input_reaction = self.maybe_infer_motion_reaction(input_reactions=input_reaction,
                                                         normalise=normalise,
                                                         description=self._description,
                                                         verbose=self._verbose

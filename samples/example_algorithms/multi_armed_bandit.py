@@ -55,8 +55,6 @@ def main(connect_to_running=False):
 
     _, signal, terminated, info = _environment.react(reaction).to_gym()
 
-    print(signal)
-
     ucb1.update_belief(action, signal)
 
     tries[action] += 1
