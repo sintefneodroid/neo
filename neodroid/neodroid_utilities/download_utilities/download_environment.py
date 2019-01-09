@@ -1,4 +1,5 @@
 import os
+import shutil
 
 from tqdm import tqdm
 
@@ -15,7 +16,7 @@ class DownloadProgress(tqdm):
     self.last_block = block_num
 
 
-def download_environment(name:str='mab_win', path_to_executables_directory: str = '/tmp')-> str:
+def download_environment(name:str='mab_win', path_to_executables_directory: str = '/tmp/neodroid')-> str:
   """
 
   :param path_to_executables_directory:
@@ -29,15 +30,22 @@ def download_environment(name:str='mab_win', path_to_executables_directory: str 
   print(f'\nFetching {name} environment\n')
   formatted = download_format.format(FILE_ID=hash_id)  # +'.tmp')
 
+  if not os.path.exists(path_to_executables_directory):
+    os.makedirs(path_to_executables_directory)
+
   with DownloadProgress(desc=name) as progress_bar:
-    file_name, headers = urlretrieve(formatted,
-                                     # os.path.join(path_to_executables_directory,f'{name}.tmp'),
+    zip_file_name, headers = urlretrieve(formatted,
+                                     os.path.join(path_to_executables_directory,f'{name}.zip'),
                                      reporthook=progress_bar.hook)
 
-  with zipfile.ZipFile(file_name, "r") as zip_ref:
+  with zipfile.ZipFile(zip_file_name, "r") as zip_ref:
     zip_ref.extractall(path_to_executables_directory)
 
-  return os.path.join(path_to_executables_directory, file_name)
+  file = os.path.join(path_to_executables_directory, zip_file_name)
+  #shutil.rmtree(file, ignore_errors=True)
+  os.remove(file)
+
+  return os.path.join(path_to_executables_directory, name)
 
 
 def available_environments(repository='http://environments.neodroid.ml/ls'):

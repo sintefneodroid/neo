@@ -4,7 +4,7 @@ from warnings import warn
 
 from neodroid.neodroid_utilities import flattened_observation
 from neodroid.version import __version__
-from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.wrappers.utility_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
 

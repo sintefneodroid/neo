@@ -64,6 +64,9 @@ class EnvironmentState(object):
     if key in neodroid.messaging.deserialise_observers(self._fbs_state):
       return neodroid.messaging.deserialise_observers(self._fbs_state)[key]
 
+  def to_gym(self):
+    return (self.observers, self.signal, self.terminated, self)
+
   def __repr__(self):
     observers_str = ''.join(
         [str(observer.__repr__()) for observer in self.observers.values()]

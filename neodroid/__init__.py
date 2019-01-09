@@ -11,11 +11,12 @@ __version__ = None
 
 
 '''
-import numpy as np
 
 from .models import *
 from .neodroid_environments import NeodroidEnvironments
 from .version import __version__
+from .wrappers import *
+import numpy as np
 
 _environments = None
 
@@ -25,7 +26,7 @@ def draw_logo():
     print(f.read())
 
 
-def make(environment_name, clones=0, *args, **kwargs):
+def make(environment_name='', clones=0, *args, **kwargs):
   global _environments
   _environments = NeodroidEnvironments(environment_name=environment_name, clones=clones, *args, **kwargs)
   return _environments
