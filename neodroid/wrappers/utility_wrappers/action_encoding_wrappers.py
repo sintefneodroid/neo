@@ -14,7 +14,8 @@ from neodroid.wrappers.curriculum_wrapper import NeodroidCurriculumWrapper
 class BinaryActionEncodingWrapper(NeodroidGymWrapper):
 
   def step(self, action: int = 0, **kwargs) -> Any:
-    ternary_action = signed_ternary_encoding(self.action_space.num_motors, action)
+    ternary_action = signed_ternary_encoding(size=self.action_space.num_motors,
+                                             index=action)
     return super().step(ternary_action, **kwargs)
 
   @property
@@ -33,7 +34,8 @@ class BinaryActionEncodingWrapper(NeodroidGymWrapper):
 class BinaryActionEncodingCurriculumEnvironment(NeodroidCurriculumWrapper):
 
   def step(self, action: int = 0, **kwargs) -> Any:
-    a = signed_ternary_encoding(self.action_space.num_motors, action)
+    a = signed_ternary_encoding(size=self.action_space.num_motors,
+                                index= action)
     return super().act(input_reaction=a, **kwargs)
 
   @property

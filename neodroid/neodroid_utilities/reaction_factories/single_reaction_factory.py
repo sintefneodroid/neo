@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import typing
+
 from neodroid.neodroid_utilities.debugging_utilities.debug_print_return import print_return_value
 from neodroid.neodroid_utilities.transformations.action_transformations import normalise_action
 
@@ -51,13 +53,17 @@ def construct_step_reaction(reaction_input, environment_description, normalise=F
 
           return M.Reaction(parameters=parameters, motions=reaction_input)
         else:
-          return construct_reaction_from_list(reaction_input, actors, normalise)
+          return construct_reaction_from_list(reaction_input,
+                                              actors,
+                                              normalise)
       elif isinstance(reaction_input, int):
         return construct_reaction_from_list([reaction_input], actors, normalise)
       elif isinstance(reaction_input, float):
         return construct_reaction_from_list([reaction_input], actors, normalise)
       elif isinstance(reaction_input, (np.ndarray, np.generic)):
-        a = construct_reaction_from_list(reaction_input.astype(float).tolist(), actors, normalise)
+        a = construct_reaction_from_list(reaction_input.astype(float).tolist(),
+                                         actors,
+                                         normalise)
         return a
 
   parameters = M.ReactionParameters(describe=True)
@@ -65,12 +71,21 @@ def construct_step_reaction(reaction_input, environment_description, normalise=F
 
 
 def construct_reaction_from_list(motion_list, actors, normalise):
-  motions = construct_motions_from_list(motion_list, actors, normalise)
+  motions = construct_motions_from_list(motion_list,
+                                        actors,
+                                        normalise)
   parameters = M.ReactionParameters(terminable=True, step=True, episode_count=True)
   return M.Reaction(motions=motions, parameters=parameters)
 
 
-def construct_motions_from_list(input_list, actors, normalise):
+def construct_motions_from_list(input_list,
+                                actors,
+                                normalise):
+  if not isinstance(input_list,typing.Collection):
+    input_list = [input_list]
+    if len(input_list)==0:
+      return []
+
   actor_motor_tuples = [
     (actor.actor_name, motor.motor_name, motor.motion_space)
     for actor in actors

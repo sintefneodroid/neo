@@ -5,14 +5,17 @@ __author__ = 'cnheider'
 import numpy as np
 
 
-def signed_ternary_encoding(size: int, index:int):
+def signed_ternary_encoding(*,
+                            size: int,
+                            index:int):
   assert isinstance(size,int), f'size was {type(size)}'
   assert isinstance(index,int), f'index was {type(index)}'
+  assert size*3 > index, f'size was {size*3}, index was {index}'
 
   a = np.zeros(size)
   if index < size:
     a[index] = 1
-  else:
+  elif index < size*2:
     a[index - size] = -1
   return a
 

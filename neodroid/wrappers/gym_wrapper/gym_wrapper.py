@@ -17,7 +17,7 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper):
 
   def step(self, action=None, *args, **kwargs):
     # action = action.flatten()
-    message = super().react(in_reaction=action, **kwargs)
+    message = super().react(action, **kwargs)
     if message:
       return (
         np.array(flattened_observation(message)),
