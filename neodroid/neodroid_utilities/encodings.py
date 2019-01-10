@@ -10,12 +10,14 @@ def signed_ternary_encoding(*,
                             index:int):
   assert isinstance(size,int), f'size was {type(size)}'
   assert isinstance(index,int), f'index was {type(index)}'
-  assert size*3 > index, f'size was {size*3}, index was {index}'
+  assert size*2 > index, f'signed size was {size*2}, index was {index}'
 
   a = np.zeros(size)
-  if index < size:
+  if index < 0:
+    return a
+  elif 0 <= index < size:
     a[index] = 1
-  elif index < size*2:
+  elif size <= index < size*2:
     a[index - size] = -1
   return a
 
@@ -37,3 +39,9 @@ def agg_double_list(l):
   s_mu = np.mean(np.array(s), 0)
   s_std = np.std(np.array(s), 0)
   return s_mu, s_std
+
+
+if __name__ == '__main__':
+  size = 4
+  index = -1
+  print(signed_ternary_encoding(size=size,index=index))
