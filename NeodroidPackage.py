@@ -10,13 +10,13 @@ class NeodroidPackage:
       'pytest',
       'mock'
       ]
-      
+
   @property
   def setup_dependencies(self) -> list:
     return [
       'pytest-runner'
       ]
-      
+
   @property
   def package_name(self)->str:
     return 'Neodroid'
@@ -76,9 +76,11 @@ class NeodroidPackage:
       'console_scripts':[
         # "name_of_executable = module.with:function_to_execute"
         'neodroid = neodroid.cli:main',
-        'neodroid-sample = samples.minimal.action_space_sampling:main',
+        'neodroid-smp = samples.minimal.action_space_sampling:main',
+        'neodroid-img = samples.minimal.image_observation:main'
         'neodroid-mab = samples.example_algorithms.multi_armed_bandit:main',
-        'neodroid-dmr = samples.minimal.image_observation:main',
+        'neodroid-dmr = samples.minimal.dmr:main',
+        'neodroid-aav = samples.minimal.aav:main'
         #'neodroid-gui = samples.guiclient.main:main'
         ]
       }

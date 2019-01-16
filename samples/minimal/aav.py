@@ -25,7 +25,7 @@ time_s = time.time()
 
 image_axs = warg.NOD()
 
-env = neogym(environment_name='dmr', connect_to_running=True)
+env = neogym(environment_name='aav', connect_to_running=False)
 fig = plt.figure()
 
 
