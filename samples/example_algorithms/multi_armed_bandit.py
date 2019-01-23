@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import argparse
 import sys
 
 from samples.example_algorithms.ucb1 import UCB1
@@ -24,7 +25,18 @@ def construct_displayables(normed, tries, totals):
 
 
 def main(connect_to_running=False):
-  _environment = neo.SingleEnvironmentWrapper(environment_name='mab', connect_to_running=connect_to_running)
+  parser = argparse.ArgumentParser(prog='mab')
+  parser.add_argument('-C',
+                      action='store_true',
+                      help='connect to running',
+                      default=connect_to_running)
+  args = parser.parse_args()
+  if args.C:
+    connect_to_running =True
+
+
+  _environment = neo.SingleEnvironmentWrapper(environment_name='mab',
+                                              connect_to_running=connect_to_running)
 
   num_arms = _environment.action_space.num_discrete_actions
 

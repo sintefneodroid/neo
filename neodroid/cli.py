@@ -59,7 +59,6 @@ class NeodroidCLI(object):
 
 def draw_cli_header(*,
                     title='Neodroid',
-
                     font='big'):
 
   figlet = Figlet(font=font, justify='center', width=terminal_width)
@@ -68,7 +67,8 @@ def draw_cli_header(*,
   print(f'{description}{indent}{underline}\n')
 
 
-def main(*,draw_header=True):
+def main(*,
+         draw_header=True):
   if draw_header:
     draw_cli_header()
   fire.Fire(NeodroidCLI)

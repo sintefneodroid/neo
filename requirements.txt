@@ -8,3 +8,5 @@ gym
 tqdm
 matplotlib
 cloudpickle
+draugr
+warg

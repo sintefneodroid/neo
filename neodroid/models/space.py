@@ -4,10 +4,12 @@ import math
 
 __author__ = 'cnheider'
 
-
 class Space(object):
 
-  def __init__(self, decimal_granularity=0, min_value=0, max_value=0):
+  def __init__(self,
+               decimal_granularity=0,
+               min_value=0,
+               max_value=0):
     self._decimal_granularity = decimal_granularity
     self._min_value = min_value
     self._max_value = max_value
@@ -65,3 +67,7 @@ class Space(object):
 
   def __unicode__(self):
     return self.__repr__()
+
+if __name__ == '__main__':
+  acs = Space()
+  print(acs)

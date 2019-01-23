@@ -77,10 +77,11 @@ class NeodroidPackage:
         # "name_of_executable = module.with:function_to_execute"
         'neodroid = neodroid.cli:main',
         'neodroid-smp = samples.minimal.action_space_sampling:main',
-        'neodroid-img = samples.minimal.image_observation:main'
+        'neodroid-img = samples.minimal.image_observation:main',
         'neodroid-mab = samples.example_algorithms.multi_armed_bandit:main',
         'neodroid-dmr = samples.minimal.dmr:main',
-        'neodroid-aav = samples.minimal.aav:main'
+        'neodroid-aav = samples.minimal.aav:main',
+        #'neodroid-xr = samples.minimal.xr:main'
         #'neodroid-gui = samples.guiclient.main:main'
         ]
       }
