@@ -9,11 +9,14 @@ from neodroid.wrappers.utility_wrappers.single_environment_wrapper import Single
 __author__ = 'cnheider'
 
 import numpy as np
+from gym import error, spaces
+import gym
 
 warn(f"This module is deprecated in version {__version__}", DeprecationWarning)
 
 
-class NeodroidGymWrapper(SingleEnvironmentWrapper):
+class NeodroidGymWrapper(SingleEnvironmentWrapper,
+                         gym.Env):
 
   def step(self, action=None, *args, **kwargs):
     # action = action.flatten()
@@ -46,3 +49,26 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper):
     if not self._is_connected_to_server:
       raise ValueError('Not connected to a server.')
     return self.react()
+
+  @property
+  def metadata(self):
+    return {'render.modes':['rgb_array']}
+
+  @property
+  def reward_range(self):
+    return -float('inf'), float('inf')
+
+  @property
+  def spec(self):
+    return None
+
+  @property
+  def action_space(self):
+    return self._action_space
+
+  @property
+  def observation_space(self):
+    return self._observation_space
+
+if __name__ == '__main__':
+  NeodroidGymWrapper()

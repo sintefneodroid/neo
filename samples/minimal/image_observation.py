@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import cv2
 import time
+
+import cv2
 import warg
 
 from neodroid.neodroid_utilities.environment_interface.neodroid_camera import extract_neodroid_camera_images
@@ -36,7 +37,7 @@ def update_figures(i):
   obs, signal, terminated, info = env.step(sample)
   print(obs)
 
-  images = extract_neodroid_camera_images(env)
+  new_images = extract_neodroid_camera_images(env)
 
   time_now = time.time()
   if time_s:
@@ -52,24 +53,30 @@ def update_figures(i):
                f'Signal: {signal}, '
                f'Terminated: {bool(terminated)}')
 
-  if image_axs.rgb_image:
-    image_axs.rgb_image.set_data(images.rgb_image)
-  if image_axs.depth_image:
-    image_axs.depth_image.set_data(images.depth_image)
-  if image_axs.infrared_image:
-    image_axs.infrared_image.set_data(images.infrared_image)
-  if image_axs.flow_image:
-    image_axs.flow_image.set_data(images.flow_image)
-  if image_axs.normal_image:
-    image_axs.normal_image.set_data(images.normal_image)
-  if image_axs.satellite_image:
-    image_axs.satellite_image.set_data(images.satellite_image)
-  if image_axs.object_space_image:
-    image_axs.object_space_image.set_data(images.object_space_image)
-  if image_axs.uvs_image:
-    image_axs.uvs_image.set_data(images.uvs_image)
-  if image_axs.tangents_image:
-    image_axs.tangents_image.set_data(images.tangents_image)
+  if image_axs.rgb_image and new_images.rgb_image:
+    image_axs.rgb_image.set_data(new_images.rgb_image)
+  if image_axs.depth_image and new_images.depth_image:
+    image_axs.depth_image.set_data(new_images.depth_image)
+  if image_axs.infrared_image and new_images.infrared_image:
+    image_axs.infrared_image.set_data(new_images.infrared_image)
+  if image_axs.flow_image and new_images.flow_image:
+    image_axs.flow_image.set_data(new_images.flow_image)
+  if image_axs.normal_image and new_images.normal_image:
+    image_axs.normal_image.set_data(new_images.normal_image)
+  if image_axs.satellite_image and new_images.satellite_image:
+    image_axs.satellite_image.set_data(new_images.satellite_image)
+  if image_axs.object_space_image and new_images.object_space_image:
+    image_axs.object_space_image.set_data(new_images.object_space_image)
+  if image_axs.uvs_image and new_images.uvs_image:
+    image_axs.uvs_image.set_data(new_images.uvs_image)
+  if image_axs.tangents_image and new_images.tangents_image:
+    image_axs.tangents_image.set_data(new_images.tangents_image)
+  if image_axs.world_space_image and new_images.world_space_image:
+    image_axs.world_space_image.set_data(new_images.world_space_image)
+  if image_axs.segmentation_image and new_images.segmentation_image:
+    image_axs.segmentation_image.set_data(new_images.segmentation_image)
+  if image_axs.instance_segmentation_image and new_images.instance_segmentation_image:
+    image_axs.instance_segmentation_image.set_data(new_images.instance_segmentation_image)
 
   if terminated:
     env.reset()
@@ -83,65 +90,82 @@ def main():
 
   ((rgb_image,
     depth_image,
-    infrared_image),
+    infrared_image, world_space_image),
    (flow_image,
     normal_image,
-    satellite_image),
+    satellite_image, segmentation_image),
    (object_space_image,
     uvs_image,
-    tangents_image)) = fig.subplots(3, 3, sharey='all')
+    tangents_image, instance_segmentation_image)) = fig.subplots(3, 4,
+                                                                 sharey='all')
 
   image_axs = warg.NOD.dict_of(rgb_image,
-    depth_image,
-    infrared_image,
-   flow_image,
-    normal_image,
-    satellite_image,
-   object_space_image,
-    uvs_image,
-    tangents_image)
+                               depth_image,
+                               infrared_image,
+                               flow_image,
+                               normal_image,
+                               satellite_image,
+                               object_space_image,
+                               uvs_image,
+                               tangents_image,
+                               world_space_image,
+                               segmentation_image,
+                               instance_segmentation_image)
 
   env.reset()
   obs, rew, term, info = env.step(env.action_space.sample())
   print(obs)
 
-  images = extract_neodroid_camera_images(env)
+  new_images = extract_neodroid_camera_images(env)
 
   rgb_image.set_title('RGB')
-  if images.rgb_image:
-    image_axs.rgb_image = rgb_image.imshow(images.rgb_image)
+  if new_images.rgb_image:
+    image_axs.rgb_image = rgb_image.imshow(new_images.rgb_image)
 
   depth_image.set_title('Depth')
-  if images.depth_image:
-    image_axs.depth_image = depth_image.imshow(images.depth_image)
+  if new_images.depth_image:
+    image_axs.depth_image = depth_image.imshow(new_images.depth_image)
 
   infrared_image.set_title('Infrared')
-  if images.infrared_image:
-    image_axs.infrared_image = infrared_image.imshow(images.infrared_image)
+  if new_images.infrared_image:
+    image_axs.infrared_image = infrared_image.imshow(new_images.infrared_image)
 
   flow_image.set_title('Flow')
-  if images.flow_image:
-    image_axs.flow_image = flow_image.imshow(images.flow_image)
+  if new_images.flow_image:
+    image_axs.flow_image = flow_image.imshow(new_images.flow_image)
 
   normal_image.set_title('Normal')
-  if images.normal_image:
-    image_axs.normal_image = normal_image.imshow(images.normal_image)
+  if new_images.normal_image:
+    image_axs.normal_image = normal_image.imshow(new_images.normal_image)
 
   satellite_image.set_title('Satellite')
-  if images.satellite_image:
-    image_axs.satellite_image = satellite_image.imshow(images.satellite_image)
+  if new_images.satellite_image:
+    image_axs.satellite_image = satellite_image.imshow(new_images.satellite_image)
 
-  object_space_image.set_title('object_space_image')
-  if images.object_space_image:
-    image_axs.object_space_image = object_space_image.imshow(images.object_space_image)
+  object_space_image.set_title('ObjectSpace')
+  if new_images.object_space_image:
+    image_axs.object_space_image = object_space_image.imshow(new_images.object_space_image)
 
-  uvs_image.set_title('uvs_image')
-  if images.uvs_image:
-    image_axs.uvs_image = uvs_image.imshow(images.uvs_image)
+  uvs_image.set_title('UVs')
+  if new_images.uvs_image:
+    image_axs.uvs_image = uvs_image.imshow(new_images.uvs_image)
 
-  tangents_image.set_title('tangents_image')
-  if images.tangents_image:
-    image_axs.tangents_image = tangents_image.imshow(images.tangents_image)
+  tangents_image.set_title('Tangents')
+  if new_images.tangents_image:
+    image_axs.tangents_image = tangents_image.imshow(new_images.tangents_image)
+
+  world_space_image.set_title('WorldSpace')
+  if new_images.world_space_image:
+    image_axs.world_space_image = world_space_image.imshow(new_images.world_space_image)
+
+  segmentation_image.set_title('Segmentation')
+  if new_images.segmentation_image:
+    image_axs.segmentation_image = segmentation_image.imshow(new_images.segmentation_image)
+
+  instance_segmentation_image.set_title('Instance')
+  if new_images.instance_segmentation_image:
+    image_axs.instance_segmentation_image = instance_segmentation_image.imshow(
+      new_images.instance_segmentation_image)
 
   _ = animation.FuncAnimation(fig, update_figures)
   plt.show()

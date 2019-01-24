@@ -52,6 +52,11 @@ def extract_neodroid_camera_images(environment):
   if object_space:
     object_space_image = Image.open(object_space.observation_value)
 
+  world_space = environment.sensor('WorldSpaceCameraObserver')
+  world_space_image = None
+  if world_space:
+    world_space_image = Image.open(world_space.observation_value)
+
   uvs = environment.sensor('UVsCameraObserver')
   uvs_image = None
   if uvs:
@@ -71,5 +76,6 @@ def extract_neodroid_camera_images(environment):
                           normal_image,
                           satellite_image,
                           object_space_image,
+                          world_space_image,
                           uvs_image,
                           tangents_image)
