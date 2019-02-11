@@ -35,7 +35,8 @@ def update_figures(i):
 
   sample = env.action_space.sample()
   obs, signal, terminated, info = env.step(sample)
-  print(obs)
+  for obs in info.observers.values():
+    print(obs)
 
   new_images = extract_neodroid_camera_images(env)
 
@@ -47,7 +48,7 @@ def update_figures(i):
 
   time_s = time_now
 
-  fig.suptitle(f'Update{i}, '
+  fig.suptitle(f'Update: {i}, '
                f'Frame: {frame_i}, '
                f'FPS: {fps}, '
                f'Signal: {signal}, '
@@ -55,26 +56,37 @@ def update_figures(i):
 
   if image_axs.rgb_image and new_images.rgb_image:
     image_axs.rgb_image.set_data(new_images.rgb_image)
+
   if image_axs.depth_image and new_images.depth_image:
     image_axs.depth_image.set_data(new_images.depth_image)
+
   if image_axs.infrared_image and new_images.infrared_image:
     image_axs.infrared_image.set_data(new_images.infrared_image)
+
   if image_axs.flow_image and new_images.flow_image:
     image_axs.flow_image.set_data(new_images.flow_image)
+
   if image_axs.normal_image and new_images.normal_image:
     image_axs.normal_image.set_data(new_images.normal_image)
+
   if image_axs.satellite_image and new_images.satellite_image:
     image_axs.satellite_image.set_data(new_images.satellite_image)
+
   if image_axs.object_space_image and new_images.object_space_image:
     image_axs.object_space_image.set_data(new_images.object_space_image)
+
   if image_axs.uvs_image and new_images.uvs_image:
     image_axs.uvs_image.set_data(new_images.uvs_image)
+
   if image_axs.tangents_image and new_images.tangents_image:
     image_axs.tangents_image.set_data(new_images.tangents_image)
+
   if image_axs.world_space_image and new_images.world_space_image:
     image_axs.world_space_image.set_data(new_images.world_space_image)
+
   if image_axs.segmentation_image and new_images.segmentation_image:
     image_axs.segmentation_image.set_data(new_images.segmentation_image)
+
   if image_axs.instance_segmentation_image and new_images.instance_segmentation_image:
     image_axs.instance_segmentation_image.set_data(new_images.instance_segmentation_image)
 
@@ -90,14 +102,16 @@ def main():
 
   ((rgb_image,
     depth_image,
-    infrared_image, world_space_image),
+    infrared_image,
+    world_space_image),
    (flow_image,
     normal_image,
-    satellite_image, segmentation_image),
+    satellite_image,
+    segmentation_image),
    (object_space_image,
     uvs_image,
-    tangents_image, instance_segmentation_image)) = fig.subplots(3, 4,
-                                                                 sharey='all')
+    tangents_image,
+    instance_segmentation_image)) = fig.subplots(3, 4, sharey='all')
 
   image_axs = warg.NOD.dict_of(rgb_image,
                                depth_image,
@@ -113,8 +127,11 @@ def main():
                                instance_segmentation_image)
 
   env.reset()
-  obs, rew, term, info = env.step(env.action_space.sample())
-  print(obs)
+  acs = env.action_space.sample()
+  obs, rew, term, info = env.step(acs)
+
+  for obs in info.observers.values():
+    print(obs)
 
   new_images = extract_neodroid_camera_images(env)
 
