@@ -29,11 +29,11 @@ class Actor(object):
   def __repr__(self):
     motors_str = ''.join([str(motor.__repr__()) for motor in self.motors.values()])
 
-    return '    <Actor>\n' + '      <name>' + self.actor_name.decode(
-        'utf-8'
-        ) + '</name>\n' + '      <alive>' + str(
-        self.is_alive
-        ) + '</alive>\n' + '      <Motors>\n' + motors_str + '      </Motors>\n' + '    </Actor>\n'
+    return (f'<Actor>\n'
+            f'<name>{self.actor_name.decode("utf-8")}</name>\n'
+            f'<alive>{self.is_alive}</alive>\n'
+            f'<Motors>\n{motors_str}</Motors>\n'
+            f'</Actor>\n')
 
   def __str__(self):
     return self.__repr__()

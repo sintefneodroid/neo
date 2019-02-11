@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
@@ -31,13 +31,11 @@ class Motion(object):
       }
 
   def __repr__(self):
-    return '<Motion>\n' + '  <actor_name>' + str(
-        self._actor_name
-        ) + '</actor_name>\n' + '  <motor_name>' + str(
-        self._motor_name
-        ) + '</motor_name>\n' + '  <strength>\n' + str(
-        self._strength
-        ) + '</strength>\n' + '</Motion>\n'
+    return (f'<Motion>\n'
+            f'<actor_name>{self._actor_name}</actor_name>\n'
+            f'<motor_name>{self._motor_name}</motor_name>\n'
+            f'<strength>{self._strength}</strength>\n'
+            f'</Motion>\n')
 
   def __str__(self):
     return self.__repr__()

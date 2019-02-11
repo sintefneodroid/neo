@@ -81,7 +81,6 @@ class NeodroidPackage:
         'neodroid-mab = samples.example_algorithms.multi_armed_bandit:main',
         'neodroid-dmr = samples.minimal.dmr:main',
         'neodroid-aav = samples.minimal.aav:main',
-        #'neodroid-xr = samples.minimal.xr:main'
         #'neodroid-gui = samples.guiclient.main:main'
         ]
       }

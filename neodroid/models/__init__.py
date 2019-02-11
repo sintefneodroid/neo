@@ -10,9 +10,9 @@ from .environment_description import EnvironmentDescription
 from .environment_state import EnvironmentState
 from .motion import Motion
 from .motor import Motor
-from .observation import Observation
+from .observer import Observer
 from .reaction import Reaction
 from .reaction_parameters import ReactionParameters
 from .simulator_configuration import SimulatorConfiguration
-from .space import Space
+from .range import Range
 from .unobservables import Unobservables

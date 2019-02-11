@@ -59,19 +59,14 @@ class ReactionParameters(object):
     return json.dumps(self.to_dict())
 
   def __repr__(self):
-    return '<ReactionParameters>\n' + '  <terminable>' + str(
-        self._terminable
-        ) + '</terminable>\n' + '  <step>' + str(
-        self._step
-        ) + '</step>\n' + '  <reset>' + str(
-        self._reset
-        ) + '</reset>\n' + '  <configure>' + str(
-        self._configure
-        ) + '</configure>\n' + '  <describe>' + str(
-        self._describe
-        ) + '</describe>\n' + '  <episode_count>' + str(
-        self._episode_count
-        ) + '</episode_count>\n' + '</ReactionParameters>\n'
+    return (f'<ReactionParameters>\n'
+            f'<terminable>{self._terminable}</terminable>\n'
+            f'<step>{self._step}</step>\n'
+            f'<reset>{self._reset}</reset>\n'
+            f'<configure>{self._configure}</configure>\n'
+            f'<describe>{self._describe}</describe>\n'
+            f'<episode_count>{self._episode_count}</episode_count>\n'
+            f'</ReactionParameters>\n')
 
   def __str__(self):
     return self.__repr__()

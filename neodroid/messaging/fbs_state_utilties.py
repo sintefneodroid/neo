@@ -103,7 +103,7 @@ def deserialise_observers(flat_state):
     observation_value, observation_space = deserialise_observation(f_obs)
 
     name = f_obs.ObservationName().decode()
-    observers[name] = N.Observation(name, observation_space, observation_value)
+    observers[name] = N.Observer(name, observation_space, observation_value)
   return observers
 
 
@@ -273,10 +273,10 @@ def deserialise_motors(flat_actor):
 
 def deserialise_space(flat_space):
   if type(flat_space) is list:
-    return [N.Space(space.DecimalGranularity(), space.MinValue(), space.MaxValue()) for space in flat_space
+    return [N.Range(space.DecimalGranularity(), space.MinValue(), space.MaxValue()) for space in flat_space
             if space is not None]
   else:
-    space = N.Space(
+    space = N.Range(
         flat_space.DecimalGranularity(), flat_space.MinValue(), flat_space.MaxValue()
         )
     return space

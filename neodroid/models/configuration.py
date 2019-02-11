@@ -24,11 +24,10 @@ class Configuration(object):
       }
 
   def __repr__(self):
-    return '<Configuration>\n' + '  <configurable_name>' + str(
-        self._configurable_name
-        ) + '</configurable_name>\n' + '  <configurable_value>' + str(
-        self._configurable_value
-        ) + '</configurable_value>\n' + '</Configuration>\n'
+    return (f'<Configuration>\n'
+            f'<configurable_name>{self._configurable_name}</configurable_name>\n'
+            f'<configurable_value>{self._configurable_value}>/configurable_value>\n'
+            f'</Configuration>\n')
 
   def __str__(self):
     return self.__repr__()

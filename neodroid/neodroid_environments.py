@@ -107,7 +107,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
       normalise=False,
       on_reaction_sent_callback=None,
       on_step_done_callback=None,
-      **kwargs      ):
+      **kwargs):
     '''
 
 :param input_reactions:
@@ -205,7 +205,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
                                   input_reactions,
                                   normalise,
                                   description,
-                                  verbose=False                                  ):
+                                  verbose=False):
     '''
 
 :param verbose:
@@ -260,13 +260,13 @@ class NeodroidEnvironments(NetworkingEnvironment):
       self._logger.debug('No valid was new_state received')
 
   def __str__(self):
-    return f'<NeodroidEnvironment>\n' \
-      f'  <ObservationSpace>{self.observation_space}</ObservationSpace>\n' \
-      f'  <ActionSpace>{self.action_space}</ActionSpace>\n' \
-      f'  <Description>{self.description}</Description>\n' \
-      f'  <SimulatorConfiguration>{self.simulator_configuration}</SimulatorConfiguration>\n' \
-      f'  <IsConnected>{self.is_connected}</IsConnected>\n' \
-      f'</NeodroidEnvironment>'
+    return (f'<NeodroidEnvironment>\n'
+            f'  <ObservationSpace>{self.observation_space}</ObservationSpace>\n'
+            f'  <ActionSpace>{self.action_space}</ActionSpace>\n'
+            f'  <Description>{self.description}</Description>\n'
+            f'  <SimulatorConfiguration>{self.simulator_configuration}</SimulatorConfiguration>\n'
+            f'  <IsConnected>{self.is_connected}</IsConnected>\n'
+            f'</NeodroidEnvironment>')
 
 
 if __name__ == '__main__':

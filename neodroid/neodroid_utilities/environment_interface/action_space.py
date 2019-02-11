@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import random
 
+from neodroid.models.range import Range
 from neodroid.models.space import Space
 
 __author__ = 'cnheider'
@@ -11,12 +12,16 @@ import numpy as np
 
 class ActionSpace(Space):
 
-  def parse_valid_inputs(self, valid_inputs):
-    self._valid_inputs = valid_inputs
+  @property
+  def ranges(self):
+    return self._action_spaces
+
+  def parse_action_space(self, action_spaces):
+    self._action_spaces = action_spaces
 
   def sample(self):
     actions = []
-    for valid_input in self._valid_inputs:
+    for valid_input in self._action_spaces:
       sample = np.random.uniform(valid_input.min_value, valid_input.max_value, 1)
       actions.append(np.round(sample, valid_input.decimal_granularity))
     return actions
@@ -24,10 +29,10 @@ class ActionSpace(Space):
   def validate(self, actions):
     for i in range(len(actions)):
       clipped = np.clip(actions[i],
-                        self._valid_inputs[i].min_value,
-                        self._valid_inputs[i].max_value,
+                        self._action_spaces[i].min_value,
+                        self._action_spaces[i].max_value,
                         )
-      actions[i] = np.round(clipped, self._valid_inputs[i].decimal_granularity)
+      actions[i] = np.round(clipped, self._action_spaces[i].decimal_granularity)
     return actions
 
   @property
@@ -40,19 +45,19 @@ class ActionSpace(Space):
 
   @property
   def low(self):
-    return [motion_space.min_value() for motion_space in self._valid_inputs]
+    return [motion_space.min_value() for motion_space in self._action_spaces]
 
   @property
   def high(self):
-    return [motion_space.max_value() for motion_space in self._valid_inputs]
+    return [motion_space.max_value() for motion_space in self._action_spaces]
 
   @property
   def num_motors(self):
-    return len(self._valid_inputs)
+    return len(self._action_spaces)
 
   @property
   def discrete_actions(self):
-    a = self._valid_inputs[0]
+    a = self._action_spaces[0]
     discrete_actions = np.arange(a.min, a.max + 1, np.power(10, a.decimal_granularity))
     return discrete_actions
 
@@ -62,11 +67,11 @@ class ActionSpace(Space):
 
   @property
   def num_binary_actions(self):
-    return len(self._valid_inputs) * 2
+    return len(self._action_spaces) * 2
 
   @property
   def num_ternary_actions(self):
-    return len(self._valid_inputs) * 3
+    return len(self._action_spaces) * 3
 
   @property
   def is_singular(self):
@@ -87,9 +92,9 @@ class ActionSpace(Space):
   def discrete_ternary_one_hot_sample(self):
     idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_ternary_actions)
-    if len(self._valid_inputs) > 0:
+    if len(self._action_spaces) > 0:
       sample = np.random.uniform(
-          self._valid_inputs[idx].min_value, self._valid_inputs[idx].max_value, 1
+          self._action_spaces[idx].min_value, self._action_spaces[idx].max_value, 1
           )
       if sample > 0:
         zeros[idx] = 1
@@ -100,10 +105,10 @@ class ActionSpace(Space):
   def discrete_binary_one_hot_sample(self):
     idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_binary_actions)
-    if len(self._valid_inputs) > 0:
+    if len(self._action_spaces) > 0:
       sample = np.random.uniform(
-          self._valid_inputs[idx].min_value,
-          self._valid_inputs[idx].max_value,
+          self._action_spaces[idx].min_value,
+          self._action_spaces[idx].max_value,
           1
           )
       if sample > 0:
@@ -119,10 +124,10 @@ class ActionSpace(Space):
   def discrete_one_hot_sample(self):
     idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_motors)
-    if len(self._valid_inputs) > 0:
+    if len(self._action_spaces) > 0:
       val = np.random.random_integers(
-          self._valid_inputs[idx].min_value(),
-          self._valid_inputs[idx].max_value(),
+          self._action_spaces[idx].min_value(),
+          self._action_spaces[idx].max_value(),
           1,
           )
       zeros[idx] = val
@@ -136,7 +141,7 @@ class ActionSpace(Space):
 
     idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_motors)
-    if len(self._valid_inputs) > 0:
+    if len(self._action_spaces) > 0:
       zeros[idx] = 1
     return zeros
 
@@ -146,14 +151,11 @@ class ActionSpace(Space):
   def __len__(self):
     return len(self.shape)
 
-  def __repr__(self):
-    return str(self.shape)
-
   # def __int__(self):
   #  return int(sum(self.shape))
 
 
 if __name__ == '__main__':
   acs =ActionSpace()
-  acs.parse_valid_inputs([Space()])
+  acs.parse_action_space([Range()])
   print(acs)

@@ -102,16 +102,16 @@ receives the same reaction.
     return json.dumps(self.to_dict())
 
   def __repr__(self):
-    return f'<Reaction>\n' \
-           f'<environment_name>{self.environment_name}</environment_name>\n  ' \
-           f'<configurations>\n{self.configurations}</configurations>\n  ' \
-           f'<motions>\n{self.motions}</motions>\n  ' \
-           f'<parameters>\n{self.parameters}</parameters>\n  ' \
-           f'<configurations>\n{self.configurations}</configurations>\n  ' \
-           f'<displayables>\n{self.displayables}</displayables>\n  ' \
-           f'<unobservables>\n{self.unobservables}</unobservables>\n  ' \
-           f'<serialised_message>{self.serialised_message}</serialised_message>\n' \
-           f'</Reaction>\n'
+    return (f'<Reaction>\n'
+            f'<environment_name>{self.environment_name}</environment_name>\n'
+            f'<configurations>\n{self.configurations}</configurations>\n'
+            f'<motions>\n{self.motions}</motions>\n'
+            f'<parameters>\n{self.parameters}</parameters>\n'
+            f'<configurations>\n{self.configurations}</configurations>\n'
+            f'<displayables>\n{self.displayables}</displayables>\n'
+            f'<unobservables>\n{self.unobservables}</unobservables>\n'
+            f'<serialised_message>{self.serialised_message}</serialised_message>\n'
+            f'</Reaction>\n')
 
   def __str__(self):
     return self.__repr__()

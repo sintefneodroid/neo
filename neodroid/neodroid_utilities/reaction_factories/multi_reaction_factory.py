@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.neodroid_utilities.transformations.action_transformations import normalise_action
+
 from neodroid.neodroid_utilities.debugging_utilities.debug_print_return import print_return_value
+from neodroid.neodroid_utilities.transformations.action_transformations import normalise_action
 
 __author__ = 'cnheider'
 
@@ -12,20 +13,10 @@ from neodroid import models as M
 
 
 @print_return_value
-def verify_motion_reactions(
-    inputs,
-    environment_descriptions,
-    normalise=False,
-    verbose=False
-    ):
-  parameters = M.ReactionParameters(
-      terminable=True,
-      step=True,
-      reset=False,
-      configure=False,
-      describe=False,
-      episode_count=True)
-
+def verify_motion_reactions(inputs,
+                            environment_descriptions,
+                            normalise=False,
+                            verbose=False):
   if environment_descriptions:
     if len(inputs) is not len(environment_descriptions):
       warnings.warn(
@@ -39,30 +30,39 @@ def verify_motion_reactions(
           if is_valid_motions:
             return input
           else:
-            input.motions = construct_motions_from_list(
-                input.motions, actors, normalise
-                )
+            input.motions = construct_motions_from_list(input.motions,
+                                                        actors,
+                                                        normalise)
             return input
         elif isinstance(input, list):
           is_valid_motions = all(isinstance(m, M.Motion) for m in input)
           if is_valid_motions:
-
-            return M.Reaction(
-                parameters=parameters, configurations=[], motions=input
-                )
+            parameters = M.ReactionParameters(terminable=True,
+                                              step=True,
+                                              reset=False,
+                                              configure=False,
+                                              describe=False,
+                                              episode_count=True)
+            return M.Reaction(parameters=parameters,
+                              configurations=[],
+                              motions=input)
           else:
             return construct_individual_reactions_from_list(input, actors, normalise)
-        elif isinstance(input, int):
-          return construct_individual_reactions_from_list([input], actors, normalise)
-        elif isinstance(input, float):
+        elif isinstance(input, (int, float)):
           return construct_individual_reactions_from_list([input], actors, normalise)
         elif isinstance(input, (np.ndarray, np.generic)):
-          a = construct_individual_reactions_from_list(
-              input.astype(float).tolist(), actors, normalise
-              )
+          a = construct_individual_reactions_from_list(input.astype(float).tolist(),
+                                                       actors,
+                                                       normalise)
           return a
   if isinstance(inputs, M.Reaction):
     return inputs
+  parameters = M.ReactionParameters(terminable=False,
+                                    step=False,
+                                    reset=False,
+                                    configure=False,
+                                    describe=True,
+                                    episode_count=False)
   return M.Reaction(parameters=parameters)
 
 
@@ -98,9 +98,9 @@ def construct_motions_from_list(input_list, actors, normalise):
 
 
 @print_return_value
-def verify_configuration_reaction(
-    input_reaction, environment_description, verbose=False
-    ):
+def verify_configuration_reaction(input_reaction,
+                                  environment_description,
+                                  verbose=False):
   parameters = M.ReactionParameters(terminable=False,
                                     step=False,
                                     reset=True,

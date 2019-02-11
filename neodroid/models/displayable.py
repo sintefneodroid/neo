@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
@@ -25,11 +25,11 @@ class Displayable(object):
       }
 
   def __repr__(self):
-    return '<Displayable>\n' + '  <displayable_name>' + str(
-        self._displayable_name
-        ) + '</displayable_name>\n' + '  <displayable_value>\n' + str(
-        self._displayable_value
-        ) + '</displayable_value>\n' + '</Displayable>\n'
+    return (
+      f'<Displayable>\n'
+      f'<displayable_name>{self._displayable_name}</displayable_name>\n'
+      f'<displayable_value>\n{self._displayable_value}</displayable_value>\n'
+      f'</Displayable>\n')
 
   def __str__(self):
     return self.__repr__()

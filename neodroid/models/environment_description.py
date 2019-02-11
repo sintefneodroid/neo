@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
@@ -52,12 +52,12 @@ class EnvironmentDescription(object):
 
     # '  <objective_name>' +  self.objective_name + '</objective_name>\n' \
 
-    return '<EnvironmentDescription>\n' + '  <MaxEpisodeLength>' + str(
-        self.max_episode_length
-        ) + '</MaxEpisodeLength>\n' '  <SolvedThreshold>' + str(
-        self.solved_threshold
-        ) + '</SolvedThreshold>\n' '  <Actors>\n' + actors_str + '  </Actors>\n' + '  <Configurables>\n' + \
-           configurables_str + '  </Configurables>\n' + '</EnvironmentDescription>\n'
+    return (f'<EnvironmentDescription>\n'
+            f'<MaxEpisodeLength>{self.max_episode_length}</MaxEpisodeLength>\n'
+            f'<SolvedThreshold>{self.solved_threshold}</SolvedThreshold>\n'
+            f'<Actors>\n{actors_str}</Actors>\n'
+            f'<Configurables>\n{configurables_str}</Configurables>\n'
+            f'</EnvironmentDescription>\n')
 
   def __str__(self):
     return self.__repr__()

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
@@ -25,12 +25,11 @@ class Motor(object):
     return self._energy_spent
 
   def __repr__(self):
-    return '        <Motor>\n' + '          <name>' + self.motor_name + '</name>\n' + '          ' \
-                                                                                      '<motion_space>' + str(
-        self.motion_space
-        ) + '</motion_space>\n' + '          <energy_spent>' + str(
-        self.energy_spent
-        ) + '</energy_spent>\n' + '        </Motor>\n'
+    return (f'<Motor>\n'
+            f'<name>{self.motor_name}</name>\n'
+            f'<motion_space>{self.motion_space}</motion_space>\n'
+            f'<energy_spent>{self.energy_spent}</energy_spent>\n'
+            f'</Motor>\n')
 
   def __str__(self):
     return self.__repr__()

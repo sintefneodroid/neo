@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import neodroid
 import neodroid.messaging
@@ -36,11 +36,11 @@ class Configurable(object):
       }
 
   def __repr__(self):
-    return f'<Configurable>\n  ' \
-           f'<configurable_name>{self._configurable_name}</configurable_name>\n  ' \
-           f'<configurable_value>{self._configurable_value}</configurable_value>\n  ' \
-           f'<configurable_space>{self._configurable_space}</configurable_space>\n' \
-           f'</Configurable>\n'
+    return (f'<Configurable>\n'
+            f'<configurable_name>{self._configurable_name}</configurable_name>\n'
+            f'<configurable_value>{self._configurable_value}</configurable_value>\n'
+            f'<configurable_space>{self._configurable_space}</configurable_space>\n'
+            f'</Configurable>\n')
 
   def __str__(self):
     return self.__repr__()

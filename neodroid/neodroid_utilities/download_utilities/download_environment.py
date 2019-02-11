@@ -1,5 +1,7 @@
 import os
-import shutil
+import stat
+import struct
+import sys
 
 from tqdm import tqdm
 
@@ -16,7 +18,8 @@ class DownloadProgress(tqdm):
     self.last_block = block_num
 
 
-def download_environment(name:str='mab_win', path_to_executables_directory: str = '/tmp/neodroid')-> str:
+def download_environment(name: str = 'mab_win',
+                         path_to_executables_directory: str = '/tmp/neodroid') -> str:
   """
 
   :param path_to_executables_directory:
@@ -26,7 +29,7 @@ def download_environment(name:str='mab_win', path_to_executables_directory: str 
   from urllib.request import urlretrieve
   import zipfile
   download_format = 'https://drive.google.com/uc?export=download&confirm=-oy0&id={FILE_ID}'
-  #download_format = 'https://drive.google.com/uc?export=download&confirm=NezD&id={FILE_ID}'
+  # download_format = 'https://drive.google.com/uc?export=download&confirm=NezD&id={FILE_ID}'
   hash_id = available_environments()[name]
   print(f'\nFetching {name} environment\n')
   formatted = download_format.format(FILE_ID=hash_id)  # +'.tmp')
@@ -36,15 +39,29 @@ def download_environment(name:str='mab_win', path_to_executables_directory: str 
 
   with DownloadProgress(desc=name) as progress_bar:
     zip_file_name, headers = urlretrieve(formatted,
-                                     os.path.join(path_to_executables_directory,f'{name}.zip'),
-                                     reporthook=progress_bar.hook)
+                                         os.path.join(path_to_executables_directory, f'{name}.zip'),
+                                         reporthook=progress_bar.hook)
 
   with zipfile.ZipFile(zip_file_name, "r") as zip_ref:
     zip_ref.extractall(path_to_executables_directory)
 
-  file = os.path.join(path_to_executables_directory, zip_file_name)
-  #shutil.rmtree(file, ignore_errors=True)
-  os.remove(file)
+  zip_file_name = os.path.join(path_to_executables_directory, zip_file_name)
+  # shutil.rmtree(file, ignore_errors=True)
+  os.remove(zip_file_name)
+
+  executable_file_name = name.split("_")[0]
+
+  system_arch = struct.calcsize("P") * 8
+
+  if system_arch == 32:
+    path_to_executable = os.path.join(path_to_executables_directory, name,
+                         f'{executable_file_name}.x86')
+  else:
+    path_to_executable = os.path.join(path_to_executables_directory, name,
+                         f'{executable_file_name}.x86_64')
+
+  st = os.stat(path_to_executable)
+  os.chmod(path_to_executable, st.st_mode | stat.S_IEXEC)
 
   return os.path.join(path_to_executables_directory, name)
 

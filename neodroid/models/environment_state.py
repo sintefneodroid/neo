@@ -73,19 +73,15 @@ class EnvironmentState(object):
         )
 
     description_str = str(self.description)
-    return '<EnvironmentState>\n' + '  <total_energy_spent>' + str(
-        self.total_energy_spent
-        ) + '</total_energy_spent>\n' + '  <frame_number>' + str(
-        self.frame_number
-        ) + '</frame_number>\n' + '  <reward>' + str(
-        self.signal
-        ) + '</reward>\n' + '  <interrupted>' + str(
-        self.terminated
-        ) + '</interrupted>\n' + '  <Observers>\n' + observers_str + '  </Observers>\n' + str(
-        self.description
-        ) + str(
-        self.unobservables
-        ) + '</EnvironmentState>\n'
+    return (f'<EnvironmentState>\n'
+            f'<total_energy_spent>{self.total_energy_spent}</total_energy_spent>\n'
+            f'<frame_number>{self.frame_number}</frame_number>\n'
+            f'<reward>{self.signal}</reward>\n'
+            f'<terminated>{self.terminated}</terminated>\n'
+            f'<Observers>\n{observers_str}</Observers>\n'
+            f'{self.description}\n'
+            f'{self.unobservables}\n'
+            f'</EnvironmentState>\n')
 
   def __str__(self):
     return self.__repr__()
@@ -93,9 +89,10 @@ class EnvironmentState(object):
   def __unicode__(self):
     return self.__repr__()
 
-  '''def __next__(self):
+  def __iter__(self):
     return self.observables
 
+  '''
   def __len__(self):
     return len(self.observables)
   '''

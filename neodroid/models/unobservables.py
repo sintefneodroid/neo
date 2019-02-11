@@ -33,11 +33,10 @@ class Unobservables(object):
         ).flatten()
 
   def __repr__(self):
-    return '<Unobservables>\n' + '  <Poses>\n' + str(
-        self.poses_numpy
-        ) + '  </Poses>\n' + '  <Bodies>\n' + str(
-        self.bodies_numpy
-        ) + '  </Bodies>\n' + '</Unobservables>\n'
+    return (f'<Unobservables>\n'
+            f'<Poses>\n{self.poses_numpy}</Poses>\n'
+            f'<Bodies>\n{self.bodies_numpy}</Bodies>\n'
+            f'</Unobservables>\n')
 
   def __str__(self):
     return self.__repr__()

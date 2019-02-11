@@ -5,7 +5,10 @@ __author__ = 'cnheider'
 import neodroid.messaging
 
 
-class Observation(object):
+class Observer(object):
+  '''
+
+  '''
 
   def __init__(self, observation_name, observation_space, observation_value):
     self._observation_space = observation_space
@@ -13,7 +16,7 @@ class Observation(object):
     self._observation_value = observation_value
 
   @property
-  def observation_name(self):
+  def observer_name(self):
     return self._observation_name
 
   @property
@@ -27,12 +30,11 @@ class Observation(object):
     return self._observation_value
 
   def __repr__(self):
-    return '    <Observer>\n' + '      <observation_name>' + self._observation_name + \
-           '</observation_name>\n' + '      <observation_space>' + str(
-        self.observation_space
-        ) + '</observation_space>\n' + '      <observation_value>' + str(
-        self.observation_value
-        ) + '</observation_value>\n' + '    </Observer>\n'
+    return (f'<Observer>\n'
+            f'<observation_name>{self._observation_name}</observation_name>\n'
+            f'<observation_space>{self.observation_space}</observation_space>\n'
+            f'<observation_value>{self.observation_value}</observation_value>\n'
+            f'</Observer>\n')
 
   def __str__(self):
     return self.__repr__()
