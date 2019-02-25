@@ -1,25 +1,27 @@
 import numpy as np
 from PIL import Image
 
+default_camera_observer_names = ('RGBCameraObserver',
+                                 'SegmentationCameraObserver',
+                                 'InstanceSegmentationCameraObserver',
+                                 'DepthCameraObserver',
+                                 'InfraredCameraObserver',
+                                 'NormalCameraObserver',
+                                 'FlowCameraObserver',
+                                 'LayerSegmentationCameraObserver',
+                                 'TagSegmentationCameraObserver',
+                                 'SatelliteCameraObserver')
 
-def extract_neodroid_camera(state):
-  rgb_im = extract_camera_observation(state, 'RGBCameraObserver')
 
-  seg_im = extract_camera_observation(state, 'SegmentationCameraObserver')
+def extract_neodroid_camera(state, cameras=default_camera_observer_names):
+  out = dict()
 
-  instance_seg_im = extract_camera_observation(state, 'InstanceSegmentationCameraObserver')
+  for camera in cameras:
+    res = extract_camera_observation(state, camera)
+    if res is not None:
+      out[camera] = res
 
-  depth_im = extract_camera_observation(state, 'DepthCameraObserver')
-
-  infrared_im = extract_camera_observation(state, 'InfraredCameraObserver')
-
-  normal_im = extract_camera_observation(state, 'NormalCameraObserver')
-
-  flow_im = extract_camera_observation(state, 'FlowCameraObserver')
-
-  sat_im = extract_camera_observation(state, 'SatelliteCameraObserver')
-
-  return rgb_im, seg_im, instance_seg_im, depth_im, infrared_im, normal_im, flow_im, sat_im
+  return out
 
 
 def extract_camera_observation(state, str):

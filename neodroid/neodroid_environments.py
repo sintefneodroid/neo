@@ -48,7 +48,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
   def __init__(
       self,
       *,
-      environment_name='mab',
+      environment_name=None,
       clones=0,
       path_to_executables_directory=default_environments_dir,
       headless=False,
@@ -68,7 +68,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
     self._simulation_instance = None
     self._clones = clones
 
-    if not self._connect_to_running and not self._simulation_instance:
+    if not self._connect_to_running and not self._simulation_instance and environment_name is not None:
       self._simulation_instance = launch_environment(environment_name,
                                                      ip=self._ip,
                                                      port=self._port,
