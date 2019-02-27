@@ -19,7 +19,6 @@ width = (terminal_width - 2 * margin)
 underline = '_' * width
 indent = " " * margin
 
-
 class NeodroidCLI(object):
   default_executables_path = '/tmp/neodroid'
 

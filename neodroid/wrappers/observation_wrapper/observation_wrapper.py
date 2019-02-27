@@ -3,10 +3,9 @@
 from warnings import warn
 
 import torch
-
 from neodroid.neodroid_utilities.messaging_utilities.neodroid_camera_extraction import (
-  extract_neodroid_camera,
   extract_camera_observation,
+  extract_neodroid_camera,
   )
 from neodroid.wrappers.utility_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
@@ -14,6 +13,7 @@ __author__ = 'cnheider'
 
 from neodroid.neodroid_utilities import flattened_observation
 import numpy as np
+
 
 class ObservationWrapper(SingleEnvironmentWrapper):
 
@@ -75,33 +75,3 @@ class CameraObservationWrapper(SingleEnvironmentWrapper):
       return extract_neodroid_camera(message)
     return None
 
-def channel_transform(inp):
-  inp = inp / 255.0
-  inp = np.clip(inp, 0, 1)
-  inp = inp.transpose((2, 0, 1))
-  return inp
-
-def neodroid_batch_data_iterator(env, device, batch_size = 12):
-  while True:
-    predictors = []
-    responses = []
-    while len(predictors) < batch_size:
-      env.update()
-      rgb_arr = env.sensor('RGBCameraObserver')
-      seg_arr = env.sensor('LayerSegmentationCameraObserver')
-
-      red_mask = np.zeros(seg_arr.shape[:-1])
-      green_mask = np.zeros(seg_arr.shape[:-1])
-      blue_mask = np.zeros(seg_arr.shape[:-1])
-
-      reddish = seg_arr[:, :, 0] > 50
-      greenish = seg_arr[:, :, 1] > 50
-      blueish = seg_arr[:, :, 2] > 50
-
-      red_mask[reddish] = 1
-      green_mask[greenish] = 1
-      blue_mask[blueish] = 1
-
-      predictors.append(channel_transform(rgb_arr))
-      responses.append(np.asarray([red_mask, blue_mask, green_mask]))
-    yield torch.FloatTensor(predictors).to(device), torch.FloatTensor(responses).to(device)
