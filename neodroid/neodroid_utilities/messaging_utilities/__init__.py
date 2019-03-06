@@ -10,16 +10,18 @@ class ClientEvents(Enum):
 
 
 def message_client_event(event):
+  stack_level = 0
+
   def receive_func(func):
 
     @wraps(func)
     def call_func(ctx, *args, **kwargs):
       if event is ClientEvents.CONNECTED:
-        warn('Connected to server')
+        print('Connected to server')
       elif event is ClientEvents.DISCONNECTED:
-        warn('Disconnected from server')
+        warn('Disconnected from server', stacklevel=stack_level)
       elif event is ClientEvents.TIMEOUT:
-        warn('Connection timeout')
+        warn('Connection timeout', stacklevel=stack_level)
       return func(ctx, *args, **kwargs)
 
     return call_func

@@ -67,7 +67,7 @@ class CameraObservationWrapper(SingleEnvironmentWrapper):
     return None
 
   def update(self):
-    super().observe()
+    return super().observe()
 
   def fetch_new_frame(self, *args, **kwargs):
     message = super().observe(*args, **kwargs)

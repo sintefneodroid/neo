@@ -49,7 +49,7 @@ class NetworkingEnvironment(Environment, ABC):
     return self._react()
 
   def _setup_connection(self):
-    warnings.warn(f'Connecting to server at {self._ip}:{self._port}')
+    print(f'Connecting to server at {self._ip}:{self._port}')
 
     self._message_server = messaging.MessageClient(
         self._ip,
@@ -59,13 +59,16 @@ class NetworkingEnvironment(Environment, ABC):
         on_disconnected_callback=self.__on_disconnected_callback__,
         verbose=self._verbose)
 
-    connect_tries = tqdm(range(CONNECT_TRY_TIMES), f'Connecting, please make sure that the ip {self._ip} '
-                                                   f'and port {self._port} '
-                                                   f'are cd correct')
+    connect_tries = tqdm(range(CONNECT_TRY_TIMES), leave=False)
+    self._describe()
+
     while self.description is None:
       self._describe()
       time.sleep(CONNECT_TRY_INTERVAL)
       connect_tries.update()
+      connect_tries.set_description(f'Connecting, please make sure that the ip {self._ip} '
+                                                   f'and port {self._port} '
+                                                   f'are cd correct')
       if connect_tries.n is CONNECT_TRY_TIMES:
         raise ConnectionError
 

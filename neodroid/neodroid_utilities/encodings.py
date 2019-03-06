@@ -23,7 +23,7 @@ def signed_ternary_encoding(*,
 
 
 def to_one_hot(dims, index):
-  if isinstance(index, np.int) or isinstance(index, np.int64):
+  if isinstance(index, np.int) or isinstance(index, np.int64) or isinstance(index, int):
     one_hot = np.zeros(dims)
     one_hot[index] = 1.
   else:
