@@ -66,6 +66,12 @@ class NeodroidCLI(object):
     print(f'{indent}Installed {env_name} to {exe_path}')
     return exe_path
 
+  def install(self, env_name: str):
+    '''
+    Fetches a remotely stored environment with the specified name to local storage
+    '''
+    return self.fetch(env_name)
+
   def remove(self, env_name: str):
     '''
     Removes locally stored environment with the specified name
