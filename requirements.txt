@@ -4,7 +4,7 @@ pyzmq==18.0.1
 numpy==1.16.2
 neodroid-flatbuffers==20180620130404
 Pillow==5.4.1
-gym
+gym==0.12.0
 tqdm
 matplotlib
 cloudpickle
