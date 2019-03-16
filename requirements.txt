@@ -1,5 +1,5 @@
 pyfiglet==0.8.post1
-fire
+fire==0.1.3
 pyzmq
 numpy
 neodroid-flatbuffers
