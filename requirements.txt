@@ -1,4 +1,4 @@
-pyfiglet
+pyfiglet==0.8.post1
 fire
 pyzmq
 numpy
