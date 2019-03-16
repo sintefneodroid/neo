@@ -2,7 +2,7 @@ pyfiglet==0.8.post1
 fire==0.1.3
 pyzmq==18.0.1
 numpy==1.16.2
-neodroid-flatbuffers
+neodroid-flatbuffers==20180620130404
 Pillow
 gym
 tqdm
