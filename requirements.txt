@@ -3,7 +3,7 @@ fire==0.1.3
 pyzmq==18.0.1
 numpy==1.16.2
 neodroid-flatbuffers==20180620130404
-Pillow
+Pillow==5.4.1
 gym
 tqdm
 matplotlib
