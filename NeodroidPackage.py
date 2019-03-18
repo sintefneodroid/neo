@@ -88,22 +88,38 @@ class NeodroidPackage:
   @property
   def extras(self) -> dict:
     requirements_gui = []
-    with open('requirements-gui.txt') as f:
+    with open('requirements_gui.txt') as f:
       requirements = f.readlines()
 
       for requirement in requirements:
         requirements_gui.append(requirement.strip())
 
     requirements_tests = []
-    with open('requirements-tests.txt') as f:
+    with open('requirements_tests.txt') as f:
       requirements = f.readlines()
 
       for requirement in requirements:
         requirements_tests.append(requirement.strip())
 
+    requirements_docs = []
+    with open('requirements_docs.txt') as f:
+      requirements = f.readlines()
+
+      for requirement in requirements:
+        requirements_docs.append(requirement.strip())
+
+    requirements_dev = []
+    with open('requirements_dev.txt') as f:
+      requirements = f.readlines()
+
+      for requirement in requirements:
+        requirements_dev.append(requirement.strip())
+
     these_extras = {
       'gui':requirements_gui,
-      'tests':requirements_tests
+      'tests':requirements_tests,
+      'docs':requirements_docs,
+      'dev':requirements_dev
 
       #'mab':['neodroid-linux-mab; platform_system == "Linux"',
       #       'neodroid-win-mab platform_system == "Windows"']
