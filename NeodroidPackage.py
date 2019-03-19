@@ -118,7 +118,7 @@ class NeodroidPackage:
     these_extras = {
       'gui':requirements_gui,
       'tests':requirements_tests,
-      'docs':requirements_docs,
+      #'docs':requirements_docs,
       'dev':requirements_dev
 
       #'mab':['neodroid-linux-mab; platform_system == "Linux"',
