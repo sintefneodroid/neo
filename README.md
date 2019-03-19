@@ -26,6 +26,11 @@ _[Neodroid](https://github.com/sintefneodroid) is developed with support from Re
         <img src='https://img.shields.io/github/issues/sintefneodroid/neo.svg?style=flat' alt='GitHub Issues' />
       </a>
     </td>
+    <td>
+      <a href='https://documentation.neodroid.ml/?badge=latest'>
+        <img src='https://readthedocs.org/projects/neodroid/badge/?version=latest' alt='Documentation Status' />
+      </a>
+    </td>
   </tr>
   <tr>
     <td>
@@ -43,6 +48,11 @@ _[Neodroid](https://github.com/sintefneodroid) is developed with support from Re
         <img src='https://img.shields.io/github/license/sintefneodroid/neo.svg?style=flat' alt='GitHub License' />
       </a>
     </td>
+    <td>
+      <a href="https://pyup.io/repos/github/sintefneodroid/neo/">
+        <img src="https://pyup.io/repos/github/sintefneodroid/neo/python-3-shield.svg" alt="Python 3" />
+      </a>
+    </td>
   </tr>
   <tr>
     <td>
@@ -58,6 +68,11 @@ _[Neodroid](https://github.com/sintefneodroid) is developed with support from Re
     <td>
       <a href='https://pypi.python.org/pypi/Neodroid'>
         <img src='https://pypip.in/wheel/neodroid/badge.png' alt='Pypi Wheel' />
+      </a>
+    </td>
+    <td>
+      <a href="https://pyup.io/repos/github/sintefneodroid/neo/">
+        <img src="https://pyup.io/repos/github/sintefneodroid/neo/shield.svg" alt="Updates" />
       </a>
     </td>
   </tr>
