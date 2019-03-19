@@ -5,10 +5,11 @@ python:
 #  - '3.7'
 #  - '3.8'
 install:
+  - pip install -r requirements.txt
   - pip install -r requirements_dev.txt
   - pip install -e .
 #  - pip install -r requirements.txt
 script:
-  - pytest --cov=warg
+  - pytest --cov=neodroid
   - coveralls
 
