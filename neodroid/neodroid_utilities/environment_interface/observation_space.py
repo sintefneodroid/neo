@@ -14,7 +14,7 @@ class ObservationSpace(Space):
 
   @property
   def shape(self):
-    return [len(self)]
+    return [self.__len__()]
 
   def __len__(self):
     return len(self._observation_spaces)

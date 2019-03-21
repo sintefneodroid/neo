@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import numpy
+
 __author__ = 'cnheider'
 
 import numpy as np
@@ -8,8 +10,8 @@ import numpy as np
 def signed_ternary_encoding(*,
                             size: int,
                             index:int):
-  assert isinstance(size,int), f'size was {type(size)}'
-  assert isinstance(index,int), f'index was {type(index)}'
+  assert isinstance(size,(int,numpy.int64)), f'size was {type(size)}'
+  assert isinstance(index,(int,numpy.int64)), f'index was {type(index)}'
   assert size*2 > index, f'signed size was {size*2}, index was {index}'
 
   a = np.zeros(size)

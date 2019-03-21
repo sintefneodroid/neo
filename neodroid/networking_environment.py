@@ -113,9 +113,9 @@ class NetworkingEnvironment(Environment, ABC):
 
   def _describe(
       self,
-      parameters=M.ReactionParameters(
-          terminable=True, describe=True, episode_count=False
-          )
+      parameters=M.ReactionParameters(          terminable=True,
+                                                describe=True,
+                                                episode_count=False          )
       ):
     '''
 

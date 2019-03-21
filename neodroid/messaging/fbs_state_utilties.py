@@ -273,10 +273,13 @@ def deserialise_motors(flat_actor):
 
 def deserialise_space(flat_space):
   if type(flat_space) is list:
-    return [N.Range(space.DecimalGranularity(), space.MinValue(), space.MaxValue()) for space in flat_space
-            if space is not None]
-  else:
-    space = N.Range(
-        flat_space.DecimalGranularity(), flat_space.MinValue(), flat_space.MaxValue()
-        )
-    return space
+    return [N.Range(space.DecimalGranularity(),
+                    space.MinValue(),
+                    space.MaxValue())
+            for space in flat_space if space is not None]
+
+  space = N.Range(flat_space.DecimalGranularity(),
+                  flat_space.MinValue(),
+                  flat_space.MaxValue()
+                  )
+  return space

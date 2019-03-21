@@ -29,13 +29,9 @@ def construct_action_space(environment_description):
 def construct_observation_space(environment):
   observation_spaces = []
   observers = environment.observers.values()
-  if len(observers)>0:
-    for observer in observers:
-      observation_spaces.append(observer.observation_space)
-  else:
-    a = len(environment.observables)
-    for i in range(a):
-      observation_spaces.append(Range())
+  for observer in observers:
+    for range in observer.observation_space:
+      observation_spaces.append(range)
 
   observation_space = ObservationSpace()
   observation_space.parse_observation_space(observation_spaces)

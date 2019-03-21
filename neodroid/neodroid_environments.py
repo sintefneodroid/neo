@@ -172,9 +172,10 @@ class NeodroidEnvironments(NetworkingEnvironment):
     self._warn_reset()
 
     if input_reactions is None:
-      parameters = M.ReactionParameters(
-          terminable=True, describe=True, episode_count=False, reset=True
-          )
+      parameters = M.ReactionParameters(terminable=True,
+                                        describe=True,
+                                        episode_count=False,
+                                        reset=True                                        )
       input_reactions = [M.Reaction(parameters=parameters)]
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
