@@ -125,7 +125,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
 '''
     self._warn_react()
 
-    if type(input_reactions) is list and len(input_reactions) > 0 and isinstance(input_reactions[0],
+    if isinstance(input_reactions, list) and len(input_reactions) > 0 and isinstance(input_reactions[0],
                                                                                  M.Reaction):
       pass
     else:
@@ -134,7 +134,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
             episode_count=True, step=True, terminable=True
             )
         input_reactions = [M.Reaction(parameters=parameters)]
-      elif type(input_reactions) is not Reaction:
+      elif not isinstance(input_reactions, Reaction):
         input_reaction = self.maybe_infer_motion_reaction(input_reactions=input_reactions,
                                                           normalise=normalise,
                                                           description=self._description,

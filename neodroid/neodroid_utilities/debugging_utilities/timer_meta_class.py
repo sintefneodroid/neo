@@ -64,7 +64,7 @@ class Timed(type):
     # a new function that is timed
     # run the computation with the provided args and return the computation result
     for name, value in attr.items():
-      if type(value) is types.FunctionType or type(value) is types.MethodType:
+      if isinstance(value,types.FunctionType) or isinstance(value,types.MethodType):
         attr[name] = time_func(value)
 
     return super(Timed, cls).__new__(cls, name, bases, attr)

@@ -136,18 +136,18 @@ def serialise_displayables(B, input_reaction):
       displayable_value_type = F.FDisplayableValue.NONE
       displayable_value_offset = None
       input_value = input_displayable.displayable_value
-      if type(input_value) is float or type(input_value) is int:
+      if isinstance(input_value,float) or isinstance(input_value,int):
         displayable_value_type = F.FDisplayableValue.FValue
         F.FValueStart(B)
         F.FValueAddVal(B, float(input_value))
         displayable_value_offset = F.FValueEnd(B)
-      elif type(input_value) is str:
+      elif isinstance(input_value,str):
         displayable_value_type = F.FDisplayableValue.FString
         v = B.CreateString(input_value)
         F.FStringStart(B)
         F.FStringAddStr(B, v)
         displayable_value_offset = F.FStringEnd(B)
-      elif type(input_value) is tuple:
+      elif isinstance(input_value,tuple):
         displayable_value_type = F.FDisplayableValue.FValuedVector3s
         _length = len(input_value[0])
 
@@ -171,7 +171,7 @@ def serialise_displayables(B, input_reaction):
         F.FValuedVector3sAddPoints(B, points)
         displayable_value_offset = F.FValuedVector3sEnd(B)
 
-      elif type(input_value) is list or type(input_value) is np.ndarray and len(input_value[0]) == 3:
+      elif isinstance(input_value,list) or isinstance(input_value,np.ndarray) and len(input_value[0]) == 3:
         displayable_value_type = F.FDisplayableValue.FVector3s
         _length = len(input_value)
 
@@ -185,7 +185,7 @@ def serialise_displayables(B, input_reaction):
         F.FVector3sAddPoints(B, points)
         displayable_value_offset = F.FVector3sEnd(B)
 
-      elif type(input_value) is list or type(input_value) is np.ndarray:
+      elif isinstance(input_value,list) or isinstance(input_value,np.ndarray):
         displayable_value_type = F.FDisplayableValue.FValues
         _length = len(input_value)
         F.FValuesStartValsVector(B, _length)
