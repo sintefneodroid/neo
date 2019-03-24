@@ -7,7 +7,7 @@ class InvalidReactionException(Exception):
     Exception.__init__(self, msg)
 
 
-class NoEnvironment(Exception):
+class NoEnvironmentError(Exception):
   """
 
   """

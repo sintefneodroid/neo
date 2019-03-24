@@ -12,11 +12,8 @@ __version__ = None
 
 '''
 
-from .models import *
-from .neodroid_environments import NeodroidEnvironments
 from .version import __version__
-from .wrappers import *
-import numpy as np
+
 
 _environments = None
 
@@ -33,6 +30,7 @@ def make(environment_name='', clones=0, *args, **kwargs):
 
 
 def seed(random_seed):
+  import numpy as np
   np.random.seed(random_seed)
 
 

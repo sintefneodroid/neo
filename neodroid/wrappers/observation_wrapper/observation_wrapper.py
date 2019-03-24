@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-import torch
 from neodroid.neodroid_utilities.messaging_utilities.neodroid_camera_extraction import (
   extract_camera_observation,
   extract_neodroid_camera,
@@ -12,7 +11,6 @@ from neodroid.wrappers.utility_wrappers.single_environment_wrapper import Single
 __author__ = 'cnheider'
 
 from neodroid.neodroid_utilities import flattened_observation
-import numpy as np
 
 
 class ObservationWrapper(SingleEnvironmentWrapper):

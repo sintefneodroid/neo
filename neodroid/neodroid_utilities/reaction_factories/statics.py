@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from collections import Iterable
+
 from neodroid.neodroid_utilities import ActionSpace, ObservationSpace, Range
 
 __author__ = 'cnheider'
@@ -30,8 +32,11 @@ def construct_observation_space(environment):
   observation_spaces = []
   observers = environment.observers.values()
   for observer in observers:
-    for range in observer.observation_space:
-      observation_spaces.append(range)
+    if isinstance(observer.observation_space,Iterable):
+      for range in observer.observation_space:
+        observation_spaces.append(range)
+    else:
+      observation_spaces.append(observer.observation_space)
 
   observation_space = ObservationSpace()
   observation_space.parse_observation_space(observation_spaces)

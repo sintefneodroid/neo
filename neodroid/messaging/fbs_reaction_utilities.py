@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.neodroid_utilities import NoUnobservablesException
+from neodroid.neodroid_utilities.exceptions.exceptions import NoUnobservablesException
 
 __author__ = 'cnheider'
 

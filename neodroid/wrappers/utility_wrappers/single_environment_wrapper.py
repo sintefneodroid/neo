@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.neodroid_utilities import NoEnvironment
+from neodroid.models import Reaction
+from neodroid.neodroid_environments import NeodroidEnvironments
+from neodroid.neodroid_utilities.exceptions.exceptions import NoEnvironmentError
 
 __author__ = 'cnheider'
 
-from neodroid import NeodroidEnvironments, Reaction
 
 
 class SingleEnvironmentWrapper(NeodroidEnvironments):
@@ -38,7 +39,7 @@ class SingleEnvironmentWrapper(NeodroidEnvironments):
     first_environment = list(env_states.values())[0]
     if first_environment:
       return first_environment
-    raise NoEnvironment()
+    raise NoEnvironmentError()
 
   def _reset(self, input_reaction=None, state=None, on_reset_callback=None):
 
