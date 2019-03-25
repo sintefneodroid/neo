@@ -51,8 +51,7 @@ class NetworkingEnvironment(Environment, ABC):
   def _setup_connection(self):
     print(f'Connecting to server at {self._ip}:{self._port}')
 
-    self._message_server = messaging.MessageClient(
-        self._ip,
+    self._message_server = messaging.MessageClient(        self._ip,
         self._port,
         on_timeout_callback=self.__on_timeout_callback__,
         on_connected_callback=self.__on_connected_callback__,

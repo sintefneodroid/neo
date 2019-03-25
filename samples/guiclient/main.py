@@ -6,9 +6,7 @@ __author__ = 'cnheider'
 
 
 import neodroid as neo
-from neodroid import Motion, Reaction
-from neodroid.models.configuration import Configuration
-from neodroid.models.reaction_parameters import ReactionParameters
+from neodroid.models import Motion, Reaction,Configuration,ReactionParameters
 
 _gui = None
 _neo_environment = None

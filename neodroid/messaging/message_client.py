@@ -44,21 +44,22 @@ def singleton(cls):
 # @singleton
 class MessageClient(object):
 
-  def __init__(
-      self,
-      tcp_address='localhost',
-      tcp_port=6969,
-      on_timeout_callback=None,
-      on_step_done_callback=None,
-      on_connected_callback=None,
-      on_disconnected_callback=None,
-      verbose=False):
+  def __init__(self,
+               tcp_address='localhost',
+               tcp_port=6969,
+               on_timeout_callback=None,
+               on_step_done_callback=None,
+               on_connected_callback=None,
+               on_disconnected_callback=None,
+               single_threaded=False,
+               verbose=False):
 
     self._verbose = verbose
     self._tcp_address = tcp_address
     self._tcp_port = tcp_port
 
     self._use_ipc_medium = False
+    self._expecting_response = False
     self._socket_type = zmq.REQ
     # self._socket_type = zmq.PAIR
 
@@ -66,15 +67,12 @@ class MessageClient(object):
     self._on_connected_callback = on_connected_callback
     self._on_disconnected_callback = on_disconnected_callback
 
-    self._context = zmq.Context.instance()
+    if single_threaded:
+      self.build(single_threaded)
 
-    if not self._context:
-      raise RuntimeError('Failed to create ZMQ context!')
-
-    self._poller = zmq.Poller()
-
-    self.open_connection()
-    self._expecting_response = False
+    self._context = None
+    self._poller = None
+    self._request_socket = None
 
   def open_connection(self):
 
@@ -95,6 +93,7 @@ class MessageClient(object):
 
     self._on_connected_callback()
 
+    self._poller = zmq.Poller()
     self._poller.register(self._request_socket, zmq.POLLIN)
 
   def close_connection(self):
@@ -102,12 +101,27 @@ class MessageClient(object):
     self._request_socket.setsockopt(zmq.LINGER, 0)
     self._request_socket.close()
     self._poller.unregister(self._request_socket)
+    #self._poller.close()
 
   def teardown(self):
     self._context.term()
 
+  def build(self, single_threaded=False):
+    if single_threaded:
+      self._context = zmq.Context.instance()
+
+      if not self._context:
+        raise RuntimeError('Failed to create ZMQ context!')
+    else:
+      self._context = zmq.Context()
+
+    self.open_connection()
+
   def send_reactions(self, reactions):
     global LAST_RECEIVED_FRAME_NUMBER
+    if self._request_socket is None:
+      self.build()
+
     if not self._expecting_response:
       serialised_reaction = serialise_reactions(reactions)
       self._request_socket.send(serialised_reaction)

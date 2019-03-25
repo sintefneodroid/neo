@@ -3,12 +3,13 @@
 import argparse
 import sys
 
+from neodroid.models import ReactionParameters
 from samples.example_algorithms.ucb1 import UCB1
 
 __author__ = 'cnheider'
 
 import neodroid.wrappers.utility_wrappers.single_environment_wrapper as neo
-from neodroid import messaging, ReactionParameters
+from neodroid import messaging
 
 
 def construct_displayables(normed, tries, totals):

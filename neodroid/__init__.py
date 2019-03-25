@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.neodroid_environments import NeodroidEnvironments
+
 __author__ = 'cnheider'
 __version__ = None
 '''

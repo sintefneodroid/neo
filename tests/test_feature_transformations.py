@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid import Range
+from neodroid.models import Range
 
 __author__ = 'cnheider'
 

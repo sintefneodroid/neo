@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid import Motion, Reaction, ReactionParameters
+from neodroid.models import ReactionParameters, Motion, Reaction
 
 __author__ = 'cnheider'
 
