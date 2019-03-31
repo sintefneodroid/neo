@@ -52,7 +52,8 @@ class MessageClient(object):
                on_connected_callback=None,
                on_disconnected_callback=None,
                single_threaded=False,
-               verbose=False):
+               verbose=False,
+               writer=warnings.warn):
 
     self._verbose = verbose
     self._tcp_address = tcp_address
@@ -65,7 +66,9 @@ class MessageClient(object):
 
     self._on_timeout_callback = on_timeout_callback
     self._on_connected_callback = on_connected_callback
+    self._on_step_done = on_step_done_callback
     self._on_disconnected_callback = on_disconnected_callback
+    self._writer = writer
 
     if single_threaded:
       self.build(single_threaded)
@@ -81,15 +84,15 @@ class MessageClient(object):
       raise RuntimeError('Failed to create ZMQ socket!')
 
     if self._verbose:
-      warnings.warn('Connecting to server')
+      self._writer('Connecting to server')
     if self._use_ipc_medium:
       self._request_socket.connect('ipc:///tmp/neodroid/messages')
       if self._verbose:
-        warnings.warn('Using IPC protocol')
+        self._writer('Using IPC protocol')
     else:
       self._request_socket.connect(f'tcp://{self._tcp_address}:{self._tcp_port}')
       if self._verbose:
-        warnings.warn('Using TCP protocol')
+        self._writer('Using TCP protocol')
 
     self._on_connected_callback()
 
@@ -101,7 +104,7 @@ class MessageClient(object):
     self._request_socket.setsockopt(zmq.LINGER, 0)
     self._request_socket.close()
     self._poller.unregister(self._request_socket)
-    #self._poller.close()
+    # self._poller.close()
 
   def teardown(self):
     self._context.term()
@@ -143,7 +146,7 @@ class MessageClient(object):
 
           states, simulator_configuration = deserialise_states(flat_buffer_states)
           # if LAST_RECEIVED_FRAME_NUMBER==states.frame_number:
-          #  warnings.warn(f'Received a duplicate frame on frame number: {states.frame_number}')
+          #  self._writer(f'Received a duplicate frame on frame number: {states.frame_number}')
           # LAST_RECEIVED_FRAME_NUMBER=states.frame_number
 
           return states, simulator_configuration
@@ -156,13 +159,15 @@ class MessageClient(object):
 
           if retries_left <= 0:
             if self._verbose:
-              warnings.warn('Out of retries, tearing down client')
+              self._writer('Out of retries, tearing down client')
             self.teardown()
             if self._on_disconnected_callback:
               self._on_disconnected_callback()
             raise ConnectionError
-
           else:
-            warnings.warn(f'\nRetrying, attempt: {retries_left:d}/{REQUEST_RETRIES:d}')
+            self._writer(f'Retrying to connect, attempt: {retries_left:d}/{REQUEST_RETRIES:d}')
             self.open_connection()
             self._request_socket.send(serialised_reaction)
+
+      if self._on_step_done:
+        self._on_step_done()

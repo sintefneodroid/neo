@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import draugr
 
 __author__ = 'cnheider'
 
@@ -93,8 +94,12 @@ class NeodroidEnvironments(NetworkingEnvironment):
       if self._verbose:
         warnings.warn(f'Server is using different version {server_version}, complications may occur!')
 
-    print(f'Server API version: {server_version}, \n'
-          f'\t{self.simulator_configuration.simulator_info}')
+    print(f'Server API version: {server_version}')
+
+    draugr.sprint(f'\nconfigurable space:\n{self.description.configurables}\n',
+                  color='blue',
+                  bold=True,
+                  highlight=True)
 
   def _configure(self, *args, **kwargs):
     return self._reset()

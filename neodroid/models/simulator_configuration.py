@@ -8,7 +8,7 @@ class SimulatorConfiguration(object):
   def __init__(self,
                fbs_configuration,
                api_version,
-               simulator_info='No extra info about simulator available'):
+               simulator_info='No simulator_info available'):
     self._fbs_configuration = fbs_configuration
     self._api_version = api_version
     self._simulator_info = simulator_info

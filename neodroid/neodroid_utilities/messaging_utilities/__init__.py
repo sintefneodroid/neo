@@ -17,7 +17,8 @@ def message_client_event(event):
     @wraps(func)
     def call_func(ctx, *args, **kwargs):
       if event is ClientEvents.CONNECTED:
-        print('Connected to server')
+        pass
+        #print('Connected to server')
       elif event is ClientEvents.DISCONNECTED:
         warn('Disconnected from server', stacklevel=stack_level)
       elif event is ClientEvents.TIMEOUT:

@@ -30,16 +30,16 @@ class Configurable(object):
 
   def to_dict(self):
     return {
-      '_configurable_name': self._configurable_name,
-      '_configurable_value':self._configurable_value,
-      '_configurable_space':self._configurable_space
+      'configurable_name': self.configurable_name,
+      'configurable_value':self.configurable_value,
+      'configurable_space':self.configurable_space
       }
 
   def __repr__(self):
     return (f'<Configurable>\n'
-            f'<configurable_name>{self._configurable_name}</configurable_name>\n'
-            f'<configurable_value>{self._configurable_value}</configurable_value>\n'
-            f'<configurable_space>{self._configurable_space}</configurable_space>\n'
+            f'<configurable_name>{self.configurable_name}</configurable_name>\n'
+            f'<configurable_value>{self.configurable_value}</configurable_value>\n'
+            f'<configurable_space>\n{self.configurable_space}</configurable_space>\n'
             f'</Configurable>\n')
 
   def __str__(self):

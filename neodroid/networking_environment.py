@@ -4,7 +4,6 @@
 __author__ = 'cnheider'
 
 import time
-import warnings
 from abc import ABC
 
 from tqdm import tqdm
@@ -51,14 +50,16 @@ class NetworkingEnvironment(Environment, ABC):
   def _setup_connection(self):
     print(f'Connecting to server at {self._ip}:{self._port}')
 
-    self._message_server = messaging.MessageClient(        self._ip,
-        self._port,
-        on_timeout_callback=self.__on_timeout_callback__,
-        on_connected_callback=self.__on_connected_callback__,
-        on_disconnected_callback=self.__on_disconnected_callback__,
-        verbose=self._verbose)
-
     connect_tries = tqdm(range(CONNECT_TRY_TIMES), leave=False)
+
+    self._message_server = messaging.MessageClient(self._ip,
+                                                   self._port,
+                                                   on_timeout_callback=self.__on_timeout_callback__,
+                                                   on_connected_callback=self.__on_connected_callback__,
+                                                   on_disconnected_callback=self.__on_disconnected_callback__,
+                                                   verbose=self._verbose,writer=connect_tries.write)
+
+
     self._describe()
 
     while self.description is None:
@@ -66,8 +67,8 @@ class NetworkingEnvironment(Environment, ABC):
       time.sleep(CONNECT_TRY_INTERVAL)
       connect_tries.update()
       connect_tries.set_description(f'Connecting, please make sure that the ip {self._ip} '
-                                                   f'and port {self._port} '
-                                                   f'are cd correct')
+                                    f'and port {self._port} '
+                                    f'are cd correct')
       if connect_tries.n is CONNECT_TRY_TIMES:
         raise ConnectionError
 
@@ -112,9 +113,9 @@ class NetworkingEnvironment(Environment, ABC):
 
   def _describe(
       self,
-      parameters=M.ReactionParameters(          terminable=True,
-                                                describe=True,
-                                                episode_count=False          )
+      parameters=M.ReactionParameters(terminable=True,
+                                      describe=True,
+                                      episode_count=False)
       ):
     '''
 
