@@ -54,17 +54,34 @@ class BinaryActionEncodingCurriculumEnvironment(NeodroidCurriculumWrapper):
     return random.randrange(num)
 
 
+class VectorWrap():
+  def __init__(self, env):
+    self.env = env
+
+  def react(self, a, *args, **kwargs):
+    v = self.env.react(a[0], *args, **kwargs)
+    observables, signal, terminated = v.observables, v.signal, v.terminated
+
+    observables = np.array([observables])
+    signal = np.array([signal])
+    terminated = np.array([terminated])
+
+    return NOD.dict_of(observables, signal, terminated)
+
+  def reset(self):
+    return [self.env.reset()]
+
+  def __getattr__(self, item):
+    return getattr(self.env, item)
+
+
 class NeodroidWrapper():
   def __init__(self, env):
     self.env = env
 
-  def react(self, a,*args, **kwargs):
-    if isinstance(a,np.ndarray):
-      if len(a.shape)>1:
-        a = list(*a)
-      else:
-        pass
-        a = a[0]
+  def react(self, a, *args, **kwargs):
+    if isinstance(a, np.ndarray):
+      a = a.tolist()
 
     observables, signal, terminated, *_ = self.env.step(a, *args, **kwargs)
 
