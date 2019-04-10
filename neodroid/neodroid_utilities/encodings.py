@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import numpy
 
 __author__ = 'cnheider'
 
@@ -9,17 +8,17 @@ import numpy as np
 
 def signed_ternary_encoding(*,
                             size: int,
-                            index:int):
-  assert isinstance(size,(int,numpy.int64)), f'size was {type(size)}'
-  assert isinstance(index,(int,numpy.int64)), f'index was {type(index)}'
-  assert size*2 > index, f'signed size was {size*2}, index was {index}'
+                            index: int):
+  # assert isinstance(size,(int,numpy.int64)), f'size was {type(size)}'
+  # assert isinstance(index,(int,numpy.int64)), f'index was {type(index)}'
+  # assert size*2 > index, f'signed size was {size*2}, index was {index}'
 
   a = np.zeros(size)
   if index < 0:
     return a
   elif 0 <= index < size:
     a[index] = 1
-  elif size <= index < size*2:
+  elif size <= index < size * 2:
     a[index - size] = -1
   return a
 
@@ -44,6 +43,6 @@ def agg_double_list(l):
 
 
 if __name__ == '__main__':
-  size = 4
-  index = -1
-  print(signed_ternary_encoding(size=size,index=index))
+  a_size = 4
+  a_index = -1
+  print(signed_ternary_encoding(size=a_size, index=a_index))

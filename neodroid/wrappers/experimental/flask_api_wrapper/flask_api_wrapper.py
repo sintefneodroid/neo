@@ -15,7 +15,7 @@ class FlaskWrapper(SingleEnvironmentWrapper):
   def __next__(self):
     if not self._is_connected_to_server:
       return
-    return self.act()
+    return self.step()
 
   def act(self, *args, **kwargs):
     message = super().react(*args, **kwargs)

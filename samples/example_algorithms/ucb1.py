@@ -45,8 +45,8 @@ class UCB1:
 
   def train(self,
             arms,
-            trials=1000):
-    for t in range(trials):
+            rollouts=1000):
+    for t in range(rollouts):
       chosen_arm = self.select_arm()
       reward = arms[chosen_arm].draw()
       self.update_belief(chosen_arm, reward)

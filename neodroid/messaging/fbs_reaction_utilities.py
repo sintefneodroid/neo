@@ -44,18 +44,16 @@ def serialise_reaction(B, input_reaction):
   serialised_message_string_offset = B.CreateString(input_reaction.serialised_message)
 
   F.FReactionStart(B)
-  F.FReactionAddParameters(
-      B,
-      F.CreateFReactionParameters(
-          B,
-          input_reaction.parameters.terminable,
-          input_reaction.parameters.step,
-          input_reaction.parameters.reset,
-          input_reaction.parameters.configure,
-          input_reaction.parameters.describe,
-          input_reaction.parameters.episode_count
-          ),
-      )
+  F.FReactionAddParameters(B,
+                           F.CreateFReactionParameters(B,
+                                                       input_reaction.parameters.terminable,
+                                                       input_reaction.parameters.step,
+                                                       input_reaction.parameters.reset,
+                                                       input_reaction.parameters.configure,
+                                                       input_reaction.parameters.describe,
+                                                       input_reaction.parameters.episode_count
+                                                       ),
+                           )
   F.FReactionAddEnvironmentName(B, environment_string_offset)
   F.FReactionAddMotions(B, motions)
   F.FReactionAddConfigurations(B, configurations)
@@ -136,18 +134,18 @@ def serialise_displayables(B, input_reaction):
       displayable_value_type = F.FDisplayableValue.NONE
       displayable_value_offset = None
       input_value = input_displayable.displayable_value
-      if isinstance(input_value,float) or isinstance(input_value,int):
+      if isinstance(input_value, float) or isinstance(input_value, int):
         displayable_value_type = F.FDisplayableValue.FValue
         F.FValueStart(B)
         F.FValueAddVal(B, float(input_value))
         displayable_value_offset = F.FValueEnd(B)
-      elif isinstance(input_value,str):
+      elif isinstance(input_value, str):
         displayable_value_type = F.FDisplayableValue.FString
         v = B.CreateString(input_value)
         F.FStringStart(B)
         F.FStringAddStr(B, v)
         displayable_value_offset = F.FStringEnd(B)
-      elif isinstance(input_value,tuple):
+      elif isinstance(input_value, tuple):
         displayable_value_type = F.FDisplayableValue.FValuedVector3s
         _length = len(input_value[0])
 
@@ -171,7 +169,7 @@ def serialise_displayables(B, input_reaction):
         F.FValuedVector3sAddPoints(B, points)
         displayable_value_offset = F.FValuedVector3sEnd(B)
 
-      elif isinstance(input_value,list) or isinstance(input_value,np.ndarray) and len(input_value[0]) == 3:
+      elif isinstance(input_value, list) or isinstance(input_value, np.ndarray) and len(input_value[0]) == 3:
         displayable_value_type = F.FDisplayableValue.FVector3s
         _length = len(input_value)
 
@@ -185,7 +183,7 @@ def serialise_displayables(B, input_reaction):
         F.FVector3sAddPoints(B, points)
         displayable_value_offset = F.FVector3sEnd(B)
 
-      elif isinstance(input_value,list) or isinstance(input_value,np.ndarray):
+      elif isinstance(input_value, list) or isinstance(input_value, np.ndarray):
         displayable_value_type = F.FDisplayableValue.FValues
         _length = len(input_value)
         F.FValuesStartValsVector(B, _length)

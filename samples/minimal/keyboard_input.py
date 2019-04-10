@@ -57,7 +57,7 @@ def on_press(key):
       if actions == 'reset':
         obs = _environments.reset()
       else:
-        obs, signal, terminated, _ = _environments.step(actions)
+        obs, signal, terminated, _ = _environments.act(actions)
       # state = next(iter(states.values()))
 
       if terminated:

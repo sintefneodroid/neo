@@ -11,8 +11,9 @@ from .environment_state import EnvironmentState
 from .motion import Motion
 from .motor import Motor
 from .observer import Observer
+from .range import Range
 from .reaction import Reaction
 from .reaction_parameters import ReactionParameters
 from .simulator_configuration import SimulatorConfiguration
-from .range import Range
+from .space import Space
 from .unobservables import Unobservables

@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 import math
 
+import numpy as np
+
 __author__ = 'cnheider'
 
 
@@ -11,9 +13,13 @@ class Range(object):
   '''
 
   def __init__(self,
-               decimal_granularity=0,
+               *,
                min_value=0,
-               max_value=0):
+               max_value=0,
+               decimal_granularity=0):
+    assert max_value >= min_value
+    assert decimal_granularity >= 0
+
     self._decimal_granularity = decimal_granularity
     self._min_value = min_value
     self._max_value = max_value
@@ -40,7 +46,7 @@ class Range(object):
 
   @property
   def discrete_step_size(self):
-    return 1 / (1 + self.decimal_granularity)
+    return 1 / np.power(10,self.decimal_granularity)
 
   @property
   def span(self):
@@ -48,11 +54,11 @@ class Range(object):
 
   @property
   def discrete_steps(self):
-    return math.floor(self.span / self.discrete_step_size) + 1
+    return math.floor(self.span / self.discrete_step_size)
 
-  def to_dict(self)->dict:
+  def to_dict(self) -> dict:
     '''
-    >>> type(self.to_dict())
+
     type(dict)
     :return:
     '''
@@ -75,7 +81,23 @@ class Range(object):
   def __unicode__(self):
     return self.__repr__()
 
+  def sample(self):
+    if self.decimal_granularity == 0:
+      return self.cheapest_sample()
+
+    return self.cheaper_sample()
+    #return self.expensive_sample()
+
+  def cheapest_sample(self):
+    return np.random.randint(self.min, self.max+1)
+
+  def cheaper_sample(self):
+    return np.round(np.random.random() * self.span,self.decimal_granularity)
+
+  def expensive_sample(self):
+    return np.random.choice(np.linspace(self.min, self.max, num=self.discrete_steps))
+
 
 if __name__ == '__main__':
-  acs = Range()
-  print(acs)
+  r = Range(min_value=0,max_value=5,decimal_granularity=2)
+  print(r,r.sample())

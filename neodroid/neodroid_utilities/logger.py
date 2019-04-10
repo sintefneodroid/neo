@@ -174,7 +174,7 @@ class TensorBoardOutputFormat(KVWriter):
 
     summary = self.tf.Summary(value=[summary_val(k, v) for k, v in kvs.items()])
     event = self.event_pb2.Event(wall_time=time.time(), summary=summary)
-    event.step = self.step  # is there any reason why you'd want to specify the step?
+    event.act = self.step  # is there any reason why you'd want to specify the step?
     self.writer.WriteEvent(event)
     self.writer.Flush()
     self.step += 1
@@ -495,11 +495,11 @@ def read_tb(path):
   maxstep = 0
   for fname in fnames:
     for summary in tf.train.summary_iterator(fname):
-      if summary.step > 0:
+      if summary.act > 0:
         for v in summary.summary.value:
-          pair = (summary.step, v.simple_value)
+          pair = (summary.act, v.simple_value)
           tag2pairs[v.tag].append(pair)
-        maxstep = max(summary.step, maxstep)
+        maxstep = max(summary.act, maxstep)
   data = np.empty((maxstep, len(tag2pairs)))
   data[:] = np.nan
   tags = sorted(tag2pairs.keys())

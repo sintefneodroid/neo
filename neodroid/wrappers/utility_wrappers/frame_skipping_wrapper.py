@@ -24,7 +24,7 @@ class FrameSkippingWrapper(gym.Wrapper):
 
     for _ in range(self._skips):
 
-      observation, signal, terminated, info = self.env.step(action[0, 0])
+      observation, signal, terminated, info = self.env.act(action[0, 0])
       next_state = self.env.get_screen()
       state_buffer.append(next_state)
       reward_buffer.append(signal)

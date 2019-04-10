@@ -12,16 +12,12 @@ import numpy as np
 
 class ActionSpace(Space):
 
-  @property
-  def ranges(self):
-    return self._action_spaces
-
   def parse_action_space(self, action_spaces):
-    self._action_spaces = action_spaces
+    self._ranges = action_spaces
 
   def sample(self):
     actions = []
-    for valid_input in self._action_spaces:
+    for valid_input in self._ranges:
       sample = np.random.uniform(valid_input.min_value, valid_input.max_value, 1)
       actions.append(np.round(sample, valid_input.decimal_granularity))
     return actions
@@ -29,49 +25,15 @@ class ActionSpace(Space):
   def validate(self, actions):
     for i in range(len(actions)):
       clipped = np.clip(actions[i],
-                        self._action_spaces[i].min_value,
-                        self._action_spaces[i].max_value,
+                        self._ranges[i].min_value,
+                        self._ranges[i].max_value,
                         )
-      actions[i] = np.round(clipped, self._action_spaces[i].decimal_granularity)
+      actions[i] = np.round(clipped, self._ranges[i].decimal_granularity)
     return actions
 
   @property
-  def shape(self):
-    return [self.num_motors]
-
-  @property
-  def n(self):
-    return self.num_motors
-
-  @property
-  def low(self):
-    return [motion_space.min_value() for motion_space in self._action_spaces]
-
-  @property
-  def high(self):
-    return [motion_space.max_value() for motion_space in self._action_spaces]
-
-  @property
-  def num_motors(self):
-    return len(self._action_spaces)
-
-  @property
-  def discrete_actions(self):
-    a = self._action_spaces[0]
-    discrete_actions = np.arange(a.min, a.max + 1, np.power(10, a.decimal_granularity))
-    return discrete_actions
-
-  @property
   def num_discrete_actions(self):
-    return len(self.discrete_actions)
-
-  @property
-  def num_binary_actions(self):
-    return len(self._action_spaces) * 2
-
-  @property
-  def num_ternary_actions(self):
-    return len(self._action_spaces) * 3
+    return sum([r.discrete_steps for r in self._ranges])
 
   @property
   def is_singular(self):
@@ -92,9 +54,9 @@ class ActionSpace(Space):
   def discrete_ternary_one_hot_sample(self):
     idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_ternary_actions)
-    if len(self._action_spaces) > 0:
+    if len(self._ranges) > 0:
       sample = np.random.uniform(
-          self._action_spaces[idx].min_value, self._action_spaces[idx].max_value, 1
+          self._ranges[idx].min_value, self._ranges[idx].max_value, 1
           )
       if sample > 0:
         zeros[idx] = 1
@@ -105,10 +67,10 @@ class ActionSpace(Space):
   def discrete_binary_one_hot_sample(self):
     idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_binary_actions)
-    if len(self._action_spaces) > 0:
+    if len(self._ranges) > 0:
       sample = np.random.uniform(
-          self._action_spaces[idx].min_value,
-          self._action_spaces[idx].max_value,
+          self._ranges[idx].min_value,
+          self._ranges[idx].max_value,
           1
           )
       if sample > 0:
@@ -124,10 +86,10 @@ class ActionSpace(Space):
   def discrete_one_hot_sample(self):
     idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_motors)
-    if len(self._action_spaces) > 0:
+    if len(self._ranges) > 0:
       val = np.random.random_integers(
-          self._action_spaces[idx].min_value(),
-          self._action_spaces[idx].max_value(),
+          self._ranges[idx].min_value(),
+          self._ranges[idx].max_value(),
           1,
           )
       zeros[idx] = val
@@ -141,21 +103,11 @@ class ActionSpace(Space):
 
     idx = np.random.randint(0, self.num_motors)
     zeros = np.zeros(self.num_motors)
-    if len(self._action_spaces) > 0:
+    if len(self._ranges) > 0:
       zeros[idx] = 1
     return zeros
 
-  def __call__(self, *args, **kwargs):
-    return self.shape
-
-  def __len__(self):
-    return len(self.shape)
-
-  # def __int__(self):
-  #  return int(sum(self.shape))
-
-
 if __name__ == '__main__':
-  acs =ActionSpace()
-  acs.parse_action_space([Range()])
-  print(acs)
+  acs = ActionSpace([Range(min_value=0,max_value=3,decimal_granularity=2),Range(min_value=0,max_value=2,
+                                                                                decimal_granularity=1)])
+  print(acs,acs.low,acs.high, acs.decimal_granularity, acs.num_discrete_actions)

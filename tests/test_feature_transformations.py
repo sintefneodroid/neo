@@ -4,12 +4,8 @@ from neodroid.models import Range
 
 __author__ = 'cnheider'
 
-def inc(x):
-  return x + 1
 
-def test_answer():
-  assert inc(4) == 5
 
 def test_space():
-  space = Range(1, -1, 1)
+  space = Range(min_value=-1, max_value = 1, decimal_granularity=1)
   assert space.min_value != 0

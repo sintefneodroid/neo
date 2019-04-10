@@ -9,7 +9,6 @@ from neodroid.wrappers.utility_wrappers.single_environment_wrapper import Single
 __author__ = 'cnheider'
 
 import numpy as np
-from gym import error, spaces
 import gym
 
 warn(f"This module is deprecated in version {__version__}", DeprecationWarning)
@@ -22,12 +21,11 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
     # action = action.flatten()
     message = super().react(action, **kwargs)
     if message:
-      return (
-        np.array(flattened_observation(message)),
-        message.signal,
-        message.terminated,
-        message,
-        )
+      return (np.array(flattened_observation(message)),
+              message.signal,
+              message.terminated,
+              message,
+              )
     raise ValueError('Did not receive any message.')
 
   def reset(self, *args, **kwargs):
@@ -69,6 +67,7 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
   @property
   def observation_space(self):
     return self._observation_space
+
 
 if __name__ == '__main__':
   NeodroidGymWrapper()

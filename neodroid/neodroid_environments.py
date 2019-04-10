@@ -46,15 +46,14 @@ class NeodroidEnvironments(NetworkingEnvironment):
   def neodroid_api_version(self):
     return '0.1.6'
 
-  def __init__(
-      self,
-      *,
-      environment_name=None,
-      clones=0,
-      path_to_executables_directory=default_environments_dir,
-      headless=False,
-      **kwargs
-      ):
+  def __init__(self,
+               *,
+               environment_name=None,
+               clones=0,
+               path_to_executables_directory=default_environments_dir,
+               headless=False,
+               **kwargs
+               ):
     super().__init__(**kwargs)
 
     # Environment
@@ -131,7 +130,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
     self._warn_react()
 
     if isinstance(input_reactions, list) and len(input_reactions) > 0 and isinstance(input_reactions[0],
-                                                                                 M.Reaction):
+                                                                                     M.Reaction):
       pass
     else:
       if input_reactions is None:
@@ -180,7 +179,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
       parameters = M.ReactionParameters(terminable=True,
                                         describe=True,
                                         episode_count=False,
-                                        reset=True                                        )
+                                        reset=True)
       input_reactions = [M.Reaction(parameters=parameters)]
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)

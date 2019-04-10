@@ -3,8 +3,11 @@
 import random
 from typing import Any
 
+import numpy as np
+
 from neodroid.neodroid_utilities.encodings import signed_ternary_encoding
 from neodroid.wrappers.gym_wrapper import NeodroidGymWrapper
+from warg import NOD
 
 __author__ = 'cnheider'
 
@@ -35,7 +38,7 @@ class BinaryActionEncodingCurriculumEnvironment(NeodroidCurriculumWrapper):
 
   def step(self, action: int = 0, **kwargs) -> Any:
     a = signed_ternary_encoding(size=self.action_space.num_motors,
-                                index= action)
+                                index=action)
     return super().act(input_reaction=a, **kwargs)
 
   @property
@@ -49,3 +52,26 @@ class BinaryActionEncodingCurriculumEnvironment(NeodroidCurriculumWrapper):
   def signed_one_hot_sample(self):
     num = self.act_spc.num_binary_actions
     return random.randrange(num)
+
+
+class NeodroidWrapper():
+  def __init__(self, env):
+    self.env = env
+
+  def react(self, a,*args, **kwargs):
+    if isinstance(a,np.ndarray):
+      if len(a.shape)>1:
+        a = list(*a)
+      else:
+        pass
+        a = a[0]
+
+    observables, signal, terminated, *_ = self.env.step(a, *args, **kwargs)
+
+    return NOD.dict_of(observables, signal, terminated)
+
+  def reset(self):
+    return self.env.reset()
+
+  def __getattr__(self, item):
+    return getattr(self.env, item)
