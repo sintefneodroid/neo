@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from neodroid.wrappers.gym_wrapper.gym_wrapper import NeodroidGymWrapper
+from neodroid.wrappers.gym_wrapper.gym_wrapper import NeodroidVectorGymWrapper
 
 __author__ = 'cnheider'
 
@@ -9,7 +9,7 @@ import numpy as np
 
 
 def make(environment_name, **kwargs):
-  return NeodroidGymWrapper(environment_name=environment_name, **kwargs)
+  return NeodroidVectorGymWrapper(environment_name=environment_name, **kwargs)
 
 
 def seed(seed):

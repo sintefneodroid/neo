@@ -66,6 +66,13 @@ class Space(object):
             f'<Ranges>\n{ranges_str}</Ranges>\n'
             f'</Space>\n')
 
+  @property
+  def n(self):
+    return len(self)
+
+  def __len__(self):
+    return len(self._ranges)
+
 
 if __name__ == '__main__':
   acs = Space()

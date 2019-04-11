@@ -12,7 +12,7 @@ __author__ = 'cnheider'
 import matplotlib.pyplot as plt
 from matplotlib import animation
 
-from neodroid.wrappers.gym_wrapper import NeodroidGymWrapper as neogym
+from neodroid.wrappers.gym_wrapper import NeodroidVectorGymWrapper as neogym
 
 
 def grab_video_frame(cap):

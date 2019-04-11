@@ -18,14 +18,14 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
   def __next__(self):
     if not self._is_connected_to_server:
       raise StopIteration
-    return self.step()
+    return self.act()
 
-  def act(self, *args, **kwargs):
-    message = super().react(*args,**kwargs)
+  def act(self, action=None ,*args, **kwargs):
+    message = super().react(action[0],*args,**kwargs)
     if message:
-      return (np.array(flattened_observation(message)),
-              message.signal,
-              message.terminated,
+      return (np.array([flattened_observation(message)]),
+              np.array([message.signal]),
+              np.array([message.terminated]),
               message,
               )
     return None, None, None, None
@@ -33,7 +33,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
   def configure(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return np.array(flattened_observation(message)), message
+      return np.array([flattened_observation(message)]), message
     return None, None
 
   def generate_trajectory_from_configuration(self,

@@ -54,7 +54,7 @@ class Range(object):
 
   @property
   def discrete_steps(self):
-    return math.floor(self.span / self.discrete_step_size)
+    return math.floor(self.span / self.discrete_step_size)+1
 
   def to_dict(self) -> dict:
     '''

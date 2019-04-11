@@ -20,7 +20,7 @@ class ActionSpace(Space):
     for valid_input in self._ranges:
       sample = np.random.uniform(valid_input.min_value, valid_input.max_value, 1)
       actions.append(np.round(sample, valid_input.decimal_granularity))
-    return actions
+    return [actions]
 
   def validate(self, actions):
     for i in range(len(actions)):
@@ -41,7 +41,7 @@ class ActionSpace(Space):
 
   @property
   def is_discrete(self):
-    return True  # TODO: Implement
+    return np.array([a.decimal_granularity==0 for a in self._ranges]).all()
 
   @property
   def is_continuous(self):

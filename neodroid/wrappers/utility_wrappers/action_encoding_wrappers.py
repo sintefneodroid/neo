@@ -6,7 +6,7 @@ from typing import Any
 import numpy as np
 
 from neodroid.neodroid_utilities.encodings import signed_ternary_encoding
-from neodroid.wrappers.gym_wrapper import NeodroidGymWrapper
+from neodroid.wrappers.gym_wrapper import NeodroidVectorGymWrapper
 from warg import NOD
 
 __author__ = 'cnheider'
@@ -14,10 +14,10 @@ __author__ = 'cnheider'
 from neodroid.wrappers.curriculum_wrapper import NeodroidCurriculumWrapper
 
 
-class BinaryActionEncodingWrapper(NeodroidGymWrapper):
+class BinaryActionEncodingWrapper(NeodroidVectorGymWrapper):
 
   def step(self, action: int = 0, **kwargs) -> Any:
-    ternary_action = signed_ternary_encoding(size=self.action_space.num_motors,
+    ternary_action = signed_ternary_encoding(size=self.action_space.n,
                                              index=action)
     return super().step(ternary_action, **kwargs)
 
@@ -30,16 +30,16 @@ class BinaryActionEncodingWrapper(NeodroidGymWrapper):
     return self.act_spc
 
   def signed_one_hot_sample(self):
-    num = self.act_spc.num_binary_actions
+    num = self.act_spc.n
     return random.randrange(num)
 
 
 class BinaryActionEncodingCurriculumEnvironment(NeodroidCurriculumWrapper):
 
   def step(self, action: int = 0, **kwargs) -> Any:
-    a = signed_ternary_encoding(size=self.action_space.num_motors,
+    a = signed_ternary_encoding(size=self.action_space.n,
                                 index=action)
-    return super().act(input_reaction=a, **kwargs)
+    return super().act(a, **kwargs)
 
   @property
   def action_space(self):
@@ -50,23 +50,22 @@ class BinaryActionEncodingCurriculumEnvironment(NeodroidCurriculumWrapper):
     return self.act_spc
 
   def signed_one_hot_sample(self):
-    num = self.act_spc.num_binary_actions
+    num = self.act_spc.n
     return random.randrange(num)
 
 
-class VectorWrap():
+class VectorWrap:
   def __init__(self, env):
     self.env = env
 
   def react(self, a, *args, **kwargs):
-    v = self.env.react(a[0], *args, **kwargs)
-    observables, signal, terminated = v.observables, v.signal, v.terminated
+    observables, signal, terminated = self.env.react(a[0], *args, **kwargs)
 
     observables = np.array([observables])
     signal = np.array([signal])
     terminated = np.array([terminated])
 
-    return NOD.dict_of(observables, signal, terminated)
+    return observables, signal, terminated
 
   def reset(self):
     return [self.env.reset()]
@@ -74,8 +73,7 @@ class VectorWrap():
   def __getattr__(self, item):
     return getattr(self.env, item)
 
-
-class NeodroidWrapper():
+class NeodroidWrapper:
   def __init__(self, env):
     self.env = env
 
@@ -85,7 +83,7 @@ class NeodroidWrapper():
 
     observables, signal, terminated, *_ = self.env.step(a, *args, **kwargs)
 
-    return NOD.dict_of(observables, signal, terminated)
+    return observables, signal, terminated
 
   def reset(self):
     return self.env.reset()

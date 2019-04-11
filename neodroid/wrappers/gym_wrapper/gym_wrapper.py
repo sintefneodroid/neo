@@ -14,24 +14,24 @@ import gym
 warn(f"This module is deprecated in version {__version__}", DeprecationWarning)
 
 
-class NeodroidGymWrapper(SingleEnvironmentWrapper,
-                         gym.Env):
+class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
+                               gym.Env):
 
   def step(self, action=None, *args, **kwargs):
     # action = action.flatten()
-    message = super().react(action, **kwargs)
+    message = super().react(action[0], **kwargs)
     if message:
-      return (np.array(flattened_observation(message)),
-              message.signal,
-              message.terminated,
-              message,
+      return (np.array([flattened_observation(message)]),
+              np.array([message.signal]),
+              np.array([message.terminated]),
+              np.array([message]),
               )
     raise ValueError('Did not receive any message.')
 
   def reset(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return np.array(flattened_observation(message))
+      return np.array([flattened_observation(message)])
     return None
 
   def render(self, *args, **kwargs):
@@ -46,7 +46,7 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
   def __next__(self):
     if not self._is_connected_to_server:
       raise ValueError('Not connected to a server.')
-    return self.react()
+    return self.step()
 
   @property
   def metadata(self):
@@ -70,4 +70,4 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
 
 
 if __name__ == '__main__':
-  NeodroidGymWrapper()
+  NeodroidVectorGymWrapper()

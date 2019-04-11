@@ -151,7 +151,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
       self.update_interface_statics(new_states, simulator_configuration)
       return new_states
 
-    self._warn_no_reaction_received()
+    self._warn_no_state_received()
 
   def _display(self, displayables):
     conf_reaction = Reaction(
@@ -186,7 +186,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
     if new_states:
       self.update_interface_statics(new_states, simulator_configuration)
       return new_states
-    self._warn_no_reaction_received()
+    self._warn_no_state_received()
 
   def _close(self, callback=None):
     '''
@@ -258,7 +258,7 @@ class NeodroidEnvironments(NetworkingEnvironment):
     if self._debug_logging:
       self._logger.debug('Resetting environment')
 
-  def _warn_no_reaction_received(self):
+  def _warn_no_state_received(self):
     if self._verbose:
       warnings.warn('No valid was new_state received')
     if self._debug_logging:
