@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import argparse
 import time
 
 __author__ = 'cnheider'
@@ -7,16 +8,49 @@ __author__ = 'cnheider'
 import neodroid as neo
 
 
+def add_bool_arg(parser, name, *, dest=None, default=False, **kwargs):
+  if not dest:
+    dest = name
+
+  group = parser.add_mutually_exclusive_group(required=False)
+
+  group.add_argument(f'--{name.upper()}', f'-{name.lower()}', dest=dest, action='store_true', **kwargs)
+  group.add_argument(f'--NO-{name.upper()}', f'-no-{name.lower()}', dest=dest, action='store_false', **kwargs)
+  parser.set_defaults(**{dest:default})
+
+
 def main():
-  _environments = neo.make(connect_to_running=True,verbose=False)
-  _environments.reset()
+  parser = argparse.ArgumentParser(description='Neodroid Action Space Sampling')
+
+  parser.add_argument('--IP',
+                      '-ip',
+                      type=str,
+                      default='localhost',
+                      metavar='IP',
+                      help='IP Address')
+  parser.add_argument('--PORT',
+                      '-port',
+                      type=int,
+                      default=6969,
+                      metavar='PORT',
+                      help='Port')
+  add_bool_arg(parser,
+               'verbose',
+               dest='VERBOSE',
+               default=False,
+               help='Verbose flag')
+
+  args = parser.parse_args()
+
+  environments = neo.make(verbose=False)
+  environments.reset()
 
   i = 0
   freq = 100
   time_s = time.time()
-  while _environments.is_connected:
-    actions = _environments.action_space.sample()
-    states = _environments.react(actions)
+  while environments.is_connected:
+    actions = environments.action_space.sample()
+    states = environments.react(actions)
     state = next(iter(states.values()))
     terminated = state.terminated
 
@@ -29,7 +63,7 @@ def main():
     time_s = time_now
 
     if terminated:
-      _environments.reset()
+      environments.reset()
 
 
 if __name__ == '__main__':

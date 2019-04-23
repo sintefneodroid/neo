@@ -30,6 +30,11 @@ def make(environment_name='', clones=0, *args, **kwargs):
   _environments = NeodroidEnvironments(environment_name=environment_name, clones=clones, *args, **kwargs)
   return _environments
 
+def connect(ip='localhost',port=6969,*args,**kwargs):
+  global _environments
+  _environments = NeodroidEnvironments(ip=ip,port=port,connect_to_running=True, *args, **kwargs)
+  return _environments
+
 
 def seed(random_seed):
   import numpy as np
