@@ -1,5 +1,5 @@
 neodroid-flatbuffers==20180620130404
-draugr==0.1.20190124092423
+draugr==0.1.20190430100606
 warg==0.1.20190425095225
 pyfiglet==0.8.post1
 fire==0.1.3
