@@ -37,7 +37,7 @@ def get_version(append_time=False):
                 else version
             )
         else:
-            # Default version is an ISO8601 compiliant datetime. PyPI doesn't allow
+            # Default version is an ISO8601 compliant datetime. PyPI doesn't allow
             # the colon ':' character in its versions, and time is required to allow
             # for multiple publications to master in one day. This datetime string
             # uses the 'basic' ISO8601 format for both its date and time components
