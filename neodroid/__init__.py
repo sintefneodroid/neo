@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.version import get_version
 from neodroid.neodroid_environments import NeodroidEnvironments
 
 __author__ = 'cnheider'
-__version__ = None
+__version__ = get_version()
 '''
 .. module:: neodroid
    :platform: Unix, Windows
@@ -13,9 +14,6 @@ __version__ = None
 
 
 '''
-
-from .version import __version__
-
 
 _environments = None
 
