@@ -11,7 +11,7 @@ __author__ = 'cnheider'
 import numpy as np
 
 from neodroid.utilities import flattened_observation
-from wrappers.experimental.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.wrappers.experimental.single_environment_wrapper import SingleEnvironmentWrapper
 
 
 class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
