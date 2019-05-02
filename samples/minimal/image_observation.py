@@ -5,7 +5,7 @@ import time
 import cv2
 import warg
 
-from neodroid.neodroid_utilities.environment_interface.neodroid_camera import extract_neodroid_camera_images
+from neodroid.utilities.environment_interface.neodroid_camera import extract_neodroid_camera_images
 
 __author__ = 'cnheider'
 

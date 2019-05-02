@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.wrappers.utility_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from wrappers.experimental.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
 
-from neodroid.neodroid_utilities import flattened_observation
+from neodroid.utilities import flattened_observation
 
 
 class FlaskWrapper(SingleEnvironmentWrapper):

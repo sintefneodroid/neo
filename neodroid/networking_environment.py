@@ -11,7 +11,7 @@ from tqdm import tqdm
 import neodroid.models as M
 from neodroid import messaging
 from neodroid.environment import Environment
-from neodroid.neodroid_utilities import (ClientEvents,
+from neodroid.utilities import (ClientEvents,
                                          construct_action_space,
                                          construct_observation_space,
                                          message_client_event,

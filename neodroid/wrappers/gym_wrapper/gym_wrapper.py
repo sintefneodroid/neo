@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.neodroid_utilities import flattened_observation
+from neodroid.utilities import flattened_observation
 from neodroid.version import __version__
-from neodroid.wrappers.utility_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from wrappers.experimental.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
 
@@ -67,6 +67,25 @@ class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
   @property
   def observation_space(self):
     return self._observation_space
+
+
+class NeodroidWrapper:
+  def __init__(self, env):
+    self.env = env
+
+  def react(self, a, *args, **kwargs):
+    if isinstance(a, np.ndarray):
+      a = a.tolist()
+
+    observables, signal, terminated, *_ = self.env.step(a, *args, **kwargs)
+
+    return observables, signal, terminated
+
+  def reset(self):
+    return self.env.reset()
+
+  def __getattr__(self, item):
+    return getattr(self.env, item)
 
 
 if __name__ == '__main__':

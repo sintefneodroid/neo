@@ -6,7 +6,7 @@ import torch
 from PIL import Image
 
 from executables.guiclient.utilities import DiceCoeff, rgb_segment
-from neodroid.neodroid_utilities.messaging_utilities.neodroid_camera_extraction import extract_neodroid_camera
+from neodroid.utilities.messaging_utilities.neodroid_camera_extraction import extract_neodroid_camera
 
 __author__ = 'cnheider'
 

@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import random
+from typing import Any
+
 from neodroid.models import Reaction, ReactionParameters
+from neodroid.utilities.encodings import signed_ternary_encoding
 
 __author__ = 'cnheider'
 
 import numpy as np
 
-from neodroid.neodroid_utilities import flattened_observation
-from neodroid.wrappers.utility_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.utilities import flattened_observation
+from wrappers.experimental.single_environment_wrapper import SingleEnvironmentWrapper
 
 
 class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
@@ -115,3 +119,23 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
 
   def quit(self, *args, **kwargs):
     return self.close(*args, **kwargs)
+
+
+class BinaryActionEncodingCurriculumEnvironment(NeodroidCurriculumWrapper):
+
+  def step(self, action: int = 0, **kwargs) -> Any:
+    a = signed_ternary_encoding(size=self.action_space.n,
+                                index=action)
+    return super().act(a, **kwargs)
+
+  @property
+  def action_space(self):
+    self.act_spc = super().action_space
+
+    # self.act_spc.sample = self.signed_one_hot_sample
+
+    return self.act_spc
+
+  def signed_one_hot_sample(self):
+    num = self.act_spc.n
+    return random.randrange(num)

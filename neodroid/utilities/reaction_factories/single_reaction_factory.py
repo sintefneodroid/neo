@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 import typing
 
-from neodroid.neodroid_utilities.debugging_utilities.debug_print_return import print_return_value
-from neodroid.neodroid_utilities.transformations.action_transformations import normalise_action
+from neodroid.utilities.debugging_utilities.debug_print_return import print_return_value
+from neodroid.utilities.transformations.action_transformations import normalise_action
 
 __author__ = 'cnheider'
 

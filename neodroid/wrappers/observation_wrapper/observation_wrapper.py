@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.neodroid_utilities.messaging_utilities.neodroid_camera_extraction import (
+from neodroid.utilities.messaging_utilities.neodroid_camera_extraction import (
   extract_camera_observation,
   extract_neodroid_camera,
   )
-from neodroid.wrappers.utility_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from wrappers.experimental.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
 
-from neodroid.neodroid_utilities import flattened_observation
+from neodroid.utilities import flattened_observation
 
 
 class ObservationWrapper(SingleEnvironmentWrapper):

@@ -11,7 +11,7 @@ import numpy as np
 
 import neodroid.models as M
 from neodroid.models import Reaction
-from neodroid.neodroid_utilities import (construct_step_reaction, flattened_observation, launch_environment,
+from neodroid.utilities import (construct_step_reaction, flattened_observation, launch_environment,
                                          verify_configuration_reaction,
                                          )
 from neodroid.networking_environment import NetworkingEnvironment

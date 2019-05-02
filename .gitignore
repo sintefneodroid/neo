@@ -1,4 +1,4 @@
-build/
+docs/build/
 dist/
 .vscode
 .installed.cfg

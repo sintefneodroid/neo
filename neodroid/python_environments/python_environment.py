@@ -7,7 +7,7 @@ from abc import ABC
 
 import neodroid.models as M
 from neodroid.environment import Environment
-from neodroid.neodroid_utilities import (construct_action_space, construct_observation_space,
+from neodroid.utilities import (construct_action_space, construct_observation_space,
                                          )
 
 

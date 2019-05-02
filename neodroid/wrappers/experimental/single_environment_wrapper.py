@@ -4,7 +4,7 @@ from warnings import warn
 
 from neodroid.models import Reaction
 from neodroid.neodroid_environments import NeodroidEnvironments
-from neodroid.neodroid_utilities.exceptions.exceptions import NoEnvironmentError
+from neodroid.utilities.exceptions.exceptions import NoEnvironmentError
 
 __author__ = 'cnheider'
 

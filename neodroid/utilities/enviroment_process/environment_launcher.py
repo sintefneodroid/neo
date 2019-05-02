@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.neodroid_utilities.download_utilities.download_environment import download_environment
+from neodroid.utilities.download_utilities.download_environment import download_environment
 
 __author__ = 'cnheider'
 

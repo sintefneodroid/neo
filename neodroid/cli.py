@@ -7,7 +7,7 @@ import draugr
 import fire
 from pyfiglet import Figlet
 
-from neodroid.neodroid_utilities.download_utilities.download_environment import (available_environments,
+from neodroid.utilities.download_utilities.download_environment import (available_environments,
                                                                                  download_environment,
                                                                                  )
 from neodroid.version import get_version

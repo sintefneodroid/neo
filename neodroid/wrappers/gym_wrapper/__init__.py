@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from neodroid.wrappers.gym_wrapper.gym_wrapper import NeodroidVectorGymWrapper
+from neodroid.wrappers.gym_wrapper.gym_wrapper import *
 
 __author__ = 'cnheider'
 

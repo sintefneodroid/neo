@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from abc import ABC, abstractmethod
 
-from neodroid.neodroid_utilities import logger
+from neodroid.utilities import logger
 
 __author__ = 'cnheider'
 
@@ -94,3 +94,23 @@ class VectorEnvironmentsWrapper(VectorEnvironments):
 
   def render(self):
     self.venv.render()
+
+
+class VectorWrap:
+  def __init__(self, env):
+    self.env = env
+
+  def react(self, a, *args, **kwargs):
+    observables, signal, terminated = self.env.react(a[0], *args, **kwargs)
+
+    observables = np.array([observables])
+    signal = np.array([signal])
+    terminated = np.array([terminated])
+
+    return observables, signal, terminated
+
+  def reset(self):
+    return [self.env.reset()]
+
+  def __getattr__(self, item):
+    return getattr(self.env, item)

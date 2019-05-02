@@ -8,7 +8,7 @@ from samples import UCB1
 
 __author__ = 'cnheider'
 
-import neodroid.wrappers.utility_wrappers.single_environment_wrapper as neo
+import wrappers.experimental.single_environment_wrapper as neo
 from neodroid import messaging
 
 
