@@ -51,7 +51,7 @@ def construct_reactions(env, R):
 
 
 def main():
-  environments = neo.BatchedNeodroidEnvironments(connect_to_running=True)
+  environments = neo.BatchedNeodroidEnvironment(connect_to_running=True)
   R = [False for _ in range(20)]
   while environments.is_connected:
     reactions = construct_reactions(environments, R)

@@ -20,7 +20,7 @@ file_dir = os.path.dirname(os.path.realpath(__file__))
 default_environments_dir = os.path.abspath(os.path.join(file_dir, 'environments'))
 
 
-class NeodroidEnvironments(NetworkingEnvironment):
+class NeodroidEnvironment(NetworkingEnvironment):
 
   @property
   def description(self):
@@ -294,7 +294,7 @@ if __name__ == '__main__':
       help='Connect to already running environment instead of starting another instance')
   args = parser.parse_args()
 
-  env = NeodroidEnvironments(name=args.ENVIRONMENT_NAME, connect_to_running=args.CONNECT_TO_RUNNING)
+  env = NeodroidEnvironment(name=args.ENVIRONMENT_NAME, connect_to_running=args.CONNECT_TO_RUNNING)
 
   observation_session = tqdm(env, leave=False)
   i = 0

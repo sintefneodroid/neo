@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from wrappers.experimental.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.wrappers.experimental.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
 

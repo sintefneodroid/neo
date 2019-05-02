@@ -6,7 +6,7 @@ from neodroid.utilities.messaging_utilities.neodroid_camera_extraction import (
   extract_camera_observation,
   extract_neodroid_camera,
   )
-from wrappers.experimental.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.wrappers.experimental.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
 

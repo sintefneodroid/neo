@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.version import get_version
-from neodroid.neodroid_environments import NeodroidEnvironments
+from neodroid.neodroid_environments import NeodroidEnvironment
 
 __author__ = 'cnheider'
 __version__ = get_version()
@@ -25,12 +25,12 @@ def draw_logo():
 
 def make(environment_name='', clones=0, *args, **kwargs):
   global _environments
-  _environments = NeodroidEnvironments(environment_name=environment_name, clones=clones, *args, **kwargs)
+  _environments = NeodroidEnvironment(environment_name=environment_name, clones=clones, *args, **kwargs)
   return _environments
 
 def connect(ip='localhost',port=6969,*args,**kwargs):
   global _environments
-  _environments = NeodroidEnvironments(ip=ip,port=port,connect_to_running=True, *args, **kwargs)
+  _environments = NeodroidEnvironment(ip=ip, port=port, connect_to_running=True, *args, **kwargs)
   return _environments
 
 

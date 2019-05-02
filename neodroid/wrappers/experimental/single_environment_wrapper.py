@@ -3,14 +3,14 @@
 from warnings import warn
 
 from neodroid.models import Reaction
-from neodroid.neodroid_environments import NeodroidEnvironments
+from neodroid.neodroid_environments import NeodroidEnvironment
 from neodroid.utilities.exceptions.exceptions import NoEnvironmentError
 
 __author__ = 'cnheider'
 
 
 
-class SingleEnvironmentWrapper(NeodroidEnvironments):
+class SingleEnvironmentWrapper(NeodroidEnvironment):
 
   def __next__(self):
     if not self._is_connected_to_server:
