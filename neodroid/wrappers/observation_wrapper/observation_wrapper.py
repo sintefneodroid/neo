@@ -52,6 +52,10 @@ class ObservationWrapper(SingleEnvironmentWrapper):
 
 class CameraObservationWrapper(SingleEnvironmentWrapper):
 
+  def __init__(self,auto_reset=True,**kwargs):
+    super().__init__(**kwargs)
+    self._auto_reset = auto_reset
+
   def __next__(self):
     if not self._is_connected_to_server:
       return
@@ -65,10 +69,14 @@ class CameraObservationWrapper(SingleEnvironmentWrapper):
     return None
 
   def update(self):
-    return super().observe()
+    return super().react()
 
   def fetch_new_frame(self, *args, **kwargs):
-    message = super().observe(*args, **kwargs)
+    message = super().react(*args, **kwargs)
+    if message.terminated and self._auto_reset:
+      super().reset()
+      message = self.fetch_new_frame()
+
     if message:
       return extract_neodroid_camera(message)
     return None

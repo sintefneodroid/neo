@@ -5,7 +5,7 @@ from neodroid.neodroid_environments import NeodroidEnvironment
 
 __author__ = 'cnheider'
 __version__ = get_version()
-'''
+__doc__='''
 .. module:: neodroid
    :platform: Unix, Windows
    :synopsis: An API for communicating with a Unity Game process.

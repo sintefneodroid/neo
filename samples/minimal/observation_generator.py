@@ -5,11 +5,11 @@ from tqdm import tqdm
 
 tqdm.monitor_interval = 0
 
-import neodroid.wrappers.formal_wrapper as neo
+from neodroid.wrappers import NeodroidFormalWrapper
 
 
 def main():
-  _environment = neo.make(environment_name='grd_camera', connect_to_running=True)
+  _environment = NeodroidFormalWrapper(connect_to_running=True)
 
   frame_i = 0
   update_description_interval = 100

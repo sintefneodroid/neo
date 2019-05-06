@@ -1,8 +1,8 @@
 import numpy as np
 from PIL import Image
 
-default_camera_observer_names = ('RGBCameraObserver',
-                                 'SegmentationCameraObserver',
+default_camera_observer_names = ('RGB',
+                                 'ObjectSpace',
                                  'InstanceSegmentationCameraObserver',
                                  'DepthCameraObserver',
                                  'InfraredCameraObserver',

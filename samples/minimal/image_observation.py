@@ -6,7 +6,7 @@ import cv2
 import warg
 
 from neodroid.utilities.environment_interface.neodroid_camera import extract_neodroid_camera_images
-from neodroid.wrappers import NeodroidWrapper, NeodroidGymWrapper
+from neodroid.wrappers import NeodroidGymWrapper
 
 __author__ = 'cnheider'
 
@@ -28,6 +28,7 @@ image_axs = warg.NOD()
 
 env = NeodroidGymWrapper(connect_to_running=True)
 fig = plt.figure()
+print_obs=False
 
 
 def update_figures(i):
@@ -35,8 +36,9 @@ def update_figures(i):
 
   sample = env.action_space.sample()
   obs, signal, terminated, info = env.step(sample)
-  for obs in info.observers.values():
-    print(obs)
+  if print_obs:
+    for obs in info.observers.values():
+      print(obs)
 
   new_images = extract_neodroid_camera_images(env)
 
@@ -129,9 +131,9 @@ def main():
   env.reset()
   acs = env.action_space.sample()
   obs, rew, term, info = env.step(acs)
-
-  for obs in info.observers.values():
-    print(obs)
+  if print_obs:
+    for obs in info.observers.values():
+      print(obs)
 
   new_images = extract_neodroid_camera_images(env)
 
