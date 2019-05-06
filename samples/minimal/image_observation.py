@@ -6,6 +6,7 @@ import cv2
 import warg
 
 from neodroid.utilities.environment_interface.neodroid_camera import extract_neodroid_camera_images
+from neodroid.wrappers import NeodroidWrapper, NeodroidGymWrapper
 
 __author__ = 'cnheider'
 
@@ -13,7 +14,6 @@ __author__ = 'cnheider'
 import matplotlib.pyplot as plt
 from matplotlib import animation
 
-from neodroid.wrappers.gym_wrapper import NeodroidVectorGymWrapper as neogym
 
 
 def grab_video_frame(cap):
@@ -26,7 +26,7 @@ time_s = time.time()
 
 image_axs = warg.NOD()
 
-env = neogym(environment_name='dmr', connect_to_running=True)
+env = NeodroidGymWrapper(connect_to_running=True)
 fig = plt.figure()
 
 

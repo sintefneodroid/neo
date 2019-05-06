@@ -78,19 +78,19 @@ def deserialise_observation(f_obs):
   elif obs_type is F.FObservation.FTriple:
     value, value_range = deserialise_triple(f_obs)
   elif obs_type is F.FObservation.FQuadruple:
-    value, *_ = deserialise_quadruple(f_obs)
+    value, value_range = deserialise_quadruple(f_obs)
   elif obs_type is F.FObservation.FArray:
-    value, *_ = deserialise_array(f_obs)
+    value, value_range = deserialise_array(f_obs)
   elif obs_type is F.FObservation.FET:
-    value, *_ = deserialise_euler_transform(f_obs)
+    value, value_range = deserialise_euler_transform(f_obs)
   elif obs_type is F.FObservation.FRB:
-    value, *_ = deserialise_body(f_obs)
+    value, value_range = deserialise_body(f_obs)
   elif obs_type is F.FObservation.FQT:
-    value, *_ = deserialise_quaternion_transform(f_obs)
+    value, value_range = deserialise_quaternion_transform(f_obs)
   elif obs_type is F.FObservation.FByteArray:
-    value, *_ = deserialise_byte_array(f_obs)
+    value, value_range = deserialise_byte_array(f_obs)
   elif obs_type is F.FObservation.FString:
-    value, *_ = deserialise_string(f_obs)
+    value, value_range = deserialise_string(f_obs)
 
   return value, value_range
 
@@ -246,7 +246,7 @@ def deserialise_array(f_obs):
   array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   # data = np.array([array.Array(i) for i in range(array.ArrayLength())])
   data = array.ArrayAsNumpy()
-  return data
+  return data, None
 
 
 def deserialise_motors(flat_actor):

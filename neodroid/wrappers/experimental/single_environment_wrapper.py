@@ -71,11 +71,11 @@ class SingleEnvironmentWrapper(NeodroidEnvironment):
 
     return None
 
-  def _observer(self, name, *args, **kwargs):
+  def _sensor(self, name, *args, **kwargs):
     state_env_0 = list(self._last_message.values())[0]
     observer = state_env_0.sensor(name)
     if not observer:
-      warn('Observer was not found!')
+      warn('Sensor was not found!')
     return observer
 
 

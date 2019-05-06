@@ -57,12 +57,19 @@ class EnvironmentState(object):
           )
 
   @property
+  def sensors(self):
+    return self.observers
+
+  @property
   def observers(self):
     return neodroid.messaging.deserialise_observers(self._fbs_state)
 
   def observer(self, key):
     if key in neodroid.messaging.deserialise_observers(self._fbs_state):
       return neodroid.messaging.deserialise_observers(self._fbs_state)[key]
+
+  def sensor(self, key):
+    return self.observer(key)
 
   def to_gym(self):
     return (self.observers, self.signal, self.terminated, self)

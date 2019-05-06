@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import PIL
+import numpy
 from PIL import Image
 import warg
 
@@ -47,10 +49,14 @@ def extract_neodroid_camera_images(environment):
   if satellite:
     satellite_image = Image.open(satellite.observation_value)
 
-  object_space = environment.sensor('ObjectSpace')
+  object_space = environment.sensor('ObjectSpaceFloat')
   object_space_image = None
   if object_space:
-    object_space_image = Image.open(object_space.observation_value)
+    if isinstance(object_space.observation_value, bytes):
+      object_space_image = Image.open(object_space.observation_value)
+    else:
+      object_space_image = Image.fromarray(numpy.array(object_space.observation_value).reshape(224,224,4),
+                                           mode='RGBA').transpose(PIL.Image.FLIP_TOP_BOTTOM)
 
   world_space = environment.sensor('WorldSpace')
   world_space_image = None
