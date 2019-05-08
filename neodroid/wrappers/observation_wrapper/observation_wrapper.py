@@ -52,9 +52,10 @@ class ObservationWrapper(SingleEnvironmentWrapper):
 
 class CameraObservationWrapper(SingleEnvironmentWrapper):
 
-  def __init__(self,auto_reset=True,**kwargs):
+  def __init__(self,auto_reset=True, image_size=(224,224,4),**kwargs):
     super().__init__(**kwargs)
     self._auto_reset = auto_reset
+    self._image_size = image_size
 
   def __next__(self):
     if not self._is_connected_to_server:
@@ -64,7 +65,7 @@ class CameraObservationWrapper(SingleEnvironmentWrapper):
   def sensor(self, key):
     if self._last_message:
       state_env_0 = list(self._last_message.values())[0]
-      return extract_camera_observation(state_env_0, key)
+      return extract_camera_observation(state_env_0, key, image_size=self._image_size)
     warn('No new message received')
     return None
 
@@ -78,6 +79,6 @@ class CameraObservationWrapper(SingleEnvironmentWrapper):
       message = self.fetch_new_frame()
 
     if message:
-      return extract_neodroid_camera(message)
+        return extract_neodroid_camera(message,image_size=self._image_size)
     return None
 
