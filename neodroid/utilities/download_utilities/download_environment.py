@@ -76,5 +76,5 @@ def available_environments(repository='http://environments.neodroid.ml/ls'):
   environments_m_csv = urlopen(req).read()
   environments_m_csv = environments_m_csv.decode('utf-8')
   reader = csv.reader(environments_m_csv.split('\n'), delimiter=',')
-  environments_m = {row[0].strip():row[1].strip() for row in reader}
+  environments_m = {row[0].strip():row[1].strip() for row in reader if len(row)>1}
   return environments_m

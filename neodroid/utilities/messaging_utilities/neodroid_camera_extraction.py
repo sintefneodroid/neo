@@ -1,4 +1,5 @@
 import math
+import time
 from io import BytesIO
 
 import PIL
@@ -6,6 +7,8 @@ import imageio
 import numpy
 from PIL import Image
 from skimage import io
+
+import neodroid
 
 default_camera_observer_names = ('90',
                                  '180',
@@ -27,6 +30,7 @@ default_camera_observer_names = ('90',
                                  'Tangents',
                                  'Flow',
                                  'Layer',
+                                 'OcclusionMask',
                                  'Tag',
                                  'Satellite')
 
@@ -36,6 +40,17 @@ def extract_neodroid_camera(state, cameras=default_camera_observer_names, image_
 
   for camera in cameras:
     res = extract_camera_observation(state, camera,image_size=image_size)
+    if res is not None:
+      out[camera] = res
+
+  return out
+
+
+def extract_all_as_camera(state, image_size=(None,None,4)):
+  out = dict()
+
+  for camera in state.observers.keys():
+    res = extract_camera_observation(state, camera, image_size=image_size)
     if res is not None:
       out[camera] = res
 
@@ -63,3 +78,23 @@ def extract_camera_observation(state, key, image_size=(None,None,4), d_type=nump
 
     return img
   return None
+
+if __name__ == '__main__':
+
+  environments = neodroid.connect()
+  environments.reset()
+
+  i = 0
+  freq = 100
+  time_s = time.time()
+  while environments.is_connected:
+    actions = environments.action_space.sample()
+    states = environments.react(actions)
+    state = next(iter(states.values()))
+    extract_all_as_camera(state)
+    terminated = state.terminated
+
+    if terminated:
+      environments.reset()
+
+
