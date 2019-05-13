@@ -12,10 +12,11 @@ import neodroid.models as M
 from neodroid import messaging
 from neodroid.environment import Environment
 from neodroid.utilities import (ClientEvents,
-                                         construct_action_space,
-                                         construct_observation_space,
-                                         message_client_event,
-                                         )
+                                construct_action_space,
+                                construct_observation_space,
+                                message_client_event,
+                                )
+
 
 class NetworkingEnvironment(Environment, ABC):
 
@@ -57,8 +58,8 @@ class NetworkingEnvironment(Environment, ABC):
                                                    on_timeout_callback=self.__on_timeout_callback__,
                                                    on_connected_callback=self.__on_connected_callback__,
                                                    on_disconnected_callback=self.__on_disconnected_callback__,
-                                                   verbose=self._verbose,writer=connect_tries.write)
-
+                                                   verbose=self._verbose,
+                                                   writer=lambda a:connect_tries.set_description(a))
 
     self._describe()
 

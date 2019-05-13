@@ -2,11 +2,8 @@ import math
 import time
 from io import BytesIO
 
-import PIL
 import imageio
 import numpy
-from PIL import Image
-from skimage import io
 
 import neodroid
 
