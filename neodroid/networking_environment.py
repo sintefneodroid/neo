@@ -4,7 +4,7 @@
 __author__ = 'cnheider'
 
 import time
-from abc import ABC
+from abc import ABC, abstractmethod
 
 from tqdm import tqdm
 
@@ -17,10 +17,6 @@ from neodroid.utilities import (ClientEvents,
                                          message_client_event,
                                          )
 
-CONNECT_TRY_TIMES = 100
-CONNECT_TRY_INTERVAL = 0.1
-
-
 class NetworkingEnvironment(Environment, ABC):
 
   def __init__(self,
@@ -31,6 +27,8 @@ class NetworkingEnvironment(Environment, ABC):
                on_connected_callback=None,
                on_disconnected_callback=None,
                on_timeout_callback=None,
+               retries=10,
+               connect_try_interval=0.1,
                **kwargs):
     super().__init__(**kwargs)
 
@@ -41,6 +39,8 @@ class NetworkingEnvironment(Environment, ABC):
     self._external_on_connected_callback = on_connected_callback
     self._external_on_disconnected_callback = on_disconnected_callback
     self._external_on_timeout_callback = on_timeout_callback
+    self._retries = retries
+    self._connect_try_interval = connect_try_interval
 
   def __next__(self):
     if not self._is_connected_to_server:
@@ -50,7 +50,7 @@ class NetworkingEnvironment(Environment, ABC):
   def _setup_connection(self):
     print(f'Connecting to server at {self._ip}:{self._port}')
 
-    connect_tries = tqdm(range(CONNECT_TRY_TIMES), leave=False)
+    connect_tries = tqdm(range(self._retries), leave=False)
 
     self._message_server = messaging.MessageClient(self._ip,
                                                    self._port,
@@ -64,12 +64,12 @@ class NetworkingEnvironment(Environment, ABC):
 
     while self.description is None:
       self._describe()
-      time.sleep(CONNECT_TRY_INTERVAL)
+      time.sleep(self._connect_try_interval)
       connect_tries.update()
       connect_tries.set_description(f'Connecting, please make sure that the ip {self._ip} '
                                     f'and port {self._port} '
                                     f'are cd correct')
-      if connect_tries.n is CONNECT_TRY_TIMES:
+      if connect_tries.n is self._retries:
         raise ConnectionError
 
     # TODO: WARN ABOUT WHEN INDIVIDUAL OBSERVATIONS AND UNOBSERVABLES ARE UNAVAILABLE
@@ -105,6 +105,20 @@ class NetworkingEnvironment(Environment, ABC):
   @property
   def is_connected(self):
     return self._is_connected_to_server
+
+  @abstractmethod
+  def _close(self, *args, **kwargs):
+    raise NotImplementedError
+
+  def __enter__(self):
+    self.reset()
+    return self
+
+  def __exit__(self, exc_type, exc_val, exc_tb):
+    self.close()
+
+  def close(self, *args, **kwargs):
+    return self._close(*args, **kwargs)
 
   def describe(self):
     return self._describe(parameters=M.ReactionParameters(

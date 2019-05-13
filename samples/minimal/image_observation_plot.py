@@ -39,7 +39,7 @@ def update_figures(i):
     for obs in info.observers.values():
       print(obs)
 
-  new_images = extract_neodroid_camera(info, ('RGB', 'ObjectSpace'),image_size=(512,512,4))
+  new_images = extract_neodroid_camera(info, ('RGB', 'ObjectSpace'),image_size=(128,128,4))
 
   time_now = time.time()
   if time_s:
@@ -75,7 +75,7 @@ def main():
     for obs in info.observers.values():
       print(obs)
 
-  new_images = extract_neodroid_camera(info, ('RGB', 'ObjectSpace'),image_size=(512,512,4))
+  new_images = extract_neodroid_camera(info, ('RGB', 'ObjectSpace'),image_size=(None,None,4))
 
   xs = int(len(new_images) / 2)
   ys = 2

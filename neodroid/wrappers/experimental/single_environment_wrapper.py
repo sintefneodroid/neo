@@ -9,7 +9,6 @@ from neodroid.utilities.exceptions.exceptions import NoEnvironmentError
 __author__ = 'cnheider'
 
 
-
 class SingleEnvironmentWrapper(NeodroidEnvironment):
 
   def __next__(self):

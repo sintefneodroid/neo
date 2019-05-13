@@ -32,8 +32,6 @@ class Environment(ABC):
       self._logger = logging.getLogger(__name__)
       self._logger.debug('Initializing Environment')
 
-  def close(self, *args, **kwargs):
-    return self._close(*args, **kwargs)
 
   def configure(self, *args, **kwargs):
     return self._configure(*args, **kwargs)
@@ -59,9 +57,7 @@ class Environment(ABC):
   def _is_solved(self, *args, **kwargs):
     raise False
 
-  @abstractmethod
-  def _close(self, *args, **kwargs):
-    raise NotImplementedError
+
 
   @abstractmethod
   def _configure(self, *args, **kwargs):
