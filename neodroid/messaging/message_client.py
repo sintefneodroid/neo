@@ -107,6 +107,7 @@ class MessageClient(object):
     # self._poller.close()
 
   def teardown(self):
+    self.close_connection()
     self._context.term()
 
   def build(self, single_threaded=False):
@@ -165,7 +166,8 @@ class MessageClient(object):
               self._on_disconnected_callback()
             raise ConnectionError
           else:
-            self._writer(f'Retrying to connect, attempt: {retries_left:d}/{REQUEST_RETRIES:d}')
+            if self._verbose:
+              self._writer(f'Retrying to connect, attempt: {retries_left:d}/{REQUEST_RETRIES:d}')
             self.open_connection()
             self._request_socket.send(serialised_reaction)
 

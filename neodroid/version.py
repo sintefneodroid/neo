@@ -5,7 +5,7 @@ import os
 from warnings import warn
 
 __author__ = "cnheider"
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __doc__ = """
 Created on 27/04/2019
 

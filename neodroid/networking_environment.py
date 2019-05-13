@@ -49,7 +49,8 @@ class NetworkingEnvironment(Environment, ABC):
     return self._react()
 
   def _setup_connection(self):
-    print(f'Connecting to server at {self._ip}:{self._port}')
+    if self._verbose:
+      print(f'Connecting to server at {self._ip}:{self._port}')
 
     connect_tries = tqdm(range(self._retries), leave=False)
 
@@ -119,6 +120,8 @@ class NetworkingEnvironment(Environment, ABC):
     self.close()
 
   def close(self, *args, **kwargs):
+    self._message_server.teardown()
+
     return self._close(*args, **kwargs)
 
   def describe(self):
