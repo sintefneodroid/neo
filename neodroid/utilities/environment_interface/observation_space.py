@@ -11,6 +11,7 @@ class ObservationSpace(Space):
   def parse_observation_space(self, observations_spaces):
     self._ranges = observations_spaces
 
+
 if __name__ == '__main__':
   acs = ObservationSpace([Range()])
   print(acs)

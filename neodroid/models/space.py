@@ -53,7 +53,7 @@ class Space(object):
 
   @property
   def discrete_binary_shape(self):
-    return len(self._ranges)*2, 1
+    return len(self._ranges) * 2, 1
 
   @property
   def continuous_shape(self):

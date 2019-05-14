@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import draugr
+from neodroid.utilities.debugging_utilities.verbosity import VerbosityLevel
 
 __author__ = 'cnheider'
 
@@ -12,8 +13,8 @@ import numpy as np
 import neodroid.models as M
 from neodroid.models import Reaction
 from neodroid.utilities import (construct_step_reaction, flattened_observation, launch_environment,
-                                         verify_configuration_reaction,
-                                         )
+                                verify_configuration_reaction,
+                                )
 from neodroid.networking_environment import NetworkingEnvironment
 
 file_dir = os.path.dirname(os.path.realpath(__file__))
@@ -83,28 +84,29 @@ class NeodroidEnvironment(NetworkingEnvironment):
 
     self._setup_connection()
 
-    if self._verbose:
+    if self._verbose >= VerbosityLevel.Warnings:
       warnings.warn(f'Using Neodroid API version {self.neodroid_api_version}')
 
     server_version = self._simulator_configuration.api_version
     if self.neodroid_api_version != server_version:
       if server_version == '':
         server_version = '*Unspecified*'
-      if self._verbose:
+      if self._verbose >= VerbosityLevel.Warnings:
         warnings.warn(f'Server is using different version {server_version}, complications may occur!')
 
-    print(f'Server API version: {server_version}')
+    if self._verbose >= VerbosityLevel.Information:
+      print(f'Server API version: {server_version}')
 
-    if self._verbose:
+    if self._verbose >= VerbosityLevel.Information:
       draugr.sprint(f'\nconfigurable space:\n{self.description.configurables}\n',
                     color='blue',
                     bold=True,
                     highlight=True)
 
-  def _configure(self, *args, **kwargs):
-    return self._reset()
+  def configure(self, *args, **kwargs):
+    return self.reset()
 
-  def _react(
+  def react(
       self,
       input_reactions=None,
       *,
@@ -154,7 +156,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
 
     self._warn_no_state_received()
 
-  def _display(self, displayables):
+  def display(self, displayables):
     conf_reaction = Reaction(
         displayables=displayables
         )
@@ -173,7 +175,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
 
     return input_reaction
 
-  def _reset(self, input_reactions=None, state=None, on_reset_callback=None):
+  def reset(self, input_reactions=None, state=None, on_reset_callback=None):
     self._warn_reset()
 
     if input_reactions is None:
@@ -211,7 +213,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
                                   input_reactions,
                                   normalise,
                                   description,
-                                  verbose=False):
+                                  verbose=VerbosityLevel.Warnings):
     '''
 
 :param verbose:
@@ -236,31 +238,31 @@ class NeodroidEnvironment(NetworkingEnvironment):
                                              False,
                                              verbose=verbose)
 
-    if verbose:
+    if verbose >= VerbosityLevel.Information:
       print(out_reaction)
 
     return out_reaction
 
   def _warn_closing(self):
-    if self._verbose:
+    if self._verbose >= VerbosityLevel.Warnings:
       warnings.warn('Closing')
     if self._debug_logging:
       self._logger.debug('Closing')
 
   def _warn_react(self):
-    if self._verbose:
+    if self._verbose >= VerbosityLevel.Information:
       warnings.warn('Reacting in environment')
     if self._debug_logging:
       self._logger.debug('Reacting in environment')
 
   def _warn_reset(self):
-    if self._verbose:
+    if self._verbose >= VerbosityLevel.Information:
       warnings.warn('Resetting environment')
     if self._debug_logging:
       self._logger.debug('Resetting environment')
 
   def _warn_no_state_received(self):
-    if self._verbose:
+    if self._verbose >= VerbosityLevel.Warnings:
       warnings.warn('No valid was new_state received')
     if self._debug_logging:
       self._logger.debug('No valid was new_state received')
@@ -280,19 +282,17 @@ if __name__ == '__main__':
   from tqdm import tqdm
 
   parser = argparse.ArgumentParser(description='Neodroid Environments')
-  parser.add_argument(
-      '--ENVIRONMENT_NAME',
-      type=str,
-      default='mab',
-      metavar='ENVIRONMENT_NAME',
-      help='name of the environment to run',
-      )
-  parser.add_argument(
-      '--CONNECT_TO_RUNNING',
-      '-C',
-      action='store_true',
-      default=True,
-      help='Connect to already running environment instead of starting another instance')
+  parser.add_argument('--ENVIRONMENT_NAME',
+                      type=str,
+                      default='mab',
+                      metavar='ENVIRONMENT_NAME',
+                      help='name of the environment to run',
+                      )
+  parser.add_argument('--CONNECT_TO_RUNNING',
+                      '-C',
+                      action='store_true',
+                      default=True,
+                      help='Connect to already running environment instead of starting another instance')
   arguments = parser.parse_args()
 
   env = NeodroidEnvironment(name=arguments.ENVIRONMENT_NAME, connect_to_running=arguments.CONNECT_TO_RUNNING)

@@ -57,7 +57,7 @@ class SensorNotAvailableException(Exception):
 
 class CameraObservationWrapper(SingleEnvironmentWrapper):
 
-  def __init__(self,auto_reset=True, image_size=(None,None,4),**kwargs):
+  def __init__(self, auto_reset=True, image_size=(None, None, 4), **kwargs):
     super().__init__(**kwargs)
     self._auto_reset = auto_reset
     self._image_size = image_size
@@ -84,6 +84,5 @@ class CameraObservationWrapper(SingleEnvironmentWrapper):
       message = self.fetch_new_frame()
 
     if message:
-        return extract_neodroid_camera(message,image_size=self._image_size)
+      return extract_neodroid_camera(message, image_size=self._image_size)
     return None
-

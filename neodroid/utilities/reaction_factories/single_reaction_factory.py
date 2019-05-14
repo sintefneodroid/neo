@@ -4,6 +4,7 @@ import typing
 
 from neodroid.utilities.debugging_utilities.debug_print_return import print_return_value
 from neodroid.utilities.transformations.action_transformations import normalise_action
+from neodroid.utilities import VerbosityLevel
 
 __author__ = 'cnheider'
 
@@ -13,7 +14,10 @@ from neodroid import models as M
 
 
 # @debug_print_return_value
-def construct_step_reaction(reaction_input, environment_description, normalise=False, verbose=False):
+def construct_step_reaction(reaction_input,
+                            environment_description,
+                            normalise=False,
+                            verbose=False):
   """
 
   :param verbose:
@@ -22,7 +26,7 @@ def construct_step_reaction(reaction_input, environment_description, normalise=F
   :type reaction_input: object
   """
   if reaction_input is None:
-    if verbose:
+    if verbose >= VerbosityLevel.Warnings:
       print('empty reaction')
     parameters = M.ReactionParameters(terminable=True,
                                       step=True,
@@ -81,9 +85,9 @@ def construct_reaction_from_list(motion_list, actors, normalise):
 def construct_motions_from_list(input_list,
                                 actors,
                                 normalise):
-  if not isinstance(input_list,typing.Collection):
+  if not isinstance(input_list, typing.Collection):
     input_list = [input_list]
-    if len(input_list)==0:
+    if len(input_list) == 0:
       return []
 
   actor_motor_tuples = [

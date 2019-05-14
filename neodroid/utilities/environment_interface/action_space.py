@@ -41,7 +41,7 @@ class ActionSpace(Space):
 
   @property
   def is_discrete(self):
-    return np.array([a.decimal_granularity==0 for a in self._ranges]).all()
+    return np.array([a.decimal_granularity == 0 for a in self._ranges]).all()
 
   @property
   def is_continuous(self):
@@ -107,7 +107,8 @@ class ActionSpace(Space):
       zeros[idx] = 1
     return zeros
 
+
 if __name__ == '__main__':
-  acs = ActionSpace([Range(min_value=0,max_value=3,decimal_granularity=2),Range(min_value=0,max_value=2,
-                                                                                decimal_granularity=1)])
-  print(acs,acs.low,acs.high, acs.decimal_granularity, acs.num_discrete_actions)
+  acs = ActionSpace([Range(min_value=0, max_value=3, decimal_granularity=2), Range(min_value=0, max_value=2,
+                                                                                   decimal_granularity=1)])
+  print(acs, acs.low, acs.high, acs.decimal_granularity, acs.num_discrete_actions)

@@ -16,12 +16,12 @@ class SingleEnvironmentWrapper(NeodroidEnvironment):
       return
     return self.react()
 
-  def _react(self,
-             input_reaction=None,
-             *,
-             parameters=None,
-             normalise=False,
-             **kwargs):
+  def react(self,
+            input_reaction=None,
+            *,
+            parameters=None,
+            normalise=False,
+            **kwargs):
     if not isinstance(input_reaction, Reaction):
       input_reaction = self.maybe_infer_motion_reaction(input_reactions=input_reaction,
                                                         normalise=normalise,
@@ -33,14 +33,14 @@ class SingleEnvironmentWrapper(NeodroidEnvironment):
 
     input_reactions = [input_reaction]
 
-    env_states = super()._react(input_reactions=input_reactions, **kwargs)
+    env_states = super().react(input_reactions=input_reactions, **kwargs)
 
     first_environment = list(env_states.values())[0]
     if first_environment:
       return first_environment
     raise NoEnvironmentError()
 
-  def _reset(self, input_reaction=None, state=None, on_reset_callback=None):
+  def reset(self, input_reaction=None, state=None, on_reset_callback=None):
 
     input_reaction = self.maybe_infer_configuration_reaction(
         input_reaction=input_reaction,
@@ -51,26 +51,26 @@ class SingleEnvironmentWrapper(NeodroidEnvironment):
       input_reaction.unobservables = state.unobservables
 
     input_reactions = [input_reaction]
-    new_states = super()._reset(input_reactions)
+    new_states = super().reset(input_reactions)
 
     new_state = list(new_states.values())[0]
     return new_state
 
-  def _configure(self, *args, **kwargs):
-    message = self._reset(*args, **kwargs)
+  def configure(self, *args, **kwargs):
+    message = self.reset(*args, **kwargs)
     if message:
       return message
     return None
 
-  def _describe(self, *args, **kwargs):
-    new_states = super()._describe(*args, **kwargs)
+  def describe(self, *args, **kwargs):
+    new_states = super().describe(*args, **kwargs)
     message = list(new_states.values())[0]
     if message:
       return message
 
     return None
 
-  def _sensor(self, name, *args, **kwargs):
+  def sensor(self, name, *args, **kwargs):
     state_env_0 = list(self._last_message.values())[0]
     observer = state_env_0.sensor(name)
     if not observer:

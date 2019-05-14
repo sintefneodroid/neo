@@ -32,7 +32,7 @@ def construct_observation_space(environment):
   observation_spaces = []
   observers = environment.observers.values()
   for observer in observers:
-    if isinstance(observer.observation_space,Iterable):
+    if isinstance(observer.observation_space, Iterable):
       for range in observer.observation_space:
         observation_spaces.append(range)
     else:

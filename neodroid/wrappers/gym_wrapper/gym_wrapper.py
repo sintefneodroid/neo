@@ -13,8 +13,9 @@ import gym
 
 warn(f"This module is deprecated in version {__version__}", DeprecationWarning)
 
+
 class NeodroidGymWrapper(SingleEnvironmentWrapper,
-                               gym.Env):
+                         gym.Env):
 
   def step(self, action=None, *args, **kwargs):
     # action = action.flatten()
@@ -66,6 +67,7 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
   @property
   def observation_space(self):
     return self._observation_space
+
 
 class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
                                gym.Env):

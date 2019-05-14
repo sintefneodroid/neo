@@ -3,6 +3,7 @@
 import warnings
 
 from neodroid.messaging.fbs_state_utilties import deserialise_states
+from neodroid.utilities.debugging_utilities.verbosity import VerbosityLevel
 
 __author__ = 'cnheider'
 
@@ -52,10 +53,10 @@ class MessageClient(object):
                on_connected_callback=None,
                on_disconnected_callback=None,
                single_threaded=False,
-               verbose=False,
+               verbose=VerbosityLevel.Nothing,
                writer=warnings.warn):
 
-    self._verbose = verbose
+    self._verbosity = verbose
     self._tcp_address = tcp_address
     self._tcp_port = tcp_port
 
@@ -80,18 +81,20 @@ class MessageClient(object):
   def open_connection(self):
 
     self._request_socket = self._context.socket(self._socket_type)
+
     if not self._request_socket:
       raise RuntimeError('Failed to create ZMQ socket!')
 
-    if self._verbose:
-      self._writer('Connecting to server')
+    if self._verbosity >= VerbosityLevel.Information and self._writer:
+      self._writer(f'Connecting to server at {self._tcp_address}:{self._tcp_port}')
+
     if self._use_ipc_medium:
       self._request_socket.connect('ipc:///tmp/neodroid/messages')
-      if self._verbose:
+      if self._verbosity and self._writer:
         self._writer('Using IPC protocol')
     else:
       self._request_socket.connect(f'tcp://{self._tcp_address}:{self._tcp_port}')
-      if self._verbose:
+      if self._verbosity and self._writer:
         self._writer('Using TCP protocol')
 
     self._on_connected_callback()
@@ -159,14 +162,14 @@ class MessageClient(object):
           retries_left -= 1
 
           if retries_left <= 0:
-            if self._verbose:
+            if self._verbosity >= VerbosityLevel.Warnings:
               self._writer('Out of retries, tearing down client')
             self.teardown()
             if self._on_disconnected_callback:
               self._on_disconnected_callback()
             raise ConnectionError
           else:
-            if self._verbose:
+            if self._verbosity >= VerbosityLevel.Information:
               self._writer(f'Retrying to connect, attempt: {retries_left:d}/{REQUEST_RETRIES:d}')
             self.open_connection()
             self._request_socket.send(serialised_reaction)

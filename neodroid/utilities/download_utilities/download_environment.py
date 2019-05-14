@@ -58,10 +58,10 @@ def download_environment(name: str = 'mab_win',
 
   if system_arch == 32:
     path_to_executable = os.path.join(path_to_executables_directory, name,
-                         f'{executable_file_name}.x86')
+                                      f'{executable_file_name}.x86')
   else:
     path_to_executable = os.path.join(path_to_executables_directory, name,
-                         f'{executable_file_name}.x86_64')
+                                      f'{executable_file_name}.x86_64')
 
   st = os.stat(path_to_executable)
   os.chmod(path_to_executable, st.st_mode | stat.S_IEXEC)
@@ -76,5 +76,5 @@ def available_environments(repository='http://environments.neodroid.ml/ls'):
   environments_m_csv = urlopen(req).read()
   environments_m_csv = environments_m_csv.decode('utf-8')
   reader = csv.reader(environments_m_csv.split('\n'), delimiter=',')
-  environments_m = {row[0].strip():row[1].strip() for row in reader if len(row)>1}
+  environments_m = {row[0].strip():row[1].strip() for row in reader if len(row) > 1}
   return environments_m

@@ -39,7 +39,7 @@ def update_figures(i):
     for obs in info.observers.values():
       print(obs)
 
-  new_images = extract_neodroid_camera(info, ('RGB', 'ObjectSpace'),image_size=(128,128,4))
+  new_images = extract_neodroid_camera(info, ('RGB', 'ObjectSpace'), image_size=(128, 128, 4))
 
   time_now = time.time()
   if time_s:
@@ -75,7 +75,7 @@ def main():
     for obs in info.observers.values():
       print(obs)
 
-  new_images = extract_neodroid_camera(info, ('RGB', 'ObjectSpace'),image_size=(None,None,4))
+  new_images = extract_neodroid_camera(info, ('RGB', 'ObjectSpace'), image_size=(None, None, 4))
 
   xs = int(len(new_images) / 2)
   ys = 2
@@ -83,10 +83,10 @@ def main():
   axes = fig.subplots(ys, xs, sharex='all', sharey='all')
 
   a = axes.flatten()
-  for ax, (k,v) in zip(a, new_images.items()):
+  for ax, (k, v) in zip(a, new_images.items()):
     if k:
       ax.set_title(k)
-      image_axs[k] = ax.imshow(v,vmin=0, vmax=255)
+      image_axs[k] = ax.imshow(v, vmin=0, vmax=255)
 
   _ = animation.FuncAnimation(fig, update_figures)
   plt.show()

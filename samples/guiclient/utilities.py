@@ -35,8 +35,7 @@ def get_masked_depth_image(depth_image, light_mask_image, lower_limit, upper_lim
 
 
 def rgb_segment(rgb_im, seg_im):
-
-  RED, GREEN, BLUE, ALPHA = (0, 1, 2,3)
+  RED, GREEN, BLUE, ALPHA = (0, 1, 2, 3)
 
   red_img = np.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), np.uint8)
   green_img = np.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), np.uint8)
@@ -63,6 +62,3 @@ def rgb_segment(rgb_im, seg_im):
   blue_masked_img[blue_mask] = rgb_im[blue_mask]
 
   return red_img, green_img, blue_img, red_masked_img, green_masked_img, blue_masked_img
-
-
-

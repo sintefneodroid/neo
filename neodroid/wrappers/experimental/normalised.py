@@ -124,6 +124,7 @@ class VecEnvWrapper(VecEnv):
   def get_images(self):
     return self.venv.get_images()
 
+
 import numpy as np
 
 

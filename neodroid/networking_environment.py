@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.utilities.debugging_utilities.verbosity import VerbosityLevel
 
 __author__ = 'cnheider'
 
@@ -46,33 +47,45 @@ class NetworkingEnvironment(Environment, ABC):
   def __next__(self):
     if not self._is_connected_to_server:
       return
-    return self._react()
+    return self.react()
 
   def _setup_connection(self):
-    if self._verbose:
-      print(f'Connecting to server at {self._ip}:{self._port}')
+    connect_tries = range(self._retries)
+    if self._verbose >= VerbosityLevel.Information:
+      connect_tries = tqdm(connect_tries, leave=False)
 
-    connect_tries = tqdm(range(self._retries), leave=False)
+      self._message_server = messaging.MessageClient(self._ip,
+                                                     self._port,
+                                                     on_timeout_callback=self.__on_timeout_callback__,
+                                                     on_connected_callback=self.__on_connected_callback__,
+                                                     on_disconnected_callback=self.__on_disconnected_callback__,
+                                                     verbose=self._verbose,
+                                                     writer=lambda a:connect_tries.set_description(a))
+    else:
+      self._message_server = messaging.MessageClient(self._ip,
+                                                     self._port,
+                                                     on_timeout_callback=self.__on_timeout_callback__,
+                                                     on_connected_callback=self.__on_connected_callback__,
+                                                     on_disconnected_callback=self.__on_disconnected_callback__,
+                                                     verbose=self._verbose,
+                                                     writer=None)
 
-    self._message_server = messaging.MessageClient(self._ip,
-                                                   self._port,
-                                                   on_timeout_callback=self.__on_timeout_callback__,
-                                                   on_connected_callback=self.__on_connected_callback__,
-                                                   on_disconnected_callback=self.__on_disconnected_callback__,
-                                                   verbose=self._verbose,
-                                                   writer=lambda a:connect_tries.set_description(a))
-
-    self._describe()
+    self.describe()
 
     while self.description is None:
-      self._describe()
+      self.describe()
       time.sleep(self._connect_try_interval)
-      connect_tries.update()
-      connect_tries.set_description(f'Connecting, please make sure that the ip {self._ip} '
-                                    f'and port {self._port} '
-                                    f'are cd correct')
-      if connect_tries.n is self._retries:
-        raise ConnectionError
+      if self._verbose >= VerbosityLevel.Information:
+        connect_tries.update()
+        connect_tries.set_description(f'Connecting, please make sure that the ip {self._ip} '
+                                      f'and port {self._port} '
+                                      f'are cd correct')
+        if connect_tries.n == self._retries:
+          raise ConnectionError
+      else:
+        n = next(connect_tries)
+        if n == self._retries:
+          raise ConnectionError
 
     # TODO: WARN ABOUT WHEN INDIVIDUAL OBSERVATIONS AND UNOBSERVABLES ARE UNAVAILABLE
     # due to simulator configuration
@@ -124,24 +137,17 @@ class NetworkingEnvironment(Environment, ABC):
 
     return self._close(*args, **kwargs)
 
-  def describe(self):
-    return self._describe(parameters=M.ReactionParameters(
-        terminable=False, describe=True, episode_count=False
-        ))
-
-  def _describe(
-      self,
-      parameters=M.ReactionParameters(terminable=True,
-                                      describe=True,
-                                      episode_count=False)
-      ):
+  def describe(self, parameters=M.ReactionParameters(terminable=False,
+                                                     describe=True,
+                                                     episode_count=False)):
     '''
 
-:param parameters:
-:type parameters:
-:return:
-:rtype:
-'''
+    :param parameters:
+    :type parameters:
+    :return:
+    :rtype:
+    '''
+
     new_states, simulator_configuration = self._message_server.send_reactions(
         [M.Reaction(parameters=parameters)])
     if new_states:

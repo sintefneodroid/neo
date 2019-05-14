@@ -4,13 +4,14 @@ import os
 import re
 
 with open(os.path.join(os.path.dirname(__file__), "neodroid/version.py"), "r") as f:
-    # get version string from module
-    version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]", f.read(), re.M).group(1)
+  # get version string from module
+  version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]", f.read(), re.M).group(1)
+
 
 class NeodroidPackage:
 
   @property
-  def test_dependencies(self)->list:
+  def test_dependencies(self) -> list:
     return [
       'pytest',
       'mock'
@@ -23,11 +24,11 @@ class NeodroidPackage:
       ]
 
   @property
-  def package_name(self)->str:
+  def package_name(self) -> str:
     return 'Neodroid'
 
   @property
-  def url(self)->str:
+  def url(self) -> str:
     return 'https://github.com/sintefneodroid/neo'
 
   @property
@@ -84,7 +85,7 @@ class NeodroidPackage:
         'neodroid-smp = samples.minimal.action_space_sampling:main',
         'neodroid-img = samples.minimal.image_observation:main',
         'neodroid-mab = samples.example_algorithms.multi_armed_bandit:main',
-        #'neodroid-gui = samples.guiclient.main:main'
+        # 'neodroid-gui = samples.guiclient.main:main'
         ]
       }
 
@@ -119,12 +120,12 @@ class NeodroidPackage:
         requirements_dev.append(requirement.strip())
 
     these_extras = {
-      'gui':requirements_gui,
+      'gui':  requirements_gui,
       'tests':requirements_tests,
-      #'docs':requirements_docs,
-      'dev':requirements_dev
+      # 'docs':requirements_docs,
+      'dev':  requirements_dev
 
-      #'mab':['neodroid-linux-mab; platform_system == "Linux"',
+      # 'mab':['neodroid-linux-mab; platform_system == "Linux"',
       #       'neodroid-win-mab platform_system == "Windows"']
 
       }

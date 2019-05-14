@@ -25,7 +25,7 @@ def debug_print_return_func(func: callable = None, *, prefix: str = '') -> calla
 
 def debug_class(cls):
   for [method_key, method_value] in vars(cls).items():
-    if isinstance(method_value,Callable):
+    if isinstance(method_value, Callable):
       setattr(cls, method_key, debug_print_return_func(method_value))
   return cls
 

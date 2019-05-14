@@ -8,8 +8,8 @@ import fire
 from pyfiglet import Figlet
 
 from neodroid.utilities.download_utilities.download_environment import (available_environments,
-                                                                                 download_environment,
-                                                                                 )
+                                                                        download_environment,
+                                                                        )
 from neodroid.version import get_version
 
 margin_percentage = (0 / 6)
@@ -18,6 +18,7 @@ margin = int(margin_percentage * terminal_width)
 width = (terminal_width - 2 * margin)
 underline = '_' * width
 indent = " " * margin
+
 
 class NeodroidCLI(object):
   default_executables_path = '/tmp/neodroid'

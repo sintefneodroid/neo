@@ -14,8 +14,8 @@ def signed_ternary_encoding(*,
   # assert isinstance(index,(int,numpy.int64)), f'index was {type(index)}'
   # assert size*2 > index, f'signed size was {size*2}, index was {index}'
 
-  if not isinstance(index,Iterable):
-    index=[index]
+  if not isinstance(index, Iterable):
+    index = [index]
   acs = []
   for i in index:
     a = np.zeros(size)
@@ -30,8 +30,8 @@ def signed_ternary_encoding(*,
 
 
 def to_one_hot(dims, index):
-  if not isinstance(index,Iterable):
-    index=[index]
+  if not isinstance(index, Iterable):
+    index = [index]
   acs = []
   for i in index:
     if isinstance(i, np.int) or isinstance(i, np.int64) or isinstance(i, int):

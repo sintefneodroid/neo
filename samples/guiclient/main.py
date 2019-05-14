@@ -4,9 +4,8 @@ from .gui import NeoGUI
 
 __author__ = 'cnheider'
 
-
 import neodroid as neo
-from neodroid.models import Motion, Reaction,Configuration,ReactionParameters
+from neodroid.models import Motion, Reaction, Configuration, ReactionParameters
 
 _gui = None
 _neo_environment = None

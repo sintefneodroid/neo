@@ -33,8 +33,7 @@ def main(connect_to_running=False):
                       default=connect_to_running)
   args = parser.parse_args()
   if args.C:
-    connect_to_running =True
-
+    connect_to_running = True
 
   _environment = neo.SingleEnvironmentWrapper(environment_name='mab',
                                               connect_to_running=connect_to_running)

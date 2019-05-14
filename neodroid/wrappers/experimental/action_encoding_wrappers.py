@@ -29,9 +29,3 @@ class BinaryActionEncodingWrapper(NeodroidVectorGymWrapper):
   def signed_one_hot_sample(self):
     num = self.act_spc.n
     return random.randrange(num)
-
-
-
-
-
-

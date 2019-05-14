@@ -46,7 +46,7 @@ class Range(object):
 
   @property
   def discrete_step_size(self):
-    return 1 / np.power(10,self.decimal_granularity)
+    return 1 / np.power(10, self.decimal_granularity)
 
   @property
   def span(self):
@@ -54,7 +54,7 @@ class Range(object):
 
   @property
   def discrete_steps(self):
-    return math.floor(self.span / self.discrete_step_size)+1
+    return math.floor(self.span / self.discrete_step_size) + 1
 
   def to_dict(self) -> dict:
     '''
@@ -86,18 +86,18 @@ class Range(object):
       return self.cheapest_sample()
 
     return self.cheaper_sample()
-    #return self.expensive_sample()
+    # return self.expensive_sample()
 
   def cheapest_sample(self):
-    return np.random.randint(self.min, self.max+1)
+    return np.random.randint(self.min, self.max + 1)
 
   def cheaper_sample(self):
-    return np.round(np.random.random() * self.span,self.decimal_granularity)
+    return np.round(np.random.random() * self.span, self.decimal_granularity)
 
   def expensive_sample(self):
     return np.random.choice(np.linspace(self.min, self.max, num=self.discrete_steps))
 
 
 if __name__ == '__main__':
-  r = Range(min_value=0,max_value=5,decimal_granularity=2)
-  print(r,r.sample())
+  r = Range(min_value=0, max_value=5, decimal_granularity=2)
+  print(r, r.sample())

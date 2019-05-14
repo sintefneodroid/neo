@@ -10,8 +10,10 @@ from .formal_wrapper import NeodroidFormalWrapper
 def make(environment_name, **kwargs):
   return NeodroidFormalWrapper(environment_name=environment_name, **kwargs)
 
+
 def connect():
   return NeodroidFormalWrapper(connect_to_running=True)
+
 
 def seed(s):
   np.random.random(s)

@@ -55,7 +55,7 @@ def extract_neodroid_camera_images(environment):
     if isinstance(object_space.observation_value, bytes):
       object_space_image = Image.open(object_space.observation_value)
     else:
-      object_space_image = Image.fromarray(numpy.array(object_space.observation_value).reshape(224,224,4),
+      object_space_image = Image.fromarray(numpy.array(object_space.observation_value).reshape(224, 224, 4),
                                            mode='RGBA').transpose(PIL.Image.FLIP_TOP_BOTTOM)
 
   world_space = environment.sensor('WorldSpace')

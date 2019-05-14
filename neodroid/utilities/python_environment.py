@@ -8,7 +8,7 @@ from abc import ABC
 import neodroid.models as M
 from neodroid.environment import Environment
 from neodroid.utilities import (construct_action_space, construct_observation_space,
-                                         )
+                                )
 
 
 class PythonEnvironment(Environment, ABC):

@@ -5,7 +5,7 @@ from neodroid.neodroid_environments import NeodroidEnvironment
 
 __author__ = 'cnheider'
 __version__ = get_version()
-__doc__='''
+__doc__ = '''
 .. module:: neodroid
    :platform: Unix, Windows
    :synopsis: An API for communicating with a Unity Game process.
@@ -28,7 +28,8 @@ def make(environment_name='', clones=0, *args, **kwargs):
   _environments = NeodroidEnvironment(environment_name=environment_name, clones=clones, *args, **kwargs)
   return _environments
 
-def connect(ip='localhost',port=6969,*args,**kwargs):
+
+def connect(ip='localhost', port=6969, *args, **kwargs):
   global _environments
   _environments = NeodroidEnvironment(ip=ip, port=port, connect_to_running=True, *args, **kwargs)
   return _environments
