@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import draugr
+import warg
+from neodroid.environment import NEODROID_APP_PATH
 from neodroid.utilities.debugging_utilities.verbosity import VerbosityLevel
 
 __author__ = 'cnheider'
@@ -17,9 +19,7 @@ from neodroid.utilities import (construct_step_reaction, flattened_observation, 
                                 )
 from neodroid.networking_environment import NetworkingEnvironment
 
-file_dir = os.path.dirname(os.path.realpath(__file__))
-default_environments_dir = os.path.abspath(os.path.join(file_dir, 'environments'))
-
+DEFAULT_ENVIRONMENTS_PATH = (NEODROID_APP_PATH.user_cache / 'environments').absolute()
 
 class NeodroidEnvironment(NetworkingEnvironment):
 
@@ -51,7 +51,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
                *,
                environment_name=None,
                clones=0,
-               path_to_executables_directory=default_environments_dir,
+               path_to_executables_directory=DEFAULT_ENVIRONMENTS_PATH,
                headless=False,
                **kwargs
                ):

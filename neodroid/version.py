@@ -2,26 +2,31 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os
+import sys
 from warnings import warn
 
 __author__ = "cnheider"
 __version__ = "0.1.4"
-__doc__ = """
+__doc__ = r"""
 Created on 27/04/2019
 
 @author: cnheider
 """
 
-RELEASE = False
-DEBUG = False
+from pip._internal.utils.misc import dist_is_editable
+import pkg_resources
+
+distributions = {v.key:v for v in pkg_resources.working_set}
+distribution = distributions['neodroid']
+DEVELOP = dist_is_editable(distribution)
 
 
-def get_version(append_time=False):
+def get_version(append_time=DEVELOP):
   version = __version__
   if not version:
     version = os.getenv("VERSION", "0.0.0")
 
-  if append_time or not RELEASE:
+  if append_time:
     now = datetime.datetime.utcnow()
     date_version = now.strftime("%Y%m%d%H%M%S")
     # date_version = time.time()
@@ -58,9 +63,6 @@ def get_version(append_time=False):
 
 
 if __version__ is None:
-  __version__ = get_version()
+  __version__ = get_version(append_time=True)
 
-
-@property
-def debug():
-  return DEBUG
+__version_info__ = tuple(int(segment) for segment in __version__.split("."))

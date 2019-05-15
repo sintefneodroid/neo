@@ -3,9 +3,7 @@
 import random
 from typing import Any
 
-import numpy as np
-
-from neodroid.utilities.encodings import signed_ternary_encoding
+from utilities.transformations.encodings import signed_ternary_encoding
 from neodroid.wrappers.gym_wrapper import NeodroidVectorGymWrapper
 
 __author__ = 'cnheider'

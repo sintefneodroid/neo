@@ -33,10 +33,10 @@ class PythonEnvironment(Environment, ABC):
     self._external_on_timeout_callback = on_timeout_callback
 
   def __next__(self):
-    return self._react()
+    return self.react()
 
   def describe(self):
-    return self._describe(parameters=M.ReactionParameters(
+    return self.react(parameters=M.ReactionParameters(
         terminable=False, describe=True, episode_count=False
         ))
 

@@ -11,6 +11,7 @@ from neodroid.utilities.download_utilities.download_environment import (availabl
                                                                         download_environment,
                                                                         )
 from neodroid.version import get_version
+from neodroid.neodroid_environments import DEFAULT_ENVIRONMENTS_PATH
 
 margin_percentage = (0 / 6)
 terminal_width = draugr.get_terminal_size().columns
@@ -21,15 +22,15 @@ indent = " " * margin
 
 
 class NeodroidCLI(object):
-  default_executables_path = '/tmp/neodroid'
+  _default_executables_path = DEFAULT_ENVIRONMENTS_PATH
 
   def run(self, env_name: str):
     '''
     Run an environment
     '''
     fail = False
-    if os.path.exists(self.default_executables_path):
-      exe_path = f'{self.default_executables_path}/{env_name}/{env_name.split("_")[0]}.x86_64'
+    if os.path.exists(self._default_executables_path):
+      exe_path = f'{self._default_executables_path}/{env_name}/{env_name.split("_")[0]}.x86_64'
 
       st = os.stat(exe_path)
       os.chmod(exe_path, st.st_mode | stat.S_IEXEC)
@@ -41,12 +42,12 @@ class NeodroidCLI(object):
         print(f'Can not find {exe_path}')
         fail = True
     else:
-      print(f'Can not find {self.default_executables_path}')
+      print(f'Can not find {self._default_executables_path}')
       fail = True
     if fail:
       self.fetch(env_name)
-      if os.path.exists(self.default_executables_path):
-        exe_path = f'{self.default_executables_path}/{env_name}/{env_name.split("_")[0]}.x86_64'
+      if os.path.exists(self._default_executables_path):
+        exe_path = f'{self._default_executables_path}/{env_name}/{env_name.split("_")[0]}.x86_64'
 
         st = os.stat(exe_path)
         os.chmod(exe_path, st.st_mode | stat.S_IEXEC)
@@ -57,13 +58,13 @@ class NeodroidCLI(object):
         else:
           print(f'Still can not find {exe_path}')
       else:
-        print(f'Still can not find {self.default_executables_path}')
+        print(f'Still can not find {self._default_executables_path}')
 
   def fetch(self, env_name: str):
     '''
     Fetches a remotely stored environment with the specified name to local storage
     '''
-    exe_path = download_environment(env_name, path_to_executables_directory=self.default_executables_path)
+    exe_path = download_environment(env_name, path_to_executables_directory=self._default_executables_path)
     print(f'{indent}Installed {env_name} to {exe_path}')
     return exe_path
 
@@ -77,7 +78,7 @@ class NeodroidCLI(object):
     '''
     Removes locally stored environment with the specified name
     '''
-    exe_path = f'{self.default_executables_path}/{env_name}'
+    exe_path = f'{self._default_executables_path}/{env_name}'
     shutil.rmtree(exe_path, ignore_errors=True)
     # os.remove(exe_path)
     print(f'{indent}Removed {exe_path}')
@@ -86,7 +87,7 @@ class NeodroidCLI(object):
     '''
     Updates, fetches environment with the specified name again and replaces the previous version if present
     '''
-    if os.path.exists(self.default_executables_path):
+    if os.path.exists(self._default_executables_path):
       self.remove(env_name)
       exe_path = self.fetch(env_name)
       print(f'{indent}Updated {env_name} at {exe_path}')
@@ -95,23 +96,23 @@ class NeodroidCLI(object):
     '''
     Removes all locally stored environments
     '''
-    if os.path.exists(self.default_executables_path):
-      shutil.rmtree(self.default_executables_path, ignore_errors=True)
-    print(f'{indent}cleaned, removed {self.default_executables_path}')
+    if os.path.exists(self._default_executables_path):
+      shutil.rmtree(self._default_executables_path, ignore_errors=True)
+    print(f'{indent}cleaned, removed {self._default_executables_path}')
 
   def ls_local(self):
     '''
     Which environments are available locally
     '''
     envs = []
-    if os.path.exists(self.default_executables_path):
-      envs = os.listdir(self.default_executables_path)
+    if os.path.exists(self._default_executables_path):
+      envs = os.listdir(self._default_executables_path)
 
     if len(envs) > 0:
       for env_key in envs:
         print(f'{indent}{env_key}')
     else:
-      print(f'{indent}No environments found at {self.default_executables_path}')
+      print(f'{indent}No environments found at {self._default_executables_path}')
 
   def ls_remote(self):
     '''
@@ -141,7 +142,7 @@ def draw_cli_header(*,
   figlet = Figlet(font=font, justify='center', width=terminal_width)
   description = figlet.renderText(title)
 
-  print(f'{description}{indent}{underline}\n')
+  print(f'{description}{underline}\n')
 
 
 def main(*,

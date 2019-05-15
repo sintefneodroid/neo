@@ -42,13 +42,13 @@ def download_environment(name: str = 'mab_win',
 
   with DownloadProgress(desc=name) as progress_bar:
     zip_file_name, headers = urlretrieve(formatted,
-                                         os.path.join(path_to_executables_directory, f'{name}.zip'),
+                                         pathlib.Path.joinpath(path_to_executables_directory, f'{name}.zip'),
                                          reporthook=progress_bar.hook)
 
   with zipfile.ZipFile(zip_file_name, "r") as zip_ref:
     zip_ref.extractall(path_to_executables_directory)
 
-  zip_file_name = os.path.join(path_to_executables_directory, zip_file_name)
+  zip_file_name = pathlib.Path.joinpath(path_to_executables_directory, zip_file_name)
   # shutil.rmtree(file, ignore_errors=True)
   os.remove(zip_file_name)
 
@@ -57,16 +57,16 @@ def download_environment(name: str = 'mab_win',
   system_arch = struct.calcsize("P") * 8
 
   if system_arch == 32:
-    path_to_executable = os.path.join(path_to_executables_directory, name,
+    path_to_executable = pathlib.Path.joinpath(path_to_executables_directory, name,
                                       f'{executable_file_name}.x86')
   else:
-    path_to_executable = os.path.join(path_to_executables_directory, name,
+    path_to_executable = pathlib.Path.joinpath(path_to_executables_directory, name,
                                       f'{executable_file_name}.x86_64')
 
   st = os.stat(path_to_executable)
   os.chmod(path_to_executable, st.st_mode | stat.S_IEXEC)
 
-  return os.path.join(path_to_executables_directory, name)
+  return pathlib.Path.joinpath(path_to_executables_directory, name)
 
 
 def available_environments(repository='http://environments.neodroid.ml/ls'):

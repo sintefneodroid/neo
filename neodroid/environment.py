@@ -2,15 +2,18 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
+import pathlib
 from abc import ABC, abstractmethod
 from types import coroutine
 
+import warg
 from neodroid.utilities.debugging_utilities.verbosity import VerbosityLevel
 
 __author__ = 'cnheider'
 
 import numpy as np
 
+NEODROID_APP_PATH = warg.AppPath('neodroid', app_author=__author__)
 
 class Environment(ABC):
 
@@ -18,7 +21,7 @@ class Environment(ABC):
                *,
                seed=8,
                debug_logging=False,
-               logging_directory='logs',
+               logging_directory=NEODROID_APP_PATH.user_log,
                verbose=VerbosityLevel.Warnings,
                **kwargs):
     self.seed(seed)
@@ -26,13 +29,16 @@ class Environment(ABC):
 
     self._debug_logging = debug_logging
     if self._debug_logging:
-      logging.basicConfig(
-          format='%(asctime)s %(new_state)s',
-          filename=os.path.join(logging_directory, 'neodroid-log.txt'),
-          level=logging.DEBUG,
-          )
+      logging.basicConfig(format='%(asctime)s %(new_state)s',
+                          filename=pathlib.Path.joinpath(logging_directory, 'neodroid-log.txt'),
+                          level=logging.DEBUG,
+                          )
       self._logger = logging.getLogger(__name__)
-      self._logger.debug('Initializing Environment')
+      self._logger.info('Initializing Environment')
+
+    self._description = None
+    self._action_space = None
+    self._observation_space = None
 
   @abstractmethod
   def configure(self, *args, **kwargs):

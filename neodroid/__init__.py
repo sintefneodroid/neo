@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import os
+import sys
+
+
 from neodroid.version import get_version
 from neodroid.neodroid_environments import NeodroidEnvironment
 
 __author__ = 'cnheider'
 __version__ = get_version()
-__doc__ = '''
+__doc__ = r'''
 .. module:: neodroid
    :platform: Unix, Windows
    :synopsis: An API for communicating with a Unity Game process.
 
-.. moduleauthor:: Christian Heider Nielsen <chrini13@student.aau.dk>
+.. moduleauthor:: Christian Heider Nielsen <christian.heider@alexandra.dk>
 
 
 '''

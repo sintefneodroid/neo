@@ -5,8 +5,9 @@ __author__ = 'cnheider'
 __doc__ = ''
 
 import neodroid
+import contextlib
 
 for i in range(100):
-  with neodroid.connect() as env:
+  with neodroid.connect() as env, contextlib.suppress(KeyboardInterrupt):
     print(i)
-    print(env.react())
+    env.react()
