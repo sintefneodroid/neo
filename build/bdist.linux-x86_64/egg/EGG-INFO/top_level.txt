@@ -1,3 +1,0 @@
-neodroid
-samples
-tests
