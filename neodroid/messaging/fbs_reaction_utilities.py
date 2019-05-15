@@ -11,7 +11,7 @@ from neodroid.messaging import FBSModels as F
 
 
 def serialise_reactions(input_reactions):
-  B = flatbuffers.Builder(1)
+  B = flatbuffers.builder.Builder(1)
 
   reaction_offsets = []
   for reaction in input_reactions:
