@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from abc import ABC, abstractmethod
 
-from utilities.debugging_utilities import logger
+from neodroid.utilities.debugging_utilities import logger
 
 __author__ = 'cnheider'
 

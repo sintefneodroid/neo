@@ -20,7 +20,7 @@ def flattened_observation(message):
 def construct_action_space(environment_description):
   motion_spaces = []
   for actor in environment_description.actors.values():
-    for motor in actor.motors.values():
+    for motor in actor.actuators.values():
       motion_spaces.append(motor.motion_space)
 
   action_space = ActionSpace()

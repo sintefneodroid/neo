@@ -5,19 +5,19 @@ __author__ = 'cnheider'
 import neodroid.messaging
 
 
-class Observer(object):
+class Sensor(object):
   '''
 
   '''
 
-  def __init__(self, observation_name, observation_space, observation_value):
+  def __init__(self, sensor_name, observation_space, observation_value):
     self._observation_space = observation_space
-    self._observation_name = observation_name
+    self._sensor_name = sensor_name
     self._observation_value = observation_value
 
   @property
-  def observer_name(self):
-    return self._observation_name
+  def senor_name(self):
+    return self._sensor_name
 
   @property
   def observation_space(self):
@@ -31,7 +31,7 @@ class Observer(object):
 
   def __repr__(self):
     return (f'<Observer>\n'
-            f'<observation_name>{self._observation_name}</observation_name>\n'
+            f'<observation_name>{self._sensor_name}</observation_name>\n'
             f'<observation_space>{self.observation_space}</observation_space>\n'
             f'<observation_value>{self.observation_value}</observation_value>\n'
             f'</Observer>\n')

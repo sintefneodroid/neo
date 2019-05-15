@@ -9,8 +9,8 @@ from .displayable import Displayable
 from .environment_description import EnvironmentDescription
 from .environment_state import EnvironmentState
 from .motion import Motion
-from .motor import Motor
-from .observer import Observer
+from .actuator import Actuator
+from .sensor import Sensor
 from .range import Range
 from .reaction import Reaction
 from .reaction_parameters import ReactionParameters

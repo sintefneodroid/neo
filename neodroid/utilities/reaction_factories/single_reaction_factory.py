@@ -91,9 +91,9 @@ def construct_motions_from_list(input_list,
       return []
 
   actor_motor_tuples = [
-    (actor.actor_name, motor.motor_name, motor.motion_space)
+    (actor.actor_name, motor.actuator_name, motor.motion_space)
     for actor in actors
-    for motor in actor.motors.values()
+    for motor in actor.actuators.values()
     ]
   if normalise:
     new_motions = [

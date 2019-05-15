@@ -1,4 +1,4 @@
-neodroid-flatbuffers
+flatbuffers
 draugr
 warg
 pyfiglet
@@ -11,3 +11,4 @@ tqdm
 matplotlib
 cloudpickle
 imageio
+pip

@@ -42,7 +42,7 @@ def main():
 
   args = parser.parse_args()
 
-  environments = neo.make(verbose=False)
+  environments = neo.connect()
   environments.reset()
 
   i = 0

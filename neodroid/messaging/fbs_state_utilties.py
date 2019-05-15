@@ -103,7 +103,7 @@ def deserialise_observers(flat_state):
     observation_value, observation_space = deserialise_observation(f_obs)
 
     name = f_obs.ObservationName().decode()
-    observers[name] = N.Observer(name, observation_space, observation_value)
+    observers[name] = N.Sensor(name, observation_space, observation_value)
   return observers
 
 
@@ -249,26 +249,26 @@ def deserialise_array(f_obs):
   return data, None
 
 
-def deserialise_motors(flat_actor):
-  motors = {}
-  for i in range(flat_actor.MotorsLength()):
-    flat_motor = flat_actor.Motors(i)
-    input_motor = N.Motor(
-        flat_motor.MotorName().decode(),
-        flat_motor.ValidInput(),
-        flat_motor.EnergySpentSinceReset(),
+def deserialise_actuators(flat_actor):
+  actuators = {}
+  for i in range(flat_actor.ActuatorsLength()):
+    flat_actuator = flat_actor.Actuators(i)
+    input_actuator = N.Actuator(
+        flat_actuator.ActuatorName().decode(),
+        flat_actuator.ValidInput(),
+        flat_actuator.EnergySpentSinceReset(),
         )
-    motors[input_motor.motor_name] = input_motor
+    actuators[input_actuator.actuator_name] = input_actuator
 
   out_motors = {}  # All dictionaries in python3.6+ are insertion ordered, motors are sorted by key and
   # inserted so that the order of motor key-value pairs are always the same for all instances the same
   # environment. This is
   # useful when descriptions are used for inference what value (motion strength) in a numeric vector
   # corresponds to what motor.
-  for key in sorted(motors.keys()):
-    out_motors[key] = motors[key]
+  for key in sorted(actuators.keys()):
+    out_motors[key] = actuators[key]
 
-  return motors
+  return actuators
 
 
 def deserialise_space(flat_space):

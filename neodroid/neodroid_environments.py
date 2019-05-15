@@ -45,7 +45,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
 
   @property
   def neodroid_api_version(self):
-    return '0.1.6'
+    return '0.1.2'
 
   def __init__(self,
                *,

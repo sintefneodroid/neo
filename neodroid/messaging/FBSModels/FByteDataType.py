@@ -3,6 +3,7 @@
 # namespace: FBS
 
 class FByteDataType(object):
-  PNG = 0
-  JPEG = 1
-  Other = 2
+    PNG = 0
+    JPEG = 1
+    Other = 2
+

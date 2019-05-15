@@ -17,7 +17,7 @@ from .FET import *
 from .FEnvironmentDescription import *
 from .FEulerTransform import *
 from .FMotion import *
-from .FMotor import *
+from .FActuator import *
 from .FOBS import *
 from .FObservation import *
 from .FQT import *

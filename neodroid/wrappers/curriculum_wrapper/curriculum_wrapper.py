@@ -4,7 +4,7 @@ import random
 from typing import Any
 
 from neodroid.models import Reaction, ReactionParameters
-from utilities.transformations.encodings import signed_ternary_encoding
+from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
 __author__ = 'cnheider'
 

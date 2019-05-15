@@ -110,10 +110,10 @@ def serialise_motions(B, input_reaction):
   motion_offsets = []
   for input_motion in input_reaction.motions:
     actor_string_offset = B.CreateString(input_motion.actor_name)
-    motor_string_offset = B.CreateString(input_motion.motor_name)
+    actuator_string_offset = B.CreateString(input_motion.actuator_name)
     F.FMotionStart(B)
     F.FMotionAddActorName(B, actor_string_offset)
-    F.FMotionAddMotorName(B, motor_string_offset)
+    F.FMotionAddActuatorName(B, actuator_string_offset)
     F.FMotionAddStrength(B, input_motion.strength)
     motion_offset = F.FMotionEnd(B)
     motion_offsets.append(motion_offset)

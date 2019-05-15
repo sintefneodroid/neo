@@ -44,7 +44,7 @@ def launch_environment(environment_name,
   if not pathlib.Path.exists(j):
     old_mask = os.umask(000)
     try:
-      pathlib.Path.mkdir(j, 0o777, exist_ok=True)
+      pathlib.Path.mkdir(j, 0o777,parents=True, exist_ok=True)
     finally:
       os.umask(old_mask)
 
