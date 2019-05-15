@@ -1,0 +1,6 @@
+[console_scripts]
+neodroid = neodroid.cli:main
+neodroid-img = samples.minimal.image_observation:main
+neodroid-mab = samples.example_algorithms.multi_armed_bandit:main
+neodroid-smp = samples.minimal.action_space_sampling:main
+
