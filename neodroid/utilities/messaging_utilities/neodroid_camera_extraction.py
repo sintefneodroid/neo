@@ -57,17 +57,18 @@ def extract_all_as_camera(state, image_size=(None, None, 4)):
 def extract_camera_observation(state, key, image_size=(None, None, 4), d_type=numpy.float32):
   sensor = state.observer(key)
   if sensor:
-    val = sensor.observation_value
-    if isinstance(val, (bytes, BytesIO)):
-      img = imageio.imread(val)
+    img = sensor.observation_value
+    return img
+    if isinstance(img, (bytes, BytesIO)):
+      img = img#imageio.imread(img)
     else:
       if image_size[0] is None or image_size[1] is None:
         # TODO: support inference of only one dimension based on knowns
-        symmetric_size = int(math.sqrt((len(val) / image_size[-1])))
+        symmetric_size = int(math.sqrt((len(img) / image_size[-1])))
         image_size = list(image_size)
         image_size[0] = image_size[1] = symmetric_size
 
-      img = numpy.array(val, dtype=d_type).reshape(*image_size)
+      img = numpy.array(img, dtype=d_type).reshape(*image_size)
       img = numpy.flipud(img)
       # img = numpy.nan_to_num(img)
 

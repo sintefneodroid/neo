@@ -1,6 +1,7 @@
 from io import BytesIO
 from typing import Any, Tuple
 
+import numpy
 import numpy as np
 
 from neodroid import models as N
@@ -70,6 +71,7 @@ def deserialise_configurables(flat_environment_description):
 def deserialise_observation(f_obs):
   value = None
   value_range = None
+  dtype = float
   obs_type = f_obs.ObservationType()
   if obs_type is F.FObservation.FSingle:
     value, value_range = deserialise_single(f_obs)
@@ -221,13 +223,16 @@ def deserialise_byte_array(f_obs):
 def deserialise_byte_array_fast(f_obs):
   byte_array = F.FByteArray()
   byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
-  # data = np.array(
-  #    [byte_array.Bytes(i) for i in range(byte_array.BytesLength())],
-  #    dtype=np.uint8)
   data = byte_array.BytesAsNumpy()
-  b = data.tobytes()
-  bio = BytesIO(b)
-  return bio
+  t = byte_array.Type()
+  if t==F.FByteDataType.JPEG:
+    data2 = numpy.frombuffer(data, dtype=numpy.uint8)
+  elif t==F.FByteDataType.PNG:
+    data2 = numpy.frombuffer(data, dtype=numpy.uint8)
+  else:
+    data2 = numpy.frombuffer(data, dtype=numpy.float16)
+
+  return data2
 
 
 def deserialise_byte_array_slow(f_obs):
