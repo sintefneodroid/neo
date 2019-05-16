@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import logging
 import typing
 
 from neodroid.utilities.debugging_utilities.debug_print_return import print_return_value
@@ -16,18 +17,16 @@ from neodroid import models as M
 # @debug_print_return_value
 def construct_step_reaction(reaction_input,
                             environment_description,
-                            normalise=False,
-                            verbose=False):
+                            normalise=False
+                            ):
   """
 
-  :param verbose:
   :param environment_description:
   :param normalise:
   :type reaction_input: object
   """
   if reaction_input is None:
-    if verbose >= VerbosityLevel.Warnings:
-      print('empty reaction')
+    logging.info('Received empty reaction, Constructing empty counting terminal step reaction')
     parameters = M.ReactionParameters(terminable=True,
                                       step=True,
                                       episode_count=True)
@@ -113,7 +112,7 @@ def construct_motions_from_list(input_list,
     return new_motions
 
 
-@print_return_value
+#@print_return_value
 def verify_configuration_reaction(*, input_reaction, environment_description, verbose=False):
   if environment_description:
     parameters = M.ReactionParameters(reset=True,

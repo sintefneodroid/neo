@@ -21,6 +21,7 @@ from neodroid.networking_environment import NetworkingEnvironment
 
 DEFAULT_ENVIRONMENTS_PATH = (NEODROID_APP_PATH.user_cache / 'environments').absolute()
 
+
 class NeodroidEnvironment(NetworkingEnvironment):
 
   @property
@@ -231,12 +232,12 @@ class NeodroidEnvironment(NetworkingEnvironment):
       out_reaction = construct_step_reaction(input_reactions,
                                              description,
                                              normalise,
-                                             verbose=verbose)
+                                             )
     else:
       out_reaction = construct_step_reaction(input_reactions,
                                              None,
-                                             False,
-                                             verbose=verbose)
+                                             False
+                                             )
 
     if verbose >= VerbosityLevel.Information:
       print(out_reaction)
