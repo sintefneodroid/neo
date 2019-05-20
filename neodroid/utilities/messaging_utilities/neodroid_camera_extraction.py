@@ -58,7 +58,7 @@ def extract_camera_observation(state,
                                key):
   sensor = state.observer(key)
   if sensor:
-    img = sensor.observation_value
+    img = sensor.value
     return img
   '''
   if isinstance(img, (bytes, BytesIO)):

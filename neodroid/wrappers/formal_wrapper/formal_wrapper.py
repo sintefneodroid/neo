@@ -49,12 +49,11 @@ class NeodroidFormalWrapper(SingleEnvironmentWrapper):
   def observe(self, *args, **kwargs):
     message = super().observe(*args, **kwargs)
     if message:
-      return (
-        flattened_observation(message),
-        message.signal,
-        message.terminated,
-        message,
-        )
+      return (flattened_observation(message),
+              message.signal,
+              message.terminated,
+              message,
+              )
     return None, None, None, None
 
   def quit(self, *args, **kwargs):

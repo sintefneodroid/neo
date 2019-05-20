@@ -85,9 +85,9 @@ class NeodroidPackage:
       'console_scripts':[
         # "name_of_executable = module.with:function_to_execute"
         'neodroid = neodroid.cli:main',
-        'neodroid-smp = samples.minimal.action_space_sampling:main',
-        'neodroid-img = samples.minimal.image_observation_plot:main',
-        'neodroid-mab = samples.example_algorithms.multi_armed_bandit:main',
+        'neodroid-sample = samples.action_space_sampling:main',
+        'neodroid-img = samples.image_observation_plot:main',
+        'neodroid-mab = samples.mab.multi_armed_bandit:main',
         # 'neodroid-gui = samples.guiclient.main:main'
         ]
       }
