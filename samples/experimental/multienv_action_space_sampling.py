@@ -4,7 +4,7 @@ from neodroid.models import ReactionParameters, Motion, Reaction
 
 __author__ = 'cnheider'
 
-import neodroid.neodroid_environments as neo
+import api.neodroid_environments as neo
 
 
 def construct_reactions(env):

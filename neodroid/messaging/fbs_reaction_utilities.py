@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from flatbuffers import Builder
 
-from neodroid.utilities.exceptions.exceptions import NoUnobservablesException
+from neodroid.exceptions.exceptions import NoUnobservablesException
 
 __author__ = 'cnheider'
 

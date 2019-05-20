@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import logging
 
-from neodroid.utilities.debugging_utilities.debug_print_return import print_return_value
 from neodroid.utilities.transformations.action_transformations import normalise_action
 
 __author__ = 'cnheider'
 
 import numpy as np
-import warnings
 
 from neodroid import models as M
 
 
-@print_return_value
+# @print_return_value
 def verify_motion_reactions(inputs,
                             environment_descriptions,
                             normalise=False,
@@ -97,10 +96,9 @@ def construct_motions_from_list(input_list, actors, normalise):
     return new_motions
 
 
-@print_return_value
+# @print_return_value
 def verify_configuration_reaction(input_reaction,
-                                  environment_description,
-                                  verbose=False):
+                                  environment_description):
   parameters = M.ReactionParameters(terminable=False,
                                     step=False,
                                     reset=True,

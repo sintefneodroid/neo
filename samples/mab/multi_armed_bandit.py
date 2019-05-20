@@ -4,11 +4,11 @@ import argparse
 import sys
 
 from neodroid.models import ReactionParameters
-from samples.example_algorithms.ucb1 import UCB1
+from .ucb1 import UCB1
 
 __author__ = 'cnheider'
 
-import wrappers.experimental.single_environment_wrapper as neo
+import api_wrappers.single_environment_wrapper as neo
 from neodroid import messaging
 
 

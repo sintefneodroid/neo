@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import logging
-import warnings
 from contextlib import suppress
 
 from neodroid.messaging.fbs_state_utilties import deserialise_states
-from neodroid.utilities.debugging_utilities.verbosity import VerbosityLevel
 
 __author__ = 'cnheider'
 
