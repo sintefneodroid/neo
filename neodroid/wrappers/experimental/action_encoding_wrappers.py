@@ -20,10 +20,5 @@ class BinaryActionEncodingWrapper(NeodroidVectorGymWrapper):
   def action_space(self):
     self.act_spc = super().action_space
 
-    # self.act_spc.sample = self.signed_one_hot_sample
-
     return self.act_spc
 
-  def signed_one_hot_sample(self):
-    num = self.act_spc.n
-    return random.randrange(num)

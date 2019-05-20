@@ -47,8 +47,32 @@ class FByteArray(object):
             return self._tab.Get(flatbuffers.number_types.Uint8Flags, o + self._tab.Pos)
         return 0
 
-def FByteArrayStart(builder): builder.StartObject(2)
+    # FByteArray
+    def Shape(self, j):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        if o != 0:
+            a = self._tab.Vector(o)
+            return self._tab.Get(flatbuffers.number_types.Int32Flags, a + flatbuffers.number_types.UOffsetTFlags.py_type(j * 4))
+        return 0
+
+    # FByteArray
+    def ShapeAsNumpy(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        if o != 0:
+            return self._tab.GetVectorAsNumpy(flatbuffers.number_types.Int32Flags, o)
+        return 0
+
+    # FByteArray
+    def ShapeLength(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        if o != 0:
+            return self._tab.VectorLen(o)
+        return 0
+
+def FByteArrayStart(builder): builder.StartObject(3)
 def FByteArrayAddBytes(builder, bytes): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(bytes), 0)
 def FByteArrayStartBytesVector(builder, numElems): return builder.StartVector(1, numElems, 1)
 def FByteArrayAddType(builder, type): builder.PrependUint8Slot(1, type, 0)
+def FByteArrayAddShape(builder, shape): builder.PrependUOffsetTRelativeSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(shape), 0)
+def FByteArrayStartShapeVector(builder, numElems): return builder.StartVector(4, numElems, 4)
 def FByteArrayEnd(builder): return builder.EndObject()

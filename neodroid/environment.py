@@ -15,26 +15,23 @@ import numpy as np
 
 NEODROID_APP_PATH = warg.AppPath('neodroid', app_author=__author__)
 
+
 class Environment(ABC):
 
   def __init__(self,
                *,
                seed=8,
-               debug_logging=False,
                logging_directory=NEODROID_APP_PATH.user_log,
-               verbose=VerbosityLevel.Warnings,
+               logging_level=logging.WARNING,
                **kwargs):
     self.seed(seed)
-    self._verbose = verbose
 
-    self._debug_logging = debug_logging
-    if self._debug_logging:
-      logging.basicConfig(format='%(asctime)s %(new_state)s',
-                          filename=pathlib.Path.joinpath(logging_directory, 'neodroid-log.txt'),
-                          level=logging.DEBUG,
-                          )
-      self._logger = logging.getLogger(__name__)
-      self._logger.info('Initializing Environment')
+    logging.basicConfig(#format='%(asctime)s %(new_state)s',
+                        #datefmt='%m/%d/%Y %I:%M:%S %p',
+                        filename=logging_directory/ 'neodroid_log.txt',
+                        level=logging_level
+                        )
+    #self._module_logger = logging.getLogger(__name__)
 
     self._description = None
     self._action_space = None

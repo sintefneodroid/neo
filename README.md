@@ -125,6 +125,14 @@ The application displays data received from the example application of the [Droi
 # To Do's
 - [ ] Be able to select and/or parameterise an objective/evaluation (None,ReachGoal,Stabilise,..) function for an environment
 
+
+# Contributing
+See guidelines for contributing [here](.github/CONTRIBUTING.md).
+
+# Licensing
+
+This project is licensed under the Apache V2 License. See [LICENSE](LICENSE.md) for more information.
+
 # Citation
 
 For citation you may use the following bibtex entry:

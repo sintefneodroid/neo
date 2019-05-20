@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import logging
 import warnings
+from contextlib import suppress
 
 from neodroid.messaging.fbs_state_utilties import deserialise_states
 from neodroid.utilities.debugging_utilities.verbosity import VerbosityLevel
@@ -53,10 +55,8 @@ class MessageClient(object):
                on_connected_callback=None,
                on_disconnected_callback=None,
                single_threaded=False,
-               verbose=VerbosityLevel.Nothing,
-               writer=warnings.warn):
+               writer=logging.info):
 
-    self._verbosity = verbose
     self._tcp_address = tcp_address
     self._tcp_port = tcp_port
 
@@ -85,16 +85,16 @@ class MessageClient(object):
     if not self._request_socket:
       raise RuntimeError('Failed to create ZMQ socket!')
 
-    if self._verbosity >= VerbosityLevel.Information and self._writer:
+    if self._writer:
       self._writer(f'Connecting to server at {self._tcp_address}:{self._tcp_port}')
 
     if self._use_ipc_medium:
       self._request_socket.connect('ipc:///tmp/neodroid/messages')
-      if self._verbosity and self._writer:
+      if self._writer:
         self._writer('Using IPC protocol')
     else:
       self._request_socket.connect(f'tcp://{self._tcp_address}:{self._tcp_port}')
-      if self._verbosity and self._writer:
+      if self._writer:
         self._writer('Using TCP protocol')
 
     self._on_connected_callback()
@@ -103,11 +103,12 @@ class MessageClient(object):
     self._poller.register(self._request_socket, zmq.POLLIN)
 
   def close_connection(self):
-    # if not self._request_socket.closed:
-    self._request_socket.setsockopt(zmq.LINGER, 0)
-    self._request_socket.close()
-    self._poller.unregister(self._request_socket)
-    # self._poller.close()
+    with suppress(zmq.error.ZMQError):
+      # if not self._request_socket.closed:
+      self._request_socket.setsockopt(zmq.LINGER, 0)
+      self._request_socket.close()
+      self._poller.unregister(self._request_socket)
+      # self._poller.close()
 
   def teardown(self):
     self.close_connection()
@@ -162,14 +163,14 @@ class MessageClient(object):
           retries_left -= 1
 
           if retries_left <= 0:
-            if self._verbosity >= VerbosityLevel.Warnings:
+            if self._writer:
               self._writer('Out of retries, tearing down client')
             self.teardown()
             if self._on_disconnected_callback:
               self._on_disconnected_callback()
             raise ConnectionError
           else:
-            if self._verbosity >= VerbosityLevel.Information:
+            if self._writer:
               self._writer(f'Retrying to connect, attempt: {retries_left:d}/{REQUEST_RETRIES:d}')
             self.open_connection()
             self._request_socket.send(serialised_reaction)

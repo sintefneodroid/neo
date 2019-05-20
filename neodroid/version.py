@@ -6,7 +6,7 @@ import sys
 from warnings import warn
 
 __author__ = "cnheider"
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 __doc__ = r"""
 Created on 27/04/2019
 

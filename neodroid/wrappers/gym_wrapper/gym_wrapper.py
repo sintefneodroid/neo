@@ -115,14 +115,6 @@ class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
   def spec(self):
     return None
 
-  @property
-  def action_space(self):
-    return self._action_space
-
-  @property
-  def observation_space(self):
-    return self._observation_space
-
 
 class NeodroidWrapper:
   def __init__(self, env):

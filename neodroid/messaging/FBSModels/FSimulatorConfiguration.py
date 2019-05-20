@@ -24,7 +24,7 @@ class FSimulatorConfiguration(object):
     # FSimulatorConfiguration
     def TargetFrameRate(self): return self._tab.Get(flatbuffers.number_types.Float32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(20))
     # FSimulatorConfiguration
-    def WaitEvery(self): return self._tab.Get(flatbuffers.number_types.Int32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(24))
+    def SimulationType(self): return self._tab.Get(flatbuffers.number_types.Uint8Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(24))
     # FSimulatorConfiguration
     def FrameSkips(self): return self._tab.Get(flatbuffers.number_types.Int32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(28))
     # FSimulatorConfiguration
@@ -32,19 +32,20 @@ class FSimulatorConfiguration(object):
     # FSimulatorConfiguration
     def NumOfEnvironments(self): return self._tab.Get(flatbuffers.number_types.Int32Flags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(36))
     # FSimulatorConfiguration
-    def DoSerialiseIndidualSensors(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(40))
+    def DoSerialiseIndividualSensors(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(40))
     # FSimulatorConfiguration
     def DoSerialiseUnobservables(self): return self._tab.Get(flatbuffers.number_types.BoolFlags, self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(41))
 
-def CreateFSimulatorConfiguration(builder, width, height, fullScreen, qualityLevel, timeScale, targetFrameRate, waitEvery, frameSkips, resetIterations, numOfEnvironments, doSerialiseIndidualSensors, doSerialiseUnobservables):
+def CreateFSimulatorConfiguration(builder, width, height, fullScreen, qualityLevel, timeScale, targetFrameRate, simulationType, frameSkips, resetIterations, numOfEnvironments, doSerialiseIndividualSensors, doSerialiseUnobservables):
     builder.Prep(4, 44)
     builder.Pad(2)
     builder.PrependBool(doSerialiseUnobservables)
-    builder.PrependBool(doSerialiseIndidualSensors)
+    builder.PrependBool(doSerialiseIndividualSensors)
     builder.PrependInt32(numOfEnvironments)
     builder.PrependInt32(resetIterations)
     builder.PrependInt32(frameSkips)
-    builder.PrependInt32(waitEvery)
+    builder.Pad(3)
+    builder.PrependUint8(simulationType)
     builder.PrependFloat32(targetFrameRate)
     builder.PrependFloat32(timeScale)
     builder.PrependInt32(qualityLevel)

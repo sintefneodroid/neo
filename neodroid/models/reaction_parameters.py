@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import logging
+
 __author__ = 'cnheider'
 
 import json
@@ -7,19 +9,20 @@ import json
 
 class ReactionParameters(object):
 
-  def __init__(
-      self,
-      *,
-      terminable=False,
-      step=False,
-      reset=False,
-      configure=False,
-      describe=False,
-      episode_count=False,
-      ):
+  def __init__(self,
+               *,
+               terminable=False,
+               step=False,
+               reset=False,
+               configure=False,
+               describe=False,
+               episode_count=False,
+               ):
     self._terminable = terminable
     self._configure = configure
     self._step = step
+    if reset:
+      logging.info('resetting')
     self._reset = reset
     self._describe = describe
     self._episode_count = episode_count

@@ -19,7 +19,7 @@ def verify_motion_reactions(inputs,
                             verbose=False):
   if environment_descriptions:
     if len(inputs) is not len(environment_descriptions):
-      warnings.warn(
+      logging.warning(
           f'Inputs({len(inputs)}) and environment descriptions({len(environment_descriptions)}) are not the '
           f'same length')
     for input, env_desc in zip(inputs, environment_descriptions):

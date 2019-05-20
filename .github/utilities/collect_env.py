@@ -7,13 +7,14 @@ import sys
 from collections import namedtuple
 
 import neodroid as neo
+from NeodroidPackage import NeodroidPackage
 
 PY3 = sys.version_info >= (3, 0)
 
 # System Environment Information
 SystemEnv = namedtuple('SystemEnv', [
   'neo_version',
-  'is_debug_build',
+  'is_a_development_build',
   'os',
   'python_version',
   'pip_version',  # 'pip' or 'pip3'
@@ -21,10 +22,12 @@ SystemEnv = namedtuple('SystemEnv', [
   ])
 
 
-def run(command):
+def run_cmd(command):
   '''Returns (return-code, stdout, stderr)'''
-  p = subprocess.Popen(command, stdout=subprocess.PIPE,
-                       stderr=subprocess.PIPE, shell=True)
+  p = subprocess.Popen(command,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.PIPE,
+                       shell=True)
   output, err = p.communicate()
   rc = p.returncode
   if PY3:
@@ -111,10 +114,18 @@ def get_os(run_lambda):
   return platform
 
 
+def req_grep_fmt():
+  r = '\|'.join([f'{req.split(">")[0].split("=")[0]}' for req in (NeodroidPackage().extras['all'] +
+                                                                  NeodroidPackage(
+
+                                                                      ).requirements)])
+  return r
+
+
 def get_pip_packages(run_lambda):
   # People generally have `pip` as `pip` or `pip3`
   def run_with_pip(pip):
-    return run_and_read_all(run_lambda, pip + ' list - -format=legacy | grep "neo\ | numpy"')
+    return run_and_read_all(run_lambda, pip + f' list - -format=legacy | grep "Neodroid\|{req_grep_fmt()}"')
 
   if not PY3:
     return 'pip', run_with_pip('pip')
@@ -138,23 +149,22 @@ def get_pip_packages(run_lambda):
 
 
 def get_env_info():
-  run_lambda = run
+  run_lambda = run_cmd
   pip_version, pip_list_output = get_pip_packages(run_lambda)
 
   return SystemEnv(
       neo_version=neo.__version__,
-      is_debug_build=neo.version.debug,
-      python_version='{}.{}'.format(
-          sys.version_info[0], sys.version_info[1]),
+      is_a_development_build=neo.version.DEVELOP,
+      python_version=f'{sys.version_info[0]}.{sys.version_info[1]}',
       pip_version=pip_version,
       pip_packages=pip_list_output,
       os=get_os(run_lambda),
       )
 
 
-env_info_fmt = '''
+env_info_fmt = r'''
 Neo version: {neo_version}
-Is debug build: {is_debug_build}
+Is a development build: {is_a_development_build}
 OS: {os}
 Python version: {python_version}
 Versions of relevant libraries:
@@ -188,27 +198,18 @@ def pretty_str(env_info):
       return replacement
     return text
 
-  def maybe_start_on_next_line(string):
-    # If `string` is multiline, prepend a \n to it.
-    if string is not None and len(string.split('\n')) > 1:
-      return '\n{}\n'.format(string)
-    return string
-
   mutable_dict = env_info._asdict()
 
-  # Replace True with Yes, False with No
-  mutable_dict = replace_bools(mutable_dict)
+  mutable_dict = replace_bools(mutable_dict)  # Replace True with Yes, False with No
 
-  # Replace all None objects with 'Could not collect'
-  mutable_dict = replace_all_none_objects(mutable_dict)
+  mutable_dict = replace_all_none_objects(mutable_dict)  # Replace all None objects with 'Could not collect'
 
-  # If either of these are '', replace with 'No relevant packages'
   mutable_dict['pip_packages'] = replace_if_empty(
-      mutable_dict['pip_packages'])
+      mutable_dict['pip_packages'])  # If either of these are '', replace with 'No relevant packages'
 
   if mutable_dict['pip_packages']:
     mutable_dict['pip_packages'] = prepend(mutable_dict['pip_packages'],
-                                           '[{}] '.format(env_info.pip_version))
+                                           f'[{env_info.pip_version}] ')
   return env_info_fmt.format(**mutable_dict)
 
 
@@ -217,6 +218,7 @@ def get_pretty_env_info():
 
 
 def main():
+  print(get_pip_packages(run_cmd))
   print('Collecting environment information...')
   output = get_pretty_env_info()
   print(output)

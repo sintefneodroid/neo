@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import logging
+
 import draugr
-import warg
 from neodroid.environment import NEODROID_APP_PATH
 from neodroid.utilities.debugging_utilities.verbosity import VerbosityLevel
 
@@ -30,14 +31,20 @@ class NeodroidEnvironment(NetworkingEnvironment):
 
   @property
   def observation_space(self):
+    while not self._observation_space:
+      self.describe()
     return self._observation_space
 
   @property
   def action_space(self):
+    while not self._action_space:
+      self.describe()
     return self._action_space
 
   @property
   def signal_space(self):
+    while not self._signal_space:
+      self.describe()
     return self._signal_space
 
   @property
@@ -47,6 +54,23 @@ class NeodroidEnvironment(NetworkingEnvironment):
   @property
   def neodroid_api_version(self):
     return '0.1.2'
+
+  def _setup_connection(self, auto_describe=False):
+    super()._setup_connection(auto_describe)
+    if auto_describe:
+      # TODO: WARN ABOUT WHEN INDIVIDUAL OBSERVATIONS AND UNOBSERVABLES ARE UNAVAILABLE
+      # due to simulator configuration
+
+      logging.warning(f'Using Neodroid API version {self.neodroid_api_version}')
+
+      server_version = self._simulator_configuration.api_version
+      logging.info(f'Server API version: {server_version}')
+
+      if self.neodroid_api_version != server_version:
+        if server_version == '':
+          server_version = '*Unspecified*'
+
+        logging.warning(f'Server is using different version {server_version}, complications may occur!')
 
   def __init__(self,
                *,
@@ -77,32 +101,12 @@ class NeodroidEnvironment(NetworkingEnvironment):
                                                      path_to_executables_directory=path_to_executables_directory,
                                                      headless=headless)
       if self._simulation_instance:
-        if self._debug_logging:
-          self._logger.debug(f'successfully started environment {environment_name}')
+        logging.debug(f'successfully started environment {environment_name}')
       else:
-        if self._debug_logging:
-          self._logger.debug(f'could not start environment {environment_name}')
+
+        logging.debug(f'could not start environment {environment_name}')
 
     self._setup_connection()
-
-    if self._verbose >= VerbosityLevel.Warnings:
-      warnings.warn(f'Using Neodroid API version {self.neodroid_api_version}')
-
-    server_version = self._simulator_configuration.api_version
-    if self.neodroid_api_version != server_version:
-      if server_version == '':
-        server_version = '*Unspecified*'
-      if self._verbose >= VerbosityLevel.Warnings:
-        warnings.warn(f'Server is using different version {server_version}, complications may occur!')
-
-    if self._verbose >= VerbosityLevel.Information:
-      print(f'Server API version: {server_version}')
-
-    if self._verbose >= VerbosityLevel.Information:
-      draugr.sprint(f'\nconfigurable space:\n{self.description.configurables}\n',
-                    color='blue',
-                    bold=True,
-                    highlight=True)
 
   def configure(self, *args, **kwargs):
     return self.reset()
@@ -131,7 +135,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
 :return:
 :rtype:
 '''
-    self._warn_react()
+    self._notify_react()
 
     if isinstance(input_reactions, list) and len(input_reactions) > 0 and isinstance(input_reactions[0],
                                                                                      M.Reaction):
@@ -145,17 +149,17 @@ class NeodroidEnvironment(NetworkingEnvironment):
       elif not isinstance(input_reactions, Reaction):
         input_reaction = self.maybe_infer_motion_reaction(input_reactions=input_reactions,
                                                           normalise=normalise,
-                                                          description=self._description,
-                                                          verbose=self._verbose)
+                                                          description=self._description
+                                                          )
         input_reactions = [input_reaction]
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
 
     if new_states:
-      self.update_interface_statics(new_states, simulator_configuration)
+      self.update_interface_attributes(new_states, simulator_configuration)
       return new_states
 
-    self._warn_no_state_received()
+    self._notify_no_state_received()
 
   def display(self, displayables):
     conf_reaction = Reaction(
@@ -166,18 +170,19 @@ class NeodroidEnvironment(NetworkingEnvironment):
       return np.array(flattened_observation(message)), message
 
   @staticmethod
-  def maybe_infer_configuration_reaction(input_reaction, description, verbose=False):
+  def maybe_infer_configuration_reaction(input_reaction, description):
     if description:
       input_reaction = verify_configuration_reaction(input_reaction=input_reaction,
-                                                     environment_description=description,
-                                                     verbose=verbose)
+                                                     environment_description=description
+                                                     )
     else:
-      input_reaction = verify_configuration_reaction(input_reaction=input_reaction, verbose=verbose)
+      input_reaction = verify_configuration_reaction(input_reaction=input_reaction,
+                                                     environment_description=description)
 
     return input_reaction
 
   def reset(self, input_reactions=None, state=None, on_reset_callback=None):
-    self._warn_reset()
+    self._notify_reset()
 
     if input_reactions is None:
       parameters = M.ReactionParameters(terminable=True,
@@ -188,9 +193,9 @@ class NeodroidEnvironment(NetworkingEnvironment):
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
     if new_states:
-      self.update_interface_statics(new_states, simulator_configuration)
+      self.update_interface_attributes(new_states, simulator_configuration)
       return new_states
-    self._warn_no_state_received()
+    self._notify_no_state_received()
 
   def _close(self, callback=None):
     '''
@@ -200,7 +205,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
 :return:
 :rtype:
 '''
-    self._warn_closing()
+    self._notify_closing()
     # if self._message_server:
     #  self._message_server.__del__()
     if self._simulation_instance is not None:
@@ -213,8 +218,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
   def maybe_infer_motion_reaction(*,
                                   input_reactions,
                                   normalise,
-                                  description,
-                                  verbose=VerbosityLevel.Warnings):
+                                  description):
     '''
 
 :param verbose:
@@ -239,34 +243,19 @@ class NeodroidEnvironment(NetworkingEnvironment):
                                              False
                                              )
 
-    if verbose >= VerbosityLevel.Information:
-      print(out_reaction)
-
     return out_reaction
 
-  def _warn_closing(self):
-    if self._verbose >= VerbosityLevel.Warnings:
-      warnings.warn('Closing')
-    if self._debug_logging:
-      self._logger.debug('Closing')
+  def _notify_closing(self) -> None:
+    logging.info('Closing')
 
-  def _warn_react(self):
-    if self._verbose >= VerbosityLevel.Information:
-      warnings.warn('Reacting in environment')
-    if self._debug_logging:
-      self._logger.debug('Reacting in environment')
+  def _notify_react(self) -> None:
+    logging.info('Reacting in environment')
 
-  def _warn_reset(self):
-    if self._verbose >= VerbosityLevel.Information:
-      warnings.warn('Resetting environment')
-    if self._debug_logging:
-      self._logger.debug('Resetting environment')
+  def _notify_reset(self) -> None:
+    logging.info('Resetting environment')
 
-  def _warn_no_state_received(self):
-    if self._verbose >= VerbosityLevel.Warnings:
-      warnings.warn('No valid was new_state received')
-    if self._debug_logging:
-      self._logger.debug('No valid was new_state received')
+  def _notify_no_state_received(self) -> None:
+    logging.warning('No valid was new_state received')
 
   def __str__(self):
     return (f'<NeodroidEnvironment>\n'

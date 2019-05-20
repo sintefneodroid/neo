@@ -77,7 +77,9 @@ def construct_reaction_from_list(motion_list, actors, normalise):
   motions = construct_motions_from_list(motion_list,
                                         actors,
                                         normalise)
-  parameters = M.ReactionParameters(terminable=True, step=True, episode_count=True)
+  parameters = M.ReactionParameters(terminable=True,
+                                    step=True,
+                                    episode_count=True)
   return M.Reaction(motions=motions, parameters=parameters)
 
 
@@ -89,31 +91,31 @@ def construct_motions_from_list(input_list,
     if len(input_list) == 0:
       return []
 
-  actor_motor_tuples = [
-    (actor.actor_name, motor.actuator_name, motor.motion_space)
+  actor_actuator_tuples = [
+    (actor.actor_name, actuator.actuator_name, actuator.motion_space)
     for actor in actors
-    for motor in actor.actuators.values()
+    for actuator in actor.actuators.values()
     ]
   if normalise:
     new_motions = [
       M.Motion(
-          actor_motor_tuple[0],
-          actor_motor_tuple[1],
-          normalise_action(list_val, actor_motor_tuple[2]),
+          actor_actuator_tuple[0],
+          actor_actuator_tuple[1],
+          normalise_action(list_val, actor_actuator_tuple[2]),
           )
-      for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
+      for (list_val, actor_actuator_tuple) in zip(input_list, actor_actuator_tuples)
       ]
     return new_motions
   else:
     new_motions = [
-      M.Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
-      for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
+      M.Motion(actor_actuator_tuple[0], actor_actuator_tuple[1], list_val)
+      for (list_val, actor_actuator_tuple) in zip(input_list, actor_actuator_tuples)
       ]
     return new_motions
 
 
 #@print_return_value
-def verify_configuration_reaction(*, input_reaction, environment_description, verbose=False):
+def verify_configuration_reaction(*, input_reaction, environment_description):
   if environment_description:
     parameters = M.ReactionParameters(reset=True,
                                       configure=True,

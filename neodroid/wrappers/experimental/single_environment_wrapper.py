@@ -25,8 +25,7 @@ class SingleEnvironmentWrapper(NeodroidEnvironment):
     if not isinstance(input_reaction, Reaction):
       input_reaction = self.maybe_infer_motion_reaction(input_reactions=input_reaction,
                                                         normalise=normalise,
-                                                        description=self._description,
-                                                        verbose=self._verbose
+                                                        description=self._description
                                                         )
     if parameters is not None:
       input_reaction.parameters = parameters
@@ -42,11 +41,10 @@ class SingleEnvironmentWrapper(NeodroidEnvironment):
 
   def reset(self, input_reaction=None, state=None, on_reset_callback=None):
 
-    input_reaction = self.maybe_infer_configuration_reaction(
-        input_reaction=input_reaction,
-        description=self._description,
-        verbose=self._verbose
-        )
+    input_reaction = self.maybe_infer_configuration_reaction(input_reaction=input_reaction,
+                                                             description=self._description
+
+                                                             )
     if state:
       input_reaction.unobservables = state.unobservables
 

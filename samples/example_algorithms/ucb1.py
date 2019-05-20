@@ -1,5 +1,7 @@
 import math
 
+from utilities import TrainingResume
+
 
 def index_of_max(x):
   m = max(x)
@@ -45,11 +47,12 @@ class UCB1:
 
   def train(self,
             arms,
-            rollouts=1000):
+            rollouts=1000) -> TrainingResume:
     for t in range(rollouts):
       chosen_arm = self.select_arm()
       reward = arms[chosen_arm].draw()
       self.update_belief(chosen_arm, reward)
+    return TrainingResume()
 
 
 if __name__ == '__main__':
