@@ -218,22 +218,16 @@ def deserialise_quaternion_transform(f_obs):
 
 
 def deserialise_byte_array(f_obs):
-  return deserialise_byte_array_fast(f_obs), None
 
-
-def deserialise_byte_array_fast(f_obs):
   byte_array = F.FByteArray()
   byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   data = byte_array.BytesAsNumpy()
   t = byte_array.Type()
-
   if t==F.FByteDataType.UINT8:
     out = numpy.frombuffer(data, dtype=numpy.uint8)
-
     out= out.reshape(*byte_array.ShapeAsNumpy())
   elif t == F.FByteDataType.FLOAT16:
     out = numpy.frombuffer(data, dtype=numpy.float16)
-
     out= out.reshape(*byte_array.ShapeAsNumpy())
   elif t == F.FByteDataType.FLOAT32:
     out = numpy.frombuffer(data, dtype=numpy.float32)
@@ -245,19 +239,7 @@ def deserialise_byte_array_fast(f_obs):
 
   else:
     out = data
-
-  return out
-
-
-def deserialise_byte_array_slow(f_obs):
-  byte_array = F.FByteArray()
-  byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
-  data = np.array(
-      [byte_array.Bytes(i) for i in range(byte_array.BytesLength())],
-      dtype=np.uint8)
-  b = data.tobytes()
-  bio = BytesIO(b)
-  return bio
+  return out, None
 
 
 def deserialise_array(f_obs):

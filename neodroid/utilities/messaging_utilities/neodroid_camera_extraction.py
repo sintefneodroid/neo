@@ -32,22 +32,22 @@ default_camera_observer_names = ('90',
                                  'Satellite')
 
 
-def extract_neodroid_camera(state, cameras=default_camera_observer_names, image_size=(None, None, 4)):
+def extract_neodroid_camera(state, cameras=default_camera_observer_names):
   out = dict()
 
   for camera in cameras:
-    res = extract_camera_observation(state, camera, image_size=image_size)
+    res = extract_camera_observation(state, camera)
     if res is not None:
       out[camera] = res
 
   return out
 
 
-def extract_all_as_camera(state, image_size=(None, None, 4)):
+def extract_all_as_camera(state):
   out = dict()
 
   for camera in state.observers.keys():
-    res = extract_camera_observation(state, camera, image_size=image_size)
+    res = extract_camera_observation(state, camera)
     if res is not None:
       out[camera] = res
 
@@ -55,9 +55,7 @@ def extract_all_as_camera(state, image_size=(None, None, 4)):
 
 
 def extract_camera_observation(state,
-                               key,
-                               image_size=(None, None, 4),
-                               d_type=numpy.float32):
+                               key):
   sensor = state.observer(key)
   if sensor:
     img = sensor.observation_value
