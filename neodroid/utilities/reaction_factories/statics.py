@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from collections import Iterable
 
-from neodroid.utilities import ActionSpace, ObservationSpace, Range
+from neodroid.utilities import ActionSpace, ObservationSpace
 
 __author__ = 'cnheider'
 

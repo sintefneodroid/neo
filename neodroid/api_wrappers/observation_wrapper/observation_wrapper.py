@@ -4,9 +4,10 @@ from warnings import warn
 
 from neodroid.api_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 from neodroid.exceptions.exceptions import SensorNotAvailableException
-from neodroid.utilities.neodroid_standard_modules.neodroid_camera_extraction import (extract_neodroid_camera,
-                                                                            extract_camera_observation,
-                                                                            )
+from neodroid.utilities.neodroid_standard_modules.neodroid_camera_extraction import (
+  extract_camera_observation,
+  extract_neodroid_camera,
+  )
 
 __author__ = 'cnheider'
 

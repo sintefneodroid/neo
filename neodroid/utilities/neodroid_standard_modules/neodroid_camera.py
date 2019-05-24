@@ -3,6 +3,7 @@
 import PIL
 import numpy
 from PIL import Image
+
 import warg
 
 __author__ = 'cnheider'
@@ -73,15 +74,15 @@ def extract_neodroid_camera_images(environment):
   if tangents:
     tangents_image = Image.open(tangents.value)
 
-  return warg.NOD.dict_of(rgb_image,
-                          depth_image,
-                          segmentation_image,
-                          instance_segmentation_image,
-                          infrared_image,
-                          flow_image,
-                          normal_image,
-                          satellite_image,
-                          object_space_image,
-                          world_space_image,
-                          uvs_image,
-                          tangents_image)
+  return warg.NOD.nod_of(rgb_image,
+                         depth_image,
+                         segmentation_image,
+                         instance_segmentation_image,
+                         infrared_image,
+                         flow_image,
+                         normal_image,
+                         satellite_image,
+                         object_space_image,
+                         world_space_image,
+                         uvs_image,
+                         tangents_image)

@@ -8,7 +8,7 @@ from .ucb1 import UCB1
 
 __author__ = 'cnheider'
 
-import api_wrappers.single_environment_wrapper as neo
+import neodroid.api_wrappers.single_environment_wrapper as neo
 from neodroid import messaging
 
 
@@ -65,7 +65,7 @@ def main(connect_to_running=False):
                                     serialised_message='this is a serialised_message'
                                     )
 
-    _, signal, terminated, info = _environment.react(reaction).to_gym()
+    _, signal, terminated, info = _environment.react(reaction).to_gym_like_output()
 
     ucb1.update_belief(action, signal)
 

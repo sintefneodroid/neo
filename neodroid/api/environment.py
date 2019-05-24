@@ -4,14 +4,13 @@ import logging
 from abc import ABC, abstractmethod
 from types import coroutine
 
-import warg
-
+from warg.app_path import AppPath
 
 __author__ = 'cnheider'
 
 import numpy as np
 
-NEODROID_APP_PATH = warg.AppPath('neodroid', app_author=__author__)
+NEODROID_APP_PATH = AppPath('neodroid', app_author=__author__)
 
 
 class Environment(ABC):

@@ -71,8 +71,8 @@ class EnvironmentState(object):
   def sensor(self, key):
     return self.observer(key)
 
-  def to_gym(self):
-    return (self.observers, self.signal, self.terminated, self)
+  def to_gym_like_output(self):
+    return self.observers, self.signal, self.terminated, self
 
   def __repr__(self):
     observers_str = ''.join(

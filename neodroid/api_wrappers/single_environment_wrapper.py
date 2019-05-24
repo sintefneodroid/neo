@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.models import Reaction
 from neodroid.api.neodroid_environments import NeodroidEnvironment
 from neodroid.exceptions.exceptions import NoEnvironmentError
+from neodroid.models import Reaction
 
 __author__ = 'cnheider'
 
@@ -65,8 +65,6 @@ class SingleEnvironmentWrapper(NeodroidEnvironment):
     message = list(new_states.values())[0]
     if message:
       return message
-
-    return None
 
   def sensor(self, name, *args, **kwargs):
     state_env_0 = list(self._last_message.values())[0]

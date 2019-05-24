@@ -1,7 +1,6 @@
-from rllab.envs.base import Env
-from rllab.spaces import Box
-from rllab.envs.base import Step
 import numpy as np
+from rllab.envs.base import Env, Step
+from rllab.spaces import Box
 
 
 class PointEnv(Env):

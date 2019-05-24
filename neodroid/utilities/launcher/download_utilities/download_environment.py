@@ -2,7 +2,6 @@ import os
 import pathlib
 import stat
 import struct
-import sys
 
 from tqdm import tqdm
 
@@ -20,7 +19,7 @@ class DownloadProgress(tqdm):
 
 
 def download_environment(name: str = 'mab_win',
-                         path_to_executables_directory: str = '/tmp/neodroid') -> str:
+                         path_to_executables_directory: str = '/tmp/neodroid') -> pathlib.Path:
   """
 
   :param path_to_executables_directory:

@@ -129,9 +129,9 @@ class NetworkingEnvironment(Environment, ABC):
     :return:
     :rtype:
     '''
-
+    reaction = M.Reaction(parameters=parameters)
     new_states, simulator_configuration = self._message_server.send_reactions(
-        [M.Reaction(parameters=parameters)])
+        [reaction])
 
     if new_states:
       self.update_interface_attributes(new_states, simulator_configuration)

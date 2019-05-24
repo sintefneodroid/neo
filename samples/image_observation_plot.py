@@ -6,10 +6,8 @@ import cv2
 import numpy
 
 import warg
-from neodroid.wrappers import NeodroidGymWrapper
-from neodroid.utilities.messaging_utilities.neodroid_camera_extraction import (extract_neodroid_camera,
-                                                                               extract_all_as_camera,
-                                                                               )
+from neodroid.api_wrappers import NeodroidGymWrapper
+from neodroid.utilities.neodroid_standard_modules.neodroid_camera_extraction import extract_all_as_camera
 
 __author__ = 'cnheider'
 
@@ -43,6 +41,8 @@ def update_figures(i):
       print(obs)
 
   new_images = extract_all_as_camera(info)
+
+  new_images['RGB'] = numpy.clip(new_images['RGB'].copy() ** (1. / 2.2),0,1)
 
   time_now = time.time()
   if time_s:

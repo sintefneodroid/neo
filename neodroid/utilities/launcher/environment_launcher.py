@@ -3,7 +3,7 @@
 import logging
 import pathlib
 
-from .download_utilities import download_environment
+from neodroid.utilities.launcher.download_utilities.download_environment import download_environment
 
 __author__ = 'cnheider'
 

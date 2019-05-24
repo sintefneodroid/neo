@@ -1,9 +1,8 @@
+import os
 import pathlib
+import re
 
 from setuptools import find_packages
-
-import os
-import re
 
 _v = pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "version.py"
 with open(_v, "r") as f:

@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.utilities import flattened_observation
-from neodroid.version import __version__
 from neodroid.api_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.utilities import flattened_observation
 
 __author__ = 'cnheider'
 
@@ -19,7 +18,7 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
 
   def step(self, action=None, *args, **kwargs):
     # action = action.flatten()
-    message = super().react(action[0], **kwargs)
+    message = super().react(action, **kwargs)
     if message:
       return (flattened_observation(message),
               message.signal,
@@ -39,7 +38,7 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
 
   def sensor(self, key):
     if self._last_message:
-      return self._sensor(key)
+      return self.sensor(key)
     warn('No message available')
     return None
 
