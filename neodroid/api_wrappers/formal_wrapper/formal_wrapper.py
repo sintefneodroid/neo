@@ -6,8 +6,6 @@ from neodroid.api_wrappers.single_environment_wrapper import SingleEnvironmentWr
 
 __author__ = 'cnheider'
 
-from neodroid.utilities import flattened_observation
-
 
 class NeodroidFormalWrapper(SingleEnvironmentWrapper):
 
@@ -21,7 +19,7 @@ class NeodroidFormalWrapper(SingleEnvironmentWrapper):
     first_environment = message
     if first_environment:
       return (
-        flattened_observation(first_environment),
+        first_environment.observables,
         first_environment.signal,
         first_environment.terminated,
         first_environment
@@ -43,13 +41,13 @@ class NeodroidFormalWrapper(SingleEnvironmentWrapper):
   def configure(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return flattened_observation(message), message
+      return message.observables, message
     return None, None
 
   def observe(self, *args, **kwargs):
     message = super().observe(*args, **kwargs)
     if message:
-      return (flattened_observation(message),
+      return (message.observables,
               message.signal,
               message.terminated,
               message,

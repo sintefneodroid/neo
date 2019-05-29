@@ -5,11 +5,12 @@ import time
 import cv2
 import numpy
 
-import warg
 from neodroid.api_wrappers import NeodroidGymWrapper
 from neodroid.utilities.neodroid_standard_modules.neodroid_camera_extraction import extract_all_as_camera
+from warg.named_ordered_dictionary import NOD
 
 __author__ = 'cnheider'
+__doc__ = ''
 
 # import cv2
 import matplotlib.pyplot as plt
@@ -24,7 +25,7 @@ def grab_video_frame(cap):
 frame_i = 0
 time_s = time.time()
 
-image_axs = warg.NOD()
+image_axs = NOD()
 
 env = NeodroidGymWrapper(connect_to_running=True)
 fig = plt.figure()
@@ -42,7 +43,9 @@ def update_figures(i):
 
   new_images = extract_all_as_camera(info)
 
-  new_images['RGB'] = numpy.clip(new_images['RGB'].copy() ** (1. / 2.2),0,1)
+  new_images['RGB'] = new_images['RGB'] ** 0.454545
+
+  #print( numpy.max(new_images['RGB']))
 
   time_now = time.time()
   if time_s:

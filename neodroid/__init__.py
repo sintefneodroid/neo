@@ -5,7 +5,6 @@ from .api import *
 from .api_wrappers import *
 from neodroid.version import get_version
 
-
 __author__ = 'cnheider'
 __version__ = get_version()
 __doc__ = r'''
@@ -17,5 +16,3 @@ __doc__ = r'''
 
 
 '''
-
-

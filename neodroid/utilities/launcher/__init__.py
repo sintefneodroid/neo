@@ -6,5 +6,6 @@ __author__ = 'cnheider'
 
 from .environment_launcher import *
 
+
 def get_available_environments():
   return available_environments()

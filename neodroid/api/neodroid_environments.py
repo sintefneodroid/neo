@@ -10,8 +10,10 @@ import numpy as np
 
 import neodroid.models as M
 from neodroid.models import Reaction
-from neodroid.utilities import (construct_step_reaction, flattened_observation, launch_environment,
+from neodroid.utilities import (construct_step_reaction, launch_environment,
                                 verify_configuration_reaction,
+                                construct_observation_space,
+                                construct_action_space,
                                 )
 from neodroid.api.networking_environment import NetworkingEnvironment
 
@@ -162,7 +164,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
         )
     message = self.reset(conf_reaction)
     if message:
-      return np.array(flattened_observation(message)), message
+      return np.array(message.observables), message
 
   @staticmethod
   def maybe_infer_configuration_reaction(input_reaction, description):
@@ -208,6 +210,34 @@ class NeodroidEnvironment(NetworkingEnvironment):
     if callback:
       callback()
     return 0
+
+  def describe(self, parameters=M.ReactionParameters(terminable=False,
+                                                     describe=True,
+                                                     episode_count=False)):
+    '''
+
+    :param parameters:
+    :type parameters:
+    :return:
+    :rtype:
+    '''
+    reaction = M.Reaction(parameters=parameters)
+    new_states, simulator_configuration = self._message_server.send_reactions(
+        [reaction])
+
+    if new_states:
+      self.update_interface_attributes(new_states, simulator_configuration)
+      return new_states
+
+  def update_interface_attributes(self, new_states, new_simulator_configuration):
+    self._last_message = new_states
+    # flat_message = flattened_observation(new_state)
+    self._simulator_configuration = new_simulator_configuration
+    first_environment = list(self._last_message.values())[0]
+    self._observation_space = construct_observation_space(first_environment)
+    if first_environment.description:
+      self._description = first_environment.description
+      self._action_space = construct_action_space(self._description)
 
   @staticmethod
   def maybe_infer_motion_reaction(*,

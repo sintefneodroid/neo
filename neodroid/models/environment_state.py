@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from collections import Callable
 
 __author__ = 'cnheider'
 
@@ -17,13 +18,23 @@ class EnvironmentState(object):
   def environment_name(self):
     return self._fbs_state.EnvironmentName()
 
-  @property
-  def signal(self):
+  def _signal(self):
     return self._fbs_state.Signal()
 
   @property
-  def observables(self):
+  def signal(self):
+    if isinstance(self._signal, Callable):
+      return self._signal()
+    return self._signal
+
+  def _observables(self):
     return neodroid.messaging.deserialise_observables(self._fbs_state)
+
+  @property
+  def observables(self):
+    if isinstance(self._observables, Callable):
+      return self._observables()
+    return self._observables
 
   @property
   def unobservables(self):
@@ -33,9 +44,14 @@ class EnvironmentState(object):
   def frame_number(self):
     return self._fbs_state.FrameNumber()
 
+  def _terminated(self):
+    return self._fbs_state.Terminated()
+
   @property
   def terminated(self):
-    return self._fbs_state.Terminated()
+    if isinstance(self._observables, Callable):
+      return self._terminated()
+    return self._terminated
 
   @property
   def termination_reason(self):
@@ -72,7 +88,7 @@ class EnvironmentState(object):
     return self.observer(key)
 
   def to_gym_like_output(self):
-    return self.observers, self.signal, self.terminated, self
+    return self.observables, self.signal, self.terminated, self
 
   def __repr__(self):
     observers_str = ''.join(

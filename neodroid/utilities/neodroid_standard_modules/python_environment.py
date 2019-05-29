@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.api.environment import Environment
 
 __author__ = 'cnheider'
 
 from abc import ABC
-
-from api.environment import Environment
-
 import neodroid.models as M
 from neodroid.utilities import (construct_action_space, construct_observation_space,
                                 )

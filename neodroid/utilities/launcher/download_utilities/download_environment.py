@@ -42,7 +42,7 @@ def download_environment(name: str = 'mab_win',
 
   with DownloadProgress(desc=name) as progress_bar:
     zip_file_name, headers = urlretrieve(formatted,
-                                         str(pathlib.Path(path_to_executables_directory)/ f'{name}.zip'),
+                                         str(pathlib.Path(path_to_executables_directory) / f'{name}.zip'),
                                          reporthook=progress_bar.hook)
 
   with zipfile.ZipFile(zip_file_name, "r") as zip_ref:
@@ -57,16 +57,16 @@ def download_environment(name: str = 'mab_win',
   system_arch = struct.calcsize("P") * 8
 
   if system_arch == 32:
-    path_to_executable = str(pathlib.Path(path_to_executables_directory)/ name/
-    f'{executable_file_name}.x86')
+    path_to_executable = str(pathlib.Path(path_to_executables_directory) / name /
+                             f'{executable_file_name}.x86')
   else:
-    path_to_executable = str(pathlib.Path(path_to_executables_directory)/ name/
-    f'{executable_file_name}.x86_64')
+    path_to_executable = str(pathlib.Path(path_to_executables_directory) / name /
+                             f'{executable_file_name}.x86_64')
 
   st = os.stat(path_to_executable)
   os.chmod(path_to_executable, st.st_mode | stat.S_IEXEC)
 
-  return pathlib.Path(path_to_executables_directory)/ name
+  return pathlib.Path(path_to_executables_directory) / name
 
 
 def available_environments(repository='http://environments.neodroid.ml/ls'):

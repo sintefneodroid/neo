@@ -13,10 +13,10 @@ import neodroid.models as M
 from neodroid import messaging
 from neodroid.api.environment import Environment
 from neodroid.utilities import (
-                                construct_action_space,
-                                construct_observation_space,
+  construct_action_space,
+  construct_observation_space,
 
-                                )
+  )
 
 
 class NetworkingEnvironment(Environment, ABC):
@@ -119,38 +119,7 @@ class NetworkingEnvironment(Environment, ABC):
 
     return self._close(*args, **kwargs)
 
-  def describe(self, parameters=M.ReactionParameters(terminable=False,
-                                                     describe=True,
-                                                     episode_count=False)):
-    '''
-
-    :param parameters:
-    :type parameters:
-    :return:
-    :rtype:
-    '''
-    reaction = M.Reaction(parameters=parameters)
-    new_states, simulator_configuration = self._message_server.send_reactions(
-        [reaction])
-
-    if new_states:
-      self.update_interface_attributes(new_states, simulator_configuration)
-      return new_states
-
-  def update_interface_attributes(self, new_states, new_simulator_configuration):
-    self._last_message = new_states
-    # flat_message = flattened_observation(new_state)
-    self._simulator_configuration = new_simulator_configuration
-    first_environment = list(self._last_message.values())[0]
-    self._observation_space = construct_observation_space(first_environment)
-    if first_environment.description:
-      self._description = first_environment.description
-      self._action_space = construct_action_space(self._description)
-
   def __str__(self):
     return (f'<NetworkingEnvironment>\n'
-            f'  <ObservationSpace>{self.observation_space}</ObservationSpace>\n'
-            f'  <ActionSpace>{self.action_space}</ActionSpace>\n'
-            f'  <Description>{self.description}</Description>\n'
             f'  <IsConnected>{self.is_connected}</IsConnected>\n'
             f'</NetworkingEnvironment>')

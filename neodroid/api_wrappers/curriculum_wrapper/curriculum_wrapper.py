@@ -10,7 +10,6 @@ __author__ = 'cnheider'
 
 import numpy as np
 
-from neodroid.utilities import flattened_observation
 from neodroid.api_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 
@@ -110,7 +109,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
   def observe(self, *args, **kwargs):
     message = super().observe()
     if message:
-      return (flattened_observation(message),
+      return (message.observables,
               message.signal,
               message.terminated,
               message,
