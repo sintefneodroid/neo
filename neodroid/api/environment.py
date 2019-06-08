@@ -4,14 +4,13 @@ import logging
 from abc import ABC, abstractmethod
 from types import coroutine
 
-import warg
-
+from warg.app_path import AppPath
 
 __author__ = 'cnheider'
 
 import numpy as np
 
-NEODROID_APP_PATH = warg.AppPath('neodroid', app_author=__author__)
+NEODROID_APP_PATH = AppPath('neodroid', app_author=__author__)
 
 
 class Environment(ABC):
@@ -24,12 +23,12 @@ class Environment(ABC):
                **kwargs):
     self.seed(seed)
 
-    logging.basicConfig(#format='%(asctime)s %(new_state)s',
-                        #datefmt='%m/%d/%Y %I:%M:%S %p',
-                        filename=logging_directory/ 'neodroid_log.txt',
-                        level=logging_level
-                        )
-    #self._module_logger = logging.getLogger(__name__)
+    logging.basicConfig(  # format='%(asctime)s %(new_state)s',
+        # datefmt='%m/%d/%Y %I:%M:%S %p',
+        filename=logging_directory / 'neodroid_log.txt',
+        level=logging_level
+        )
+    # self._module_logger = logging.getLogger(__name__)
 
     self._description = None
     self._action_space = None

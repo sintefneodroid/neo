@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
-from .fbs_reaction_utilities import *
-from .fbs_state_utilties import *
-from .message_client import MessageClient
-
 import logging
 from enum import Enum, auto
 from functools import wraps
+
+from .fbs_reaction_utilities import *
+from .fbs_state_utilties import *
+from .message_client import MessageClient
 
 
 class ClientEvents(Enum):

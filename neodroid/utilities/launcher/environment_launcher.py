@@ -3,7 +3,7 @@
 import logging
 import pathlib
 
-from .download_utilities import download_environment
+from neodroid.utilities.launcher.download_utilities.download_environment import download_environment
 
 __author__ = 'cnheider'
 
@@ -37,13 +37,13 @@ def launch_environment(environment_name,
   else:
     variation_name = f'{variation_name}_linux'
 
-  j = pathlib.Path(path_to_executables_directory)/ environment_name
-  path = j/ variation_name
+  j = pathlib.Path(path_to_executables_directory) / environment_name
+  path = j / variation_name
 
   if not pathlib.Path.exists(j):
     old_mask = os.umask(000)
     try:
-      pathlib.Path.mkdir(j, 0o777,parents=True, exist_ok=True)
+      pathlib.Path.mkdir(j, 0o777, parents=True, exist_ok=True)
     finally:
       os.umask(old_mask)
 

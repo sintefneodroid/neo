@@ -217,20 +217,19 @@ def deserialise_quaternion_transform(f_obs):
 
 
 def deserialise_byte_array(f_obs):
-
   byte_array = F.FByteArray()
   byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
   data = byte_array.BytesAsNumpy()
   t = byte_array.Type()
-  if t==F.FByteDataType.UINT8:
+  if t == F.FByteDataType.UINT8:
     out = numpy.frombuffer(data, dtype=numpy.uint8)
-    out= out.reshape(*byte_array.ShapeAsNumpy())
+    out = out.reshape(*byte_array.ShapeAsNumpy())
   elif t == F.FByteDataType.FLOAT16:
     out = numpy.frombuffer(data, dtype=numpy.float16)
-    out= out.reshape(*byte_array.ShapeAsNumpy())
+    out = out.reshape(*byte_array.ShapeAsNumpy())
   elif t == F.FByteDataType.FLOAT32:
     out = numpy.frombuffer(data, dtype=numpy.float32)
-    out= out.reshape(*byte_array.ShapeAsNumpy())
+    out = out.reshape(*byte_array.ShapeAsNumpy())
   elif t == F.FByteDataType.PNG:
     out = imageio.imread(data, format='PNG-PIL')
   elif t == F.FByteDataType.JPEG:

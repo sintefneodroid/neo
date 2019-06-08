@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from .gui_components import EnvironmentStateBox, XMLBox, ReactionBox, StatusBar
+from .gui_components import EnvironmentStateBox, ReactionBox, StatusBar, XMLBox
 
 __author__ = 'cnheider'
 

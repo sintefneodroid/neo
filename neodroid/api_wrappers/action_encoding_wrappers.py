@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import random
 from typing import Any
 
 from neodroid.api_wrappers import NeodroidVectorGymWrapper
@@ -21,4 +20,3 @@ class BinaryActionEncodingWrapper(NeodroidVectorGymWrapper):
     self.act_spc = super().action_space
 
     return self.act_spc
-

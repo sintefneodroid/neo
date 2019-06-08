@@ -2,19 +2,9 @@
 # -*- coding: utf-8 -*-
 from collections import Iterable
 
-from neodroid.utilities import ActionSpace, ObservationSpace, Range
+from neodroid.utilities import ActionSpace, ObservationSpace
 
 __author__ = 'cnheider'
-
-
-def flattened_observation(message):
-  # flat = np.array([np.hstack([obs.observation_value]).flatten() for obs in message.observers.values() if
-  # obs.observation_value is not None and type(obs.observation_value) is not _io.BytesIO])
-  # flatter = np.hstack(flat).flatten()
-  # flatter = np.hstack(flatter).flatten()
-  # flatest = np.nan_to_num(flatter).tolist()
-  obs = message.observables
-  return obs
 
 
 def construct_action_space(environment_description):

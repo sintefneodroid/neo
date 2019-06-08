@@ -3,9 +3,7 @@
 import logging
 import typing
 
-
 from neodroid.utilities.transformations.action_transformations import normalise_action
-
 
 __author__ = 'cnheider'
 
@@ -74,6 +72,8 @@ def construct_step_reaction(reaction_input,
 
 
 def construct_reaction_from_list(motion_list, actors, normalise):
+  if not isinstance(motion_list, list):
+    motion_list = [motion_list]
   motions = construct_motions_from_list(motion_list,
                                         actors,
                                         normalise)
@@ -86,11 +86,6 @@ def construct_reaction_from_list(motion_list, actors, normalise):
 def construct_motions_from_list(input_list,
                                 actors,
                                 normalise):
-  if not isinstance(input_list, typing.Collection):
-    input_list = [input_list]
-    if len(input_list) == 0:
-      return []
-
   actor_actuator_tuples = [
     (actor.actor_name, actuator.actuator_name, actuator.motion_space)
     for actor in actors
@@ -114,7 +109,7 @@ def construct_motions_from_list(input_list,
     return new_motions
 
 
-#@print_return_value
+# @print_return_value
 def verify_configuration_reaction(*, input_reaction, environment_description):
   if environment_description:
     parameters = M.ReactionParameters(reset=True,

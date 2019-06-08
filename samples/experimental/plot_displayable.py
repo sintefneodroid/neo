@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
+import neodroid.wrappers.formal_wrapper as neo
 import numpy as np
 
-import neodroid.wrappers.formal_wrapper as neo
 from neodroid import messaging
 
 
@@ -13,7 +13,7 @@ def main():
 
   i = 0
   while _environment.is_connected:
-    actions = _environment.action_space.sample()
+    actions = _environment.action_space._sample()
     p = '.' * (i % 100)
     i += 1
     d1 = messaging.N.Displayable('TextMeshDisplayer', f'Hello from Python{p}')

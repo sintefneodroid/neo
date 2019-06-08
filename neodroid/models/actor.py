@@ -12,7 +12,7 @@ class Actor(object):
 
   @property
   def actor_name(self):
-    return self._flat_actor.ActorName()
+    return self._flat_actor.ActorName().decode()
 
   @property
   def is_alive(self):

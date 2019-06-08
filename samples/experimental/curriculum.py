@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
+import neodroid.wrappers.curriculum_wrapper as neo
 import numpy as np
 
-import neodroid.wrappers.curriculum_wrapper as neo
 from neodroid.models import Configuration
 
 random_motion_horizon = 5
@@ -46,7 +46,7 @@ def main():
 
     terminated = False
     while not terminated:
-      actions = _environment.action_space.sample()
+      actions = _environment.action_space._sample()
       observations, reward, terminated, info = _environment.act(actions)
       if terminated:
         print('Interrupted', reward)

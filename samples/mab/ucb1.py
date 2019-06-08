@@ -1,7 +1,6 @@
 import math
 
-from warg import NOD
-
+from warg.named_ordered_dictionary import NOD
 
 
 def index_of_max(x):

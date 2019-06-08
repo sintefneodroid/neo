@@ -4,6 +4,7 @@
 __author__ = 'cnheider'
 
 from .FActor import *
+from .FActuator import *
 from .FArray import *
 from .FBody import *
 from .FByteArray import *
@@ -17,7 +18,6 @@ from .FET import *
 from .FEnvironmentDescription import *
 from .FEulerTransform import *
 from .FMotion import *
-from .FActuator import *
 from .FOBS import *
 from .FObservation import *
 from .FQT import *

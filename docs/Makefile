@@ -6,7 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = Neo
 SOURCEDIR     = source
-BUILDDIR      = build
+BUILDDIR      = github
 PYCMD 				= python
 
 # Put it first so that "make" without argument is like "make help".
@@ -31,5 +31,5 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 clean:
-	@echo "Removing everything under 'build'.."
+	@echo "Removing everything under $(BUILDDIR).."
 	@rm -r $(BUILDDIR)/html/ $(BUILDDIR)/doctrees

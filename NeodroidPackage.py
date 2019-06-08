@@ -1,9 +1,8 @@
+import os
 import pathlib
+import re
 
 from setuptools import find_packages
-
-import os
-import re
 
 _v = pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "version.py"
 with open(_v, "r") as f:
@@ -97,28 +96,28 @@ class NeodroidPackage:
 
     path = pathlib.Path(__file__).parent
     requirements_gui = []
-    with open(path/'requirements_gui.txt') as f:
+    with open(path / 'requirements_gui.txt') as f:
       requirements = f.readlines()
 
       for requirement in requirements:
         requirements_gui.append(requirement.strip())
 
     requirements_tests = []
-    with open(path/'requirements_tests.txt') as f:
+    with open(path / 'requirements_tests.txt') as f:
       requirements = f.readlines()
 
       for requirement in requirements:
         requirements_tests.append(requirement.strip())
 
     requirements_docs = []
-    with open(path/'requirements_docs.txt') as f:
+    with open(path / 'requirements_docs.txt') as f:
       requirements = f.readlines()
 
       for requirement in requirements:
         requirements_docs.append(requirement.strip())
 
     requirements_dev = []
-    with open(path/'requirements_dev.txt') as f:
+    with open(path / 'requirements_dev.txt') as f:
       requirements = f.readlines()
 
       for requirement in requirements:
@@ -147,7 +146,7 @@ class NeodroidPackage:
   def requirements(self) -> list:
     path = pathlib.Path(__file__).parent
     requirements_out = []
-    with open(path/'requirements.txt') as f:
+    with open(path / 'requirements.txt') as f:
       requirements = f.readlines()
 
       for requirement in requirements:

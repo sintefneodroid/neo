@@ -2,16 +2,16 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.utilities import flattened_observation
-from neodroid.version import __version__
 from neodroid.api_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.models import EnvironmentState
 
 __author__ = 'cnheider'
 
 import numpy as np
 import gym
 
-#warn(f"This module is deprecated in version {__version__}", DeprecationWarning)
+
+# warn(f"This module is deprecated in version {__version__}", DeprecationWarning)
 
 
 class NeodroidGymWrapper(SingleEnvironmentWrapper,
@@ -19,9 +19,9 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
 
   def step(self, action=None, *args, **kwargs):
     # action = action.flatten()
-    message = super().react(action[0], **kwargs)
+    message = super().react(action, **kwargs)
     if message:
-      return (flattened_observation(message),
+      return (message.observables,
               message.signal,
               message.terminated,
               message
@@ -31,15 +31,15 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
   def reset(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return flattened_observation(message)
+      return message.observables
     return None
 
   def render(self, *args, **kwargs):
     pass
 
-  def sensor(self, key):
+  def sensor(self, key, **kwargs):
     if self._last_message:
-      return self._sensor(key)
+      return self._last_message.sensor(key)
     warn('No message available')
     return None
 
@@ -76,7 +76,7 @@ class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
     # action = action.flatten()
     message = super().react(action[0], **kwargs)
     if message:
-      return (np.array([flattened_observation(message)]),
+      return (np.array([message.observables]),
               np.array([message.signal]),
               np.array([message.terminated]),
               np.array([message])
@@ -86,17 +86,11 @@ class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
   def reset(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return np.array([flattened_observation(message)])
+      return np.array([message.observables])
     return None
 
   def render(self, *args, **kwargs):
     pass
-
-  def sensor(self, key):
-    if self._last_message:
-      return self._sensor(key)
-    warn('No message available')
-    return None
 
   def __next__(self):
     if not self._is_connected_to_server:
@@ -118,21 +112,31 @@ class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
 
 class NeodroidWrapper:
   def __init__(self, env):
-    self.env = env
+    self._env = env
 
   def react(self, a, *args, **kwargs):
     if isinstance(a, np.ndarray):
       a = a.tolist()
 
-    observables, signal, terminated, *_ = self.env.step(a, *args, **kwargs)
+    observables, signal, terminated, *_ = self._env.step(a, *args, **kwargs)
 
-    return observables, signal, terminated
+    env_state = EnvironmentState(None)
+    env_state._observables = observables
+    env_state._signal = signal
+    env_state._terminated = terminated
+
+    return env_state
 
   def reset(self):
-    return self.env.reset()
+    observables = self._env.reset()
+
+    env_state = EnvironmentState(None)
+    env_state._observables = observables
+
+    return env_state
 
   def __getattr__(self, item):
-    return getattr(self.env, item)
+    return getattr(self._env, item)
 
 
 if __name__ == '__main__':

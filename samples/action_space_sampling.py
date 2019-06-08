@@ -42,16 +42,14 @@ def main():
 
   args = parser.parse_args()
 
-  environments = neo.connect()
-  environments.reset()
+  environment = neo.connect()
 
   i = 0
   freq = 100
   time_s = time.time()
-  while environments.is_connected:
-    actions = environments.action_space.sample()
-    states = environments.react(actions)
-    state = next(iter(states.values()))
+  while environment.is_connected:
+    action = environment.action_space.sample()
+    state = environment.react(action)
     terminated = state.terminated
 
     time_now = time.time()
@@ -63,7 +61,7 @@ def main():
     time_s = time_now
 
     if terminated:
-      environments.reset()
+      environment.reset()
 
 
 if __name__ == '__main__':

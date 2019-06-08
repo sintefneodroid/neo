@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os
-import sys
 from warnings import warn
 
 __author__ = "cnheider"
-__version__ = "0.2.6"
+__version__ = "0.2.7"
 __doc__ = r"""
 Created on 27/04/2019
 

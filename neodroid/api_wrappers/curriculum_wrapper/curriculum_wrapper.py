@@ -10,7 +10,6 @@ __author__ = 'cnheider'
 
 import numpy as np
 
-from neodroid.utilities import flattened_observation
 from neodroid.api_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 
@@ -66,15 +65,15 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
     while len(initial_states) < 1:
       state, _ = self.configure(conf_reaction)
       for i in range(non_terminable_horizon):
-        state, _, terminated, info = self.act(self.action_space.sample(),
+        state, _, terminated, info = self.act(self.action_space._sample(),
                                               parameters=non_terminable_params)
 
       for i in range(motion_horizon):
         if random_process is not None:
-          actions = random_process.sample()
+          actions = random_process._sample()
           actions = self.action_space.validate(actions)
         else:
-          actions = self.action_space.sample()
+          actions = self.action_space._sample()
 
         state, _, terminated, info = self.act(actions)
 
@@ -94,10 +93,10 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
       s, _ = self.configure(state=state)
       for i in range(motion_horizon):
         if random_process is not None:
-          actions = random_process.sample()
+          actions = random_process._sample()
           actions = self.action_space.validate(actions)
         else:
-          actions = self.action_space.sample()
+          actions = self.action_space._sample()
 
         s, _, terminated, info = self.act(actions)
 
@@ -110,7 +109,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
   def observe(self, *args, **kwargs):
     message = super().observe()
     if message:
-      return (flattened_observation(message),
+      return (message.observables,
               message.signal,
               message.terminated,
               message,

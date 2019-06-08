@@ -4,13 +4,12 @@ from warnings import warn
 
 from neodroid.api_wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 from neodroid.exceptions.exceptions import SensorNotAvailableException
-from neodroid.utilities.neodroid_standard_modules.neodroid_camera_extraction import (extract_neodroid_camera,
-                                                                            extract_camera_observation,
-                                                                            )
+from neodroid.utilities.neodroid_standard_modules.neodroid_camera_extraction import (
+  extract_camera_observation,
+  extract_neodroid_camera,
+  )
 
 __author__ = 'cnheider'
-
-from neodroid.utilities import flattened_observation
 
 
 class ObservationWrapper(SingleEnvironmentWrapper):
@@ -32,13 +31,13 @@ class ObservationWrapper(SingleEnvironmentWrapper):
   def configure(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return flattened_observation(message), message
+      return message.observables, message
     return None, None
 
   def fetch_new_frame(self, *args, **kwargs):
     message = super().observe(*args, **kwargs)
     if message:
-      return (flattened_observation(message),
+      return (message.observables,
               message.signal,
               message.terminated,
               message,

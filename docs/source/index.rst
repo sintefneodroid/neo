@@ -6,6 +6,8 @@ contain the root `toctree` directive.
 Welcome to Neo's documentation!
 ===============================
 
+.. mdinclude:: ../../.github/README.rst
+
 .. toctree::
 :maxdepth: 2
      :caption: Contents:
