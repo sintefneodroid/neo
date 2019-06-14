@@ -26,7 +26,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
   def act(self, action=None, *args, **kwargs):
     message = super().react(action[0], *args, **kwargs)
     if message:
-      return (np.array([flattened_observation(message)]),
+      return (np.array([message.observation]),
               np.array([message.signal]),
               np.array([message.terminated]),
               message,
@@ -36,7 +36,7 @@ class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
   def configure(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return np.array([flattened_observation(message)]), message
+      return np.array([message.observation]), message
     return None, None
 
   def generate_trajectory_from_configuration(self,

@@ -119,4 +119,7 @@ ENV/
 .pyre
 logs/*.csv
 
-trolls/exclude
+*[Ee]xcluded.*
+*[Ee]xclude.*
+*[Ee]xcluded*
+*[Ee]xclude*

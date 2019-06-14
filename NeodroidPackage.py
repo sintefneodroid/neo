@@ -87,6 +87,7 @@ class NeodroidPackage:
         'neodroid-sample = samples.action_space_sampling:main',
         'neodroid-img = samples.image_observation_plot:main',
         'neodroid-mab = samples.mab.multi_armed_bandit:main',
+        'neodroid-kb = samples.keyboard.wasd_input:main',
         # 'neodroid-gui = samples.guiclient.main:main'
         ]
       }

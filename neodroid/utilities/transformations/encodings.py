@@ -9,7 +9,7 @@ import numpy as np
 
 def signed_ternary_encoding(*,
                             size: int,
-                            index):
+                            index: int):
   # assert isinstance(size,(int,numpy.int64)), f'size was {type(size)}'
   # assert isinstance(index,(int,numpy.int64)), f'index was {type(index)}'
   # assert size*2 > index, f'signed size was {size*2}, index was {index}'
@@ -55,6 +55,6 @@ def agg_double_list(l):
 
 
 if __name__ == '__main__':
-  a_size = 4
-  a_index = -1
+  a_size = 2
+  a_index = 0
   print(signed_ternary_encoding(size=a_size, index=a_index))

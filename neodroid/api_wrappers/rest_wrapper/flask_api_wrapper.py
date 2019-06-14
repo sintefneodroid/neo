@@ -4,8 +4,6 @@ from neodroid.api_wrappers.single_environment_wrapper import SingleEnvironmentWr
 
 __author__ = 'cnheider'
 
-from neodroid.utilities import flattened_observation
-
 
 class FlaskWrapper(SingleEnvironmentWrapper):
 
@@ -22,7 +20,7 @@ class FlaskWrapper(SingleEnvironmentWrapper):
     first_environment = list(message.values())[0]  # TODO: Only exposing first environments state
     if first_environment:
       return (
-        flattened_observation(first_environment),
+        first_environment.observation,
         first_environment.signal,
         first_environment.terminated,
         first_environment
@@ -35,14 +33,14 @@ class FlaskWrapper(SingleEnvironmentWrapper):
   def configure(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return flattened_observation(message), message
+      return message.observation, message
     return None, None
 
   def observe(self, *args, **kwargs):
     message = super().observe(*args, **kwargs)
     if message:
       return (
-        flattened_observation(message),
+        message.observation,
         message.signal,
         message.terminated,
         message,

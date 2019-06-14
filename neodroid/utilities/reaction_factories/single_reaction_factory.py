@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import logging
-import typing
 
 from neodroid.utilities.transformations.action_transformations import normalise_action
 

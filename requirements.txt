@@ -12,3 +12,4 @@ matplotlib
 cloudpickle
 imageio
 pip
+fire

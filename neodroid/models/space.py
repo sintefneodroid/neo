@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from abc import abstractmethod
-from typing import Iterable
+from typing import Sequence
 
 from .range import Range
 
@@ -10,18 +9,16 @@ __author__ = 'cnheider'
 
 class Space(object):
 
-  def __init__(self, ranges: Iterable[Range] = (), discrete_binary=False):
-    if not isinstance(ranges, Iterable):
-      ranges = [ranges]
+  def __init__(self, ranges: Sequence[Range], discrete_binary=False):
+    assert isinstance(ranges, Sequence)
     self._ranges = ranges
     self._discrete_binary = discrete_binary
 
   @property
-  @abstractmethod
-  def ranges(self) -> Iterable[Range]:
+  def ranges(self) -> Sequence[Range]:
     return self._ranges
 
-  def sample(self) -> Iterable[float]:
+  def sample(self) -> Sequence[float]:
     return [r.sample() for r in self._ranges]
 
   @property

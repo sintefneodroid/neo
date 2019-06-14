@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import argparse
-import sys
 
-from neodroid.models import ReactionParameters
 from .ucb1 import UCB1
 
 __author__ = 'cnheider'
@@ -39,11 +37,7 @@ def main(connect_to_running=False):
                                               connect_to_running=connect_to_running)
 
   num_arms = _environment.action_space.num_discrete_actions
-
-  beliefs = [1 / num_arms] * num_arms
   totals = [0] * num_arms
-  tries = [0] * num_arms
-  normed = [1 / num_arms] * num_arms
 
   ucb1 = UCB1(num_arms)
 
@@ -51,33 +45,21 @@ def main(connect_to_running=False):
   while _environment.is_connected:
     action = int(ucb1.select_arm())
 
-    motions = [messaging.N.Motion('MultiArmedBanditKillableActor',
-                                  'MultiArmedBanditMotor',
-                                  action)]
-
     i += 1
 
-    reaction = messaging.N.Reaction(motions=motions,
-                                    displayables=construct_displayables(normed, tries, totals),
-                                    parameters=ReactionParameters(step=True,
-                                                                  episode_count=True,
-                                                                  terminable=True),
-                                    serialised_message='this is a serialised_message'
-                                    )
-
-    _, signal, terminated, info = _environment.react(reaction).to_gym_like_output()
+    _, signal, terminated, info = _environment.react(action).to_gym_like_output()
 
     ucb1.update_belief(action, signal)
 
-    tries[action] += 1
     totals[action] += signal
-    beliefs[action] = float(totals[action]) / tries[action]
 
-    for i in range(len(beliefs)):
-      normed[i] = beliefs[i] / (sum(beliefs) + sys.float_info.epsilon)
+    _environment.display(displayables=construct_displayables(ucb1.normalised_values,
+                                                             ucb1.counts,
+                                                             totals))
 
     if terminated:
       print(info.termination_reason)
+      _environment.reset()
 
 
 if __name__ == '__main__':
