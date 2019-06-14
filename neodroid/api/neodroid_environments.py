@@ -14,6 +14,7 @@ from neodroid.utilities import (construct_step_reaction, launch_environment,
                                 verify_configuration_reaction,
                                 construct_observation_space,
                                 construct_action_space,
+                                ActionSpace,
                                 )
 from neodroid.api.networking_environment import NetworkingEnvironment
 
@@ -33,7 +34,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
     return self._observation_space
 
   @property
-  def action_space(self):
+  def action_space(self) -> ActionSpace:
     while not self._action_space:
       self.describe()
     return self._action_space
@@ -159,9 +160,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
     self._notify_no_state_received()
 
   def display(self, displayables):
-    conf_reaction = Reaction(
-        displayables=displayables
-        )
+    conf_reaction = Reaction(displayables=displayables)
     message = self.reset(conf_reaction)
     if message:
       return np.array(message.observables), message
@@ -231,7 +230,6 @@ class NeodroidEnvironment(NetworkingEnvironment):
 
   def update_interface_attributes(self, new_states, new_simulator_configuration):
     self._last_message = new_states
-    # flat_message = flattened_observation(new_state)
     self._simulator_configuration = new_simulator_configuration
     first_environment = list(self._last_message.values())[0]
     self._observation_space = construct_observation_space(first_environment)

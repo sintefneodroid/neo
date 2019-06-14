@@ -3,8 +3,6 @@
 import time
 
 import cv2
-import numpy
-
 from neodroid.api_wrappers import NeodroidGymWrapper
 from neodroid.utilities.neodroid_standard_modules.neodroid_camera_extraction import extract_all_as_camera
 from warg.named_ordered_dictionary import NOD
@@ -45,7 +43,7 @@ def update_figures(i):
 
   new_images['RGB'] = new_images['RGB'] ** 0.454545
 
-  #print( numpy.max(new_images['RGB']))
+  # print( numpy.max(new_images['RGB']))
 
   time_now = time.time()
   if time_s:

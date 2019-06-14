@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
-import numpy as np
-
 import neodroid.messaging
+import numpy as np
 
 
 class Unobservables(object):

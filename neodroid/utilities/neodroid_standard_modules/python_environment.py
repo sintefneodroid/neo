@@ -41,7 +41,7 @@ class PythonEnvironment(Environment, ABC):
 
   def update_interface_statics(self, new_states, new_simulator_configuration):
     self._last_message = new_states
-    # flat_message = flattened_observation(new_state)
+
     self._simulator_configuration = new_simulator_configuration
     first_environment = list(self._last_message.values())[0]
     observables = first_environment.observables

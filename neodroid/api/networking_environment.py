@@ -9,14 +9,8 @@ __author__ = 'cnheider'
 import time
 from abc import ABC, abstractmethod
 
-import neodroid.models as M
 from neodroid import messaging
 from neodroid.api.environment import Environment
-from neodroid.utilities import (
-  construct_action_space,
-  construct_observation_space,
-
-  )
 
 
 class NetworkingEnvironment(Environment, ABC):

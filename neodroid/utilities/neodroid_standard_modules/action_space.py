@@ -4,6 +4,7 @@ import random
 
 from neodroid.models.range import Range
 from neodroid.models.space import Space
+from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
 __author__ = 'cnheider'
 
@@ -52,31 +53,31 @@ class ActionSpace(Space):
     return True  # TODO: Implement
 
   def discrete_ternary_one_hot_sample(self):
-    idx = np.random.randint(0, self.num_motors)
+    idx = np.random.randint(0, self.num_actuators)
     zeros = np.zeros(self.num_ternary_actions)
     if len(self._ranges) > 0:
-      sample = np.random.uniform(
-          self._ranges[idx].min_value, self._ranges[idx].max_value, 1
-          )
+      sample = np.random.uniform(self._ranges[idx].min_value,
+                                 self._ranges[idx].max_value,
+                                 1
+                                 )
       if sample > 0:
         zeros[idx] = 1
       else:
-        zeros[idx + self.num_motors] = 1
+        zeros[idx + self.num_actuators] = 1
     return zeros
 
   def discrete_binary_one_hot_sample(self):
-    idx = np.random.randint(0, self.num_motors)
+    idx = np.random.randint(0, self.num_actuators)
     zeros = np.zeros(self.num_binary_actions)
     if len(self._ranges) > 0:
-      sample = np.random.uniform(
-          self._ranges[idx].min_value,
-          self._ranges[idx].max_value,
-          1
-          )
+      sample = np.random.uniform(self._ranges[idx].min_value,
+                                 self._ranges[idx].max_value,
+                                 1
+                                 )
       if sample > 0:
         zeros[idx] = 1
       else:
-        zeros[idx + self.num_motors] = 1
+        zeros[idx + self.num_actuators] = 1
     return zeros
 
   def signed_one_hot_sample(self):
@@ -84,8 +85,8 @@ class ActionSpace(Space):
     return random.randrange(num)
 
   def discrete_one_hot_sample(self):
-    idx = np.random.randint(0, self.num_motors)
-    zeros = np.zeros(self.num_motors)
+    idx = np.random.randint(0, self.num_actuators)
+    zeros = np.zeros(self.num_actuators)
     if len(self._ranges) > 0:
       val = np.random.random_integers(
           self._ranges[idx].min_value(),
@@ -101,14 +102,32 @@ class ActionSpace(Space):
 
   def one_hot_sample(self):
 
-    idx = np.random.randint(0, self.num_motors)
-    zeros = np.zeros(self.num_motors)
+    idx = np.random.randint(0, self.num_actuators)
+    zeros = np.zeros(self.num_actuators)
     if len(self._ranges) > 0:
       zeros[idx] = 1
     return zeros
 
+  @property
+  def num_actuators(self):
+    return self.n
+
+  @property
+  def num_binary_actions(self):
+    return self.n * 2
+
+  @property
+  def num_ternary_actions(self):
+    return self.n * 3
+
+  def ternary_discrete_action_from_idx(self, idx):
+    return signed_ternary_encoding(size=self.n, index=idx)
+
+  def binary_discrete_action_from_idx(self, idx):
+    return signed_ternary_encoding(size=(self.n * 2) / 3, index=idx)
+
 
 if __name__ == '__main__':
-  acs = ActionSpace([Range(min_value=0, max_value=3, decimal_granularity=2), Range(min_value=0, max_value=2,
-                                                                                   decimal_granularity=1)])
+  acs = ActionSpace([Range(min_value=0, max_value=3, decimal_granularity=2),
+                     Range(min_value=0, max_value=2, decimal_granularity=1)])
   print(acs, acs.low, acs.high, acs.decimal_granularity, acs.num_discrete_actions)

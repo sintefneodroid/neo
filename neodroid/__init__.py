@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from neodroid.version import get_version
+
 from .api import *
 from .api_wrappers import *
-from neodroid.version import get_version
 
 __author__ = 'cnheider'
 __version__ = get_version()
