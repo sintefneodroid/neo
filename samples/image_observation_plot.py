@@ -4,7 +4,7 @@ import time
 
 import cv2
 from neodroid.api_wrappers import NeodroidGymWrapper
-from neodroid.utilities.neodroid_standard_modules.neodroid_camera_extraction import extract_all_as_camera
+from neodroid.interfaces.neodroid_standard_modules import extract_all_as_camera
 from warg.named_ordered_dictionary import NOD
 
 __author__ = 'cnheider'
@@ -36,7 +36,7 @@ def update_figures(i):
   sample = env.action_space.sample()
   obs, signal, terminated, info = env.step(sample)
   if print_obs:
-    for obs in info.observers.values():
+    for obs in info.sensors.values():
       print(obs)
 
   new_images = extract_all_as_camera(info)
@@ -76,7 +76,7 @@ def main():
   acs = env.action_space.sample()
   obs, rew, term, info = env.step(acs)
   if print_obs:
-    for obs in info.observers.values():
+    for obs in info.sensors.values():
       print(obs)
 
   new_images = extract_all_as_camera(info)

@@ -3,21 +3,39 @@
 import datetime
 import os
 from warnings import warn
+from pip._internal.utils.misc import dist_is_editable
+import pkg_resources
 
 __author__ = "cnheider"
-__version__ = "0.2.8"
+__version__ = "0.3.1"
 __doc__ = r"""
 Created on 27/04/2019
 
 @author: cnheider
 """
 
-from pip._internal.utils.misc import dist_is_editable
-import pkg_resources
+'''
+def dist_is_editable(dist):
+    # type: (Distribution) -> bool
+    """
+    Return True if given Distribution is an editable install.
+    """
+    for path_item in sys.path:
+        egg_link = os.path.join(path_item, dist.project_name + '.egg-link')
+        if os.path.isfile(egg_link):
+            return True
+    return False
+'''
+
+PROJECT_NAME = 'Neodroid'
+
 
 distributions = {v.key:v for v in pkg_resources.working_set}
-distribution = distributions['neodroid']
-DEVELOP = dist_is_editable(distribution)
+if PROJECT_NAME in distributions:
+  distribution = distributions[PROJECT_NAME]
+  DEVELOP = dist_is_editable(distribution)
+else:
+  DEVELOP = True
 
 
 def get_version(append_time=DEVELOP):

@@ -6,8 +6,11 @@ from setuptools import find_packages
 
 _v = pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "version.py"
 with open(_v, "r") as f:
-  # get version string from module
-  version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]", f.read(), re.M).group(1)
+  content = f.read()
+
+  version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]", content, re.M).group(1)   # get version string from module
+
+  project_name = re.search(r"PROJECT_NAME = ['\"]([^'\"]*)['\"]", content, re.M).group(1)   # get project name string from module
 
 
 class NeodroidPackage:
@@ -27,7 +30,7 @@ class NeodroidPackage:
 
   @property
   def package_name(self) -> str:
-    return 'Neodroid'
+    return project_name
 
   @property
   def url(self) -> str:

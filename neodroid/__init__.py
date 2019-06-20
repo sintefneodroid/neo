@@ -3,8 +3,7 @@
 
 from neodroid.version import get_version
 
-from .api import *
-from .api_wrappers import *
+from .environments import *
 
 __author__ = 'cnheider'
 __version__ = get_version()

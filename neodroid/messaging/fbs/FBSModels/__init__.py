@@ -18,7 +18,7 @@ from .FET import *
 from .FEnvironmentDescription import *
 from .FEulerTransform import *
 from .FMotion import *
-from .FOBS import *
+from .FSensor import *
 from .FObservation import *
 from .FQT import *
 from .FQuadruple import *
