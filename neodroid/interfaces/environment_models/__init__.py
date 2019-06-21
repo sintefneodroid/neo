@@ -8,7 +8,7 @@ from .configurable import Configurable
 from .configuration import Configuration
 from .displayable import Displayable
 from .environment_description import EnvironmentDescription
-from .environment_state import EnvironmentState
+from .environment_snapshot import EnvironmentSnapshot
 from .motion import Motion
 from .range import Range
 from .reaction import Reaction

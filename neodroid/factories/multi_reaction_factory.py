@@ -11,7 +11,6 @@ import numpy as np
 from neodroid.interfaces import environment_models as M
 
 
-# @print_return_value
 def verify_motion_reactions(inputs,
                             environment_descriptions,
                             normalise=False,
@@ -96,7 +95,6 @@ def construct_motions_from_list(input_list, actors, normalise):
     return new_motions
 
 
-# @print_return_value
 def verify_configuration_reaction(input_reaction,
                                   environment_description):
   parameters = M.ReactionParameters(terminable=False,

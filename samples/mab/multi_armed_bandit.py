@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 import argparse
 
+from warg.arguments import add_bool_arg
 from .ucb1 import UCB1
 
 __author__ = 'cnheider'
 
-import neodroid.api_wrappers.single_environment_wrapper as neo
+import neodroid.wrappers.single_environment_wrapper as neo
 from neodroid import messaging
 
 
@@ -25,16 +26,17 @@ def construct_displayables(normed, tries, totals):
 
 def main(connect_to_running=False):
   parser = argparse.ArgumentParser(prog='mab')
-  parser.add_argument('-C',
-                      action='store_true',
-                      help='connect to running',
-                      default=connect_to_running)
+  add_bool_arg(
+      parser,
+      "connect_to_running",
+      dest="CONNECT_TO_RUNNING",
+      default=connect_to_running,
+      help="Connect to already running simulation or start an instance",
+      )
   args = parser.parse_args()
-  if args.C:
-    connect_to_running = True
 
   _environment = neo.SingleEnvironmentWrapper(environment_name='mab',
-                                              connect_to_running=connect_to_running)
+                                              connect_to_running=args.CONNECT_TO_RUNNING)
 
   num_arms = _environment.action_space.num_discrete_actions
   totals = [0] * num_arms

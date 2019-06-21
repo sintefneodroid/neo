@@ -3,8 +3,11 @@
 import datetime
 import os
 from warnings import warn
-from pip._internal.utils.misc import dist_is_editable
+
 import pkg_resources
+from pip._internal.utils.misc import dist_is_editable
+
+from warg.app_path import AppPath
 
 __author__ = "cnheider"
 __version__ = "0.3.1"
@@ -28,7 +31,9 @@ def dist_is_editable(dist):
 '''
 
 PROJECT_NAME = 'Neodroid'
-
+PROJECT_AUTHOR = __author__
+PROJECT_APP_PATH = AppPath(app_name=PROJECT_NAME, app_author=PROJECT_AUTHOR)
+DEFAULT_ENVIRONMENTS_PATH = (PROJECT_APP_PATH.user_cache / 'environments').absolute()
 
 distributions = {v.key:v for v in pkg_resources.working_set}
 if PROJECT_NAME in distributions:

@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
+from neodroid.interfaces.environment_models import EnvironmentSnapshot
 from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
-from neodroid.interfaces.environment_models import EnvironmentState
 
 __author__ = 'cnheider'
 
@@ -120,7 +120,7 @@ class NeodroidWrapper:
 
     observables, signal, terminated, *_ = self._env.step(a, *args, **kwargs)
 
-    env_state = EnvironmentState(None)
+    env_state = EnvironmentSnapshot(None)
     env_state._observables = observables
     env_state._signal = signal
     env_state._terminated = terminated
@@ -130,7 +130,7 @@ class NeodroidWrapper:
   def reset(self):
     observables = self._env.reset()
 
-    env_state = EnvironmentState(None)
+    env_state = EnvironmentSnapshot(None)
     env_state._observables = observables
 
     return env_state

@@ -92,5 +92,5 @@ class Space(object):
 
 
 if __name__ == '__main__':
-  acs = Space([],[])
+  acs = Space([], [])
   print(acs, acs.decimal_granularity)

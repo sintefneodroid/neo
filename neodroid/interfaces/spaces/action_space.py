@@ -12,7 +12,7 @@ import numpy as np
 
 class ActionSpace(Space):
 
-  def parse_action_space(self, action_spaces,motion_names):
+  def parse_action_space(self, action_spaces, motion_names):
     self._ranges = action_spaces
     self._names = motion_names
 
@@ -35,8 +35,6 @@ class ActionSpace(Space):
   @property
   def num_discrete_actions(self):
     return sum([r.discrete_steps for r in self._ranges])
-
-
 
   def discrete_ternary_one_hot_sample(self):
     idx = np.random.randint(0, self.num_actuators)
@@ -120,7 +118,7 @@ class ActionSpace(Space):
       for actuator in actor.actuators.values():
         motion_spaces.append(actuator.motion_space)
 
-    return     ActionSpace(motion_spaces,motion_names)
+    return ActionSpace(motion_spaces, motion_names)
 
 
 if __name__ == '__main__':

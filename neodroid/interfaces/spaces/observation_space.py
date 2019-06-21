@@ -2,19 +2,18 @@
 # -*- coding: utf-8 -*-
 from collections import Sequence
 
-from neodroid.interfaces.environment_models import Space, Range, EnvironmentDescription
-
+from neodroid.interfaces.environment_models import EnvironmentDescription, Range, Space
 
 __author__ = 'cnheider'
 
 
 class ObservationSpace(Space):
 
-  def parse_observation_space(self, observations_spaces,sensor_names):
+  def parse_observation_space(self, observations_spaces, sensor_names):
     self._ranges = observations_spaces
     self._names = sensor_names
 
-  def parse_gym_space(self,ob):
+  def parse_gym_space(self, ob):
     pass
 
   def space(self):
@@ -32,9 +31,9 @@ class ObservationSpace(Space):
       else:
         observation_spaces.append(observer.space)
 
-    return ObservationSpace(observation_spaces,sensor_names)
+    return ObservationSpace(observation_spaces, sensor_names)
 
 
 if __name__ == '__main__':
-  acs = ObservationSpace([Range()],())
+  acs = ObservationSpace([Range()], ())
   print(acs)

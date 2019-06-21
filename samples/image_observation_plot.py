@@ -3,7 +3,8 @@
 import time
 
 import cv2
-from neodroid.api_wrappers import NeodroidGymWrapper
+from neodroid.wrappers import NeodroidGymWrapper
+
 from neodroid.interfaces.neodroid_standard_modules import extract_all_as_camera
 from warg.named_ordered_dictionary import NOD
 

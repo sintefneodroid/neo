@@ -19,8 +19,6 @@ class Actuator(object):
   def motion_space(self):
     return neodroid.messaging.deserialise_space(self._motion_space)
 
-
-
   def __repr__(self):
     return (f'<Actuator>\n'
             f'<name>{self.actuator_name}</name>\n'

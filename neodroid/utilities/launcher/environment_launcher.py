@@ -1,17 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import logging
-import pathlib
 
-from neodroid.utilities.launcher.download_utilities.download_environment import download_environment
 
 __author__ = 'cnheider'
-
-import os
-import shlex
-import struct
-import subprocess
-import sys
 
 
 def launch_environment(environment_name,
@@ -19,56 +10,111 @@ def launch_environment(environment_name,
                        path_to_executables_directory,
                        ip='127.0.0.1',
                        port=5252,
-                       full_screen='0',
-                       screen_height=500,
-                       screen_width=500,
                        headless=False):
+  '''
+
+
+  :param environment_name:
+  :param path_to_executables_directory:
+  :param ip:
+  :param port:
+  :param headless:
+  :return:
+  '''
+  import logging
+  import pathlib
+
+  from neodroid.utilities.launcher.download_utilities.download_environment import download_environment
+  import os
+  import shlex
+  import struct
+  import subprocess
+  import sys
   import stat
-  system_arch = struct.calcsize("P") * 8
 
-  logging.info(f'\nSystem Architecture: {system_arch}')
+  environment_name = pathlib.Path(environment_name)
 
-  variation_name = f'{environment_name}' if not headless else f'{environment_name}_headless'
-
-  if sys.platform == 'win32':
-    variation_name = f'{variation_name}_win'
-  elif sys.platform == 'darwin':
-    variation_name = f'{variation_name}_mac'
+  if pathlib.Path.exists(environment_name):
+    path_to_executable = environment_name
   else:
-    variation_name = f'{variation_name}_linux'
+    system_arch = struct.calcsize("P") * 8
 
-  j = pathlib.Path(path_to_executables_directory) / environment_name
-  path = j / variation_name
+    logging.info(f'System Architecture: {system_arch}')
 
-  if not pathlib.Path.exists(j):
-    old_mask = os.umask(000)
-    try:
-      pathlib.Path.mkdir(j, 0o777, parents=True, exist_ok=True)
-    finally:
-      os.umask(old_mask)
+    variation_name = f'{environment_name}' if not headless else f'{environment_name}_headless'
 
-  if not pathlib.Path.exists(path):
-    download_environment(variation_name, path_to_executables_directory=j)
-
-  path_to_executable = pathlib.Path.joinpath(path, 'Neodroid.exe')
-  if sys.platform != 'win32':
-    if system_arch == 32:
-      path_to_executable = pathlib.Path.joinpath(path, f'{environment_name}.x86')
+    if sys.platform == 'win32':
+      variation_name = f'{variation_name}_win'
+    elif sys.platform == 'darwin':
+      variation_name = f'{variation_name}_mac'
     else:
-      path_to_executable = pathlib.Path.joinpath(path, f'{environment_name}.x86_64')
+      variation_name = f'{variation_name}_linux'
 
-  # Ensure file is executable
-  st = pathlib.Path.stat(path_to_executable)
-  pathlib.Path.chmod(path_to_executable, st.st_mode | stat.S_IEXEC)
+    base_name = pathlib.Path(path_to_executables_directory) / environment_name
+    path = base_name / variation_name
+
+    if not base_name.exists():
+      old_mask = os.umask(000)
+      try:
+        base_name.mkdir(0o777, parents=True, exist_ok=True)
+      finally:
+        os.umask(old_mask)
+
+    if not path.exists():
+      download_environment(variation_name, path_to_executables_directory=base_name)
+
+    path_to_executable = path / 'Neodroid.exe'
+    if sys.platform != 'win32':
+      if system_arch == 32:
+        path_to_executable = path / f'{environment_name}.x86'
+      else:
+        path_to_executable = path / f'{environment_name}.x86_64'
+
+    '''
+      cwd = os.getcwd()
+      file_name = (file_name.strip()
+                   .replace('.app', '').replace('.exe', '').replace('.x86_64', '').replace('.x86', ''))
+      true_filename = os.path.basename(os.path.normpath(file_name))
+      launch_string = None
+      if platform == 'linux' or platform == 'linux2':
+        candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name) + '.x86_64')
+        if len(candidates) == 0:
+          candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name) + '.x86')
+        if len(candidates) == 0:
+          candidates = glob.glob(file_name + '.x86_64')
+        if len(candidates) == 0:
+          candidates = glob.glob(file_name + '.x86')
+        if len(candidates) > 0:
+          launch_string = candidates[0]
+  
+      elif platform == 'darwin':
+        candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.app', 'Contents', 'MacOS', 
+        true_filename))
+        if len(candidates) == 0:
+          candidates = glob.glob(pathlib.Path.joinpath(file_name + '.app', 'Contents', 'MacOS', true_filename))
+        if len(candidates) == 0:
+          candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.app', 'Contents', 'MacOS', '*'))
+        if len(candidates) == 0:
+          candidates = glob.glob(pathlib.Path.joinpath(file_name + '.app', 'Contents', 'MacOS', '*'))
+        if len(candidates) > 0:
+          launch_string = candidates[0]
+      elif platform == 'win32':
+        candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.exe'))
+        if len(candidates) == 0:
+          candidates = glob.glob(file_name + '.exe')
+        if len(candidates) > 0:
+          launch_string = candidates[0]
+  
+    '''
+
+  st = path_to_executable.stat()  # Ensure file is executable
+  path_to_executable.chmod( st.st_mode | stat.S_IEXEC)
 
   # new_env = os.environ.copy()
   # new_env['vblank_mode'] = '0'
   # pre_args = ['vblank_mode=0','optirun']
   post_args = shlex.split(f' -ip {ip}'
                           f' -port {port}'
-                          # f' -screen-fullscreen {full_screen}'
-                          # f' -screen-height {screen_height}'
-                          # f' -screen-width {screen_width}'
                           # f' -batchmode'
                           # f' -nographics'
                           )
@@ -79,40 +125,3 @@ def launch_environment(environment_name,
   return subprocess.Popen(cmd
                           # ,env=new_env
                           )
-
-
-'''
-  cwd = os.getcwd()
-  file_name = (file_name.strip()
-               .replace('.app', '').replace('.exe', '').replace('.x86_64', '').replace('.x86', ''))
-  true_filename = os.path.basename(os.path.normpath(file_name))
-  launch_string = None
-  if platform == 'linux' or platform == 'linux2':
-    candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name) + '.x86_64')
-    if len(candidates) == 0:
-      candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name) + '.x86')
-    if len(candidates) == 0:
-      candidates = glob.glob(file_name + '.x86_64')
-    if len(candidates) == 0:
-      candidates = glob.glob(file_name + '.x86')
-    if len(candidates) > 0:
-      launch_string = candidates[0]
-
-  elif platform == 'darwin':
-    candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.app', 'Contents', 'MacOS', true_filename))
-    if len(candidates) == 0:
-      candidates = glob.glob(pathlib.Path.joinpath(file_name + '.app', 'Contents', 'MacOS', true_filename))
-    if len(candidates) == 0:
-      candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.app', 'Contents', 'MacOS', '*'))
-    if len(candidates) == 0:
-      candidates = glob.glob(pathlib.Path.joinpath(file_name + '.app', 'Contents', 'MacOS', '*'))
-    if len(candidates) > 0:
-      launch_string = candidates[0]
-  elif platform == 'win32':
-    candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.exe'))
-    if len(candidates) == 0:
-      candidates = glob.glob(file_name + '.exe')
-    if len(candidates) > 0:
-      launch_string = candidates[0]
-
-'''

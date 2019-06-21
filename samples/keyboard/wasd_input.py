@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.api_wrappers.action_encoding_wrappers import DiscreteActionEncodingWrapper
+from neodroid.wrappers.action_encoding_wrappers import DiscreteActionEncodingWrapper
 
 __author__ = 'cnheider'
 

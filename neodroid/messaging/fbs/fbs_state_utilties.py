@@ -12,7 +12,7 @@ def deserialise_states(flat_states):
   states = {}
 
   for i in range(flat_states.StatesLength()):
-    state = N.EnvironmentState(flat_states.States(i))
+    state = N.EnvironmentSnapshot(flat_states.States(i))
     states[state.environment_name] = state
 
   out_states = {}

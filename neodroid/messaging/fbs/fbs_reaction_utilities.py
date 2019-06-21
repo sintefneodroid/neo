@@ -3,6 +3,7 @@
 from collections import Sequence
 
 from flatbuffers import Builder
+
 from neodroid.exceptions.exceptions import NoUnobservablesException
 
 __author__ = 'cnheider'

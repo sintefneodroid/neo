@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.api.environment import Environment
-from neodroid.factories import construct_observation_space, construct_action_space
+
+from neodroid.factories import construct_action_space, construct_observation_space
 
 __author__ = 'cnheider'
 

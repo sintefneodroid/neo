@@ -18,7 +18,6 @@ from .FET import *
 from .FEnvironmentDescription import *
 from .FEulerTransform import *
 from .FMotion import *
-from .FSensor import *
 from .FObservation import *
 from .FQT import *
 from .FQuadruple import *
@@ -29,6 +28,7 @@ from .FRange import *
 from .FReaction import *
 from .FReactionParameters import *
 from .FReactions import *
+from .FSensor import *
 from .FSimulatorConfiguration import *
 from .FSingle import *
 from .FState import *

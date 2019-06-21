@@ -8,9 +8,11 @@ _v = pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "version.py"
 with open(_v, "r") as f:
   content = f.read()
 
-  version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]", content, re.M).group(1)   # get version string from module
+  version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]", content, re.M).group(
+    1)  # get version string from module
 
-  project_name = re.search(r"PROJECT_NAME = ['\"]([^'\"]*)['\"]", content, re.M).group(1)   # get project name string from module
+  project_name = re.search(r"PROJECT_NAME = ['\"]([^'\"]*)['\"]", content, re.M).group(
+    1)  # get project name string from module
 
 
 class NeodroidPackage:

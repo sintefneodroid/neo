@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import random
 
-from neodroid.interfaces.environment_models import Space, Range
-from neodroid.utilities.transformations.encodings import signed_ternary_encoding
+from neodroid.interfaces.environment_models import Range, Space
 
 __author__ = 'cnheider'
 
@@ -31,7 +29,6 @@ class SignalSpace(Space):
       actions[i] = np.round(clipped, self._ranges[i].decimal_granularity)
     return actions
 
-
   @property
   def solved_threshold(self):
     return False  # TODO: Implement
@@ -39,7 +36,6 @@ class SignalSpace(Space):
   @property
   def is_sparse(self):
     return np.array([a.decimal_granularity == 0 for a in self._ranges]).all()
-
 
 
 if __name__ == '__main__':

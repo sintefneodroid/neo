@@ -6,9 +6,7 @@ __author__ = 'cnheider'
 
 import neodroid.messaging
 
-
-# @pretty_print
-class EnvironmentState(object):
+class EnvironmentSnapshot(object):
 
   def __init__(self, fbs_state):
     super().__init__()
@@ -104,11 +102,3 @@ class EnvironmentState(object):
 
   def __unicode__(self):
     return self.__repr__()
-
-  def __iter__(self):
-    return self.observables
-
-  '''
-  def __len__(self):
-    return len(self.observables)
-  '''

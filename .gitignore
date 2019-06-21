@@ -16,7 +16,6 @@ __pycache__/
 venv/
 *.db
 
-environments/
 *.log
 # Byte-compiled / optimized / DLL files
 *$py.class

@@ -3,14 +3,14 @@ import shutil
 import stat
 import subprocess
 
-import draugr
 import fire
-from neodroid.api.neodroid_environments import DEFAULT_ENVIRONMENTS_PATH
+from pyfiglet import Figlet
+
+import draugr
 from neodroid.utilities.launcher.download_utilities.download_environment import (available_environments,
                                                                                  download_environment,
                                                                                  )
-from neodroid.version import get_version
-from pyfiglet import Figlet
+from neodroid.version import get_version, DEFAULT_ENVIRONMENTS_PATH
 
 margin_percentage = (0 / 6)
 terminal_width = draugr.get_terminal_size().columns

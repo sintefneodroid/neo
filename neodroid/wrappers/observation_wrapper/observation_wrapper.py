@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 from neodroid.exceptions.exceptions import SensorNotAvailableException
 from neodroid.interfaces.neodroid_standard_modules.neodroid_camera_extraction import \
   (extract_camera_observation, extract_neodroid_camera,
    )
+from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
 

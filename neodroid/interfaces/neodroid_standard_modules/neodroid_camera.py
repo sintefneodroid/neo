@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 import PIL
 import numpy
-import warg
 from PIL import Image
+
+import warg
 
 __author__ = 'cnheider'
 
