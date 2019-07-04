@@ -50,7 +50,9 @@ def main():
   while environment.is_connected:
     action = environment.action_space.sample()
     state = environment.react(action)
-    terminated = state.terminated
+    for k,v in state.items():
+      terminated = v.terminated
+      break
 
     time_now = time.time()
     if i % freq == 0:

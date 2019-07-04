@@ -27,7 +27,7 @@ def reset():
   return 'reset'
 
 
-_environments = DiscreteActionEncodingWrapper(environment_name='grd', connect_to_running=True)
+_environments = DiscreteActionEncodingWrapper(connect_to_running=True)
 _environments.reset()
 
 COMBINATIONS = {
@@ -68,7 +68,7 @@ def on_press(key):
         obs, signal, terminated, _ = _environments.step(actions)
       # state = next(iter(states.values()))
       step_i += 1
-      print(step_i, obs, signal, terminated)
+      print('\n', step_i, obs, signal, terminated)
 
       if auto_reset and terminated:
         _environments.reset()
