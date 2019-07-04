@@ -7,7 +7,7 @@ import sys
 from collections import namedtuple
 
 import neodroid as neo
-from NeodroidPackage import NeodroidPackage
+from package import NeodroidPackage
 
 PY3 = sys.version_info >= (3, 0)
 

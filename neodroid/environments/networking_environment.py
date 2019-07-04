@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from neodroid.interfaces.environment_models import EnvironmentSnapshot
 from neodroid.messaging import ClientEvents, message_client_event
 
 __author__ = 'cnheider'
@@ -38,7 +39,7 @@ class NetworkingEnvironment(Environment, ABC):
     self._retries = retries
     self._connect_try_interval = connect_try_interval
 
-  def __next__(self):
+  def __next__(self) -> EnvironmentSnapshot:
     if not self._is_connected_to_server:
       return
     return self.react()

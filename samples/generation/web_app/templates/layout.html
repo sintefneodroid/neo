@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="static/favicon.ico" rel="icon" type="image/x-icon"/>
+    <title>Dataset Generation</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Oxygen -->
+    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+    <!-- Jasny Bootstrap -->
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+
+    <!-- Scrolling Script-->
+    <script>
+        $(document).ready(function () {
+            // Add smooth scrolling to all links in navbar + footer link
+            $(".navbar a, footer a[href='#top'], .container-fluid a[href='#third']").on('click', function (event) {
+
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 900, function () {
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                } // End if
+            });
+        })
+    </script>
+
+    <!--Loading Script-->
+    <script type="text/javascript">// <![CDATA[
+    function loading() {
+        $("#loading").show();
+    }
+
+    // ]]></script>
+
+    <!--Tooltip Script-->
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    <!--Local Styling -->
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+  </head>
+
+  <body>
+    <div class="container-fluid text-center" id="first">
+      <h1>Classification Assessment</h1>
+      <br>
+      <br>
+
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+
+  <footer class="bg-4 text-center">
+    <a href="mailto:christian.heider@alexandra.com"
+       title="Email">Email</a> |
+    <a href="https://github.com/cnheider"
+       title="Github">Github</a>
+  </footer>
+</html>

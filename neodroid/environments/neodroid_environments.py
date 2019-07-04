@@ -3,7 +3,7 @@
 import logging
 
 from neodroid.factories.inference import maybe_infer_motion_reaction
-from neodroid.interfaces.environment_models import EnvironmentDescription
+from neodroid.interfaces.environment_models import EnvironmentDescription, EnvironmentSnapshot
 from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
 from neodroid.utilities import launch_environment
 from neodroid.version import DEFAULT_ENVIRONMENTS_PATH
@@ -112,7 +112,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
       normalise=False,
       on_reaction_sent_callback=None,
       on_step_done_callback=None,
-      **kwargs):
+      **kwargs) -> EnvironmentSnapshot:
     '''
 
 :param input_reactions:
