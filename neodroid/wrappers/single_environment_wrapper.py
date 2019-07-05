@@ -4,7 +4,7 @@ from warnings import warn
 
 from neodroid import NeodroidEnvironment
 from neodroid.exceptions.exceptions import NoEnvironmentError
-from neodroid.factories.inference import maybe_infer_motion_reaction, maybe_infer_configuration_reaction
+from neodroid.factories.inference import maybe_infer_configuration_reaction, maybe_infer_motion_reaction
 from neodroid.interfaces.environment_models import Reaction
 
 __author__ = 'cnheider'
@@ -25,9 +25,9 @@ class SingleEnvironmentWrapper(NeodroidEnvironment):
             **kwargs):
     if not isinstance(input_reaction, Reaction):
       input_reaction = maybe_infer_motion_reaction(input_reactions=input_reaction,
-                                                        normalise=normalise,
-                                                        description=self._description
-                                                        )
+                                                   normalise=normalise,
+                                                   description=self._description
+                                                   )
     if parameters is not None:
       input_reaction.parameters = parameters
 
@@ -43,9 +43,9 @@ class SingleEnvironmentWrapper(NeodroidEnvironment):
   def reset(self, input_reaction=None, state=None, on_reset_callback=None):
 
     input_reaction = maybe_infer_configuration_reaction(input_reaction=input_reaction,
-                                                             description=self._description
+                                                        description=self._description
 
-                                                             )
+                                                        )
     if state:
       input_reaction.unobservables = state.unobservables
 

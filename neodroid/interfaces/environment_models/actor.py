@@ -27,12 +27,12 @@ class Actor(object):
     return neodroid.messaging.deserialise_actuators(self._flat_actor)
 
   def __repr__(self):
-    motors_str = ''.join([str(motor.__repr__()) for motor in self.actuators.values()])
+    actuators = ''.join([str(actuators.__repr__()) for actuators in self.actuators.values()])
 
     return (f'<Actor>\n'
-            f'<name>{self.actor_name.decode("utf-8")}</name>\n'
+            f'<name>{self.actor_name}</name>\n'
             f'<alive>{self.is_alive}</alive>\n'
-            f'<Actuators>\n{motors_str}</Actuators>\n'
+            f'<Actuators>\n{actuators}</Actuators>\n'
             f'</Actor>\n')
 
   def __str__(self):

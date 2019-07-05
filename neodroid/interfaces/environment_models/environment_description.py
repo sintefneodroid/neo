@@ -33,7 +33,7 @@ class EnvironmentDescription(object):
 
   @property
   def actuators(self):
-    return neodroid.messaging.deserialise_actors(self._fbs_description)[0].actuators
+    return list(neodroid.messaging.deserialise_actors(self._fbs_description).values())[0].actuators
 
   def actuator(self, key):
     actuators = self.actuators

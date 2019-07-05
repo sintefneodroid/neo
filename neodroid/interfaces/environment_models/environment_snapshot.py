@@ -59,9 +59,6 @@ class EnvironmentSnapshot(object):
   def debug_message(self):
     return self._fbs_state.DebugMessage().decode()
 
-  @property
-  def total_energy_spent(self):
-    return self._fbs_state.TotalEnergySpent()
 
   @property
   def description(self):
@@ -89,7 +86,6 @@ class EnvironmentSnapshot(object):
 
   def __repr__(self):
     return (f'<EnvironmentState>\n'
-            f'<total_energy_spent>{self.total_energy_spent}</total_energy_spent>\n'
             f'<frame_number>{self.frame_number}</frame_number>\n'
             f'<reward>{self.signal}</reward>\n'
             f'<terminated>{self.terminated}</terminated>\n'

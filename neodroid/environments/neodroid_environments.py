@@ -20,6 +20,8 @@ class NeodroidEnvironment(NetworkingEnvironment):
 
   @property
   def description(self) -> EnvironmentDescription:
+    while not self._description:
+      self.describe()
     return self._description
 
   @property
@@ -48,7 +50,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
   def neodroid_api_version(self):
     return '0.1.2'
 
-  def _setup_connection(self, auto_describe=False):
+  def _setup_connection(self, auto_describe=True):
     super()._setup_connection(auto_describe)
     if auto_describe:
       # TODO: WARN ABOUT WHEN INDIVIDUAL OBSERVATIONS AND UNOBSERVABLES ARE UNAVAILABLE
@@ -206,8 +208,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
     :rtype:
     '''
     reaction = M.Reaction(parameters=parameters)
-    new_states, simulator_configuration = self._message_server.send_reactions(
-        [reaction])
+    new_states, simulator_configuration = self._message_server.send_reactions([reaction])
 
     if new_states:
       self.update_interface_attributes(new_states, simulator_configuration)

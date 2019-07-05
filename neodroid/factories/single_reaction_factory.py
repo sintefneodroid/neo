@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from neodroid.interfaces.environment_models import Motion
 from neodroid.utilities.transformations.action_transformations import normalise_action
 
 __author__ = 'cnheider'
@@ -34,6 +35,16 @@ def construct_step_reaction(reaction_input,
   if isinstance(reaction_input, list):
     if len(reaction_input) > 0 and isinstance(reaction_input[0], M.Reaction):
       return reaction_input
+
+  if isinstance(reaction_input, dict):
+    parameters = M.ReactionParameters(terminable=True,
+                                      step=True,
+                                      episode_count=True)
+    if isinstance(list(reaction_input.values())[0], dict):
+      return M.Reaction(parameters=parameters,
+                        motions=[Motion(p, k, v) for p, a in reaction_input.items() for k,v in a.items() ])
+
+    return M.Reaction(parameters=parameters, motions=[Motion('Actor', k, v) for k, v in reaction_input.items()])
   if environment_description:
     parameters = M.ReactionParameters(terminable=True,
                                       step=True,

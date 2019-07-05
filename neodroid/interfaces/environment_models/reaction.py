@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from collections import Sequence
+
+from neodroid.interfaces.environment_models.configuration import Configuration
+from neodroid.interfaces.environment_models.displayable import Displayable
+from neodroid.interfaces.environment_models.motion import Motion
+from neodroid.interfaces.environment_models.unobservables import Unobservables
+
 __author__ = 'cnheider'
 
 import json
@@ -9,17 +16,16 @@ from .reaction_parameters import ReactionParameters
 
 class Reaction(object):
 
-  def __init__(
-      self,
-      *,
-      motions=[],
-      configurations=[],
-      parameters=None,
-      unobservables=None,
-      displayables=None,
-      environment_name='all',
-      serialised_message=''
-      ):
+  def __init__(self,
+               *,
+               motions: Sequence = (),
+               configurations: Sequence = (),
+               parameters: ReactionParameters = None,
+               unobservables: Unobservables = None,
+               displayables: Sequence = None,
+               environment_name: str = 'all',
+               serialised_message: str = ''
+               ):
 
     '''
 
