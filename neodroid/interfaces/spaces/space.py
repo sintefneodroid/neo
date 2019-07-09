@@ -4,14 +4,14 @@ from typing import Sequence
 
 import numpy
 
-from .range import Range
+from neodroid.interfaces.environment_models.range import Range
 
 __author__ = 'cnheider'
 
 
 class Space(object):
 
-  def __init__(self, ranges: Sequence[Range], names: Sequence[str]):
+  def __init__(self, ranges: Sequence[Range], names: Sequence[str]= ()):
     assert isinstance(ranges, Sequence)
     self._ranges = ranges
     self._names = names
@@ -68,15 +68,15 @@ class Space(object):
 
   @property
   def discrete_binary_shape(self):
-    return len(self._ranges) * 2, 1
+    return (len(self._ranges) * 2,)
 
   @property
   def continuous_shape(self):
-    return len(self._ranges), 1
+    return (len(self._ranges),)
 
   def __repr__(self):
-    names_str = ''.join([str(range.__repr__()) for range in self._names])
-    ranges_str = ''.join([str(range.__repr__()) for range in self._ranges])
+    names_str = ''.join([str(r.__repr__()) for r in self._names])
+    ranges_str = ''.join([str(r.__repr__()) for r in self._ranges])
 
     return (f'<Space>\n'
             f'<Names>\n{names_str}</Names>\n'

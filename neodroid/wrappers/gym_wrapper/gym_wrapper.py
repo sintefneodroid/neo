@@ -3,6 +3,7 @@
 from warnings import warn
 
 from neodroid.interfaces.environment_models import EnvironmentSnapshot
+from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, Range
 from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
@@ -18,6 +19,13 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
                          gym.Env):
 
   def step(self, action=None, *args, **kwargs):
+    '''
+
+    :param action:
+    :param args:
+    :param kwargs:
+    :return:
+    '''
     # action = action.flatten()
     message = super().react(action, **kwargs)
     if message:
@@ -29,6 +37,12 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
     raise ValueError('Did not receive any message.')
 
   def reset(self, *args, **kwargs):
+    """
+
+    :param args:
+    :param kwargs:
+    :return:
+    """
     message = super().reset(*args, **kwargs)
     if message:
       return message.observables
@@ -65,6 +79,13 @@ class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
                                gym.Env):
 
   def step(self, action=None, *args, **kwargs):
+    '''
+
+    :param action:
+    :param args:
+    :param kwargs:
+    :return:
+    '''
     # action = action.flatten()
     message = super().react(action[0], **kwargs)
     if message:
@@ -104,7 +125,41 @@ class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
 
 class NeodroidWrapper:
   def __init__(self, env):
+    '''
+
+    :param env:
+    '''
     self._env = env
+
+  @property
+  def observation_space(self):
+    '''
+
+    :return:
+    '''
+    _input_shape = None
+
+    if len(self._env.observation_space.shape) >= 1:
+      _input_shape = self._env.observation_space
+    else:
+      _output_shape = ObservationSpace([Range(min_value=0, max_value=self._env.observation_space.n)])
+
+    return _input_shape
+
+  @property
+  def action_space(self):
+    '''
+
+    :return:
+    '''
+    _output_shape = None
+
+    if len(self._env.action_space.shape) >= 1:
+      _output_shape = self._env.action_space
+    else:
+      _output_shape = ActionSpace([Range(min_value=0, max_value=self._env.action_space.n)])
+
+    return _output_shape
 
   def react(self, a, *args, **kwargs):
     if isinstance(a, np.ndarray):

@@ -7,7 +7,6 @@ from types import coroutine
 from neodroid.interfaces.environment_models import EnvironmentDescription
 from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
 from neodroid.version import PROJECT_APP_PATH
-from warg.app_path import AppPath
 
 __author__ = 'cnheider'
 
@@ -24,7 +23,8 @@ class Environment(ABC):
                **kwargs):
     self.seed(seed)
 
-    logging.basicConfig(  # format='%(asctime)s %(new_state)s',
+    logging.basicConfig(
+        # format='%(asctime)s %(new_state)s',
         # datefmt='%m/%d/%Y %I:%M:%S %p',
         filename=logging_directory / 'neodroid_log.txt',
         level=logging_level
@@ -88,10 +88,10 @@ class Environment(ABC):
 
   def __repr__(self):
     return (f'<Environment>\n'
-      f'  <ObservationSpace>{self.observation_space}</ObservationSpace>\n'
-      f'  <ActionSpace>{self.action_space}</ActionSpace>\n'
-      f'  <Description>{self.description}</Description>\n'
-      f'</Environment>')
+            f'  <ObservationSpace>{self.observation_space}</ObservationSpace>\n'
+            f'  <ActionSpace>{self.action_space}</ActionSpace>\n'
+            f'  <Description>{self.description}</Description>\n'
+            f'</Environment>')
 
   def __str__(self):
     return self.__repr__()

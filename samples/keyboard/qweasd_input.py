@@ -1,49 +1,59 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.wrappers import SingleEnvironmentWrapper
+from warg.named_ordered_dictionary import NOD
 
 __author__ = 'cnheider'
 
 from pynput import keyboard
 
-_environments = SingleEnvironmentWrapper(connect_to_running=True)
-_environments.reset()
-
 
 def up():
-  if 'ActorY_' in _environments.description.actuators:
-    return {'ActorY_':_environments.description.actuator('ActorY_').motion_space.max}
+  if 'ActorY_' in ENVIRONMENT.description.actuators:
+    return {'ActorY_':ENVIRONMENT.description.actuator('ActorY_').motion_space.max}
   raise KeyError(f'Could not find actuator ActorY_')
 
 
 def down():
-  if 'ActorY_' in _environments.description.actuators:
-    return {'ActorY_':_environments.description.actuator('ActorY_').motion_space.min}
+  if 'ActorY_' in ENVIRONMENT.description.actuators:
+    return {'ActorY_':ENVIRONMENT.description.actuator('ActorY_').motion_space.min}
   raise KeyError(f'Could not find actuator ActorY_')
 
+
 def left():
-  if 'ActorX_' in _environments.description.actuators:
-    return {'ActorX_':_environments.description.actuator('ActorX_').motion_space.min}
+  if 'ActorX_' in ENVIRONMENT.description.actuators:
+    return {'ActorX_':ENVIRONMENT.description.actuator('ActorX_').motion_space.min}
   raise KeyError(f'Could not find actuator ActorX_')
+
 
 def right():
-  if 'ActorX_' in _environments.description.actuators:
-    return {'ActorX_':_environments.description.actuator('ActorX_').motion_space.max}
+  if 'ActorX_' in ENVIRONMENT.description.actuators:
+    return {'ActorX_':ENVIRONMENT.description.actuator('ActorX_').motion_space.max}
   raise KeyError(f'Could not find actuator ActorX_')
 
+
 def backward():
-  if 'ActorZ_' in _environments.description.actuators:
-    return {'ActorZ_':_environments.description.actuator('ActorZ_').motion_space.min}
+  if 'ActorZ_' in ENVIRONMENT.description.actuators:
+    return {'ActorZ_':ENVIRONMENT.description.actuator('ActorZ_').motion_space.min}
   raise KeyError(f'Could not find actuator ActorZ_')
 
+
 def forward():
-  if 'ActorZ_' in _environments.description.actuators:
-    return {'ActorZ_':_environments.description.actuator('ActorZ_').motion_space.max}
+  if 'ActorZ_' in ENVIRONMENT.description.actuators:
+    return {'ActorZ_':ENVIRONMENT.description.actuator('ActorZ_').motion_space.max}
   raise KeyError(f'Could not find actuator ActorZ_')
+
 
 def reset():
   return 'reset'
 
+
+ENVIRONMENT = SingleEnvironmentWrapper(connect_to_running=True)
+ENVIRONMENT.reset()
+
+CURRENT_COMBINATIONS = set()  # The currently active modifiers
+STEP_I = 0
+AUTO_RESET = False
 
 COMBINATIONS = {keyboard.KeyCode(char='q'):down,
                 keyboard.KeyCode(char='w'):forward,
@@ -55,9 +65,6 @@ COMBINATIONS = {keyboard.KeyCode(char='q'):down,
                 keyboard.KeyCode(char='r'):reset
                 }
 
-# The currently active modifiers
-current_combinations = set()
-
 
 def listen_for_combinations():
   print(f'\n\nPress any of:\n{COMBINATIONS}\n\n')
@@ -65,37 +72,33 @@ def listen_for_combinations():
   return keyboard.Listener(on_press=on_press, on_release=on_release)
 
 
-step_i = 0
-auto_reset = False
-
-
 def on_press(key):
-  global step_i
+  global STEP_I
   if any([key in COMBINATIONS]):
-    if key not in current_combinations:
-      current_combinations.add(key)
+    if key not in CURRENT_COMBINATIONS:
+      CURRENT_COMBINATIONS.add(key)
     actions = COMBINATIONS[key]()
     terminated = False
     signal = 0
 
-    if _environments.is_connected:
+    if ENVIRONMENT.is_connected:
       if actions == 'reset':
-        obs = _environments.reset()
-        step_i = 0
+        obs = ENVIRONMENT.reset()
+        STEP_I = 0
       else:
-        obs, signal, terminated, _ = _environments.react(actions).to_gym_like_output()
-      step_i += 1
-      print('\n', step_i, obs, signal, terminated)
+        obs, signal, terminated, _ = ENVIRONMENT.react(actions).to_gym_like_output()
+      STEP_I += 1
+      print(NOD.nod_of(STEP_I, obs, signal, terminated).as_dict())
 
-      if auto_reset and terminated:
-        _environments.reset()
-        step_i = 0
+      if AUTO_RESET and terminated:
+        ENVIRONMENT.reset()
+        STEP_I = 0
 
 
 def on_release(key):
   if any([key in COMBINATIONS]):
-    if key in current_combinations:
-      current_combinations.remove(key)
+    if key in CURRENT_COMBINATIONS:
+      CURRENT_COMBINATIONS.remove(key)
 
 
 def main():

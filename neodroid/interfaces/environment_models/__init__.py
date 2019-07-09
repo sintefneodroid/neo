@@ -15,5 +15,4 @@ from .reaction import Reaction
 from .reaction_parameters import ReactionParameters
 from .sensor import Sensor
 from .simulator_configuration import SimulatorConfiguration
-from .space import Space
 from .unobservables import Unobservables

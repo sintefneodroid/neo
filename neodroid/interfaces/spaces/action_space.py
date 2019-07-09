@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 import random
 
-from neodroid.interfaces.environment_models import EnvironmentDescription, Range, Space
+from neodroid.interfaces.environment_models import EnvironmentDescription, Range
+from neodroid.interfaces.spaces.space import Space
 from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
 __author__ = 'cnheider'
@@ -124,4 +125,4 @@ class ActionSpace(Space):
 if __name__ == '__main__':
   acs = ActionSpace([Range(min_value=0, max_value=3, decimal_granularity=2),
                      Range(min_value=0, max_value=2, decimal_granularity=1)])
-  print(acs, acs.low, acs.high, acs.decimal_granularity, acs.num_discrete_actions)
+  print(acs, acs.low, acs.high, acs.decimal_granularity, acs.num_discrete_actions,acs.shape)

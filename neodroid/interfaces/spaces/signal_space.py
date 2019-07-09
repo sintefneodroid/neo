@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from neodroid.interfaces.environment_models import Range, Space
+from neodroid.interfaces.environment_models import Range
+from neodroid.interfaces.spaces import Space
 
 __author__ = 'cnheider'
 
@@ -40,5 +41,5 @@ class SignalSpace(Space):
 
 if __name__ == '__main__':
   acs = SignalSpace([Range(min_value=0, max_value=3, decimal_granularity=2),
-                     Range(min_value=0, max_value=2, decimal_granularity=1)])
+                     Range(min_value=0, max_value=2, decimal_granularity=1)],())
   print(acs, acs.low, acs.high, acs.decimal_granularity)
