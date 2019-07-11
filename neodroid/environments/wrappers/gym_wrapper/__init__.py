@@ -8,7 +8,7 @@ import numpy as np
 
 
 def make(environment_name, **kwargs):
-  return NeodroidVectorGymWrapper(environment_name=environment_name, **kwargs)
+  return NeodroidVectorGymEnvironment(environment_name=environment_name, **kwargs)
 
 
 def seed(seed):

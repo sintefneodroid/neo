@@ -6,12 +6,12 @@ from neodroid.exceptions.exceptions import SensorNotAvailableException
 from neodroid.interfaces.neodroid_standard_modules.neodroid_camera_extraction import \
   (extract_camera_observation, extract_neodroid_camera,
    )
-from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.environments.wrappers import SingleEnvironment
 
 __author__ = 'cnheider'
 
 
-class ObservationWrapper(SingleEnvironmentWrapper):
+class ObservationWrapper(SingleEnvironment):
 
   def __next__(self):
     if not self._is_connected_to_server:
@@ -47,7 +47,7 @@ class ObservationWrapper(SingleEnvironmentWrapper):
     return self.close(*args, **kwargs)
 
 
-class CameraObservationWrapper(SingleEnvironmentWrapper):
+class CameraObservationWrapper(SingleEnvironment):
 
   def __init__(self, auto_reset=True, **kwargs):
     super().__init__(**kwargs)

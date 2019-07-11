@@ -136,7 +136,7 @@ def deserialise_bodies(unobservables):
   return bodies
 
 
-def deserialise_euler_transform(f_obs):
+def deserialise_euler_transform(f_obs)-> Tuple[Any, Any]:
   transform = F.FEulerTransform()
   transform.Init(f_obs.Bytes, f_obs.Pos)
   position = transform.Position(F.FVector3())
@@ -146,7 +146,7 @@ def deserialise_euler_transform(f_obs):
   return [[position.X(), position.Y(), position.Z()],
           [direction.X(), direction.Y(), direction.Z()],
           [rotation.X(), rotation.Y(), rotation.Z()],
-          ], None
+          ], [None for _ in range(9)]
 
 
 def deserialise_body(f_obs):
@@ -157,7 +157,7 @@ def deserialise_body(f_obs):
   return [
            [velocity.X(), velocity.Y(), velocity.Z()],
            [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
-           ], None
+           ], [None for _ in range(6)]
 
 
 def deserialise_quadruple(f_obs) -> Tuple[Any, Any]:
@@ -165,10 +165,10 @@ def deserialise_quadruple(f_obs) -> Tuple[Any, Any]:
   q.Init(f_obs.Bytes, f_obs.Pos)
   quad = q.Quat()
   data = [quad.X(), quad.Y(), quad.Z(), quad.W()]
-  return data, None
+  return data, [None for _ in range(4)]
 
 
-def deserialise_triple(f_obs):
+def deserialise_triple(f_obs)-> Tuple[Any, Any]:
   pos = F.FTriple()
   pos.Init(f_obs.Bytes, f_obs.Pos)
   position = pos.Vec3()
@@ -177,7 +177,7 @@ def deserialise_triple(f_obs):
   return value, value_range
 
 
-def deserialise_double(f_obs):
+def deserialise_double(f_obs)-> Tuple[Any, Any]:
   pos = F.FDouble()
   pos.Init(f_obs.Bytes, f_obs.Pos)
   position = pos.Vec2()
@@ -186,21 +186,21 @@ def deserialise_double(f_obs):
   return value, value_range
 
 
-def deserialise_single(f_obs):
+def deserialise_single(f_obs)-> Tuple[Any, Any]:
   val = F.FSingle()
   val.Init(f_obs.Bytes, f_obs.Pos)
   value, value_range = val.Value(), val.Range()
   return value, value_range
 
 
-def deserialise_string(f_obs):
+def deserialise_string(f_obs)-> Tuple[Any, Any]:
   val = F.FString()
   val.Init(f_obs.Bytes, f_obs.Pos)
   value = val.Str()
-  return value, None
+  return value, 'skip_observable_dim'
 
 
-def deserialise_quaternion_transform(f_obs):
+def deserialise_quaternion_transform(f_obs) -> Tuple[Any, Any]:
   qt = F.FQT()
   qt.Init(f_obs.Bytes, f_obs.Pos)
   position = qt.Transform().Position(F.FVector3())
@@ -213,10 +213,10 @@ def deserialise_quaternion_transform(f_obs):
           rotation.Z(),
           rotation.W(),
           ]
-  return data, None
+  return data, [None for _ in range(7)]
 
 
-def deserialise_byte_array(f_obs):
+def deserialise_byte_array(f_obs)-> Tuple[Any, Any]:
   byte_array = F.FByteArray()
   byte_array.Init(f_obs.Bytes, f_obs.Pos)
   data = byte_array.BytesAsNumpy()
@@ -237,15 +237,15 @@ def deserialise_byte_array(f_obs):
 
   else:
     out = data
-  return out, None
+  return out, 'skip_observable_dim'
 
 
-def deserialise_array(f_obs):
+def deserialise_array(f_obs)-> Tuple[Any, Any]:
   array = F.FArray()
   array.Init(f_obs.Bytes, f_obs.Pos)
   # data = np.array([array.Array(i) for i in range(array.ArrayLength())])
   data = array.ArrayAsNumpy()
-  return data, None
+  return data, [None for _ in range(array.ArrayLength())]
 
 
 def deserialise_actuators(flat_actor):
@@ -278,13 +278,22 @@ def deserialise_actuators(flat_actor):
 
 def deserialise_space(flat_space):
   if isinstance(flat_space, list):
-    return [N.Range(decimal_granularity=space.DecimalGranularity(),
-                    min_value=space.MinValue(),
-                    max_value=space.MaxValue())
-            for space in flat_space if space is not None]
+    ret = []
+    for space in flat_space:
+      if space is not None:
+        ran = N.Range(decimal_granularity=space.DecimalGranularity(),
+                      min_value=space.MinValue(),
+                      max_value=space.MaxValue())
+        ret.append(ran)
+      elif  space != 'skip_observable_dim':
+        ran = N.Range()
+        ret.append(ran)
+
+    return ret
 
   space = N.Range(decimal_granularity=flat_space.DecimalGranularity(),
                   min_value=flat_space.MinValue(),
                   max_value=flat_space.MaxValue()
                   )
+
   return space

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.environments.wrappers import SingleEnvironment
 
 __author__ = 'cnheider'
 
 
-class FlaskWrapper(SingleEnvironmentWrapper):
+class FlaskWrapper(SingleEnvironment):
 
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)

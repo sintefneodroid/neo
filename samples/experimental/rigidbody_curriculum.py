@@ -4,7 +4,7 @@ __author__ = 'cnheider'
 import numpy as np
 from neodroid.models import Configuration
 
-import neodroid.wrappers.curriculum_wrapper as neo
+import neodroid.environments.wrappers.curriculum_wrapper as neo
 
 random_motion_horizon = 5
 _memory = []

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.wrappers import SingleEnvironmentWrapper
+from neodroid.environments.wrappers import SingleEnvironment
 from warg.named_ordered_dictionary import NOD
 
 __author__ = 'cnheider'
@@ -48,7 +48,7 @@ def reset():
   return 'reset'
 
 
-ENVIRONMENT = SingleEnvironmentWrapper(connect_to_running=True)
+ENVIRONMENT = SingleEnvironment(connect_to_running=True)
 ENVIRONMENT.reset()
 
 CURRENT_COMBINATIONS = set()  # The currently active modifiers

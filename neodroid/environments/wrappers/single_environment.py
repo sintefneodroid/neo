@@ -10,7 +10,7 @@ from neodroid.interfaces.environment_models import Reaction
 __author__ = 'cnheider'
 
 
-class SingleEnvironmentWrapper(NeodroidEnvironment):
+class SingleEnvironment(NeodroidEnvironment):
 
   def __next__(self):
     if not self._is_connected_to_server:
@@ -26,7 +26,8 @@ class SingleEnvironmentWrapper(NeodroidEnvironment):
     if not isinstance(input_reaction, Reaction):
       input_reaction = maybe_infer_motion_reaction(input_reactions=input_reaction,
                                                    normalise=normalise,
-                                                   description=self._description
+                                                   description=self._description,
+                                                   action_space=self.action_space
                                                    )
     if parameters is not None:
       input_reaction.parameters = parameters
@@ -93,8 +94,8 @@ if __name__ == '__main__':
                       help='Connect to already running environment instead of starting another instance')
   proc_args = parser.parse_args()
 
-  env = SingleEnvironmentWrapper(environment_name=proc_args.ENVIRONMENT_NAME,
-                                 connect_to_running=proc_args.CONNECT_TO_RUNNING)
+  env = SingleEnvironment(environment_name=proc_args.ENVIRONMENT_NAME,
+                          connect_to_running=proc_args.CONNECT_TO_RUNNING)
 
   observation_session = tqdm(env, leave=False)
   for environment_state in observation_session:

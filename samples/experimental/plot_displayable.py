@@ -4,7 +4,7 @@ __author__ = 'cnheider'
 
 import numpy as np
 
-import neodroid.wrappers.formal_wrapper as neo
+import neodroid.environments.wrappers.formal_wrapper as neo
 from neodroid import messaging
 
 

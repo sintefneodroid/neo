@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from neodroid.environments.wrappers.single_environment import SingleEnvironment
 
 __author__ = 'cnheider'
 
 
-class NeodroidFormalWrapper(SingleEnvironmentWrapper):
+class NeodroidFormalWrapper(SingleEnvironment):
 
   def __next__(self):
     if not self._is_connected_to_server:

@@ -104,6 +104,9 @@ class Environment(ABC):
     '''
     return self
 
+  def render(self):
+    pass
+
   @staticmethod
   def seed(seed):
     '''

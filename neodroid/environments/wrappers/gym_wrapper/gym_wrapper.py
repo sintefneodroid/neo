@@ -2,9 +2,12 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
+from gym import Env
+
+from neodroid.environments.wrappers.single_environment import SingleEnvironment
 from neodroid.interfaces.environment_models import EnvironmentSnapshot
 from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, Range
-from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
+from trolls import SubProcessEnvironments
 
 __author__ = 'cnheider'
 
@@ -15,8 +18,8 @@ import gym
 # warn(f"This module is deprecated in version {__version__}", DeprecationWarning)
 
 
-class NeodroidGymWrapper(SingleEnvironmentWrapper,
-                         gym.Env):
+class NeodroidGymEnvironment(SingleEnvironment,
+                             gym.Env):
 
   def step(self, action=None, *args, **kwargs):
     '''
@@ -75,8 +78,8 @@ class NeodroidGymWrapper(SingleEnvironmentWrapper,
     return None
 
 
-class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
-                               gym.Env):
+class NeodroidVectorGymEnvironment(SingleEnvironment,
+                                   gym.Env):
 
   def step(self, action=None, *args, **kwargs):
     '''
@@ -123,8 +126,8 @@ class NeodroidVectorGymWrapper(SingleEnvironmentWrapper,
     return None
 
 
-class NeodroidWrapper:
-  def __init__(self, env):
+class NeodroidGymWrapper:
+  def __init__(self, env:Env):
     '''
 
     :param env:
@@ -140,9 +143,12 @@ class NeodroidWrapper:
     _input_shape = None
 
     if len(self._env.observation_space.shape) >= 1:
-      _input_shape = self._env.observation_space
+      _input_shape = ObservationSpace([Range(decimal_granularity=2) for _ in range(
+          self._env.observation_space.shape[0])])
     else:
-      _output_shape = ObservationSpace([Range(min_value=0, max_value=self._env.observation_space.n)])
+      _input_shape = ObservationSpace([Range(min_value=0,
+                                         max_value=self._env.observation_space.n,
+                                         decimal_granularity=0)])
 
     return _input_shape
 
@@ -155,9 +161,12 @@ class NeodroidWrapper:
     _output_shape = None
 
     if len(self._env.action_space.shape) >= 1:
-      _output_shape = self._env.action_space
+      _output_shape = ActionSpace([Range(decimal_granularity=2) for _ in range(
+          self._env.action_space.shape[0])])
     else:
-      _output_shape = ActionSpace([Range(min_value=0, max_value=self._env.action_space.n)])
+      _output_shape = ActionSpace([Range(min_value=0,
+                                         max_value=self._env.action_space.n,
+                                         decimal_granularity=0)])
 
     return _output_shape
 
@@ -187,4 +196,6 @@ class NeodroidWrapper:
 
 
 if __name__ == '__main__':
-  NeodroidVectorGymWrapper()
+  env = NeodroidGymWrapper(gym.make('CartPole-v1'))
+  print(env.observation_space)
+  print(env.action_space)

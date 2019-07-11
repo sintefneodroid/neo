@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.factories import construct_step_reaction, verify_configuration_reaction
+from neodroid.interfaces.spaces import ActionSpace
 
 __author__ = 'cnheider'
 __doc__ = ''
@@ -8,9 +9,11 @@ __doc__ = ''
 def maybe_infer_motion_reaction(*,
                                 input_reactions,
                                 normalise,
-                                description):
+                                description,
+                                action_space:ActionSpace):
   '''
 
+  :param action_space:
 :param verbose:
 :type verbose:
 :param input_reactions:
@@ -23,14 +26,16 @@ def maybe_infer_motion_reaction(*,
 :rtype:
 '''
   if description:
-    out_reaction = construct_step_reaction(input_reactions,
-                                           description,
-                                           normalise,
+    out_reaction = construct_step_reaction(reaction_input=input_reactions,
+                                           environment_description=description,
+                                           normalise=normalise,
+                                           space=action_space
                                            )
   else:
-    out_reaction = construct_step_reaction(input_reactions,
-                                           None,
-                                           False
+    out_reaction = construct_step_reaction(reaction_input=input_reactions,
+                                           environment_description=None,
+                                           normalise=False,
+                                           space=action_space
                                            )
 
   return out_reaction

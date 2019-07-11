@@ -3,16 +3,16 @@
 import random
 from typing import Any
 
+from neodroid.environments.wrappers.single_environment import SingleEnvironment
 from neodroid.interfaces.environment_models import Reaction, ReactionParameters
 from neodroid.utilities.transformations.encodings import signed_ternary_encoding
-from neodroid.wrappers.single_environment_wrapper import SingleEnvironmentWrapper
 
 __author__ = 'cnheider'
 
 import numpy as np
 
 
-class NeodroidCurriculumWrapper(SingleEnvironmentWrapper):
+class NeodroidCurriculumWrapper(SingleEnvironment):
 
   def __init__(self, **kwargs):
     super().__init__(**kwargs)

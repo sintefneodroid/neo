@@ -17,8 +17,9 @@ class ObservationSpace(Space):
   def parse_gym_space(self, ob):
     pass
 
+  @property
   def space(self):
-    self.continuous_shape()
+    return self.continuous_shape
 
   @staticmethod
   def from_environment_description(environment_description: EnvironmentDescription):

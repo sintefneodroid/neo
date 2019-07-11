@@ -49,7 +49,7 @@ class Space(object):
 
   @property
   def is_discrete(self):
-    return numpy.array([a.decimal_granularity == 0 for a in self._ranges]).all()
+    return numpy.array([a.decimal_granularity == 0 for a in self._ranges if hasattr(a,'decimal_granularity')]).all()
 
   @property
   def is_mixed(self):
@@ -85,10 +85,10 @@ class Space(object):
 
   @property
   def n(self):
-    return len(self)
+    return len(self._ranges)
 
   def __len__(self):
-    return len(self._ranges)
+    return self.n
 
 
 if __name__ == '__main__':

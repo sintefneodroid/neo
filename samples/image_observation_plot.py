@@ -3,7 +3,7 @@
 import time
 
 import cv2
-from neodroid.wrappers import NeodroidGymWrapper
+from neodroid.environments.wrappers import NeodroidGymEnvironment
 
 from neodroid.interfaces.neodroid_standard_modules import extract_all_as_camera
 from warg.named_ordered_dictionary import NOD
@@ -26,7 +26,7 @@ time_s = time.time()
 
 image_axs = NOD()
 
-env = NeodroidGymWrapper(connect_to_running=True)
+env = NeodroidGymEnvironment(connect_to_running=True)
 fig = plt.figure()
 print_obs = False
 

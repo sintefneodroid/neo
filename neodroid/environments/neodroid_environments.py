@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import logging
+from typing import Dict
 
 from neodroid.factories.inference import maybe_infer_motion_reaction
 from neodroid.interfaces.environment_models import EnvironmentDescription, EnvironmentSnapshot
@@ -114,7 +115,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
       normalise=False,
       on_reaction_sent_callback=None,
       on_step_done_callback=None,
-      **kwargs) -> EnvironmentSnapshot:
+      **kwargs) -> Dict[str, EnvironmentSnapshot]:
     '''
 
 :param input_reactions:
@@ -145,7 +146,8 @@ class NeodroidEnvironment(NetworkingEnvironment):
       elif not isinstance(input_reactions, M.Reaction):
         input_reaction = maybe_infer_motion_reaction(input_reactions=input_reactions,
                                                      normalise=normalise,
-                                                     description=self._description
+                                                     description=self._description,
+                                                     action_space=self.action_space
                                                      )
         input_reactions = [input_reaction]
 
