@@ -46,7 +46,7 @@ def FValuedVector3PointAddVal(builder, val): builder.PrependFloat64Slot(0, val, 
 
 def FValuedVector3PointAddPoint(builder, point): builder.PrependStructSlot(1,
                                                                            flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                               point), 0)
+                                                                             point), 0)
 
 
 def FValuedVector3PointEnd(builder): return builder.EndObject()

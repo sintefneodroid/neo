@@ -27,7 +27,7 @@ class FActuator(object):
     return None
 
   # FActuator
-  def ValidInput(self):
+  def ActuatorRange(self):
     o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
     if o != 0:
       x = o + self._tab.Pos
@@ -37,30 +37,18 @@ class FActuator(object):
       return obj
     return None
 
-  # FActuator
-  def EnergySpentSinceReset(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
-    if o != 0:
-      return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
-    return 0.0
 
-
-def FActuatorStart(builder): builder.StartObject(3)
+def FActuatorStart(builder): builder.StartObject(2)
 
 
 def FActuatorAddActuatorName(builder, actuatorName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                          flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                             actuatorName), 0)
+                                                                                           actuatorName), 0)
 
 
-def FActuatorAddValidInput(builder, validInput): builder.PrependStructSlot(1,
-                                                                           flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                               validInput), 0)
-
-
-def FActuatorAddEnergySpentSinceReset(builder, energySpentSinceReset): builder.PrependFloat32Slot(2,
-                                                                                                  energySpentSinceReset,
-                                                                                                  0.0)
+def FActuatorAddActuatorRange(builder, actuatorRange): builder.PrependStructSlot(1,
+                                                                                 flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                   actuatorRange), 0)
 
 
 def FActuatorEnd(builder): return builder.EndObject()

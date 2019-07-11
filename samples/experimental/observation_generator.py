@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 tqdm.monitor_interval = 0
 
-from neodroid.wrappers import NeodroidFormalWrapper
+from neodroid.environments.wrappers import NeodroidFormalWrapper
 
 
 def main():

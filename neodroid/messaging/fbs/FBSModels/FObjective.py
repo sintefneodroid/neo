@@ -46,7 +46,7 @@ def FObjectiveStart(builder): builder.StartObject(3)
 
 def FObjectiveAddObjectiveName(builder, objectiveName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                             flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                objectiveName),
+                                                                                              objectiveName),
                                                                                             0)
 
 

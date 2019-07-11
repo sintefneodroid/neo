@@ -36,7 +36,7 @@ def FETStart(builder): builder.StartObject(1)
 
 def FETAddTransform(builder, transform): builder.PrependStructSlot(0,
                                                                    flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                       transform), 0)
+                                                                     transform), 0)
 
 
 def FETEnd(builder): return builder.EndObject()

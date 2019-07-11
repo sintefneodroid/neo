@@ -27,14 +27,14 @@ class FConfigurable(object):
     return None
 
   # FConfigurable
-  def ObservationType(self):
+  def ConfigurableValueType(self):
     o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
     if o != 0:
       return self._tab.Get(flatbuffers.number_types.Uint8Flags, o + self._tab.Pos)
     return 0
 
   # FConfigurable
-  def Observation(self):
+  def ConfigurableValue(self):
     o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
     if o != 0:
       from flatbuffers.table import Table
@@ -43,23 +43,42 @@ class FConfigurable(object):
       return obj
     return None
 
+  # FConfigurable
+  def ConfigurableRange(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+    if o != 0:
+      x = o + self._tab.Pos
+      from .FRange import FRange
+      obj = FRange()
+      obj.Init(self._tab.Bytes, x)
+      return obj
+    return None
 
-def FConfigurableStart(builder): builder.StartObject(3)
+
+def FConfigurableStart(builder): builder.StartObject(4)
 
 
 def FConfigurableAddConfigurableName(builder, configurableName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                                      flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                         configurableName),
+                                                                                                       configurableName),
                                                                                                      0)
 
 
-def FConfigurableAddObservationType(builder, observationType): builder.PrependUint8Slot(1, observationType, 0)
+def FConfigurableAddConfigurableValueType(builder, configurableValueType): builder.PrependUint8Slot(1,
+                                                                                                    configurableValueType,
+                                                                                                    0)
 
 
-def FConfigurableAddObservation(builder, observation): builder.PrependUOffsetTRelativeSlot(2,
-                                                                                           flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                               observation),
-                                                                                           0)
+def FConfigurableAddConfigurableValue(builder, configurableValue): builder.PrependUOffsetTRelativeSlot(2,
+                                                                                                       flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                                         configurableValue),
+                                                                                                       0)
+
+
+def FConfigurableAddConfigurableRange(builder, configurableRange): builder.PrependStructSlot(3,
+                                                                                             flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                               configurableRange),
+                                                                                             0)
 
 
 def FConfigurableEnd(builder): return builder.EndObject()

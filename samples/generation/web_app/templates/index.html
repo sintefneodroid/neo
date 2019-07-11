@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+  <!-- Third Container (Submit assessment)  -->
+  <div class="container-fluid bg-2 text-center" id="third">
+    {% if scroll %}
+      <script>
+          document.location.hash = '#' + '{{ scroll }}';
+      </script>
+    {% endif %}
+    <h3>Submit Assessment</h3>
+    <div class=flashes>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    <div class="fileinput fileinput-new" data-provides="fileinput">
+      <div class="fileinput-preview thumbnail" data-trigger="fileinput" id="window">
+      </div>
+      <div>
+        <!-- # A <form> tag is marked with enctype=multipart/form-data and an <input type=file> is placed in that form.
+# The application accesses the file from the files dictionary on the request object.
+# use the save() method of the file to save the file permanently somewhere on the filesystem.
+ -->
+        <form action="assessment" method="POST" enctype="multipart/form-data" class="form-inline">
+          <span class="btn btn-default btn-file">
+          <span class="fileinput-new">Select Image</span>
+          <span class="fileinput-exists">Change</span>
+          <input type="file" id="filename" name="file"></span>
+          <button type="submit" class="btn btn-default fileinput-exists" id="analyze" onclick="loading();">
+            Submit
+          </button>
+        </form>
+      </div>
+
+    </div>
+    <div id="loading"></div>
+    <!--
+    <p>The maximum filesize is 10MB.</p>
+    -->
+    <p>Only GLTF2 format is currently supported.</p>
+  </div>
+{% endblock %}

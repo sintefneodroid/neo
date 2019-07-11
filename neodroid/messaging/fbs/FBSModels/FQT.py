@@ -36,7 +36,7 @@ def FQTStart(builder): builder.StartObject(1)
 
 def FQTAddTransform(builder, transform): builder.PrependStructSlot(0,
                                                                    flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                       transform), 0)
+                                                                     transform), 0)
 
 
 def FQTEnd(builder): return builder.EndObject()

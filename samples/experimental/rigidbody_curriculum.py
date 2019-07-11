@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
-import neodroid.wrappers.curriculum_wrapper as neo
 import numpy as np
-
 from neodroid.models import Configuration
+
+import neodroid.environments.wrappers.curriculum_wrapper as neo
 
 random_motion_horizon = 5
 _memory = []

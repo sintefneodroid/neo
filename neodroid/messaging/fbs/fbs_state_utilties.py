@@ -3,7 +3,8 @@ from typing import Any, Tuple
 import imageio
 import numpy
 import numpy as np
-from neodroid import models as N
+
+from neodroid.interfaces import environment_models as N
 from neodroid.messaging.fbs import FBSModels as F
 
 
@@ -11,7 +12,7 @@ def deserialise_states(flat_states):
   states = {}
 
   for i in range(flat_states.StatesLength()):
-    state = N.EnvironmentState(flat_states.States(i))
+    state = N.EnvironmentSnapshot(flat_states.States(i))
     states[state.environment_name] = state
 
   out_states = {}
@@ -56,56 +57,57 @@ def deserialise_configurables(flat_environment_description):
   if flat_environment_description:
     for i in range(flat_environment_description.ConfigurablesLength()):
       f_conf = flat_environment_description.Configurables(i)
-      observation_value, observation_space = deserialise_observation(f_conf)
+      obs_type = f_conf.ConfigurableValueType()
+      obs_value = f_conf.ConfigurableValue()
+      observation_value, observation_space = deserialise_sensor(obs_type, obs_value)
 
-      configurable = N.Configurable(
-          f_conf.ConfigurableName().decode(),
-          observation_value,
-          observation_space
-          )
+      configurable = N.Configurable(f_conf.ConfigurableName().decode(),
+                                    observation_value,
+                                    observation_space
+                                    )
       configurables[configurable.configurable_name] = configurable
   return configurables
 
 
-def deserialise_observation(f_obs):
+def deserialise_sensor(obs_type, obs_value):
   value = None
   value_range = None
-  dtype = float
-  obs_type = f_obs.ObservationType()
   if obs_type is F.FObservation.FSingle:
-    value, value_range = deserialise_single(f_obs)
+    value, value_range = deserialise_single(obs_value)
   elif obs_type is F.FObservation.FDouble:
-    value, value_range = deserialise_double(f_obs)
+    value, value_range = deserialise_double(obs_value)
   elif obs_type is F.FObservation.FTriple:
-    value, value_range = deserialise_triple(f_obs)
+    value, value_range = deserialise_triple(obs_value)
   elif obs_type is F.FObservation.FQuadruple:
-    value, value_range = deserialise_quadruple(f_obs)
+    value, value_range = deserialise_quadruple(obs_value)
   elif obs_type is F.FObservation.FArray:
-    value, value_range = deserialise_array(f_obs)
+    value, value_range = deserialise_array(obs_value)
   elif obs_type is F.FObservation.FET:
-    value, value_range = deserialise_euler_transform(f_obs)
+    value, value_range = deserialise_euler_transform(obs_value)
   elif obs_type is F.FObservation.FRB:
-    value, value_range = deserialise_body(f_obs)
+    value, value_range = deserialise_body(obs_value)
   elif obs_type is F.FObservation.FQT:
-    value, value_range = deserialise_quaternion_transform(f_obs)
+    value, value_range = deserialise_quaternion_transform(obs_value)
   elif obs_type is F.FObservation.FByteArray:
-    value, value_range = deserialise_byte_array(f_obs)
+    value, value_range = deserialise_byte_array(obs_value)
   elif obs_type is F.FObservation.FString:
-    value, value_range = deserialise_string(f_obs)
+    value, value_range = deserialise_string(obs_value)
 
   return value, value_range
 
 
-def deserialise_observers(flat_state):
-  observers = {}
+def deserialise_sensors(flat_description):
+  out_sensors = {}
 
-  for i in range(flat_state.ObservationsLength()):
-    f_obs = flat_state.Observations(i)
-    observation_value, observation_space = deserialise_observation(f_obs)
+  for i in range(flat_description.SensorsLength()):
+    f_obs = flat_description.Sensors(i)
+    obs_type = f_obs.SensorValueType()
+    obs_value = f_obs.SensorValue()
+    sensor_value, sensor_space = deserialise_sensor(obs_type, obs_value)
 
-    name = f_obs.ObservationName().decode()
-    observers[name] = N.Sensor(name, observation_space, observation_value)
-  return observers
+    name = f_obs.SensorName().decode()
+    out_sensors[name] = N.Sensor(name, sensor_space, sensor_value)
+  return out_sensors
 
 
 def deserialise_unobservables(state):
@@ -134,90 +136,89 @@ def deserialise_bodies(unobservables):
   return bodies
 
 
-def deserialise_euler_transform(f_obs):
+def deserialise_euler_transform(f_obs)-> Tuple[Any, Any]:
   transform = F.FEulerTransform()
-  transform.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  transform.Init(f_obs.Bytes, f_obs.Pos)
   position = transform.Position(F.FVector3())
   rotation = transform.Rotation(F.FVector3())
   direction = transform.Direction(F.FVector3())
-  return [
-    [position.X(), position.Y(), position.Z()],
-    [direction.X(), direction.Y(), direction.Z()],
-    [rotation.X(), rotation.Y(), rotation.Z()],
-    ]
+
+  return [[position.X(), position.Y(), position.Z()],
+          [direction.X(), direction.Y(), direction.Z()],
+          [rotation.X(), rotation.Y(), rotation.Z()],
+          ], [None for _ in range(9)]
 
 
 def deserialise_body(f_obs):
   body = F.FBody()
-  body.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  body.Init(f_obs.Bytes, f_obs.Pos)
   velocity = body.Velocity(F.FVector3())
   angular_velocity = body.AngularVelocity(F.FVector3())
   return [
-    [velocity.X(), velocity.Y(), velocity.Z()],
-    [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
-    ]
+           [velocity.X(), velocity.Y(), velocity.Z()],
+           [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
+           ], [None for _ in range(6)]
 
 
 def deserialise_quadruple(f_obs) -> Tuple[Any, Any]:
   q = F.FQuadruple()
-  q.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  q.Init(f_obs.Bytes, f_obs.Pos)
   quad = q.Quat()
   data = [quad.X(), quad.Y(), quad.Z(), quad.W()]
-  return data, None
+  return data, [None for _ in range(4)]
 
 
-def deserialise_triple(f_obs):
+def deserialise_triple(f_obs)-> Tuple[Any, Any]:
   pos = F.FTriple()
-  pos.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  pos.Init(f_obs.Bytes, f_obs.Pos)
   position = pos.Vec3()
   value = [position.X(), position.Y(), position.Z()]
   value_range = [pos.XRange(), pos.YRange(), pos.ZRange()]
   return value, value_range
 
 
-def deserialise_double(f_obs):
+def deserialise_double(f_obs)-> Tuple[Any, Any]:
   pos = F.FDouble()
-  pos.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  pos.Init(f_obs.Bytes, f_obs.Pos)
   position = pos.Vec2()
   value = [position.X(), position.Y()]
   value_range = [pos.XRange(), pos.YRange()]
   return value, value_range
 
 
-def deserialise_single(f_obs):
+def deserialise_single(f_obs)-> Tuple[Any, Any]:
   val = F.FSingle()
-  val.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  val.Init(f_obs.Bytes, f_obs.Pos)
   value, value_range = val.Value(), val.Range()
   return value, value_range
 
 
-def deserialise_string(f_obs):
+def deserialise_string(f_obs)-> Tuple[Any, Any]:
   val = F.FString()
-  val.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  val.Init(f_obs.Bytes, f_obs.Pos)
   value = val.Str()
-  return value, None
+  return value, 'skip_observable_dim'
 
 
-def deserialise_quaternion_transform(f_obs):
+def deserialise_quaternion_transform(f_obs) -> Tuple[Any, Any]:
   qt = F.FQT()
-  qt.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  qt.Init(f_obs.Bytes, f_obs.Pos)
   position = qt.Transform().Position(F.FVector3())
   rotation = qt.Transform().Rotation(F.FQuaternion())
-  data = [
-    position.X(),
-    position.Y(),
-    position.Z(),
-    rotation.X(),
-    rotation.Y(),
-    rotation.Z(),
-    rotation.W(),
-    ]
-  return data, None
+  data = [position.X(),
+          position.Y(),
+          position.Z(),
+          rotation.X(),
+          rotation.Y(),
+          rotation.Z(),
+          rotation.W(),
+          ]
+  return data, [None for _ in range(7)]
 
 
-def deserialise_byte_array(f_obs):
+def deserialise_byte_array(f_obs)-> Tuple[Any, Any]:
   byte_array = F.FByteArray()
-  byte_array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  byte_array.Init(f_obs.Bytes, f_obs.Pos)
   data = byte_array.BytesAsNumpy()
   t = byte_array.Type()
   if t == F.FByteDataType.UINT8:
@@ -236,48 +237,63 @@ def deserialise_byte_array(f_obs):
 
   else:
     out = data
-  return out, None
+  return out, 'skip_observable_dim'
 
 
-def deserialise_array(f_obs):
+def deserialise_array(f_obs)-> Tuple[Any, Any]:
   array = F.FArray()
-  array.Init(f_obs.Observation().Bytes, f_obs.Observation().Pos)
+  array.Init(f_obs.Bytes, f_obs.Pos)
   # data = np.array([array.Array(i) for i in range(array.ArrayLength())])
   data = array.ArrayAsNumpy()
-  return data, None
+  return data, [None for _ in range(array.ArrayLength())]
 
 
 def deserialise_actuators(flat_actor):
+  '''
+
+  # All dictionaries in python3.6+ are insertion ordered, actuators are sorted by key and
+  # inserted so that the order of actuator key-value pairs are always the same for all instances the same
+  # environment. This is
+  # useful when descriptions are used for inference what value (motion strength) in a numeric vector
+  # corresponds to what actuator.
+
+  :param flat_actor:
+  :return:
+  '''
   actuators = {}
   for i in range(flat_actor.ActuatorsLength()):
     flat_actuator = flat_actor.Actuators(i)
     input_actuator = N.Actuator(
         flat_actuator.ActuatorName().decode(),
-        flat_actuator.ValidInput(),
-        flat_actuator.EnergySpentSinceReset(),
+        flat_actuator.ActuatorRange()
         )
     actuators[input_actuator.actuator_name] = input_actuator
 
-  out_motors = {}  # All dictionaries in python3.6+ are insertion ordered, motors are sorted by key and
-  # inserted so that the order of motor key-value pairs are always the same for all instances the same
-  # environment. This is
-  # useful when descriptions are used for inference what value (motion strength) in a numeric vector
-  # corresponds to what motor.
+  out_actuators = {}
   for key in sorted(actuators.keys()):
-    out_motors[key] = actuators[key]
+    out_actuators[key] = actuators[key]
 
   return actuators
 
 
 def deserialise_space(flat_space):
   if isinstance(flat_space, list):
-    return [N.Range(decimal_granularity=space.DecimalGranularity(),
-                    min_value=space.MinValue(),
-                    max_value=space.MaxValue())
-            for space in flat_space if space is not None]
+    ret = []
+    for space in flat_space:
+      if space is not None:
+        ran = N.Range(decimal_granularity=space.DecimalGranularity(),
+                      min_value=space.MinValue(),
+                      max_value=space.MaxValue())
+        ret.append(ran)
+      elif  space != 'skip_observable_dim':
+        ran = N.Range()
+        ret.append(ran)
+
+    return ret
 
   space = N.Range(decimal_granularity=flat_space.DecimalGranularity(),
                   min_value=flat_space.MinValue(),
                   max_value=flat_space.MaxValue()
                   )
+
   return space

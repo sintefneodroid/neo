@@ -1,0 +1,202 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  min-height: 100% !important;
+  height: 100% !important;
+  color: rgba(35, 31, 32, 1);
+}
+
+body {
+  font: 14px Oxygen, sans-serif;
+  line-height: 1.8;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.25),
+      rgba(230, 230, 230, 0.25)
+  );
+  color: rgba(35, 31, 32, 1);
+}
+
+p {
+  font-size: 14px;
+}
+
+.bg-0 {
+rgba(160, 160, 160, 0.35);
+  background-size: cover;
+  color: rgba(35, 31, 32, 1);
+}
+
+.bg-1 {
+  color: rgba(35, 31, 32, 1);
+}
+
+.bg-2 {
+  background: rgba(200, 200, 200, 0.35);
+  color: rgba(35, 31, 32, 1);
+}
+
+.bg-3 {
+  background: rgba(244, 244, 244, 0.15); /* Rusty Red #984B43 */
+  color: rgba(35, 31, 32, 1);
+}
+
+.bg-4 {
+  background-color: rgba(160, 160, 160, 0.35);
+  color: rgba(215, 100, 50, 1);
+}
+
+input {
+  color: rgba(215, 100, 50, 1);
+}
+
+.navbar { /* Add a dark background color with a little bit see-through */
+  margin-bottom: 0;
+  background-color: #2d2d30;
+  border: 0;
+  font-size: 12px !important;
+  letter-spacing: 5px;
+  opacity: 0.9;
+}
+
+
+.navbar li a, .navbar .navbar-brand { /* Add a gray color to all navbar links */
+  color: rgba(35, 31, 32, 1) !important;
+}
+
+
+.navbar-nav li a:hover { /* On hover, the links will turn white */
+  color: #fff !important;
+}
+
+
+.navbar-nav li.active a { /* The active link */
+  color: #fff !important;
+  background-color: #29292c !important;
+}
+
+
+.navbar-default .navbar-toggle { /* Remove border color from the collapsible button */
+  border-color: transparent;
+}
+
+#first {
+  padding: 240px 0 240px 0;
+}
+
+#third {
+  height: auto;
+}
+
+img {
+  display: block;
+  margin: auto;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.container-fluid {
+  padding: 70px 50px 70px 50px;
+}
+
+.container-fluid div {
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.container-fluid a {
+  color: rgba(35, 31, 32, 1);
+}
+
+.container-fluid a:hover {
+  color: rgba(35, 31, 32, 1);
+  text-decoration: none;
+}
+
+.btn {
+  background-color: transparent;
+  color: rgba(215, 100, 50, 0.6);
+}
+
+
+footer { /* Add a dark background color to the footer */
+  background-color: rgba(35, 31, 32, 0.2);
+  color: rgba(35, 31, 32, 1);
+  padding: 16px;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+
+footer a {
+  color: rgba(35, 31, 32, 1) !important;
+}
+
+footer a:hover {
+  color: rgba(215, 100, 50, 1);
+!important;
+  text-decoration: none;
+}
+
+div#loading {
+  width: 150px;
+  height: 50px;
+  display: none;
+  background: url(loading_image.gif) no-repeat center;
+  cursor: wait;
+}
+
+.logo-small {
+  color: rgba(35, 31, 32, 1);
+  font-size: 50px;
+}
+
+table {
+  width: 80%;
+  max-width: 400px;
+}
+
+#picture {
+  width: 80%;
+  max-width: 400px;
+}
+
+table, th, td {
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+tr:hover {
+  background-color: rgba(35, 31, 32, 0.2);
+}
+
+th, td {
+  padding: 5px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+td {
+  vertical-align: middle;
+}
+
+label {
+  text-align: left;
+}
+
+h1 {
+  color: rgb(35, 31, 32);
+}
+
+.thumbnail img {
+  width: 150px;
+  max-width: 400px;
+}

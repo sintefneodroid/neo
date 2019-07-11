@@ -34,56 +34,8 @@ class FState(object):
     return 0
 
   # FState
-  def Signal(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
-    if o != 0:
-      return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
-    return 0.0
-
-  # FState
-  def Terminated(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
-    if o != 0:
-      return bool(self._tab.Get(flatbuffers.number_types.BoolFlags, o + self._tab.Pos))
-    return False
-
-  # FState
-  def TerminationReason(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
-    if o != 0:
-      return self._tab.String(o + self._tab.Pos)
-    return None
-
-  # FState
-  def TotalEnergySpent(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
-    if o != 0:
-      return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
-    return 0.0
-
-  # FState
-  def Observations(self, j):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
-    if o != 0:
-      x = self._tab.Vector(o)
-      x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
-      x = self._tab.Indirect(x)
-      from .FOBS import FOBS
-      obj = FOBS()
-      obj.Init(self._tab.Bytes, x)
-      return obj
-    return None
-
-  # FState
-  def ObservationsLength(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
-    if o != 0:
-      return self._tab.VectorLen(o)
-    return 0
-
-  # FState
   def Observables(self, j):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
     if o != 0:
       a = self._tab.Vector(o)
       return self._tab.Get(flatbuffers.number_types.Float32Flags,
@@ -92,21 +44,21 @@ class FState(object):
 
   # FState
   def ObservablesAsNumpy(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
     if o != 0:
       return self._tab.GetVectorAsNumpy(flatbuffers.number_types.Float32Flags, o)
     return 0
 
   # FState
   def ObservablesLength(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
     if o != 0:
       return self._tab.VectorLen(o)
     return 0
 
   # FState
   def Unobservables(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(20))
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
     if o != 0:
       x = self._tab.Indirect(o + self._tab.Pos)
       from .FUnobservables import FUnobservables
@@ -116,8 +68,29 @@ class FState(object):
     return None
 
   # FState
+  def Signal(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
+    if o != 0:
+      return self._tab.Get(flatbuffers.number_types.Float32Flags, o + self._tab.Pos)
+    return 0.0
+
+  # FState
+  def Terminated(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
+    if o != 0:
+      return bool(self._tab.Get(flatbuffers.number_types.BoolFlags, o + self._tab.Pos))
+    return False
+
+  # FState
+  def TerminationReason(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
+    if o != 0:
+      return self._tab.String(o + self._tab.Pos)
+    return None
+
+  # FState
   def EnvironmentDescription(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(22))
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(18))
     if o != 0:
       x = self._tab.Indirect(o + self._tab.Pos)
       from .FEnvironmentDescription import FEnvironmentDescription
@@ -127,71 +100,76 @@ class FState(object):
     return None
 
   # FState
-  def SerialisedMessage(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(24))
+  def LastReaction(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(20))
+    if o != 0:
+      x = self._tab.Indirect(o + self._tab.Pos)
+      from .FReaction import FReaction
+      obj = FReaction()
+      obj.Init(self._tab.Bytes, x)
+      return obj
+    return None
+
+  # FState
+  def ExtraSerialisedMessage(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(22))
     if o != 0:
       return self._tab.String(o + self._tab.Pos)
     return None
 
 
-def FStateStart(builder): builder.StartObject(11)
+def FStateStart(builder): builder.StartObject(10)
 
 
 def FStateAddEnvironmentName(builder, environmentName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                             flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                environmentName),
+                                                                                              environmentName),
                                                                                             0)
 
 
 def FStateAddFrameNumber(builder, frameNumber): builder.PrependInt32Slot(1, frameNumber, 0)
 
 
-def FStateAddSignal(builder, signal): builder.PrependFloat32Slot(2, signal, 0.0)
-
-
-def FStateAddTerminated(builder, terminated): builder.PrependBoolSlot(3, terminated, 0)
-
-
-def FStateAddTerminationReason(builder, terminationReason): builder.PrependUOffsetTRelativeSlot(4,
-                                                                                                flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                    terminationReason),
-                                                                                                0)
-
-
-def FStateAddTotalEnergySpent(builder, totalEnergySpent): builder.PrependFloat32Slot(5, totalEnergySpent, 0.0)
-
-
-def FStateAddObservations(builder, observations): builder.PrependUOffsetTRelativeSlot(6,
-                                                                                      flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                          observations), 0)
-
-
-def FStateStartObservationsVector(builder, numElems): return builder.StartVector(4, numElems, 4)
-
-
-def FStateAddObservables(builder, observables): builder.PrependUOffsetTRelativeSlot(7,
+def FStateAddObservables(builder, observables): builder.PrependUOffsetTRelativeSlot(2,
                                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                        observables), 0)
+                                                                                      observables), 0)
 
 
 def FStateStartObservablesVector(builder, numElems): return builder.StartVector(4, numElems, 4)
 
 
-def FStateAddUnobservables(builder, unobservables): builder.PrependUOffsetTRelativeSlot(8,
+def FStateAddUnobservables(builder, unobservables): builder.PrependUOffsetTRelativeSlot(3,
                                                                                         flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                            unobservables), 0)
+                                                                                          unobservables), 0)
 
 
-def FStateAddEnvironmentDescription(builder, environmentDescription): builder.PrependUOffsetTRelativeSlot(9,
+def FStateAddSignal(builder, signal): builder.PrependFloat32Slot(4, signal, 0.0)
+
+
+def FStateAddTerminated(builder, terminated): builder.PrependBoolSlot(5, terminated, 0)
+
+
+def FStateAddTerminationReason(builder, terminationReason): builder.PrependUOffsetTRelativeSlot(6,
+                                                                                                flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                                  terminationReason),
+                                                                                                0)
+
+
+def FStateAddEnvironmentDescription(builder, environmentDescription): builder.PrependUOffsetTRelativeSlot(7,
                                                                                                           flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                              environmentDescription),
+                                                                                                            environmentDescription),
                                                                                                           0)
 
 
-def FStateAddSerialisedMessage(builder, serialisedMessage): builder.PrependUOffsetTRelativeSlot(10,
-                                                                                                flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                    serialisedMessage),
-                                                                                                0)
+def FStateAddLastReaction(builder, lastReaction): builder.PrependUOffsetTRelativeSlot(8,
+                                                                                      flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                        lastReaction), 0)
+
+
+def FStateAddExtraSerialisedMessage(builder, extraSerialisedMessage): builder.PrependUOffsetTRelativeSlot(9,
+                                                                                                          flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                                            extraSerialisedMessage),
+                                                                                                          0)
 
 
 def FStateEnd(builder): return builder.EndObject()
