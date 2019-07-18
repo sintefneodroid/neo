@@ -13,8 +13,7 @@ from neodroid.interfaces import environment_models as M
 
 def verify_motion_reactions(inputs,
                             environment_descriptions,
-                            normalise=False,
-                            verbose=False):
+                            normalise=False):
   if environment_descriptions:
     if len(inputs) is not len(environment_descriptions):
       logging.warning(

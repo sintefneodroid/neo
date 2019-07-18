@@ -3,7 +3,7 @@
 import logging
 from typing import Dict
 
-from neodroid.factories.inference import maybe_infer_motion_reaction
+from neodroid.factories.reaction_inference import maybe_infer_motion_reaction
 from neodroid.interfaces.environment_models import EnvironmentDescription, EnvironmentSnapshot
 from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
 from neodroid.utilities import launch_environment
