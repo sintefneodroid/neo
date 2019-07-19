@@ -82,11 +82,11 @@ def deserialise_sensor(obs_type, obs_value):
     value, value_range = deserialise_quadruple(obs_value)
   elif obs_type is F.FObservation.FArray:
     value, value_range = deserialise_array(obs_value)
-  elif obs_type is F.FObservation.FET:
+  elif obs_type is F.FObservation.FETObs:
     value, value_range = deserialise_euler_transform(obs_value)
-  elif obs_type is F.FObservation.FRB:
+  elif obs_type is F.FObservation.FRBObs:
     value, value_range = deserialise_body(obs_value)
-  elif obs_type is F.FObservation.FQT:
+  elif obs_type is F.FObservation.FQTObs:
     value, value_range = deserialise_quaternion_transform(obs_value)
   elif obs_type is F.FObservation.FByteArray:
     value, value_range = deserialise_byte_array(obs_value)
@@ -137,11 +137,13 @@ def deserialise_bodies(unobservables):
 
 
 def deserialise_euler_transform(f_obs) -> Tuple[Any, Any]:
-  transform = F.FEulerTransform()
+  transform = F.FETObs()
   transform.Init(f_obs.Bytes, f_obs.Pos)
-  position = transform.Position(F.FVector3())
-  rotation = transform.Rotation(F.FVector3())
-  direction = transform.Direction(F.FVector3())
+  t = transform.Transform()
+  position = t.Position(F.FVector3())
+  rotation = t.Rotation(F.FVector3())
+  direction = t.Direction(F.FVector3())
+  # ranges = [q.XRange(),q.YRange(), q.ZRange()]
 
   return [[position.X(), position.Y(), position.Z()],
           [direction.X(), direction.Y(), direction.Z()],
@@ -150,10 +152,14 @@ def deserialise_euler_transform(f_obs) -> Tuple[Any, Any]:
 
 
 def deserialise_body(f_obs):
-  body = F.FBody()
+  body = F.FRBObs()
   body.Init(f_obs.Bytes, f_obs.Pos)
-  velocity = body.Velocity(F.FVector3())
-  angular_velocity = body.AngularVelocity(F.FVector3())
+  b = body.Body()
+  velocity = b.Velocity(F.FVector3())
+  angular_velocity = b.AngularVelocity(F.FVector3())
+
+  # ranges = [q.XRange(),q.YRange(), q.ZRange()]
+
   return [
            [velocity.X(), velocity.Y(), velocity.Z()],
            [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
@@ -165,6 +171,7 @@ def deserialise_quadruple(f_obs) -> Tuple[Any, Any]:
   q.Init(f_obs.Bytes, f_obs.Pos)
   quad = q.Quat()
   data = [quad.X(), quad.Y(), quad.Z(), quad.W()]
+  # ranges = [q.XRange(),q.YRange(), q.ZRange(), q.WRange()]
   return data, [None for _ in range(4)]
 
 
@@ -200,8 +207,40 @@ def deserialise_string(f_obs) -> Tuple[Any, Any]:
   return value, 'skip_observable_dim'
 
 
+def deserialise_rigidbody(f_obs) -> Tuple[Any, Any]:
+  qt = F.FRBObs()
+  qt.Init(f_obs.Bytes, f_obs.Pos)
+  position = qt.Transform().Position(F.FVector3())
+  rotation = qt.Transform().Rotation(F.FQuaternion())
+  data = [position.X(),
+          position.Y(),
+          position.Z(),
+          rotation.X(),
+          rotation.Y(),
+          rotation.Z(),
+          rotation.W(),
+          ]
+  return data, [None for _ in range(7)]
+
+
+def deserialise_rigidbody(f_obs) -> Tuple[Any, Any]:
+  qt = F.FETObs()
+  qt.Init(f_obs.Bytes, f_obs.Pos)
+  position = qt.Transform().Position(F.FVector3())
+  rotation = qt.Transform().Rotation(F.FQuaternion())
+  data = [position.X(),
+          position.Y(),
+          position.Z(),
+          rotation.X(),
+          rotation.Y(),
+          rotation.Z(),
+          rotation.W(),
+          ]
+  return data, [None for _ in range(7)]
+
+
 def deserialise_quaternion_transform(f_obs) -> Tuple[Any, Any]:
-  qt = F.FQT()
+  qt = F.FQTObs()
   qt.Init(f_obs.Bytes, f_obs.Pos)
   position = qt.Transform().Position(F.FVector3())
   rotation = qt.Transform().Rotation(F.FQuaternion())

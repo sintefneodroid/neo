@@ -4,33 +4,33 @@
 
 import flatbuffers
 
-class FQuadruple(object):
+class FETObs(object):
     __slots__ = ['_tab']
 
     @classmethod
-    def GetRootAsFQuadruple(cls, buf, offset):
+    def GetRootAsFETObs(cls, buf, offset):
         n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-        x = FQuadruple()
+        x = FETObs()
         x.Init(buf, n + offset)
         return x
 
-    # FQuadruple
+    # FETObs
     def Init(self, buf, pos):
         self._tab = flatbuffers.table.Table(buf, pos)
 
-    # FQuadruple
-    def Quat(self):
+    # FETObs
+    def Transform(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             x = o + self._tab.Pos
-            from .FQuaternion import FQuaternion
-            obj = FQuaternion()
+            from .FEulerTransform import FEulerTransform
+            obj = FEulerTransform()
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
 
-    # FQuadruple
-    def XRange(self):
+    # FETObs
+    def PosRange(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
             x = o + self._tab.Pos
@@ -40,8 +40,8 @@ class FQuadruple(object):
             return obj
         return None
 
-    # FQuadruple
-    def YRange(self):
+    # FETObs
+    def RotRange(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         if o != 0:
             x = o + self._tab.Pos
@@ -51,8 +51,8 @@ class FQuadruple(object):
             return obj
         return None
 
-    # FQuadruple
-    def ZRange(self):
+    # FETObs
+    def DirRange(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
         if o != 0:
             x = o + self._tab.Pos
@@ -62,21 +62,9 @@ class FQuadruple(object):
             return obj
         return None
 
-    # FQuadruple
-    def WRange(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
-        if o != 0:
-            x = o + self._tab.Pos
-            from .FRange import FRange
-            obj = FRange()
-            obj.Init(self._tab.Bytes, x)
-            return obj
-        return None
-
-def FQuadrupleStart(builder): builder.StartObject(5)
-def FQuadrupleAddQuat(builder, quat): builder.PrependStructSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(quat), 0)
-def FQuadrupleAddXRange(builder, xRange): builder.PrependStructSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(xRange), 0)
-def FQuadrupleAddYRange(builder, yRange): builder.PrependStructSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(yRange), 0)
-def FQuadrupleAddZRange(builder, zRange): builder.PrependStructSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(zRange), 0)
-def FQuadrupleAddWRange(builder, wRange): builder.PrependStructSlot(4, flatbuffers.number_types.UOffsetTFlags.py_type(wRange), 0)
-def FQuadrupleEnd(builder): return builder.EndObject()
+def FETObsStart(builder): builder.StartObject(4)
+def FETObsAddTransform(builder, transform): builder.PrependStructSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(transform), 0)
+def FETObsAddPosRange(builder, posRange): builder.PrependStructSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(posRange), 0)
+def FETObsAddRotRange(builder, rotRange): builder.PrependStructSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(rotRange), 0)
+def FETObsAddDirRange(builder, dirRange): builder.PrependStructSlot(3, flatbuffers.number_types.UOffsetTFlags.py_type(dirRange), 0)
+def FETObsEnd(builder): return builder.EndObject()
