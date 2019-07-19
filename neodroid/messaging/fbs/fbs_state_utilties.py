@@ -82,11 +82,11 @@ def deserialise_sensor(obs_type, obs_value):
     value, value_range = deserialise_quadruple(obs_value)
   elif obs_type is F.FObservation.FArray:
     value, value_range = deserialise_array(obs_value)
-  elif obs_type is F.FObservation.FET:
+  elif obs_type is F.FObservation.FETObs:
     value, value_range = deserialise_euler_transform(obs_value)
-  elif obs_type is F.FObservation.FRB:
+  elif obs_type is F.FObservation.FRBObs:
     value, value_range = deserialise_body(obs_value)
-  elif obs_type is F.FObservation.FQT:
+  elif obs_type is F.FObservation.FQTObs:
     value, value_range = deserialise_quaternion_transform(obs_value)
   elif obs_type is F.FObservation.FByteArray:
     value, value_range = deserialise_byte_array(obs_value)
@@ -136,12 +136,14 @@ def deserialise_bodies(unobservables):
   return bodies
 
 
-def deserialise_euler_transform(f_obs)-> Tuple[Any, Any]:
-  transform = F.FEulerTransform()
+def deserialise_euler_transform(f_obs) -> Tuple[Any, Any]:
+  transform = F.FETObs()
   transform.Init(f_obs.Bytes, f_obs.Pos)
-  position = transform.Position(F.FVector3())
-  rotation = transform.Rotation(F.FVector3())
-  direction = transform.Direction(F.FVector3())
+  t = transform.Transform()
+  position = t.Position(F.FVector3())
+  rotation = t.Rotation(F.FVector3())
+  direction = t.Direction(F.FVector3())
+  # ranges = [q.XRange(),q.YRange(), q.ZRange()]
 
   return [[position.X(), position.Y(), position.Z()],
           [direction.X(), direction.Y(), direction.Z()],
@@ -150,10 +152,14 @@ def deserialise_euler_transform(f_obs)-> Tuple[Any, Any]:
 
 
 def deserialise_body(f_obs):
-  body = F.FBody()
+  body = F.FRBObs()
   body.Init(f_obs.Bytes, f_obs.Pos)
-  velocity = body.Velocity(F.FVector3())
-  angular_velocity = body.AngularVelocity(F.FVector3())
+  b = body.Body()
+  velocity = b.Velocity(F.FVector3())
+  angular_velocity = b.AngularVelocity(F.FVector3())
+
+  # ranges = [q.XRange(),q.YRange(), q.ZRange()]
+
   return [
            [velocity.X(), velocity.Y(), velocity.Z()],
            [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
@@ -165,10 +171,11 @@ def deserialise_quadruple(f_obs) -> Tuple[Any, Any]:
   q.Init(f_obs.Bytes, f_obs.Pos)
   quad = q.Quat()
   data = [quad.X(), quad.Y(), quad.Z(), quad.W()]
+  # ranges = [q.XRange(),q.YRange(), q.ZRange(), q.WRange()]
   return data, [None for _ in range(4)]
 
 
-def deserialise_triple(f_obs)-> Tuple[Any, Any]:
+def deserialise_triple(f_obs) -> Tuple[Any, Any]:
   pos = F.FTriple()
   pos.Init(f_obs.Bytes, f_obs.Pos)
   position = pos.Vec3()
@@ -177,7 +184,7 @@ def deserialise_triple(f_obs)-> Tuple[Any, Any]:
   return value, value_range
 
 
-def deserialise_double(f_obs)-> Tuple[Any, Any]:
+def deserialise_double(f_obs) -> Tuple[Any, Any]:
   pos = F.FDouble()
   pos.Init(f_obs.Bytes, f_obs.Pos)
   position = pos.Vec2()
@@ -186,22 +193,22 @@ def deserialise_double(f_obs)-> Tuple[Any, Any]:
   return value, value_range
 
 
-def deserialise_single(f_obs)-> Tuple[Any, Any]:
+def deserialise_single(f_obs) -> Tuple[Any, Any]:
   val = F.FSingle()
   val.Init(f_obs.Bytes, f_obs.Pos)
   value, value_range = val.Value(), val.Range()
   return value, value_range
 
 
-def deserialise_string(f_obs)-> Tuple[Any, Any]:
+def deserialise_string(f_obs) -> Tuple[Any, Any]:
   val = F.FString()
   val.Init(f_obs.Bytes, f_obs.Pos)
   value = val.Str()
   return value, 'skip_observable_dim'
 
 
-def deserialise_quaternion_transform(f_obs) -> Tuple[Any, Any]:
-  qt = F.FQT()
+def deserialise_rigidbody(f_obs) -> Tuple[Any, Any]:
+  qt = F.FRBObs()
   qt.Init(f_obs.Bytes, f_obs.Pos)
   position = qt.Transform().Position(F.FVector3())
   rotation = qt.Transform().Rotation(F.FQuaternion())
@@ -216,7 +223,39 @@ def deserialise_quaternion_transform(f_obs) -> Tuple[Any, Any]:
   return data, [None for _ in range(7)]
 
 
-def deserialise_byte_array(f_obs)-> Tuple[Any, Any]:
+def deserialise_rigidbody(f_obs) -> Tuple[Any, Any]:
+  qt = F.FETObs()
+  qt.Init(f_obs.Bytes, f_obs.Pos)
+  position = qt.Transform().Position(F.FVector3())
+  rotation = qt.Transform().Rotation(F.FQuaternion())
+  data = [position.X(),
+          position.Y(),
+          position.Z(),
+          rotation.X(),
+          rotation.Y(),
+          rotation.Z(),
+          rotation.W(),
+          ]
+  return data, [None for _ in range(7)]
+
+
+def deserialise_quaternion_transform(f_obs) -> Tuple[Any, Any]:
+  qt = F.FQTObs()
+  qt.Init(f_obs.Bytes, f_obs.Pos)
+  position = qt.Transform().Position(F.FVector3())
+  rotation = qt.Transform().Rotation(F.FQuaternion())
+  data = [position.X(),
+          position.Y(),
+          position.Z(),
+          rotation.X(),
+          rotation.Y(),
+          rotation.Z(),
+          rotation.W(),
+          ]
+  return data, [None for _ in range(7)]
+
+
+def deserialise_byte_array(f_obs) -> Tuple[Any, Any]:
   byte_array = F.FByteArray()
   byte_array.Init(f_obs.Bytes, f_obs.Pos)
   data = byte_array.BytesAsNumpy()
@@ -240,7 +279,7 @@ def deserialise_byte_array(f_obs)-> Tuple[Any, Any]:
   return out, 'skip_observable_dim'
 
 
-def deserialise_array(f_obs)-> Tuple[Any, Any]:
+def deserialise_array(f_obs) -> Tuple[Any, Any]:
   array = F.FArray()
   array.Init(f_obs.Bytes, f_obs.Pos)
   # data = np.array([array.Array(i) for i in range(array.ArrayLength())])
@@ -263,10 +302,9 @@ def deserialise_actuators(flat_actor):
   actuators = {}
   for i in range(flat_actor.ActuatorsLength()):
     flat_actuator = flat_actor.Actuators(i)
-    input_actuator = N.Actuator(
-        flat_actuator.ActuatorName().decode(),
-        flat_actuator.ActuatorRange()
-        )
+    input_actuator = N.Actuator(flat_actuator.ActuatorName().decode(),
+                                flat_actuator.ActuatorRange()
+                                )
     actuators[input_actuator.actuator_name] = input_actuator
 
   out_actuators = {}
@@ -285,8 +323,8 @@ def deserialise_space(flat_space):
                       min_value=space.MinValue(),
                       max_value=space.MaxValue())
         ret.append(ran)
-      elif  space != 'skip_observable_dim':
-        ran = N.Range()
+      elif space != 'skip_observable_dim':
+        ran = N.Range(decimal_granularity=10)
         ret.append(ran)
 
     return ret

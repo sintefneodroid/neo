@@ -17,12 +17,18 @@ class Range(object):
                min_value=0,
                max_value=0,
                decimal_granularity=0):
+
     assert max_value >= min_value
     assert decimal_granularity >= 0
 
     self._decimal_granularity = decimal_granularity
     self._min_value = min_value
     self._max_value = max_value
+    self._normalised = True
+
+  @property
+  def normalised(self):
+    return self._normalised
 
   @property
   def decimal_granularity(self):

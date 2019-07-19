@@ -48,10 +48,12 @@ def construct_step_reaction(*,
                                       episode_count=True)
     if isinstance(list(reaction_input.values())[0], dict):
       return M.Reaction(parameters=parameters,
-                        motions=[Motion(p, k, v) for p, a in reaction_input.items() for k, v in a.items()])
+                        motions=[Motion(p, k, v)
+                                 for p, a in reaction_input.items() for k, v in a.items()])
 
     return M.Reaction(parameters=parameters,
-                      motions=[Motion('Actor', k, v) for k, v in reaction_input.items()])
+                      motions=[Motion('Actor', k, v)
+                               for k, v in reaction_input.items()])
 
   if environment_description:
     parameters = M.ReactionParameters(terminable=True,
@@ -64,24 +66,31 @@ def construct_step_reaction(*,
         if is_valid_motions:
           return reaction_input
         else:
-          reaction_input.motions = construct_motions_from_list(reaction_input.motions, actors, normalise,
+          reaction_input.motions = construct_motions_from_list(reaction_input.motions,
+                                                               actors,
+                                                               normalise,
                                                                space)
           return reaction_input
       elif isinstance(reaction_input, list):
         is_valid_motions = all(isinstance(m, M.Motion) for m in reaction_input)
         if is_valid_motions:
-
-          return M.Reaction(parameters=parameters, motions=reaction_input)
+          return M.Reaction(parameters=parameters,
+                            motions=reaction_input)
         else:
           return construct_reaction_from_list(reaction_input,
                                               actors,
-                                              normalise, space)
-      elif isinstance(reaction_input, (int,float)):
-        return construct_reaction_from_list([reaction_input], actors, normalise, space)
+                                              normalise,
+                                              space)
+      elif isinstance(reaction_input, (int, float)):
+        return construct_reaction_from_list([reaction_input],
+                                            actors,
+                                            normalise,
+                                            space)
       elif isinstance(reaction_input, (np.ndarray, np.generic)):
         a = construct_reaction_from_list(reaction_input.astype(float).tolist(),
                                          actors,
-                                         normalise, space)
+                                         normalise,
+                                         space)
         return a
 
   parameters = M.ReactionParameters(describe=True)
@@ -164,7 +173,7 @@ def verify_configuration_reaction(*, input_reaction, environment_description):
           return M.Reaction(parameters=parameters, configurations=input_reaction)
         else:
           return construct_configuration_reaction_from_list(input_reaction, configurables)
-      elif isinstance(input_reaction, (int,float)):
+      elif isinstance(input_reaction, (int, float)):
         return construct_configuration_reaction_from_list([input_reaction], configurables)
       elif isinstance(input_reaction, (np.ndarray, np.generic)):
         a = construct_configuration_reaction_from_list(input_reaction.astype(float).tolist(), configurables)

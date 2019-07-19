@@ -11,7 +11,7 @@ __author__ = 'cnheider'
 
 class Space(object):
 
-  def __init__(self, ranges: Sequence[Range], names: Sequence[str]= ()):
+  def __init__(self, ranges: Sequence[Range], names: Sequence[str] = ()):
     assert isinstance(ranges, Sequence)
     self._ranges = ranges
     self._names = names
@@ -49,7 +49,8 @@ class Space(object):
 
   @property
   def is_discrete(self):
-    return numpy.array([a.decimal_granularity == 0 for a in self._ranges if hasattr(a,'decimal_granularity')]).all()
+    return numpy.array(
+        [a.decimal_granularity == 0 for a in self._ranges if hasattr(a, 'decimal_granularity')]).all()
 
   @property
   def is_mixed(self):
@@ -73,6 +74,10 @@ class Space(object):
   @property
   def continuous_shape(self):
     return (len(self._ranges),)
+
+  @property
+  def is_01normalised(self):
+    return numpy.array([a.normalised for a in self._ranges if hasattr(a, 'normalised')]).all()
 
   def __repr__(self):
     names_str = ''.join([str(r.__repr__()) for r in self._names])

@@ -4,7 +4,7 @@ from warnings import warn
 
 from neodroid import NeodroidEnvironment
 from neodroid.exceptions.exceptions import NoEnvironmentError
-from neodroid.factories.inference import maybe_infer_configuration_reaction, maybe_infer_motion_reaction
+from neodroid.factories.reaction_inference import maybe_infer_configuration_reaction, maybe_infer_motion_reaction
 from neodroid.interfaces.environment_models import Reaction
 
 __author__ = 'cnheider'

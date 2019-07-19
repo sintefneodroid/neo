@@ -4,33 +4,33 @@
 
 import flatbuffers
 
-class FDouble(object):
+class FQTObs(object):
     __slots__ = ['_tab']
 
     @classmethod
-    def GetRootAsFDouble(cls, buf, offset):
+    def GetRootAsFQTObs(cls, buf, offset):
         n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-        x = FDouble()
+        x = FQTObs()
         x.Init(buf, n + offset)
         return x
 
-    # FDouble
+    # FQTObs
     def Init(self, buf, pos):
         self._tab = flatbuffers.table.Table(buf, pos)
 
-    # FDouble
-    def Vec2(self):
+    # FQTObs
+    def Transform(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             x = o + self._tab.Pos
-            from .FVector2 import FVector2
-            obj = FVector2()
+            from .FQuaternionTransform import FQuaternionTransform
+            obj = FQuaternionTransform()
             obj.Init(self._tab.Bytes, x)
             return obj
         return None
 
-    # FDouble
-    def XRange(self):
+    # FQTObs
+    def PosRange(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
             x = o + self._tab.Pos
@@ -40,8 +40,8 @@ class FDouble(object):
             return obj
         return None
 
-    # FDouble
-    def YRange(self):
+    # FQTObs
+    def RotRange(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
         if o != 0:
             x = o + self._tab.Pos
@@ -51,8 +51,8 @@ class FDouble(object):
             return obj
         return None
 
-def FDoubleStart(builder): builder.StartObject(3)
-def FDoubleAddVec2(builder, vec2): builder.PrependStructSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(vec2), 0)
-def FDoubleAddXRange(builder, xRange): builder.PrependStructSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(xRange), 0)
-def FDoubleAddYRange(builder, yRange): builder.PrependStructSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(yRange), 0)
-def FDoubleEnd(builder): return builder.EndObject()
+def FQTObsStart(builder): builder.StartObject(3)
+def FQTObsAddTransform(builder, transform): builder.PrependStructSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(transform), 0)
+def FQTObsAddPosRange(builder, posRange): builder.PrependStructSlot(1, flatbuffers.number_types.UOffsetTFlags.py_type(posRange), 0)
+def FQTObsAddRotRange(builder, rotRange): builder.PrependStructSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(rotRange), 0)
+def FQTObsEnd(builder): return builder.EndObject()
