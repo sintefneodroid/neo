@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from neodroid.interfaces.environment_models import EnvironmentSnapshot
+from neodroid.interfaces.specifications import EnvironmentSnapshot
 from neodroid.messaging import ClientEvents, message_client_event
 
 __author__ = 'cnheider'

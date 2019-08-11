@@ -50,7 +50,7 @@ def main():
   while environment.is_connected:
     action = environment.action_space.sample()
     state = environment.react(action)
-    for k,v in state.items():
+    for k, v in state.items():
       terminated = v.terminated
       break
 

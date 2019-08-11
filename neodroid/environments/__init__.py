@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from .neodroid_environments import NeodroidEnvironment
+from .neodroid_environment import NeodroidEnvironment
+from .batched_neodroid_environments import BatchedNeodroidEnvironment
+from neodroid.environments.deprecated.python_environment import PythonEnvironment
+from .vector_environment import VectorEnvironment
 
 __author__ = 'cnheider'
 __doc__ = ''
 
 
-def make(environment_name='', clones=0, *args, **kwargs) -> NeodroidEnvironment:
-  _environments = NeodroidEnvironment(environment_name=environment_name, clones=clones, *args, **kwargs)
+def make(environment_name: str = None, clones=0, *args, **kwargs) -> NeodroidEnvironment:
+  _environments = NeodroidEnvironment(environment_name=environment_name,
+                                      clones=clones,
+                                      *args,
+                                      **kwargs)
   return _environments
 
 

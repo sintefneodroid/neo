@@ -4,7 +4,7 @@ import imageio
 import numpy
 import numpy as np
 
-from neodroid.interfaces import environment_models as N
+from neodroid.interfaces import specifications as N
 from neodroid.messaging.fbs import FBSModels as F
 
 

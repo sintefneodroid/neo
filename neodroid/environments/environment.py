@@ -4,9 +4,9 @@ import logging
 from abc import ABC, abstractmethod
 from types import coroutine
 
-from neodroid.interfaces.environment_models import EnvironmentDescription
+from neodroid import PROJECT_APP_PATH
 from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
-from neodroid.version import PROJECT_APP_PATH
+from neodroid.interfaces.specifications import EnvironmentDescription
 
 __author__ = 'cnheider'
 

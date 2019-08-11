@@ -3,11 +3,12 @@
 import argparse
 
 from warg.arguments import add_bool_arg
+
 from .ucb1 import UCB1
 
 __author__ = 'cnheider'
 
-import neodroid.environments.wrappers.single_environment as neo
+import neodroid.wrappers.single_environment as neo
 from neodroid import messaging
 
 

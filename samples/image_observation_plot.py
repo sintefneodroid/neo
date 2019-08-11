@@ -3,10 +3,10 @@
 import time
 
 import cv2
-from neodroid.environments.wrappers import NeodroidGymEnvironment
-
-from neodroid.interfaces.neodroid_standard_modules import extract_all_as_camera
 from warg.named_ordered_dictionary import NOD
+
+from neodroid.wrappers import NeodroidGymEnvironment
+from neodroid.interfaces.neodroid_standard_modules import extract_all_as_camera
 
 __author__ = 'cnheider'
 __doc__ = ''

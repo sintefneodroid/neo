@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 from collections import Sequence
 
-from neodroid.interfaces.environment_models import EnvironmentDescription, Range
 from neodroid.interfaces.spaces import Space
+from neodroid.interfaces.specifications import EnvironmentDescription, Range
 
 __author__ = 'cnheider'
 

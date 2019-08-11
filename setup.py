@@ -18,15 +18,15 @@ import re
 
 from setuptools import find_packages
 
-_v = pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "version.py"
+_v = pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "__init__.py"
 with open(_v, "r") as f:
   content = f.read()
 
   version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]", content, re.M).group(
-    1)  # get version string from module
+      1)  # get version string from module
 
   project_name = re.search(r"PROJECT_NAME = ['\"]([^'\"]*)['\"]", content, re.M).group(
-    1)  # get project name string from module
+      1)  # get project name string from module
 
 
 class NeodroidPackageMeta(type):
@@ -74,7 +74,7 @@ class NeodroidPackageMeta(type):
 
   @property
   def author_email(self):
-    return 'cnheider@yandex.com'
+    return 'christian.heider@alexandra.dk'
 
   @property
   def maintainer_name(self):
@@ -102,12 +102,12 @@ class NeodroidPackageMeta(type):
     return {
       'console_scripts':[
         # "name_of_executable = module.with:function_to_execute"
-        'neodroid = neodroid.cli:main',
+        'neodroid = entry_points.cli:main',
         'neodroid-sample = samples.action_space_sampling:main',
         'neodroid-img = samples.image_observation_plot:main',
         'neodroid-mab = samples.mab.multi_armed_bandit:main',
         'neodroid-kb = samples.keyboard.qweasd_input:main',
-        # 'neodroid-gui = samples.guiclient.main:main'
+        'neodroid-gui = samples.gui_client.main:main'
         ]
       }
 
@@ -219,6 +219,7 @@ class NeodroidPackageMeta(type):
 
 class NeodroidPackage(metaclass=NeodroidPackageMeta):
   pass
+
 
 from setuptools import setup
 

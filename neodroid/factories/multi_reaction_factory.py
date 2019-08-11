@@ -8,7 +8,7 @@ __author__ = 'cnheider'
 
 import numpy as np
 
-from neodroid.interfaces import environment_models as M
+from neodroid.interfaces import specifications as M
 
 
 def verify_motion_reactions(inputs,

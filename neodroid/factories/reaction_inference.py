@@ -6,11 +6,12 @@ from neodroid.interfaces.spaces import ActionSpace
 __author__ = 'cnheider'
 __doc__ = ''
 
+
 def maybe_infer_motion_reaction(*,
                                 input_reactions,
                                 normalise,
                                 description,
-                                action_space:ActionSpace):
+                                action_space: ActionSpace):
   '''
 
   :param action_space:
@@ -39,6 +40,7 @@ def maybe_infer_motion_reaction(*,
                                            )
 
   return out_reaction
+
 
 def maybe_infer_configuration_reaction(input_reaction, description):
   if description:

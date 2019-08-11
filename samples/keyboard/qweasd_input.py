@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.environments.wrappers import SingleEnvironment
 from warg.named_ordered_dictionary import NOD
+
+from neodroid.wrappers import SingleEnvironment
 
 __author__ = 'cnheider'
 

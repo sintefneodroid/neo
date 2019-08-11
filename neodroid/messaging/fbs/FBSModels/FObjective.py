@@ -4,47 +4,62 @@
 
 import flatbuffers
 
+
 class FObjective(object):
-    __slots__ = ['_tab']
+  __slots__ = ['_tab']
 
-    @classmethod
-    def GetRootAsFObjective(cls, buf, offset):
-        n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-        x = FObjective()
-        x.Init(buf, n + offset)
-        return x
+  @classmethod
+  def GetRootAsFObjective(cls, buf, offset):
+    n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
+    x = FObjective()
+    x.Init(buf, n + offset)
+    return x
 
-    # FObjective
-    def Init(self, buf, pos):
-        self._tab = flatbuffers.table.Table(buf, pos)
+  # FObjective
+  def Init(self, buf, pos):
+    self._tab = flatbuffers.table.Table(buf, pos)
 
-    # FObjective
-    def ObjectiveName(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-        if o != 0:
-            return self._tab.String(o + self._tab.Pos)
-        return None
+  # FObjective
+  def ObjectiveName(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+    if o != 0:
+      return self._tab.String(o + self._tab.Pos)
+    return None
 
-    # FObjective
-    def MaxEpisodeLength(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
-        if o != 0:
-            return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
-        return 0
+  # FObjective
+  def MaxEpisodeLength(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+    if o != 0:
+      return self._tab.Get(flatbuffers.number_types.Int32Flags, o + self._tab.Pos)
+    return 0
 
-    # FObjective
-    def SignalSpace(self):
-        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
-        if o != 0:
-            x = o + self._tab.Pos
-            from .FRange import FRange
-            obj = FRange()
-            obj.Init(self._tab.Bytes, x)
-            return obj
-        return None
+  # FObjective
+  def SignalSpace(self):
+    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+    if o != 0:
+      x = o + self._tab.Pos
+      from .FRange import FRange
+      obj = FRange()
+      obj.Init(self._tab.Bytes, x)
+      return obj
+    return None
+
 
 def FObjectiveStart(builder): builder.StartObject(3)
-def FObjectiveAddObjectiveName(builder, objectiveName): builder.PrependUOffsetTRelativeSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(objectiveName), 0)
+
+
+def FObjectiveAddObjectiveName(builder, objectiveName): builder.PrependUOffsetTRelativeSlot(0,
+                                                                                            flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                              objectiveName),
+                                                                                            0)
+
+
 def FObjectiveAddMaxEpisodeLength(builder, maxEpisodeLength): builder.PrependInt32Slot(1, maxEpisodeLength, 0)
-def FObjectiveAddSignalSpace(builder, signalSpace): builder.PrependStructSlot(2, flatbuffers.number_types.UOffsetTFlags.py_type(signalSpace), 0)
+
+
+def FObjectiveAddSignalSpace(builder, signalSpace): builder.PrependStructSlot(2,
+                                                                              flatbuffers.number_types.UOffsetTFlags.py_type(
+                                                                                signalSpace), 0)
+
+
 def FObjectiveEnd(builder): return builder.EndObject()
