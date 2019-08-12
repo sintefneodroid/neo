@@ -101,7 +101,7 @@ def create_app(base_path,
 if __name__ == '__main__':
 
   executable_path = Path.home() / 'Data'
-  executable_path.mkdir()
+  executable_path.mkdir(parents=True)
   exported_model_path = executable_path / 'export'
   labels_path = executable_path / 'output_labels.txt'
   app = create_app(exported_model_path, labels_path)
