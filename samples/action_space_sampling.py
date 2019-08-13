@@ -3,9 +3,9 @@
 import argparse
 import time
 
-__author__ = 'cnheider'
+from neodroid.environments import connect
 
-import neodroid as neo
+__author__ = 'cnheider'
 
 
 def add_bool_arg(parser, name, *, dest=None, default=False, **kwargs):
@@ -42,11 +42,12 @@ def main():
 
   args = parser.parse_args()
 
-  environment = neo.connect()
+  environment = connect()
 
   i = 0
   freq = 100
   time_s = time.time()
+  terminated = False
   while environment.is_connected:
     action = environment.action_space.sample()
     state = environment.react(action)

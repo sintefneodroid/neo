@@ -3,7 +3,6 @@
 
 from .neodroid_environment import NeodroidEnvironment
 from .batched_neodroid_environments import BatchedNeodroidEnvironment
-from neodroid.environments.deprecated.python_environment import PythonEnvironment
 from .vector_environment import VectorEnvironment
 
 __author__ = 'cnheider'

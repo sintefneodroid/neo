@@ -10,7 +10,20 @@ from pip._internal.utils.misc import dist_is_editable
 from apppath import AppPath
 
 __author__ = "cnheider"
-__version__ = "0.3.9"
+__version__ = "0.4.0"
+__doc__ = r'''
+Created on 27/04/2019
+
+@author: cnheider
+
+.. module:: neodroid
+   :platform: Unix, Windows
+   :synopsis: An API for communicating with a Unity Game process.
+
+.. moduleauthor:: Christian Heider Nielsen <christian.heider@alexandra.dk>
+
+
+'''
 
 '''
 def dist_is_editable(dist):
@@ -84,19 +97,7 @@ if __version__ is None:
 
 __version_info__ = tuple(int(segment) for segment in __version__.split("."))
 
-__doc__ = r'''
-Created on 27/04/2019
 
-@author: cnheider
-
-.. module:: neodroid
-   :platform: Unix, Windows
-   :synopsis: An API for communicating with a Unity Game process.
-
-.. moduleauthor:: Christian Heider Nielsen <christian.heider@alexandra.dk>
-
-
-'''
 
 
 def get_logo() -> str:

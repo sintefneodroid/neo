@@ -3,17 +3,15 @@
 import time
 
 import cv2
+import matplotlib.pyplot as plt
+from matplotlib import animation
 from warg.named_ordered_dictionary import NOD
 
+from neodroid.interfaces.neodroid_standard_modules.neodroid_camera_extraction import extract_all_as_camera
 from neodroid.wrappers import NeodroidGymEnvironment
-from neodroid.interfaces.neodroid_standard_modules import extract_all_as_camera
 
 __author__ = 'cnheider'
 __doc__ = ''
-
-# import cv2
-import matplotlib.pyplot as plt
-from matplotlib import animation
 
 
 def grab_video_frame(cap):
@@ -37,12 +35,13 @@ def update_figures(i):
   sample = env.action_space.sample()
   obs, signal, terminated, info = env.step(sample)
   if print_obs:
+    print(i)
     for obs in info.sensors.values():
       print(obs)
 
   new_images = extract_all_as_camera(info)
 
-  new_images['RGB'] = new_images['RGB'] ** 0.454545
+  #new_images['RGB'] = new_images['RGB'] ** 0.454545
 
   # print( numpy.max(new_images['RGB']))
 
@@ -77,6 +76,7 @@ def main():
   acs = env.action_space.sample()
   obs, rew, term, info = env.step(acs)
   if print_obs:
+    print(0)
     for obs in info.sensors.values():
       print(obs)
 
