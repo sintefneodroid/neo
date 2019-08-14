@@ -221,14 +221,17 @@ def deserialise_rigidbody(f_obs) -> Tuple[Any, Any]:
           rotation.W(),
           ]
   return data, [
-    N.Range(min_value=qt.VelRange().MinValue(), max_value=qt.VelRange().MaxValue(), decimal_granularity=qt.VelRange(
+    N.Range(min_value=qt.VelRange().MinValue(), max_value=qt.VelRange().MaxValue(),
+            decimal_granularity=qt.VelRange(
 
-        ).DecimalGranularity()) for
+                ).DecimalGranularity()) for
     _ in
-    range(3)] + [N.Range(min_value=qt.AngRange().MinValue(), max_value=qt.AngRange().MaxValue(), decimal_granularity=qt.AngRange(
+    range(3)] + [N.Range(min_value=qt.AngRange().MinValue(), max_value=qt.AngRange().MaxValue(),
+                         decimal_granularity=qt.AngRange(
 
-      ).DecimalGranularity()) for _ in
+                             ).DecimalGranularity()) for _ in
                  range(4)]
+
 
 def deserialise_quaternion_transform(f_obs) -> Tuple[Any, Any]:
   qt = F.FQTObs()
@@ -254,7 +257,6 @@ def deserialise_byte_array(f_obs) -> Tuple[Any, Any]:
   if t == F.FByteDataType.UINT8:
     out = numpy.frombuffer(data, dtype=numpy.uint8)
     out = out.reshape(*byte_array.ShapeAsNumpy())
-    out = numpy.flipud(out)
   elif t == F.FByteDataType.FLOAT16:
     out = numpy.frombuffer(data, dtype=numpy.float16)
     out = out.reshape(*byte_array.ShapeAsNumpy())

@@ -21,7 +21,6 @@ def add_bool_arg(parser, name, *, dest=None, default=False, **kwargs):
 
 def main():
   parser = argparse.ArgumentParser(description='Neodroid Action Space Sampling')
-
   parser.add_argument('--IP',
                       '-ip',
                       type=str,

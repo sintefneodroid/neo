@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.wrappers import SingleEnvironment
 from neodroid.exceptions.exceptions import SensorNotAvailableException
 from neodroid.interfaces.neodroid_standard_modules.neodroid_camera_extraction import (
   extract_camera_observation,
   extract_neodroid_camera,
   )
-
+from neodroid.wrappers import SingleEnvironment
 
 __author__ = 'cnheider'
 

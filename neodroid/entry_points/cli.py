@@ -95,7 +95,7 @@ class NeodroidCLI(object):
       print(f'{indent}Updated {env_name} at {exe_path}')
 
   @staticmethod
-  def clean(self) -> None:
+  def clean() -> None:
     '''
     Removes all locally stored environments
     '''
