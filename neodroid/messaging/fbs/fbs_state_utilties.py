@@ -4,7 +4,7 @@ import imageio
 import numpy
 import numpy as np
 
-from neodroid.interfaces import environment_models as N
+from neodroid.interfaces import specifications as N
 from neodroid.messaging.fbs import FBSModels as F
 
 
@@ -210,8 +210,8 @@ def deserialise_string(f_obs) -> Tuple[Any, Any]:
 def deserialise_rigidbody(f_obs) -> Tuple[Any, Any]:
   qt = F.FRBObs()
   qt.Init(f_obs.Bytes, f_obs.Pos)
-  position = qt.Transform().Position(F.FVector3())
-  rotation = qt.Transform().Rotation(F.FQuaternion())
+  position = qt.Body().Position(F.FVector3())
+  rotation = qt.Body().Rotation(F.FQuaternion())
   data = [position.X(),
           position.Y(),
           position.Z(),
@@ -220,23 +220,17 @@ def deserialise_rigidbody(f_obs) -> Tuple[Any, Any]:
           rotation.Z(),
           rotation.W(),
           ]
-  return data, [None for _ in range(7)]
+  return data, [
+    N.Range(min_value=qt.VelRange().MinValue(), max_value=qt.VelRange().MaxValue(),
+            decimal_granularity=qt.VelRange(
 
+                ).DecimalGranularity()) for
+    _ in
+    range(3)] + [N.Range(min_value=qt.AngRange().MinValue(), max_value=qt.AngRange().MaxValue(),
+                         decimal_granularity=qt.AngRange(
 
-def deserialise_rigidbody(f_obs) -> Tuple[Any, Any]:
-  qt = F.FETObs()
-  qt.Init(f_obs.Bytes, f_obs.Pos)
-  position = qt.Transform().Position(F.FVector3())
-  rotation = qt.Transform().Rotation(F.FQuaternion())
-  data = [position.X(),
-          position.Y(),
-          position.Z(),
-          rotation.X(),
-          rotation.Y(),
-          rotation.Z(),
-          rotation.W(),
-          ]
-  return data, [None for _ in range(7)]
+                             ).DecimalGranularity()) for _ in
+                 range(4)]
 
 
 def deserialise_quaternion_transform(f_obs) -> Tuple[Any, Any]:
@@ -273,7 +267,6 @@ def deserialise_byte_array(f_obs) -> Tuple[Any, Any]:
     out = imageio.imread(data, format='PNG-PIL')
   elif t == F.FByteDataType.JPEG:
     out = imageio.imread(data, format='JPEG-PIL')
-
   else:
     out = data
   return out, 'skip_observable_dim'
@@ -321,7 +314,8 @@ def deserialise_space(flat_space):
       if space is not None:
         ran = N.Range(decimal_granularity=space.DecimalGranularity(),
                       min_value=space.MinValue(),
-                      max_value=space.MaxValue())
+                      max_value=space.MaxValue()
+                      )
         ret.append(ran)
       elif space != 'skip_observable_dim':
         ran = N.Range(decimal_granularity=10)
@@ -329,9 +323,15 @@ def deserialise_space(flat_space):
 
     return ret
 
-  space = N.Range(decimal_granularity=flat_space.DecimalGranularity(),
-                  min_value=flat_space.MinValue(),
-                  max_value=flat_space.MaxValue()
-                  )
+  if isinstance(flat_space, str):
+    if flat_space != 'skip_observable_dim':
+      space = N.Range(decimal_granularity=10)
+    else:
+      return None
+  else:
+    space = N.Range(decimal_granularity=flat_space.DecimalGranularity(),
+                    min_value=flat_space.MinValue(),
+                    max_value=flat_space.MaxValue()
+                    )
 
   return space

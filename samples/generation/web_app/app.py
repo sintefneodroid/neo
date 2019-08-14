@@ -4,8 +4,6 @@ from pathlib import Path
 from flask import Flask, flash, redirect, render_template, request, url_for
 from werkzeug.utils import secure_filename
 
-
-
 from .config import ALLOWED_EXTENSIONS
 from .routes import uploads
 
@@ -103,8 +101,8 @@ def create_app(base_path,
 if __name__ == '__main__':
 
   executable_path = Path.home() / 'Data'
-  executable_path.mkdir()
+  executable_path.mkdir(parents=True)
   exported_model_path = executable_path / 'export'
-  labels_path= executable_path / 'output_labels.txt'
-  app = create_app(exported_model_path,labels_path)
+  labels_path = executable_path / 'output_labels.txt'
+  app = create_app(exported_model_path, labels_path)
   app.run(host='0.0.0.0', port=8080, debug=True, use_reloader=False)

@@ -5,15 +5,15 @@ from typing import Sequence
 
 import numpy
 
-from neodroid.interfaces.environment_models import Motion
 from neodroid.interfaces.spaces import ActionSpace, signed_ternary_encoding
+from neodroid.interfaces.specifications import Motion
 from neodroid.utilities.transformations.action_transformations import normalise_action
 
 __author__ = 'cnheider'
 
 import numpy as np
 
-from neodroid.interfaces import environment_models as M
+from neodroid.interfaces import specifications as M
 
 
 # @debug_print_return_value
@@ -25,6 +25,7 @@ def construct_step_reaction(*,
                             ):
   """
 
+  :param space:
   :param environment_description:
   :param normalise:
   :type reaction_input: object

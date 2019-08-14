@@ -4,7 +4,7 @@ from typing import Sequence
 
 import numpy
 
-from neodroid.interfaces.environment_models.range import Range
+from neodroid.interfaces.specifications.range import Range
 
 __author__ = 'cnheider'
 

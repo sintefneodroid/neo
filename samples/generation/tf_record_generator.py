@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 import json
 
-import numpy
-
 __author__ = 'cnheider'
 __doc__ = ''
 
@@ -92,7 +90,7 @@ if __name__ == '__main__':
         image_data = state.sensor('RGB').value
         dt.append((image_data, label, (256, 256, 4), json.loads(bb)))
 
-    write_tf_record_file(dt,file_name=file_name)
+    write_tf_record_file(dt, file_name=file_name)
 
   raw_image_dataset = tf.data.TFRecordDataset(file_name)
 

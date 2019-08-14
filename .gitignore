@@ -122,3 +122,8 @@ logs/*.csv
 *[Ee]xclude.*
 *[Ee]xcluded*
 *[Ee]xclude*
+
+
+pip-wheel-metadata
+.pytest_cache
+build/

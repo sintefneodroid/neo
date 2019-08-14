@@ -91,7 +91,8 @@ def launch_environment(environment_name,
         candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.app', 'Contents', 'MacOS', 
         true_filename))
         if len(candidates) == 0:
-          candidates = glob.glob(pathlib.Path.joinpath(file_name + '.app', 'Contents', 'MacOS', true_filename))
+          candidates = glob.glob(pathlib.Path.joinpath(file_name + '.app', 'Contents', 'MacOS', 
+          true_filename))
         if len(candidates) == 0:
           candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.app', 'Contents', 'MacOS', '*'))
         if len(candidates) == 0:
@@ -108,7 +109,7 @@ def launch_environment(environment_name,
     '''
 
   st = path_to_executable.stat()  # Ensure file is executable
-  path_to_executable.chmod( st.st_mode | stat.S_IEXEC)
+  path_to_executable.chmod(st.st_mode | stat.S_IEXEC)
 
   # new_env = os.environ.copy()
   # new_env['vblank_mode'] = '0'

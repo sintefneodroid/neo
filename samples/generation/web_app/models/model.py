@@ -10,7 +10,6 @@ from tensorflow.python.keras.backend import clear_session
 from tensorflow.python.keras.utils import get_file
 from tensorflow.python.saved_model import tag_constants
 
-
 CLASS_INDEX = None
 CLASS_INDEX_PATH = 'https://s3.amazonaws.com/deep-learning-models/image-models/imagenet_class_index.json'
 

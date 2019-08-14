@@ -18,15 +18,19 @@ import re
 
 from setuptools import find_packages
 
-_v = pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "version.py"
+_v = pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "__init__.py"
 with open(_v, "r") as f:
   content = f.read()
 
-  version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]", content, re.M).group(
-    1)  # get version string from module
+  version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]",
+                      content,
+                      re.M).group(
+      1)  # get version string from module
 
-  project_name = re.search(r"PROJECT_NAME = ['\"]([^'\"]*)['\"]", content, re.M).group(
-    1)  # get project name string from module
+  project_name = re.search(r"PROJECT_NAME = ['\"]([^'\"]*)['\"]",
+                           content,
+                           re.M).group(
+      1)  # get project name string from module
 
 
 class NeodroidPackageMeta(type):
@@ -74,7 +78,7 @@ class NeodroidPackageMeta(type):
 
   @property
   def author_email(self):
-    return 'cnheider@yandex.com'
+    return 'christian.heider@alexandra.dk'
 
   @property
   def maintainer_name(self):
@@ -102,12 +106,10 @@ class NeodroidPackageMeta(type):
     return {
       'console_scripts':[
         # "name_of_executable = module.with:function_to_execute"
-        'neodroid = neodroid.cli:main',
-        'neodroid-sample = samples.action_space_sampling:main',
-        'neodroid-img = samples.image_observation_plot:main',
-        'neodroid-mab = samples.mab.multi_armed_bandit:main',
-        'neodroid-kb = samples.keyboard.qweasd_input:main',
-        # 'neodroid-gui = samples.guiclient.main:main'
+        'neodroid = neodroid.entry_points.cli:main',
+        'neodroid-sample = neodroid.entry_points.action_space_sampling:main',
+        'neodroid-img = neodroid.entry_points.image_observation_plot:main',
+        'neodroid-kb = neodroid.entry_points.keyboard.qweasd_input:main',
         ]
       }
 
@@ -219,6 +221,7 @@ class NeodroidPackageMeta(type):
 
 class NeodroidPackage(metaclass=NeodroidPackageMeta):
   pass
+
 
 from setuptools import setup
 
