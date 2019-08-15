@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 import json
 
+from neodroid.environments import connect
+
 __author__ = 'cnheider'
 __doc__ = ''
 
@@ -37,7 +39,10 @@ class TFFeature:
 TFF = TFFeature
 
 
-def neodroid_tf_example(image_string, label, image_shape, bounding_box):
+def neodroid_tf_example(image_string,
+                        label,
+                        image_shape,
+                        bounding_box):
   '''
 
   :param bounding_box:
@@ -61,7 +66,8 @@ def neodroid_tf_example(image_string, label, image_shape, bounding_box):
   return tf.train.Example(features=tf.train.Features(feature=feature))
 
 
-def write_tf_record_file(data_tuples, file_name='neodroid_bb_images.tfr'):
+def write_tf_record_file(data_tuples,
+                         file_name='neodroid_bb_images.tfr'):
   '''
 
   '''
@@ -79,7 +85,7 @@ if __name__ == '__main__':
 
   if generate_num > 0:
     dt = []
-    with neodroid.connect() as env:
+    with connect() as env:
       for i, state in enumerate(env):
         if i >= generate_num:
           break

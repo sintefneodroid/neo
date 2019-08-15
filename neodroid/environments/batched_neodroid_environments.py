@@ -37,19 +37,17 @@ if __name__ == '__main__':
   from tqdm import tqdm
 
   parser = argparse.ArgumentParser(description='Batched Neodroid Environments')
-  parser.add_argument(
-      '--ENVIRONMENT_NAME',
-      type=str,
-      default='mab',
-      metavar='ENVIRONMENT_NAME',
-      help='name of the environment to run',
-      )
-  parser.add_argument(
-      '--CONNECT_TO_RUNNING',
-      '-C',
-      action='store_true',
-      default=True,
-      help='Connect to already running environment instead of starting another instance')
+  parser.add_argument('--ENVIRONMENT_NAME',
+                      type=str,
+                      default='mab',
+                      metavar='ENVIRONMENT_NAME',
+                      help='name of the environment to run',
+                      )
+  parser.add_argument('--CONNECT_TO_RUNNING',
+                      '-C',
+                      action='store_true',
+                      default=True,
+                      help='Connect to already running environment instead of starting another instance')
   args = parser.parse_args()
 
   env = NeodroidEnvironment(name=args.ENVIRONMENT_NAME, connect_to_running=args.CONNECT_TO_RUNNING)
