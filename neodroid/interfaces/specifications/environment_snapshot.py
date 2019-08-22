@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from collections import Callable
 
+from neodroid.messaging.fbs.FBSModels import FState
+
 __author__ = 'cnheider'
 
 import neodroid.messaging
@@ -9,7 +11,7 @@ import neodroid.messaging
 
 class EnvironmentSnapshot(object):
 
-  def __init__(self, fbs_state):
+  def __init__(self, fbs_state: FState):
     super().__init__()
     self._fbs_state = fbs_state
 
@@ -48,7 +50,7 @@ class EnvironmentSnapshot(object):
 
   @property
   def terminated(self):
-    if isinstance(self._observables, Callable):
+    if isinstance(self._terminated, Callable):
       return self._terminated()
     return self._terminated
 
@@ -57,8 +59,8 @@ class EnvironmentSnapshot(object):
     return self._fbs_state.TerminationReason().decode()
 
   @property
-  def debug_message(self):
-    return self._fbs_state.DebugMessage().decode()
+  def extra_serialised_message(self):
+    return self._fbs_state.ExtraSerialisedMessage().decode()
 
   @property
   def description(self):

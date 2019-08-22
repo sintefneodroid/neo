@@ -5,10 +5,12 @@ import time
 import cv2
 import matplotlib.pyplot as plt
 from matplotlib import animation
+
+from neodroid.environments import VectorEnvironment, NeodroidEnvironment
+from neodroid.environments.vector_environment import VectorWrapper
 from warg.named_ordered_dictionary import NOD
 
 from neodroid.interfaces.neodroid_standard_modules.neodroid_camera_extraction import extract_all_as_camera
-from neodroid.wrappers import NeodroidGymEnvironment
 
 __author__ = 'cnheider'
 __doc__ = ''
@@ -24,7 +26,7 @@ time_s = time.time()
 
 image_axs = NOD()
 
-env = NeodroidGymEnvironment(connect_to_running=True)
+env = VectorWrapper(NeodroidEnvironment(connect_to_running=True))
 fig = plt.figure()
 print_obs = False
 
@@ -33,7 +35,7 @@ def update_figures(i):
   global time_s, frame_i, image_axs
 
   sample = env.action_space.sample()
-  obs, signal, terminated, info = env.step(sample)
+  obs, signal, terminated, info = env.react(sample).to_gym_like_output()
   if print_obs:
     print(i)
     for obs in info.sensors.values():
@@ -74,7 +76,7 @@ def main():
 
   env.reset()
   acs = env.action_space.sample()
-  obs, rew, term, info = env.step(acs)
+  obs, rew, term, info = env.react(acs).to_gym_like_output()
   if print_obs:
     print(0)
     for obs in info.sensors.values():

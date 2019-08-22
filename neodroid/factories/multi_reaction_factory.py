@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import logging
+from typing import Mapping
 
 from neodroid.utilities.transformations.action_transformations import normalise_action
 
@@ -8,18 +9,69 @@ __author__ = 'cnheider'
 
 import numpy as np
 
-from neodroid.interfaces import specifications as M
+from neodroid.interfaces import specifications as M, EnvironmentDescription, ActionSpace
 
 
-def verify_motion_reactions(inputs,
-                            environment_descriptions,
-                            normalise=False):
+def maybe_infer_multi_motion_reaction(*,
+                                      input_reactions,
+                                      normalise: bool,
+                                      descriptions: Mapping[str, EnvironmentDescription],
+                                      action_space: Mapping[str, ActionSpace]):
+  '''
+
+  :param action_space:
+:param verbose:
+:type verbose:
+:param input_reactions:
+:type input_reactions:
+:param normalise:
+:type normalise:
+:param descriptions:
+:type descriptions:
+:return:
+:rtype:
+'''
+  if descriptions:
+    out_reaction = verify_motion_reactions(reaction_input=input_reactions,
+                                           environment_descriptions=descriptions,
+                                           normalise=normalise
+                                           )
+  else:
+    out_reaction = verify_motion_reactions(reaction_input=input_reactions,
+                                           environment_descriptions=None,
+                                           normalise=False
+                                           )
+
+  return out_reaction
+
+
+def maybe_infer_multi_configuration_reaction(input_reactions,
+                                             description: Mapping[str, EnvironmentDescription]):
+  if description:
+    input_reactions = verify_configuration_reactions(input_reaction=input_reactions,
+                                                     environment_descriptions=description
+                                                     )
+  else:
+    input_reactions = verify_configuration_reactions(input_reaction=input_reactions,
+                                                     environment_descriptions=description)
+
+  return input_reactions
+
+
+def verify_motion_reactions(*,
+                            reaction_input,
+                            environment_descriptions: Mapping[str, EnvironmentDescription],
+                            normalise: bool = False):
+  outs = []
   if environment_descriptions:
-    if len(inputs) is not len(environment_descriptions):
+    if len(reaction_input) is not len(environment_descriptions):
       logging.warning(
-          f'Inputs({len(inputs)}) and environment descriptions({len(environment_descriptions)}) are not the '
+          f'Inputs({len(reaction_input)}) and'
+          f' environment descriptions({len(environment_descriptions)}) are not the '
           f'same length')
-    for input, env_desc in zip(inputs, environment_descriptions):
+
+    for input, (env_name,env_desc) in zip(reaction_input,
+                               environment_descriptions.items()):
       actors = env_desc.actors.values()
       if actors:
         if isinstance(input, M.Reaction):
@@ -40,70 +92,65 @@ def verify_motion_reactions(inputs,
                                               configure=False,
                                               describe=False,
                                               episode_count=True)
-            return M.Reaction(parameters=parameters,
-                              configurations=[],
-                              motions=input)
+            outs.append(M.Reaction(parameters=parameters,
+                                   configurations=[],
+                                   motions=input,environment_name=env_name))
           else:
-            return construct_individual_reactions_from_list(input, actors, normalise)
+            outs.append(construct_individual_reactions_from_list(input, actors, normalise,env_name=env_name))
         elif isinstance(input, (int, float)):
-          return construct_individual_reactions_from_list([input], actors, normalise)
+          outs.append(construct_individual_reactions_from_list([input], actors, normalise,env_name=env_name))
         elif isinstance(input, (np.ndarray, np.generic)):
           a = construct_individual_reactions_from_list(input.astype(float).tolist(),
                                                        actors,
-                                                       normalise)
-          return a
-  if isinstance(inputs, M.Reaction):
-    return inputs
-  parameters = M.ReactionParameters(terminable=False,
-                                    step=False,
-                                    reset=False,
-                                    configure=False,
-                                    describe=True,
-                                    episode_count=False)
-  return M.Reaction(parameters=parameters)
+                                                       normalise,env_name=env_name)
+          outs.append(a)
+    else:
+      parameters = M.ReactionParameters(describe=True)
+      outs.append( M.Reaction(parameters=parameters))
+  return outs
 
 
-def construct_individual_reactions_from_list(motion_list, actors, normalise):
+def construct_individual_reactions_from_list(motion_list, actors, normalise,env_name='all'):
   motions = construct_motions_from_list(motion_list, actors, normalise)
   parameters = M.ReactionParameters(terminable=True, step=True, reset=False, configure=False,
                                     describe=False, episode_count=True)
-  return M.Reaction(motions=motions, parameters=parameters)
+  return M.Reaction(motions=motions, parameters=parameters,environment_name=env_name)
 
 
 def construct_motions_from_list(input_list, actors, normalise):
   actor_motor_tuples = [
-    (actor.actor_name, motor.actuator_name, motor.motion_space)
-    for actor in actors
-    for motor in actor.actuators.values()
-    ]
+      (actor.actor_name, motor.actuator_name, motor.motion_space)
+      for actor in actors
+      for motor in actor.actuators.values()
+      ]
   if normalise:
     new_motions = [
-      M.Motion(
-          actor_motor_tuple[0],
-          actor_motor_tuple[1],
-          normalise_action(list_val, actor_motor_tuple[2]),
-          )
-      for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
-      ]
+        M.Motion(
+            actor_motor_tuple[0],
+            actor_motor_tuple[1],
+            normalise_action(list_val, actor_motor_tuple[2]),
+            )
+        for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
+        ]
     return new_motions
   else:
     new_motions = [
-      M.Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
-      for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
-      ]
+        M.Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
+        for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
+        ]
     return new_motions
 
 
-def verify_configuration_reaction(input_reaction,
-                                  environment_description):
+def verify_configuration_reactions(input_reaction,
+                                   environment_descriptions: Mapping[str, EnvironmentDescription]):
   parameters = M.ReactionParameters(terminable=False,
                                     step=False,
                                     reset=True,
                                     configure=True,
                                     describe=True,
                                     episode_count=False)
-  if environment_description:
-    configurables = environment_description.configurables.values()
+  if environment_descriptions:
+    configurables = next(iter(environment_descriptions.items()))[1].configurables.values()
     if configurables:
       if isinstance(input_reaction, M.Reaction):
         if input_reaction.configurations:
@@ -150,7 +197,8 @@ def verify_configuration_reaction(input_reaction,
   return M.Reaction(parameters=parameters)
 
 
-def construct_configuration_reaction_from_list(configuration_list, configurables):
+def construct_configuration_reaction_from_list(configuration_list,
+                                               configurables):
   configurations = construct_configurations_from_known_observables(
       configuration_list, configurables
       )
@@ -161,7 +209,7 @@ def construct_configuration_reaction_from_list(configuration_list, configurables
 
 def construct_configurations_from_known_observables(input_list, configurables):
   new_configurations = [
-    M.Configuration(configurable.configurable_name, list_val)
-    for (list_val, configurable) in zip(input_list, configurables)
-    ]
+      M.Configuration(configurable.configurable_name, list_val)
+      for (list_val, configurable) in zip(input_list, configurables)
+      ]
   return new_configurations

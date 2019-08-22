@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.messaging.fbs.FBSModels import FEnvironmentDescription
+
 __author__ = 'cnheider'
 
 import neodroid.messaging
@@ -7,15 +9,15 @@ import neodroid.messaging
 
 class EnvironmentDescription(object):
 
-  def __init__(self, fbs_description):
+  def __init__(self, fbs_description:FEnvironmentDescription):
     self._fbs_description = fbs_description
 
   @property
-  def objective_name(self):
+  def objective_name(self) -> str:
     return self._fbs_description.Objective().ObjectiveName()
 
   @property
-  def max_episode_length(self):
+  def max_episode_length(self) -> int:
     return self._fbs_description.Objective().MaxEpisodeLength()
 
   @property

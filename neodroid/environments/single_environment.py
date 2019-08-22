@@ -4,9 +4,9 @@ from warnings import warn
 
 from neodroid.environments import NeodroidEnvironment
 from neodroid.exceptions.exceptions import NoEnvironmentError
-from neodroid.factories.reaction_inference import (maybe_infer_configuration_reaction,
-                                                   maybe_infer_motion_reaction,
-                                                   )
+from neodroid.factories.single_reaction_factory import (maybe_infer_single_configuration_reaction,
+                                                        maybe_infer_single_motion_reaction,
+                                                        )
 from neodroid.interfaces.specifications import Reaction, EnvironmentSnapshot
 
 __author__ = 'cnheider'
@@ -26,11 +26,11 @@ class SingleEnvironment(NeodroidEnvironment):
             normalise=False,
             **kwargs) -> EnvironmentSnapshot:
     if not isinstance(input_reaction, Reaction):
-      input_reaction = maybe_infer_motion_reaction(input_reactions=input_reaction,
-                                                   normalise=normalise,
-                                                   description=self._description,
-                                                   action_space=self.action_space
-                                                   )
+      input_reaction = maybe_infer_single_motion_reaction(input_reactions=input_reaction,
+                                                          normalise=normalise,
+                                                          description=self._description,
+                                                          action_space=self.action_space
+                                                          )
     if parameters is not None:
       input_reaction.parameters = parameters
 
@@ -45,10 +45,10 @@ class SingleEnvironment(NeodroidEnvironment):
 
   def reset(self, input_reaction=None, state=None, on_reset_callback=None)-> EnvironmentSnapshot:
 
-    input_reaction = maybe_infer_configuration_reaction(input_reaction=input_reaction,
-                                                        description=self._description
+    input_reaction = maybe_infer_single_configuration_reaction(input_reaction=input_reaction,
+                                                               description=self._description
 
-                                                        )
+                                                               )
     if state:
       input_reaction.unobservables = state.unobservables
 

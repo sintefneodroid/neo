@@ -5,7 +5,7 @@ from typing import Sequence
 
 import numpy
 
-from neodroid.interfaces.spaces import ActionSpace, signed_ternary_encoding
+from neodroid.interfaces.spaces import ActionSpace, signed_ternary_encoding, EnvironmentDescription
 from neodroid.interfaces.specifications import Motion
 from neodroid.utilities.transformations.action_transformations import normalise_action
 
@@ -16,12 +16,62 @@ import numpy as np
 from neodroid.interfaces import specifications as M
 
 
+
+
+def maybe_infer_single_motion_reaction(*,
+                                       input_reactions,
+                                       normalise:bool,
+                                       description:EnvironmentDescription,
+                                       action_space: ActionSpace):
+  '''
+
+  :param action_space:
+:param verbose:
+:type verbose:
+:param input_reactions:
+:type input_reactions:
+:param normalise:
+:type normalise:
+:param description:
+:type description:
+:return:
+:rtype:
+'''
+  if description:
+    out_reaction = construct_step_reaction(reaction_input=input_reactions,
+                                           environment_description=description,
+                                           normalise=normalise,
+                                           space=action_space
+                                           )
+  else:
+    out_reaction = construct_step_reaction(reaction_input=input_reactions,
+                                           environment_description=None,
+                                           normalise=False,
+                                           space=action_space
+                                           )
+
+  return out_reaction
+
+
+def maybe_infer_single_configuration_reaction(input_reaction,
+                                              description:EnvironmentDescription):
+  if description:
+    input_reaction = verify_configuration_reaction(input_reaction=input_reaction,
+                                                   environment_description=description
+                                                   )
+  else:
+    input_reaction = verify_configuration_reaction(input_reaction=input_reaction,
+                                                   environment_description=description)
+
+  return input_reaction
+
+
 # @debug_print_return_value
 def construct_step_reaction(*,
                             reaction_input,
-                            environment_description,
-                            space,
-                            normalise=False
+                            environment_description:EnvironmentDescription,
+                            space:ActionSpace,
+                            normalise:bool=False
                             ):
   """
 
@@ -113,7 +163,7 @@ def construct_reaction_from_list(motion_list, actors, normalise, space):
 
 def construct_motions_from_list(input_list,
                                 actors,
-                                normalise,
+                                normalise:bool,
                                 space: ActionSpace):
   actor_actuator_tuples = [(actor.actor_name,
                             actuator.actuator_name,
@@ -149,7 +199,9 @@ def construct_motions_from_list(input_list,
 
 
 # @print_return_value
-def verify_configuration_reaction(*, input_reaction, environment_description):
+def verify_configuration_reaction(*,
+                                  input_reaction,
+                                  environment_description: EnvironmentDescription):
   if environment_description:
     parameters = M.ReactionParameters(reset=True,
                                       configure=True,

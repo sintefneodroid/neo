@@ -5,11 +5,18 @@ from warnings import warn
 import numpy as np
 
 from neodroid.environments import NeodroidEnvironment
-from neodroid.factories.reaction_inference import (maybe_infer_configuration_reaction,
-                                                   maybe_infer_motion_reaction,
-                                                   )
-from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, Range
-from neodroid.interfaces.specifications import EnvironmentSnapshot, Reaction
+
+
+from neodroid.factories.multi_reaction_factory import (maybe_infer_multi_motion_reaction,
+                                                       maybe_infer_multi_configuration_reaction,
+                                                       )
+from neodroid.interfaces.spaces import (ActionSpace,
+                                        ObservationSpace,
+                                        Range,
+                                        SignalSpace,
+                                        EnvironmentDescription,
+                                        )
+from neodroid.interfaces.specifications import EnvironmentSnapshot, Reaction, ReactionParameters
 
 __author__ = 'cnheider'
 
@@ -22,21 +29,19 @@ class VectorEnvironment(NeodroidEnvironment):
     return self.react()
 
   def react(self,
-            input_reaction=None,
+            input_reactions=None,
             *,
-            parameters=None,
-            normalise=False,
+            parameters: ReactionParameters = None,
+            normalise: bool = False,
             **kwargs):
-    if not isinstance(input_reaction, Reaction):
-      input_reaction = maybe_infer_motion_reaction(input_reactions=input_reaction,
-                                                   normalise=normalise,
-                                                   description=self._description,
-                                                   action_space=self.action_space
-                                                   )
+    if not isinstance(input_reactions, Reaction):
+      input_reactions = maybe_infer_multi_motion_reaction(input_reactions=input_reactions,
+                                                          normalise=normalise,
+                                                          descriptions=self._description,
+                                                          action_space=self.action_space
+                                                          )
     if parameters is not None:
-      input_reaction.parameters = parameters
-
-    input_reactions = [input_reaction]
+      input_reactions.parameters = parameters
 
     env_states = super().react(input_reactions=input_reactions, **kwargs)
 
@@ -48,15 +53,18 @@ class VectorEnvironment(NeodroidEnvironment):
 
     return e
 
-  def reset(self, input_reaction=None, state=None, on_reset_callback=None):
+  def reset(self,
+            input_reactions=None,
+            state=None,
+            on_reset_callback:callable=None):
 
-    input_reaction = maybe_infer_configuration_reaction(input_reaction=input_reaction,
-                                                        description=self._description
-                                                        )
-    if state:
-      input_reaction.unobservables = state.unobservables
+    input_reactions = maybe_infer_multi_configuration_reaction(input_reactions=input_reactions,
+                                                               description=self._description
+                                                               )
+    #if state:
+    #  input_reaction.unobservables = state.unobservables
 
-    input_reactions = [input_reaction]
+    input_reactions = [input_reactions]
     new_states = super().reset(input_reactions)
 
     envs = list(new_states.values())
@@ -82,8 +90,16 @@ class VectorEnvironment(NeodroidEnvironment):
     e._terminated = [e_.terminated for e_ in envs]
 
     return e
+  '''
 
-  def sensor(self, name, *args, **kwargs):
+  def signal_space(self) -> SignalSpace:
+    pass
+
+  def description(self) -> EnvironmentDescription:
+    pass
+'''
+
+  def sensor(self, name:str, *args, **kwargs):
 
     envs = list(self._last_message.values())
 
@@ -105,35 +121,35 @@ class VectorWrapper:
     self._env = env
 
   @property
-  def observation_space(self):
+  def observation_space(self)-> ObservationSpace:
     '''
 
     :return:
     '''
     _input_shape = None
 
-    if len(self._env.observation_space.shape) >= 1:
-      _input_shape = self._env.observation_space
+    if len(next(iter(self._env._observation_space.values())).shape) >= 1:
+      _input_shape = next(iter(self._env._observation_space.values()))
     else:
       _input_shape = ObservationSpace([Range(min_value=0,
-                                             max_value=self._env.observation_space.n,
+                                             max_value=next(iter(self._env._observation_space.values())).n,
                                              decimal_granularity=0)])
 
     return _input_shape
 
   @property
-  def action_space(self):
+  def action_space(self) -> ActionSpace:
     '''
 
     :return:
     '''
     _output_shape = None
 
-    if len(self._env.action_space.shape) >= 1:
-      _output_shape = self._env.action_space
+    if len(next(iter(self._env.action_space.values())).shape) >= 1:
+      _output_shape = next(iter(self._env.action_space.values()))
     else:
       _output_shape = ActionSpace([Range(min_value=0,
-                                         max_value=self._env.action_space.n,
+                                         max_value=next(iter(self._env.action_space.values())).n,
                                          decimal_granularity=0)])
 
     return _output_shape
@@ -142,22 +158,18 @@ class VectorWrapper:
     if isinstance(a, np.ndarray):
       a = a.tolist()
 
-    observables, signal, terminated, *_ = self._env.step(a, *args, **kwargs)
+    info = self._env.react(a, *args, **kwargs)
 
-    env_state = EnvironmentSnapshot(None)
-    env_state._observables = observables
-    env_state._signal = signal
-    env_state._terminated = terminated
+    info = next(iter(info.values()))
 
-    return env_state
+    return info
 
   def reset(self):
-    observables = self._env.reset()
+    info = self._env.reset()
 
-    env_state = EnvironmentSnapshot(None)
-    env_state._observables = observables
+    info = next(iter(info.values()))
 
-    return env_state
+    return info
 
   def __getattr__(self, item):
     return getattr(self._env, item)

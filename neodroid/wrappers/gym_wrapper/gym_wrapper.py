@@ -4,7 +4,7 @@ from warnings import warn
 
 from gym import Env
 
-from neodroid.wrappers.single_environment import SingleEnvironment
+from neodroid.environments.single_environment import SingleEnvironment
 from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, Range
 from neodroid.interfaces.specifications import EnvironmentSnapshot
 

@@ -22,6 +22,6 @@ def seed(random_seed) -> None:
   np.random.seed(random_seed)
 
 
-def connect(ip='localhost', port=6969) -> NeodroidEnvironment:
-  _environments = NeodroidEnvironment(connect_to_running=True, ip=ip, port=port)
+def connect(ip='localhost', port=6969, **kwargs) -> NeodroidEnvironment:
+  _environments = NeodroidEnvironment(connect_to_running=True, ip=ip, port=port,**kwargs)
   return _environments

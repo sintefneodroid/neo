@@ -2,17 +2,16 @@
 # -*- coding: utf-8 -*-
 import logging
 from pathlib import Path
-from typing import Dict, Union
+from typing import Mapping, Union
 
 from neodroid import DEFAULT_ENVIRONMENTS_PATH
-from neodroid.factories.reaction_inference import maybe_infer_motion_reaction
+from neodroid.factories.multi_reaction_factory import maybe_infer_multi_motion_reaction
+from neodroid.interfaces import SimulatorConfiguration
 from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
 from neodroid.interfaces.specifications import EnvironmentDescription, EnvironmentSnapshot
 from neodroid.utilities import launch_environment
 
 __author__ = 'cnheider'
-
-import numpy as np
 
 import neodroid.interfaces.specifications as M
 from .networking_environment import NetworkingEnvironment
@@ -21,46 +20,48 @@ from .networking_environment import NetworkingEnvironment
 class NeodroidEnvironment(NetworkingEnvironment):
 
   @property
-  def description(self) -> EnvironmentDescription:
+  def description(self) -> Mapping[str, EnvironmentDescription]:
     while not self._description:
       self.describe()
     return self._description
 
   @property
-  def observation_space(self) -> ObservationSpace:
+  def observation_space(self) -> [str, ObservationSpace]:
     while not self._observation_space:
       self.describe()
     return self._observation_space
 
   @property
-  def action_space(self) -> ActionSpace:
+  def action_space(self) -> Mapping[str, ActionSpace]:
     while not self._action_space:
       self.describe()
     return self._action_space
 
   @property
-  def signal_space(self) -> SignalSpace:
+  def signal_space(self) -> Mapping[str, SignalSpace]:
     while not self._signal_space:
       self.describe()
     return self._signal_space
 
   @property
-  def simulator_configuration(self):
+  def simulator_configuration(self) -> SimulatorConfiguration:
+    while not self._simulator_configuration:
+      self.describe()
     return self._simulator_configuration
 
   @property
   def neodroid_api_version(self):
-    return '0.1.2'
+    return '0.4.0'
 
   def _setup_connection(self, auto_describe=True):
     super()._setup_connection(auto_describe)
     if auto_describe:
-      # TODO: WARN ABOUT WHEN INDIVIDUAL OBSERVATIONS AND UNOBSERVABLES ARE UNAVAILABLE
-      # due to simulator configuration
+      # TODO: WARN ABOUT WHEN INDIVIDUAL OBSERVATIONS AND UNOBSERVABLES ARE UNAVAILABLE due to simulator
+      #  configuration
 
       logging.warning(f'Using Neodroid API version {self.neodroid_api_version}')
 
-      server_version = self._simulator_configuration.api_version
+      server_version = self.simulator_configuration.api_version
       logging.info(f'Server API version: {server_version}')
 
       if self.neodroid_api_version != server_version:
@@ -105,7 +106,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
 
     self._setup_connection()
 
-  def configure(self, *args, **kwargs):
+  def configure(self, *args, **kwargs) -> Mapping[str, EnvironmentSnapshot]:
     return self.reset()
 
   def react(
@@ -116,7 +117,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
       normalise=False,
       on_reaction_sent_callback=None,
       on_step_done_callback=None,
-      **kwargs) -> Dict[str, EnvironmentSnapshot]:
+      **kwargs) -> Mapping[str, EnvironmentSnapshot]:
     '''
 
 :param input_reactions:
@@ -145,12 +146,11 @@ class NeodroidEnvironment(NetworkingEnvironment):
                                           )
         input_reactions = [M.Reaction(parameters=parameters)]
       elif not isinstance(input_reactions, M.Reaction):
-        input_reaction = maybe_infer_motion_reaction(input_reactions=input_reactions,
-                                                     normalise=normalise,
-                                                     description=self._description,
-                                                     action_space=self.action_space
-                                                     )
-        input_reactions = [input_reaction]
+        input_reactions = maybe_infer_multi_motion_reaction(input_reactions=input_reactions,
+                                                            normalise=normalise,
+                                                            descriptions=self._description,
+                                                            action_space=self.action_space
+                                                            )
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
 
@@ -160,13 +160,17 @@ class NeodroidEnvironment(NetworkingEnvironment):
 
     logging.warning('No valid was new_state received')
 
-  def display(self, displayables):
+  def display(self, displayables) -> Mapping[str, EnvironmentSnapshot]:
     conf_reaction = M.Reaction(displayables=displayables)
     message = self.reset(conf_reaction)
     if message:
-      return np.array(message.observables), message
+      return message
 
-  def reset(self, input_reactions=None, state=None, on_reset_callback=None):
+  def reset(self,
+            input_reactions=None,
+            state=None,
+            on_reset_callback=None) -> Mapping[
+    str, EnvironmentSnapshot]:
     logging.info('Resetting environment')
 
     if input_reactions is None:
@@ -202,7 +206,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
   def describe(self,
                parameters=M.ReactionParameters(terminable=False,
                                                describe=True,
-                                               episode_count=False)):
+                                               episode_count=False)) -> Mapping[str, EnvironmentSnapshot]:
     '''
 
     :param parameters:
@@ -220,11 +224,15 @@ class NeodroidEnvironment(NetworkingEnvironment):
   def update_interface_attributes(self, new_states, new_simulator_configuration):
     self._last_message = new_states
     self._simulator_configuration = new_simulator_configuration
-    first_environment = list(self._last_message.values())[0]
+    envs = self._last_message.items()
+    first_environment = next(iter(envs))[1]
     if first_environment.description:
-      self._description = first_environment.description
-      self._action_space = ActionSpace.from_environment_description(self._description)
-      self._observation_space = ObservationSpace.from_environment_description(self._description)
+      self._description = {k:env.description for k, env in envs}
+      self._action_space = next(iter({k:ActionSpace.from_environment_description(env.description) for k,
+                                                                                                      env in
+                                      envs}.values()))
+      self._observation_space = next(iter({k:ObservationSpace.from_environment_description(env.description)
+                                           for k, env in envs}.values()))
 
   def __repr__(self):
     return (f'<NeodroidEnvironment>\n'
