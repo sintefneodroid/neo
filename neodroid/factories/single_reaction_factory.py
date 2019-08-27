@@ -11,7 +11,7 @@ from neodroid.utilities.transformations.action_transformations import normalise_
 
 __author__ = 'cnheider'
 
-import numpy as np
+import numpy
 
 from neodroid.interfaces import specifications as M
 
@@ -137,7 +137,7 @@ def construct_step_reaction(*,
                                             actors,
                                             normalise,
                                             space)
-      elif isinstance(reaction_input, (np.ndarray, np.generic)):
+      elif isinstance(reaction_input, (numpy.ndarray,numpy.generic)):
         a = construct_reaction_from_list(reaction_input.astype(float).tolist(),
                                          actors,
                                          normalise,
@@ -228,7 +228,7 @@ def verify_configuration_reaction(*,
           return construct_configuration_reaction_from_list(input_reaction, configurables)
       elif isinstance(input_reaction, (int, float)):
         return construct_configuration_reaction_from_list([input_reaction], configurables)
-      elif isinstance(input_reaction, (np.ndarray, np.generic)):
+      elif isinstance(input_reaction, (numpy.ndarray,numpy.generic)):
         a = construct_configuration_reaction_from_list(input_reaction.astype(float).tolist(), configurables)
         return a
   if isinstance(input_reaction, M.Reaction):

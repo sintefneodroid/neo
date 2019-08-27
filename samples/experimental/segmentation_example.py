@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 def collect_states(_environments, num=4):
   states_c = []
   for _ in range(num):
-    actions = _environments.action_space._sample()
+    actions = _environments.action_space.sample()
     states = _environments.react(actions)
     state = next(iter(states.values()))
     terminated = state.terminated

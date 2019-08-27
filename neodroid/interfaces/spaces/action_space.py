@@ -8,7 +8,7 @@ from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
 __author__ = 'cnheider'
 
-import numpy as np
+import numpy
 
 
 class ActionSpace(Space):
@@ -20,17 +20,17 @@ class ActionSpace(Space):
   def sample(self):
     actions = []
     for valid_input in self._ranges:
-      sample = np.random.uniform(valid_input.min_value, valid_input.max_value, 1)
-      actions.append(np.round(sample, valid_input.decimal_granularity))
+      sample = numpy.random.uniform(valid_input.min_value, valid_input.max_value, 1)
+      actions.append(numpy.round(sample, valid_input.decimal_granularity))
     return actions
 
   def validate(self, actions):
     for i in range(len(actions)):
-      clipped = np.clip(actions[i],
+      clipped = numpy.clip(actions[i],
                         self._ranges[i].min_value,
                         self._ranges[i].max_value,
                         )
-      actions[i] = np.round(clipped, self._ranges[i].decimal_granularity)
+      actions[i] = numpy.round(clipped, self._ranges[i].decimal_granularity)
     return actions
 
   @property
@@ -38,10 +38,10 @@ class ActionSpace(Space):
     return sum([r.discrete_steps for r in self._ranges])
 
   def discrete_ternary_one_hot_sample(self):
-    idx = np.random.randint(0, self.num_actuators)
-    zeros = np.zeros(self.num_ternary_actions)
+    idx = numpy.random.randint(0, self.num_actuators)
+    zeros = numpy.zeros(self.num_ternary_actions)
     if len(self._ranges) > 0:
-      sample = np.random.uniform(self._ranges[idx].min_value,
+      sample = numpy.random.uniform(self._ranges[idx].min_value,
                                  self._ranges[idx].max_value,
                                  1
                                  )
@@ -52,10 +52,10 @@ class ActionSpace(Space):
     return zeros
 
   def discrete_binary_one_hot_sample(self):
-    idx = np.random.randint(0, self.num_actuators)
-    zeros = np.zeros(self.num_binary_actions)
+    idx = numpy.random.randint(0, self.num_actuators)
+    zeros = numpy.zeros(self.num_binary_actions)
     if len(self._ranges) > 0:
-      sample = np.random.uniform(self._ranges[idx].min_value,
+      sample = numpy.random.uniform(self._ranges[idx].min_value,
                                  self._ranges[idx].max_value,
                                  1
                                  )
@@ -70,10 +70,10 @@ class ActionSpace(Space):
     return random.randrange(num)
 
   def discrete_one_hot_sample(self):
-    idx = np.random.randint(0, self.num_actuators)
-    zeros = np.zeros(self.num_actuators)
+    idx = numpy.random.randint(0, self.num_actuators)
+    zeros = numpy.zeros(self.num_actuators)
     if len(self._ranges) > 0:
-      val = np.random.random_integers(
+      val = numpy.random.random_integers(
           self._ranges[idx].min_value(),
           self._ranges[idx].max_value(),
           1,
@@ -82,13 +82,13 @@ class ActionSpace(Space):
     return zeros
 
   def discrete_sample(self):
-    idx = np.random.randint(0, self.num_binary_actions)
+    idx = numpy.random.randint(0, self.num_binary_actions)
     return idx
 
   def one_hot_sample(self):
 
-    idx = np.random.randint(0, self.num_actuators)
-    zeros = np.zeros(self.num_actuators)
+    idx = numpy.random.randint(0, self.num_actuators)
+    zeros = numpy.zeros(self.num_actuators)
     if len(self._ranges) > 0:
       zeros[idx] = 1
     return zeros

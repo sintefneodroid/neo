@@ -7,7 +7,7 @@ from neodroid.utilities.transformations.action_transformations import normalise_
 
 __author__ = 'cnheider'
 
-import numpy as np
+import numpy
 
 from neodroid.interfaces import specifications as M, EnvironmentDescription, ActionSpace
 
@@ -99,7 +99,7 @@ def verify_motion_reactions(*,
             outs.append(construct_individual_reactions_from_list(input, actors, normalise,env_name=env_name))
         elif isinstance(input, (int, float)):
           outs.append(construct_individual_reactions_from_list([input], actors, normalise,env_name=env_name))
-        elif isinstance(input, (np.ndarray, np.generic)):
+        elif isinstance(input, (numpy.ndarray, numpy.generic)):
           a = construct_individual_reactions_from_list(input.astype(float).tolist(),
                                                        actors,
                                                        normalise,env_name=env_name)
@@ -187,7 +187,7 @@ def verify_configuration_reactions(input_reaction,
         return construct_configuration_reaction_from_list(
             [input_reaction], configurables
             )
-      elif isinstance(input_reaction, (np.ndarray, np.generic)):
+      elif isinstance(input_reaction, (numpy.ndarray, numpy.generic)):
         a = construct_configuration_reaction_from_list(
             input_reaction.astype(float).tolist(), configurables
             )

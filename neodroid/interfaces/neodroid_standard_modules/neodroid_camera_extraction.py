@@ -85,7 +85,7 @@ if __name__ == '__main__':
   freq = 100
   time_s = time.time()
   while environments.is_connected:
-    actions = environments.action_space._sample()
+    actions = environments.action_space.sample()
     states = environments.react(actions)
     state = next(iter(states.values()))
     extract_all_as_camera(state)

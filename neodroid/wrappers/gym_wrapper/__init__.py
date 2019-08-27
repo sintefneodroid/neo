@@ -4,7 +4,7 @@ from .gym_wrapper import *
 
 __author__ = 'cnheider'
 
-import numpy as np
+import numpy
 
 
 def make(environment_name, **kwargs):
@@ -12,4 +12,4 @@ def make(environment_name, **kwargs):
 
 
 def seed(seed):
-  np.random.random(seed)
+  numpy.random.random(seed)

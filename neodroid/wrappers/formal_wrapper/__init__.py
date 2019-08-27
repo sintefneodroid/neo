@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
-import numpy as np
+import numpy
 
 from .formal_wrapper import NeodroidFormalWrapper
 
@@ -16,4 +16,4 @@ def connect():
 
 
 def seed(s):
-  np.random.random(s)
+  numpy.random.random(s)

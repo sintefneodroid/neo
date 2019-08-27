@@ -68,7 +68,7 @@ class NeodroidPackageMeta(type):
   def packages(self):
     return find_packages(
         exclude=[
-          # 'neodroid/environments'
+          # 'Path/To/Exclude'
           ]
         )
 

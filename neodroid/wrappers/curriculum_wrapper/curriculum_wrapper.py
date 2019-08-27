@@ -9,7 +9,7 @@ from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
 __author__ = 'cnheider'
 
-import numpy as np
+import numpy
 
 
 class NeodroidCurriculumWrapper(SingleEnvironment):
@@ -25,9 +25,9 @@ class NeodroidCurriculumWrapper(SingleEnvironment):
   def act(self, action=None, *args, **kwargs):
     message = super().react(action[0], *args, **kwargs)
     if message:
-      return (np.array([message.observation]),
-              np.array([message.signal]),
-              np.array([message.terminated]),
+      return (numpy.array([message.observation]),
+              numpy.array([message.signal]),
+              numpy.array([message.terminated]),
               message,
               )
     return None, None, None, None
@@ -35,7 +35,7 @@ class NeodroidCurriculumWrapper(SingleEnvironment):
   def configure(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return np.array([message.observation]), message
+      return numpy.array([message.observation]), message
     return None, None
 
   def generate_trajectory_from_configuration(self,
@@ -69,7 +69,7 @@ class NeodroidCurriculumWrapper(SingleEnvironment):
 
       for i in range(motion_horizon):
         if random_process is not None:
-          actions = random_process._sample()
+          actions = random_process.sample()
           actions = self.action_space.validate(actions)
         else:
           actions = self.action_space._sample()
@@ -92,7 +92,7 @@ class NeodroidCurriculumWrapper(SingleEnvironment):
       s, _ = self.configure(state=state)
       for i in range(motion_horizon):
         if random_process is not None:
-          actions = random_process._sample()
+          actions = random_process.sample()
           actions = self.action_space.validate(actions)
         else:
           actions = self.action_space._sample()

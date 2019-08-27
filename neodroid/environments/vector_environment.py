@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-import numpy as np
+import numpy
 
 from neodroid.environments import NeodroidEnvironment
 
@@ -33,7 +33,7 @@ class VectorEnvironment(NeodroidEnvironment):
             *,
             parameters: ReactionParameters = None,
             normalise: bool = False,
-            **kwargs):
+            **kwargs) -> EnvironmentSnapshot:
     if not isinstance(input_reactions, Reaction):
       input_reactions = maybe_infer_multi_motion_reaction(input_reactions=input_reactions,
                                                           normalise=normalise,
@@ -46,17 +46,16 @@ class VectorEnvironment(NeodroidEnvironment):
     env_states = super().react(input_reactions=input_reactions, **kwargs)
 
     envs = list(env_states.values())
-    e = EnvironmentSnapshot(None)
-    e._observables = [e_.observables for e_ in envs]
-    e._signal = [e_.signal for e_ in envs]
-    e._terminated = [e_.terminated for e_ in envs]
-
+    e = EnvironmentSnapshot.from_gym_like_out([e_.observables for e_ in envs],
+                                              [e_.signal for e_ in envs],
+                                              [e_.terminated for e_ in envs],
+                                              None)
     return e
 
   def reset(self,
             input_reactions=None,
             state=None,
-            on_reset_callback:callable=None):
+            on_reset_callback:callable=None) -> EnvironmentSnapshot:
 
     input_reactions = maybe_infer_multi_configuration_reaction(input_reactions=input_reactions,
                                                                description=self._description
@@ -68,10 +67,10 @@ class VectorEnvironment(NeodroidEnvironment):
     new_states = super().reset(input_reactions)
 
     envs = list(new_states.values())
-    e = EnvironmentSnapshot(None)
-    e._observables = [e_.observables for e_ in envs]
-    e._signal = [e_.signal for e_ in envs]
-    e._terminated = [e_.terminated for e_ in envs]
+    e = EnvironmentSnapshot.from_gym_like_out([e_.observables for e_ in envs],
+                                              [e_.signal for e_ in envs],
+                                              [e_.terminated for e_ in envs],
+                                              None)
 
     return e
 
@@ -84,10 +83,10 @@ class VectorEnvironment(NeodroidEnvironment):
   def describe(self, *args, **kwargs):
     new_states = super().describe(*args, **kwargs)
     envs = list(new_states.values())
-    e = EnvironmentSnapshot(None)
-    e._observables = [e_.observables for e_ in envs]
-    e._signal = [e_.signal for e_ in envs]
-    e._terminated = [e_.terminated for e_ in envs]
+    e = EnvironmentSnapshot.from_gym_like_out([e_.observables for e_ in envs],
+                                              [e_.signal for e_ in envs],
+                                              [e_.terminated for e_ in envs],
+                                              None)
 
     return e
   '''
@@ -155,7 +154,7 @@ class VectorWrapper:
     return _output_shape
 
   def react(self, a, *args, **kwargs):
-    if isinstance(a, np.ndarray):
+    if isinstance(a, numpy.ndarray):
       a = a.tolist()
 
     info = self._env.react(a, *args, **kwargs)

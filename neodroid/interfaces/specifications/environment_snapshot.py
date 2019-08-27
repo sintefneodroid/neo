@@ -86,6 +86,15 @@ class EnvironmentSnapshot(object):
   def to_gym_like_output(self):
     return self.observables, self.signal, self.terminated, self
 
+  @staticmethod
+  def from_gym_like_out(observables, signal, terminated, info):
+    es = EnvironmentSnapshot(None)
+    es._observables = observables
+    es._signal = signal
+    es._terminated = terminated
+    #es.extra_serialised_message = info
+    return es
+
   def __repr__(self):
     return (f'<EnvironmentState>\n'
             f'<frame_number>{self.frame_number}</frame_number>\n'

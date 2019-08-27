@@ -1,6 +1,6 @@
 import json
 
-import numpy as np
+import numpy
 import tensorflow as tf
 from keras_preprocessing.image import img_to_array, load_img
 from tensorflow.python.keras.applications import VGG16
@@ -37,7 +37,7 @@ def get_predictions(predictions, top=5):
 def vgg_prepare_img_224(img_path):
   img = load_img(img_path, target_size=(224, 224))
   x = img_to_array(img)
-  x = np.expand_dims(x, axis=0)
+  x = numpy.expand_dims(x, axis=0)
   x = preprocess_input(x)
   return x
 

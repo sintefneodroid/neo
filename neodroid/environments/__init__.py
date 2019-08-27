@@ -18,8 +18,8 @@ def make(environment_name: str = None, clones=0, *args, **kwargs) -> NeodroidEnv
 
 
 def seed(random_seed) -> None:
-  import numpy as np
-  np.random.seed(random_seed)
+  import numpy
+  numpy.random.seed(random_seed)
 
 
 def connect(ip='localhost', port=6969, **kwargs) -> NeodroidEnvironment:

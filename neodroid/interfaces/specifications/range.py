@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import math
 
-import numpy as np
+import numpy
 
 __author__ = 'cnheider'
 
@@ -52,7 +52,7 @@ class Range(object):
 
   @property
   def discrete_step_size(self) -> float:
-    return 1 / np.power(10, self.decimal_granularity)
+    return 1 / numpy.power(10, self.decimal_granularity)
 
   @property
   def span(self) -> float:
@@ -95,13 +95,13 @@ class Range(object):
     # return self.expensive_sample()
 
   def cheapest_sample(self) -> float:
-    return np.random.randint(self.min, self.max + 1)
+    return numpy.random.randint(self.min, self.max + 1)
 
   def cheaper_sample(self) -> float:
-    return np.round(np.random.random() * self.span, self.decimal_granularity)
+    return numpy.round(numpy.random.random() * self.span, self.decimal_granularity)
 
   def expensive_sample(self) -> float:
-    return np.random.choice(np.linspace(self.min, self.max, num=self.discrete_steps))
+    return numpy.random.choice(numpy.linspace(self.min, self.max, num=self.discrete_steps))
 
 
 if __name__ == '__main__':

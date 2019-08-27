@@ -61,7 +61,7 @@ class NeodroidDataGenerator(Dataset):
   def __getitem__(self, index):
     state = self._env.update()
     rgb_arr = state.sensor('RGB').value
-    rgb_arr = np.asarray(Image.open(rgb_arr).convert('RGB'))
+    rgb_arr = numpy.asarray(Image.open(rgb_arr).convert('RGB'))
     a_class = state.sensor('Class').value
 
     predictors = channel_transform(rgb_arr)

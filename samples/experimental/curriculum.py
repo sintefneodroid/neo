@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
-import numpy as np
+import numpy
 from neodroid.models import Configuration
 
 import neodroid.wrappers.curriculum_wrapper as neo
@@ -46,7 +46,7 @@ def main():
 
     terminated = False
     while not terminated:
-      actions = _environment.action_space._sample()
+      actions = _environment.action_space.sample()
       observations, reward, terminated, info = _environment.act(actions)
       if terminated:
         print('Interrupted', reward)
@@ -56,7 +56,7 @@ def main():
 
 
 def sample_initial_state(memory):
-  idx = np.random.randint(0, len(memory))
+  idx = numpy.random.randint(0, len(memory))
   return memory[idx]
 
 

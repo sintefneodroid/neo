@@ -10,7 +10,7 @@ from neodroid.interfaces.specifications import EnvironmentSnapshot
 
 __author__ = 'cnheider'
 
-import numpy as np
+import numpy
 import gym
 
 
@@ -91,17 +91,17 @@ class NeodroidVectorGymEnvironment(SingleEnvironment,
     # action = action.flatten()
     message = super().react(action[0], **kwargs)
     if message:
-      return (np.array([message.observables]),
-              np.array([message.signal]),
-              np.array([message.terminated]),
-              np.array([message])
+      return (numpy.array([message.observables]),
+              numpy.array([message.signal]),
+              numpy.array([message.terminated]),
+              numpy.array([message])
               )
     raise ValueError('Did not receive any message.')
 
   def reset(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return np.array([message.observables])
+      return numpy.array([message.observables])
     return None
 
   def render(self, *args, **kwargs):
@@ -176,23 +176,19 @@ class NeodroidGymWrapper:
     return space
 
   def react(self, a, *args, **kwargs):
-    if isinstance(a, np.ndarray):
+    if isinstance(a, numpy.ndarray):
       a = a.tolist()
 
     observables, signal, terminated, *_ = self._env.step(a, *args, **kwargs)
 
-    env_state = EnvironmentSnapshot(None)
-    env_state._observables = observables
-    env_state._signal = signal
-    env_state._terminated = terminated
+    env_state = EnvironmentSnapshot.from_gym_like_out(observables,signal,terminated,None)
 
     return env_state
 
   def reset(self):
     observables = self._env.reset()
 
-    env_state = EnvironmentSnapshot(None)
-    env_state._observables = observables
+    env_state = EnvironmentSnapshot.from_gym_like_out(observables,0,False,None)
 
     return env_state
 

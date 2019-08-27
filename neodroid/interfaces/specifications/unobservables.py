@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'cnheider'
 
-import numpy as np
+import numpy
 
 import neodroid.messaging
 
@@ -28,7 +28,7 @@ class Unobservables(object):
 
   @property
   def state_configuration(self):
-    return np.array(
+    return numpy.array(
         [self.poses_numpy().flatten(), self.bodies_numpy().flatten()]
         ).flatten()
 

@@ -10,7 +10,7 @@ from neodroid.interfaces.specifications import EnvironmentDescription
 
 __author__ = 'cnheider'
 
-import numpy as np
+import numpy
 
 
 class Environment(ABC):
@@ -114,4 +114,4 @@ class Environment(ABC):
 :param seed:
 :type seed:
 '''
-    np.random.seed(seed)
+    numpy.random.seed(seed)

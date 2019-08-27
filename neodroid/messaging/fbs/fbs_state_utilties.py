@@ -2,7 +2,7 @@ from typing import Any, Tuple
 
 import imageio
 import numpy
-import numpy as np
+import numpy
 
 from neodroid.interfaces import specifications as N
 from neodroid.messaging.fbs import FBSModels as F
@@ -116,7 +116,7 @@ def deserialise_unobservables(state):
 
 def deserialise_poses(unobservables):
   pl = unobservables.PosesLength()
-  poses = np.zeros((pl, 7))
+  poses = numpy.zeros((pl, 7))
   for i in range(pl):
     pose = unobservables.Poses(i)
     pos = pose.Position(F.FVector3())
@@ -127,7 +127,7 @@ def deserialise_poses(unobservables):
 
 def deserialise_bodies(unobservables):
   bl = unobservables.BodiesLength()
-  bodies = np.zeros((bl, 6))
+  bodies = numpy.zeros((bl, 6))
   for i in range(bl):
     body = unobservables.Bodies(i)
     vel = body.Velocity(F.FVector3())
@@ -278,7 +278,7 @@ def deserialise_byte_array(f_obs) -> Tuple[Any, Any]:
 def deserialise_array(f_obs) -> Tuple[Any, Any]:
   array = F.FArray()
   array.Init(f_obs.Bytes, f_obs.Pos)
-  # data = np.array([array.Array(i) for i in range(array.ArrayLength())])
+  # data = numpy.array([array.Array(i) for i in range(array.ArrayLength())])
   data = array.ArrayAsNumpy()
   return data, [None for _ in range(array.ArrayLength())]
 
