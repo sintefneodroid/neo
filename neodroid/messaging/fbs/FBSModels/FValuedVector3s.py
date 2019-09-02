@@ -67,7 +67,7 @@ def FValuedVector3sStart(builder): builder.StartObject(2)
 
 def FValuedVector3sAddVals(builder, vals): builder.PrependUOffsetTRelativeSlot(0,
                                                                                flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                 vals), 0)
+                                                                                   vals), 0)
 
 
 def FValuedVector3sStartValsVector(builder, numElems): return builder.StartVector(8, numElems, 8)
@@ -75,7 +75,7 @@ def FValuedVector3sStartValsVector(builder, numElems): return builder.StartVecto
 
 def FValuedVector3sAddPoints(builder, points): builder.PrependUOffsetTRelativeSlot(1,
                                                                                    flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                     points), 0)
+                                                                                       points), 0)
 
 
 def FValuedVector3sStartPointsVector(builder, numElems): return builder.StartVector(24, numElems, 8)

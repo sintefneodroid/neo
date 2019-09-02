@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import logging
 from enum import Enum, auto
 from functools import wraps
-
-from neodroid.messaging.fbs.fbs_reaction_utilities import *
-from neodroid.messaging.fbs.fbs_state_utilties import *
-from .message_client import MessageClient
 
 
 class ClientEvents(Enum):

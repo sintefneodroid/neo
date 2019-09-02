@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 from kivy.adapters.dictadapter import DictAdapter
 from kivy.uix.button import Button
@@ -18,33 +18,33 @@ class MotionViewList(GridLayout):
 
     def args_converter(row_index, row_data):
       return {
-        'text':       row_data['text'],
-        'size_hint_y':None,
-        'height':     25,
-        'cls_dicts':  [
-          {
-            'cls':   ListItemLabel,
-            'kwargs':{
-              'text':row_data['text'], 'is_representing_cls':True
-              },
-            },
-          {
-            'cls':   ListItemLabel,
-            'kwargs':{
-              'text':               'Middle-{0}'.format(row_data['text']),
-              'is_representing_cls':True,
-              },
-            },
-          {
-            'cls':   ListItemLabel,
-            'kwargs':{
-              'text':               'End-{0}'.format(row_data['text']),
-              'is_representing_cls':True,
-              },
-            },
-          {'cls':ListItemButton, 'kwargs':{'text':row_data['text']}},
-          ],
-        }
+          'text':       row_data['text'],
+          'size_hint_y':None,
+          'height':     25,
+          'cls_dicts':  [
+              {
+                  'cls':   ListItemLabel,
+                  'kwargs':{
+                      'text':row_data['text'], 'is_representing_cls':True
+                      },
+                  },
+              {
+                  'cls':   ListItemLabel,
+                  'kwargs':{
+                      'text':               'Middle-{0}'.format(row_data['text']),
+                      'is_representing_cls':True,
+                      },
+                  },
+              {
+                  'cls':   ListItemLabel,
+                  'kwargs':{
+                      'text':               'End-{0}'.format(row_data['text']),
+                      'is_representing_cls':True,
+                      },
+                  },
+              {'cls':ListItemButton, 'kwargs':{'text':row_data['text']}},
+              ],
+          }
 
     item_strings = ['{0}'.format(index) for index in range(100)]
 

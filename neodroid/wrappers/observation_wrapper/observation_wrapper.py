@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.wrappers import SingleEnvironment
+from neodroid.wrappers import SingleUnityEnvironment
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
-class ObservationWrapper(SingleEnvironment):
+class ObservationWrapper(SingleUnityEnvironment):
 
   def __next__(self):
     if not self._is_connected_to_server:

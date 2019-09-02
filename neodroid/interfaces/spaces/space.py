@@ -4,14 +4,24 @@ from typing import Sequence
 
 import numpy
 
-from neodroid.interfaces.specifications.range import Range
+from neodroid.interfaces.spaces.range import Range
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
 class Space(object):
+  '''
 
-  def __init__(self, ranges: Sequence[Range], names: Sequence[str] = ()):
+  '''
+
+  def __init__(self,
+               ranges: Sequence[Range],
+               names: Sequence[str] = ()):
+    '''
+
+    :param ranges:
+    :param names:
+    '''
     assert isinstance(ranges, Sequence)
     self._ranges = ranges
     self._names = names

@@ -58,17 +58,17 @@ def FQTObsStart(builder): builder.StartObject(3)
 
 def FQTObsAddTransform(builder, transform): builder.PrependStructSlot(0,
                                                                       flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                        transform), 0)
+                                                                          transform), 0)
 
 
 def FQTObsAddPosRange(builder, posRange): builder.PrependStructSlot(1,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                      posRange), 0)
+                                                                        posRange), 0)
 
 
 def FQTObsAddRotRange(builder, rotRange): builder.PrependStructSlot(2,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                      rotRange), 0)
+                                                                        rotRange), 0)
 
 
 def FQTObsEnd(builder): return builder.EndObject()

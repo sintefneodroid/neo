@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from .gym_wrapper import *
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import numpy
 

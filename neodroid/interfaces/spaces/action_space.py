@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 import random
 
+from neodroid.interfaces.spaces.range import Range
 from neodroid.interfaces.spaces.space import Space
-from neodroid.interfaces.specifications import EnvironmentDescription, Range
 from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import numpy
 
@@ -27,9 +27,9 @@ class ActionSpace(Space):
   def validate(self, actions):
     for i in range(len(actions)):
       clipped = numpy.clip(actions[i],
-                        self._ranges[i].min_value,
-                        self._ranges[i].max_value,
-                        )
+                           self._ranges[i].min_value,
+                           self._ranges[i].max_value,
+                           )
       actions[i] = numpy.round(clipped, self._ranges[i].decimal_granularity)
     return actions
 
@@ -42,9 +42,9 @@ class ActionSpace(Space):
     zeros = numpy.zeros(self.num_ternary_actions)
     if len(self._ranges) > 0:
       sample = numpy.random.uniform(self._ranges[idx].min_value,
-                                 self._ranges[idx].max_value,
-                                 1
-                                 )
+                                    self._ranges[idx].max_value,
+                                    1
+                                    )
       if sample > 0:
         zeros[idx] = 1
       else:
@@ -56,9 +56,9 @@ class ActionSpace(Space):
     zeros = numpy.zeros(self.num_binary_actions)
     if len(self._ranges) > 0:
       sample = numpy.random.uniform(self._ranges[idx].min_value,
-                                 self._ranges[idx].max_value,
-                                 1
-                                 )
+                                    self._ranges[idx].max_value,
+                                    1
+                                    )
       if sample > 0:
         zeros[idx] = 1
       else:
@@ -112,7 +112,8 @@ class ActionSpace(Space):
     return signed_ternary_encoding(size=(self.n * 2) / 3, index=idx)
 
   @staticmethod
-  def from_environment_description(environment_description: EnvironmentDescription):
+  def from_environment_description(environment_description#: EnvironmentDescription
+    ):
     motion_names = environment_description.actors.keys()
     motion_spaces = []
     for actor in environment_description.actors.values():

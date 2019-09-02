@@ -6,7 +6,7 @@ from torch.utils.data import Dataset
 
 from neodroid.wrappers import CameraObservationWrapper
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
 class NeodroidDataGenerator(Dataset):

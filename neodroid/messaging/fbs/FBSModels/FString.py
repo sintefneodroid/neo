@@ -32,7 +32,7 @@ def FStringStart(builder): builder.StartObject(1)
 
 def FStringAddStr(builder, str): builder.PrependUOffsetTRelativeSlot(0,
                                                                      flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                       str), 0)
+                                                                         str), 0)
 
 
 def FStringEnd(builder): return builder.EndObject()

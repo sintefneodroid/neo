@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
 class Motion(object):
@@ -30,10 +30,10 @@ class Motion(object):
 
   def to_dict(self):
     return {
-      '_actor_name':self._actor_name,
-      '_motor_name':self._actuator_name,
-      '_strength':  self._strength,
-      }
+        '_actor_name':self._actor_name,
+        '_motor_name':self._actuator_name,
+        '_strength':  self._strength,
+        }
 
   def __repr__(self):
     return (f'<Motion>\n'

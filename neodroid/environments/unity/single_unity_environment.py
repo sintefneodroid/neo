@@ -2,17 +2,42 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.environments import NeodroidEnvironment
+from neodroid.environments.unity import UnityEnvironment
 from neodroid.exceptions.exceptions import NoEnvironmentError
 from neodroid.factories.single_reaction_factory import (maybe_infer_single_configuration_reaction,
                                                         maybe_infer_single_motion_reaction,
                                                         )
-from neodroid.interfaces.specifications import Reaction, EnvironmentSnapshot
+from neodroid.interfaces import Sensor, SignalSpace, ActionSpace, ObservationSpace, EnvironmentDescription
+from neodroid.interfaces.unity_specifications import EnvironmentSnapshot, Reaction
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
-class SingleEnvironment(NeodroidEnvironment):
+class SingleUnityEnvironment(UnityEnvironment):
+
+  @property
+  def description(self) -> EnvironmentDescription:
+    while not self._description:
+      self.describe()
+    return self._description
+
+  @property
+  def observation_space(self) ->  ObservationSpace:
+    while not self._observation_space:
+      self.describe()
+    return self._observation_space
+
+  @property
+  def action_space(self) -> ActionSpace:
+    while not self._action_space:
+      self.describe()
+    return self._action_space
+
+  @property
+  def signal_space(self) ->  SignalSpace:
+    while not self._signal_space:
+      self.describe()
+    return self._signal_space
 
   def __next__(self):
     if not self._is_connected_to_server:
@@ -43,7 +68,7 @@ class SingleEnvironment(NeodroidEnvironment):
       return first_environment
     raise NoEnvironmentError()
 
-  def reset(self, input_reaction=None, state=None, on_reset_callback=None)-> EnvironmentSnapshot:
+  def reset(self, input_reaction=None, state=None, on_reset_callback=None) -> EnvironmentSnapshot:
 
     input_reaction = maybe_infer_single_configuration_reaction(input_reaction=input_reaction,
                                                                description=self._description
@@ -58,24 +83,24 @@ class SingleEnvironment(NeodroidEnvironment):
     new_state = list(new_states.values())[0]
     return new_state
 
-  def configure(self, *args, **kwargs)-> EnvironmentSnapshot:
+  def configure(self, *args, **kwargs) -> EnvironmentSnapshot:
     message = self.reset(*args, **kwargs)
     if message:
       return message
     return None
 
-  def describe(self, *args, **kwargs)-> EnvironmentSnapshot:
+  def describe(self, *args, **kwargs) -> EnvironmentSnapshot:
     new_states = super().describe(*args, **kwargs)
     message = list(new_states.values())[0]
     if message:
       return message
 
-  def sensor(self, name, *args, **kwargs):
+  def sensor(self, name, *args, **kwargs) -> Sensor:
     state_env_0 = list(self._last_message.values())[0]
-    observer = state_env_0.sensor(name)
-    if not observer:
+    sens = state_env_0.sensor(name)
+    if not sens:
       warn('Sensor was not found!')
-    return observer
+    return sens
 
 
 if __name__ == '__main__':
@@ -96,8 +121,8 @@ if __name__ == '__main__':
                       help='Connect to already running environment instead of starting another instance')
   proc_args = parser.parse_args()
 
-  env = SingleEnvironment(environment_name=proc_args.ENVIRONMENT_NAME,
-                          connect_to_running=proc_args.CONNECT_TO_RUNNING)
+  env = SingleUnityEnvironment(environment_name=proc_args.ENVIRONMENT_NAME,
+                               connect_to_running=proc_args.CONNECT_TO_RUNNING)
 
   observation_session = tqdm(env, leave=False)
   for environment_state in observation_session:

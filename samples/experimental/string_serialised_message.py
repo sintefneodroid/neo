@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 from neodroid.environments import connect
 
-__author__ = 'cnheider'
-
+__author__ = 'Christian Heider Nielsen'
 
 from neodroid import messaging
 

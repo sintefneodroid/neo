@@ -3,9 +3,10 @@
 from collections import Sequence
 
 from neodroid.interfaces.spaces import Space
-from neodroid.interfaces.specifications import EnvironmentDescription, Range
+from neodroid.interfaces.unity_specifications.environment_description import EnvironmentDescription
+from neodroid.interfaces.spaces.range import Range
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
 class ObservationSpace(Space):

@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from neodroid.interfaces.specifications import EnvironmentSnapshot
+from neodroid.interfaces.unity_specifications.environment_snapshot import EnvironmentSnapshot
 from neodroid.messaging import ClientEvents, message_client_event
+from neodroid.messaging.message_client import MessageClient
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import time
 from abc import ABC, abstractmethod
@@ -47,7 +48,7 @@ class NetworkingEnvironment(Environment, ABC):
   def _setup_connection(self, auto_describe=False):
     connect_tries = range(self._retries)
 
-    self._message_server = messaging.MessageClient(self._ip,
+    self._message_server = MessageClient(self._ip,
                                                    self._port,
                                                    on_timeout_callback=self.__on_timeout_callback__,
                                                    on_connected_callback=self.__on_connected_callback__,

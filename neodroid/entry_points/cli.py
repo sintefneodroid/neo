@@ -4,10 +4,10 @@ import stat
 import subprocess
 from pathlib import Path
 
-import draugr
 import fire
 from pyfiglet import Figlet
 
+import draugr
 from neodroid import DEFAULT_ENVIRONMENTS_PATH, get_version
 from neodroid.utilities.launcher.download_utilities.download_environment import (available_environments,
                                                                                  download_environment,

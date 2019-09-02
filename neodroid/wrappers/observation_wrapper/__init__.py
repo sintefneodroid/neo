@@ -1,8 +1,7 @@
 import numpy
 
-from .observation_wrapper import ObservationWrapper
 from .camera_observation_wrapper import CameraObservationWrapper
-
+from .observation_wrapper import ObservationWrapper
 
 
 def make(environment_name, **kwargs):

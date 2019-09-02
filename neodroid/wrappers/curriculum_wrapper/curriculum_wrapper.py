@@ -3,16 +3,16 @@
 import random
 from typing import Any
 
-from neodroid.environments.single_environment import SingleEnvironment
-from neodroid.interfaces.specifications import Reaction, ReactionParameters
+from neodroid.environments.unity.single_unity_environment import SingleUnityEnvironment
+from neodroid.interfaces.unity_specifications import Reaction, ReactionParameters
 from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import numpy
 
 
-class NeodroidCurriculumWrapper(SingleEnvironment):
+class NeodroidCurriculumWrapper(SingleUnityEnvironment):
 
   def __init__(self, **kwargs):
     super().__init__(**kwargs)
@@ -25,7 +25,7 @@ class NeodroidCurriculumWrapper(SingleEnvironment):
   def act(self, action=None, *args, **kwargs):
     message = super().react(action[0], *args, **kwargs)
     if message:
-      return (numpy.array([message.observation]),
+      return (numpy.array([message.observables]),
               numpy.array([message.signal]),
               numpy.array([message.terminated]),
               message,
@@ -35,7 +35,7 @@ class NeodroidCurriculumWrapper(SingleEnvironment):
   def configure(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return numpy.array([message.observation]), message
+      return numpy.array([message.observables]), message
     return None, None
 
   def generate_trajectory_from_configuration(self,

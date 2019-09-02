@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import json
 

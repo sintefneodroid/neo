@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from .main import main
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 '''A sample of using the neodroid api.
 

@@ -15,7 +15,7 @@ class FReactionParameters(object):
   # FReactionParameters
   def Terminable(self): return self._tab.Get(flatbuffers.number_types.BoolFlags,
                                              self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
-                                               0))
+                                                 0))
 
   # FReactionParameters
   def Step(self): return self._tab.Get(flatbuffers.number_types.BoolFlags,
@@ -36,7 +36,7 @@ class FReactionParameters(object):
   # FReactionParameters
   def EpisodeCount(self): return self._tab.Get(flatbuffers.number_types.BoolFlags,
                                                self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                 5))
+                                                   5))
 
 
 def CreateFReactionParameters(builder, terminable, step, reset, configure, describe, episodeCount):

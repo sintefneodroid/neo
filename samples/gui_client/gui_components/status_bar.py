@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button

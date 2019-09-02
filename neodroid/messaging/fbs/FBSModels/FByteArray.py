@@ -78,7 +78,7 @@ def FByteArrayStart(builder): builder.StartObject(3)
 
 def FByteArrayAddBytes(builder, bytes): builder.PrependUOffsetTRelativeSlot(0,
                                                                             flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                              bytes), 0)
+                                                                                bytes), 0)
 
 
 def FByteArrayStartBytesVector(builder, numElems): return builder.StartVector(1, numElems, 1)
@@ -89,7 +89,7 @@ def FByteArrayAddType(builder, type): builder.PrependUint8Slot(1, type, 0)
 
 def FByteArrayAddShape(builder, shape): builder.PrependUOffsetTRelativeSlot(2,
                                                                             flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                              shape), 0)
+                                                                                shape), 0)
 
 
 def FByteArrayStartShapeVector(builder, numElems): return builder.StartVector(4, numElems, 4)

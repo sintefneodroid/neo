@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.messaging.fbs.FBSModels import FEnvironmentDescription
+from neodroid.messaging.fbs.fbs_state_utilties import (deserialise_actors,
+                                                       deserialise_sensors,
+                                                       deserialise_configurables,
+                                                       )
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
-import neodroid.messaging
+
 
 
 class EnvironmentDescription(object):
 
-  def __init__(self, fbs_description:FEnvironmentDescription):
+  def __init__(self, fbs_description: FEnvironmentDescription):
     self._fbs_description = fbs_description
 
   @property
@@ -26,7 +30,7 @@ class EnvironmentDescription(object):
 
   @property
   def actors(self):
-    return neodroid.messaging.deserialise_actors(self._fbs_description)
+    return deserialise_actors(self._fbs_description)
 
   def actor(self, key):
     actors = self.actors
@@ -35,7 +39,7 @@ class EnvironmentDescription(object):
 
   @property
   def actuators(self):
-    return list(neodroid.messaging.deserialise_actors(self._fbs_description).values())[0].actuators
+    return list(deserialise_actors(self._fbs_description).values())[0].actuators
 
   def actuator(self, key):
     actuators = self.actuators
@@ -44,7 +48,7 @@ class EnvironmentDescription(object):
 
   @property
   def sensors(self):
-    return neodroid.messaging.deserialise_sensors(self._fbs_description)
+    return deserialise_sensors(self._fbs_description)
 
   def sensor(self, key):
     sensors = self.sensors
@@ -53,7 +57,7 @@ class EnvironmentDescription(object):
 
   @property
   def configurables(self):
-    return neodroid.messaging.deserialise_configurables(self._fbs_description)
+    return deserialise_configurables(self._fbs_description)
 
   def configurable(self, key):
     configurables = self.configurables

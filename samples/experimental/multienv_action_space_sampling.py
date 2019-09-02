@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from neodroid.models import Motion, Reaction, ReactionParameters
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import api.neodroid_environments as neo
 

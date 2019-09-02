@@ -6,18 +6,21 @@ from typing import Mapping, Union
 
 from neodroid import DEFAULT_ENVIRONMENTS_PATH
 from neodroid.factories.multi_reaction_factory import maybe_infer_multi_motion_reaction
-from neodroid.interfaces import SimulatorConfiguration
+from neodroid.interfaces.unity_specifications.environment_snapshot import EnvironmentSnapshot
+from neodroid.interfaces.unity_specifications.reaction import Reaction
+from neodroid.interfaces.unity_specifications.reaction_parameters import ReactionParameters
+from neodroid.interfaces.unity_specifications.simulator_configuration import SimulatorConfiguration
 from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
-from neodroid.interfaces.specifications import EnvironmentDescription, EnvironmentSnapshot
+from neodroid.interfaces.unity_specifications.environment_description import EnvironmentDescription
 from neodroid.utilities import launch_environment
+from neodroid.messaging.fbs import FBSModels as F
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
-import neodroid.interfaces.specifications as M
-from .networking_environment import NetworkingEnvironment
+from neodroid.environments.networking_environment import NetworkingEnvironment
 
 
-class NeodroidEnvironment(NetworkingEnvironment):
+class UnityEnvironment(NetworkingEnvironment):
 
   @property
   def description(self) -> Mapping[str, EnvironmentDescription]:
@@ -76,17 +79,14 @@ class NeodroidEnvironment(NetworkingEnvironment):
                clones: int = 0,
                path_to_executables_directory: Union[str, Path] = DEFAULT_ENVIRONMENTS_PATH,
                headless: bool = False,
+
                **kwargs
                ):
     super().__init__(**kwargs)
 
     # Environment
-    self._description = None
     self._simulator_configuration = None
     self._last_message = None
-    self._observation_space = None
-    self._action_space = None
-    self._signal_space = None
 
     # Simulation
     self._simulation_instance = None
@@ -136,16 +136,16 @@ class NeodroidEnvironment(NetworkingEnvironment):
     logging.info('Reacting in environment')
 
     if isinstance(input_reactions, list) and len(input_reactions) > 0 and isinstance(input_reactions[0],
-                                                                                     M.Reaction):
+                                                                                     Reaction):
       pass
     else:
       if input_reactions is None:
-        parameters = M.ReactionParameters(episode_count=True,
+        parameters = ReactionParameters(episode_count=True,
                                           step=True,
                                           terminable=True
                                           )
-        input_reactions = [M.Reaction(parameters=parameters)]
-      elif not isinstance(input_reactions, M.Reaction):
+        input_reactions = [Reaction(parameters=parameters)]
+      elif not isinstance(input_reactions, Reaction):
         input_reactions = maybe_infer_multi_motion_reaction(input_reactions=input_reactions,
                                                             normalise=normalise,
                                                             descriptions=self._description,
@@ -161,7 +161,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
     logging.warning('No valid was new_state received')
 
   def display(self, displayables) -> Mapping[str, EnvironmentSnapshot]:
-    conf_reaction = M.Reaction(displayables=displayables)
+    conf_reaction = Reaction(displayables=displayables)
     message = self.reset(conf_reaction)
     if message:
       return message
@@ -174,11 +174,11 @@ class NeodroidEnvironment(NetworkingEnvironment):
     logging.info('Resetting environment')
 
     if input_reactions is None:
-      parameters = M.ReactionParameters(terminable=True,
+      parameters = ReactionParameters(terminable=True,
                                         describe=True,
                                         episode_count=False,
                                         reset=True)
-      input_reactions = [M.Reaction(parameters=parameters)]
+      input_reactions = [Reaction(parameters=parameters)]
 
     new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
     if new_states:
@@ -204,7 +204,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
     return 0
 
   def describe(self,
-               parameters=M.ReactionParameters(terminable=False,
+               parameters=ReactionParameters(terminable=False,
                                                describe=True,
                                                episode_count=False)) -> Mapping[str, EnvironmentSnapshot]:
     '''
@@ -214,7 +214,7 @@ class NeodroidEnvironment(NetworkingEnvironment):
     :return:
     :rtype:
     '''
-    reaction = M.Reaction(parameters=parameters)
+    reaction = Reaction(parameters=parameters)
     new_states, simulator_configuration = self._message_server.send_reactions([reaction])
 
     if new_states:
@@ -262,7 +262,7 @@ if __name__ == '__main__':
                       help='Connect to already running environment instead of starting another instance')
   arguments = parser.parse_args()
 
-  env = NeodroidEnvironment(name=arguments.ENVIRONMENT_NAME, connect_to_running=arguments.CONNECT_TO_RUNNING)
+  env = UnityEnvironment(name=arguments.ENVIRONMENT_NAME, connect_to_running=arguments.CONNECT_TO_RUNNING)
 
   observation_session = tqdm(env, leave=False)
   i = 0

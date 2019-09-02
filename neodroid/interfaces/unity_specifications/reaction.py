@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 from collections import Sequence
 
-from neodroid.interfaces.specifications.unobservables import Unobservables
+from neodroid.interfaces.unity_specifications.unobservables import Unobservables
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import json
 
@@ -95,11 +95,11 @@ receives the same reaction.
 
   def to_dict(self):
     return {
-      '_configurations':[
-        configuration.to_dict() for configuration in self._configurations
-        ],
-      '_motions':       [motion.to_dict() for motion in self._motions],
-      }
+        '_configurations':[
+            configuration.to_dict() for configuration in self._configurations
+            ],
+        '_motions':       [motion.to_dict() for motion in self._motions],
+        }
 
   def to_json(self):
     return json.dumps(self.to_dict())

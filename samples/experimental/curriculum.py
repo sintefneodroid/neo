@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 import numpy
 from neodroid.models import Configuration
 
@@ -26,10 +26,10 @@ def main():
   goal_pos = get_goal_configuration(_environment)
 
   initial_configuration = [
-    Configuration('ActorPositionX', goal_pos[0]),
-    Configuration('ActorPositionY', goal_pos[1]),
-    Configuration('ActorPositionZ', goal_pos[2]),
-    ]
+      Configuration('ActorPositionX', goal_pos[0]),
+      Configuration('ActorPositionY', goal_pos[1]),
+      Configuration('ActorPositionZ', goal_pos[2]),
+      ]
   _memory.extend(
       _environment.generate_initial_states_from_configuration(initial_configuration)
       )

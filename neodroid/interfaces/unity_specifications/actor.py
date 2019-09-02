@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__author__ = 'cnheider'
+from neodroid.messaging.fbs.fbs_state_utilties import deserialise_actuators
+
+__author__ = 'Christian Heider Nielsen'
 
 import neodroid.messaging
 
@@ -19,12 +21,12 @@ class Actor(object):
     return self._flat_actor.Alive()
 
   def actuator(self, key):
-    if key in neodroid.messaging.deserialise_actuators(self._flat_actor):
-      return neodroid.messaging.deserialise_actuators(self._flat_actor)[key]
+    if key in deserialise_actuators(self._flat_actor):
+      return deserialise_actuators(self._flat_actor)[key]
 
   @property
   def actuators(self):
-    return neodroid.messaging.deserialise_actuators(self._flat_actor)
+    return deserialise_actuators(self._flat_actor)
 
   def __repr__(self):
     actuators = ''.join([str(actuators.__repr__()) for actuators in self.actuators.values()])

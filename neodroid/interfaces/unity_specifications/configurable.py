@@ -3,7 +3,7 @@
 import neodroid
 import neodroid.messaging
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
 # @pretty_print
@@ -30,10 +30,10 @@ class Configurable(object):
 
   def to_dict(self):
     return {
-      'configurable_name': self.configurable_name,
-      'configurable_value':self.configurable_value,
-      'configurable_space':self.configurable_space
-      }
+        'configurable_name': self.configurable_name,
+        'configurable_value':self.configurable_value,
+        'configurable_space':self.configurable_space
+        }
 
   def __repr__(self):
     return (f'<Configurable>\n'

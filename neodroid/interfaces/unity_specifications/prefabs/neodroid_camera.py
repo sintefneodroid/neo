@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 import PIL
 import numpy
-import warg
 from PIL import Image
 
-__author__ = 'cnheider'
+import warg
+
+__author__ = 'Christian Heider Nielsen'
 
 
 def extract_neodroid_camera_images(environment):

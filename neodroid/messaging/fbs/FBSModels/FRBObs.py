@@ -57,17 +57,17 @@ def FRBObsStart(builder): builder.StartObject(3)
 
 
 def FRBObsAddBody(builder, body): builder.PrependStructSlot(0, flatbuffers.number_types.UOffsetTFlags.py_type(
-  body), 0)
+    body), 0)
 
 
 def FRBObsAddVelRange(builder, velRange): builder.PrependStructSlot(1,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                      velRange), 0)
+                                                                        velRange), 0)
 
 
 def FRBObsAddAngRange(builder, angRange): builder.PrependStructSlot(2,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                      angRange), 0)
+                                                                        angRange), 0)
 
 
 def FRBObsEnd(builder): return builder.EndObject()

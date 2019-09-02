@@ -7,7 +7,7 @@ import numpy
 
 from neodroid.environments import connect
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
 def add_bool_arg(parser, name, *, dest=None, default=False, **kwargs):
@@ -38,7 +38,7 @@ def main():
 
   aargs = parser.parse_args()
 
-  environment = connect(ip=aargs.IP,port=aargs.PORT)
+  environment = connect(ip=aargs.IP, port=aargs.PORT)
 
   i = 0
   freq = 100
@@ -59,7 +59,7 @@ def main():
     time_s = time_now
 
     t = numpy.array(terminated)
-    terminated=[]
+    terminated = []
     if t.all():
       environment.reset()
 

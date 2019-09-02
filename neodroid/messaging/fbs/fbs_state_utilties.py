@@ -2,54 +2,29 @@ from typing import Any, Tuple
 
 import imageio
 import numpy
-import numpy
 
-from neodroid.interfaces import specifications as N
+from neodroid.interfaces.spaces.range import Range
+
+from neodroid.interfaces  import unity_specifications as US
 from neodroid.messaging.fbs import FBSModels as F
+
 
 
 def deserialise_states(flat_states):
   states = {}
 
   for i in range(flat_states.StatesLength()):
-    state = N.EnvironmentSnapshot(flat_states.States(i))
+    state = US.EnvironmentSnapshot(flat_states.States(i))
     states[state.environment_name] = state
 
   out_states = {}
   for key in sorted(states.keys()):  # Sort states by key, ensures the same order every time
     out_states[key] = states[key]
 
-  simulator_configuration = N.SimulatorConfiguration(flat_states.SimulatorConfiguration(),
-                                                     flat_states.ApiVersion())
+  simulator_configuration = US.SimulatorConfiguration(flat_states.SimulatorConfiguration(),
+                                                   flat_states.ApiVersion())
 
   return out_states, simulator_configuration
-
-
-def deserialise_description(flat_description):
-  return N.EnvironmentDescription(flat_description)
-
-
-def deserialise_actors(flat_environment_description):
-  actors = {}
-  if flat_environment_description:
-    for i in range(flat_environment_description.ActorsLength()):
-      flat_actor = flat_environment_description.Actors(i)
-      actor = N.Actor(flat_actor)
-      actors[actor.actor_name] = actor
-
-  out_actors = {}  # All dictionaries in python3.6+ are insertion ordered, actors are sorted by key and
-  # inserted so that the order of actor key-value pairs are always the same for all instances the same
-  # environment. This is
-  # useful when descriptions are used for inference what value (motion strength) in a numeric vector
-  # corresponds to what actor.
-  for key in sorted(actors.keys()):
-    out_actors[key] = actors[key]
-
-  return out_actors
-
-
-def deserialise_observables(state):
-  return [state.Observables(i) for i in range(state.ObservablesLength())]
 
 
 def deserialise_configurables(flat_environment_description):
@@ -61,12 +36,26 @@ def deserialise_configurables(flat_environment_description):
       obs_value = f_conf.ConfigurableValue()
       observation_value, observation_space = deserialise_sensor(obs_type, obs_value)
 
-      configurable = N.Configurable(f_conf.ConfigurableName().decode(),
-                                    observation_value,
-                                    observation_space
-                                    )
+      configurable = US.Configurable(f_conf.ConfigurableName().decode(),
+                                  observation_value,
+                                  observation_space
+                                  )
       configurables[configurable.configurable_name] = configurable
   return configurables
+
+
+def deserialise_sensors(flat_description):
+  out_sensors = {}
+
+  for i in range(flat_description.SensorsLength()):
+    f_obs = flat_description.Sensors(i)
+    obs_type = f_obs.SensorValueType()
+    obs_value = f_obs.SensorValue()
+    sensor_value, sensor_space = deserialise_sensor(obs_type, obs_value)
+
+    name = f_obs.SensorName().decode()
+    out_sensors[name] = US.Sensor(name, sensor_space, sensor_value)
+  return out_sensors
 
 
 def deserialise_sensor(obs_type, obs_value):
@@ -96,22 +85,43 @@ def deserialise_sensor(obs_type, obs_value):
   return value, value_range
 
 
-def deserialise_sensors(flat_description):
-  out_sensors = {}
-
-  for i in range(flat_description.SensorsLength()):
-    f_obs = flat_description.Sensors(i)
-    obs_type = f_obs.SensorValueType()
-    obs_value = f_obs.SensorValue()
-    sensor_value, sensor_space = deserialise_sensor(obs_type, obs_value)
-
-    name = f_obs.SensorName().decode()
-    out_sensors[name] = N.Sensor(name, sensor_space, sensor_value)
-  return out_sensors
+def deserialise_observables(state):
+  return [state.Observables(i) for i in range(state.ObservablesLength())]
 
 
 def deserialise_unobservables(state):
-  return N.Unobservables(state.Unobservables())
+  return US.Unobservables(state.Unobservables())
+
+
+
+def deserialise_actors(flat_environment_description):
+  actors = {}
+  if flat_environment_description:
+    for i in range(flat_environment_description.ActorsLength()):
+      flat_actor = flat_environment_description.Actors(i)
+      actor = US.Actor(flat_actor)
+      actors[actor.actor_name] = actor
+
+  out_actors = {}  # All dictionaries in python3.6+ are insertion ordered, actors are sorted by key and
+  # inserted so that the order of actor key-value pairs are always the same for all instances the same
+  # environment. This is
+  # useful when descriptions are used for inference what value (motion strength) in a numeric vector
+  # corresponds to what actor.
+  for key in sorted(actors.keys()):
+    out_actors[key] = actors[key]
+
+  return out_actors
+
+
+def deserialise_description(flat_description):
+  return US.EnvironmentDescription(flat_description)
+
+
+
+
+
+
+
 
 
 def deserialise_poses(unobservables):
@@ -161,9 +171,9 @@ def deserialise_body(f_obs):
   # ranges = [q.XRange(),q.YRange(), q.ZRange()]
 
   return [
-           [velocity.X(), velocity.Y(), velocity.Z()],
-           [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
-           ], [None for _ in range(6)]
+             [velocity.X(), velocity.Y(), velocity.Z()],
+             [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
+             ], [None for _ in range(6)]
 
 
 def deserialise_quadruple(f_obs) -> Tuple[Any, Any]:
@@ -220,17 +230,15 @@ def deserialise_rigidbody(f_obs) -> Tuple[Any, Any]:
           rotation.Z(),
           rotation.W(),
           ]
-  return data, [
-    N.Range(min_value=qt.VelRange().MinValue(), max_value=qt.VelRange().MaxValue(),
-            decimal_granularity=qt.VelRange(
+  return data, [Range(min_value=qt.VelRange().MinValue(),
+                      max_value=qt.VelRange().MaxValue(),
+                      decimal_granularity=qt.VelRange().DecimalGranularity())
+                for _ in range(3)] + [Range(min_value=qt.AngRange().MinValue(),
+                                            max_value=qt.AngRange().MaxValue(),
+                                            decimal_granularity=qt.AngRange(
 
-                ).DecimalGranularity()) for
-    _ in
-    range(3)] + [N.Range(min_value=qt.AngRange().MinValue(), max_value=qt.AngRange().MaxValue(),
-                         decimal_granularity=qt.AngRange(
-
-                             ).DecimalGranularity()) for _ in
-                 range(4)]
+                                                ).DecimalGranularity()) for _ in
+                                      range(4)]
 
 
 def deserialise_quaternion_transform(f_obs) -> Tuple[Any, Any]:
@@ -298,9 +306,9 @@ def deserialise_actuators(flat_actor):
   actuators = {}
   for i in range(flat_actor.ActuatorsLength()):
     flat_actuator = flat_actor.Actuators(i)
-    input_actuator = N.Actuator(flat_actuator.ActuatorName().decode(),
-                                flat_actuator.ActuatorRange()
-                                )
+    input_actuator = US.Actuator(flat_actuator.ActuatorName().decode(),
+                              flat_actuator.ActuatorRange()
+                              )
     actuators[input_actuator.actuator_name] = input_actuator
 
   out_actuators = {}
@@ -315,26 +323,26 @@ def deserialise_space(flat_space):
     ret = []
     for space in flat_space:
       if space is not None:
-        ran = N.Range(decimal_granularity=space.DecimalGranularity(),
-                      min_value=space.MinValue(),
-                      max_value=space.MaxValue()
-                      )
+        ran = Range(decimal_granularity=space.DecimalGranularity(),
+                    min_value=space.MinValue(),
+                    max_value=space.MaxValue()
+                    )
         ret.append(ran)
       elif space != 'skip_observable_dim':
-        ran = N.Range(decimal_granularity=10)
+        ran = Range(decimal_granularity=10)
         ret.append(ran)
 
     return ret
 
   if isinstance(flat_space, str):
     if flat_space != 'skip_observable_dim':
-      space = N.Range(decimal_granularity=10)
+      space = Range(decimal_granularity=10)
     else:
       return None
   else:
-    space = N.Range(decimal_granularity=flat_space.DecimalGranularity(),
-                    min_value=flat_space.MinValue(),
-                    max_value=flat_space.MaxValue()
-                    )
+    space = Range(decimal_granularity=flat_space.DecimalGranularity(),
+                  min_value=flat_space.MinValue(),
+                  max_value=flat_space.MaxValue()
+                  )
 
   return space

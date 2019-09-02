@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-def python_version_check():
+def python_version_check(major=3, minor=6):
   import sys
 
-  assert sys.version_info.major == 3 and sys.version_info.minor >= 6, (
-    f'This project is utilises language features only present Python 3.6 and greater. '
-    f'You are running {sys.version_info}.')
+  assert sys.version_info.major == major and sys.version_info.minor >= minor, (
+      f"This project is utilises language features only present Python {major}.{minor} and greater. "
+      f"You are running {sys.version_info}."
+  )
 
 
 python_version_check()
 
-__author__ = 'cnheider'
 
 import os
 import pathlib
@@ -18,19 +18,12 @@ import re
 
 from setuptools import find_packages
 
-_v = pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "__init__.py"
-with open(_v, "r") as f:
-  content = f.read()
-
-  version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]",
-                      content,
-                      re.M).group(
-      1)  # get version string from module
-
-  project_name = re.search(r"PROJECT_NAME = ['\"]([^'\"]*)['\"]",
-                           content,
-                           re.M).group(
-      1)  # get project name string from module
+with open(pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "__init__.py", "r") as project_init_file:
+  content = project_init_file.read()  # get strings from module
+  version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]", content, re.M).group(1)
+  project_name = re.search(r"__project__ = ['\"]([^'\"]*)['\"]", content, re.M).group(1)
+  author = re.search(r"__author__ = ['\"]([^'\"]*)['\"]", content, re.M).group(1)
+__author__ = author
 
 
 class NeodroidPackageMeta(type):
@@ -38,15 +31,15 @@ class NeodroidPackageMeta(type):
   @property
   def test_dependencies(self) -> list:
     return [
-      'pytest',
-      'mock'
-      ]
+        'pytest',
+        'mock'
+        ]
 
   @property
   def setup_dependencies(self) -> list:
     return [
-      'pytest-runner'
-      ]
+        'pytest-runner'
+        ]
 
   @property
   def package_name(self) -> str:
@@ -68,13 +61,13 @@ class NeodroidPackageMeta(type):
   def packages(self):
     return find_packages(
         exclude=[
-          # 'Path/To/Exclude'
-          ]
+            # 'Path/To/Exclude'
+            ]
         )
 
   @property
   def author_name(self):
-    return 'Christian Heider Nielsen'
+    return author
 
   @property
   def author_email(self):
@@ -92,26 +85,26 @@ class NeodroidPackageMeta(type):
   def package_data(self):
     # data = glob.glob('environments/mab/**', recursive=True)
     return {
-      'neodroid':[
-        # *data
-        # 'environments/mab/**',
-        # 'environments/mab/**_Data/*',
-        # 'environments/mab/windows/*'
-        # 'environments/mab/windows/*_Data/*'
-        ]
-      }
+        'neodroid':[
+            # *data
+            # 'environments/mab/**',
+            # 'environments/mab/**_Data/*',
+            # 'environments/mab/windows/*'
+            # 'environments/mab/windows/*_Data/*'
+            ]
+        }
 
   @property
   def entry_points(self):
     return {
-      'console_scripts':[
-        # "name_of_executable = module.with:function_to_execute"
-        'neodroid = neodroid.entry_points.cli:main',
-        'neodroid-sample = neodroid.entry_points.action_space_sampling:main',
-        'neodroid-img = neodroid.entry_points.image_observation_plot:main',
-        'neodroid-kb = neodroid.entry_points.keyboard.qweasd_input:main',
-        ]
-      }
+        'console_scripts':[
+            # "name_of_executable = module.with:function_to_execute"
+            'neodroid = neodroid.entry_points.cli:main',
+            'neodroid-sample = neodroid.entry_points.action_space_sampling:main',
+            'neodroid-img = neodroid.entry_points.image_observation_plot:main',
+            'neodroid-kb = neodroid.entry_points.keyboard.qweasd_input:main',
+            ]
+        }
 
   @property
   def extras(self) -> dict:
@@ -146,15 +139,15 @@ class NeodroidPackageMeta(type):
         requirements_dev.append(requirement.strip())
 
     these_extras = {
-      'gui':  requirements_gui,
-      'tests':requirements_tests,
-      # 'docs':requirements_docs,
-      'dev':  requirements_dev
+        'gui':  requirements_gui,
+        'tests':requirements_tests,
+        # 'docs':requirements_docs,
+        'dev':  requirements_dev
 
-      # 'mab':['neodroid-linux-mab; platform_system == "Linux"',
-      #       'neodroid-win-mab platform_system == "Windows"']
+        # 'mab':['neodroid-linux-mab; platform_system == "Linux"',
+        #       'neodroid-win-mab platform_system == "Windows"']
 
-      }
+        }
 
     all_dependencies = []
 
@@ -199,20 +192,20 @@ class NeodroidPackageMeta(type):
   @property
   def classifiers(self):
     return [
-      'Development Status :: 4 - Beta',
-      'Environment :: Console',
-      'Intended Audience :: End Users/Desktop',
-      'Intended Audience :: Developers',
-      'License :: OSI Approved :: Apache Software License',
-      'Operating System :: MacOS :: MacOS X',
-      'Operating System :: Microsoft :: Windows',
-      'Operating System :: POSIX',
-      'Operating System :: OS Independent',
-      'Programming Language :: Python :: 3',
-      'Natural Language :: English',
-      # 'Topic :: Scientific/Engineering :: Artificial Intelligence'
-      # 'Topic :: Software Development :: Bug Tracking',
-      ]
+        'Development Status :: 4 - Beta',
+        'Environment :: Console',
+        'Intended Audience :: End Users/Desktop',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: Microsoft :: Windows',
+        'Operating System :: POSIX',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python :: 3',
+        'Natural Language :: English',
+        # 'Topic :: Scientific/Engineering :: Artificial Intelligence'
+        # 'Topic :: Software Development :: Bug Tracking',
+        ]
 
   @property
   def version(self):

@@ -7,9 +7,12 @@ from warnings import warn
 
 import pkg_resources
 from pip._internal.utils.misc import dist_is_editable
+
 from apppath import AppPath
 
-__author__ = "cnheider"
+
+__project__ = 'Neodroid'
+__author__ = "Christian Heider Nielsen"
 __version__ = "0.4.2"
 __doc__ = r'''
 Created on 27/04/2019
@@ -38,8 +41,8 @@ def dist_is_editable(dist):
     return False
 '''
 
-PROJECT_NAME = 'Neodroid'
-PROJECT_AUTHOR = __author__
+PROJECT_NAME = __project__.lower().strip().replace(' ','_')
+PROJECT_AUTHOR = __author__.lower().strip().replace(' ','_')
 PROJECT_APP_PATH = AppPath(app_name=PROJECT_NAME, app_author=PROJECT_AUTHOR)
 DEFAULT_ENVIRONMENTS_PATH = (PROJECT_APP_PATH.user_cache / 'environments').absolute()
 
@@ -66,9 +69,9 @@ def get_version(append_time=DEVELOP):
       # never desirable for artifact repositories, so we strip the
       # leading 'v' if it's present.
       version = (
-        version[1:]
-        if isinstance(version, str) and version.startswith("v")
-        else version
+          version[1:]
+          if isinstance(version, str) and version.startswith("v")
+          else version
       )
     else:
       # Default version is an ISO8601 compliant datetime. PyPI doesn't allow
@@ -96,8 +99,6 @@ if __version__ is None:
   __version__ = get_version(append_time=True)
 
 __version_info__ = tuple(int(segment) for segment in __version__.split("."))
-
-
 
 
 def get_logo() -> str:

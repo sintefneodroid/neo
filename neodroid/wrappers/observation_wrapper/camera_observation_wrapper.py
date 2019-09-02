@@ -5,12 +5,12 @@ from neodroid.interfaces.neodroid_standard_modules.neodroid_camera_extraction im
   extract_camera_observation,
   extract_neodroid_camera,
   )
-from neodroid.wrappers import SingleEnvironment
+from neodroid.wrappers import SingleUnityEnvironment
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
-class CameraObservationWrapper(SingleEnvironment):
+class CameraObservationWrapper(SingleUnityEnvironment):
 
   def __init__(self, auto_reset=True, **kwargs):
     super().__init__(**kwargs)

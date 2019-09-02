@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from neodroid.interfaces.spaces import Space
-from neodroid.interfaces.specifications import Range
+from neodroid.interfaces.spaces.range import Range
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import numpy
 
@@ -24,9 +24,9 @@ class SignalSpace(Space):
   def validate(self, actions):
     for i in range(len(actions)):
       clipped = numpy.clip(actions[i],
-                        self._ranges[i].min_value,
-                        self._ranges[i].max_value,
-                        )
+                           self._ranges[i].min_value,
+                           self._ranges[i].max_value,
+                           )
       actions[i] = numpy.round(clipped, self._ranges[i].decimal_granularity)
     return actions
 

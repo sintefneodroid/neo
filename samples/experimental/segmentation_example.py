@@ -7,7 +7,7 @@ from PIL import Image
 from executables.guiclient.utilities import DiceCoeff, rgb_segment
 from neodroid.utilities.messaging_utilities.neodroid_camera_extraction import extract_neodroid_camera
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import neodroid as neo
 import matplotlib.pyplot as plt

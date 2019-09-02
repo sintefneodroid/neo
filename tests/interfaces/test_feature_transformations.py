@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from neodroid.interfaces import Range
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
 def test_space_construction():

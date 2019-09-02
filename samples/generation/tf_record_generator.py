@@ -4,11 +4,10 @@ import json
 
 from neodroid.environments import connect
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 __doc__ = ''
 
 import tensorflow as tf
-import neodroid
 
 tf.enable_eager_execution()
 

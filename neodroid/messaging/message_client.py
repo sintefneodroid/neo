@@ -5,7 +5,7 @@ from contextlib import suppress
 
 from neodroid.messaging.fbs.fbs_state_utilties import deserialise_states
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import functools
 

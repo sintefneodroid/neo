@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 from typing import Any
 
-from neodroid.wrappers import NeodroidVectorGymEnvironment
 from neodroid.utilities.transformations.encodings import signed_ternary_encoding
+from neodroid.wrappers import NeodroidVectorGymEnvironment
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
 class DiscreteActionEncodingWrapper(NeodroidVectorGymEnvironment):

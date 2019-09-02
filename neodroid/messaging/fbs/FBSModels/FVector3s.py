@@ -44,7 +44,7 @@ def FVector3sStart(builder): builder.StartObject(1)
 
 def FVector3sAddPoints(builder, points): builder.PrependUOffsetTRelativeSlot(0,
                                                                              flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                               points), 0)
+                                                                                 points), 0)
 
 
 def FVector3sStartPointsVector(builder, numElems): return builder.StartVector(24, numElems, 8)

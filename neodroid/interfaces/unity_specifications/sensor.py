@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__author__ = 'cnheider'
+from neodroid.messaging.fbs.fbs_state_utilties import deserialise_space
+
+__author__ = 'Christian Heider Nielsen'
 
 import neodroid.messaging
 
@@ -22,7 +24,7 @@ class Sensor(object):
   @property
   def space(self):
     if self._observation_space:
-      space = neodroid.messaging.deserialise_space(self._observation_space)
+      space = deserialise_space(self._observation_space)
       return space
 
   @property

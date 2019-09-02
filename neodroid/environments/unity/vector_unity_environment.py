@@ -4,24 +4,20 @@ from warnings import warn
 
 import numpy
 
-from neodroid.environments import NeodroidEnvironment
-
-
-from neodroid.factories.multi_reaction_factory import (maybe_infer_multi_motion_reaction,
-                                                       maybe_infer_multi_configuration_reaction,
+from neodroid.environments import UnityEnvironment
+from neodroid.factories.multi_reaction_factory import (maybe_infer_multi_configuration_reaction,
+                                                       maybe_infer_multi_motion_reaction,
                                                        )
 from neodroid.interfaces.spaces import (ActionSpace,
                                         ObservationSpace,
                                         Range,
-                                        SignalSpace,
-                                        EnvironmentDescription,
                                         )
-from neodroid.interfaces.specifications import EnvironmentSnapshot, Reaction, ReactionParameters
+from neodroid.interfaces.unity_specifications import EnvironmentSnapshot, Reaction, ReactionParameters
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
-class VectorEnvironment(NeodroidEnvironment):
+class VectorUnityEnvironment(UnityEnvironment):
 
   def __next__(self):
     if not self._is_connected_to_server:
@@ -55,12 +51,12 @@ class VectorEnvironment(NeodroidEnvironment):
   def reset(self,
             input_reactions=None,
             state=None,
-            on_reset_callback:callable=None) -> EnvironmentSnapshot:
+            on_reset_callback: callable = None) -> EnvironmentSnapshot:
 
     input_reactions = maybe_infer_multi_configuration_reaction(input_reactions=input_reactions,
                                                                description=self._description
                                                                )
-    #if state:
+    # if state:
     #  input_reaction.unobservables = state.unobservables
 
     input_reactions = [input_reactions]
@@ -89,6 +85,7 @@ class VectorEnvironment(NeodroidEnvironment):
                                               None)
 
     return e
+
   '''
 
   def signal_space(self) -> SignalSpace:
@@ -98,7 +95,7 @@ class VectorEnvironment(NeodroidEnvironment):
     pass
 '''
 
-  def sensor(self, name:str, *args, **kwargs):
+  def sensor(self, name: str, *args, **kwargs):
 
     envs = list(self._last_message.values())
 
@@ -112,7 +109,7 @@ class VectorEnvironment(NeodroidEnvironment):
 
 
 class VectorWrapper:
-  def __init__(self, env: NeodroidEnvironment):
+  def __init__(self, env: UnityEnvironment):
     '''
 
     :param env:
@@ -120,7 +117,7 @@ class VectorWrapper:
     self._env = env
 
   @property
-  def observation_space(self)-> ObservationSpace:
+  def observation_space(self) -> ObservationSpace:
     '''
 
     :return:
@@ -192,8 +189,8 @@ if __name__ == '__main__':
                       help='Connect to already running environment instead of starting another instance')
   proc_args = parser.parse_args()
 
-  env = VectorEnvironment(environment_name=proc_args.ENVIRONMENT_NAME,
-                          connect_to_running=proc_args.CONNECT_TO_RUNNING)
+  env = VectorUnityEnvironment(environment_name=proc_args.ENVIRONMENT_NAME,
+                               connect_to_running=proc_args.CONNECT_TO_RUNNING)
 
   observation_session = tqdm(env, leave=False)
   for environment_state in observation_session:

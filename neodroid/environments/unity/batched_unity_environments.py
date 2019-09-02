@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.environments.neodroid_environment import NeodroidEnvironment
+from neodroid.environments.unity.unity_environment import UnityEnvironment
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
-class BatchedNeodroidEnvironment(NeodroidEnvironment):
+class BatchedUnityEnvironment(UnityEnvironment):
   def __init__(self, **kwargs):
     super().__init__(**kwargs)
     self._resets = []
@@ -50,7 +50,7 @@ if __name__ == '__main__':
                       help='Connect to already running environment instead of starting another instance')
   args = parser.parse_args()
 
-  env = NeodroidEnvironment(name=args.ENVIRONMENT_NAME, connect_to_running=args.CONNECT_TO_RUNNING)
+  env = UnityEnvironment(name=args.ENVIRONMENT_NAME, connect_to_running=args.CONNECT_TO_RUNNING)
 
   observation_session = tqdm(env, leave=False)
   i = 0

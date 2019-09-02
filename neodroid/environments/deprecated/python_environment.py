@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 from neodroid.environments.environment import Environment
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 from abc import ABC
-import neodroid.interfaces.specifications as M
+import neodroid.interfaces.unity_specifications as M
 
 
 class PythonEnvironment(Environment, ABC):

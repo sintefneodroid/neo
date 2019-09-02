@@ -6,9 +6,9 @@ from types import coroutine
 
 from neodroid import PROJECT_APP_PATH
 from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
-from neodroid.interfaces.specifications import EnvironmentDescription
+from neodroid.interfaces.unity_specifications.environment_description import EnvironmentDescription
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import numpy
 
@@ -20,6 +20,7 @@ class Environment(ABC):
                seed=8,
                logging_directory=PROJECT_APP_PATH.user_log,
                logging_level=logging.WARNING,
+               auto_reset=True,
                **kwargs):
     self.seed(seed)
 
@@ -32,6 +33,8 @@ class Environment(ABC):
     # self._module_logger = logging.getLogger(__name__)
 
     self._description = None
+    self._auto_reset = auto_reset
+    self._signal_space = None
     self._action_space = None
     self._observation_space = None
 

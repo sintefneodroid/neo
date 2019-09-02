@@ -6,7 +6,7 @@ from flatbuffers import Builder
 
 from neodroid.exceptions.exceptions import NoUnobservablesException
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import numpy
 

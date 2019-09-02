@@ -6,13 +6,12 @@ import cv2
 import matplotlib.pyplot as plt
 from matplotlib import animation
 
-from neodroid.environments import VectorEnvironment, NeodroidEnvironment
-from neodroid.environments.vector_environment import VectorWrapper
+from neodroid.environments import UnityEnvironment
+from neodroid.environments.unity.vector_unity_environment import VectorWrapper
+from neodroid.interfaces.neodroid_standard_modules.neodroid_camera_extraction import extract_all_as_camera
 from warg.named_ordered_dictionary import NOD
 
-from neodroid.interfaces.neodroid_standard_modules.neodroid_camera_extraction import extract_all_as_camera
-
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 __doc__ = ''
 
 
@@ -26,7 +25,7 @@ time_s = time.time()
 
 image_axs = NOD()
 
-env = VectorWrapper(NeodroidEnvironment(connect_to_running=True))
+env = VectorWrapper(UnityEnvironment(connect_to_running=True))
 fig = plt.figure()
 print_obs = False
 
@@ -43,7 +42,7 @@ def update_figures(i):
 
   new_images = extract_all_as_camera(info)
 
-  #new_images['RGB'] = new_images['RGB'] ** 0.454545
+  # new_images['RGB'] = new_images['RGB'] ** 0.454545
 
   # print( numpy.max(new_images['RGB']))
 

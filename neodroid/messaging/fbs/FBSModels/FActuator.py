@@ -43,12 +43,12 @@ def FActuatorStart(builder): builder.StartObject(2)
 
 def FActuatorAddActuatorName(builder, actuatorName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                          flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                           actuatorName), 0)
+                                                                                             actuatorName), 0)
 
 
 def FActuatorAddActuatorRange(builder, actuatorRange): builder.PrependStructSlot(1,
                                                                                  flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                   actuatorRange), 0)
+                                                                                     actuatorRange), 0)
 
 
 def FActuatorEnd(builder): return builder.EndObject()
