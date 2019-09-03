@@ -18,7 +18,6 @@ import numpy
 
 def maybe_infer_multi_motion_reaction(*,
                                       input_reactions,
-                                      normalise: bool,
                                       descriptions: Mapping[str, EnvironmentDescription],
                                       action_space: Mapping[str, ActionSpace]):
   '''
@@ -37,13 +36,11 @@ def maybe_infer_multi_motion_reaction(*,
 '''
   if descriptions:
     out_reaction = verify_motion_reactions(reaction_input=input_reactions,
-                                           environment_descriptions=descriptions,
-                                           normalise=normalise
+                                           environment_descriptions=descriptions
                                            )
   else:
     out_reaction = verify_motion_reactions(reaction_input=input_reactions,
-                                           environment_descriptions=None,
-                                           normalise=False
+                                           environment_descriptions=None
                                            )
 
   return out_reaction
@@ -64,8 +61,8 @@ def maybe_infer_multi_configuration_reaction(input_reactions,
 
 def verify_motion_reactions(*,
                             reaction_input,
-                            environment_descriptions: Mapping[str, EnvironmentDescription],
-                            normalise: bool = False):
+                            environment_descriptions: Mapping[str, EnvironmentDescription]
+                            ):
   outs = []
   if environment_descriptions:
     if len(reaction_input) is not len(environment_descriptions):
@@ -84,8 +81,8 @@ def verify_motion_reactions(*,
             return input
           else:
             input.motions = construct_motions_from_list(input.motions,
-                                                        actors,
-                                                        normalise)
+                                                        actors
+                                                      )
             return input
         elif isinstance(input, list):
           is_valid_motions = all(isinstance(m, Motion) for m in input)
@@ -100,13 +97,13 @@ def verify_motion_reactions(*,
                                  configurations=[],
                                  motions=input, environment_name=env_name))
           else:
-            outs.append(construct_individual_reactions_from_list(input, actors, normalise, env_name=env_name))
+            outs.append(construct_individual_reactions_from_list(input, actors,  env_name=env_name))
         elif isinstance(input, (int, float)):
-          outs.append(construct_individual_reactions_from_list([input], actors, normalise, env_name=env_name))
+          outs.append(construct_individual_reactions_from_list([input], actors,  env_name=env_name))
         elif isinstance(input, (numpy.ndarray, numpy.generic)):
           a = construct_individual_reactions_from_list(input.astype(float).tolist(),
                                                        actors,
-                                                       normalise, env_name=env_name)
+                                                        env_name=env_name)
           outs.append(a)
     else:
       parameters = ReactionParameters(describe=True)
@@ -114,35 +111,25 @@ def verify_motion_reactions(*,
   return outs
 
 
-def construct_individual_reactions_from_list(motion_list, actors, normalise, env_name='all'):
-  motions = construct_motions_from_list(motion_list, actors, normalise)
+def construct_individual_reactions_from_list(motion_list, actors, env_name='all'):
+  motions = construct_motions_from_list(motion_list, actors)
   parameters = ReactionParameters(terminable=True, step=True, reset=False, configure=False,
                                   describe=False, episode_count=True)
   return Reaction(motions=motions, parameters=parameters, environment_name=env_name)
 
 
-def construct_motions_from_list(input_list, actors, normalise):
+def construct_motions_from_list(input_list, actors):
   actor_motor_tuples = [
       (actor.actor_name, motor.actuator_name, motor.motion_space)
       for actor in actors
       for motor in actor.actuators.values()
       ]
-  if normalise:
-    new_motions = [
-        Motion(
-            actor_motor_tuple[0],
-            actor_motor_tuple[1],
-            normalise_action(list_val, actor_motor_tuple[2]),
-            )
-        for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
-        ]
-    return new_motions
-  else:
-    new_motions = [
-        Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
-        for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
-        ]
-    return new_motions
+
+  new_motions = [
+      Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
+      for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
+      ]
+  return new_motions
 
 
 def verify_configuration_reactions(input_reaction,

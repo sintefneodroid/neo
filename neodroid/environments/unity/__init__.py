@@ -14,5 +14,8 @@ def make(environment_name: str = None, clones=0, *args, **kwargs) -> UnityEnviro
 
 
 def connect(ip='localhost', port=6969, **kwargs) -> UnityEnvironment:
-  _environments = UnityEnvironment(connect_to_running=True, ip=ip, port=port, **kwargs)
+  _environments = UnityEnvironment(connect_to_running=True,
+                                   ip=ip,
+                                   port=port,
+                                   **kwargs)
   return _environments

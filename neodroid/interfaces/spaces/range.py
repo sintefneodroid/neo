@@ -21,13 +21,23 @@ class Range(object):
     assert max_value >= min_value
     assert decimal_granularity >= 0
 
-    self._decimal_granularity = decimal_granularity
-    self._min_value = min_value
-    self._max_value = max_value
     self._normalised = True
+    self._decimal_granularity = decimal_granularity
+
+    if self.normalised:
+      self._min_value = 0
+      self._max_value = 1
+    else:
+      self._min_value = min_value
+      self._max_value = max_value
+
 
   @property
   def normalised(self) -> bool:
+    '''
+    Indicates whether the action space span is zero-one normalised
+    :return:
+    '''
     return self._normalised
 
   @property

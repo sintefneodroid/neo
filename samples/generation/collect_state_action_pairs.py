@@ -1,25 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import json
 
-from neodroid.environments.unity import connect
+from neodroid import connect
 
 __author__ = 'Christian Heider Nielsen'
-__doc__ = ''
-
+__doc__ = 'Small sample program for connecting to environment and collecting observations'
 
 if __name__ == '__main__':
 
-  generate_num = 10
-  if generate_num > 0:
-    dt = []
-    with connect() as env:
-      for i, state in enumerate(env):
-        if i >= generate_num:
-          break
+  def main(generate_num=10):
 
-        state = state[list(state.keys())[0]]
-        label = state.sensor('String').value
-        ray = state.sensor('Ray').value
+    if generate_num > 0:
+      with connect() as env:
+        for i, state in enumerate(env):
+          if i >= generate_num:
+            break
 
-        print(label,ray)
+          state = next(iter(state.values()))
+          label = state.sensor('String').value
+          ray = state.sensor('Ray').value
+          image = state.sensor('RGB').value
+
+          print(label, ray, image)
+
+
+  main()

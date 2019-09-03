@@ -7,8 +7,12 @@ from neodroid.exceptions.exceptions import NoEnvironmentError
 from neodroid.factories.single_reaction_factory import (maybe_infer_single_configuration_reaction,
                                                         maybe_infer_single_motion_reaction,
                                                         )
-from neodroid.interfaces import Sensor, SignalSpace, ActionSpace, ObservationSpace, EnvironmentDescription
-from neodroid.interfaces.unity_specifications import EnvironmentSnapshot, Reaction
+from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
+from neodroid.interfaces.unity_specifications import (EnvironmentDescription,
+                                                      EnvironmentSnapshot,
+                                                      Reaction,
+                                                      Sensor,
+                                                      )
 
 __author__ = 'Christian Heider Nielsen'
 
@@ -19,25 +23,25 @@ class SingleUnityEnvironment(UnityEnvironment):
   def description(self) -> EnvironmentDescription:
     while not self._description:
       self.describe()
-    return self._description
+    return next(iter(self._description.values()))
 
   @property
-  def observation_space(self) ->  ObservationSpace:
+  def observation_space(self) -> ObservationSpace:
     while not self._observation_space:
       self.describe()
-    return self._observation_space
+    return next(iter(self._observation_space.values()))
 
   @property
   def action_space(self) -> ActionSpace:
     while not self._action_space:
       self.describe()
-    return self._action_space
+    return next(iter(self._action_space.values()))
 
   @property
-  def signal_space(self) ->  SignalSpace:
+  def signal_space(self) -> SignalSpace:
     while not self._signal_space:
       self.describe()
-    return self._signal_space
+    return next(iter(self._signal_space.values()))
 
   def __next__(self):
     if not self._is_connected_to_server:
@@ -71,7 +75,7 @@ class SingleUnityEnvironment(UnityEnvironment):
   def reset(self, input_reaction=None, state=None, on_reset_callback=None) -> EnvironmentSnapshot:
 
     input_reaction = maybe_infer_single_configuration_reaction(input_reaction=input_reaction,
-                                                               description=self._description
+                                                               description=self.description
 
                                                                )
     if state:
@@ -96,7 +100,7 @@ class SingleUnityEnvironment(UnityEnvironment):
       return message
 
   def sensor(self, name, *args, **kwargs) -> Sensor:
-    state_env_0 = list(self._last_message.values())[0]
+    state_env_0 = list(self._last_valid_message.values())[0]
     sens = state_env_0.sensor(name)
     if not sens:
       warn('Sensor was not found!')

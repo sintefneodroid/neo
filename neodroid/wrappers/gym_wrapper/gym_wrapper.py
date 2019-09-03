@@ -57,8 +57,8 @@ class NeodroidGymEnvironment(SingleUnityEnvironment,
     pass
 
   def sensor(self, key, **kwargs):
-    if self._last_message:
-      return self._last_message.sensor(key)
+    if self._last_valid_message:
+      return self._last_valid_message.sensor(key)
     warn('No message available')
     return None
 

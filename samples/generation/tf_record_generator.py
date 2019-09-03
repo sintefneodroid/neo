@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import json
 
+from neodroid import PROJECT_APP_PATH
 from neodroid.environments import connect
 
 __author__ = 'Christian Heider Nielsen'
@@ -80,7 +81,7 @@ def write_tf_record_file(data_tuples,
 if __name__ == '__main__':
 
   generate_num = 10
-  file_name = 'neodroid_bb_images.tfr'
+  output_file_name = PROJECT_APP_PATH.user_data/ 'neodroid_bb_images.tfr'
 
   if generate_num > 0:
     dt = []
@@ -95,11 +96,11 @@ if __name__ == '__main__':
         image_data = state.sensor('RGB').value
         dt.append((image_data, label, (256, 256, 4), json.loads(bb)))
 
-    write_tf_record_file(dt, file_name=file_name)
+    write_tf_record_file(dt, file_name=output_file_name)
 
-  raw_image_dataset = tf.data.TFRecordDataset(file_name)
+  raw_image_dataset = tf.data.TFRecordDataset(output_file_name)
 
-  # Create a dictionary describing the features.
+
   image_feature_description = {'height':   tf.FixedLenFeature([], tf.int64),
                                'width':    tf.FixedLenFeature([], tf.int64),
                                'depth':    tf.FixedLenFeature([], tf.int64),
@@ -109,7 +110,7 @@ if __name__ == '__main__':
                                'bb_w':     tf.FixedLenFeature([], tf.float32),
                                'bb_h':     tf.FixedLenFeature([], tf.float32),
                                'image_raw':tf.FixedLenFeature([], tf.string),
-                               }
+                               }  # Create a dictionary describing the features.
 
 
   def _parse_image_function(example_proto):

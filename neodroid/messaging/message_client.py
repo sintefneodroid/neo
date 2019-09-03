@@ -123,7 +123,7 @@ class MessageClient(object):
 
     self.open_connection()
 
-  def send_reactions(self, reactions):
+  def send_receive(self, reactions):
     global LAST_RECEIVED_FRAME_NUMBER
     if self._request_socket is None:
       self.build()

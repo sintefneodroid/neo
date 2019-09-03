@@ -5,7 +5,7 @@ import time
 
 import numpy
 
-from neodroid.environments import connect
+from neodroid import connect
 
 __author__ = 'Christian Heider Nielsen'
 

@@ -4,20 +4,21 @@ import logging
 from pathlib import Path
 from typing import Mapping, Union
 
-from neodroid import DEFAULT_ENVIRONMENTS_PATH
+from neodroid import PROJECT_APP_PATH
 from neodroid.factories.multi_reaction_factory import maybe_infer_multi_motion_reaction
+from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
+from neodroid.interfaces.unity_specifications.environment_description import EnvironmentDescription
 from neodroid.interfaces.unity_specifications.environment_snapshot import EnvironmentSnapshot
 from neodroid.interfaces.unity_specifications.reaction import Reaction
 from neodroid.interfaces.unity_specifications.reaction_parameters import ReactionParameters
 from neodroid.interfaces.unity_specifications.simulator_configuration import SimulatorConfiguration
-from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
-from neodroid.interfaces.unity_specifications.environment_description import EnvironmentDescription
 from neodroid.utilities import launch_environment
-from neodroid.messaging.fbs import FBSModels as F
 
 __author__ = 'Christian Heider Nielsen'
 
 from neodroid.environments.networking_environment import NetworkingEnvironment
+
+DEFAULT_ENVIRONMENTS_PATH = (PROJECT_APP_PATH.user_cache / 'environments').absolute()
 
 
 class UnityEnvironment(NetworkingEnvironment):
@@ -29,7 +30,7 @@ class UnityEnvironment(NetworkingEnvironment):
     return self._description
 
   @property
-  def observation_space(self) -> [str, ObservationSpace]:
+  def observation_space(self) -> Mapping[str, ObservationSpace]:
     while not self._observation_space:
       self.describe()
     return self._observation_space
@@ -86,8 +87,7 @@ class UnityEnvironment(NetworkingEnvironment):
 
     # Environment
     self._simulator_configuration = None
-    self._last_message = None
-
+    self._last_valid_message = None
     # Simulation
     self._simulation_instance = None
     self._clones = clones
@@ -141,24 +141,26 @@ class UnityEnvironment(NetworkingEnvironment):
     else:
       if input_reactions is None:
         parameters = ReactionParameters(episode_count=True,
-                                          step=True,
-                                          terminable=True
-                                          )
+                                        step=True,
+                                        terminable=True
+                                        )
         input_reactions = [Reaction(parameters=parameters)]
       elif not isinstance(input_reactions, Reaction):
         input_reactions = maybe_infer_multi_motion_reaction(input_reactions=input_reactions,
-                                                            normalise=normalise,
                                                             descriptions=self._description,
                                                             action_space=self.action_space
                                                             )
 
-    new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
+    new_states, simulator_configuration = self._message_server.send_receive(input_reactions)
 
     if new_states:
-      self.update_interface_attributes(new_states, simulator_configuration)
-      return new_states
+      self._last_valid_message = new_states
+    else:
+      logging.warning('No valid was new_state received')
 
-    logging.warning('No valid was new_state received')
+    return new_states
+
+
 
   def display(self, displayables) -> Mapping[str, EnvironmentSnapshot]:
     conf_reaction = Reaction(displayables=displayables)
@@ -175,16 +177,19 @@ class UnityEnvironment(NetworkingEnvironment):
 
     if input_reactions is None:
       parameters = ReactionParameters(terminable=True,
-                                        describe=True,
-                                        episode_count=False,
-                                        reset=True)
+                                      describe=True,
+                                      episode_count=False,
+                                      reset=True)
       input_reactions = [Reaction(parameters=parameters)]
 
-    new_states, simulator_configuration = self._message_server.send_reactions(input_reactions)
+    new_states, simulator_configuration = self._message_server.send_receive(input_reactions)
+
     if new_states:
+      self._last_valid_message = new_states
       self.update_interface_attributes(new_states, simulator_configuration)
-      return new_states
-    logging.warning('No valid was new_state received')
+    else:
+      logging.warning('No valid was new_state received')
+    return new_states
 
   def _close(self, callback=None):
     '''
@@ -205,8 +210,8 @@ class UnityEnvironment(NetworkingEnvironment):
 
   def describe(self,
                parameters=ReactionParameters(terminable=False,
-                                               describe=True,
-                                               episode_count=False)) -> Mapping[str, EnvironmentSnapshot]:
+                                             describe=True,
+                                             episode_count=False)) -> Mapping[str, EnvironmentSnapshot]:
     '''
 
     :param parameters:
@@ -215,24 +220,28 @@ class UnityEnvironment(NetworkingEnvironment):
     :rtype:
     '''
     reaction = Reaction(parameters=parameters)
-    new_states, simulator_configuration = self._message_server.send_reactions([reaction])
+    new_states, simulator_configuration = self._message_server.send_receive([reaction])
 
     if new_states:
+      self._last_valid_message = new_states
       self.update_interface_attributes(new_states, simulator_configuration)
-      return new_states
+    else:
+      logging.warning('No valid was new_state received')
+    return new_states
 
   def update_interface_attributes(self, new_states, new_simulator_configuration):
-    self._last_message = new_states
     self._simulator_configuration = new_simulator_configuration
-    envs = self._last_message.items()
-    first_environment = next(iter(envs))[1]
-    if first_environment.description:
+    envs = new_states.items()
+    f = next(iter(new_states.values()))
+    if f.description:
       self._description = {k:env.description for k, env in envs}
-      self._action_space = next(iter({k:ActionSpace.from_environment_description(env.description) for k,
-                                                                                                      env in
-                                      envs}.values()))
-      self._observation_space = next(iter({k:ObservationSpace.from_environment_description(env.description)
-                                           for k, env in envs}.values()))
+      self._action_space = {k:ActionSpace.from_environment_description(env.description) for k, env in envs}
+      self._observation_space = {k:ObservationSpace.from_environment_description(env.description) for k, env
+                                 in envs}
+      self._signal_space = {k:SignalSpace.from_environment_description(env.description) for k, env
+                                 in envs}
+
+
 
   def __repr__(self):
     return (f'<NeodroidEnvironment>\n'

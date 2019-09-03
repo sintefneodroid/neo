@@ -10,7 +10,6 @@ from pip._internal.utils.misc import dist_is_editable
 
 from apppath import AppPath
 
-
 __project__ = 'Neodroid'
 __author__ = "Christian Heider Nielsen"
 __version__ = "0.4.2"
@@ -41,10 +40,9 @@ def dist_is_editable(dist):
     return False
 '''
 
-PROJECT_NAME = __project__.lower().strip().replace(' ','_')
-PROJECT_AUTHOR = __author__.lower().strip().replace(' ','_')
+PROJECT_NAME = __project__.lower().strip().replace(' ', '_')
+PROJECT_AUTHOR = __author__.lower().strip().replace(' ', '_')
 PROJECT_APP_PATH = AppPath(app_name=PROJECT_NAME, app_author=PROJECT_AUTHOR)
-DEFAULT_ENVIRONMENTS_PATH = (PROJECT_APP_PATH.user_cache / 'environments').absolute()
 
 distributions = {v.key:v for v in pkg_resources.working_set}
 if PROJECT_NAME in distributions:
@@ -109,6 +107,8 @@ def get_logo() -> str:
 def draw_logo() -> None:
   print(get_logo())
 
+
+from .environments.unity import connect
 
 if __name__ == '__main__':
   draw_logo()

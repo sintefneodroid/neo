@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import neodroid
-import neodroid.messaging
+
 
 __author__ = 'Christian Heider Nielsen'
 

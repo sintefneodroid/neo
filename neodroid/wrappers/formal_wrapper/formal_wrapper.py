@@ -33,7 +33,7 @@ class NeodroidFormalWrapper(SingleUnityEnvironment):
     pass
 
   def observer(self, key):
-    if self._last_message:
+    if self._last_valid_message:
       return self._sensor(key)
     warn('No message available')
     return None

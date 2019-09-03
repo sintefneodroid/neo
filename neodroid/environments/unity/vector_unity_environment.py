@@ -4,13 +4,15 @@ from warnings import warn
 
 import numpy
 
-from neodroid.environments import UnityEnvironment
+from neodroid.environments.unity import UnityEnvironment
 from neodroid.factories.multi_reaction_factory import (maybe_infer_multi_configuration_reaction,
                                                        maybe_infer_multi_motion_reaction,
                                                        )
 from neodroid.interfaces.spaces import (ActionSpace,
                                         ObservationSpace,
                                         Range,
+                                        EnvironmentDescription,
+                                        SignalSpace,
                                         )
 from neodroid.interfaces.unity_specifications import EnvironmentSnapshot, Reaction, ReactionParameters
 
@@ -28,11 +30,10 @@ class VectorUnityEnvironment(UnityEnvironment):
             input_reactions=None,
             *,
             parameters: ReactionParameters = None,
-            normalise: bool = False,
             **kwargs) -> EnvironmentSnapshot:
     if not isinstance(input_reactions, Reaction):
       input_reactions = maybe_infer_multi_motion_reaction(input_reactions=input_reactions,
-                                                          normalise=normalise,
+
                                                           descriptions=self._description,
                                                           action_space=self.action_space
                                                           )
@@ -75,6 +76,30 @@ class VectorUnityEnvironment(UnityEnvironment):
     if message:
       return message
     return None
+  @property
+  def action_space(self) -> ActionSpace:
+    while not self._action_space:
+      self.describe()
+    return next(iter(self._action_space.values()))
+
+  @property
+  def description(self) -> EnvironmentDescription:
+    while not self._description:
+      self.describe()
+    return next(iter(self._description.values()))
+
+  @property
+  def observation_space(self) -> ObservationSpace:
+    while not self._observation_space:
+      self.describe()
+    return next(iter(self._observation_space.values()))
+
+  @property
+  def signal_space(self) -> SignalSpace:
+    while not self._signal_space:
+      self.describe()
+    return next(iter(self._signal_space.values()))
+
 
   def describe(self, *args, **kwargs):
     new_states = super().describe(*args, **kwargs)
@@ -97,7 +122,7 @@ class VectorUnityEnvironment(UnityEnvironment):
 
   def sensor(self, name: str, *args, **kwargs):
 
-    envs = list(self._last_message.values())
+    envs = list(self._last_valid_message.values())
 
     observer = []
     for e in envs:

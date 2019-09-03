@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.exceptions.exceptions import SensorNotAvailableException
-from neodroid.interfaces.neodroid_standard_modules.neodroid_camera_extraction import (
-  extract_camera_observation,
-  extract_neodroid_camera,
-  )
+from neodroid.interfaces.unity_specifications.prefabs.neodroid_camera_extraction import \
+  (extract_camera_observation, extract_neodroid_camera,
+   )
 from neodroid.wrappers import SingleUnityEnvironment
 
 __author__ = 'Christian Heider Nielsen'
@@ -24,8 +23,8 @@ class CameraObservationWrapper(SingleUnityEnvironment):
     return self.fetch_new_frame(None)
 
   def sensor(self, key):
-    if self._last_message:
-      state_env_0 = list(self._last_message.values())[0]
+    if self._last_valid_message:
+      state_env_0 = list(self._last_valid_message.values())[0]
       return extract_camera_observation(state_env_0, key)
     raise SensorNotAvailableException
 

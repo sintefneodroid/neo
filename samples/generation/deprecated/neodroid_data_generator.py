@@ -4,7 +4,9 @@ from multiprocessing import Pipe, Process
 
 from torch.utils.data import Dataset
 
+from draugr.torch_utilities import channel_transform
 from neodroid.wrappers import CameraObservationWrapper
+from trolls.experimental import CloudPickleWrapper
 
 __author__ = 'Christian Heider Nielsen'
 
@@ -50,7 +52,7 @@ class NeodroidDataGenerator(Dataset):
     self.remotes, self.work_remotes = zip(*[Pipe() for _ in range(self._transformation_workers)])
     self.ps = [Process(target=self.worker, args=(work_remote,
                                                  remote,
-                                                 CloudpickleWrapper(env_fn)))
+                                                 CloudPickleWrapper(env_fn)))
                for (work_remote, remote, env_fn) in zip(self.work_remotes,
                                                         self.remotes,
                                                         env_fns)]
@@ -61,7 +63,6 @@ class NeodroidDataGenerator(Dataset):
   def __getitem__(self, index):
     state = self._env.update()
     rgb_arr = state.sensor('RGB').value
-    rgb_arr = numpy.asarray(Image.open(rgb_arr).convert('RGB'))
     a_class = state.sensor('Class').value
 
     predictors = channel_transform(rgb_arr)

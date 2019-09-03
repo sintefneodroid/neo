@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.messaging.fbs.fbs_state_utilties import deserialise_space
+
 __author__ = 'Christian Heider Nielsen'
 
-import neodroid.messaging
+
 
 
 class Actuator(object):
@@ -17,7 +19,7 @@ class Actuator(object):
 
   @property
   def motion_space(self):
-    return neodroid.messaging.deserialise_space(self._motion_space)
+    return deserialise_space(self._motion_space)
 
   def __repr__(self):
     return (f'<Actuator>\n'

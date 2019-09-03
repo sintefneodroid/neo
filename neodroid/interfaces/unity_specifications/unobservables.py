@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.messaging.fbs.fbs_state_utilties import deserialise_poses, deserialise_bodies
+
 __author__ = 'Christian Heider Nielsen'
 
 import numpy
 
-import neodroid.messaging
+
 
 
 class Unobservables(object):
@@ -19,12 +21,12 @@ class Unobservables(object):
   @property
   def poses_numpy(self):
     if self._unobservables:
-      return neodroid.messaging.deserialise_poses(self._unobservables)
+      return deserialise_poses(self._unobservables)
 
   @property
   def bodies_numpy(self):
     if self._unobservables:
-      return neodroid.messaging.deserialise_bodies(self._unobservables)
+      return deserialise_bodies(self._unobservables)
 
   @property
   def state_configuration(self):
