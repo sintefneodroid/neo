@@ -2,4 +2,5 @@
 # -*- coding: utf-8 -*-
 
 __author__ = 'Christian Heider Nielsen'
-__doc__ = ''
+
+from .neodroid_camera_extraction import *

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from typing import Any
+
+from neodroid.utilities.unity_specifications.sensor import Sensor
+from neodroid.utilities.spaces import ObservationSpace, Sequence, ActionSpace
 from neodroid.messaging.fbs.FBSModels import FEnvironmentDescription
 from neodroid.messaging.fbs.fbs_state_utilties import (deserialise_actors,
                                                        deserialise_sensors,
@@ -7,8 +11,6 @@ from neodroid.messaging.fbs.fbs_state_utilties import (deserialise_actors,
                                                        )
 
 __author__ = 'Christian Heider Nielsen'
-
-
 
 
 class EnvironmentDescription(object):
@@ -23,10 +25,6 @@ class EnvironmentDescription(object):
   @property
   def max_episode_length(self) -> int:
     return self._fbs_description.Objective().MaxEpisodeLength()
-
-  @property
-  def solved_threshold(self):
-    return self._fbs_description.Objective().SolvedThreshold()
 
   @property
   def actors(self):
@@ -50,10 +48,9 @@ class EnvironmentDescription(object):
   def sensors(self):
     return deserialise_sensors(self._fbs_description)
 
-  def sensor(self, key):
-    sensors = self.sensors
-    if key in sensors:
-      return sensors[key]
+  def sensor(self, key) -> Sensor:
+    if key in self.sensors:
+      return self.sensors[key]
 
   @property
   def configurables(self):
@@ -76,7 +73,7 @@ class EnvironmentDescription(object):
 
     return (f'<EnvironmentDescription>\n'
             f'<MaxEpisodeLength>{self.max_episode_length}</MaxEpisodeLength>\n'
-            f'<SolvedThreshold>{self.solved_threshold}</SolvedThreshold>\n'
+            f'<Sensors>\n{self.sensors}</Sensors>\n'
             f'<Actors>\n{actors_str}</Actors>\n'
             f'<Configurables>\n{configurables_str}</Configurables>\n'
             f'</EnvironmentDescription>\n')
@@ -86,3 +83,44 @@ class EnvironmentDescription(object):
 
   def __unicode__(self):
     return self.__repr__()
+
+  @property
+  def observation_space(self):
+    sensor_names = self.sensors.keys()
+    observation_spaces = []
+    observers = self.sensors.values()
+    for observer in observers:
+      if isinstance(observer.space, Sequence):
+        for r in observer.space:
+          observation_spaces.append(r)
+      else:
+        observation_spaces.append(observer.space)
+
+    return ObservationSpace(observation_spaces, sensor_names)
+
+  @property
+  def action_space(self):
+    motion_names = self.actors.keys()
+    motion_spaces = []
+    for actor in self.actors.values():
+      for actuator in actor.actuators.values():
+        motion_spaces.append(actuator.motion_space)
+
+    return ActionSpace(motion_spaces, motion_names)
+
+  @property
+  def signal_space(environment_description):
+    return None
+    '''
+    sensor_names = environment_description.signal_space
+    observation_spaces = []
+    observers = environment_description.sensors.values()
+    for observer in observers:
+      if isinstance(observer.space, Sequence):
+        for r in observer.space:
+          observation_spaces.append(r)
+      else:
+        observation_spaces.append(observer.space)
+
+    return SignalSpace(observation_spaces, sensor_names)
+    '''

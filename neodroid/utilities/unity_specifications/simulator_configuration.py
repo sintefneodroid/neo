@@ -9,6 +9,12 @@ class SimulatorConfiguration(object):
                fbs_configuration,
                api_version,
                simulator_info='No simulator_info available'):
+    '''
+
+    :param fbs_configuration:
+    :param api_version:
+    :param simulator_info:
+    '''
     self._fbs_configuration = fbs_configuration
     self._api_version = api_version
     self._simulator_info = simulator_info
@@ -23,6 +29,6 @@ class SimulatorConfiguration(object):
 
   @property
   def simulator_info(self):
-    if type(self._simulator_info) is not str:
-      return self._simulator_info.decode()
+    #if not isinstance(self._simulator_info, str):
+    #  return self._simulator_info.decode()
     return self._simulator_info

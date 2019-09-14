@@ -5,13 +5,13 @@ from pathlib import Path
 from typing import Mapping, Union
 
 from neodroid import PROJECT_APP_PATH
-from neodroid.factories.multi_reaction_factory import maybe_infer_multi_motion_reaction
-from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
-from neodroid.interfaces.unity_specifications.environment_description import EnvironmentDescription
-from neodroid.interfaces.unity_specifications.environment_snapshot import EnvironmentSnapshot
-from neodroid.interfaces.unity_specifications.reaction import Reaction
-from neodroid.interfaces.unity_specifications.reaction_parameters import ReactionParameters
-from neodroid.interfaces.unity_specifications.simulator_configuration import SimulatorConfiguration
+from neodroid.factories.motion_reactions import verify_motion_reactions
+from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
+from neodroid.utilities.unity_specifications.environment_description import EnvironmentDescription
+from neodroid.utilities.unity_specifications.environment_snapshot import EnvironmentSnapshot
+from neodroid.utilities.unity_specifications import Reaction
+from neodroid.utilities.unity_specifications.reaction_parameters import ReactionParameters
+from neodroid.utilities.unity_specifications.simulator_configuration import SimulatorConfiguration
 from neodroid.utilities import launch_environment
 
 __author__ = 'Christian Heider Nielsen'
@@ -57,6 +57,18 @@ class UnityEnvironment(NetworkingEnvironment):
   def neodroid_api_version(self):
     return '0.4.0'
 
+  def sensor(self, name: str):
+
+    envs = list(self._last_valid_message.values())
+
+    observer = []
+    for e in envs:
+      o = e.sensor(name)
+      if not o:
+        logging.warning('Sensor was not found!')
+      observer.append(o)
+    return observer
+
   def _setup_connection(self, auto_describe=True):
     super()._setup_connection(auto_describe)
     if auto_describe:
@@ -80,7 +92,6 @@ class UnityEnvironment(NetworkingEnvironment):
                clones: int = 0,
                path_to_executables_directory: Union[str, Path] = DEFAULT_ENVIRONMENTS_PATH,
                headless: bool = False,
-
                **kwargs
                ):
     super().__init__(**kwargs)
@@ -109,15 +120,14 @@ class UnityEnvironment(NetworkingEnvironment):
   def configure(self, *args, **kwargs) -> Mapping[str, EnvironmentSnapshot]:
     return self.reset()
 
-  def react(
-      self,
-      input_reactions=None,
-      *,
-      parameters=None,
-      normalise=False,
-      on_reaction_sent_callback=None,
-      on_step_done_callback=None,
-      **kwargs) -> Mapping[str, EnvironmentSnapshot]:
+  def react(self,
+            input_reactions=None,
+            *,
+            parameters=None,
+            normalise=False,
+            on_reaction_sent_callback=None,
+            on_step_done_callback=None,
+            **kwargs) -> Mapping[str, EnvironmentSnapshot]:
     '''
 
 :param input_reactions:
@@ -146,10 +156,9 @@ class UnityEnvironment(NetworkingEnvironment):
                                         )
         input_reactions = [Reaction(parameters=parameters)]
       elif not isinstance(input_reactions, Reaction):
-        input_reactions = maybe_infer_multi_motion_reaction(input_reactions=input_reactions,
-                                                            descriptions=self._description,
-                                                            action_space=self.action_space
-                                                            )
+        input_reactions = verify_motion_reactions(input_reactions=input_reactions,
+                                                  environment_descriptions=self._description
+                                                  )
 
     new_states, simulator_configuration = self._message_server.send_receive(input_reactions)
 
@@ -159,8 +168,6 @@ class UnityEnvironment(NetworkingEnvironment):
       logging.warning('No valid was new_state received')
 
     return new_states
-
-
 
   def display(self, displayables) -> Mapping[str, EnvironmentSnapshot]:
     conf_reaction = Reaction(displayables=displayables)
@@ -235,13 +242,11 @@ class UnityEnvironment(NetworkingEnvironment):
     f = next(iter(new_states.values()))
     if f.description:
       self._description = {k:env.description for k, env in envs}
-      self._action_space = {k:ActionSpace.from_environment_description(env.description) for k, env in envs}
-      self._observation_space = {k:ObservationSpace.from_environment_description(env.description) for k, env
+      self._action_space = {k:env.description.action_space for k, env in envs}
+      self._observation_space = {k:env.description.observation_space for k, env
                                  in envs}
-      self._signal_space = {k:SignalSpace.from_environment_description(env.description) for k, env
-                                 in envs}
-
-
+      self._signal_space = {k:env.description.signal_space for k, env
+                            in envs}
 
   def __repr__(self):
     return (f'<NeodroidEnvironment>\n'

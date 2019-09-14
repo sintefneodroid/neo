@@ -3,11 +3,9 @@ from typing import Any, Tuple
 import imageio
 import numpy
 
-from neodroid.interfaces.spaces.range import Range
-
-from neodroid.interfaces  import unity_specifications as US
+from neodroid.utilities import unity_specifications as US
+from neodroid.utilities.spaces.range import Range
 from neodroid.messaging.fbs import FBSModels as F
-
 
 
 def deserialise_states(flat_states):
@@ -22,7 +20,7 @@ def deserialise_states(flat_states):
     out_states[key] = states[key]
 
   simulator_configuration = US.SimulatorConfiguration(flat_states.SimulatorConfiguration(),
-                                                   flat_states.ApiVersion())
+                                                      flat_states.ApiVersion())
 
   return out_states, simulator_configuration
 
@@ -34,12 +32,12 @@ def deserialise_configurables(flat_environment_description):
       f_conf = flat_environment_description.Configurables(i)
       obs_type = f_conf.ConfigurableValueType()
       obs_value = f_conf.ConfigurableValue()
-      observation_value, observation_space = deserialise_sensor(obs_type, obs_value)
+      observation_value, observation_space,_ = deserialise_sensor(obs_type, obs_value)
 
       configurable = US.Configurable(f_conf.ConfigurableName().decode(),
-                                  observation_value,
-                                  observation_space
-                                  )
+                                     observation_value,
+                                     observation_space
+                                     )
       configurables[configurable.configurable_name] = configurable
   return configurables
 
@@ -51,16 +49,19 @@ def deserialise_sensors(flat_description):
     f_obs = flat_description.Sensors(i)
     obs_type = f_obs.SensorValueType()
     obs_value = f_obs.SensorValue()
-    sensor_value, sensor_space = deserialise_sensor(obs_type, obs_value)
+    sensor_value, sensor_space,is_image = deserialise_sensor(obs_type, obs_value)
 
     name = f_obs.SensorName().decode()
-    out_sensors[name] = US.Sensor(name, sensor_space, sensor_value)
+    out_sensors[name] = US.Sensor(name,
+                                  sensor_space,
+                                  sensor_value,is_image)
   return out_sensors
 
 
 def deserialise_sensor(obs_type, obs_value):
   value = None
   value_range = None
+  is_image = False
   if obs_type is F.FObservation.FSingle:
     value, value_range = deserialise_single(obs_value)
   elif obs_type is F.FObservation.FDouble:
@@ -79,10 +80,11 @@ def deserialise_sensor(obs_type, obs_value):
     value, value_range = deserialise_quaternion_transform(obs_value)
   elif obs_type is F.FObservation.FByteArray:
     value, value_range = deserialise_byte_array(obs_value)
+    is_image = True
   elif obs_type is F.FObservation.FString:
     value, value_range = deserialise_string(obs_value)
 
-  return value, value_range
+  return value, value_range,is_image
 
 
 def deserialise_observables(state):
@@ -91,7 +93,6 @@ def deserialise_observables(state):
 
 def deserialise_unobservables(state):
   return US.Unobservables(state.Unobservables())
-
 
 
 def deserialise_actors(flat_environment_description):
@@ -115,13 +116,6 @@ def deserialise_actors(flat_environment_description):
 
 def deserialise_description(flat_description):
   return US.EnvironmentDescription(flat_description)
-
-
-
-
-
-
-
 
 
 def deserialise_poses(unobservables):
@@ -307,8 +301,8 @@ def deserialise_actuators(flat_actor):
   for i in range(flat_actor.ActuatorsLength()):
     flat_actuator = flat_actor.Actuators(i)
     input_actuator = US.Actuator(flat_actuator.ActuatorName().decode(),
-                              flat_actuator.ActuatorRange()
-                              )
+                                 flat_actuator.ActuatorRange()
+                                 )
     actuators[input_actuator.actuator_name] = input_actuator
 
   out_actuators = {}

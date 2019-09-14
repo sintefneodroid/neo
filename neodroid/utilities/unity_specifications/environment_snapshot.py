@@ -15,8 +15,7 @@ class EnvironmentSnapshot(object):
 
   def __init__(self, fbs_state: FState = None):
 
-    if fbs_state is not None:
-      self._fbs_state = fbs_state
+    self._fbs_state = fbs_state
 
   def _environment_name(self):
     return self._fbs_state.EnvironmentName()
@@ -95,8 +94,8 @@ class EnvironmentSnapshot(object):
   def description(self):
     if self._fbs_state.EnvironmentDescription():
       return deserialise_description(
-          self._fbs_state.EnvironmentDescription()
-          )
+        self._fbs_state.EnvironmentDescription()
+        )
 
   @property
   def sensors(self):
@@ -116,16 +115,16 @@ class EnvironmentSnapshot(object):
     return self.observables, self.signal, self.terminated, self
 
   @staticmethod
-  def from_gym_like_out(observables=(),
-                        signal=2,
-                        terminated=False,
-                        info=None):
-    es = EnvironmentSnapshot(None)
-    es._observables = observables
-    es._signal = signal
-    es._terminated = terminated
-    es._extra_serialised_message = info
-    return es
+  def from_gym_like_out(observables,
+                        signal,
+                        terminated,
+                        info):
+    snapshot = EnvironmentSnapshot(None)
+    snapshot._observables = observables
+    snapshot._signal = signal
+    snapshot._terminated = terminated
+    snapshot._extra_serialised_message = info
+    return snapshot
 
   def to_dict(self):
     # inspect.getmembers(a)

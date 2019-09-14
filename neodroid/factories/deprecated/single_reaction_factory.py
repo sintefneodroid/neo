@@ -3,11 +3,12 @@
 import logging
 from typing import Sequence
 
-from neodroid.interfaces.spaces import ActionSpace, EnvironmentDescription, signed_ternary_encoding
-from neodroid.interfaces.unity_specifications.configuration import Configuration
-from neodroid.interfaces.unity_specifications.motion import Motion
-from neodroid.interfaces.unity_specifications.reaction import Reaction
-from neodroid.interfaces.unity_specifications.reaction_parameters import ReactionParameters
+from neodroid.utilities.spaces import ActionSpace,  signed_ternary_encoding
+from neodroid.utilities.unity_specifications import EnvironmentDescription
+from neodroid.utilities.unity_specifications.configuration import Configuration
+from neodroid.utilities.unity_specifications.motion import Motion
+from neodroid.utilities.unity_specifications import Reaction
+from neodroid.utilities.unity_specifications.reaction_parameters import ReactionParameters
 from neodroid.utilities.transformations.action_transformations import normalise_action
 
 __author__ = 'Christian Heider Nielsen'
@@ -15,65 +16,16 @@ __author__ = 'Christian Heider Nielsen'
 import numpy
 
 
-
-def maybe_infer_single_motion_reaction(*,
-                                       input_reactions,
-                                       normalise: bool,
-                                       description: EnvironmentDescription,
-                                       action_space: ActionSpace):
-  '''
-
-  :param action_space:
-:param verbose:
-:type verbose:
-:param input_reactions:
-:type input_reactions:
-:param normalise:
-:type normalise:
-:param description:
-:type description:
-:return:
-:rtype:
-'''
-  if description:
-    out_reaction = construct_step_reaction(reaction_input=input_reactions,
-                                           environment_description=description,
-                                           normalise=normalise,
-                                           space=action_space
-                                           )
-  else:
-    out_reaction = construct_step_reaction(reaction_input=input_reactions,
-                                           environment_description=None,
-                                           normalise=False,
-                                           space=action_space
-                                           )
-
-  return out_reaction
-
-
-def maybe_infer_single_configuration_reaction(input_reaction,
-                                              description: EnvironmentDescription):
-  if description:
-    input_reaction = verify_configuration_reaction(input_reaction=input_reaction,
-                                                   environment_description=description
-                                                   )
-  else:
-    input_reaction = verify_configuration_reaction(input_reaction=input_reaction,
-                                                   environment_description=description)
-
-  return input_reaction
-
-
 # @debug_print_return_value
-def construct_step_reaction(*,
-                            reaction_input,
-                            environment_description: EnvironmentDescription,
-                            space: ActionSpace,
-                            normalise: bool = False
-                            ):
+def verify_motion_reaction(*,
+                           reaction_input,
+                           action_space: ActionSpace,
+                           environment_description: EnvironmentDescription=None,
+                           normalise: bool = False
+                           ):
   """
 
-  :param space:
+  :param action_space:
   :param environment_description:
   :param normalise:
   :type reaction_input: object
@@ -118,7 +70,7 @@ def construct_step_reaction(*,
           reaction_input.motions = construct_motions_from_list(reaction_input.motions,
                                                                actors,
                                                                normalise,
-                                                               space)
+                                                               action_space)
           return reaction_input
       elif isinstance(reaction_input, list):
         is_valid_motions = all(isinstance(m, Motion) for m in reaction_input)
@@ -129,17 +81,17 @@ def construct_step_reaction(*,
           return construct_reaction_from_list(reaction_input,
                                               actors,
                                               normalise,
-                                              space)
+                                              action_space)
       elif isinstance(reaction_input, (int, float)):
         return construct_reaction_from_list([reaction_input],
                                             actors,
                                             normalise,
-                                            space)
+                                            action_space)
       elif isinstance(reaction_input, (numpy.ndarray, numpy.generic)):
         a = construct_reaction_from_list(reaction_input.astype(float).tolist(),
                                          actors,
                                          normalise,
-                                         space)
+                                         action_space)
         return a
 
   parameters = ReactionParameters(describe=True)

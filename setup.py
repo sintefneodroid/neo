@@ -11,7 +11,6 @@ def python_version_check(major=3, minor=6):
 
 python_version_check()
 
-
 import os
 import pathlib
 import re
@@ -19,10 +18,11 @@ import re
 from setuptools import find_packages
 
 with open(pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "__init__.py", "r") as project_init_file:
+  str_reg_exp = "['\"]([^'\"]*)['\"]"
   content = project_init_file.read()  # get strings from module
-  version = re.search(r"__version__ = ['\"]([^'\"]*)['\"]", content, re.M).group(1)
-  project_name = re.search(r"__project__ = ['\"]([^'\"]*)['\"]", content, re.M).group(1)
-  author = re.search(r"__author__ = ['\"]([^'\"]*)['\"]", content, re.M).group(1)
+  version = re.search(rf"__version__ = {str_reg_exp}", content, re.M).group(1)
+  project_name = re.search(rf"__project__ = {str_reg_exp}", content, re.M).group(1)
+  author = re.search(rf"__author__ = {str_reg_exp}", content, re.M).group(1)
 __author__ = author
 
 
@@ -108,46 +108,32 @@ class NeodroidPackageMeta(type):
 
   @property
   def extras(self) -> dict:
-
-    path = pathlib.Path(__file__).parent
-    requirements_gui = []
-    with open(path / 'requirements_gui.txt') as f:
-      requirements = f.readlines()
-
-      for requirement in requirements:
-        requirements_gui.append(requirement.strip())
-
-    requirements_tests = []
-    with open(path / 'requirements_tests.txt') as f:
-      requirements = f.readlines()
-
-      for requirement in requirements:
-        requirements_tests.append(requirement.strip())
-
-    requirements_docs = []
-    with open(path / 'requirements_docs.txt') as f:
-      requirements = f.readlines()
-
-      for requirement in requirements:
-        requirements_docs.append(requirement.strip())
-
-    requirements_dev = []
-    with open(path / 'requirements_dev.txt') as f:
-      requirements = f.readlines()
-
-      for requirement in requirements:
-        requirements_dev.append(requirement.strip())
-
     these_extras = {
-        'gui':  requirements_gui,
-        'tests':requirements_tests,
+        # 'gui':  requirements_gui,
+        # 'tests':requirements_tests,
         # 'docs':requirements_docs,
-        'dev':  requirements_dev
+        # 'dev':  requirements_dev
 
         # 'mab':['neodroid-linux-mab; platform_system == "Linux"',
         #       'neodroid-win-mab platform_system == "Windows"']
 
         }
+
+    path: pathlib.Path = pathlib.Path(__file__).parent
+
+    for file in path.iterdir():
+      if (file.name.startswith('requirements_')):
+
+        requirements_group = []
+        with open(str(file.absolute())) as f:
+          requirements = f.readlines()
+
+          for requirement in requirements:
+            requirements_group.append(requirement.strip())
+
+        group_name_ = '_'.join(file.name.strip('.txt').split('_')[1:])
+
+        these_extras[group_name_] = requirements_group
 
     all_dependencies = []
 

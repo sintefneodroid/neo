@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from neodroid.interfaces.unity_specifications.environment_snapshot import EnvironmentSnapshot
+from neodroid.utilities.unity_specifications.environment_snapshot import EnvironmentSnapshot
 from neodroid.messaging import ClientEvents, message_client_event
 from neodroid.messaging.message_client import MessageClient
 
@@ -11,7 +11,6 @@ __author__ = 'Christian Heider Nielsen'
 import time
 from abc import ABC, abstractmethod
 
-from neodroid import messaging
 from .environment import Environment
 
 

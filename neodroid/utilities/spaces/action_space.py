@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 import random
 
-from neodroid.interfaces.spaces.range import Range
-from neodroid.interfaces.spaces.space import Space
+from neodroid.utilities.spaces.range import Range
+from neodroid.utilities.spaces.space import Space
 from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
 __author__ = 'Christian Heider Nielsen'
@@ -111,16 +111,7 @@ class ActionSpace(Space):
   def binary_discrete_action_from_idx(self, idx):
     return signed_ternary_encoding(size=(self.n * 2) / 3, index=idx)
 
-  @staticmethod
-  def from_environment_description(environment_description#: EnvironmentDescription
-    ):
-    motion_names = environment_description.actors.keys()
-    motion_spaces = []
-    for actor in environment_description.actors.values():
-      for actuator in actor.actuators.values():
-        motion_spaces.append(actuator.motion_space)
 
-    return ActionSpace(motion_spaces, motion_names)
 
 
 if __name__ == '__main__':

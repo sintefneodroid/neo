@@ -4,7 +4,7 @@ import random
 from typing import Any
 
 from neodroid.environments.unity.single_unity_environment import SingleUnityEnvironment
-from neodroid.interfaces.unity_specifications import Reaction, ReactionParameters
+from neodroid.utilities.unity_specifications import Reaction, ReactionParameters
 from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
 __author__ = 'Christian Heider Nielsen'

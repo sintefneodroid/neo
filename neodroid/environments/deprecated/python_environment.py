@@ -5,7 +5,7 @@ from neodroid.environments.environment import Environment
 __author__ = 'Christian Heider Nielsen'
 
 from abc import ABC
-import neodroid.interfaces.unity_specifications as M
+import neodroid.utilities.unity_specifications as M
 
 
 class PythonEnvironment(Environment, ABC):

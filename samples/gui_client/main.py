@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.environments import UnityEnvironment
-from neodroid.interfaces.unity_specifications import Configuration, Motion, Reaction, ReactionParameters
+from neodroid.utilities.unity_specifications import Configuration, Motion, Reaction, ReactionParameters
 from .gui import NeoGUI
 
 __author__ = 'Christian Heider Nielsen'

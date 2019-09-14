@@ -5,8 +5,8 @@ from abc import ABC, abstractmethod
 from types import coroutine
 
 from neodroid import PROJECT_APP_PATH
-from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
-from neodroid.interfaces.unity_specifications.environment_description import EnvironmentDescription
+from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
+from neodroid.utilities.unity_specifications.environment_description import EnvironmentDescription
 
 __author__ = 'Christian Heider Nielsen'
 

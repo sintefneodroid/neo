@@ -5,8 +5,8 @@ from warnings import warn
 from gym import Env
 
 from neodroid.environments.unity.single_unity_environment import SingleUnityEnvironment
-from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
-from neodroid.interfaces.unity_specifications import EnvironmentSnapshot
+from neodroid.utilities.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
+from neodroid.utilities.unity_specifications import EnvironmentSnapshot
 
 __author__ = 'Christian Heider Nielsen'
 

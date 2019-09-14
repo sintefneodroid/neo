@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from warnings import warn
-
 import numpy
 
 from neodroid.environments.unity import UnityEnvironment
-from neodroid.factories.multi_reaction_factory import (maybe_infer_multi_configuration_reaction,
-                                                       maybe_infer_multi_motion_reaction,
-                                                       )
-from neodroid.interfaces.spaces import (ActionSpace,
-                                        ObservationSpace,
-                                        Range,
-                                        EnvironmentDescription,
-                                        SignalSpace,
-                                        )
-from neodroid.interfaces.unity_specifications import EnvironmentSnapshot, Reaction, ReactionParameters
+from neodroid.factories.configuration_reactions import verify_configuration_reactions
+from neodroid.factories.motion_reactions import (verify_motion_reactions
+                                                 )
+from neodroid.utilities.spaces import (ActionSpace,
+                                       ObservationSpace,
+                                       Range,
+                                       SignalSpace,
+                                       )
+from neodroid.utilities.spaces.vector.vector_action_space import VectorActionSpace
+from neodroid.utilities.unity_specifications import (EnvironmentDescription,
+                                                     EnvironmentSnapshot,
+                                                     Reaction,
+                                                     ReactionParameters,
+                                                     )
 
 __author__ = 'Christian Heider Nielsen'
 
@@ -32,11 +34,9 @@ class VectorUnityEnvironment(UnityEnvironment):
             parameters: ReactionParameters = None,
             **kwargs) -> EnvironmentSnapshot:
     if not isinstance(input_reactions, Reaction):
-      input_reactions = maybe_infer_multi_motion_reaction(input_reactions=input_reactions,
-
-                                                          descriptions=self._description,
-                                                          action_space=self.action_space
-                                                          )
+      input_reactions = verify_motion_reactions(input_reactions=input_reactions,
+                                                environment_descriptions=self._description
+                                                )
     if parameters is not None:
       input_reactions.parameters = parameters
 
@@ -54,14 +54,13 @@ class VectorUnityEnvironment(UnityEnvironment):
             state=None,
             on_reset_callback: callable = None) -> EnvironmentSnapshot:
 
-    input_reactions = maybe_infer_multi_configuration_reaction(input_reactions=input_reactions,
-                                                               description=self._description
-                                                               )
+    input_reactions = verify_configuration_reactions(input_reactions=input_reactions,
+                                                     environment_descriptions=self._description
+                                                     )
     # if state:
     #  input_reaction.unobservables = state.unobservables
 
-    input_reactions = [input_reactions]
-    new_states = super().reset(input_reactions)
+    new_states = super().reset(input_reactions=input_reactions)
 
     envs = list(new_states.values())
     e = EnvironmentSnapshot.from_gym_like_out([e_.observables for e_ in envs],
@@ -72,15 +71,17 @@ class VectorUnityEnvironment(UnityEnvironment):
     return e
 
   def configure(self, *args, **kwargs):
-    message = self.reset(*args, **kwargs)
-    if message:
-      return message
-    return None
+    return self.reset(*args, **kwargs)
+
   @property
-  def action_space(self) -> ActionSpace:
+  def action_space(self) -> VectorActionSpace:
     while not self._action_space:
       self.describe()
-    return next(iter(self._action_space.values()))
+
+    ev = next(iter(self._action_space.values()))
+    _output_shape = VectorActionSpace(ev.ranges,
+                                      len(self._action_space.values()))
+    return _output_shape
 
   @property
   def description(self) -> EnvironmentDescription:
@@ -100,7 +101,6 @@ class VectorUnityEnvironment(UnityEnvironment):
       self.describe()
     return next(iter(self._signal_space.values()))
 
-
   def describe(self, *args, **kwargs):
     new_states = super().describe(*args, **kwargs)
     envs = list(new_states.values())
@@ -119,18 +119,6 @@ class VectorUnityEnvironment(UnityEnvironment):
   def description(self) -> EnvironmentDescription:
     pass
 '''
-
-  def sensor(self, name: str, *args, **kwargs):
-
-    envs = list(self._last_valid_message.values())
-
-    observer = []
-    for e in envs:
-      o = e.sensor(name)
-      if not o:
-        warn('Sensor was not found!')
-      observer.append(o)
-    return observer
 
 
 class VectorWrapper:
@@ -169,9 +157,9 @@ class VectorWrapper:
     if len(next(iter(self._env.action_space.values())).shape) >= 1:
       _output_shape = next(iter(self._env.action_space.values()))
     else:
-      _output_shape = ActionSpace([Range(min_value=0,
-                                         max_value=next(iter(self._env.action_space.values())).n,
-                                         decimal_granularity=0)])
+      _output_shape = VectorActionSpace([Range(min_value=0,
+                                               max_value=next(iter(self._env.action_space.values())).n,
+                                               decimal_granularity=0)], len(self._env.action_space.values()))
 
     return _output_shape
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import time
+from math import sqrt, floor, ceil
 
 import cv2
 import matplotlib.pyplot as plt
@@ -8,7 +9,7 @@ from matplotlib import animation
 
 from neodroid.environments.unity import UnityEnvironment
 from neodroid.environments.unity.vector_unity_environment import VectorWrapper
-from neodroid.interfaces.unity_specifications.prefabs.neodroid_camera_extraction import extract_all_as_camera
+from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import extract_all_as_camera
 from warg.named_ordered_dictionary import NOD
 
 __author__ = 'Christian Heider Nielsen'
@@ -83,14 +84,17 @@ def main():
 
   new_images = extract_all_as_camera(info)
 
-  xs = int(len(new_images) / 2) + 1
-  ys = 2
+  side = sqrt(len(new_images))
+  xs = ceil(side)
+  ys = floor(side)
 
   axes = fig.subplots(ys, xs, sharex='all', sharey='all')
 
   a = axes.flatten()
   for ax, (k, v) in zip(a, new_images.items()):
     if k:
+
+      ax.set_facecolor('gray')
       ax.set_title(k)
       image_axs[k] = ax.imshow(v)
 

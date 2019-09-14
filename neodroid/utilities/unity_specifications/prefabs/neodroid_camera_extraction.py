@@ -2,11 +2,7 @@ import time
 
 import neodroid
 
-default_camera_observer_names = ('90',
-                                 '180',
-                                 '270',
-                                 '360'
-                                 'Material',
+default_camera_observer_names = ('Material',
                                  'WorldSpace',
                                  'Us',
                                  'Vs',
@@ -24,6 +20,7 @@ default_camera_observer_names = ('90',
                                  'Layer',
                                  'OcclusionMask',
                                  'Tag',
+                                 'Diffuse',
                                  'Satellite')
 
 
@@ -52,7 +49,7 @@ def extract_all_as_camera(state):
 def extract_camera_observation(state,
                                key):
   sensor = state.sensor(key)
-  if sensor:
+  if sensor and sensor.is_image:
     img = sensor.value
     return img
   '''
@@ -85,8 +82,7 @@ if __name__ == '__main__':
   freq = 100
   time_s = time.time()
   while environments.is_connected:
-    actions = environments.action_space.sample()
-    states = environments.react(actions)
+    states = environments.react()
     state = next(iter(states.values()))
     extract_all_as_camera(state)
     terminated = state.terminated

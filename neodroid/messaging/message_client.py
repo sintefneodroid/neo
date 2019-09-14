@@ -3,16 +3,13 @@
 import logging
 from contextlib import suppress
 
-from neodroid.messaging.fbs.fbs_state_utilties import deserialise_states
+from neodroid.messaging.fbs import deserialise_states,FStates,serialise_reactions
 
 __author__ = 'Christian Heider Nielsen'
 
 import functools
 
 import zmq
-
-from neodroid.messaging.fbs.FBSModels import FStates
-from neodroid.messaging.fbs.fbs_reaction_utilities import serialise_reactions
 
 REQUEST_TIMEOUT = 8000  # Milliseconds
 REQUEST_RETRIES = 9

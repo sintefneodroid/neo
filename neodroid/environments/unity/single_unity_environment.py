@@ -4,15 +4,15 @@ from warnings import warn
 
 from neodroid.environments.unity import UnityEnvironment
 from neodroid.exceptions.exceptions import NoEnvironmentError
-from neodroid.factories.single_reaction_factory import (maybe_infer_single_configuration_reaction,
-                                                        maybe_infer_single_motion_reaction,
-                                                        )
-from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, SignalSpace
-from neodroid.interfaces.unity_specifications import (EnvironmentDescription,
-                                                      EnvironmentSnapshot,
-                                                      Reaction,
-                                                      Sensor,
-                                                      )
+from neodroid.factories.deprecated.single_reaction_factory import (verify_configuration_reaction,
+                                                                   verify_motion_reaction,
+                                                                   )
+from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
+from neodroid.utilities.unity_specifications import (EnvironmentDescription,
+                                                     EnvironmentSnapshot,
+                                                     Reaction,
+                                                     Sensor,
+                                                     )
 
 __author__ = 'Christian Heider Nielsen'
 
@@ -55,11 +55,11 @@ class SingleUnityEnvironment(UnityEnvironment):
             normalise=False,
             **kwargs) -> EnvironmentSnapshot:
     if not isinstance(input_reaction, Reaction):
-      input_reaction = maybe_infer_single_motion_reaction(input_reactions=input_reaction,
-                                                          normalise=normalise,
-                                                          description=self._description,
-                                                          action_space=self.action_space
-                                                          )
+      input_reaction = verify_motion_reaction(reaction_input=input_reaction,
+                                              normalise=normalise,
+                                              environment_description=self._description,
+                                              action_space=self.action_space
+                                              )
     if parameters is not None:
       input_reaction.parameters = parameters
 
@@ -74,10 +74,10 @@ class SingleUnityEnvironment(UnityEnvironment):
 
   def reset(self, input_reaction=None, state=None, on_reset_callback=None) -> EnvironmentSnapshot:
 
-    input_reaction = maybe_infer_single_configuration_reaction(input_reaction=input_reaction,
-                                                               description=self.description
+    input_reaction = verify_configuration_reaction(input_reaction=input_reaction,
+                                                   environment_description=self.description
 
-                                                               )
+                                                   )
     if state:
       input_reaction.unobservables = state.unobservables
 
@@ -88,16 +88,13 @@ class SingleUnityEnvironment(UnityEnvironment):
     return new_state
 
   def configure(self, *args, **kwargs) -> EnvironmentSnapshot:
-    message = self.reset(*args, **kwargs)
-    if message:
-      return message
-    return None
+    return self.reset(*args, **kwargs)
+
 
   def describe(self, *args, **kwargs) -> EnvironmentSnapshot:
     new_states = super().describe(*args, **kwargs)
     message = list(new_states.values())[0]
-    if message:
-      return message
+    return message
 
   def sensor(self, name, *args, **kwargs) -> Sensor:
     state_env_0 = list(self._last_valid_message.values())[0]

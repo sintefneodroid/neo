@@ -7,7 +7,7 @@ import numpy
 __author__ = 'Christian Heider Nielsen'
 
 
-class Range(object):
+class Range:
   '''
 
   '''
@@ -16,12 +16,19 @@ class Range(object):
                *,
                min_value=0,
                max_value=0,
-               decimal_granularity=0):
+               decimal_granularity=0,
+               normalised=True):
+    '''
 
+    :param min_value:
+    :param max_value:
+    :param decimal_granularity:
+    :param normalised:
+    '''
     assert max_value >= min_value
     assert decimal_granularity >= 0
 
-    self._normalised = True
+    self._normalised = normalised
     self._decimal_granularity = decimal_granularity
 
     if self.normalised:
@@ -30,7 +37,6 @@ class Range(object):
     else:
       self._min_value = min_value
       self._max_value = max_value
-
 
   @property
   def normalised(self) -> bool:
@@ -79,10 +85,10 @@ class Range(object):
     :return:
     '''
     return {
-        'decimal_granularity':self._decimal_granularity,
-        'min_value':          self._min_value,
-        'max_value':          self._max_value,
-        }
+      'decimal_granularity':self._decimal_granularity,
+      'min_value':          self._min_value,
+      'max_value':          self._max_value,
+      }
 
   def __repr__(self) -> str:
     return (f'<Range>\n'

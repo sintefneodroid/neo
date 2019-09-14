@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from collections import Sequence
 
-from neodroid.interfaces.unity_specifications.unobservables import Unobservables
+from neodroid.utilities.unity_specifications.unobservables import Unobservables
 
 __author__ = 'Christian Heider Nielsen'
 

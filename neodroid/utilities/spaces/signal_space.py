@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from neodroid.interfaces.spaces import Space, EnvironmentDescription, Sequence
-from neodroid.interfaces.spaces.range import Range
+from neodroid.utilities.spaces import Space
+from neodroid.utilities.spaces import Range
 
 __author__ = 'Christian Heider Nielsen'
 
@@ -38,22 +38,6 @@ class SignalSpace(Space):
   def is_sparse(self):
     return numpy.array([a.decimal_granularity == 0 for a in self._ranges]).all()
 
-  @staticmethod
-  def from_environment_description(environment_description: EnvironmentDescription):
-    return None
-    '''
-    sensor_names = environment_description.signal_space
-    observation_spaces = []
-    observers = environment_description.sensors.values()
-    for observer in observers:
-      if isinstance(observer.space, Sequence):
-        for r in observer.space:
-          observation_spaces.append(r)
-      else:
-        observation_spaces.append(observer.space)
-
-    return SignalSpace(observation_spaces, sensor_names)
-    '''
 
 if __name__ == '__main__':
   acs = SignalSpace([Range(min_value=0, max_value=3, decimal_granularity=2),

@@ -12,24 +12,29 @@ class Sensor(object):
 
   '''
 
-  def __init__(self, sensor_name, observation_space, observation_value):
-    self._observation_space = observation_space
+  def __init__(self, sensor_name, sensor_range, sensor_value, is_image):
+    self._range = sensor_range
     self._sensor_name = sensor_name
-    self._observation_value = observation_value
+    self._value = sensor_value
+    self._is_image = is_image
 
   @property
   def name(self):
     return self._sensor_name
 
   @property
+  def is_image(self):
+    return self._is_image
+
+  @property
   def space(self):
-    if self._observation_space:
-      space = deserialise_space(self._observation_space)
+    if self._range:
+      space = deserialise_space(self._range)
       return space
 
   @property
   def value(self):
-    return self._observation_value
+    return self._value
 
   def __repr__(self):
     return (f'<Observer>\n'

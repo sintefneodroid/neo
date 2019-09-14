@@ -4,7 +4,7 @@ from typing import Sequence
 
 import numpy
 
-from neodroid.interfaces.spaces.range import Range
+from neodroid.utilities.spaces.range import Range
 
 __author__ = 'Christian Heider Nielsen'
 
