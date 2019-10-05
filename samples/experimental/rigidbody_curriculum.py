@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__author__ = 'cnheider'
-import numpy as np
+__author__ = 'Christian Heider Nielsen'
+import numpy
 from neodroid.models import Configuration
 
 import neodroid.wrappers.curriculum_wrapper as neo
@@ -18,25 +18,25 @@ def get_goal_configuration(environment):
     if goal_transform:
       goal_transform = goal_transform.configurable_value
       return [
-        Configuration('LunarLanderEulerTransformX', goal_transform[0][0]),
-        Configuration('LunarLanderEulerTransformY', goal_transform[0][1]),
-        Configuration('LunarLanderEulerTransformZ', goal_transform[0][2]),
-        Configuration('LunarLanderEulerTransformDirX', goal_transform[1][0]),
-        Configuration('LunarLanderEulerTransformDirY', goal_transform[1][1]),
-        Configuration('LunarLanderEulerTransformDirZ', goal_transform[1][2]),
-        Configuration('LunarLanderEulerTransformRotX', goal_transform[2][0]),
-        Configuration('LunarLanderEulerTransformRotY', goal_transform[2][1]),
-        Configuration('LunarLanderEulerTransformRotZ', goal_transform[2][2]),
-        ]
+          Configuration('LunarLanderEulerTransformX', goal_transform[0][0]),
+          Configuration('LunarLanderEulerTransformY', goal_transform[0][1]),
+          Configuration('LunarLanderEulerTransformZ', goal_transform[0][2]),
+          Configuration('LunarLanderEulerTransformDirX', goal_transform[1][0]),
+          Configuration('LunarLanderEulerTransformDirY', goal_transform[1][1]),
+          Configuration('LunarLanderEulerTransformDirZ', goal_transform[1][2]),
+          Configuration('LunarLanderEulerTransformRotX', goal_transform[2][0]),
+          Configuration('LunarLanderEulerTransformRotY', goal_transform[2][1]),
+          Configuration('LunarLanderEulerTransformRotZ', goal_transform[2][2]),
+          ]
     else:
       return [
-        Configuration('SatelliteRigidbodyVelX', 0),
-        Configuration('SatelliteRigidbodyVelY', 0),
-        Configuration('SatelliteRigidbodyVelZ', 0),
-        Configuration('SatelliteRigidbodyAngX', 0),
-        Configuration('SatelliteRigidbodyAngY', 0),
-        Configuration('SatelliteRigidbodyAngZ', 0),
-        ]
+          Configuration('SatelliteRigidbodyVelX', 0),
+          Configuration('SatelliteRigidbodyVelY', 0),
+          Configuration('SatelliteRigidbodyVelZ', 0),
+          Configuration('SatelliteRigidbodyAngX', 0),
+          Configuration('SatelliteRigidbodyAngY', 0),
+          Configuration('SatelliteRigidbodyAngZ', 0),
+          ]
 
 
 def main():
@@ -60,7 +60,7 @@ def main():
 
     terminated = False
     while not terminated:
-      actions = _environment.action_space._sample()
+      actions = _environment.action_space.sample()
       observations, reward, terminated, info = _environment.act(actions)
       if terminated:
         print('Interrupted', reward)
@@ -70,7 +70,7 @@ def main():
 
 
 def sample_initial_state(memory):
-  idx = np.random.randint(0, len(memory))
+  idx = numpy.random.randint(0, len(memory))
   return memory[idx]
 
 

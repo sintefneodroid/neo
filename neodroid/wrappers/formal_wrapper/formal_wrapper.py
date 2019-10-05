@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.wrappers.single_environment import SingleEnvironment
+from neodroid.environments.unity.single_unity_environment import SingleUnityEnvironment
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
-class NeodroidFormalWrapper(SingleEnvironment):
+class NeodroidFormalWrapper(SingleUnityEnvironment):
 
   def __next__(self):
     if not self._is_connected_to_server:
@@ -19,11 +19,11 @@ class NeodroidFormalWrapper(SingleEnvironment):
     first_environment = message
     if first_environment:
       return (
-        first_environment.observables,
-        first_environment.signal,
-        first_environment.terminated,
-        first_environment
-        )
+          first_environment.observables,
+          first_environment.signal,
+          first_environment.terminated,
+          first_environment
+          )
     raise ValueError('Did not receive any message.')
 
   def step(self, input_reaction, **kwargs):
@@ -33,7 +33,7 @@ class NeodroidFormalWrapper(SingleEnvironment):
     pass
 
   def observer(self, key):
-    if self._last_message:
+    if self._last_valid_message:
       return self._sensor(key)
     warn('No message available')
     return None

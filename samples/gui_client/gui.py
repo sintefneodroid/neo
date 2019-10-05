@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from .gui_components import EnvironmentStateBox, ReactionBox, StatusBar, XMLBox
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 from kivy.app import App
 from kivy.core.window import Window

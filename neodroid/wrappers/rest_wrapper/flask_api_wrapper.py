@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.wrappers import SingleEnvironment
+from neodroid.wrappers import SingleUnityEnvironment
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
-class FlaskWrapper(SingleEnvironment):
+class FlaskWrapper(SingleUnityEnvironment):
 
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
@@ -20,11 +20,11 @@ class FlaskWrapper(SingleEnvironment):
     first_environment = list(message.values())[0]  # TODO: Only exposing first environments state
     if first_environment:
       return (
-        first_environment.observation,
-        first_environment.signal,
-        first_environment.terminated,
-        first_environment
-        )
+          first_environment.observation,
+          first_environment.signal,
+          first_environment.terminated,
+          first_environment
+          )
     return None, None, None, None
 
   def realise(self):
@@ -40,11 +40,11 @@ class FlaskWrapper(SingleEnvironment):
     message = super().observe(*args, **kwargs)
     if message:
       return (
-        message.observation,
-        message.signal,
-        message.terminated,
-        message,
-        )
+          message.observation,
+          message.signal,
+          message.terminated,
+          message,
+          )
     return None, None, None, None
 
   def quit(self, *args, **kwargs):

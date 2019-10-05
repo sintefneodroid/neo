@@ -2,11 +2,13 @@
 # -*- coding: utf-8 -*-
 import json
 
-__author__ = 'cnheider'
+from neodroid import PROJECT_APP_PATH
+from neodroid.environments import connect
+
+__author__ = 'Christian Heider Nielsen'
 __doc__ = ''
 
 import tensorflow as tf
-import neodroid
 
 tf.enable_eager_execution()
 
@@ -37,7 +39,10 @@ class TFFeature:
 TFF = TFFeature
 
 
-def neodroid_tf_example(image_string, label, image_shape, bounding_box):
+def neodroid_tf_example(image_string,
+                        label,
+                        image_shape,
+                        bounding_box):
   '''
 
   :param bounding_box:
@@ -61,7 +66,8 @@ def neodroid_tf_example(image_string, label, image_shape, bounding_box):
   return tf.train.Example(features=tf.train.Features(feature=feature))
 
 
-def write_tf_record_file(data_tuples, file_name='neodroid_bb_images.tfr'):
+def write_tf_record_file(data_tuples,
+                         file_name='neodroid_bb_images.tfr'):
   '''
 
   '''
@@ -75,11 +81,11 @@ def write_tf_record_file(data_tuples, file_name='neodroid_bb_images.tfr'):
 if __name__ == '__main__':
 
   generate_num = 10
-  file_name = 'neodroid_bb_images.tfr'
+  output_file_name = PROJECT_APP_PATH.user_data/ 'neodroid_bb_images.tfr'
 
   if generate_num > 0:
     dt = []
-    with neodroid.connect() as env:
+    with connect() as env:
       for i, state in enumerate(env):
         if i >= generate_num:
           break
@@ -90,11 +96,11 @@ if __name__ == '__main__':
         image_data = state.sensor('RGB').value
         dt.append((image_data, label, (256, 256, 4), json.loads(bb)))
 
-    write_tf_record_file(dt, file_name=file_name)
+    write_tf_record_file(dt, file_name=output_file_name)
 
-  raw_image_dataset = tf.data.TFRecordDataset(file_name)
+  raw_image_dataset = tf.data.TFRecordDataset(output_file_name)
 
-  # Create a dictionary describing the features.
+
   image_feature_description = {'height':   tf.FixedLenFeature([], tf.int64),
                                'width':    tf.FixedLenFeature([], tf.int64),
                                'depth':    tf.FixedLenFeature([], tf.int64),
@@ -104,7 +110,7 @@ if __name__ == '__main__':
                                'bb_w':     tf.FixedLenFeature([], tf.float32),
                                'bb_h':     tf.FixedLenFeature([], tf.float32),
                                'image_raw':tf.FixedLenFeature([], tf.string),
-                               }
+                               }  # Create a dictionary describing the features.
 
 
   def _parse_image_function(example_proto):

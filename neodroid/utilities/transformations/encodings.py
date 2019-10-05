@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 from typing import Iterable
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
-import numpy as np
+import numpy
 
 
 def signed_ternary_encoding(*,
@@ -18,7 +18,7 @@ def signed_ternary_encoding(*,
     index = [index]
   acs = []
   for i in index:
-    a = np.zeros(size)
+    a = numpy.zeros(size)
     if i < 0:
       return a
     elif 0 <= i < size:
@@ -34,12 +34,12 @@ def to_one_hot(dims, index):
     index = [index]
   acs = []
   for i in index:
-    if isinstance(i, np.int) or isinstance(i, np.int64) or isinstance(i, int):
-      one_hot = np.zeros(dims)
+    if isinstance(i, numpy.int) or isinstance(i, numpy.int64) or isinstance(i, int):
+      one_hot = numpy.zeros(dims)
       one_hot[i] = 1.
     else:
-      one_hot = np.zeros((len(i), dims))
-      one_hot[np.arange(len(i)), i] = 1.
+      one_hot = numpy.zeros((len(i), dims))
+      one_hot[numpy.arange(len(i)), i] = 1.
     acs.append(one_hot)
 
   return acs
@@ -48,9 +48,9 @@ def to_one_hot(dims, index):
 def agg_double_list(l):
   # l: [ [...], [...], [...] ]
   # l_i: result of each step in the i-th episode
-  s = [np.sum(np.array(l_i), 0) for l_i in l]
-  s_mu = np.mean(np.array(s), 0)
-  s_std = np.std(np.array(s), 0)
+  s = [numpy.sum(numpy.array(l_i), 0) for l_i in l]
+  s_mu = numpy.mean(numpy.array(s), 0)
+  s_std = numpy.std(numpy.array(s), 0)
   return s_mu, s_std
 
 

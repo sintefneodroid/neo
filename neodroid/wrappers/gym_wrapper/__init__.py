@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 from .gym_wrapper import *
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
-import numpy as np
+import numpy
 
 
 def make(environment_name, **kwargs):
@@ -12,4 +12,4 @@ def make(environment_name, **kwargs):
 
 
 def seed(seed):
-  np.random.random(seed)
+  numpy.random.random(seed)

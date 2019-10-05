@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from neodroid.models import Motion, Reaction, ReactionParameters
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import api.batched_neodroid_environments as neo
 
@@ -15,14 +15,14 @@ def construct_reactions(env, R):
       configure=False,
       describe=False,
       episode_count=True)
-  action1, action2 = env.action_space._sample()
+  action1, action2 = env.action_space.sample()
   motions = [Motion('ActorActor', 'ActorTransformX_', action1),
              Motion('ActorActor', 'ActorTransformZ_', action2)]
   reactions = {f'EnvironmentPrototypingEnvironment':Reaction(
       environment_name=f'EnvironmentPrototypingEnvironment',
       parameters=parameters,
       motions=motions)
-    }
+      }
 
   for i in range(19):
 
@@ -34,7 +34,7 @@ def construct_reactions(env, R):
         describe=False,
         episode_count=True)
 
-    action1, action2 = env.action_space._sample()
+    action1, action2 = env.action_space.sample()
     motions = [Motion('ActorActor', 'ActorTransformX_', action1),
                Motion('ActorActor', 'ActorTransformZ_', action2)]
 

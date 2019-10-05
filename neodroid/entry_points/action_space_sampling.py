@@ -3,9 +3,11 @@
 import argparse
 import time
 
-from neodroid.environments import connect
+import numpy
 
-__author__ = 'cnheider'
+from neodroid import connect
+
+__author__ = 'Christian Heider Nielsen'
 
 
 def add_bool_arg(parser, name, *, dest=None, default=False, **kwargs):
@@ -33,26 +35,20 @@ def main():
                       default=6969,
                       metavar='PORT',
                       help='Port')
-  add_bool_arg(parser,
-               'verbose',
-               dest='VERBOSE',
-               default=False,
-               help='Verbose flag')
 
-  args = parser.parse_args()
+  aargs = parser.parse_args()
 
-  environment = connect()
+  environment = connect(ip=aargs.IP, port=aargs.PORT)
 
   i = 0
   freq = 100
   time_s = time.time()
-  terminated = False
+  terminated = []
   while environment.is_connected:
-    action = environment.action_space.sample()
+    action = [aas.sample() for aas in environment.action_space.values()]
     state = environment.react(action)
     for k, v in state.items():
-      terminated = v.terminated
-      break
+      terminated.append(v.terminated)
 
     time_now = time.time()
     if i % freq == 0:
@@ -62,7 +58,9 @@ def main():
     i += 1
     time_s = time_now
 
-    if terminated:
+    t = numpy.array(terminated)
+    terminated = []
+    if t.all():
       environment.reset()
 
 

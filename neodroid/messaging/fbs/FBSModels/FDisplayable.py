@@ -49,7 +49,7 @@ def FDisplayableStart(builder): builder.StartObject(3)
 
 def FDisplayableAddDisplayableName(builder, displayableName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                                   flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                    displayableName),
+                                                                                                      displayableName),
                                                                                                   0)
 
 
@@ -60,7 +60,7 @@ def FDisplayableAddDisplayableValueType(builder, displayableValueType): builder.
 
 def FDisplayableAddDisplayableValue(builder, displayableValue): builder.PrependUOffsetTRelativeSlot(2,
                                                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                      displayableValue),
+                                                                                                        displayableValue),
                                                                                                     0)
 
 

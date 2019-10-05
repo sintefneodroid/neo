@@ -4,7 +4,7 @@ from pathlib import Path
 
 from .app import create_app
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 __doc__ = ''
 
 if __name__ == '__main__':

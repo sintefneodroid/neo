@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.wrappers import SingleUnityEnvironment
 from warg.named_ordered_dictionary import NOD
 
-from neodroid.wrappers import SingleEnvironment
-
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 from pynput import keyboard
 
@@ -49,7 +48,7 @@ def reset():
   return 'reset'
 
 
-ENVIRONMENT = SingleEnvironment(connect_to_running=True)
+ENVIRONMENT = SingleUnityEnvironment(connect_to_running=True)
 ENVIRONMENT.reset()
 
 CURRENT_COMBINATIONS = set()  # The currently active modifiers

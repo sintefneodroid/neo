@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import time
+from math import sqrt, floor, ceil
 
 import cv2
 import matplotlib.pyplot as plt
 from matplotlib import animation
+
+from neodroid.environments.unity import UnityEnvironment
+from neodroid.environments.unity.vector_unity_environment import VectorWrapper
+from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import extract_all_as_camera
 from warg.named_ordered_dictionary import NOD
 
-from neodroid.interfaces.neodroid_standard_modules.neodroid_camera_extraction import extract_all_as_camera
-from neodroid.wrappers import NeodroidGymEnvironment
-
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 __doc__ = ''
 
 
@@ -24,7 +26,7 @@ time_s = time.time()
 
 image_axs = NOD()
 
-env = NeodroidGymEnvironment(connect_to_running=True)
+env = VectorWrapper(UnityEnvironment(connect_to_running=True))
 fig = plt.figure()
 print_obs = False
 
@@ -33,7 +35,7 @@ def update_figures(i):
   global time_s, frame_i, image_axs
 
   sample = env.action_space.sample()
-  obs, signal, terminated, info = env.step(sample)
+  obs, signal, terminated, info = env.react(sample).to_gym_like_output()
   if print_obs:
     print(i)
     for obs in info.sensors.values():
@@ -41,7 +43,7 @@ def update_figures(i):
 
   new_images = extract_all_as_camera(info)
 
-  #new_images['RGB'] = new_images['RGB'] ** 0.454545
+  # new_images['RGB'] = new_images['RGB'] ** 0.454545
 
   # print( numpy.max(new_images['RGB']))
 
@@ -74,7 +76,7 @@ def main():
 
   env.reset()
   acs = env.action_space.sample()
-  obs, rew, term, info = env.step(acs)
+  obs, rew, term, info = env.react(acs).to_gym_like_output()
   if print_obs:
     print(0)
     for obs in info.sensors.values():
@@ -82,14 +84,17 @@ def main():
 
   new_images = extract_all_as_camera(info)
 
-  xs = int(len(new_images) / 2) + 1
-  ys = 2
+  side = sqrt(len(new_images))
+  xs = ceil(side)
+  ys = floor(side)
 
   axes = fig.subplots(ys, xs, sharex='all', sharey='all')
 
   a = axes.flatten()
   for ax, (k, v) in zip(a, new_images.items()):
     if k:
+
+      ax.set_facecolor('gray')
       ax.set_title(k)
       image_axs[k] = ax.imshow(v)
 

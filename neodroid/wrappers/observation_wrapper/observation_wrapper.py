@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.wrappers import SingleEnvironment
+from neodroid.wrappers import SingleUnityEnvironment
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 
-class ObservationWrapper(SingleEnvironment):
+class ObservationWrapper(SingleUnityEnvironment):
 
   def __next__(self):
     if not self._is_connected_to_server:
@@ -18,7 +18,7 @@ class ObservationWrapper(SingleEnvironment):
     return self.fetch_new_frame(input_reaction, **kwargs)
 
   def observer(self, key):
-    if self._last_message:
+    if self._last_valid_message:
       return self._sensor(key)
     warn('No message available')
     return None

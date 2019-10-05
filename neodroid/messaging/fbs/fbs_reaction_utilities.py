@@ -6,9 +6,9 @@ from flatbuffers import Builder
 
 from neodroid.exceptions.exceptions import NoUnobservablesException
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
-import numpy as np
+import numpy
 
 from neodroid.messaging.fbs import FBSModels as F
 
@@ -157,13 +157,13 @@ def serialise_displayables(B, input_reaction):
 
         F.FValuedVector3sStartValsVector(B, _length)
         for v_ in reversed(a0):
-          v = np.float64(v_)
+          v = numpy.float64(v_)
           B.PrependFloat64(v)
         values_offset = B.EndVector(_length)
 
         F.FValuedVector3sStartPointsVector(B, _length)
         for p in reversed(a1):
-          x, y, z = np.float64(p)
+          x, y, z = numpy.float64(p)
           F.CreateFVector3(B, x, y, z)
         points = B.EndVector(_length)
 
@@ -172,7 +172,7 @@ def serialise_displayables(B, input_reaction):
         F.FValuedVector3sAddPoints(B, points)
         displayable_value_offset = F.FValuedVector3sEnd(B)
 
-      elif isinstance(input_value, (list, np.ndarray)) and isinstance(input_value[0], Sequence) and len(
+      elif isinstance(input_value, (list, numpy.ndarray)) and isinstance(input_value[0], Sequence) and len(
           input_value[
             0]) == 3:
         displayable_value_type = F.FDisplayableValue.FVector3s
@@ -188,12 +188,12 @@ def serialise_displayables(B, input_reaction):
         F.FVector3sAddPoints(B, points)
         displayable_value_offset = F.FVector3sEnd(B)
 
-      elif isinstance(input_value, (list, np.ndarray)):
+      elif isinstance(input_value, (list, numpy.ndarray)):
         displayable_value_type = F.FDisplayableValue.FValues
         _length = len(input_value)
         F.FValuesStartValsVector(B, _length)
         for v_ in reversed(input_value):
-          B.PrependFloat64(np.float64(v_))
+          B.PrependFloat64(numpy.float64(v_))
         values_offset = B.EndVector(_length)
 
         F.FValuesStart(B)

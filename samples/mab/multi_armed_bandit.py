@@ -3,12 +3,11 @@
 import argparse
 
 from warg.arguments import add_bool_arg
-
 from .ucb1 import UCB1
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
-import neodroid.wrappers.single_environment as neo
+import neodroid.environments.unity.single_unity_environment as neo
 from neodroid import messaging
 
 
@@ -36,8 +35,8 @@ def main(connect_to_running=False):
       )
   args = parser.parse_args()
 
-  _environment = neo.SingleEnvironment(environment_name='mab',
-                                       connect_to_running=args.CONNECT_TO_RUNNING)
+  _environment = neo.SingleUnityEnvironment(environment_name='mab',
+                                            connect_to_running=args.CONNECT_TO_RUNNING)
 
   num_arms = _environment.action_space.num_discrete_actions
   totals = [0] * num_arms

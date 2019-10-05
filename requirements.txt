@@ -6,7 +6,6 @@ fire
 pyzmq
 numpy
 Pillow
-gym
 tqdm
 matplotlib
 cloudpickle

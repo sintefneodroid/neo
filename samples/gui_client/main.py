@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.environments import NeodroidEnvironment
-from neodroid.interfaces.specifications import Configuration, Motion, Reaction, ReactionParameters
+from neodroid.environments import UnityEnvironment
+from neodroid.utilities.unity_specifications import Configuration, Motion, Reaction, ReactionParameters
 from .gui import NeoGUI
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 _gui = None
 _neo_environment = None
@@ -24,11 +24,11 @@ def on_connect_callback(ip_address, port, launch_environment, environment):
   if _neo_environment and _neo_environment.is_connected:
     _neo_environment.close(on_disconnected_callback)
   else:
-    _neo_environment = NeodroidEnvironment(ip=ip_address,
-                                           port=int(port),
-                                           on_connected_callback=on_connected_callback,
-                                           connect_to_running=(not launch_environment),
-                                           )
+    _neo_environment = UnityEnvironment(ip=ip_address,
+                                        port=int(port),
+                                        on_connected_callback=on_connected_callback,
+                                        connect_to_running=(not launch_environment),
+                                        )
 
 
 def update_callback(state):
@@ -37,11 +37,11 @@ def update_callback(state):
 
 def on_step_callback(actor_name, slider_values):
   motions = [
-    Motion(str(actor_name), str(slider_values[0][0]), slider_values[0][1]),
-    Motion(str(actor_name), str(slider_values[1][0]), slider_values[1][1])
-    # Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
-    # Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
-    ]
+      Motion(str(actor_name), str(slider_values[0][0]), slider_values[0][1]),
+      Motion(str(actor_name), str(slider_values[1][0]), slider_values[1][1])
+      # Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
+      # Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
+      ]
   parameters = ReactionParameters(terminable=True, step=True, reset=False, configure=False, describe=False,
                                   episode_count=True)
   new_state = _neo_environment.react(Reaction(motions=motions, parameters=parameters))

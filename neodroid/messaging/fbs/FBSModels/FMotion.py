@@ -46,12 +46,12 @@ def FMotionStart(builder): builder.StartObject(3)
 
 def FMotionAddActorName(builder, actorName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                  flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                   actorName), 0)
+                                                                                     actorName), 0)
 
 
 def FMotionAddActuatorName(builder, actuatorName): builder.PrependUOffsetTRelativeSlot(1,
                                                                                        flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                         actuatorName), 0)
+                                                                                           actuatorName), 0)
 
 
 def FMotionAddStrength(builder, strength): builder.PrependFloat64Slot(2, strength, 0.0)

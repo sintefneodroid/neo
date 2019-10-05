@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
 import io
 
-import numpy as np
+import numpy
 from PIL import Image
 
 
 def get_masked_depth_image(depth_image, light_mask_image, lower_limit, upper_limit):
   mask = Image.open(light_mask_image).convert('L')
-  mask_array = np.asarray(mask)
+  mask_array = numpy.asarray(mask)
   mask_array = mask_array.reshape((mask_array.shape[0], mask_array.shape[1], 1))
   mask_array.setflags(write=1)
   above_threshold = mask_array[:, :, 0] > upper_limit
@@ -19,7 +19,7 @@ def get_masked_depth_image(depth_image, light_mask_image, lower_limit, upper_lim
   mask_array[below_threshold] = 0
   rest = mask_array[:, :, 0] == 0
   depth_image = Image.open(depth_image).convert('L')
-  depth_image_array = np.asarray(depth_image)
+  depth_image_array = numpy.asarray(depth_image)
   ori = depth_image_array.shape
   depth_image_array = depth_image_array.reshape(
       (depth_image_array.shape[0], depth_image_array.shape[1], 1)
@@ -37,13 +37,13 @@ def get_masked_depth_image(depth_image, light_mask_image, lower_limit, upper_lim
 def rgb_segment(rgb_im, seg_im):
   RED, GREEN, BLUE, ALPHA = (0, 1, 2, 3)
 
-  red_img = np.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), np.uint8)
-  green_img = np.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), np.uint8)
-  blue_img = np.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), np.uint8)
+  red_img = numpy.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), numpy.uint8)
+  green_img = numpy.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), numpy.uint8)
+  blue_img = numpy.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), numpy.uint8)
 
-  red_masked_img = np.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), np.uint8)
-  green_masked_img = np.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), np.uint8)
-  blue_masked_img = np.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), np.uint8)
+  red_masked_img = numpy.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), numpy.uint8)
+  green_masked_img = numpy.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), numpy.uint8)
+  blue_masked_img = numpy.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), numpy.uint8)
 
   reds = seg_im[:, :, RED]
   greens = seg_im[:, :, GREEN]

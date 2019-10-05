@@ -14,13 +14,13 @@ PY3 = sys.version_info >= (3, 0)
 
 # System Environment Information
 SystemEnv = namedtuple('SystemEnv', [
-  'neo_version',
-  'is_a_development_build',
-  'os',
-  'python_version',
-  'pip_version',  # 'pip' or 'pip3'
-  'pip_packages',
-  ])
+    'neo_version',
+    'is_a_development_build',
+    'os',
+    'python_version',
+    'pip_version',  # 'pip' or 'pip3'
+    'pip_packages',
+    ])
 
 
 def run_cmd(command):

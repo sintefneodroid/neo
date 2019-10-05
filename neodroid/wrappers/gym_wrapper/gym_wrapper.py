@@ -4,21 +4,24 @@ from warnings import warn
 
 from gym import Env
 
-from neodroid.wrappers.single_environment import SingleEnvironment
-from neodroid.interfaces.spaces import ActionSpace, ObservationSpace, Range
-from neodroid.interfaces.specifications import EnvironmentSnapshot
+from neodroid.environments.unity.single_unity_environment import SingleUnityEnvironment
+from neodroid.utilities.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
+from neodroid.utilities.unity_specifications import EnvironmentSnapshot
 
-__author__ = 'cnheider'
+__author__ = 'Christian Heider Nielsen'
 
-import numpy as np
+import numpy
 import gym
 
 
 # warn(f"This module is deprecated in version {__version__}", DeprecationWarning)
 
 
-class NeodroidGymEnvironment(SingleEnvironment,
+class NeodroidGymEnvironment(SingleUnityEnvironment,
                              gym.Env):
+  def __init__(self, render_interval: int = 0, **kwargs):
+    super().__init__(**kwargs)
+    self._render_interval = render_interval
 
   def step(self, action=None, *args, **kwargs):
     '''
@@ -54,8 +57,8 @@ class NeodroidGymEnvironment(SingleEnvironment,
     pass
 
   def sensor(self, key, **kwargs):
-    if self._last_message:
-      return self._last_message.sensor(key)
+    if self._last_valid_message:
+      return self._last_valid_message.sensor(key)
     warn('No message available')
     return None
 
@@ -77,8 +80,12 @@ class NeodroidGymEnvironment(SingleEnvironment,
     return None
 
 
-class NeodroidVectorGymEnvironment(SingleEnvironment,
+class NeodroidVectorGymEnvironment(SingleUnityEnvironment,
                                    gym.Env):
+
+  def __init__(self, render_interval: int = 0, **kwargs):
+    super().__init__(**kwargs)
+    self._render_interval = render_interval
 
   def step(self, action=None, *args, **kwargs):
     '''
@@ -91,17 +98,17 @@ class NeodroidVectorGymEnvironment(SingleEnvironment,
     # action = action.flatten()
     message = super().react(action[0], **kwargs)
     if message:
-      return (np.array([message.observables]),
-              np.array([message.signal]),
-              np.array([message.terminated]),
-              np.array([message])
+      return (numpy.array([message.observables]),
+              numpy.array([message.signal]),
+              numpy.array([message.terminated]),
+              numpy.array([message])
               )
     raise ValueError('Did not receive any message.')
 
   def reset(self, *args, **kwargs):
     message = super().reset(*args, **kwargs)
     if message:
-      return np.array([message.observables])
+      return numpy.array([message.observables])
     return None
 
   def render(self, *args, **kwargs):
@@ -126,15 +133,29 @@ class NeodroidVectorGymEnvironment(SingleEnvironment,
 
 
 class NeodroidGymWrapper:
-  def __init__(self, environment: Env):
+  def __init__(self, environment: Env, render_interval: int = 0):
     '''
 
     :param environment:
     '''
     self._env = environment
+    self._render_interval = render_interval
 
   @property
-  def observation_space(self):
+  def signal_space(self) -> SignalSpace:
+    '''
+
+    :return:
+    '''
+
+    space = SignalSpace([Range(min_value=-float('inf'),
+                               max_value=float('inf'),
+                               decimal_granularity=9)])
+
+    return space
+
+  @property
+  def observation_space(self) -> ObservationSpace:
     '''
 
     :return:
@@ -146,7 +167,9 @@ class NeodroidGymWrapper:
                                       min_value=mn,
                                       max_value=mx)
                                 for _, mn, mx in zip(range(
-            self._env.observation_space.shape[0]), aspc.low, aspc.high)])
+              self._env.observation_space.shape[0]),
+              aspc.low,
+              aspc.high)])
     else:
       space = ObservationSpace([Range(min_value=0,
                                       max_value=self._env.observation_space.n,
@@ -155,7 +178,7 @@ class NeodroidGymWrapper:
     return space
 
   @property
-  def action_space(self):
+  def action_space(self) -> ActionSpace:
     '''
 
     :return:
@@ -176,23 +199,21 @@ class NeodroidGymWrapper:
     return space
 
   def react(self, a, *args, **kwargs):
-    if isinstance(a, np.ndarray):
+    if isinstance(a, numpy.ndarray):
       a = a.tolist()
 
-    observables, signal, terminated, *_ = self._env.step(a, *args, **kwargs)
+    observables, signal, terminated, *_ = self._env.step(a,
+                                                         *args,
+                                                         **kwargs)
 
-    env_state = EnvironmentSnapshot(None)
-    env_state._observables = observables
-    env_state._signal = signal
-    env_state._terminated = terminated
+    env_state = EnvironmentSnapshot.from_gym_like_out(observables, signal, terminated, None)
 
     return env_state
 
   def reset(self):
     observables = self._env.reset()
 
-    env_state = EnvironmentSnapshot(None)
-    env_state._observables = observables
+    env_state = EnvironmentSnapshot.from_gym_like_out(observables, 0, False, None)
 
     return env_state
 
