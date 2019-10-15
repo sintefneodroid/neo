@@ -32,7 +32,7 @@ def deserialise_configurables(flat_environment_description):
       f_conf = flat_environment_description.Configurables(i)
       obs_type = f_conf.ConfigurableValueType()
       obs_value = f_conf.ConfigurableValue()
-      observation_value, observation_space,_ = deserialise_sensor(obs_type, obs_value)
+      observation_value, observation_space, _ = deserialise_sensor(obs_type, obs_value)
 
       configurable = US.Configurable(f_conf.ConfigurableName().decode(),
                                      observation_value,
@@ -49,12 +49,12 @@ def deserialise_sensors(flat_description):
     f_obs = flat_description.Sensors(i)
     obs_type = f_obs.SensorValueType()
     obs_value = f_obs.SensorValue()
-    sensor_value, sensor_space,is_image = deserialise_sensor(obs_type, obs_value)
+    sensor_value, sensor_space, is_image = deserialise_sensor(obs_type, obs_value)
 
     name = f_obs.SensorName().decode()
     out_sensors[name] = US.Sensor(name,
                                   sensor_space,
-                                  sensor_value,is_image)
+                                  sensor_value, is_image)
   return out_sensors
 
 
@@ -84,7 +84,7 @@ def deserialise_sensor(obs_type, obs_value):
   elif obs_type is F.FObservation.FString:
     value, value_range = deserialise_string(obs_value)
 
-  return value, value_range,is_image
+  return value, value_range, is_image
 
 
 def deserialise_observables(state):
@@ -165,9 +165,9 @@ def deserialise_body(f_obs):
   # ranges = [q.XRange(),q.YRange(), q.ZRange()]
 
   return [
-             [velocity.X(), velocity.Y(), velocity.Z()],
-             [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
-             ], [None for _ in range(6)]
+           [velocity.X(), velocity.Y(), velocity.Z()],
+           [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
+           ], [None for _ in range(6)]
 
 
 def deserialise_quadruple(f_obs) -> Tuple[Any, Any]:
@@ -231,7 +231,7 @@ def deserialise_rigidbody(f_obs) -> Tuple[Any, Any]:
                                             max_value=qt.AngRange().MaxValue(),
                                             decimal_granularity=qt.AngRange(
 
-                                                ).DecimalGranularity()) for _ in
+                                              ).DecimalGranularity()) for _ in
                                       range(4)]
 
 

@@ -7,8 +7,6 @@ __author__ = 'Christian Heider Nielsen'
 import numpy
 
 
-
-
 class Unobservables(object):
 
   def __init__(self, unobservables):
@@ -31,8 +29,8 @@ class Unobservables(object):
   @property
   def state_configuration(self):
     return numpy.array(
-        [self.poses_numpy().flatten(), self.bodies_numpy().flatten()]
-        ).flatten()
+      [self.poses_numpy().flatten(), self.bodies_numpy().flatten()]
+      ).flatten()
 
   def __repr__(self):
     return (f'<Unobservables>\n'

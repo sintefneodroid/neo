@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.environments.unity import UnityEnvironment
+from neodroid.environments.environment import Environment
 from neodroid.exceptions.exceptions import NoEnvironmentError
 from neodroid.factories.deprecated.single_reaction_factory import (verify_configuration_reaction,
                                                                    verify_motion_reaction,
@@ -17,7 +17,10 @@ from neodroid.utilities.unity_specifications import (EnvironmentDescription,
 __author__ = 'Christian Heider Nielsen'
 
 
-class SingleUnityEnvironment(UnityEnvironment):
+class BlenderEnvironment(Environment):
+
+  def display(self, *args, **kwargs):
+    pass
 
   @property
   def description(self) -> EnvironmentDescription:
@@ -44,8 +47,6 @@ class SingleUnityEnvironment(UnityEnvironment):
     return next(iter(self._signal_space.values()))
 
   def __next__(self):
-    if not self._is_connected_to_server:
-      return
     return self.react()
 
   def react(self,

@@ -3,7 +3,7 @@
 from typing import Any
 
 from neodroid.utilities.unity_specifications.sensor import Sensor
-from neodroid.utilities.spaces import ObservationSpace, Sequence, ActionSpace
+from neodroid.utilities.spaces import ObservationSpace, Sequence, ActionSpace, SignalSpace, Range
 from neodroid.messaging.fbs.FBSModels import FEnvironmentDescription
 from neodroid.messaging.fbs.fbs_state_utilties import (deserialise_actors,
                                                        deserialise_sensors,
@@ -37,7 +37,10 @@ class EnvironmentDescription(object):
 
   @property
   def actuators(self):
-    return list(deserialise_actors(self._fbs_description).values())[0].actuators
+    actuators_out = []
+    for a in deserialise_actors(self._fbs_description).values():
+      actuators_out.append(a.actuators)
+    return actuators_out
 
   def actuator(self, key):
     actuators = self.actuators
@@ -110,17 +113,9 @@ class EnvironmentDescription(object):
 
   @property
   def signal_space(environment_description):
-    return None
-    '''
-    sensor_names = environment_description.signal_space
-    observation_spaces = []
-    observers = environment_description.sensors.values()
-    for observer in observers:
-      if isinstance(observer.space, Sequence):
-        for r in observer.space:
-          observation_spaces.append(r)
-      else:
-        observation_spaces.append(observer.space)
+    return SignalSpace((Range(min_value=-1, max_value=1, decimal_granularity=3),))
 
-    return SignalSpace(observation_spaces, sensor_names)
-    '''
+
+if __name__ == '__main__':
+  ed = EnvironmentDescription(None)
+  print(ed.signal_space)

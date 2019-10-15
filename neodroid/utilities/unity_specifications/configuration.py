@@ -19,9 +19,9 @@ class Configuration(object):
 
   def to_dict(self):
     return {
-        '_configurable_name': self._configurable_name,
-        '_configurable_value':self._configurable_value,
-        }
+      '_configurable_name': self._configurable_name,
+      '_configurable_value':self._configurable_value,
+      }
 
   def __repr__(self):
     return (f'<Configuration>\n'

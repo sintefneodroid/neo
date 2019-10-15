@@ -5,7 +5,6 @@ from neodroid.messaging.fbs.fbs_state_utilties import deserialise_actuators
 __author__ = 'Christian Heider Nielsen'
 
 
-
 class Actor(object):
 
   def __init__(self, flat_actor):

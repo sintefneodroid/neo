@@ -93,8 +93,8 @@ def serialise_poses(B, fu):
     pos = pose.Position(F.FVector3())
     rot = pose.Rotation(F.FQuaternion())
     F.CreateFQuaternionTransform(
-        B, pos.X(), pos.Y(), pos.Z(), rot.X(), rot.Y(), rot.Z(), rot.W()
-        )
+      B, pos.X(), pos.Y(), pos.Z(), rot.X(), rot.Y(), rot.Z(), rot.W()
+      )
   return B.EndVector(pl)
 
 
@@ -173,8 +173,8 @@ def serialise_displayables(B, input_reaction):
         displayable_value_offset = F.FValuedVector3sEnd(B)
 
       elif isinstance(input_value, (list, numpy.ndarray)) and isinstance(input_value[0], Sequence) and len(
-          input_value[
-            0]) == 3:
+        input_value[
+          0]) == 3:
         displayable_value_type = F.FDisplayableValue.FVector3s
         _length = len(input_value)
 
@@ -221,8 +221,8 @@ def serialise_configurations(B, input_reaction):
       F.FConfigurationStart(B)
       F.FConfigurationAddConfigurableName(B, name_string_offset)
       F.FConfigurationAddConfigurableValue(
-          B, input_configuration.configurable_value
-          )
+        B, input_configuration.configurable_value
+        )
       configuration_offset = F.FConfigurationEnd(B)
       configurations_offsets.append(configuration_offset)
 

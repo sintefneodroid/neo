@@ -5,8 +5,6 @@ from neodroid.messaging.fbs.fbs_state_utilties import deserialise_space
 __author__ = 'Christian Heider Nielsen'
 
 
-
-
 class Actuator(object):
 
   def __init__(self, actuator_name, motion_space):

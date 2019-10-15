@@ -60,7 +60,7 @@ def FConfigurableStart(builder): builder.StartObject(4)
 
 def FConfigurableAddConfigurableName(builder, configurableName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                                      flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                         configurableName),
+                                                                                                       configurableName),
                                                                                                      0)
 
 
@@ -71,13 +71,13 @@ def FConfigurableAddConfigurableValueType(builder, configurableValueType): build
 
 def FConfigurableAddConfigurableValue(builder, configurableValue): builder.PrependUOffsetTRelativeSlot(2,
                                                                                                        flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                           configurableValue),
+                                                                                                         configurableValue),
                                                                                                        0)
 
 
 def FConfigurableAddConfigurableRange(builder, configurableRange): builder.PrependStructSlot(3,
                                                                                              flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                 configurableRange),
+                                                                                               configurableRange),
                                                                                              0)
 
 

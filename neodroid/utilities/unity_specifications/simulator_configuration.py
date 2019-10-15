@@ -29,6 +29,6 @@ class SimulatorConfiguration(object):
 
   @property
   def simulator_info(self):
-    #if not isinstance(self._simulator_info, str):
+    # if not isinstance(self._simulator_info, str):
     #  return self._simulator_info.decode()
     return self._simulator_info

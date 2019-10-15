@@ -5,6 +5,6 @@ def reverse_normalise_action(self, action):
 
 
 def normalise_action(action, motion_space):
-  act_k = (motion_space.max_value - motion_space.min_value) / 2.
-  act_b = (motion_space.max_value + motion_space.min_value) / 2.
+  act_k = (motion_space.max_unnorm - motion_space.min_unnorm) / 2.
+  act_b = (motion_space.max_unnorm + motion_space.min_unnorm) / 2.
   return act_k * action + act_b

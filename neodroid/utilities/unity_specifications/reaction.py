@@ -95,11 +95,11 @@ receives the same reaction.
 
   def to_dict(self):
     return {
-        '_configurations':[
-            configuration.to_dict() for configuration in self._configurations
-            ],
-        '_motions':       [motion.to_dict() for motion in self._motions],
-        }
+      '_configurations':[
+        configuration.to_dict() for configuration in self._configurations
+        ],
+      '_motions':       [motion.to_dict() for motion in self._motions],
+      }
 
   def to_json(self):
     return json.dumps(self.to_dict())

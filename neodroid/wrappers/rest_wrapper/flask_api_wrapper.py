@@ -20,11 +20,11 @@ class FlaskWrapper(SingleUnityEnvironment):
     first_environment = list(message.values())[0]  # TODO: Only exposing first environments state
     if first_environment:
       return (
-          first_environment.observation,
-          first_environment.signal,
-          first_environment.terminated,
-          first_environment
-          )
+        first_environment.observation,
+        first_environment.signal,
+        first_environment.terminated,
+        first_environment
+        )
     return None, None, None, None
 
   def realise(self):
@@ -40,11 +40,11 @@ class FlaskWrapper(SingleUnityEnvironment):
     message = super().observe(*args, **kwargs)
     if message:
       return (
-          message.observation,
-          message.signal,
-          message.terminated,
-          message,
-          )
+        message.observation,
+        message.signal,
+        message.terminated,
+        message,
+        )
     return None, None, None, None
 
   def quit(self, *args, **kwargs):

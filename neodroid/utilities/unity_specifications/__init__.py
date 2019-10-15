@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Christian Heider Nielsen'
 
-
 from .actor import Actor
 from .actuator import Actuator
 from .configurable import Configurable

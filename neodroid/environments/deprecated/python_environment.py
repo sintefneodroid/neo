@@ -34,8 +34,8 @@ class PythonEnvironment(Environment, ABC):
 
   def describe(self):
     return self.react(parameters=M.ReactionParameters(
-        terminable=False, describe=True, episode_count=False
-        ))
+      terminable=False, describe=True, episode_count=False
+      ))
 
   def update_interface_statics(self, new_states, new_simulator_configuration):
     self._last_message = new_states

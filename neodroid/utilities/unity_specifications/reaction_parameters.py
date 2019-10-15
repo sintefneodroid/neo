@@ -11,12 +11,12 @@ class ReactionParameters(object):
 
   def __init__(self,
                *,
-               terminable=False,
-               step=False,
-               reset=False,
-               configure=False,
-               describe=False,
-               episode_count=False,
+               terminable: bool = False,
+               step: bool = False,
+               reset: bool = False,
+               configure: bool = False,
+               describe: bool = False,
+               episode_count: bool = False,
                ):
     self._terminable = terminable
     self._configure = configure
@@ -28,37 +28,37 @@ class ReactionParameters(object):
     self._episode_count = episode_count
 
   @property
-  def reset(self):
+  def reset(self) -> bool:
     return self._reset
 
   @property
-  def configure(self):
+  def configure(self) -> bool:
     return self._configure
 
   @property
-  def describe(self):
+  def describe(self) -> bool:
     return self._describe
 
   @property
-  def step(self):
+  def step(self) -> bool:
     return self._step
 
   @property
-  def episode_count(self):
+  def episode_count(self) -> bool:
     return self._episode_count
 
   @property
-  def terminable(self):
+  def terminable(self) -> bool:
     return self._terminable
 
   @reset.setter
-  def reset(self, value):
+  def reset(self, value: bool) -> None:
     self._reset = value
 
-  def to_dict(self):
+  def to_dict(self) -> dict:
     return {'_reset':self._reset}
 
-  def to_json(self):
+  def to_json(self) -> str:
     return json.dumps(self.to_dict())
 
   def __repr__(self):

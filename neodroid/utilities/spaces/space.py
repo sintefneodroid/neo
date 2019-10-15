@@ -35,11 +35,11 @@ class Space(object):
 
   @property
   def low(self):
-    return [motion_space.min_value for motion_space in self._ranges]
+    return [motion_space.min_unnorm for motion_space in self._ranges]
 
   @property
   def high(self):
-    return [motion_space.max_value for motion_space in self._ranges]
+    return [motion_space.max_unnorm for motion_space in self._ranges]
 
   @property
   def max(self):
@@ -60,7 +60,7 @@ class Space(object):
   @property
   def is_discrete(self):
     return numpy.array(
-        [a.decimal_granularity == 0 for a in self._ranges if hasattr(a, 'decimal_granularity')]).all()
+      [a.decimal_granularity == 0 for a in self._ranges if hasattr(a, 'decimal_granularity')]).all()
 
   @property
   def is_mixed(self):
@@ -79,7 +79,7 @@ class Space(object):
 
   @property
   def discrete_binary_shape(self):
-    return (len(self._ranges) * 2,)
+    return (sum([r.discrete_steps for r in self._ranges]),)
 
   @property
   def continuous_shape(self):
@@ -88,6 +88,10 @@ class Space(object):
   @property
   def is_01normalised(self):
     return numpy.array([a.normalised for a in self._ranges if hasattr(a, 'normalised')]).all()
+
+  def clip(self, values: Sequence):
+    assert len(self.ranges) == len(values)
+    return numpy.array([a.clip(v) for a, v in zip(self._ranges, values)])
 
   def __repr__(self):
     names_str = ''.join([str(r.__repr__()) for r in self._names])

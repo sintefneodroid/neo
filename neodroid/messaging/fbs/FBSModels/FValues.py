@@ -48,7 +48,7 @@ def FValuesStart(builder): builder.StartObject(1)
 
 def FValuesAddVals(builder, vals): builder.PrependUOffsetTRelativeSlot(0,
                                                                        flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                           vals), 0)
+                                                                         vals), 0)
 
 
 def FValuesStartValsVector(builder, numElems): return builder.StartVector(8, numElems, 8)

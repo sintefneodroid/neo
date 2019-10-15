@@ -3,7 +3,7 @@
 import logging
 from typing import Sequence
 
-from neodroid.utilities.spaces import ActionSpace,  signed_ternary_encoding
+from neodroid.utilities.spaces import ActionSpace, signed_ternary_encoding
 from neodroid.utilities.unity_specifications import EnvironmentDescription
 from neodroid.utilities.unity_specifications.configuration import Configuration
 from neodroid.utilities.unity_specifications.motion import Motion
@@ -20,7 +20,7 @@ import numpy
 def verify_motion_reaction(*,
                            reaction_input,
                            action_space: ActionSpace,
-                           environment_description: EnvironmentDescription=None,
+                           environment_description: EnvironmentDescription = None,
                            normalise: bool = False
                            ):
   """
@@ -33,8 +33,8 @@ def verify_motion_reaction(*,
   if reaction_input is None:
     logging.info('Received empty reaction, Constructing empty counting terminal step reaction')
     parameters = ReactionParameters(terminable=True,
-                                      step=True,
-                                      episode_count=True)
+                                    step=True,
+                                    episode_count=True)
     return Reaction(parameters=parameters)
 
   if isinstance(reaction_input, Reaction):
@@ -45,21 +45,21 @@ def verify_motion_reaction(*,
 
   if isinstance(reaction_input, dict):
     parameters = ReactionParameters(terminable=True,
-                                      step=True,
-                                      episode_count=True)
+                                    step=True,
+                                    episode_count=True)
     if isinstance(list(reaction_input.values())[0], dict):
       return Reaction(parameters=parameters,
-                        motions=[Motion(p, k, v)
-                                 for p, a in reaction_input.items() for k, v in a.items()])
+                      motions=[Motion(p, k, v)
+                               for p, a in reaction_input.items() for k, v in a.items()])
 
     return Reaction(parameters=parameters,
-                      motions=[Motion('Actor', k, v)
-                               for k, v in reaction_input.items()])
+                    motions=[Motion('Actor', k, v)
+                             for k, v in reaction_input.items()])
 
   if environment_description:
     parameters = ReactionParameters(terminable=True,
-                                      step=True,
-                                      episode_count=True)
+                                    step=True,
+                                    episode_count=True)
     actors = environment_description.actors.values()
     if actors:
       if isinstance(reaction_input, Reaction):
@@ -76,7 +76,7 @@ def verify_motion_reaction(*,
         is_valid_motions = all(isinstance(m, Motion) for m in reaction_input)
         if is_valid_motions:
           return Reaction(parameters=parameters,
-                            motions=reaction_input)
+                          motions=reaction_input)
         else:
           return construct_reaction_from_list(reaction_input,
                                               actors,
@@ -106,8 +106,8 @@ def construct_reaction_from_list(motion_list, actors, normalise, space):
                                         normalise,
                                         space)
   parameters = ReactionParameters(terminable=True,
-                                    step=True,
-                                    episode_count=True)
+                                  step=True,
+                                  episode_count=True)
   return Reaction(motions=motions, parameters=parameters)
 
 
@@ -132,17 +132,17 @@ def construct_motions_from_list(input_list,
 
   if normalise:
     new_motions = [Motion(actor_actuator_tuple[0],
-                            actor_actuator_tuple[1],
-                            normalise_action(list_val,
-                                             actor_actuator_tuple[2]),
-                            )
+                          actor_actuator_tuple[1],
+                          normalise_action(list_val,
+                                           actor_actuator_tuple[2]),
+                          )
                    for (list_val, actor_actuator_tuple) in zip(input_list, actor_actuator_tuples)
                    ]
     return new_motions
   else:
     new_motions = [Motion(actor_actuator_tuple[0],
-                            actor_actuator_tuple[1],
-                            list_val)
+                          actor_actuator_tuple[1],
+                          list_val)
                    for (list_val, actor_actuator_tuple) in zip(input_list, actor_actuator_tuples)
                    ]
     return new_motions
@@ -154,8 +154,8 @@ def verify_configuration_reaction(*,
                                   environment_description: EnvironmentDescription):
   if environment_description:
     parameters = ReactionParameters(reset=True,
-                                      configure=True,
-                                      describe=True)
+                                    configure=True,
+                                    describe=True)
     configurables = environment_description.configurables.values()
     if configurables:
       if isinstance(input_reaction, Reaction):
@@ -165,10 +165,10 @@ def verify_configuration_reaction(*,
             return input_reaction
           else:
             input_reaction.motions(construct_configurations_from_known_observables(
-                input_reaction.configurations,
-                configurables
-                )
-                )
+              input_reaction.configurations,
+              configurables
+              )
+              )
           return input_reaction
       elif isinstance(input_reaction, list):
         is_valid_configurations = all(isinstance(c, Configuration) for c in input_reaction)
@@ -184,8 +184,8 @@ def verify_configuration_reaction(*,
   if isinstance(input_reaction, Reaction):
     return input_reaction
   parameters = ReactionParameters(reset=True,
-                                    configure=True,
-                                    describe=True)
+                                  configure=True,
+                                  describe=True)
   return Reaction(parameters=parameters)
 
 
@@ -199,7 +199,7 @@ def construct_configuration_reaction_from_list(configuration_list, configurables
 
 def construct_configurations_from_known_observables(input_list, configurables):
   new_configurations = [Configuration(configurable.configurable_name,
-                                        list_val)
+                                      list_val)
                         for (list_val, configurable) in zip(input_list, configurables)
                         ]
   return new_configurations

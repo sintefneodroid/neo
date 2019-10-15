@@ -80,27 +80,27 @@ def FQuadrupleStart(builder): builder.StartObject(5)
 
 def FQuadrupleAddQuat(builder, quat): builder.PrependStructSlot(0,
                                                                 flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                    quat), 0)
+                                                                  quat), 0)
 
 
 def FQuadrupleAddXRange(builder, xRange): builder.PrependStructSlot(1,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                        xRange), 0)
+                                                                      xRange), 0)
 
 
 def FQuadrupleAddYRange(builder, yRange): builder.PrependStructSlot(2,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                        yRange), 0)
+                                                                      yRange), 0)
 
 
 def FQuadrupleAddZRange(builder, zRange): builder.PrependStructSlot(3,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                        zRange), 0)
+                                                                      zRange), 0)
 
 
 def FQuadrupleAddWRange(builder, wRange): builder.PrependStructSlot(4,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                        wRange), 0)
+                                                                      wRange), 0)
 
 
 def FQuadrupleEnd(builder): return builder.EndObject()

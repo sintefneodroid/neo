@@ -69,22 +69,22 @@ def FETObsStart(builder): builder.StartObject(4)
 
 def FETObsAddTransform(builder, transform): builder.PrependStructSlot(0,
                                                                       flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                          transform), 0)
+                                                                        transform), 0)
 
 
 def FETObsAddPosRange(builder, posRange): builder.PrependStructSlot(1,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                        posRange), 0)
+                                                                      posRange), 0)
 
 
 def FETObsAddRotRange(builder, rotRange): builder.PrependStructSlot(2,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                        rotRange), 0)
+                                                                      rotRange), 0)
 
 
 def FETObsAddDirRange(builder, dirRange): builder.PrependStructSlot(3,
                                                                     flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                        dirRange), 0)
+                                                                      dirRange), 0)
 
 
 def FETObsEnd(builder): return builder.EndObject()

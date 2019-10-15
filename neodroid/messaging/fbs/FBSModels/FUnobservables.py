@@ -63,7 +63,7 @@ def FUnobservablesStart(builder): builder.StartObject(2)
 
 def FUnobservablesAddPoses(builder, poses): builder.PrependUOffsetTRelativeSlot(0,
                                                                                 flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                    poses), 0)
+                                                                                  poses), 0)
 
 
 def FUnobservablesStartPosesVector(builder, numElems): return builder.StartVector(56, numElems, 8)
@@ -71,7 +71,7 @@ def FUnobservablesStartPosesVector(builder, numElems): return builder.StartVecto
 
 def FUnobservablesAddBodies(builder, bodies): builder.PrependUOffsetTRelativeSlot(1,
                                                                                   flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                      bodies), 0)
+                                                                                    bodies), 0)
 
 
 def FUnobservablesStartBodiesVector(builder, numElems): return builder.StartVector(48, numElems, 8)

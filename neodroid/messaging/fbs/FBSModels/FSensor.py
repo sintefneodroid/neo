@@ -49,7 +49,7 @@ def FSensorStart(builder): builder.StartObject(3)
 
 def FSensorAddSensorName(builder, sensorName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                    flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                       sensorName), 0)
+                                                                                     sensorName), 0)
 
 
 def FSensorAddSensorValueType(builder, sensorValueType): builder.PrependUint8Slot(1, sensorValueType, 0)
@@ -57,7 +57,7 @@ def FSensorAddSensorValueType(builder, sensorValueType): builder.PrependUint8Slo
 
 def FSensorAddSensorValue(builder, sensorValue): builder.PrependUOffsetTRelativeSlot(2,
                                                                                      flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                         sensorValue), 0)
+                                                                                       sensorValue), 0)
 
 
 def FSensorEnd(builder): return builder.EndObject()

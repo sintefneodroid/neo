@@ -19,11 +19,11 @@ class NeodroidFormalWrapper(SingleUnityEnvironment):
     first_environment = message
     if first_environment:
       return (
-          first_environment.observables,
-          first_environment.signal,
-          first_environment.terminated,
-          first_environment
-          )
+        first_environment.observables,
+        first_environment.signal,
+        first_environment.terminated,
+        first_environment
+        )
     raise ValueError('Did not receive any message.')
 
   def step(self, input_reaction, **kwargs):

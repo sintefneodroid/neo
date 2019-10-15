@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 import time
 from math import sqrt, floor, ceil
+from typing import Iterable
 
 import cv2
-import matplotlib.pyplot as plt
+from matplotlib import pyplot
+import numpy
 from matplotlib import animation
 
 from neodroid.environments.unity import UnityEnvironment
@@ -27,15 +29,16 @@ time_s = time.time()
 image_axs = NOD()
 
 env = VectorWrapper(UnityEnvironment(connect_to_running=True))
-fig = plt.figure()
+fig = pyplot.figure()
 print_obs = False
 
 
 def update_figures(i):
   global time_s, frame_i, image_axs
 
-  sample = env.action_space.sample()
-  obs, signal, terminated, info = env.react(sample).to_gym_like_output()
+  # sample = env.action_space.sample()
+  # obs, signal, terminated, info = env.react(sample).to_gym_like_output()
+  obs, signal, terminated, info = env.reset().to_gym_like_output()
   if print_obs:
     print(i)
     for obs in info.sensors.values():
@@ -90,7 +93,10 @@ def main():
 
   axes = fig.subplots(ys, xs, sharex='all', sharey='all')
 
-  a = axes.flatten()
+  if isinstance(axes, numpy.ndarray):
+    a = axes.flatten()
+  else:
+    a = [axes]
   for ax, (k, v) in zip(a, new_images.items()):
     if k:
 
@@ -99,7 +105,7 @@ def main():
       image_axs[k] = ax.imshow(v)
 
   _ = animation.FuncAnimation(fig, update_figures)
-  plt.show()
+  pyplot.show()
 
 
 if __name__ == '__main__':

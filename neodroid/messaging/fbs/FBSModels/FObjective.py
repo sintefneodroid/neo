@@ -50,7 +50,7 @@ def FObjectiveStart(builder): builder.StartObject(3)
 
 def FObjectiveAddObjectiveName(builder, objectiveName): builder.PrependUOffsetTRelativeSlot(0,
                                                                                             flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                                objectiveName),
+                                                                                              objectiveName),
                                                                                             0)
 
 
@@ -59,7 +59,7 @@ def FObjectiveAddMaxEpisodeLength(builder, maxEpisodeLength): builder.PrependInt
 
 def FObjectiveAddSignalSpace(builder, signalSpace): builder.PrependStructSlot(2,
                                                                               flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                  signalSpace), 0)
+                                                                                signalSpace), 0)
 
 
 def FObjectiveEnd(builder): return builder.EndObject()

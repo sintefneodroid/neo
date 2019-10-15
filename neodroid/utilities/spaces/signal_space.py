@@ -1,41 +1,28 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import math
+
+import numpy
 
 from neodroid.utilities.spaces import Space
 from neodroid.utilities.spaces import Range
 
 __author__ = 'Christian Heider Nielsen'
 
-import numpy
-
 
 class SignalSpace(Space):
 
-  def parse_action_space(self, action_spaces):
-    self._ranges = action_spaces
+  def parse_signal_space(self,
+                         signal_range: Range,
+                         solved_threshold=math.inf):
+    self._ranges = [signal_range]
+    self.solved_threshold = solved_threshold
 
-  def sample(self):
-    actions = []
-    for valid_input in self._ranges:
-      sample = numpy.random.uniform(valid_input.min_value, valid_input.max_value, 1)
-      actions.append(numpy.round(sample, valid_input.decimal_granularity))
-    return actions
-
-  def validate(self, actions):
-    for i in range(len(actions)):
-      clipped = numpy.clip(actions[i],
-                           self._ranges[i].min_value,
-                           self._ranges[i].max_value,
-                           )
-      actions[i] = numpy.round(clipped, self._ranges[i].decimal_granularity)
-    return actions
+  def is_solved(self, value) -> bool:
+    return value > self.solved_threshold
 
   @property
-  def solved_threshold(self):
-    return False  # TODO: Implement
-
-  @property
-  def is_sparse(self):
+  def is_sparse(self) -> bool:
     return numpy.array([a.decimal_granularity == 0 for a in self._ranges]).all()
 
 

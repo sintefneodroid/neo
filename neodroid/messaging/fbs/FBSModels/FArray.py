@@ -67,7 +67,7 @@ def FArrayStart(builder): builder.StartObject(2)
 
 def FArrayAddArray(builder, array): builder.PrependUOffsetTRelativeSlot(0,
                                                                         flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                            array), 0)
+                                                                          array), 0)
 
 
 def FArrayStartArrayVector(builder, numElems): return builder.StartVector(4, numElems, 4)
@@ -75,7 +75,7 @@ def FArrayStartArrayVector(builder, numElems): return builder.StartVector(4, num
 
 def FArrayAddRanges(builder, ranges): builder.PrependUOffsetTRelativeSlot(1,
                                                                           flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                              ranges), 0)
+                                                                            ranges), 0)
 
 
 def FArrayStartRangesVector(builder, numElems): return builder.StartVector(16, numElems, 4)

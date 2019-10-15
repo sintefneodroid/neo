@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Callable
+from typing import Callable, Sequence, Iterable
 
 from neodroid.messaging.fbs.FBSModels.FState import FState
 from neodroid.messaging.fbs.fbs_state_utilties import (deserialise_description,
@@ -22,80 +22,77 @@ class EnvironmentSnapshot(object):
 
   @property
   def environment_name(self):
-    if isinstance(self._environment_name, Callable):
-      return self._environment_name()
-    return self._environment_name
+    if not isinstance(self._environment_name, Callable):
+      return self._environment_name
+    return self._environment_name()
 
-  def _signal(self):
+  def _signal(self) -> float:
     return self._fbs_state.Signal()
 
   @property
-  def signal(self):
-    if isinstance(self._signal, Callable):
-      return self._signal()
-    return self._signal
+  def signal(self) -> float:
+    if not isinstance(self._signal, Callable):
+      return self._signal
+    return self._signal()
 
-  def _observables(self):
+  def _observables(self) -> Iterable:
     return deserialise_observables(self._fbs_state)
 
   @property
-  def observables(self):
-    if isinstance(self._observables, Callable):
-      return self._observables()
-    return self._observables
+  def observables(self) -> Iterable:
+    if not isinstance(self._observables, Callable):
+      return self._observables
+    return self._observables()
 
   def _unobservables(self):
     return deserialise_unobservables(self._fbs_state)
 
   @property
   def unobservables(self):
-    if isinstance(self._unobservables, Callable):
-      return self._unobservables()
-    return self._unobservables
+    if not isinstance(self._unobservables, Callable):
+      return self._unobservables
+    return self._unobservables()
 
   def _frame_number(self):
     return self._fbs_state.FrameNumber()
 
   @property
   def frame_number(self):
-    if isinstance(self._frame_number, Callable):
-      return self._frame_number()
-    return self._frame_number
+    if not isinstance(self._frame_number, Callable):
+      return self._frame_number
+    return self._frame_number()
 
   def _terminated(self):
     return self._fbs_state.Terminated()
 
   @property
   def terminated(self):
-    if isinstance(self._terminated, Callable):
-      return self._terminated()
-    return self._terminated
+    if not isinstance(self._terminated, Callable):
+      return self._terminated
+    return self._terminated()
 
   def _termination_reason(self):
     return self._fbs_state.TerminationReason().decode()
 
   @property
   def termination_reason(self):
-    if isinstance(self._termination_reason, Callable):
-      return self._termination_reason()
-
-    return self._termination_reason
+    if not isinstance(self._termination_reason, Callable):
+      return self._termination_reason
+    return self._termination_reason()
 
   def _extra_serialised_message(self):
     return self._fbs_state.ExtraSerialisedMessage().decode()
 
   @property
   def extra_serialised_message(self):
-    if isinstance(self._extra_serialised_message, Callable):
-      return self._extra_serialised_message()
-    return self._extra_serialised_message
+    if not isinstance(self._extra_serialised_message, Callable):
+      return self._extra_serialised_message
+    return self._extra_serialised_message()
 
   @property
   def description(self):
     if self._fbs_state.EnvironmentDescription():
-      return deserialise_description(
-        self._fbs_state.EnvironmentDescription()
-        )
+      return deserialise_description(self._fbs_state.EnvironmentDescription())
 
   @property
   def sensors(self):
@@ -152,5 +149,5 @@ class EnvironmentSnapshot(object):
 
 
 if __name__ == '__main__':
-  es = EnvironmentSnapshot.from_gym_like_out([0, 2, 1])
+  es = EnvironmentSnapshot.from_gym_like_out([0, 2, 1], 0, terminated=False, info=None)
   print(es.to_json())

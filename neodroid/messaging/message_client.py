@@ -3,7 +3,7 @@
 import logging
 from contextlib import suppress
 
-from neodroid.messaging.fbs import deserialise_states,FStates,serialise_reactions
+from neodroid.messaging.fbs import deserialise_states, FStates, serialise_reactions
 
 __author__ = 'Christian Heider Nielsen'
 

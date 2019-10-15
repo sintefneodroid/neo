@@ -16,7 +16,7 @@ class FRange(object):
   def DecimalGranularity(self): return self._tab.Get(flatbuffers.number_types.Int32Flags,
                                                      self._tab.Pos +
                                                      flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                         0))
+                                                       0))
 
   # FRange
   def MaxValue(self): return self._tab.Get(flatbuffers.number_types.Float32Flags,
@@ -29,7 +29,7 @@ class FRange(object):
   # FRange
   def Normalised(self): return self._tab.Get(flatbuffers.number_types.BoolFlags,
                                              self._tab.Pos + flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                 12))
+                                               12))
 
 
 def CreateFRange(builder, decimalGranularity, maxValue, minValue, normalised):

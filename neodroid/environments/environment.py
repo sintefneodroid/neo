@@ -25,11 +25,11 @@ class Environment(ABC):
     self.seed(seed)
 
     logging.basicConfig(
-        # format='%(asctime)s %(new_state)s',
-        # datefmt='%m/%d/%Y %I:%M:%S %p',
-        filename=logging_directory / 'neodroid_log.txt',
-        level=logging_level
-        )
+      # format='%(asctime)s %(new_state)s',
+      # datefmt='%m/%d/%Y %I:%M:%S %p',
+      filename=logging_directory / 'neodroid_log.txt',
+      level=logging_level
+      )
     # self._module_logger = logging.getLogger(__name__)
 
     self._description = None

@@ -20,9 +20,9 @@ def verify_motion_reactions(*,
   if environment_descriptions:
     if len(input_reactions) is not len(environment_descriptions):
       logging.warning(
-          f'Inputs({len(input_reactions)}) and'
-          f' environment descriptions({len(environment_descriptions)}) are not the '
-          f'same length')
+        f'Inputs({len(input_reactions)}) and'
+        f' environment descriptions({len(environment_descriptions)}) are not the '
+        f'same length')
 
     for input, (env_name, env_desc) in zip(input_reactions,
                                            environment_descriptions.items()):
@@ -73,14 +73,13 @@ def construct_individual_reactions_from_list(motion_list, actors, env_name='all'
 
 def construct_motions_from_list(input_list, actors):
   actor_motor_tuples = [
-      (actor.actor_name, motor.actuator_name, motor.motion_space)
-      for actor in actors
-      for motor in actor.actuators.values()
-      ]
+    (actor.actor_name, motor.actuator_name, motor.motion_space)
+    for actor in actors
+    for motor in actor.actuators.values()
+    ]
 
   new_motions = [
-      Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
-      for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
-      ]
+    Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
+    for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
+    ]
   return new_motions
-

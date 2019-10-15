@@ -11,6 +11,6 @@ __author__ = 'Christian Heider Nielsen'
 class DiscreteActionEncodingWrapper(NeodroidVectorGymEnvironment):
 
   def step(self, action: int = 0, **kwargs) -> Any:
-    ternary_action = signed_ternary_encoding(size=self.action_space.num_discrete_actions // 3,
+    ternary_action = signed_ternary_encoding(size=self.action_space.num_binary_discrete_actions // 3,
                                              index=action)
     return super().step(ternary_action, **kwargs)

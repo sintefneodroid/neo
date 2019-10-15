@@ -18,8 +18,8 @@ def test_space_construction(min,max,dec,norm):
                 normalised=norm)
   assert space.min == min
   assert space.max == max
-  assert space.min_value == min
-  assert space.max_value == max
+  assert space.min_unnorm == min
+  assert space.max_unnorm == max
   assert space.decimal_granularity == dec
   assert space.normalised == norm
 

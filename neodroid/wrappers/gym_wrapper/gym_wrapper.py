@@ -133,7 +133,10 @@ class NeodroidVectorGymEnvironment(SingleUnityEnvironment,
 
 
 class NeodroidGymWrapper:
-  def __init__(self, environment: Env, render_interval: int = 0):
+  def __init__(self, environment: Env,
+               render_interval: int = 0,
+               min_signal=-1,
+               max_signal=1):
     '''
 
     :param environment:
@@ -167,9 +170,9 @@ class NeodroidGymWrapper:
                                       min_value=mn,
                                       max_value=mx)
                                 for _, mn, mx in zip(range(
-              self._env.observation_space.shape[0]),
-              aspc.low,
-              aspc.high)])
+          self._env.observation_space.shape[0]),
+          aspc.low,
+          aspc.high)])
     else:
       space = ObservationSpace([Range(min_value=0,
                                       max_value=self._env.observation_space.n,

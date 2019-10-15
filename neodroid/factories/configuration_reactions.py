@@ -92,9 +92,9 @@ def verify_configuration_reactions(*,
   if environment_descriptions and input_reactions:
     if len(input_reactions) is not len(environment_descriptions):
       logging.warning(
-          f'Inputs({len(input_reactions)}) and'
-          f' environment descriptions({len(environment_descriptions)}) are not the '
-          f'same length')
+        f'Inputs({len(input_reactions)}) and'
+        f' environment descriptions({len(environment_descriptions)}) are not the '
+        f'same length')
 
     for input, (env_name, env_desc) in zip(input_reactions,
                                            environment_descriptions.items()):
@@ -125,19 +125,20 @@ def verify_configuration_reactions(*,
                                                          configurables,
                                                          env_name=env_name)
           outs.append(a)
-    else:
-      outs.append(Reaction(parameters=parameters))
+      else:
+        outs.append(Reaction(parameters=parameters))
+  else:
+    outs.append(Reaction(parameters=parameters))
   return outs
-
-
 
 
 def construct_configuration_reaction_from_list(configuration_list,
                                                configurables,
                                                env_name='all'):
   configurations = construct_configurations_from_known_observables(
-      configuration_list, configurables
-      )
+    configuration_list,
+    configurables
+    )
   parameters = ReactionParameters(terminable=False, step=False, reset=True, configure=True,
                                   describe=True, episode_count=False)
   return Reaction(parameters=parameters, configurations=configurations, motions=[], environment_name=env_name)
@@ -145,7 +146,7 @@ def construct_configuration_reaction_from_list(configuration_list,
 
 def construct_configurations_from_known_observables(input_list, configurables):
   new_configurations = [
-      Configuration(configurable.configurable_name, list_val)
-      for (list_val, configurable) in zip(input_list, configurables)
-      ]
+    Configuration(configurable.configurable_name, list_val)
+    for (list_val, configurable) in zip(input_list, configurables)
+    ]
   return new_configurations

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from typing import Sized, Sequence
 
 from neodroid.utilities.spaces import Space
 
@@ -10,7 +11,7 @@ __author__ = 'Christian Heider Nielsen'
 
 class ObservationSpace(Space):
 
-  def parse_observation_space(self, observations_spaces, sensor_names):
+  def parse_observation_space(self, observations_spaces: Sequence[Range], sensor_names: Sequence[str]):
     self._ranges = observations_spaces
     self._names = sensor_names
 
@@ -18,10 +19,8 @@ class ObservationSpace(Space):
     pass
 
   @property
-  def space(self):
+  def space(self) -> Sequence:
     return self.continuous_shape
-
-
 
 
 if __name__ == '__main__':

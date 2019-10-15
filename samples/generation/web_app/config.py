@@ -2,7 +2,7 @@ from os.path import dirname, join, realpath
 
 PROJECT = 'DemoWebApp'
 CONFIG_NAME = __name__
-CONFIG_FILE = __file__
+import pathlib; CONFIG_FILE_PATH = pathlib.Path(__file__)
 VERBOSE = False
 USE_LOGGING = True
 

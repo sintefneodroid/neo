@@ -10,7 +10,7 @@ from neodroid.utilities.messaging_utilities.neodroid_camera_extraction import ex
 __author__ = 'Christian Heider Nielsen'
 
 import neodroid as neo
-import matplotlib.pyplot as plt
+from matplotlib import pyplot
 
 
 def collect_states(_environments, num=4):
@@ -26,7 +26,7 @@ def collect_states(_environments, num=4):
 
 def plot_images(rgb_im, seg_im, red_img, green_img, blue_img, red_masked_img, green_masked_img,
                 blue_masked_img):
-  fig = plt.figure()
+  fig = pyplot.figure()
 
   (ax1, ax2), (ax3, ax4), (ax5, ax6), (ax7, ax8) = fig.subplots(4, 2)
 
@@ -43,7 +43,7 @@ def plot_images(rgb_im, seg_im, red_img, green_img, blue_img, red_masked_img, gr
   ax8.imshow(blue_masked_img)
 
   fig.tight_layout()
-  plt.show()
+  pyplot.show()
 
 
 i = 0
@@ -146,7 +146,7 @@ def main():
       print(f'fps:[{fps}], loss:[{los}]')
 
       if i % (10 * freq) == 0:
-        fig = plt.figure()
+        fig = pyplot.figure()
 
         (ax1, ax2) = fig.subplots(1, 2)
 
@@ -155,7 +155,7 @@ def main():
         ax2.imshow(labels[0])
 
         fig.tight_layout()
-        plt.show()
+        pyplot.show()
 
     i += 1
     time_s = time_now

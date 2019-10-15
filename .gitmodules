@@ -1,0 +1,3 @@
+[submodule "neodroid/environments/blender/Training-data-render"]
+	path = neodroid/environments/blender/Training-data-render
+	url = git@github.com:martinljep/Training-data-render.git

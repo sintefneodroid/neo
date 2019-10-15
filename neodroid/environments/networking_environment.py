@@ -48,11 +48,11 @@ class NetworkingEnvironment(Environment, ABC):
     connect_tries = range(self._retries)
 
     self._message_server = MessageClient(self._ip,
-                                                   self._port,
-                                                   on_timeout_callback=self.__on_timeout_callback__,
-                                                   on_connected_callback=self.__on_connected_callback__,
-                                                   on_disconnected_callback=self.__on_disconnected_callback__,
-                                                   )
+                                         self._port,
+                                         on_timeout_callback=self.__on_timeout_callback__,
+                                         on_connected_callback=self.__on_connected_callback__,
+                                         on_disconnected_callback=self.__on_disconnected_callback__,
+                                         )
 
     if auto_describe:
       while self.description is None:

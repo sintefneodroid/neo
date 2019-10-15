@@ -46,7 +46,7 @@ def FSingleAddValue(builder, value): builder.PrependFloat64Slot(0, value, 0.0)
 
 def FSingleAddRange(builder, range): builder.PrependStructSlot(1,
                                                                flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                   range), 0)
+                                                                 range), 0)
 
 
 def FSingleEnd(builder): return builder.EndObject()
