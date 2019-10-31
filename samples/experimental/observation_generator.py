@@ -27,7 +27,7 @@ def main():
           diverged = True
         if frame_i % update_description_interval == 0:
           observation_session.set_description(
-              f'Local frame: {frame_i}, Unity frame: {info.frame_number}' + appended_text)
+            f'Local frame: {frame_i}, Unity frame: {info.frame_number}' + appended_text)
 
         if terminated:
           print(f'Interrupted, Length: {frame_i}, Unity frame: {info.frame_number}')

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import numpy
 
-from neodroid.environments.unity import UnityEnvironment
+from neodroid.environments.unity_environment import UnityEnvironment
 from neodroid.factories.configuration_reactions import verify_configuration_reactions
 from neodroid.factories.motion_reactions import (verify_motion_reactions
                                                  )

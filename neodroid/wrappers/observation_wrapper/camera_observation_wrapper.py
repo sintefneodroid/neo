@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from neodroid.environments.unity_environment import SingleUnityEnvironment
 from neodroid.exceptions.exceptions import SensorNotAvailableException
 from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import \
   (extract_camera_observation, extract_neodroid_camera,
    )
-from neodroid.wrappers import SingleUnityEnvironment
 
 __author__ = 'Christian Heider Nielsen'
 

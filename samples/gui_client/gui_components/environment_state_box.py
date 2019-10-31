@@ -23,8 +23,8 @@ class EnvironmentStateBox(BoxLayout):
 
     self.reward_label = Label(text='Reward: ', size_hint=(1.0, 0.05))
     self.energy_label = Label(
-        text='Energy Spent Since Reset: ', size_hint=(1.0, 0.05)
-        )
+      text='Energy Spent Since Reset: ', size_hint=(1.0, 0.05)
+      )
     self.time_label = Label(text='Time Since Reset: ', size_hint=(1.0, 0.05))
     self.frame_label = Label(text='Frame: ', size_hint=(1.0, 0.05))
     self.interrupted_label = Label(text='Interrupted: ', size_hint=(1.0, 0.05))
@@ -92,8 +92,8 @@ class EnvironmentStateBox(BoxLayout):
     try:
 
       instance_segmentation_image = CoreImage(
-          instance_segmentation_image_data, ext='png'
-          )
+        instance_segmentation_image_data, ext='png'
+        )
       self.instance_segmentation_image.texture = instance_segmentation_image.texture
     except BaseException:
       print('Image not valid')

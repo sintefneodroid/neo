@@ -22,8 +22,8 @@ def get_masked_depth_image(depth_image, light_mask_image, lower_limit, upper_lim
   depth_image_array = numpy.asarray(depth_image)
   ori = depth_image_array.shape
   depth_image_array = depth_image_array.reshape(
-      (depth_image_array.shape[0], depth_image_array.shape[1], 1)
-      )
+    (depth_image_array.shape[0], depth_image_array.shape[1], 1)
+    )
   depth_image_array.setflags(write=1)
   depth_image_array[rest] = 0
   depth_image_array = depth_image_array.reshape(ori)

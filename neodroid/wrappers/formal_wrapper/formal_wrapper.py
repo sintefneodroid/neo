@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.environments.unity.single_unity_environment import SingleUnityEnvironment
+from neodroid.environments.unity_environment.single_unity_environment import SingleUnityEnvironment
 
 __author__ = 'Christian Heider Nielsen'
 

@@ -9,8 +9,8 @@ from matplotlib import pyplot
 import numpy
 from matplotlib import animation
 
-from neodroid.environments.unity import UnityEnvironment
-from neodroid.environments.unity.vector_unity_environment import VectorWrapper
+from neodroid.environments.unity_environment import UnityEnvironment
+from neodroid.environments.unity_environment.vector_unity_environment import VectorWrapper
 from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import extract_all_as_camera
 from warg.named_ordered_dictionary import NOD
 

@@ -20,7 +20,7 @@ class Reaction(object):
                parameters: ReactionParameters = None,
                unobservables: Unobservables = None,
                displayables: Sequence = None,
-               environment_name: str = 'all',
+               environment_name: str = 'None',
                serialised_message: str = ''
                ):
 

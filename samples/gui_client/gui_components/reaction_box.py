@@ -45,23 +45,23 @@ class ReactionBox(BoxLayout):
 
   def on_step_button(self, value):
     motions = [
-        (
-            str(self.motor_1.motor_input.text),
-            float(self.motor_1.motor_slider.value),
-            ),
-        (str(self.motor_2.motor_input.text), float(self.motor_2.motor_slider.value))
-        # (str(self.motor_3.motor_input.text),
-        # float(self.motor_3.motor_slider.value)),
-        # (str(self.motor_4.motor_input.text),
-        # float(self.motor_4.motor_slider.value)),
-        ]
+      (
+        str(self.motor_1.motor_input.text),
+        float(self.motor_1.motor_slider.value),
+        ),
+      (str(self.motor_2.motor_input.text), float(self.motor_2.motor_slider.value))
+      # (str(self.motor_3.motor_input.text),
+      # float(self.motor_3.motor_slider.value)),
+      # (str(self.motor_4.motor_input.text),
+      # float(self.motor_4.motor_slider.value)),
+      ]
     self._on_step_callback(self.actor_input.text, motions)
 
   def on_reset_button(self, value):
     configurations = [
-        (
-            str(self.configuration_1.motor_input.text),
-            float(self.configuration_1.motor_slider.value),
-            )
-        ]
+      (
+        str(self.configuration_1.motor_input.text),
+        float(self.configuration_1.motor_slider.value),
+        )
+      ]
     self._on_reset_callback(configurations)

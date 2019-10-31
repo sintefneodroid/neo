@@ -37,6 +37,11 @@ class Environment(ABC):
     self._signal_space = None
     self._action_space = None
     self._observation_space = None
+    self._environment_name = 'NeodroidEnvironment'
+
+  @property
+  def environment_name(self) -> str:
+    return self._environment_name
 
   @abstractmethod
   def configure(self, *args, **kwargs):

@@ -9,30 +9,30 @@ import api.batched_neodroid_environments as neo
 
 def construct_reactions(env, R):
   parameters = ReactionParameters(
-      terminable=True,
-      step=True,
-      reset=R[0],
-      configure=False,
-      describe=False,
-      episode_count=True)
+    terminable=True,
+    step=True,
+    reset=R[0],
+    configure=False,
+    describe=False,
+    episode_count=True)
   action1, action2 = env.action_space.sample()
   motions = [Motion('ActorActor', 'ActorTransformX_', action1),
              Motion('ActorActor', 'ActorTransformZ_', action2)]
   reactions = {f'EnvironmentPrototypingEnvironment':Reaction(
-      environment_name=f'EnvironmentPrototypingEnvironment',
-      parameters=parameters,
-      motions=motions)
-      }
+    environment_name=f'EnvironmentPrototypingEnvironment',
+    parameters=parameters,
+    motions=motions)
+    }
 
   for i in range(19):
 
     parameters = ReactionParameters(
-        terminable=True,
-        step=True,
-        reset=R[i + 1],
-        configure=False,
-        describe=False,
-        episode_count=True)
+      terminable=True,
+      step=True,
+      reset=R[i + 1],
+      configure=False,
+      describe=False,
+      episode_count=True)
 
     action1, action2 = env.action_space.sample()
     motions = [Motion('ActorActor', 'ActorTransformX_', action1),

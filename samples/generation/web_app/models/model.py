@@ -18,8 +18,8 @@ def get_predictions(predictions, top=5):
   global CLASS_INDEX
   if len(predictions.shape) != 2 or predictions.shape[1] != 1000:
     raise ValueError(
-        f'`decode_predictions` expects a batch of predictions (i.e. a 2D array of shape (samples, '
-        f'1000)). Found array with shape: {predictions.shape}')
+      f'`decode_predictions` expects a batch of predictions (i.e. a 2D array of shape (samples, '
+      f'1000)). Found array with shape: {predictions.shape}')
   if CLASS_INDEX is None:
     file_path = get_file('imagenet_class_index.json',
                          CLASS_INDEX_PATH,

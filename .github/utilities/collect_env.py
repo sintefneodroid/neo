@@ -14,13 +14,13 @@ PY3 = sys.version_info >= (3, 0)
 
 # System Environment Information
 SystemEnv = namedtuple('SystemEnv', [
-    'neo_version',
-    'is_a_development_build',
-    'os',
-    'python_version',
-    'pip_version',  # 'pip' or 'pip3'
-    'pip_packages',
-    ])
+  'neo_version',
+  'is_a_development_build',
+  'os',
+  'python_version',
+  'pip_version',  # 'pip' or 'pip3'
+  'pip_packages',
+  ])
 
 
 def run_cmd(command):
@@ -119,7 +119,7 @@ def req_grep_fmt():
   r = '\|'.join([f'{req.split(">")[0].split("=")[0]}' for req in (NeodroidPackage().extras['all'] +
                                                                   NeodroidPackage(
 
-                                                                      ).requirements)])
+                                                                    ).requirements)])
   return r
 
 
@@ -154,13 +154,13 @@ def get_env_info():
   pip_version, pip_list_output = get_pip_packages(run_lambda)
 
   return SystemEnv(
-      neo_version=neo.__version__,
-      is_a_development_build=neo.version.DEVELOP,
-      python_version=f'{sys.version_info[0]}.{sys.version_info[1]}',
-      pip_version=pip_version,
-      pip_packages=pip_list_output,
-      os=get_os(run_lambda),
-      )
+    neo_version=neo.__version__,
+    is_a_development_build=neo.version.DEVELOP,
+    python_version=f'{sys.version_info[0]}.{sys.version_info[1]}',
+    pip_version=pip_version,
+    pip_packages=pip_list_output,
+    os=get_os(run_lambda),
+    )
 
 
 env_info_fmt = r'''
@@ -206,7 +206,7 @@ def pretty_str(env_info):
   mutable_dict = replace_all_none_objects(mutable_dict)  # Replace all None objects with 'Could not collect'
 
   mutable_dict['pip_packages'] = replace_if_empty(
-      mutable_dict['pip_packages'])  # If either of these are '', replace with 'No relevant packages'
+    mutable_dict['pip_packages'])  # If either of these are '', replace with 'No relevant packages'
 
   if mutable_dict['pip_packages']:
     mutable_dict['pip_packages'] = prepend(mutable_dict['pip_packages'],

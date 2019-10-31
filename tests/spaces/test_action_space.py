@@ -8,9 +8,11 @@ __doc__ = r'''
            Created on 15/09/2019
            '''
 
+
 def test1():
   acs = SignalSpace([Range(min_value=0, max_value=3, decimal_granularity=2)], ())
   print(acs, acs.low, acs.high, acs.decimal_granularity)
+
 
 def test_sparsity():
   acs = SignalSpace([Range(min_value=0, max_value=3, decimal_granularity=0)], ())

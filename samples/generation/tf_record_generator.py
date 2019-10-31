@@ -81,7 +81,7 @@ def write_tf_record_file(data_tuples,
 if __name__ == '__main__':
 
   generate_num = 10
-  output_file_name = PROJECT_APP_PATH.user_data/ 'neodroid_bb_images.tfr'
+  output_file_name = PROJECT_APP_PATH.user_data / 'neodroid_bb_images.tfr'
 
   if generate_num > 0:
     dt = []
@@ -99,7 +99,6 @@ if __name__ == '__main__':
     write_tf_record_file(dt, file_name=output_file_name)
 
   raw_image_dataset = tf.data.TFRecordDataset(output_file_name)
-
 
   image_feature_description = {'height':   tf.FixedLenFeature([], tf.int64),
                                'width':    tf.FixedLenFeature([], tf.int64),

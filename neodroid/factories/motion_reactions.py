@@ -58,9 +58,9 @@ def verify_motion_reactions(*,
                                                        actors,
                                                        env_name=env_name)
           outs.append(a)
-    else:
-      parameters = ReactionParameters(describe=True)
-      outs.append(Reaction(parameters=parameters))
+  else:
+    parameters = ReactionParameters(describe=True)
+    outs.append(Reaction(parameters=parameters, environment_name='all'))
   return outs
 
 

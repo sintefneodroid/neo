@@ -31,21 +31,21 @@ class NeoGUI(App):
     self.xml_column = XMLBox(size_hint=(0.5, 1.0))
     self.state_box = EnvironmentStateBox(orientation='vertical')
     self.reaction_column = ReactionBox(
-        on_step_callback=self._on_step_callback,
-        on_reset_callback=self._on_reset_callback,
-        orientation='vertical',
-        # size_hint=(0.2,1.0),
-        spacing=10,
-        padding=10,
-        )
+      on_step_callback=self._on_step_callback,
+      on_reset_callback=self._on_reset_callback,
+      orientation='vertical',
+      # size_hint=(0.2,1.0),
+      spacing=10,
+      padding=10,
+      )
 
     # Status Bar
 
     self.status_bar = StatusBar(
-        on_connect_callback=self._on_connect_callback,
-        orientation='horizontal',
-        size_hint=(1.0, 0.05),
-        )
+      on_connect_callback=self._on_connect_callback,
+      orientation='horizontal',
+      size_hint=(1.0, 0.05),
+      )
 
   def build(self):
     self.inner_rows.add_widget(self.state_box)

@@ -3,6 +3,3 @@
 
 __author__ = 'Christian Heider Nielsen'
 __doc__ = ''
-
-from .unity import *
-from .blender import *

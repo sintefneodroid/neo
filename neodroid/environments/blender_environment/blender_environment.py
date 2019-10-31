@@ -4,9 +4,9 @@ from warnings import warn
 
 from neodroid.environments.environment import Environment
 from neodroid.exceptions.exceptions import NoEnvironmentError
-from neodroid.factories.deprecated.single_reaction_factory import (verify_configuration_reaction,
-                                                                   verify_motion_reaction,
-                                                                   )
+from neodroid.factories.single.single_reaction_factory import (verify_configuration_reaction,
+                                                               verify_motion_reaction,
+                                                               )
 from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
 from neodroid.utilities.unity_specifications import (EnvironmentDescription,
                                                      EnvironmentSnapshot,

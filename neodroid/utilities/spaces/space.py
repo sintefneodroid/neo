@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Sequence
+from typing import Sequence, List, Tuple
 
 import numpy
 
@@ -73,13 +73,17 @@ class Space(object):
   @property
   def shape(self):
     if self.is_discrete:
-      return self.discrete_binary_shape
+      return self.discrete_steps_shape
 
     return self.continuous_shape
 
   @property
-  def discrete_binary_shape(self):
-    return (sum([r.discrete_steps for r in self._ranges]),)
+  def discrete_steps(self) -> int:
+    return sum(self.discrete_steps_shape)
+
+  @property
+  def discrete_steps_shape(self) -> Tuple[int, ...]:
+    return (*[r.discrete_steps for r in self._ranges],)
 
   @property
   def continuous_shape(self):

@@ -34,42 +34,6 @@ class ActionSpace(Space):
       actions[i] = numpy.round(clipped, self._ranges[i].decimal_granularity)
     return actions
 
-  @property
-  def num_binary_discrete_actions(self) -> int:
-    return sum([r.discrete_steps for r in self._ranges])
-
-  def discrete_ternary_one_hot_sample(self):
-    idx = numpy.random.randint(0, self.num_actuators)
-    zeros = numpy.zeros(self.num_ternary_actions)
-    if len(self._ranges) > 0:
-      sample = numpy.random.uniform(self._ranges[idx].min_unnorm,
-                                    self._ranges[idx].max_unnorm,
-                                    1
-                                    )
-      if sample > 0:
-        zeros[idx] = 1
-      else:
-        zeros[idx + self.num_actuators] = 1
-    return zeros
-
-  def discrete_binary_one_hot_sample(self):
-    idx = numpy.random.randint(0, self.num_actuators)
-    zeros = numpy.zeros(self.num_binary_actions)
-    if len(self._ranges) > 0:
-      sample = numpy.random.uniform(self._ranges[idx].min_unnorm,
-                                    self._ranges[idx].max_unnorm,
-                                    1
-                                    )
-      if sample > 0:
-        zeros[idx] = 1
-      else:
-        zeros[idx + self.num_actuators] = 1
-    return zeros
-
-  def signed_one_hot_sample(self):
-    num = self.num_binary_actions
-    return random.randrange(num)
-
   def discrete_one_hot_sample(self):
     idx = numpy.random.randint(0, self.num_actuators)
     zeros = numpy.zeros(self.num_actuators)
@@ -83,7 +47,7 @@ class ActionSpace(Space):
     return zeros
 
   def discrete_sample(self):
-    idx = numpy.random.randint(0, self.num_binary_actions)
+    idx = numpy.random.randint(0, self.discrete_steps)
     return idx
 
   def one_hot_sample(self):
@@ -98,29 +62,17 @@ class ActionSpace(Space):
   def num_actuators(self):
     return self.n
 
-  @property
-  def num_binary_actions(self):
-    return self.n * 2
-
-  @property
-  def num_ternary_actions(self):
-    return self.n * 3
-
-  def ternary_discrete_action_from_idx(self, idx):
-    return signed_ternary_encoding(size=self.n, index=idx)
-
-  def binary_discrete_action_from_idx(self, idx):
-    return signed_ternary_encoding(size=(self.n * 2) / 3, index=idx)
-
 
 if __name__ == '__main__':
   acs = ActionSpace([Range(min_value=0, max_value=3, decimal_granularity=2),
                      Range(min_value=0, max_value=2, decimal_granularity=1)])
-  print(acs, acs.low, acs.high, acs.decimal_granularity, acs.num_binary_discrete_actions, acs.shape)
+  print(acs, acs.low, acs.high, acs.decimal_granularity, acs.discrete_steps, acs.shape)
 
   acs = ActionSpace([Range(min_value=0, max_value=3, decimal_granularity=2, normalised=False),
                      Range(min_value=0, max_value=2, decimal_granularity=1, normalised=False)])
-  print(acs, acs.low, acs.high, acs.decimal_granularity, acs.num_binary_discrete_actions, acs.shape)
+  print(acs, acs.low, acs.high, acs.decimal_granularity, acs.discrete_steps, acs.shape,
+        acs.discrete_steps_shape)
 
   acs = ActionSpace([Range(min_value=0, max_value=1, decimal_granularity=0, normalised=False)])
-  print(acs, acs.low, acs.high, acs.decimal_granularity, acs.num_binary_discrete_actions, acs.shape)
+  print(acs, acs.low, acs.high, acs.decimal_granularity, acs.discrete_steps, acs.shape,
+        acs.discrete_steps_shape)

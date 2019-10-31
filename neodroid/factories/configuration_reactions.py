@@ -126,9 +126,9 @@ def verify_configuration_reactions(*,
                                                          env_name=env_name)
           outs.append(a)
       else:
-        outs.append(Reaction(parameters=parameters))
+        outs.append(Reaction(parameters=parameters, environment_name=env_name))
   else:
-    outs.append(Reaction(parameters=parameters))
+    outs.append(Reaction(parameters=parameters, environment_name='all'))
   return outs
 
 
@@ -141,7 +141,10 @@ def construct_configuration_reaction_from_list(configuration_list,
     )
   parameters = ReactionParameters(terminable=False, step=False, reset=True, configure=True,
                                   describe=True, episode_count=False)
-  return Reaction(parameters=parameters, configurations=configurations, motions=[], environment_name=env_name)
+  return Reaction(parameters=parameters,
+                  configurations=configurations,
+                  motions=[],
+                  environment_name=env_name)
 
 
 def construct_configurations_from_known_observables(input_list, configurables):

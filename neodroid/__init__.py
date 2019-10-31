@@ -6,13 +6,14 @@ import os
 from warnings import warn
 
 import pkg_resources
-from pip._internal.utils.misc import dist_is_editable
+import sys
+from pathlib import Path
 
 from apppath import AppPath
 
 __project__ = 'Neodroid'
 __author__ = "Christian Heider Nielsen"
-__version__ = "0.4.2"
+__version__ = "0.4.3"
 __doc__ = r'''
 Created on 27/04/2019
 
@@ -27,18 +28,17 @@ Created on 27/04/2019
 
 '''
 
-'''
+
 def dist_is_editable(dist):
-    # type: (Distribution) -> bool
-    """
-    Return True if given Distribution is an editable install.
-    """
-    for path_item in sys.path:
-        egg_link = os.path.join(path_item, dist.project_name + '.egg-link')
-        if os.path.isfile(egg_link):
-            return True
-    return False
-'''
+  """
+  Return True if given Distribution is an editable install.
+  """
+  for path_item in sys.path:
+    egg_link = Path(path_item) / f'{dist.project_name}.egg-link'
+    if egg_link.is_file():
+      return True
+  return False
+
 
 PROJECT_NAME = __project__.lower().strip().replace(' ', '_')
 PROJECT_AUTHOR = __author__.lower().strip().replace(' ', '_')
@@ -107,8 +107,6 @@ def get_logo() -> str:
 def draw_logo() -> None:
   print(get_logo())
 
-
-from .environments.unity import connect
 
 if __name__ == '__main__':
   draw_logo()

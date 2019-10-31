@@ -27,12 +27,12 @@ def construct_displayables(normed, tries, totals):
 def main(connect_to_running=False):
   parser = argparse.ArgumentParser(prog='mab')
   add_bool_arg(
-      parser,
-      "connect_to_running",
-      dest="CONNECT_TO_RUNNING",
-      default=connect_to_running,
-      help="Connect to already running simulation or start an instance",
-      )
+    parser,
+    "connect_to_running",
+    dest="CONNECT_TO_RUNNING",
+    default=connect_to_running,
+    help="Connect to already running simulation or start an instance",
+    )
   args = parser.parse_args()
 
   _environment = neo.SingleUnityEnvironment(environment_name='mab',

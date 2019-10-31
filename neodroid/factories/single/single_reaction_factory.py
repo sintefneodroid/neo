@@ -121,14 +121,9 @@ def construct_motions_from_list(input_list,
                            for actor in actors
                            for actuator in actor.actuators.values()
                            ]
-  if isinstance(input_list[0], list):
+  if isinstance(input_list[0], Sequence):
     if len(input_list) == 1:
       input_list = input_list[0]
-
-  if space.is_discrete:
-    if (isinstance(input_list, Sequence) and len(input_list) == 1) or not isinstance(input_list, Sequence):
-      input_list = signed_ternary_encoding(size=space.num_ternary_actions // 3,
-                                           index=input_list)[0]
 
   if normalise:
     new_motions = [Motion(actor_actuator_tuple[0],

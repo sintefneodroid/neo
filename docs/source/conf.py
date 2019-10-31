@@ -31,17 +31,17 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages',
-    ]
+  'sphinx.ext.autodoc',
+  'sphinx.ext.autosummary',
+  'sphinx.ext.napoleon',
+  'sphinx.ext.doctest',
+  'sphinx.ext.intersphinx',
+  'sphinx.ext.todo',
+  'sphinx.ext.coverage',
+  'sphinx.ext.mathjax',
+  'sphinx.ext.viewcode',
+  'sphinx.ext.githubpages',
+  ]
 
 napoleon_use_ivar = True
 
@@ -113,26 +113,26 @@ htmlhelp_basename = 'Neodoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-    }
+  # The paper size ('letterpaper' or 'a4paper').
+  #
+  # 'papersize': 'letterpaper',
+  # The font size ('10pt', '11pt' or '12pt').
+  #
+  # 'pointsize': '10pt',
+  # Additional stuff for the LaTeX preamble.
+  #
+  # 'preamble': '',
+  # Latex figure (float) alignment
+  #
+  # 'figure_align': 'htbp',
+  }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Neo.tex', 'Neo Documentation', 'Christian Heider Nielsen', 'manual')
-    ]
+  (master_doc, 'Neo.tex', 'Neo Documentation', 'Christian Heider Nielsen', 'manual')
+  ]
 
 # -- Options for manual page output ---------------------------------------
 
@@ -146,16 +146,16 @@ man_pages = [(master_doc, 'neo', 'Neo Documentation', [author], 1)]
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (
-        master_doc,
-        'Neo',
-        'Neo Documentation',
-        author,
-        'Neo',
-        'One line description of project.',
-        'Miscellaneous',
-        )
-    ]
+  (
+    master_doc,
+    'Neo',
+    'Neo Documentation',
+    author,
+    'Neo',
+    'One line description of project.',
+    'Miscellaneous',
+    )
+  ]
 
 # -- Options for Epub output ----------------------------------------------
 
@@ -179,9 +179,9 @@ epub_exclude_files = ['search.html']
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
-    'python':('https://docs.python.org/', None),
-    'numpy': ('http://docs.scipy.org/doc/numpy/', None),
-    }
+  'python':('https://docs.python.org/', None),
+  'numpy': ('http://docs.scipy.org/doc/numpy/', None),
+  }
 
 # -- A patch that prevents Sphinx from cross-referencing ivar tags -------
 # See http://stackoverflow.com/a/41184353/3343043
@@ -214,14 +214,14 @@ def patched_make_field(self, types, domain, items, **kw):
         typename = typename.replace('float', 'python:float')
         typename = typename.replace('type', 'python:type')
         par.extend(
-            self.make_xrefs(
-                self.typerolename,
-                domain,
-                typename,
-                addnodes.literal_emphasis,
-                **kw
-                )
+          self.make_xrefs(
+            self.typerolename,
+            domain,
+            typename,
+            addnodes.literal_emphasis,
+            **kw
             )
+          )
       else:
         par += fieldtype
       par += nodes.Text(')')

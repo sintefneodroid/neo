@@ -37,11 +37,11 @@ def update_callback(state):
 
 def on_step_callback(actor_name, slider_values):
   motions = [
-      Motion(str(actor_name), str(slider_values[0][0]), slider_values[0][1]),
-      Motion(str(actor_name), str(slider_values[1][0]), slider_values[1][1])
-      # Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
-      # Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
-      ]
+    Motion(str(actor_name), str(slider_values[0][0]), slider_values[0][1]),
+    Motion(str(actor_name), str(slider_values[1][0]), slider_values[1][1])
+    # Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
+    # Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
+    ]
   parameters = ReactionParameters(terminable=True, step=True, reset=False, configure=False, describe=False,
                                   episode_count=True)
   new_state = _neo_environment.react(Reaction(motions=motions, parameters=parameters))
@@ -52,8 +52,8 @@ def on_reset_callback(slider_values):
   configurations = [Configuration(str(slider_values[0][0]), slider_values[0][1])]
   parameters = ReactionParameters(terminable=False, step=False, reset=True, configure=True, describe=True)
   new_state = _neo_environment.react(
-      Reaction(parameters=parameters, configurations=configurations)
-      )
+    Reaction(parameters=parameters, configurations=configurations)
+    )
   update_callback(new_state)
 
 
@@ -75,15 +75,15 @@ def update_environment_widgets(state):
     _gui.update_motion_image(state.sensor('FlowCamera').value)
     _gui.update_depth_image(state.sensor('DepthCamera').value)
     _gui.update_segmentation_image(
-        state.sensor('SegmentationCamera').value
-        )
+      state.sensor('SegmentationCamera').value
+      )
     _gui.update_instance_segmentation_image(
-        state.sensor('InstanceSegmentationCamera').value
-        )
+      state.sensor('InstanceSegmentationCamera').value
+      )
     _gui.update_rgb_image(state.sensor('RGBCamera').value)
     _gui.update_infrared_shadow_image(
-        state.sensor('InfraredShadowCamera').value
-        )
+      state.sensor('InfraredShadowCamera').value
+      )
   except BaseException:
     print('Failed at updating Images')
 
