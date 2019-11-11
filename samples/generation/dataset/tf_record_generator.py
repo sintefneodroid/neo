@@ -3,7 +3,7 @@
 import json
 
 from neodroid import PROJECT_APP_PATH
-from neodroid.environments import connect
+from neodroid.environments.unity_environment import connect
 
 __author__ = 'Christian Heider Nielsen'
 __doc__ = ''

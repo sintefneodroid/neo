@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-from neodroid import connect
+from neodroid.environments.unity_environment import connect
 
 __author__ = 'Christian Heider Nielsen'
 __doc__ = 'Small sample program for connecting to environment and collecting observations'

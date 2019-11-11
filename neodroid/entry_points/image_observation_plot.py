@@ -89,7 +89,7 @@ def main():
 
   side = sqrt(len(new_images))
   xs = ceil(side)
-  ys = floor(side)
+  ys = floor(side) +1
 
   axes = fig.subplots(ys, xs, sharex='all', sharey='all')
 

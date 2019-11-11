@@ -1,7 +1,7 @@
 import numpy
 
 from .camera_observation_wrapper import CameraObservationWrapper
-from .observation_wrapper import ObservationWrapper
+from .float_observation_wrapper import FloatObservationWrapper
 
 
 def make(environment_name, **kwargs):

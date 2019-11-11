@@ -7,7 +7,7 @@ from neodroid.environments.unity_environment import SingleUnityEnvironment
 __author__ = 'Christian Heider Nielsen'
 
 
-class ObservationWrapper(SingleUnityEnvironment):
+class FloatObservationWrapper(SingleUnityEnvironment):
 
   def __next__(self):
     if not self._is_connected_to_server:
