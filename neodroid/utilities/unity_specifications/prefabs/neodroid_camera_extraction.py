@@ -2,57 +2,58 @@ import time
 
 import neodroid
 
-default_camera_observer_names = ('Material',
-                                 'WorldSpace',
-                                 'Us',
-                                 'Vs',
-                                 'UVs',
-                                 'Offset',
-                                 'Depth',
-                                 'RGB',
-                                 'ObjectSpace',
-                                 'Instance',
-                                 'CompressedDepth',
-                                 'Infrared',
-                                 'Normal',
-                                 'Tangents',
-                                 'Flow',
-                                 'Layer',
-                                 'OcclusionMask',
-                                 'Tag',
-                                 'Diffuse',
-                                 'Satellite')
+default_camera_observer_names = (
+    "Material",
+    "WorldSpace",
+    "Us",
+    "Vs",
+    "UVs",
+    "Offset",
+    "Depth",
+    "RGB",
+    "ObjectSpace",
+    "Instance",
+    "CompressedDepth",
+    "Infrared",
+    "Normal",
+    "Tangents",
+    "Flow",
+    "Layer",
+    "OcclusionMask",
+    "Tag",
+    "Diffuse",
+    "Satellite",
+)
 
 
 def extract_neodroid_camera(state, cameras=default_camera_observer_names):
-  out = dict()
+    out = dict()
 
-  for camera in cameras:
-    res = extract_camera_observation(state, camera)
-    if res is not None:
-      out[camera] = res
+    for camera in cameras:
+        res = extract_camera_observation(state, camera)
+        if res is not None:
+            out[camera] = res
 
-  return out
+    return out
 
 
 def extract_all_as_camera(state):
-  out = dict()
+    out = dict()
 
-  for camera in state.sensors.keys():
-    res = extract_camera_observation(state, camera)
-    if res is not None:
-      out[camera] = res
+    for camera in state.sensors.keys():
+        res = extract_camera_observation(state, camera)
+        if res is not None:
+            out[camera] = res
 
-  return out
+    return out
 
 
-def extract_camera_observation(state,
-                               key):
-  sensor = state.sensor(key)
-  if sensor and sensor.is_image:
-    img = sensor.value
-    return img
-  '''
+def extract_camera_observation(state, key):
+    sensor = state.sensor(key)
+    if sensor and sensor.is_image:
+        img = sensor.value
+        return img
+    """
   if isinstance(img, (bytes, BytesIO)):
     img = img#imageio.imread(img)
   else:
@@ -69,23 +70,23 @@ def extract_camera_observation(state,
     # img = Image.fromarray(img, mode='RGBA').transpose(PIL.Image.FLIP_TOP_BOTTOM)
 
     return img
-  '''
-  return None
+  """
+    return None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-  environments = neodroid.connect()
-  environments.reset()
+    environments = neodroid.connect()
+    environments.reset()
 
-  i = 0
-  freq = 100
-  time_s = time.time()
-  while environments.is_connected:
-    states = environments.react()
-    state = next(iter(states.values()))
-    extract_all_as_camera(state)
-    terminated = state.terminated
+    i = 0
+    freq = 100
+    time_s = time.time()
+    while environments.is_connected:
+        states = environments.react()
+        state = next(iter(states.values()))
+        extract_all_as_camera(state)
+        terminated = state.terminated
 
-    if terminated:
-      environments.reset()
+        if terminated:
+            environments.reset()

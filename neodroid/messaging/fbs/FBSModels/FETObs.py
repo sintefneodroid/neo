@@ -6,85 +6,95 @@ import flatbuffers
 
 
 class FETObs(object):
-  __slots__ = ['_tab']
+    __slots__ = ["_tab"]
 
-  @classmethod
-  def GetRootAsFETObs(cls, buf, offset):
-    n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-    x = FETObs()
-    x.Init(buf, n + offset)
-    return x
+    @classmethod
+    def GetRootAsFETObs(cls, buf, offset):
+        n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
+        x = FETObs()
+        x.Init(buf, n + offset)
+        return x
 
-  # FETObs
-  def Init(self, buf, pos):
-    self._tab = flatbuffers.table.Table(buf, pos)
+    # FETObs
+    def Init(self, buf, pos):
+        self._tab = flatbuffers.table.Table(buf, pos)
 
-  # FETObs
-  def Transform(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-    if o != 0:
-      x = o + self._tab.Pos
-      from .FEulerTransform import FEulerTransform
-      obj = FEulerTransform()
-      obj.Init(self._tab.Bytes, x)
-      return obj
-    return None
+    # FETObs
+    def Transform(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+        if o != 0:
+            x = o + self._tab.Pos
+            from .FEulerTransform import FEulerTransform
 
-  # FETObs
-  def PosRange(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
-    if o != 0:
-      x = o + self._tab.Pos
-      from .FRange import FRange
-      obj = FRange()
-      obj.Init(self._tab.Bytes, x)
-      return obj
-    return None
+            obj = FEulerTransform()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
 
-  # FETObs
-  def RotRange(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
-    if o != 0:
-      x = o + self._tab.Pos
-      from .FRange import FRange
-      obj = FRange()
-      obj.Init(self._tab.Bytes, x)
-      return obj
-    return None
+    # FETObs
+    def PosRange(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        if o != 0:
+            x = o + self._tab.Pos
+            from .FRange import FRange
 
-  # FETObs
-  def DirRange(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
-    if o != 0:
-      x = o + self._tab.Pos
-      from .FRange import FRange
-      obj = FRange()
-      obj.Init(self._tab.Bytes, x)
-      return obj
-    return None
+            obj = FRange()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
 
+    # FETObs
+    def RotRange(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        if o != 0:
+            x = o + self._tab.Pos
+            from .FRange import FRange
 
-def FETObsStart(builder): builder.StartObject(4)
+            obj = FRange()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
 
+    # FETObs
+    def DirRange(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
+        if o != 0:
+            x = o + self._tab.Pos
+            from .FRange import FRange
 
-def FETObsAddTransform(builder, transform): builder.PrependStructSlot(0,
-                                                                      flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                        transform), 0)
+            obj = FRange()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
 
 
-def FETObsAddPosRange(builder, posRange): builder.PrependStructSlot(1,
-                                                                    flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                      posRange), 0)
+def FETObsStart(builder):
+    builder.StartObject(4)
 
 
-def FETObsAddRotRange(builder, rotRange): builder.PrependStructSlot(2,
-                                                                    flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                      rotRange), 0)
+def FETObsAddTransform(builder, transform):
+    builder.PrependStructSlot(
+        0, flatbuffers.number_types.UOffsetTFlags.py_type(transform), 0
+    )
 
 
-def FETObsAddDirRange(builder, dirRange): builder.PrependStructSlot(3,
-                                                                    flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                      dirRange), 0)
+def FETObsAddPosRange(builder, posRange):
+    builder.PrependStructSlot(
+        1, flatbuffers.number_types.UOffsetTFlags.py_type(posRange), 0
+    )
 
 
-def FETObsEnd(builder): return builder.EndObject()
+def FETObsAddRotRange(builder, rotRange):
+    builder.PrependStructSlot(
+        2, flatbuffers.number_types.UOffsetTFlags.py_type(rotRange), 0
+    )
+
+
+def FETObsAddDirRange(builder, dirRange):
+    builder.PrependStructSlot(
+        3, flatbuffers.number_types.UOffsetTFlags.py_type(dirRange), 0
+    )
+
+
+def FETObsEnd(builder):
+    return builder.EndObject()

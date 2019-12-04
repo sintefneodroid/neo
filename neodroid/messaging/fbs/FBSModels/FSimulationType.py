@@ -2,8 +2,9 @@
 
 # namespace: FBS
 
+
 class FSimulationType(object):
-  Independent = 0
-  FrameDependent = 1
-  PhysicsDependent = 2
-  EventDependent = 3
+    Independent = 0
+    FrameDependent = 1
+    PhysicsDependent = 2
+    EventDependent = 3
