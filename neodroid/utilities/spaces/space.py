@@ -12,14 +12,14 @@ __author__ = "Christian Heider Nielsen"
 class Space(object):
     """
 
-"""
+  """
 
     def __init__(self, ranges: Sequence[Range], names: Sequence[str] = ()):
         """
 
-:param ranges:
-:param names:
-"""
+    :param ranges:
+    :param names:
+    """
         assert isinstance(ranges, Sequence)
         self._ranges = ranges
         self._names = names

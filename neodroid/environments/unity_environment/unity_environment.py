@@ -4,7 +4,7 @@ import logging
 from pathlib import Path
 from typing import Mapping, Union
 
-from neodroid import PROJECT_APP_PATH, __version__
+from neodroid import PROJECT_APP_PATH
 from neodroid.factories.motion_reactions import verify_motion_reactions
 from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
 from neodroid.utilities.unity_specifications.environment_description import (
@@ -62,7 +62,7 @@ class UnityEnvironment(NetworkingEnvironment):
 
     @property
     def neodroid_api_version(self):
-        return __version__
+        return "0.4.0"
 
     def sensor(self, name: str):
 
@@ -245,11 +245,11 @@ class UnityEnvironment(NetworkingEnvironment):
     ) -> Mapping[str, EnvironmentSnapshot]:
         """
 
-:param parameters:
-:type parameters:
-:return:
-:rtype:
-"""
+    :param parameters:
+    :type parameters:
+    :return:
+    :rtype:
+    """
         reaction = Reaction(parameters=parameters)
         new_states, simulator_configuration = self._message_server.send_receive(
             [reaction]

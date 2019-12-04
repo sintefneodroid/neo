@@ -31,8 +31,8 @@ Created on 27/04/2019
 
 def dist_is_editable(dist):
     """
-Return True if given Distribution is an editable install.
-"""
+  Return True if given Distribution is an editable install.
+  """
     for path_item in sys.path:
         egg_link = Path(path_item) / f"{dist.project_name}.egg-link"
         if egg_link.is_file():
@@ -107,8 +107,6 @@ def get_logo() -> str:
 def draw_logo() -> None:
     print(get_logo())
 
-
-from .environments import *
 
 if __name__ == "__main__":
     draw_logo()

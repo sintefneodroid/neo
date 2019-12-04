@@ -3,5 +3,3 @@
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = ""
-
-from .unity_environment import connect

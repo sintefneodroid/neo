@@ -3,7 +3,6 @@
 from contextlib import suppress
 
 __author__ = "Christian Heider Nielsen"
-
 from tqdm import tqdm
 
 tqdm.monitor_interval = 0

@@ -12,10 +12,10 @@ class SimulatorConfiguration(object):
     ):
         """
 
-:param fbs_configuration:
-:param api_version:
-:param simulator_info:
-"""
+    :param fbs_configuration:
+    :param api_version:
+    :param simulator_info:
+    """
         self._fbs_configuration = fbs_configuration
         self._api_version = api_version
         self._simulator_info = simulator_info

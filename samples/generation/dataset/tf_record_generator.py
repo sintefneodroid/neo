@@ -48,12 +48,12 @@ TFF = TFFeature
 def neodroid_tf_example(image_string, label, image_shape, bounding_box):
     """
 
-:param bounding_box:
-:param image_shape:
-:param image_string:
-:param label:
-:return:
-"""
+  :param bounding_box:
+  :param image_shape:
+  :param image_string:
+  :param label:
+  :return:
+  """
 
     feature = {
         "height": TFF.int64([image_shape[0]]),
@@ -73,7 +73,7 @@ def neodroid_tf_example(image_string, label, image_shape, bounding_box):
 def write_tf_record_file(data_tuples, file_name="neodroid_bb_images.tfr"):
     """
 
-"""
+  """
 
     with tf.python_io.TFRecordWriter(file_name) as writer:
         for data_tuple in data_tuples:

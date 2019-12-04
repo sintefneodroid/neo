@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 __author__ = "Christian Heider Nielsen"
-
 import numpy
 from neodroid.models import Configuration
 

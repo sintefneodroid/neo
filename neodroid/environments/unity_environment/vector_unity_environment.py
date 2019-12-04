@@ -111,11 +111,11 @@ class VectorUnityEnvironment(UnityEnvironment):
 
     """
 
-def signal_space(self) -> SignalSpace:
-  pass
+  def signal_space(self) -> SignalSpace:
+    pass
 
-def description(self) -> EnvironmentDescription:
-  pass
+  def description(self) -> EnvironmentDescription:
+    pass
 """
 
 
@@ -123,16 +123,16 @@ class VectorWrapper:
     def __init__(self, env: UnityEnvironment):
         """
 
-:param env:
-"""
+    :param env:
+    """
         self._env = env
 
     @property
     def observation_space(self) -> ObservationSpace:
         """
 
-:return:
-"""
+    :return:
+    """
         _input_shape = None
 
         if len(next(iter(self._env._observation_space.values())).shape) >= 1:
@@ -154,8 +154,8 @@ class VectorWrapper:
     def action_space(self) -> ActionSpace:
         """
 
-:return:
-"""
+    :return:
+    """
         _output_shape = None
 
         if len(next(iter(self._env.action_space.values())).shape) >= 1:

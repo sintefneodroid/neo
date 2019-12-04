@@ -700,20 +700,20 @@
     '>\
             Sort by:\
             <a href=';
-    #
-        ' class=';
+#
+    ' class=';
     sort - option;
     byrating;
     '>best rated</a>\
             <a href=';
-    #
-        ' class=';
+#
+    ' class=';
     sort - option;
     byascage;
     '>newest</a>\
             <a href=';
-    #
-        ' class=';
+#
+    ' class=';
     sort - option;
     byage;
     '>oldest</a>\
@@ -737,8 +737,8 @@
     add - a - comment;
     '>Add a comment\
             (<a href=';
-    #
-        ' class=';
+#
+    ' class=';
     comment - markup;
     ' id=';
     ab < % id % > '>markup</a>):</p>\
@@ -765,16 +765,16 @@
     propose - button;
     '>\
               <a href=';
-    #
-        ' id=';
+#
+    ' id=';
     pc < % id % > ' class=';
     show - propose - change;
     '>\
                 Propose a change &#9657;\
               </a>\
               <a href=';
-    #
-        ' id=';
+#
+    ' id=';
     hc < % id % > ' class=';
     hide - propose - change;
     '>\
@@ -822,8 +822,8 @@
     arrow;
     '>\
               <a href=';
-    #
-        ' id=';
+#
+    ' id=';
     uv < % id % > ' class=';
     vote;
     ' title=';
@@ -833,8 +833,8 @@
                 <img src=' < % upArrow % > ' />\
           </a>\
           <a href=';
-    #
-        ' id=';
+#
+    ' id=';
     uu < % id % > ' class=';
     un;
     vote;
@@ -849,8 +849,8 @@
     arrow;
     '>\
               <a href=';
-    #
-        ' id=';
+#
+    ' id=';
     dv < % id % > ' class=';
     vote;
     ' title=';
@@ -861,8 +861,8 @@
     da < % id % > ' />\
           </a>\
           <a href=';
-    #
-        ' id=';
+#
+    ' id=';
     du < % id % > ' class=';
     un;
     vote;
@@ -900,33 +900,33 @@
     comment;
     '>\
               <a href=';
-    #
-        ' class=';
+#
+    ' class=';
     reply;
     hidden;
     ' id=';
     rl < % id % > '>reply &#9657;</a>\
           <a href=';
-    #
-        ' class=';
+#
+    ' class=';
     close - reply;
     ' id=';
     cr < % id % > '>reply &#9663;</a>\
           <a href=';
-    #
-        ' id=';
+#
+    ' id=';
     sp < % id % > ' class=';
     show - proposal;
     '>proposal &#9657;</a>\
               <a href=';
-    #
-        ' id=';
+#
+    ' id=';
     hp < % id % > ' class=';
     hide - proposal;
     '>proposal &#9663;</a>\
               <a href=';
-    #
-        ' id=';
+#
+    ' id=';
     dc < % id % > ' class=';
     delete -comment;
     hidden;
@@ -937,8 +937,8 @@
     hidden;
     '>\
                 <a href=';
-    #
-        ' id=';
+#
+    ' id=';
     ac < % id % > ' class=';
     accept - comment;
     '>accept</a>\

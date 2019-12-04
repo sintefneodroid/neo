@@ -27,10 +27,10 @@ def download_environment(
 ) -> pathlib.Path:
     """
 
-:param path_to_executables_directory:
-:return:
-:type name: object
-"""
+  :param path_to_executables_directory:
+  :return:
+  :type name: object
+  """
     from urllib.request import urlretrieve
     import zipfile
 
