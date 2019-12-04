@@ -16,13 +16,13 @@ def launch_environment(
     """
 
 
-  :param environment_name:
-  :param path_to_executables_directory:
-  :param ip:
-  :param port:
-  :param headless:
-  :return:
-  """
+:param environment_name:
+:param path_to_executables_directory:
+:param ip:
+:param port:
+:param headless:
+:return:
+"""
     import logging
     import pathlib
 
@@ -79,42 +79,42 @@ def launch_environment(
                 path_to_executable = path / f"{environment_name}.x86_64"
 
         """
-      cwd = os.getcwd()
-      file_name = (file_name.strip()
-                   .replace('.app', '').replace('.exe', '').replace('.x86_64', '').replace('.x86', ''))
-      true_filename = os.path.basename(os.path.normpath(file_name))
-      launch_string = None
-      if platform == 'linux' or platform == 'linux2':
-        candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name) + '.x86_64')
-        if len(candidates) == 0:
-          candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name) + '.x86')
-        if len(candidates) == 0:
-          candidates = glob.glob(file_name + '.x86_64')
-        if len(candidates) == 0:
-          candidates = glob.glob(file_name + '.x86')
-        if len(candidates) > 0:
-          launch_string = candidates[0]
-  
-      elif platform == 'darwin':
-        candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.app', 'Contents', 'MacOS', 
-        true_filename))
-        if len(candidates) == 0:
-          candidates = glob.glob(pathlib.Path.joinpath(file_name + '.app', 'Contents', 'MacOS', 
-          true_filename))
-        if len(candidates) == 0:
-          candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.app', 'Contents', 'MacOS', '*'))
-        if len(candidates) == 0:
-          candidates = glob.glob(pathlib.Path.joinpath(file_name + '.app', 'Contents', 'MacOS', '*'))
-        if len(candidates) > 0:
-          launch_string = candidates[0]
-      elif platform == 'win32':
-        candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.exe'))
-        if len(candidates) == 0:
-          candidates = glob.glob(file_name + '.exe')
-        if len(candidates) > 0:
-          launch_string = candidates[0]
-  
-    """
+  cwd = os.getcwd()
+  file_name = (file_name.strip()
+               .replace('.app', '').replace('.exe', '').replace('.x86_64', '').replace('.x86', ''))
+  true_filename = os.path.basename(os.path.normpath(file_name))
+  launch_string = None
+  if platform == 'linux' or platform == 'linux2':
+    candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name) + '.x86_64')
+    if len(candidates) == 0:
+      candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name) + '.x86')
+    if len(candidates) == 0:
+      candidates = glob.glob(file_name + '.x86_64')
+    if len(candidates) == 0:
+      candidates = glob.glob(file_name + '.x86')
+    if len(candidates) > 0:
+      launch_string = candidates[0]
+
+  elif platform == 'darwin':
+    candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.app', 'Contents', 'MacOS',
+    true_filename))
+    if len(candidates) == 0:
+      candidates = glob.glob(pathlib.Path.joinpath(file_name + '.app', 'Contents', 'MacOS',
+      true_filename))
+    if len(candidates) == 0:
+      candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.app', 'Contents', 'MacOS', '*'))
+    if len(candidates) == 0:
+      candidates = glob.glob(pathlib.Path.joinpath(file_name + '.app', 'Contents', 'MacOS', '*'))
+    if len(candidates) > 0:
+      launch_string = candidates[0]
+  elif platform == 'win32':
+    candidates = glob.glob(pathlib.Path.joinpath(cwd, file_name + '.exe'))
+    if len(candidates) == 0:
+      candidates = glob.glob(file_name + '.exe')
+    if len(candidates) > 0:
+      launch_string = candidates[0]
+
+"""
 
     st = path_to_executable.stat()  # Ensure file is executable
     path_to_executable.chmod(st.st_mode | stat.S_IEXEC)

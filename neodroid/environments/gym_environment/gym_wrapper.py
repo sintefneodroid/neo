@@ -27,11 +27,11 @@ class NeodroidGymEnvironment(SingleUnityEnvironment, gym.Env):
     def step(self, action=None, *args, **kwargs):
         """
 
-    :param action:
-    :param args:
-    :param kwargs:
-    :return:
-    """
+:param action:
+:param args:
+:param kwargs:
+:return:
+"""
         # action = action.flatten()
         message = super().react(action, **kwargs)
         if message:
@@ -41,10 +41,10 @@ class NeodroidGymEnvironment(SingleUnityEnvironment, gym.Env):
     def reset(self, *args, **kwargs):
         """
 
-    :param args:
-    :param kwargs:
-    :return:
-    """
+:param args:
+:param kwargs:
+:return:
+"""
         message = super().reset(*args, **kwargs)
         if message:
             return message.observables
@@ -85,11 +85,11 @@ class NeodroidVectorGymEnvironment(SingleUnityEnvironment, gym.Env):
     def step(self, action=None, *args, **kwargs):
         """
 
-    :param action:
-    :param args:
-    :param kwargs:
-    :return:
-    """
+:param action:
+:param args:
+:param kwargs:
+:return:
+"""
         # action = action.flatten()
         message = super().react(action[0], **kwargs)
         if message:
@@ -139,8 +139,8 @@ class NeodroidGymWrapper:
     ):
         """
 
-    :param environment:
-    """
+:param environment:
+"""
         self._env = environment
         self._environment_name = environment_name
         self._render_interval = render_interval
@@ -149,8 +149,8 @@ class NeodroidGymWrapper:
     def signal_space(self) -> SignalSpace:
         """
 
-    :return:
-    """
+:return:
+"""
 
         space = SignalSpace(
             [
@@ -168,8 +168,8 @@ class NeodroidGymWrapper:
     def observation_space(self) -> ObservationSpace:
         """
 
-    :return:
-    """
+:return:
+"""
 
         if len(self._env.observation_space.shape) >= 1:
             aspc = self._env.observation_space
@@ -198,8 +198,8 @@ class NeodroidGymWrapper:
     def action_space(self) -> ActionSpace:
         """
 
-    :return:
-    """
+:return:
+"""
 
         if len(self._env.action_space.shape) >= 1:
             aspc = self._env.action_space

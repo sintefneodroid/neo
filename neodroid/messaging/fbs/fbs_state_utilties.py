@@ -311,15 +311,15 @@ def deserialise_array(f_obs) -> Tuple[Any, Any]:
 def deserialise_actuators(flat_actor):
     """
 
-  # All dictionaries in python3.6+ are insertion ordered, actuators are sorted by key and
-  # inserted so that the order of actuator key-value pairs are always the same for all instances the same
-  # environment. This is
-  # useful when descriptions are used for inference what value (motion strength) in a numeric vector
-  # corresponds to what actuator.
+# All dictionaries in python3.6+ are insertion ordered, actuators are sorted by key and
+# inserted so that the order of actuator key-value pairs are always the same for all instances the same
+# environment. This is
+# useful when descriptions are used for inference what value (motion strength) in a numeric vector
+# corresponds to what actuator.
 
-  :param flat_actor:
-  :return:
-  """
+:param flat_actor:
+:return:
+"""
     actuators = {}
     for i in range(flat_actor.ActuatorsLength()):
         flat_actuator = flat_actor.Actuators(i)

@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 import logging
 from abc import ABC, abstractmethod
+from pathlib import Path
 from types import coroutine
+from typing import Any
 
 from neodroid import PROJECT_APP_PATH
 from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
@@ -19,10 +21,10 @@ class Environment(ABC):
     def __init__(
         self,
         *,
-        seed=8,
-        logging_directory=PROJECT_APP_PATH.user_log,
-        logging_level=logging.WARNING,
-        auto_reset=True,
+        seed: int = 8,
+        logging_directory: Path = PROJECT_APP_PATH.user_log,
+        logging_level: Any = logging.WARNING,
+        auto_reset: bool = True,
         **kwargs,
     ):
         self.seed(seed)
@@ -30,7 +32,7 @@ class Environment(ABC):
         logging.basicConfig(
             # format='%(asctime)s %(new_state)s',
             # datefmt='%m/%d/%Y %I:%M:%S %p',
-            filename=logging_directory / "neodroid_log.txt",
+            filename=str(logging_directory / "neodroid_log.txt"),
             level=logging_level,
         )
         # self._module_logger = logging.getLogger(__name__)
@@ -112,9 +114,9 @@ class Environment(ABC):
     @coroutine
     def coroutine_generator(self):
         """
-    :return:
-    :rtype:
-    """
+:return:
+:rtype:
+"""
         return self
 
     def render(self):

@@ -10,18 +10,18 @@ __author__ = "Christian Heider Nielsen"
 class Range:
     """
 
-  """
+"""
 
     def __init__(
         self, *, min_value=0, max_value=0, decimal_granularity=0, normalised=True
     ):
         """
 
-    :param min_value:
-    :param max_value:
-    :param decimal_granularity:
-    :param normalised:
-    """
+:param min_value:
+:param max_value:
+:param decimal_granularity:
+:param normalised:
+"""
         assert max_value >= min_value
         assert decimal_granularity >= 0
 
@@ -34,9 +34,9 @@ class Range:
     @property
     def normalised(self) -> bool:
         """
-    Indicates whether the action space span is zero-one normalised
-    :return:
-    """
+Indicates whether the action space span is zero-one normalised
+:return:
+"""
         return self._normalised
 
     @property
@@ -84,9 +84,9 @@ class Range:
     def to_dict(self) -> dict:
         """
 
-    type(dict)
-    :return:
-    """
+type(dict)
+:return:
+"""
         return {
             "decimal_granularity": self._decimal_granularity,
             "min_value": self._min_value,

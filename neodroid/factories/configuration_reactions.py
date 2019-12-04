@@ -28,59 +28,59 @@ def verify_configuration_reactions(
 ):
     """
 
-  :param input_reactions:
-  :param environment_descriptions:
-  :return:
-  """
+:param input_reactions:
+:param environment_descriptions:
+:return:
+"""
 
     """
-  if environment_descriptions:
-    configurables = next(iter(environment_descriptions.items()))[1].configurables.values()
-    if configurables:
-      if isinstance(reaction_input, Reaction):
-        if reaction_input.configurations:
-          is_valid_configurations = all(
-              isinstance(m, Configuration)
-              for m in reaction_input.configurations
-              )
-          if is_valid_configurations:
-            return reaction_input
-          else:
-            reaction_input.motions(
-                construct_configurations_from_known_observables(
-                    reaction_input.configurations, configurables
-                    )
-                )
-          return reaction_input
-      elif isinstance(reaction_input, list):
+if environment_descriptions:
+  configurables = next(iter(environment_descriptions.items()))[1].configurables.values()
+  if configurables:
+    if isinstance(reaction_input, Reaction):
+      if reaction_input.configurations:
         is_valid_configurations = all(
-            isinstance(c, Configuration) for c in reaction_input
+            isinstance(m, Configuration)
+            for m in reaction_input.configurations
             )
         if is_valid_configurations:
-          return Reaction(
-              parameters=parameters, configurations=reaction_input, motions=[]
-              )
+          return reaction_input
         else:
-          return construct_configuration_reaction_from_list(
-              reaction_input, configurables
+          reaction_input.motions(
+              construct_configurations_from_known_observables(
+                  reaction_input.configurations, configurables
+                  )
               )
-      elif isinstance(reaction_input, int):
+        return reaction_input
+    elif isinstance(reaction_input, list):
+      is_valid_configurations = all(
+          isinstance(c, Configuration) for c in reaction_input
+          )
+      if is_valid_configurations:
+        return Reaction(
+            parameters=parameters, configurations=reaction_input, motions=[]
+            )
+      else:
         return construct_configuration_reaction_from_list(
-            [reaction_input], configurables
+            reaction_input, configurables
             )
-      elif isinstance(reaction_input, float):
-        return construct_configuration_reaction_from_list(
-            [reaction_input], configurables
-            )
-      elif isinstance(reaction_input, (numpy.ndarray, numpy.generic)):
-        a = construct_configuration_reaction_from_list(
-            reaction_input.astype(float).tolist(), configurables
-            )
-        return a
-  if isinstance(reaction_input, Reaction):
-    return reaction_input
-  return Reaction(parameters=parameters)
-  """
+    elif isinstance(reaction_input, int):
+      return construct_configuration_reaction_from_list(
+          [reaction_input], configurables
+          )
+    elif isinstance(reaction_input, float):
+      return construct_configuration_reaction_from_list(
+          [reaction_input], configurables
+          )
+    elif isinstance(reaction_input, (numpy.ndarray, numpy.generic)):
+      a = construct_configuration_reaction_from_list(
+          reaction_input.astype(float).tolist(), configurables
+          )
+      return a
+if isinstance(reaction_input, Reaction):
+  return reaction_input
+return Reaction(parameters=parameters)
+"""
 
     if isinstance(input_reactions, Reaction):
         return input_reactions
