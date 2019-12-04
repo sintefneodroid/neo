@@ -8,7 +8,7 @@ __author__ = "Christian Heider Nielsen"
 class Sensor(object):
     """
 
-  """
+"""
 
     def __init__(self, sensor_name, sensor_range, sensor_value, is_image):
         self._range = sensor_range

@@ -20,14 +20,14 @@ class NetworkingEnvironment(Environment, ABC):
     def __init__(
         self,
         *,
-        ip="localhost",
-        port=6969,
-        connect_to_running=False,
-        on_connected_callback=None,
-        on_disconnected_callback=None,
-        on_timeout_callback=None,
-        retries=10,
-        connect_try_interval=0.1,
+        ip: str = "localhost",
+        port: int = 6969,
+        connect_to_running: bool = False,
+        on_connected_callback: callable = None,
+        on_disconnected_callback: callable = None,
+        on_timeout_callback: callable = None,
+        retries: int = 10,
+        connect_try_interval: float = 0.1,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -44,10 +44,10 @@ class NetworkingEnvironment(Environment, ABC):
 
     def __next__(self) -> EnvironmentSnapshot:
         if not self._is_connected_to_server:
-            return
+            raise StopIteration
         return self.react()
 
-    def _setup_connection(self, auto_describe=False):
+    def _setup_connection(self, auto_describe: bool = False):
         connect_tries = range(self._retries)
 
         self._message_server = MessageClient(

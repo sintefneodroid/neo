@@ -12,12 +12,12 @@ class PythonEnvironment(Environment, ABC):
     def __init__(
         self,
         *,
-        ip="localhost",
-        port=6969,
-        connect_to_running=False,
-        on_connected_callback=None,
-        on_disconnected_callback=None,
-        on_timeout_callback=None,
+        ip: str = "localhost",
+        port: int = 6969,
+        connect_to_running: bool = False,
+        on_connected_callback: callable = None,
+        on_disconnected_callback: callable = None,
+        on_timeout_callback: callable = None,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -47,10 +47,10 @@ class PythonEnvironment(Environment, ABC):
         first_environment = list(self._last_message.values())[0]
         observables = first_environment.observables
         if observables is not None:
-            self._observation_space = construct_observation_space(observables)
+            self._observation_space = len(observables)
         if first_environment.description:
             self._description = first_environment.description
-            self._action_space = construct_action_space(self._description)
+            self._action_space = len(self._description)
 
     def __repr__(self):
         return (

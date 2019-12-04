@@ -54,12 +54,12 @@ def create_app(base_path, labels_path, template_folder=None, UPLOAD_FOLDER="Uplo
 
     def allowed_file(filename):
         """
-    check if an extension is valid and that uploads the file and redirects the user to the URL for the
-    uploaded file
+check if an extension is valid and that uploads the file and redirects the user to the URL for the
+uploaded file
 
-    :param filename:
-    :return:
-    """
+:param filename:
+:return:
+"""
         return "." in filename and filename.rsplit(".", 1)[1] in ALLOWED_EXTENSIONS
 
     @app.route("/assessment")

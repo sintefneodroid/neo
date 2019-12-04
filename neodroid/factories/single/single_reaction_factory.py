@@ -28,11 +28,11 @@ def verify_motion_reaction(
 ):
     """
 
-  :param action_space:
-  :param environment_description:
-  :param normalise:
-  :type reaction_input: object
-  """
+:param action_space:
+:param environment_description:
+:param normalise:
+:type reaction_input: object
+"""
     if reaction_input is None:
         logging.info(
             "Received empty reaction, Constructing empty counting terminal step reaction"
