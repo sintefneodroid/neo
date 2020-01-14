@@ -3,6 +3,7 @@
 from neodroid.environments.unity_environment.unity_environment import UnityEnvironment
 
 __author__ = "Christian Heider Nielsen"
+__all__ = ["BatchedUnityEnvironment"]
 
 
 class BatchedUnityEnvironment(UnityEnvironment):

@@ -130,12 +130,7 @@ class NeodroidVectorGymEnvironment(SingleUnityEnvironment, gym.Env):
 
 class NeodroidGymWrapper:
     def __init__(
-        self,
-        environment: Env,
-        environment_name: str,
-        render_interval: int = 0,
-        min_signal=-1,
-        max_signal=1,
+        self, environment: Env, environment_name: str = "", render_interval: int = 0
     ):
         """
 
@@ -228,13 +223,14 @@ class NeodroidGymWrapper:
     def environment_name(self):
         return self._environment_name
 
+    def step(self, *args, **kwargs):
+        raise DeprecationWarning
+
     def react(self, a, *args, **kwargs):
-        if isinstance(a, numpy.ndarray):
-            a = a.tolist()
 
         observables, signal, terminated, *_ = self._env.step(a, *args, **kwargs)
 
-        env_state = EnvironmentSnapshot.from_gym_like_out(
+        env_state = EnvironmentSnapshot.from_gym_like_output(
             observables, signal, terminated, None
         )
 
@@ -243,7 +239,9 @@ class NeodroidGymWrapper:
     def reset(self):
         observables = self._env.reset()
 
-        env_state = EnvironmentSnapshot.from_gym_like_out(observables, 0, False, None)
+        env_state = EnvironmentSnapshot.from_gym_like_output(
+            observables, 0, False, None
+        )
 
         return env_state
 

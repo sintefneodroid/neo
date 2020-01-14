@@ -10,29 +10,6 @@ from neodroid import connect
 __author__ = "Christian Heider Nielsen"
 
 
-def add_bool_arg(parser, name, *, dest=None, default=False, **kwargs):
-    if not dest:
-        dest = name
-
-    group = parser.add_mutually_exclusive_group(required=False)
-
-    group.add_argument(
-        f"--{name.upper()}",
-        f"-{name.lower()}",
-        dest=dest,
-        action="store_true",
-        **kwargs,
-    )
-    group.add_argument(
-        f"--NO-{name.upper()}",
-        f"-no-{name.lower()}",
-        dest=dest,
-        action="store_false",
-        **kwargs,
-    )
-    parser.set_defaults(**{dest: default})
-
-
 def main():
     parser = argparse.ArgumentParser(description="Neodroid Action Space Sampling")
     parser.add_argument(
@@ -53,6 +30,7 @@ def main():
     while environment.is_connected:
         action = [aas.sample() for aas in environment.action_space.values()]
         state = environment.react(action)
+
         for k, v in state.items():
             terminated.append(v.terminated)
 

@@ -15,7 +15,7 @@ class ReactionParameters(object):
         step: bool = False,
         reset: bool = False,
         configure: bool = False,
-        describe: bool = False,
+        describe: bool = True,
         episode_count: bool = False,
     ):
         self._terminable = terminable

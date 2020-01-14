@@ -132,15 +132,30 @@ type(dict)
         # return self.expensive_sample()
 
     def cheapest_sample(self) -> float:
-        return numpy.random.randint(self.min, self.max + 1)
+        val = numpy.random.randint(self.min, self.max + 1)
+
+        if isinstance(val, numpy.ndarray):
+            return val.item()
+
+        return val
 
     def cheaper_sample(self) -> float:
-        return numpy.round(numpy.random.random() * self.span, self.decimal_granularity)
+        val = numpy.round(numpy.random.random() * self.span, self.decimal_granularity)
+
+        if isinstance(val, numpy.ndarray):
+            return val.item()
+
+        return val
 
     def expensive_sample(self) -> float:
-        return numpy.random.choice(
+        val = numpy.random.choice(
             numpy.linspace(self.min, self.max, num=self.discrete_steps)
         )
+
+        if isinstance(val, numpy.ndarray):
+            return val.item()
+
+        return val
 
 
 if __name__ == "__main__":

@@ -22,7 +22,7 @@ class ActionSpace(Space):
         for valid_input in self._ranges:
             sample = numpy.random.uniform(
                 valid_input.min_unnorm, valid_input.max_unnorm, 1
-            )
+            ).item()
             actions.append(numpy.round(sample, valid_input.decimal_granularity))
         return actions
 

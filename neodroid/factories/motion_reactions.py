@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import logging
+from typing import Mapping
 
 from neodroid.utilities.unity_specifications.motion import Motion
 from neodroid.utilities.unity_specifications import Reaction
@@ -13,14 +14,13 @@ __author__ = "Christian Heider Nielsen"
 import numpy
 
 
-def verify_motion_reactions(
-    *,
-    input_reactions,
-    environment_descriptions
-    #: Mapping[str, EnvironmentDescription]
-):
+def verify_motion_reactions(*, input_reactions, environment_descriptions: Mapping):
     outs = []
-    if environment_descriptions:
+    if (
+        environment_descriptions
+        and isinstance(environment_descriptions, Mapping)
+        and len(environment_descriptions) > 0
+    ):
         if len(input_reactions) is not len(environment_descriptions):
             logging.warning(
                 f"Inputs({len(input_reactions)}) and"

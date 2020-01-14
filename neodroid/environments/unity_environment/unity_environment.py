@@ -24,6 +24,8 @@ from neodroid.utilities import launch_environment
 
 __author__ = "Christian Heider Nielsen"
 
+__all__ = ["UnityEnvironment"]
+
 from neodroid.environments.networking_environment import NetworkingEnvironment
 
 DEFAULT_ENVIRONMENTS_PATH = (PROJECT_APP_PATH.user_cache / "environments").absolute()
@@ -113,6 +115,11 @@ class UnityEnvironment(NetworkingEnvironment):
         self._simulation_instance = None
         self._clones = clones
 
+        self._description = None
+        self._action_space = None
+        self._observation_space = None
+        self._signal_space = None
+
         if (
             not self._connect_to_running
             and not self._simulation_instance
@@ -134,13 +141,13 @@ class UnityEnvironment(NetworkingEnvironment):
         self._setup_connection()
 
     def configure(self, *args, **kwargs) -> Mapping[str, EnvironmentSnapshot]:
-        return self.reset()
+        return self.reset(*args, **kwargs)
 
     def react(
         self,
         input_reactions=None,
         *,
-        parameters=None,
+        parameters=ReactionParameters(episode_count=True, step=True, terminable=True),
         normalise=False,
         on_reaction_sent_callback=None,
         on_step_done_callback=None,
@@ -174,14 +181,16 @@ class UnityEnvironment(NetworkingEnvironment):
                 parameters = ReactionParameters(
                     episode_count=True, step=True, terminable=True
                 )
-                input_reactions = [Reaction(parameters=parameters)]
+                input_reactions = [
+                    Reaction(parameters=parameters, environment_name="all")
+                ]
             elif not isinstance(input_reactions, Reaction):
                 input_reactions = verify_motion_reactions(
                     input_reactions=input_reactions,
-                    environment_descriptions=self._description,
+                    environment_descriptions=self.description,
                 )
 
-        new_states, simulator_configuration = self._message_server.send_receive(
+        (new_states, simulator_configuration) = self._message_server.send_receive(
             input_reactions
         )
 
@@ -207,7 +216,7 @@ class UnityEnvironment(NetworkingEnvironment):
             parameters = ReactionParameters(
                 terminable=True, describe=True, episode_count=False, reset=True
             )
-            input_reactions = [Reaction(parameters=parameters)]
+            input_reactions = [Reaction(parameters=parameters, environment_name="all")]
 
         new_states, simulator_configuration = self._message_server.send_receive(
             input_reactions
@@ -237,12 +246,7 @@ class UnityEnvironment(NetworkingEnvironment):
             callback()
         return 0
 
-    def describe(
-        self,
-        parameters=ReactionParameters(
-            terminable=False, describe=True, episode_count=False
-        ),
-    ) -> Mapping[str, EnvironmentSnapshot]:
+    def describe(self) -> Mapping[str, EnvironmentSnapshot]:
         """
 
 :param parameters:
@@ -250,7 +254,11 @@ class UnityEnvironment(NetworkingEnvironment):
 :return:
 :rtype:
 """
-        reaction = Reaction(parameters=parameters)
+        reaction = Reaction(
+            parameters=ReactionParameters(
+                terminable=False, describe=True, episode_count=False
+            )
+        )
         new_states, simulator_configuration = self._message_server.send_receive(
             [reaction]
         )
@@ -263,16 +271,24 @@ class UnityEnvironment(NetworkingEnvironment):
         return new_states
 
     def update_interface_attributes(self, new_states, new_simulator_configuration):
+        if not self._description:
+            self._description = {}
+        if not self._action_space:
+            self._action_space = {}
+        if not self._observation_space:
+            self._observation_space = {}
+        if not self._signal_space:
+            self._signal_space = {}
+
         self._simulator_configuration = new_simulator_configuration
         envs = new_states.items()
-        f = next(iter(new_states.values()))
-        if f.description:
-            self._description = {k: env.description for k, env in envs}
-            self._action_space = {k: env.description.action_space for k, env in envs}
-            self._observation_space = {
-                k: env.description.observation_space for k, env in envs
-            }
-            self._signal_space = {k: env.description.signal_space for k, env in envs}
+
+        for key, env in envs:
+            if env.description:
+                self._description[key] = env.description
+                self._action_space[key] = env.description.action_space
+                self._observation_space[key] = env.description.observation_space
+                self._signal_space[key] = env.description.signal_space
 
     def __repr__(self):
         return (

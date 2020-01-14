@@ -17,6 +17,7 @@ from neodroid.utilities.unity_specifications import (
 )
 
 __author__ = "Christian Heider Nielsen"
+__all__ = ["SingleUnityEnvironment"]
 
 
 class SingleUnityEnvironment(UnityEnvironment):

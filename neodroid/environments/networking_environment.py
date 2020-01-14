@@ -15,6 +15,8 @@ from abc import ABC, abstractmethod
 
 from .environment import Environment
 
+__all__ = ["NetworkingEnvironment"]
+
 
 class NetworkingEnvironment(Environment, ABC):
     def __init__(
@@ -47,7 +49,7 @@ class NetworkingEnvironment(Environment, ABC):
             raise StopIteration
         return self.react()
 
-    def _setup_connection(self, auto_describe: bool = False):
+    def _setup_connection(self, auto_describe: bool = True):
         connect_tries = range(self._retries)
 
         self._message_server = MessageClient(

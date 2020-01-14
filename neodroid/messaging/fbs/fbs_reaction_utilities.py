@@ -11,6 +11,7 @@ __author__ = "Christian Heider Nielsen"
 import numpy
 
 from neodroid.messaging.fbs import FBSModels as F
+from neodroid.utilities.unity_specifications.reaction import Reaction
 
 
 def serialise_reactions(input_reactions):
@@ -37,7 +38,7 @@ def serialise_reactions(input_reactions):
     return B.Output()
 
 
-def serialise_reaction(B, input_reaction):
+def serialise_reaction(B, input_reaction: Reaction):
     unobservables = serialise_unobservables(B, input_reaction)
     displayables = serialise_displayables(B, input_reaction)
     configurations = serialise_configurations(B, input_reaction)
@@ -113,9 +114,17 @@ def serialise_bodies(B, fu):
     return B.EndVector(bl)
 
 
-def serialise_motions(B, input_reaction):
+def serialise_motions(B, input_reaction: Reaction):
     motion_offsets = []
     for input_motion in input_reaction.motions:
+        assert isinstance(input_motion.actor_name, str), type(input_motion.actor_name)
+        assert isinstance(input_motion.actuator_name, str), type(
+            input_motion.actor_name
+        )
+        assert isinstance(input_motion.strength, (int, float)), (
+            type(input_motion.strength),
+            input_motion.strength,
+        )
         actor_string_offset = B.CreateString(input_motion.actor_name)
         actuator_string_offset = B.CreateString(input_motion.actuator_name)
         F.FMotionStart(B)

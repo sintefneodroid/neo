@@ -10,7 +10,7 @@ __doc__ = r"""
 
 
 class VectorActionSpace(ActionSpace):
-    def __init__(self, ranges: Sequence[Range], num_env):
+    def __init__(self, ranges: Sequence[Range], num_env: int):
         super().__init__(ranges)
         self.num_env = num_env
 

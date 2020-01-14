@@ -36,7 +36,7 @@ import numpy as np
 from collections import deque
 
 
-class Environment:
+class BlackjackEnvironment:
     def __init__(self):
         # Starts are parametrized efficiently with (s_player, s_dealer) where:
         #  s_player = player card sum in range [12, 21] inclusive
@@ -193,7 +193,7 @@ class Agent:
 # ===================
 if __name__ == "__main__":
     env = (
-        Environment()
+        BlackjackEnvironment()
     )  # initialize discrete state, discrete action blackjack environment
     agent = Agent(env.state_dim, env.action_dim)  # initialize reward-averaging agent
 

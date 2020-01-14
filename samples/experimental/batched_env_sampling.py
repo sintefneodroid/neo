@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.models import Motion, Reaction, ReactionParameters
+
 
 __author__ = "Christian Heider Nielsen"
 
-import api.batched_neodroid_environments as neo
+from neodroid.utilities import ReactionParameters, Motion, Reaction
 
 
 def construct_reactions(env, R):
@@ -61,7 +61,7 @@ def construct_reactions(env, R):
 
 
 def main():
-    environments = neo.BatchedNeodroidEnvironment(connect_to_running=True)
+    environments = VectorNeodroidEnvironment(connect_to_running=True)
     R = [False for _ in range(20)]
     while environments.is_connected:
         reactions = construct_reactions(environments, R)

@@ -16,8 +16,13 @@ __author__ = "Christian Heider Nielsen"
 
 import numpy
 
+from warg import drop_unused_kws
+
+__all__ = ["Environment"]
+
 
 class Environment(ABC):
+    @drop_unused_kws
     def __init__(
         self,
         *,
@@ -25,7 +30,6 @@ class Environment(ABC):
         logging_directory: Path = PROJECT_APP_PATH.user_log,
         logging_level: Any = logging.WARNING,
         auto_reset: bool = True,
-        **kwargs,
     ):
         self.seed(seed)
 

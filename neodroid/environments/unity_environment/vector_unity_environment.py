@@ -5,7 +5,13 @@ import numpy
 from neodroid.environments.unity_environment import UnityEnvironment
 from neodroid.factories.configuration_reactions import verify_configuration_reactions
 from neodroid.factories.motion_reactions import verify_motion_reactions
-from neodroid.utilities.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
+from neodroid.utilities.spaces import (
+    ActionSpace,
+    ObservationSpace,
+    Range,
+    SignalSpace,
+    List,
+)
 from neodroid.utilities.spaces.vector.vector_action_space import VectorActionSpace
 from neodroid.utilities.unity_specifications import (
     EnvironmentDescription,
@@ -15,9 +21,105 @@ from neodroid.utilities.unity_specifications import (
 )
 
 __author__ = "Christian Heider Nielsen"
+__all__ = ["VectorUnityEnvironment", "VectorWrapper"]
 
 
 class VectorUnityEnvironment(UnityEnvironment):
+    def __next__(self):
+        if not self._is_connected_to_server:
+            return
+        return self.react()
+
+    def react(
+        self, input_reactions=None, *, parameters: ReactionParameters = None, **kwargs
+    ) -> List[EnvironmentSnapshot]:
+
+        input_reactions = input_reactions
+        if not isinstance(input_reactions, Reaction):
+            input_reactions = verify_motion_reactions(
+                input_reactions=input_reactions,
+                environment_descriptions=self._description,
+            )
+        if parameters is not None:
+            input_reactions.parameters = parameters
+
+        env_states = super().react(input_reactions=input_reactions, **kwargs)
+
+        envs = list(env_states.values())
+        e = EnvironmentSnapshot.from_gym_like_output(
+            *zip(*[(e_.observables, e_.signal, e_.terminated, None) for e_ in envs])
+        )
+        return e
+
+    def reset(
+        self, input_reactions=None, state=None, on_reset_callback: callable = None
+    ) -> List[EnvironmentSnapshot]:
+
+        input_reactions = verify_configuration_reactions(
+            input_reactions=input_reactions, environment_descriptions=self._description
+        )
+        # if state:
+        #  input_reaction.unobservables = state.unobservables
+
+        new_states = super().reset(input_reactions=input_reactions)
+
+        envs = list(new_states.values())
+        e = EnvironmentSnapshot.from_gym_like_output(
+            *zip(*[(e_.observables, e_.signal, e_.terminated, None) for e_ in envs])
+        )
+
+        return e
+
+    def configure(self, *args, **kwargs):
+        return self.reset(*args, **kwargs)
+
+    @property
+    def action_space(self) -> VectorActionSpace:
+        while not self._action_space:
+            self.describe()
+
+        ev = next(iter(self._action_space.values()))
+        _output_shape = VectorActionSpace(ev.ranges, len(self._action_space.values()))
+        return _output_shape
+
+    @property
+    def description(self) -> EnvironmentDescription:
+        while not self._description:
+            self.describe()
+        return next(iter(self._description.values()))
+
+    @property
+    def observation_space(self) -> ObservationSpace:
+        while not self._observation_space:
+            self.describe()
+        return next(iter(self._observation_space.values()))
+
+    @property
+    def signal_space(self) -> SignalSpace:
+        while not self._signal_space:
+            self.describe()
+        return next(iter(self._signal_space.values()))
+
+    def describe(self, *args, **kwargs):
+        new_states = super().describe(*args, **kwargs)
+        envs = list(new_states.values())
+        e = EnvironmentSnapshot.from_gym_like_output(
+            *zip(*[(e_.observables, e_.signal, e_.terminated, None) for e_ in envs])
+        )
+
+        return e
+
+    """
+
+def signal_space(self) -> SignalSpace:
+pass
+
+def description(self) -> EnvironmentDescription:
+pass
+"""
+
+
+class VectorUnityEnvironment2(UnityEnvironment):
     def __next__(self):
         if not self._is_connected_to_server:
             return
@@ -37,7 +139,7 @@ class VectorUnityEnvironment(UnityEnvironment):
         env_states = super().react(input_reactions=input_reactions, **kwargs)
 
         envs = list(env_states.values())
-        e = EnvironmentSnapshot.from_gym_like_out(
+        e = EnvironmentSnapshot.from_gym_like_output(
             [e_.observables for e_ in envs],
             [e_.signal for e_ in envs],
             [e_.terminated for e_ in envs],
@@ -58,7 +160,7 @@ class VectorUnityEnvironment(UnityEnvironment):
         new_states = super().reset(input_reactions=input_reactions)
 
         envs = list(new_states.values())
-        e = EnvironmentSnapshot.from_gym_like_out(
+        e = EnvironmentSnapshot.from_gym_like_output(
             [e_.observables for e_ in envs],
             [e_.signal for e_ in envs],
             [e_.terminated for e_ in envs],
@@ -100,7 +202,7 @@ class VectorUnityEnvironment(UnityEnvironment):
     def describe(self, *args, **kwargs):
         new_states = super().describe(*args, **kwargs)
         envs = list(new_states.values())
-        e = EnvironmentSnapshot.from_gym_like_out(
+        e = EnvironmentSnapshot.from_gym_like_output(
             [e_.observables for e_ in envs],
             [e_.signal for e_ in envs],
             [e_.terminated for e_ in envs],
@@ -112,10 +214,10 @@ class VectorUnityEnvironment(UnityEnvironment):
     """
 
 def signal_space(self) -> SignalSpace:
-  pass
+pass
 
 def description(self) -> EnvironmentDescription:
-  pass
+pass
 """
 
 

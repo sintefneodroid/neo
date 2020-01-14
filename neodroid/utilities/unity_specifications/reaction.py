@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from collections import Sequence
+from typing import Sized
 
 from neodroid.utilities.unity_specifications.unobservables import Unobservables
 
@@ -9,21 +10,21 @@ __author__ = "Christian Heider Nielsen"
 import json
 
 from .reaction_parameters import ReactionParameters
+from .motion import Motion
 
 
 class Reaction(object):
     def __init__(
         self,
         *,
-        motions: Sequence = (),
-        configurations: Sequence = (),
         parameters: ReactionParameters = None,
+        motions: Sized = (),
+        configurations: Sequence = (),
         unobservables: Unobservables = None,
         displayables: Sequence = None,
         environment_name: str = "None",
         serialised_message: str = "",
     ):
-
         """
 
 The environment_name argument lets you specify which environments to react in, 'all' means all environment
@@ -33,7 +34,7 @@ receives the same reaction.
 
         self._serialised_message = serialised_message
         self._environment_name = environment_name
-        if parameters is None:
+        if not parameters:
             parameters = ReactionParameters()
         self._parameters = parameters
         self._configurations = configurations

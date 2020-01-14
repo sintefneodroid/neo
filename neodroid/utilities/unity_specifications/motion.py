@@ -4,7 +4,7 @@ __author__ = "Christian Heider Nielsen"
 
 
 class Motion(object):
-    def __init__(self, actor_name, actuator_name, strength):
+    def __init__(self, actor_name: str, actuator_name: str, strength: float):
         """
 
 :param actor_name:
@@ -16,15 +16,15 @@ class Motion(object):
         self._strength = strength
 
     @property
-    def actor_name(self):
+    def actor_name(self) -> str:
         return self._actor_name
 
     @property
-    def actuator_name(self):
+    def actuator_name(self) -> str:
         return self._actuator_name
 
     @property
-    def strength(self):
+    def strength(self) -> float:
         return self._strength
 
     def to_dict(self):

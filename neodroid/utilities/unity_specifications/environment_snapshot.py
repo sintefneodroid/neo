@@ -112,7 +112,7 @@ class EnvironmentSnapshot(object):
         return self.observables, self.signal, self.terminated, self
 
     @staticmethod
-    def from_gym_like_out(observables, signal, terminated, info):
+    def from_gym_like_output(observables, signal, terminated, info):
         snapshot = EnvironmentSnapshot(None)
         snapshot._observables = observables
         snapshot._signal = signal
@@ -149,7 +149,7 @@ class EnvironmentSnapshot(object):
 
 
 if __name__ == "__main__":
-    es = EnvironmentSnapshot.from_gym_like_out(
+    es = EnvironmentSnapshot.from_gym_like_output(
         [0, 2, 1], 0, terminated=False, info=None
     )
     print(es.to_json())
