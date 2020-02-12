@@ -7,6 +7,7 @@ from types import coroutine
 from typing import Any
 
 from neodroid import PROJECT_APP_PATH
+from neodroid.utilities import EnvironmentSnapshot
 from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
 from neodroid.utilities.unity_specifications.environment_description import (
     EnvironmentDescription,
@@ -22,6 +23,14 @@ __all__ = ["Environment"]
 
 
 class Environment(ABC):
+    """
+  Environment base class, this class is responsible for defining the interface of interaction. It is
+  designed with the idea for constructing/connecting, configuring, resetting and reacting with an
+  Environment as a Markov Decision Process(MDP). However can easily used as a stateless interface for
+  collecting data, eg. from a real world camera, synthetic (Maybe domain randomised images) data or
+  sampling consecutive data points (Maybe a time series of sensor values).
+  """
+
     @drop_unused_kws
     def __init__(
         self,
@@ -29,7 +38,7 @@ class Environment(ABC):
         seed: int = 8,
         logging_directory: Path = PROJECT_APP_PATH.user_log,
         logging_level: Any = logging.WARNING,
-        auto_reset: bool = True,
+        auto_reset_on_terminal_state: bool = True,
     ):
         self.seed(seed)
 
@@ -42,7 +51,7 @@ class Environment(ABC):
         # self._module_logger = logging.getLogger(__name__)
 
         self._description = None
-        self._auto_reset = auto_reset
+        self._auto_reset = auto_reset_on_terminal_state
         self._signal_space = None
         self._action_space = None
         self._observation_space = None
@@ -53,23 +62,23 @@ class Environment(ABC):
         return self._environment_name
 
     @abstractmethod
-    def configure(self, *args, **kwargs):
+    def configure(self, *args, **kwargs) -> EnvironmentSnapshot:
         raise NotImplementedError
 
     @abstractmethod
-    def reset(self, *args, **kwargs):
+    def reset(self, *args, **kwargs) -> EnvironmentSnapshot:
         raise NotImplementedError
 
     @abstractmethod
-    def react(self, *args, **kwargs):
+    def react(self, *args, **kwargs) -> EnvironmentSnapshot:
         raise NotImplementedError
 
     @abstractmethod
-    def display(self, *args, **kwargs):
+    def display(self, *args, **kwargs) -> EnvironmentSnapshot:
         raise NotImplementedError
 
     @abstractmethod
-    def describe(self, *args, **kwargs):
+    def describe(self, *args, **kwargs) -> EnvironmentSnapshot:
         raise NotImplementedError
 
     @property

@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from typing import List
+
 from neodroid.messaging.fbs.fbs_state_utilties import deserialise_space
 
 __author__ = "Christian Heider Nielsen"
 
+from neodroid.utilities.spaces.range import Range
+
 
 class Sensor(object):
-    """
+    r"""
 
-"""
+  """
 
     def __init__(self, sensor_name, sensor_range, sensor_value, is_image):
         self._range = sensor_range
@@ -25,10 +29,8 @@ class Sensor(object):
         return self._is_image
 
     @property
-    def space(self):
-        if self._range:
-            space = deserialise_space(self._range)
-            return space
+    def space(self) -> List[Range]:
+        return self._range
 
     @property
     def value(self):

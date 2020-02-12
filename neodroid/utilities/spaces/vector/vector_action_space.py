@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.utilities import ActionSpace, Range, Sequence
+from typing import Sequence
+
+from neodroid.utilities.spaces.action_space import ActionSpace
+from neodroid.utilities.spaces.range import Range
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = r"""
@@ -9,10 +12,16 @@ __doc__ = r"""
            """
 
 
-class VectorActionSpace(ActionSpace):
-    def __init__(self, ranges: Sequence[Range], num_env: int):
-        super().__init__(ranges)
+class VectorActionSpace:
+    def __init__(self, action_space: ActionSpace, num_env: int):
+        self.action_space = action_space
         self.num_env = num_env
 
     def sample(self):
-        return [super(ActionSpace, self).sample() for _ in range(self.num_env)]
+        return [self.action_space.sample() for _ in range(self.num_env)]
+
+    def __getattr__(self, item):
+        return getattr(self.action_space, item)
+
+    def __repr__(self):
+        return self.action_space.__repr__()

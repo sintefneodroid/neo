@@ -4,7 +4,7 @@ import logging
 from pathlib import Path
 from typing import Mapping, Union
 
-from neodroid import PROJECT_APP_PATH, __version__
+from neodroid import PROJECT_APP_PATH, __version__, DEFAULT_ENVIRONMENTS_PATH
 from neodroid.factories.motion_reactions import verify_motion_reactions
 from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
 from neodroid.utilities.unity_specifications.environment_description import (
@@ -28,10 +28,51 @@ __all__ = ["UnityEnvironment"]
 
 from neodroid.environments.networking_environment import NetworkingEnvironment
 
-DEFAULT_ENVIRONMENTS_PATH = (PROJECT_APP_PATH.user_cache / "environments").absolute()
-
 
 class UnityEnvironment(NetworkingEnvironment):
+    def __init__(
+        self,
+        *,
+        environment_name: str = None,
+        clones: int = 0,
+        path_to_executables_directory: Union[str, Path] = DEFAULT_ENVIRONMENTS_PATH,
+        headless: bool = False,
+        **kwargs,
+    ):
+        super().__init__(**kwargs)
+
+        # Environment
+        self._simulator_configuration = None
+        self._last_snapshots = None
+        # Simulation
+        self._simulation_instance = None
+        self._clones = clones
+
+        self._description = None
+        self._action_space = None
+        self._observation_space = None
+        self._signal_space = None
+
+        if (
+            not self._connect_to_running
+            and not self._simulation_instance
+            and environment_name is not None
+        ):
+            self._simulation_instance = launch_environment(
+                environment_name,
+                ip=self._ip,
+                port=self._port,
+                path_to_executables_directory=path_to_executables_directory,
+                headless=headless,
+            )
+            if self._simulation_instance:
+                logging.debug(f"successfully started environment {environment_name}")
+            else:
+
+                logging.debug(f"could not start environment {environment_name}")
+
+        self._setup_connection()
+
     @property
     def description(self) -> Mapping[str, EnvironmentDescription]:
         while not self._description:
@@ -68,7 +109,7 @@ class UnityEnvironment(NetworkingEnvironment):
 
     def sensor(self, name: str):
 
-        envs = list(self._last_valid_message.values())
+        envs = list(self._last_snapshots.values())
 
         observer = []
         for e in envs:
@@ -96,49 +137,6 @@ class UnityEnvironment(NetworkingEnvironment):
                 logging.warning(
                     f"Server is using different version {server_version}, complications may occur!"
                 )
-
-    def __init__(
-        self,
-        *,
-        environment_name: str = None,
-        clones: int = 0,
-        path_to_executables_directory: Union[str, Path] = DEFAULT_ENVIRONMENTS_PATH,
-        headless: bool = False,
-        **kwargs,
-    ):
-        super().__init__(**kwargs)
-
-        # Environment
-        self._simulator_configuration = None
-        self._last_valid_message = None
-        # Simulation
-        self._simulation_instance = None
-        self._clones = clones
-
-        self._description = None
-        self._action_space = None
-        self._observation_space = None
-        self._signal_space = None
-
-        if (
-            not self._connect_to_running
-            and not self._simulation_instance
-            and environment_name is not None
-        ):
-            self._simulation_instance = launch_environment(
-                environment_name,
-                ip=self._ip,
-                port=self._port,
-                path_to_executables_directory=path_to_executables_directory,
-                headless=headless,
-            )
-            if self._simulation_instance:
-                logging.debug(f"successfully started environment {environment_name}")
-            else:
-
-                logging.debug(f"could not start environment {environment_name}")
-
-        self._setup_connection()
 
     def configure(self, *args, **kwargs) -> Mapping[str, EnvironmentSnapshot]:
         return self.reset(*args, **kwargs)
@@ -188,18 +186,25 @@ class UnityEnvironment(NetworkingEnvironment):
                 input_reactions = verify_motion_reactions(
                     input_reactions=input_reactions,
                     environment_descriptions=self.description,
+                    environment_snapshots=self._last_snapshots,
                 )
 
-        (new_states, simulator_configuration) = self._message_server.send_receive(
+        return self.send(input_reactions)
+
+    def send(self, input_reactions):
+        (new_snapshots, simulator_configuration) = self._message_server.send_receive(
             input_reactions
         )
 
-        if new_states:
-            self._last_valid_message = new_states
+        if new_snapshots:
+            self._last_snapshots = new_snapshots
         else:
             logging.warning("No valid was new_state received")
 
-        return new_states
+        if simulator_configuration:
+            self.update_interface_attributes(new_snapshots, simulator_configuration)
+
+        return new_snapshots
 
     def display(self, displayables) -> Mapping[str, EnvironmentSnapshot]:
         conf_reaction = Reaction(displayables=displayables)
@@ -218,16 +223,7 @@ class UnityEnvironment(NetworkingEnvironment):
             )
             input_reactions = [Reaction(parameters=parameters, environment_name="all")]
 
-        new_states, simulator_configuration = self._message_server.send_receive(
-            input_reactions
-        )
-
-        if new_states:
-            self._last_valid_message = new_states
-            self.update_interface_attributes(new_states, simulator_configuration)
-        else:
-            logging.warning("No valid was new_state received")
-        return new_states
+        return self.send(input_reactions)
 
     def _close(self, callback=None):
         """
@@ -259,16 +255,8 @@ class UnityEnvironment(NetworkingEnvironment):
                 terminable=False, describe=True, episode_count=False
             )
         )
-        new_states, simulator_configuration = self._message_server.send_receive(
-            [reaction]
-        )
 
-        if new_states:
-            self._last_valid_message = new_states
-            self.update_interface_attributes(new_states, simulator_configuration)
-        else:
-            logging.warning("No valid was new_state received")
-        return new_states
+        return self.send([reaction])
 
     def update_interface_attributes(self, new_states, new_simulator_configuration):
         if not self._description:

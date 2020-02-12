@@ -1,22 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.messaging.fbs.fbs_state_utilties import deserialise_space
+from typing import List
+
+from neodroid.messaging.fbs.fbs_state_utilties import (
+    deserialise_space,
+    deserialise_rang,
+)
 
 __author__ = "Christian Heider Nielsen"
+
+from neodroid.utilities.spaces.range import Range
 
 
 class Actuator(object):
     def __init__(self, actuator_name, motion_space):
         self._actuator_name = actuator_name
-        self._motion_space = motion_space
+        self._range = motion_space
 
     @property
     def actuator_name(self):
         return self._actuator_name
 
     @property
-    def motion_space(self):
-        return deserialise_space(self._motion_space)
+    def motion_space(self) -> Range:
+        return deserialise_rang(self._range)
 
     def __repr__(self):
         return (

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.environments.unity_environment.single_unity_environment import (
+from neodroid.environments.unity_environment.deprecated.single_unity_environment import (
     SingleUnityEnvironment,
 )
 

@@ -3,15 +3,15 @@
 import logging
 from typing import Sequence
 
-from neodroid.utilities.spaces import ActionSpace, signed_ternary_encoding
-from neodroid.utilities.unity_specifications import EnvironmentDescription
-from neodroid.utilities.unity_specifications.configuration import Configuration
-from neodroid.utilities.unity_specifications.motion import Motion
-from neodroid.utilities.unity_specifications import Reaction
-from neodroid.utilities.unity_specifications.reaction_parameters import (
+from neodroid.utilities.spaces import ActionSpace
+from neodroid.utilities.unity_specifications import (
+    EnvironmentDescription,
+    Configuration,
+    Motion,
+    Reaction,
     ReactionParameters,
 )
-from neodroid.utilities.transformations.action_transformations import normalise_action
+from neodroid.utilities.transformations import normalise_action
 
 __author__ = "Christian Heider Nielsen"
 

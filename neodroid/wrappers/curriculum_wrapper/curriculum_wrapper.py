@@ -3,7 +3,7 @@
 import random
 from typing import Any
 
-from neodroid.environments.unity_environment.single_unity_environment import (
+from neodroid.environments.unity_environment.deprecated.single_unity_environment import (
     SingleUnityEnvironment,
 )
 from neodroid.utilities.unity_specifications import Reaction, ReactionParameters

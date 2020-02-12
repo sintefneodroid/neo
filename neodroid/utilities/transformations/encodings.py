@@ -6,6 +6,8 @@ __author__ = "Christian Heider Nielsen"
 
 import numpy
 
+__all__ = ["signed_ternary_encoding", "to_one_hot", "agg_double_list"]
+
 
 def signed_ternary_encoding(*, size: int, index: int):
     # assert isinstance(size,(int,numpy.int64)), f'size was {type(size)}'

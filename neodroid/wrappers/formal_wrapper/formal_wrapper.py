@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.environments.unity_environment.single_unity_environment import (
+from neodroid.environments.unity_environment.deprecated.single_unity_environment import (
     SingleUnityEnvironment,
 )
 
@@ -34,7 +34,7 @@ class NeodroidFormalWrapper(SingleUnityEnvironment):
         pass
 
     def observer(self, key):
-        if self._last_valid_message:
+        if self._last_snapshots:
             return self._sensor(key)
         warn("No message available")
         return None

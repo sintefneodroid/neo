@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Any
 
-from neodroid.environments.gym_environment import NeodroidVectorGymEnvironment
-from neodroid.utilities.transformations.encodings import signed_ternary_encoding
+
+from neodroid.utilities.spaces import ActionSpace
 
 __author__ = "Christian Heider Nielsen"
 
+__all__ = ["ToIntWrapper"]
 
-class DiscreteActionEncodingWrapper(NeodroidVectorGymEnvironment):
-    def step(self, action: int = 0, **kwargs) -> Any:
-        ternary_action = signed_ternary_encoding(
-            size=self.action_space.discrete_steps // 3, index=action
-        )
-        return super().step(ternary_action, **kwargs)
+
+class ToIntWrapper:
+    def __init__(self, action_space: ActionSpace):
+        self.action_space = action_space
+
+    def sample(self):
+        return [round(a) for a in self.action_space.sample()]
+
+    def __getattr__(self, item):
+        return getattr(self.action_space, item)

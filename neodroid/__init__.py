@@ -13,7 +13,7 @@ from apppath import AppPath
 
 __project__ = "Neodroid"
 __author__ = "Christian Heider Nielsen"
-__version__ = "0.4.4"
+__version__ = "0.4.5"
 __doc__ = r"""
 Created on 27/04/2019
 
@@ -43,6 +43,8 @@ Return True if given Distribution is an editable install.
 PROJECT_NAME = __project__.lower().strip().replace(" ", "_")
 PROJECT_AUTHOR = __author__.lower().strip().replace(" ", "_")
 PROJECT_APP_PATH = AppPath(app_name=PROJECT_NAME, app_author=PROJECT_AUTHOR)
+
+DEFAULT_ENVIRONMENTS_PATH = (PROJECT_APP_PATH.user_cache / "environments").absolute()
 
 distributions = {v.key: v for v in pkg_resources.working_set}
 if PROJECT_NAME in distributions:

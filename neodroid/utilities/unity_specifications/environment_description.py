@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Any
+from typing import Any, Dict
 
+from neodroid.utilities.unity_specifications.configurable import Configurable
 from neodroid.utilities.unity_specifications.sensor import Sensor
 from neodroid.utilities.spaces import (
     ObservationSpace,
@@ -62,15 +63,15 @@ class EnvironmentDescription(object):
             return self.sensors[key]
 
     @property
-    def configurables(self):
+    def configurables(self) -> Dict[str, Configurable]:
         return deserialise_configurables(self._fbs_description)
 
-    def configurable(self, key):
+    def configurable(self, key: str) -> Configurable:
         configurables = self.configurables
         if key in configurables:
             return configurables[key]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         actors_str = "".join([str(actor.__repr__()) for actor in self.actors.values()])
 
         configurables_str = "".join(
@@ -91,28 +92,24 @@ class EnvironmentDescription(object):
             f"</EnvironmentDescription>\n"
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.__repr__()
 
-    def __unicode__(self):
+    def __unicode__(self) -> str:
         return self.__repr__()
 
     @property
-    def observation_space(self):
+    def observation_space(self) -> ObservationSpace:
         sensor_names = self.sensors.keys()
         observation_spaces = []
         observers = self.sensors.values()
         for observer in observers:
-            if isinstance(observer.space, Sequence):
-                for r in observer.space:
-                    observation_spaces.append(r)
-            else:
-                observation_spaces.append(observer.space)
+            observation_spaces.extend(observer.space)
 
         return ObservationSpace(observation_spaces, sensor_names)
 
     @property
-    def action_space(self):
+    def action_space(self) -> ActionSpace:
         motion_names = self.actors.keys()
         motion_spaces = []
         for actor in self.actors.values():
@@ -122,7 +119,7 @@ class EnvironmentDescription(object):
         return ActionSpace(motion_spaces, motion_names)
 
     @property
-    def signal_space(environment_description):
+    def signal_space(environment_description) -> SignalSpace:
         return SignalSpace((Range(min_value=-1, max_value=1, decimal_granularity=3),))
 
 

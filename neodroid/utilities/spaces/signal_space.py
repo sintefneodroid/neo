@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import math
+from typing import Sequence
 
 import numpy
 
-from neodroid.utilities.spaces import Space
-from neodroid.utilities.spaces import Range
+from neodroid.utilities.spaces.space import Space
+from neodroid.utilities.spaces.range import Range
 
 __author__ = "Christian Heider Nielsen"
 
+__all__ = ["SignalSpace"]
+
 
 class SignalSpace(Space):
-    def parse_signal_space(self, signal_range: Range, solved_threshold=math.inf):
-        self._ranges = [signal_range]
+    def __init__(self, ranges: Sequence[Range], solved_threshold=math.inf):
+        super().__init__(ranges)
+
         self.solved_threshold = solved_threshold
 
     def is_solved(self, value) -> bool:

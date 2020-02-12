@@ -97,7 +97,7 @@ class SingleUnityEnvironment(UnityEnvironment):
         return message
 
     def sensor(self, name, *args, **kwargs) -> Sensor:
-        state_env_0 = list(self._last_valid_message.values())[0]
+        state_env_0 = list(self._last_snapshots.values())[0]
         sens = state_env_0.sensor(name)
         if not sens:
             warn("Sensor was not found!")

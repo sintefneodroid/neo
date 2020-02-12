@@ -8,15 +8,12 @@ from neodroid.utilities.spaces.space import Space
 from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
 __author__ = "Christian Heider Nielsen"
+__all__ = ["ActionSpace"]
 
 import numpy
 
 
 class ActionSpace(Space):
-    def parse_action_space(self, action_spaces: Sequence[Range], motion_names):
-        self._ranges = action_spaces
-        self._names = motion_names
-
     def sample(self):
         actions = []
         for valid_input in self._ranges:

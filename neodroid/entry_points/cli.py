@@ -8,7 +8,7 @@ import fire
 from pyfiglet import Figlet
 
 import draugr
-from neodroid import DEFAULT_ENVIRONMENTS_PATH, get_version
+from neodroid import get_version, DEFAULT_ENVIRONMENTS_PATH
 from neodroid.utilities.launcher.download_utilities.download_environment import (
     available_environments,
     download_environment,
@@ -122,7 +122,7 @@ Which environments are available locally
     @staticmethod
     def ls_remote() -> None:
         """
-    Which environments are available on remote servers
+Which environments are available on remote servers
 """
         envs = available_environments()
         for k, v in envs.items():

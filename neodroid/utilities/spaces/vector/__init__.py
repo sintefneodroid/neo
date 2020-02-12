@@ -6,3 +6,5 @@ __doc__ = r"""
 
            Created on 9/5/19
            """
+
+from .vector_action_space import *

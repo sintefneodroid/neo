@@ -1,3 +1,6 @@
+__all__ = ["reverse_normalise_action", "normalise_action"]
+
+
 def reverse_normalise_action(self, action):
     act_k_inv = 2.0 / (self.action_space.high - self.action_space.low)
     act_b = (self.action_space.high + self.action_space.low) / 2.0

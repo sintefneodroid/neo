@@ -17,7 +17,7 @@ class FloatObservationWrapper(SingleUnityEnvironment):
         return self.fetch_new_frame(input_reaction, **kwargs)
 
     def observer(self, key):
-        if self._last_valid_message:
+        if self._last_snapshots:
             return self._sensor(key)
         warn("No message available")
         return None

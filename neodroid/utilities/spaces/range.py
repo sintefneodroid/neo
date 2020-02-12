@@ -6,6 +6,8 @@ import numpy
 
 __author__ = "Christian Heider Nielsen"
 
+__all__ = ["Range"]
+
 
 class Range:
     """

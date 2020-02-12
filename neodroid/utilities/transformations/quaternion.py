@@ -12,8 +12,10 @@ from typing import Iterable
 
 import numpy
 
+__all__ = ["normalise_vector", "Quaternion"]
 
-def normalize(vector: Iterable, tolerance=0.00001):
+
+def normalise_vector(vector: Iterable, tolerance=0.00001) -> numpy.ndarray:
     mag2 = sum(n * n for n in vector)
     if abs(mag2 - 1.0) > tolerance:
         mag = sqrt(mag2)
@@ -24,7 +26,7 @@ def normalize(vector: Iterable, tolerance=0.00001):
 class Quaternion:
     @staticmethod
     def from_axisangle(theta, vector):
-        vector = normalize(vector)
+        vector = normalise_vector(vector)
 
         new_quaternion = Quaternion()
         new_quaternion._axisangle_to_q(theta, vector)
@@ -87,7 +89,7 @@ class Quaternion:
         w, axis = self.components[0], self.components[1:]
         theta = acos(w) * 2.0
 
-        return theta, normalize(axis)
+        return theta, normalise_vector(axis)
 
     def tolist(self):
         return self.components.tolist()

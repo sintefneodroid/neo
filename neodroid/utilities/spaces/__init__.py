@@ -9,3 +9,4 @@ from .observation_space import *
 from .signal_space import *
 from .range import *
 from .space import *
+from .vector import *

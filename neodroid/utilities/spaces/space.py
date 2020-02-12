@@ -8,6 +8,8 @@ from neodroid.utilities.spaces.range import Range
 
 __author__ = "Christian Heider Nielsen"
 
+__all__ = ["Space"]
+
 
 class Space(object):
     """
@@ -32,49 +34,43 @@ class Space(object):
         return [r.sample() for r in self._ranges]
 
     @property
-    def low(self):
+    def low(self) -> List:
         return [motion_space.min_unnorm for motion_space in self._ranges]
 
     @property
-    def high(self):
+    def high(self) -> List:
         return [motion_space.max_unnorm for motion_space in self._ranges]
 
     @property
-    def max(self):
+    def max(self) -> List:
         return self.high
 
     @property
-    def min(self):
+    def min(self) -> List:
         return self.low
 
     @property
-    def decimal_granularity(self):
+    def decimal_granularity(self) -> List:
         return [motion_space.decimal_granularity for motion_space in self._ranges]
 
     @property
-    def is_singular(self):
+    def is_singular(self) -> bool:
         return len(self._ranges) == 1
 
     @property
-    def is_discrete(self):
-        return numpy.array(
-            [
-                a.decimal_granularity == 0
-                for a in self._ranges
-                if hasattr(a, "decimal_granularity")
-            ]
-        ).all()
+    def is_discrete(self) -> bool:
+        return numpy.array([a.decimal_granularity == 0 for a in self._ranges]).all()
 
     @property
-    def is_mixed(self):
+    def is_mixed(self) -> bool:
         return numpy.array([a.decimal_granularity != 0 for a in self._ranges]).any()
 
     @property
-    def is_continuous(self):
+    def is_continuous(self) -> bool:
         return numpy.array([a.decimal_granularity != 0 for a in self._ranges]).all()
 
     @property
-    def shape(self):
+    def shape(self) -> Tuple:
         if self.is_discrete:
             return self.discrete_steps_shape
 
@@ -89,20 +85,20 @@ class Space(object):
         return (*[r.discrete_steps for r in self._ranges],)
 
     @property
-    def continuous_shape(self):
+    def continuous_shape(self) -> Tuple:
         return (len(self._ranges),)
 
     @property
-    def is_01normalised(self):
+    def is_01normalised(self) -> numpy.ndarray:
         return numpy.array(
             [a.normalised for a in self._ranges if hasattr(a, "normalised")]
         ).all()
 
-    def clip(self, values: Sequence):
+    def clip(self, values: Sequence) -> numpy.ndarray:
         assert len(self.ranges) == len(values)
         return numpy.array([a.clip(v) for a, v in zip(self._ranges, values)])
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         names_str = "".join([str(r.__repr__()) for r in self._names])
         ranges_str = "".join([str(r.__repr__()) for r in self._ranges])
 
@@ -114,10 +110,10 @@ class Space(object):
         )
 
     @property
-    def n(self):
+    def n(self) -> int:
         return len(self._ranges)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.n
 
 

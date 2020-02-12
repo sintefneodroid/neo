@@ -1,144 +1,41 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from warnings import warn
+from typing import Iterable, Sized, Sequence, Union
 
+import numpy
 from gym import Env
 
-from neodroid.environments.unity_environment.single_unity_environment import (
-    SingleUnityEnvironment,
+from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
+    VectorEnvironmentSnapshot,
 )
 from neodroid.utilities.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
 from neodroid.utilities.unity_specifications import EnvironmentSnapshot
 
 __author__ = "Christian Heider Nielsen"
 
-import numpy
 import gym
 
+from trolls import SubProcessEnvironments, make_gym_env
+from warg import drop_unused_kws
 
-# warn(f"This module is deprecated in version {__version__}", DeprecationWarning)
-
-
-class NeodroidGymEnvironment(SingleUnityEnvironment, gym.Env):
-    def __init__(self, render_interval: int = 0, **kwargs):
-        super().__init__(**kwargs)
-        self._render_interval = render_interval
-
-    def step(self, action=None, *args, **kwargs):
-        """
-
-:param action:
-:param args:
-:param kwargs:
-:return:
-"""
-        # action = action.flatten()
-        message = super().react(action, **kwargs)
-        if message:
-            return (message.observables, message.signal, message.terminated, message)
-        raise ValueError("Did not receive any message.")
-
-    def reset(self, *args, **kwargs):
-        """
-
-:param args:
-:param kwargs:
-:return:
-"""
-        message = super().reset(*args, **kwargs)
-        if message:
-            return message.observables
-        return None
-
-    def render(self, *args, **kwargs):
-        pass
-
-    def sensor(self, key, **kwargs):
-        if self._last_valid_message:
-            return self._last_valid_message.sensor(key)
-        warn("No message available")
-        return None
-
-    def __next__(self):
-        if not self._is_connected_to_server:
-            raise ValueError("Not connected to a server.")
-        return self.step()
-
-    @property
-    def metadata(self):
-        return {"render.modes": ["rgb_array"]}
-
-    @property
-    def reward_range(self):
-        return -float("inf"), float("inf")
-
-    @property
-    def spec(self):
-        return None
+__all__ = ["NeodroidGymEnvironment"]
 
 
-class NeodroidVectorGymEnvironment(SingleUnityEnvironment, gym.Env):
-    def __init__(self, render_interval: int = 0, **kwargs):
-        super().__init__(**kwargs)
-        self._render_interval = render_interval
-
-    def step(self, action=None, *args, **kwargs):
-        """
-
-:param action:
-:param args:
-:param kwargs:
-:return:
-"""
-        # action = action.flatten()
-        message = super().react(action[0], **kwargs)
-        if message:
-            return (
-                numpy.array([message.observables]),
-                numpy.array([message.signal]),
-                numpy.array([message.terminated]),
-                numpy.array([message]),
-            )
-        raise ValueError("Did not receive any message.")
-
-    def reset(self, *args, **kwargs):
-        message = super().reset(*args, **kwargs)
-        if message:
-            return numpy.array([message.observables])
-        return None
-
-    def render(self, *args, **kwargs):
-        pass
-
-    def __next__(self):
-        if not self._is_connected_to_server:
-            raise ValueError("Not connected to a server.")
-        return self.step()
-
-    @property
-    def metadata(self):
-        return {"render.modes": ["rgb_array"]}
-
-    @property
-    def reward_range(self):
-        return -float("inf"), float("inf")
-
-    @property
-    def spec(self):
-        return None
-
-
-class NeodroidGymWrapper:
+class NeodroidGymEnvironment(object):
+    @drop_unused_kws
     def __init__(
-        self, environment: Env, environment_name: str = "", render_interval: int = 0
+        self, environment: Union[str, Env] = "", *, auto_reset_on_terminal_state=True
     ):
         """
 
 :param environment:
 """
-        self._env = environment
-        self._environment_name = environment_name
-        self._render_interval = render_interval
+        if isinstance(environment, str):
+            self._env = gym.make(environment)
+        else:
+            self._env = environment
+        self._environment_name = environment
+        self._auto_reset_on_terminal_state = auto_reset_on_terminal_state
 
     @property
     def signal_space(self) -> SignalSpace:
@@ -206,6 +103,7 @@ class NeodroidGymWrapper:
                     )
                 ]
             )
+
         else:
             space = ActionSpace(
                 [
@@ -223,33 +121,28 @@ class NeodroidGymWrapper:
     def environment_name(self):
         return self._environment_name
 
-    def step(self, *args, **kwargs):
-        raise DeprecationWarning
+    @drop_unused_kws
+    def react(self, a: Iterable) -> VectorEnvironmentSnapshot:
+        a = a[0]
+        e = EnvironmentSnapshot.from_gym(self.environment_name, *self._env.step(a))
+        return VectorEnvironmentSnapshot({self.environment_name: e})
 
-    def react(self, a, *args, **kwargs):
-
-        observables, signal, terminated, *_ = self._env.step(a, *args, **kwargs)
-
-        env_state = EnvironmentSnapshot.from_gym_like_output(
-            observables, signal, terminated, None
-        )
-
-        return env_state
-
-    def reset(self):
+    def reset(self) -> VectorEnvironmentSnapshot:
         observables = self._env.reset()
-
-        env_state = EnvironmentSnapshot.from_gym_like_output(
-            observables, 0, False, None
+        e = EnvironmentSnapshot.from_gym(
+            self.environment_name, observables, 0, False, None
         )
-
-        return env_state
+        return VectorEnvironmentSnapshot({self.environment_name: e})
 
     def __getattr__(self, item):
         return getattr(self._env, item)
 
 
 if __name__ == "__main__":
-    env = NeodroidGymWrapper(gym.make("CartPole-v1"))
+    env = NeodroidGymEnvironment("CartPole-v1")
     print(env.observation_space)
     print(env.action_space)
+    print(env.signal_space)
+    print(env.reset())
+    print(env.react([1]))
+    print(env.react(env.action_space.sample()))

@@ -23,8 +23,8 @@ class CameraObservationWrapper(SingleUnityEnvironment):
         return self.fetch_new_frame(None)
 
     def sensor(self, key: str):
-        if self._last_valid_message:
-            state_env_0 = list(self._last_valid_message.values())[0]
+        if self._last_snapshots:
+            state_env_0 = list(self._last_snapshots.values())[0]
             return extract_camera_observation(state_env_0, key)
         raise SensorNotAvailableException
 

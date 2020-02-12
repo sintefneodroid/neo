@@ -20,7 +20,7 @@ from draugr import (
 )
 from draugr.torch_utilities.images.channel_transform import rgb_drop_alpha_batch
 from neodroid.environments.unity_environment import UnityEnvironment
-from neodroid.environments.unity_environment.vector_unity_environment import (
+from neodroid.environments.unity_environment.deprecated.batched_unity_environments import (
     VectorWrapper,
 )
 from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import (
