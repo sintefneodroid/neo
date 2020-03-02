@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import functools
 import math
 
 import numpy
@@ -8,6 +9,8 @@ __author__ = "Christian Heider Nielsen"
 
 __all__ = ["Range"]
 
+from warg import cached_property
+
 
 class Range:
     """
@@ -15,7 +18,7 @@ class Range:
 """
 
     def __init__(
-        self, *, min_value=0, max_value=0, decimal_granularity=0, normalised=True
+        self, *, min_value=0, max_value=1, decimal_granularity=0, normalised=True
     ):
         """
 
@@ -50,39 +53,40 @@ Indicates whether the action space span is zero-one normalised
         return self._min_value
 
     @property
+    def max_unnorm(self) -> float:
+        return self._max_value
+
+    @cached_property
     def min(self) -> float:
         if self.normalised:
             return 0
         return self.min_unnorm
 
-    @property
-    def max_unnorm(self) -> float:
-        return self._max_value
-
-    @property
+    @cached_property
     def max(self) -> float:
         if self.normalised:
             return 1
         return self.max_unnorm
 
-    @property
+    @cached_property
     def discrete_step_size(self) -> float:
         return 1 / numpy.power(10, self.decimal_granularity)
 
-    @property
+    @cached_property
     def span_unnorm(self) -> float:
         return self.max_unnorm - self.min_unnorm
 
-    @property
+    @cached_property
     def span(self) -> float:
         if self.normalised:
             return 1
         return self.span_unnorm
 
-    @property
+    @cached_property
     def discrete_steps(self) -> int:
         return math.floor(self.span_unnorm / self.discrete_step_size) + 1
 
+    @functools.lru_cache()
     def to_dict(self) -> dict:
         """
 
@@ -110,6 +114,7 @@ type(dict)
     def clip_normalise_round(self, value):
         return self.round(self.normalise(self.clip(value)))
 
+    @functools.lru_cache()
     def __repr__(self) -> str:
         return (
             f"<Range>\n"

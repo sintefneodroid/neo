@@ -15,7 +15,6 @@ __author__ = "Christian Heider Nielsen"
 
 import gym
 
-from trolls import SubProcessEnvironments, make_gym_env
 from warg import drop_unused_kws
 
 __all__ = ["NeodroidGymEnvironment"]
@@ -60,8 +59,8 @@ class NeodroidGymEnvironment(object):
     def observation_space(self) -> ObservationSpace:
         """
 
-:return:
-"""
+        :return:
+        """
 
         if len(self._env.observation_space.shape) >= 1:
             aspc = self._env.observation_space

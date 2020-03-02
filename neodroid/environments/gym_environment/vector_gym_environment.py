@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from os import cpu_count
 from typing import Iterable, Sized, Sequence
 
 import numpy
@@ -13,8 +14,6 @@ from neodroid.utilities.unity_specifications import EnvironmentSnapshot
 
 __author__ = "Christian Heider Nielsen"
 
-import gym
-
 from trolls import SubProcessEnvironments, make_gym_env
 from warg import drop_unused_kws
 
@@ -24,7 +23,11 @@ __all__ = ["NeodroidVectorGymEnvironment"]
 class NeodroidVectorGymEnvironment(object):
     @drop_unused_kws
     def __init__(
-        self, environment_name, *, num_envs: int = 6, auto_reset_on_terminal_state=False
+        self,
+        environment_name,
+        *,
+        num_envs: int = cpu_count(),
+        auto_reset_on_terminal_state=False,
     ):
 
         self._env = SubProcessEnvironments(
@@ -119,13 +122,20 @@ class NeodroidVectorGymEnvironment(object):
 
     @drop_unused_kws
     def react(self, a: Sequence) -> VectorEnvironmentSnapshot:
+        a = self.action_space.reproject(a)
+        if self.action_space.is_discrete:
+            a = numpy.squeeze(a, -1)
         res = self._env.step(a)
 
         e = {
             f"{self.environment_name}{i}": EnvironmentSnapshot.from_gym(
-                self.environment_name, *o
+                self.environment_name,
+                self.observation_space.project(o),
+                self.signal_space.project(s),
+                t,
+                info,
             )
-            for i, o in enumerate(res)
+            for i, (o, s, t, info) in enumerate(res)
         }
         return VectorEnvironmentSnapshot(e)
 
@@ -144,18 +154,6 @@ class NeodroidVectorGymEnvironment(object):
 
     def __next__(self):
         return self.react(self.action_space.sample())
-
-    @property
-    def metadata(self) -> dict:
-        return {"render.modes": ["rgb_array"]}
-
-    @property
-    def reward_range(self) -> tuple:
-        return -float("inf"), float("inf")
-
-    @property
-    def spec(self):
-        return None
 
 
 if __name__ == "__main__":

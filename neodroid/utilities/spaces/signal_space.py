@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import functools
 import math
 from typing import Sequence
 
@@ -12,6 +13,8 @@ __author__ = "Christian Heider Nielsen"
 
 __all__ = ["SignalSpace"]
 
+from warg import cached_property
+
 
 class SignalSpace(Space):
     def __init__(self, ranges: Sequence[Range], solved_threshold=math.inf):
@@ -22,7 +25,7 @@ class SignalSpace(Space):
     def is_solved(self, value) -> bool:
         return value > self.solved_threshold
 
-    @property
+    @cached_property
     def is_sparse(self) -> bool:
         return numpy.array([a.decimal_granularity == 0 for a in self._ranges]).all()
 

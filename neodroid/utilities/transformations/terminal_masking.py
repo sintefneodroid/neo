@@ -13,6 +13,8 @@ import numpy
 import torch
 from torch import Tensor
 
+__all__ = ["non_terminal_numerical_mask", "non_terminal_mask"]
+
 
 def non_terminal_mask(terminal: Any) -> Any:
     """

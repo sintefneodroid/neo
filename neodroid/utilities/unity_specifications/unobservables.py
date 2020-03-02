@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import functools
+
 from neodroid.messaging.fbs.fbs_state_utilties import (
     deserialise_poses,
     deserialise_bodies,
@@ -8,6 +10,8 @@ from neodroid.messaging.fbs.fbs_state_utilties import (
 __author__ = "Christian Heider Nielsen"
 
 import numpy
+
+from warg import cached_property
 
 
 class Unobservables(object):
@@ -18,22 +22,23 @@ class Unobservables(object):
     def unobservables(self):
         return self._unobservables
 
-    @property
+    @cached_property
     def poses_numpy(self):
         if self._unobservables:
             return deserialise_poses(self._unobservables)
 
-    @property
+    @cached_property
     def bodies_numpy(self):
         if self._unobservables:
             return deserialise_bodies(self._unobservables)
 
-    @property
+    @cached_property
     def state_configuration(self):
         return numpy.array(
-            [self.poses_numpy().flatten(), self.bodies_numpy().flatten()]
+            [self.poses_numpy.flatten(), self.bodies_numpy.flatten()]
         ).flatten()
 
+    @functools.lru_cache()
     def __repr__(self):
         return (
             f"<Unobservables>\n"

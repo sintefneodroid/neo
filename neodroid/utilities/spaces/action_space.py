@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import functools
 import random
 from typing import Sequence
 
@@ -11,6 +12,8 @@ __author__ = "Christian Heider Nielsen"
 __all__ = ["ActionSpace"]
 
 import numpy
+
+from warg import cached_property
 
 
 class ActionSpace(Space):
@@ -53,7 +56,7 @@ class ActionSpace(Space):
             zeros[idx] = 1
         return zeros
 
-    @property
+    @cached_property
     def num_actuators(self):
         return self.n
 
@@ -86,7 +89,10 @@ if __name__ == "__main__":
     )
 
     acs = ActionSpace(
-        [Range(min_value=0, max_value=1, decimal_granularity=0, normalised=False)]
+        [
+            Range(min_value=0, max_value=1, decimal_granularity=0, normalised=False),
+            Range(min_value=0, max_value=1, decimal_granularity=0, normalised=False),
+        ]
     )
     print(
         acs,

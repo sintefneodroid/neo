@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import functools
 from typing import Callable, Sequence, Iterable, Mapping, TypeVar, List
 
 from neodroid.messaging.fbs.FBSModels.FState import FState
@@ -10,6 +11,8 @@ from neodroid.messaging.fbs.fbs_state_utilties import (
 )
 
 __author__ = "Christian Heider Nielsen"
+
+from warg import cached_property
 
 from .sensor import Sensor
 from .configurable import Configurable
@@ -28,7 +31,7 @@ class EnvironmentSnapshot(object):
         if self._fbs_state:
             return self._fbs_state.EnvironmentName()
 
-    @property
+    @cached_property
     def environment_name(self) -> str:
         if isinstance(self._environment_name, Callable):
             self._environment_name = self._environment_name()
@@ -38,7 +41,7 @@ class EnvironmentSnapshot(object):
         if self._fbs_state:
             return self._fbs_state.Signal()
 
-    @property
+    @cached_property
     def signal(self) -> float:
         if isinstance(self._signal, Callable):
             self._signal = self._signal()
@@ -48,7 +51,7 @@ class EnvironmentSnapshot(object):
         if self._fbs_state:
             return deserialise_observables(self._fbs_state)
 
-    @property
+    @cached_property
     def observables(self) -> List[float]:
         if isinstance(self._observables, Callable):
             self._observables = self._observables()
@@ -58,7 +61,7 @@ class EnvironmentSnapshot(object):
         if self._fbs_state:
             return deserialise_unobservables(self._fbs_state)
 
-    @property
+    @cached_property
     def unobservables(self) -> List[float]:
         if isinstance(self._unobservables, Callable):
             self._unobservables = self._unobservables()
@@ -68,7 +71,7 @@ class EnvironmentSnapshot(object):
         if self._fbs_state:
             return self._fbs_state.FrameNumber()
 
-    @property
+    @cached_property
     def frame_number(self) -> int:
         if isinstance(self._frame_number, Callable):
             self._frame_number = self._frame_number()
@@ -78,7 +81,7 @@ class EnvironmentSnapshot(object):
         if self._fbs_state:
             return self._fbs_state.Terminated()
 
-    @property
+    @cached_property
     def terminated(self) -> bool:
         if isinstance(self._terminated, Callable):
             self._terminated = self._terminated()
@@ -88,7 +91,7 @@ class EnvironmentSnapshot(object):
         if self._fbs_state:
             return self._fbs_state.TerminationReason().decode()
 
-    @property
+    @cached_property
     def termination_reason(self) -> str:
         if isinstance(self._termination_reason, Callable):
             self._termination_reason = self._termination_reason()
@@ -98,19 +101,19 @@ class EnvironmentSnapshot(object):
         if self._fbs_state:
             return self._fbs_state.ExtraSerialisedMessage().decode()
 
-    @property
+    @cached_property
     def extra_serialised_message(self) -> str:
         if isinstance(self._extra_serialised_message, Callable):
             self._extra_serialised_message = self._extra_serialised_message()
         return self._extra_serialised_message
 
-    @property
+    @cached_property
     def description(self) -> EnvironmentDescription:
         if self._fbs_state:
             if self._fbs_state.EnvironmentDescription():
                 return deserialise_description(self._fbs_state.EnvironmentDescription())
 
-    @property
+    @cached_property
     def sensors(self) -> Mapping[str, Sensor]:
         if self.description:
             return self.description.sensors
@@ -119,7 +122,7 @@ class EnvironmentSnapshot(object):
         if self.description:
             return self.description.sensor(key)
 
-    @property
+    @cached_property
     def configurables(self) -> Mapping[str, Configurable]:
         if self.description:
             return self.description.configurables
@@ -157,6 +160,7 @@ class EnvironmentSnapshot(object):
         encoder = json.JSONEncoder()
         return encoder.encode(self.to_dict())
 
+    @functools.lru_cache()
     def __repr__(self) -> str:
         return (
             f"<EnvironmentSnapshot>\n"

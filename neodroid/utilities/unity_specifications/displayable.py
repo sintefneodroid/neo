@@ -4,16 +4,19 @@ __author__ = "Christian Heider Nielsen"
 
 
 # @pretty_print
+from warg import cached_property
+
+
 class Displayable(object):
     def __init__(self, displayable_name, displayable_value):
         self._displayable_name = displayable_name
         self._displayable_value = displayable_value
 
-    @property
+    @cached_property
     def displayable_name(self):
         return self._displayable_name
 
-    @property
+    @cached_property
     def displayable_value(self):
         return self._displayable_value
 

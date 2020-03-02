@@ -6,6 +6,9 @@ __author__ = "Christian Heider Nielsen"
 
 import numpy
 
+__doc__ = r"""
+"""
+
 __all__ = ["signed_ternary_encoding", "to_one_hot", "agg_double_list"]
 
 

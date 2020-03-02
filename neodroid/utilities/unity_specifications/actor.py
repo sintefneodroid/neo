@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import functools
+
 from neodroid.messaging.fbs.fbs_state_utilties import deserialise_actuators
 
 __author__ = "Christian Heider Nielsen"
+
+from warg import cached_property
 
 
 class Actor(object):
     def __init__(self, flat_actor):
         self._flat_actor = flat_actor
 
-    @property
+    @cached_property
     def actor_name(self):
         return self._flat_actor.ActorName().decode()
 
-    @property
+    @cached_property
     def is_alive(self):
         return self._flat_actor.Alive()
 
@@ -21,10 +25,11 @@ class Actor(object):
         if key in deserialise_actuators(self._flat_actor):
             return deserialise_actuators(self._flat_actor)[key]
 
-    @property
+    @cached_property
     def actuators(self):
         return deserialise_actuators(self._flat_actor)
 
+    @functools.lru_cache()
     def __repr__(self):
         actuators = "".join(
             [str(actuators.__repr__()) for actuators in self.actuators.values()]

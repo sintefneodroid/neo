@@ -20,20 +20,22 @@ from neodroid.messaging.fbs.fbs_state_utilties import (
 
 __author__ = "Christian Heider Nielsen"
 
+from warg import cached_property
+
 
 class EnvironmentDescription(object):
     def __init__(self, fbs_description: FEnvironmentDescription):
         self._fbs_description = fbs_description
 
-    @property
+    @cached_property
     def objective_name(self) -> str:
         return self._fbs_description.Objective().ObjectiveName()
 
-    @property
+    @cached_property
     def max_episode_length(self) -> int:
         return self._fbs_description.Objective().MaxEpisodeLength()
 
-    @property
+    @cached_property
     def actors(self):
         return deserialise_actors(self._fbs_description)
 
@@ -42,7 +44,7 @@ class EnvironmentDescription(object):
         if key in actors:
             return actors[key]
 
-    @property
+    @cached_property
     def actuators(self):
         actuators_out = []
         for a in deserialise_actors(self._fbs_description).values():
@@ -54,7 +56,7 @@ class EnvironmentDescription(object):
         if key in actuators:
             return actuators[key]
 
-    @property
+    @cached_property
     def sensors(self):
         return deserialise_sensors(self._fbs_description)
 
@@ -62,7 +64,7 @@ class EnvironmentDescription(object):
         if key in self.sensors:
             return self.sensors[key]
 
-    @property
+    @cached_property
     def configurables(self) -> Dict[str, Configurable]:
         return deserialise_configurables(self._fbs_description)
 
@@ -98,7 +100,7 @@ class EnvironmentDescription(object):
     def __unicode__(self) -> str:
         return self.__repr__()
 
-    @property
+    @cached_property
     def observation_space(self) -> ObservationSpace:
         sensor_names = self.sensors.keys()
         observation_spaces = []
@@ -108,7 +110,7 @@ class EnvironmentDescription(object):
 
         return ObservationSpace(observation_spaces, sensor_names)
 
-    @property
+    @cached_property
     def action_space(self) -> ActionSpace:
         motion_names = self.actors.keys()
         motion_spaces = []
@@ -118,7 +120,7 @@ class EnvironmentDescription(object):
 
         return ActionSpace(motion_spaces, motion_names)
 
-    @property
+    @cached_property
     def signal_space(environment_description) -> SignalSpace:
         return SignalSpace((Range(min_value=-1, max_value=1, decimal_granularity=3),))
 

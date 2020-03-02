@@ -1,3 +1,7 @@
+__author__ = "Christian Heider Nielsen"
+__doc__ = r"""
+"""
+
 __all__ = ["reverse_normalise_action", "normalise_action"]
 
 

@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 __author__ = "Christian Heider Nielsen"
 
+from warg import cached_property
+
 
 class SimulatorConfiguration(object):
     def __init__(
@@ -24,7 +26,7 @@ class SimulatorConfiguration(object):
     def simulator_configuration(self):
         return self._fbs_configuration
 
-    @property
+    @cached_property
     def api_version(self):
         return self._api_version.decode()
 

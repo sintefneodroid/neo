@@ -15,11 +15,11 @@ from neodroid.messaging.fbs.fbs_state_utilties import (
 __author__ = "Christian Heider Nielsen"
 
 from neodroid.utilities import EnvironmentSnapshot
-from warg import IterValuesMixin, IndexDictTuplesMixin
+from warg import IterDictValuesMixin, IndexDictTuplesMixin
 
 
 @dataclass
-class VectorPoints(IterValuesMixin, IndexDictTuplesMixin):
+class VectorPoints(IterDictValuesMixin, IndexDictTuplesMixin):
     __slots__ = ["observables", "signal", "terminated"]
     observables: List[List[float]]
     signal: List[float]
@@ -34,7 +34,7 @@ class VectorPoints(IterValuesMixin, IndexDictTuplesMixin):
 
 
 @dataclass
-class NumpyVectorPoints(IterValuesMixin, IndexDictTuplesMixin):
+class NumpyVectorPoints(IterDictValuesMixin, IndexDictTuplesMixin):
     __slots__ = ["observables", "signal", "terminated"]
     observables: numpy.ndarray
     signal: numpy.ndarray

@@ -6,26 +6,33 @@ __author__ = "Christian Heider Nielsen"
 
 
 # @pretty_print
+import functools
+
+from neodroid.messaging.fbs import deserialise_space
+from warg import cached_property
+
+
 class Configurable(object):
     def __init__(self, configurable_name, configurable_value, space):
         self._configurable_name = configurable_name
         self._configurable_value = configurable_value
         self._configurable_space = space
 
-    @property
+    @cached_property
     def configurable_name(self):
         return self._configurable_name
 
-    @property
+    @cached_property
     def configurable_value(self):
         return self._configurable_value
 
-    @property
+    @cached_property
     def configurable_space(self):
         if self._configurable_space:
-            space = neodroid.messaging.deserialise_space(self._configurable_space)
+            space = deserialise_space(self._configurable_space)
             return space
 
+    @functools.lru_cache()
     def to_dict(self):
         return {
             "configurable_name": self.configurable_name,
@@ -33,6 +40,7 @@ class Configurable(object):
             "configurable_space": self.configurable_space,
         }
 
+    @functools.lru_cache()
     def __repr__(self):
         return (
             f"<Configurable>\n"

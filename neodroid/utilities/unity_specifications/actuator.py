@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import functools
 from typing import List
 
 from neodroid.messaging.fbs.fbs_state_utilties import (
@@ -10,6 +11,7 @@ from neodroid.messaging.fbs.fbs_state_utilties import (
 __author__ = "Christian Heider Nielsen"
 
 from neodroid.utilities.spaces.range import Range
+from warg import cached_property
 
 
 class Actuator(object):
@@ -17,14 +19,15 @@ class Actuator(object):
         self._actuator_name = actuator_name
         self._range = motion_space
 
-    @property
+    @cached_property
     def actuator_name(self):
         return self._actuator_name
 
-    @property
+    @cached_property
     def motion_space(self) -> Range:
         return deserialise_rang(self._range)
 
+    @functools.lru_cache()
     def __repr__(self):
         return (
             f"<Actuator>\n"
