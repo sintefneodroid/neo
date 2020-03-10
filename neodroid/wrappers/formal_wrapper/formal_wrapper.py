@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.environments.unity_environment.deprecated.single_unity_environment import (
+from neodroid.environments.droid_environment.deprecated.single_unity_environment import (
     SingleUnityEnvironment,
 )
 

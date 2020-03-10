@@ -3,21 +3,15 @@
 from itertools import count
 from typing import Union
 
-from neodroid.environments.unity_environment import UnityEnvironment
+from neodroid.environments.droid_environment import UnityEnvironment
 from neodroid.factories.configuration_reactions import verify_configuration_reactions
 from neodroid.factories.motion_reactions import verify_motion_reactions
-from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
-    VectorEnvironmentSnapshot,
-)
-from neodroid.utilities.spaces import (
+from neodroid.utilities import (
     ObservationSpace,
     SignalSpace,
-    ActionSpace,
     VectorActionSpace,
-)
-
-from neodroid.utilities.unity_specifications import (
     EnvironmentDescription,
+    VectorEnvironmentSnapshot,
     Reaction,
     ReactionParameters,
 )
@@ -96,7 +90,6 @@ class VectorUnityEnvironment(UnityEnvironment):
 
 if __name__ == "__main__":
     import argparse
-    from tqdm import tqdm
 
     parser = argparse.ArgumentParser(description="Single environment wrapper")
     parser.add_argument(

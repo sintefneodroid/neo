@@ -26,7 +26,7 @@ def connect(ip: str = "localhost", port: int = 6969, **kwargs) -> UnityEnvironme
     return _environments
 
 
-from neodroid.environments.unity_environment.deprecated.single_unity_environment import *
+from neodroid.environments.droid_environment.deprecated.single_unity_environment import *
 from .unity_environment import *
 from .vector_unity_environment import *
-from neodroid.environments.unity_environment.deprecated.batched_unity_environments import *
+from neodroid.environments.droid_environment.deprecated.batched_unity_environments import *

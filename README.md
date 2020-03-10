@@ -157,7 +157,7 @@ For citation you may use the following bibtex entry:
   - Ensure that you have disabled vsync, for bumblebee users on linux you can use ```vblank_mode=0 optirun ..```.
 - Why was this tool created, what does it serve and not just use Unity's own RL framework?
   - This project is very similar to Unity's own project [Unity Machine Learning Agents](https://github.com/Unity-Technologies/ml-agents). The most of the efforts done in this project were made prior to their announcement, [Introducing: Unity Machine Learning Agents](https://blogs.unity3d.com/2017/09/19/introducing-unity-machine-learning-agents/). The entire Neodroid platform served and still serves as a tool for academic research specific to the authors interests, hence explaining to the existence and future direction of this project.
-  
+
 ## Other Problems
 Please contact us or add an issue if have a problem that is not listed in the FAQ
 

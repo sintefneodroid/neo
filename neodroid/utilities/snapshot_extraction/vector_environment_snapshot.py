@@ -14,8 +14,11 @@ from neodroid.messaging.fbs.fbs_state_utilties import (
 
 __author__ = "Christian Heider Nielsen"
 
-from neodroid.utilities import EnvironmentSnapshot
+from neodroid.utilities import EnvironmentSnapshot, NoEnvironment
 from warg import IterDictValuesMixin, IndexDictTuplesMixin
+
+
+__all__ = ["VectorPoints", "NumpyVectorPoints", "VectorEnvironmentSnapshot"]
 
 
 @dataclass
@@ -50,7 +53,10 @@ class NumpyVectorPoints(IterDictValuesMixin, IndexDictTuplesMixin):
 
 class VectorEnvironmentSnapshot(object):
     def __init__(self, environment_snapshots: Mapping[str, EnvironmentSnapshot]):
-        self._environment_name = next(iter(environment_snapshots.keys()))
+        keys = environment_snapshots.keys()
+        if not len(keys):
+            raise NoEnvironment
+        self._environment_name = next(iter(keys))
         self._environment_snapshots = environment_snapshots
 
         o, s, t = zip(

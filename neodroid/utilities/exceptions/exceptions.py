@@ -1,3 +1,11 @@
+__all__ = [
+    "InvalidReactionException",
+    "NoEnvironment",
+    "NoUnobservablesException",
+    "SensorNotAvailableException",
+]
+
+
 class InvalidReactionException(Exception):
     """
 Raised when a supplied reaction is invalid.
@@ -7,7 +15,7 @@ Raised when a supplied reaction is invalid.
         Exception.__init__(self, msg)
 
 
-class NoEnvironmentError(Exception):
+class NoEnvironment(Exception):
     """
 
 """

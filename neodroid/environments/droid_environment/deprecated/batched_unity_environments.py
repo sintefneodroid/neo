@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import numpy
 
-from neodroid.environments.unity_environment.unity_environment import UnityEnvironment
+from neodroid.environments.droid_environment.unity_environment import UnityEnvironment
 
 __author__ = "Christian Heider Nielsen"
 __all__ = ["BatchedUnityEnvironment"]

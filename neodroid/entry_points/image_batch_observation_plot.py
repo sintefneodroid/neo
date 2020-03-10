@@ -19,8 +19,8 @@ from draugr import (
     to_tensor,
 )
 from draugr.torch_utilities.images.channel_transform import rgb_drop_alpha_batch
-from neodroid.environments.unity_environment import UnityEnvironment
-from neodroid.environments.unity_environment.deprecated.batched_unity_environments import (
+from neodroid.environments.droid_environment import UnityEnvironment
+from neodroid.environments.droid_environment.deprecated.batched_unity_environments import (
     VectorWrapper,
 )
 from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import (

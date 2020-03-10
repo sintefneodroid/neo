@@ -4,7 +4,7 @@ from collections import Sequence
 
 from flatbuffers import Builder
 
-from neodroid.exceptions.exceptions import NoUnobservablesException
+from neodroid.utilities.exceptions.exceptions import NoUnobservablesException
 
 __author__ = "Christian Heider Nielsen"
 

@@ -2,16 +2,18 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from neodroid.environments.unity_environment import UnityEnvironment
-from neodroid.exceptions.exceptions import NoEnvironmentError
+from neodroid.environments.droid_environment import UnityEnvironment
 from neodroid.factories.single.single_reaction_factory import (
     verify_configuration_reaction,
     verify_motion_reaction,
 )
-from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
-from neodroid.utilities.unity_specifications import (
+from neodroid.utilities import (
+    ActionSpace,
+    ObservationSpace,
+    SignalSpace,
     EnvironmentDescription,
     EnvironmentSnapshot,
+    NoEnvironment,
     Reaction,
     Sensor,
 )
@@ -70,7 +72,7 @@ class SingleUnityEnvironment(UnityEnvironment):
         first_environment = list(env_states.values())[0]
         if first_environment:
             return first_environment
-        raise NoEnvironmentError()
+        raise NoEnvironment()
 
     def reset(
         self, input_reaction=None, state=None, on_reset_callback=None

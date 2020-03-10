@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from draugr import generator_batch
-from neodroid.environments.unity_environment import SingleUnityEnvironment
-from neodroid.exceptions.exceptions import SensorNotAvailableException
+from neodroid.environments.droid_environment import SingleUnityEnvironment
 from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import (
     extract_neodroid_camera,
 )

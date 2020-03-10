@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.environments.unity_environment import connect
+from neodroid.environments.droid_environment import connect
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = (
