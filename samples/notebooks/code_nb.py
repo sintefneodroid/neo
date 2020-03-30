@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-__author__ = 'Christian Heider Nielsen'
-__doc__ = ''
+__author__ = "Christian Heider Nielsen"
+__doc__ = ""
 
 # %%
 import neodroid
 
 for i in range(100):
-  with neodroid.connect() as env:
-    print(i)
-    env.react()
+    with neodroid.connect() as env:
+        print(i)
+        env.react()
 
 # %% [markdown]
 # Heading 1
@@ -23,6 +23,6 @@ for i in range(100):
 # %%
 
 for i in range(100):
-  with neodroid.connect() as env:
-    print(i)
-    env.react()
+    with neodroid.connect() as env:
+        print(i)
+        env.react()

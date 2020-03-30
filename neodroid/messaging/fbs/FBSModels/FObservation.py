@@ -2,15 +2,16 @@
 
 # namespace: State
 
+
 class FObservation(object):
-  NONE = 0
-  FSingle = 1
-  FDouble = 2
-  FTriple = 3
-  FQuadruple = 4
-  FArray = 5
-  FRBObs = 6
-  FETObs = 7
-  FQTObs = 8
-  FString = 9
-  FByteArray = 10
+    NONE = 0
+    FSingle = 1
+    FDouble = 2
+    FTriple = 3
+    FQuadruple = 4
+    FArray = 5
+    FRBObs = 6
+    FETObs = 7
+    FQTObs = 8
+    FString = 9
+    FByteArray = 10

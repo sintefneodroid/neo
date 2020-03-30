@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-__author__ = 'Christian Heider Nielsen'
-
+__author__ = "Christian Heider Nielsen"
 
 from .actor import Actor
 from .actuator import Actuator
@@ -16,4 +15,3 @@ from .reaction_parameters import ReactionParameters
 from .sensor import Sensor
 from .simulator_configuration import SimulatorConfiguration
 from .unobservables import Unobservables
-from .prefabs import *

@@ -1,29 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from typing import Sequence
 
-from neodroid.utilities.spaces import Space
+from neodroid.utilities.spaces.range import Range
+from neodroid.utilities.spaces.space import Space
 
-from neodroid.utilities.spaces import Range
+__author__ = "Christian Heider Nielsen"
 
-__author__ = 'Christian Heider Nielsen'
+__all__ = ["ObservationSpace"]
 
 
 class ObservationSpace(Space):
-
-  def parse_observation_space(self, observations_spaces, sensor_names):
-    self._ranges = observations_spaces
-    self._names = sensor_names
-
-  def parse_gym_space(self, ob):
-    pass
-
-  @property
-  def space(self):
-    return self.continuous_shape
+    @property
+    def space(self) -> Sequence:
+        return self.continuous_shape
 
 
-
-
-if __name__ == '__main__':
-  acs = ObservationSpace([Range()], ())
-  print(acs)
+if __name__ == "__main__":
+    acs = ObservationSpace([Range()], ())
+    print(acs)

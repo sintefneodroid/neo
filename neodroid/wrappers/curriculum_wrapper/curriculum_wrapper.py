@@ -3,137 +3,137 @@
 import random
 from typing import Any
 
-from neodroid.environments.unity.single_unity_environment import SingleUnityEnvironment
-from neodroid.utilities.unity_specifications import Reaction, ReactionParameters
+from neodroid.environments.droid_environment.deprecated.single_unity_environment import (
+    SingleUnityEnvironment,
+)
 from neodroid.utilities.transformations.encodings import signed_ternary_encoding
+from neodroid.utilities.unity_specifications import Reaction, ReactionParameters
 
-__author__ = 'Christian Heider Nielsen'
+__author__ = "Christian Heider Nielsen"
 
 import numpy
 
 
 class NeodroidCurriculumWrapper(SingleUnityEnvironment):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
-  def __init__(self, **kwargs):
-    super().__init__(**kwargs)
+    def __next__(self):
+        if not self._is_connected_to_server:
+            raise StopIteration
+        return self.act()
 
-  def __next__(self):
-    if not self._is_connected_to_server:
-      raise StopIteration
-    return self.act()
+    def act(self, action=None, *args, **kwargs):
+        message = super().react(action[0], *args, **kwargs)
+        if message:
+            return (
+                numpy.array([message.observables]),
+                numpy.array([message.signal]),
+                numpy.array([message.terminated]),
+                message,
+            )
+        return None, None, None, None
 
-  def act(self, action=None, *args, **kwargs):
-    message = super().react(action[0], *args, **kwargs)
-    if message:
-      return (numpy.array([message.observables]),
-              numpy.array([message.signal]),
-              numpy.array([message.terminated]),
-              message,
-              )
-    return None, None, None, None
+    def configure(self, *args, **kwargs):
+        message = super().reset(*args, **kwargs)
+        if message:
+            return numpy.array([message.observables]), message
+        return None, None
 
-  def configure(self, *args, **kwargs):
-    message = super().reset(*args, **kwargs)
-    if message:
-      return numpy.array([message.observables]), message
-    return None, None
+    def generate_trajectory_from_configuration(
+        self,
+        initial_configuration,
+        motion_horizon=6,
+        non_terminable_horizon=10,
+        random_process=None,
+    ):
+        configure_params = ReactionParameters(
+            reset=True,
+            terminable=False,
+            configure=True
+            # ,episode_count=False
+        )
 
-  def generate_trajectory_from_configuration(self,
-                                             initial_configuration,
-                                             motion_horizon=6,
-                                             non_terminable_horizon=10,
-                                             random_process=None
-                                             ):
-    configure_params = ReactionParameters(reset=True,
-                                          terminable=False,
-                                          configure=True
-                                          # ,episode_count=False
-                                          )
+        conf_reaction = Reaction(
+            parameters=configure_params, configurations=initial_configuration
+        )
 
-    conf_reaction = Reaction(parameters=configure_params,
-                             configurations=initial_configuration)
+        non_terminable_params = ReactionParameters(
+            step=True,
+            terminable=False
+            #                                              ,
+            #                                              episode_count=False
+        )
 
-    non_terminable_params = ReactionParameters(step=True,
-                                               terminable=False
-                                               #                                              ,
-                                               #                                              episode_count=False
-                                               )
+        initial_states = set()
+        self.configure()
+        while len(initial_states) < 1:
+            state, _ = self.configure(conf_reaction)
+            for i in range(non_terminable_horizon):
+                state, _, terminated, info = self.act(
+                    self.action_space._sample(), parameters=non_terminable_params
+                )
 
-    initial_states = set()
-    self.configure()
-    while len(initial_states) < 1:
-      state, _ = self.configure(conf_reaction)
-      for i in range(non_terminable_horizon):
-        state, _, terminated, info = self.act(self.action_space._sample(),
-                                              parameters=non_terminable_params)
+            for i in range(motion_horizon):
+                if random_process is not None:
+                    actions = random_process.sample()
+                    actions = self.action_space.validate(actions)
+                else:
+                    actions = self.action_space._sample()
 
-      for i in range(motion_horizon):
-        if random_process is not None:
-          actions = random_process.sample()
-          actions = self.action_space.validate(actions)
-        else:
-          actions = self.action_space._sample()
+                state, _, terminated, info = self.act(actions)
 
-        state, _, terminated, info = self.act(actions)
+                if not terminated:
+                    initial_states.add(info)
+            non_terminable_horizon += 1
 
-        if not terminated:
-          initial_states.add(info)
-      non_terminable_horizon += 1
+        return initial_states
 
-    return initial_states
+    def generate_trajectory_from_state(
+        self, state, motion_horizon=10, random_process=None
+    ):
+        initial_states = set()
+        self.configure()
+        while len(initial_states) < 1:
+            s, _ = self.configure(state=state)
+            for i in range(motion_horizon):
+                if random_process is not None:
+                    actions = random_process.sample()
+                    actions = self.action_space.validate(actions)
+                else:
+                    actions = self.action_space._sample()
 
-  def generate_trajectory_from_state(self,
-                                     state,
-                                     motion_horizon=10,
-                                     random_process=None):
-    initial_states = set()
-    self.configure()
-    while len(initial_states) < 1:
-      s, _ = self.configure(state=state)
-      for i in range(motion_horizon):
-        if random_process is not None:
-          actions = random_process.sample()
-          actions = self.action_space.validate(actions)
-        else:
-          actions = self.action_space._sample()
+                s, _, terminated, info = self.act(actions)
 
-        s, _, terminated, info = self.act(actions)
+                if not terminated:
+                    initial_states.add(info)
+            motion_horizon += 1
 
-        if not terminated:
-          initial_states.add(info)
-      motion_horizon += 1
+        return initial_states
 
-    return initial_states
+    def observe(self, *args, **kwargs):
+        message = super().observe()
+        if message:
+            return (message.observables, message.signal, message.terminated, message)
+        return None, None, None, None
 
-  def observe(self, *args, **kwargs):
-    message = super().observe()
-    if message:
-      return (message.observables,
-              message.signal,
-              message.terminated,
-              message,
-              )
-    return None, None, None, None
-
-  def quit(self, *args, **kwargs):
-    return self.close(*args, **kwargs)
+    def quit(self, *args, **kwargs):
+        return self.close(*args, **kwargs)
 
 
 class BinaryActionEncodingCurriculumEnvironment(NeodroidCurriculumWrapper):
+    def step(self, action: int = 0, **kwargs) -> Any:
+        a = signed_ternary_encoding(size=self.action_space.n, index=action)
+        return super().act(a, **kwargs)
 
-  def step(self, action: int = 0, **kwargs) -> Any:
-    a = signed_ternary_encoding(size=self.action_space.n,
-                                index=action)
-    return super().act(a, **kwargs)
+    @property
+    def action_space(self):
+        self.act_spc = super().action_space
 
-  @property
-  def action_space(self):
-    self.act_spc = super().action_space
+        # self.act_spc.sample = self.signed_one_hot_sample
 
-    # self.act_spc.sample = self.signed_one_hot_sample
+        return self.act_spc
 
-    return self.act_spc
-
-  def signed_one_hot_sample(self):
-    num = self.act_spc.n
-    return random.randrange(num)
+    def signed_one_hot_sample(self):
+        num = self.act_spc.n
+        return random.randrange(num)

@@ -6,49 +6,54 @@ import flatbuffers
 
 
 class FActuator(object):
-  __slots__ = ['_tab']
+    __slots__ = ["_tab"]
 
-  @classmethod
-  def GetRootAsFActuator(cls, buf, offset):
-    n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
-    x = FActuator()
-    x.Init(buf, n + offset)
-    return x
+    @classmethod
+    def GetRootAsFActuator(cls, buf, offset):
+        n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
+        x = FActuator()
+        x.Init(buf, n + offset)
+        return x
 
-  # FActuator
-  def Init(self, buf, pos):
-    self._tab = flatbuffers.table.Table(buf, pos)
+    # FActuator
+    def Init(self, buf, pos):
+        self._tab = flatbuffers.table.Table(buf, pos)
 
-  # FActuator
-  def ActuatorName(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
-    if o != 0:
-      return self._tab.String(o + self._tab.Pos)
-    return None
+    # FActuator
+    def ActuatorName(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
+        if o != 0:
+            return self._tab.String(o + self._tab.Pos)
+        return None
 
-  # FActuator
-  def ActuatorRange(self):
-    o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
-    if o != 0:
-      x = o + self._tab.Pos
-      from .FRange import FRange
-      obj = FRange()
-      obj.Init(self._tab.Bytes, x)
-      return obj
-    return None
+    # FActuator
+    def ActuatorRange(self):
+        o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
+        if o != 0:
+            x = o + self._tab.Pos
+            from .FRange import FRange
 
-
-def FActuatorStart(builder): builder.StartObject(2)
+            obj = FRange()
+            obj.Init(self._tab.Bytes, x)
+            return obj
+        return None
 
 
-def FActuatorAddActuatorName(builder, actuatorName): builder.PrependUOffsetTRelativeSlot(0,
-                                                                                         flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                             actuatorName), 0)
+def FActuatorStart(builder):
+    builder.StartObject(2)
 
 
-def FActuatorAddActuatorRange(builder, actuatorRange): builder.PrependStructSlot(1,
-                                                                                 flatbuffers.number_types.UOffsetTFlags.py_type(
-                                                                                     actuatorRange), 0)
+def FActuatorAddActuatorName(builder, actuatorName):
+    builder.PrependUOffsetTRelativeSlot(
+        0, flatbuffers.number_types.UOffsetTFlags.py_type(actuatorName), 0
+    )
 
 
-def FActuatorEnd(builder): return builder.EndObject()
+def FActuatorAddActuatorRange(builder, actuatorRange):
+    builder.PrependStructSlot(
+        1, flatbuffers.number_types.UOffsetTFlags.py_type(actuatorRange), 0
+    )
+
+
+def FActuatorEnd(builder):
+    return builder.EndObject()
