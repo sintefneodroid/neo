@@ -7,13 +7,13 @@ from neodroid.environments.droid_environment import UnityEnvironment
 from neodroid.factories.configuration_reactions import verify_configuration_reactions
 from neodroid.factories.motion_reactions import verify_motion_reactions
 from neodroid.utilities import (
-    ObservationSpace,
-    SignalSpace,
-    VectorActionSpace,
     EnvironmentDescription,
-    VectorEnvironmentSnapshot,
+    ObservationSpace,
     Reaction,
     ReactionParameters,
+    SignalSpace,
+    VectorActionSpace,
+    VectorEnvironmentSnapshot,
 )
 
 __author__ = "Christian Heider Nielsen"

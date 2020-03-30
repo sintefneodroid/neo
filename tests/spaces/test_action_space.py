@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.utilities import SignalSpace, Range
+from neodroid.utilities import Range, SignalSpace
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = r"""

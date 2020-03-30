@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Sequence
 
 from neodroid.utilities.spaces.action_space import ActionSpace
-from neodroid.utilities.spaces.range import Range
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = r"""

@@ -3,8 +3,8 @@
 import functools
 
 from neodroid.messaging.fbs.fbs_state_utilties import (
-    deserialise_poses,
     deserialise_bodies,
+    deserialise_poses,
 )
 
 __author__ = "Christian Heider Nielsen"

@@ -7,7 +7,7 @@ __doc__ = r"""
            Created on 20/01/2020
            """
 
-from typing import Sequence, Any
+from typing import Any, Sequence
 
 import numpy
 import torch
@@ -19,9 +19,9 @@ __all__ = ["non_terminal_numerical_mask", "non_terminal_mask"]
 def non_terminal_mask(terminal: Any) -> Any:
     """
 
-  @param terminal:
-  @return:
-  """
+@param terminal:
+@return:
+"""
     if isinstance(terminal, bool):
         return not terminal
     if isinstance(terminal, (numpy.ndarray, Sequence)):
@@ -36,9 +36,9 @@ def non_terminal_mask(terminal: Any) -> Any:
 def non_terminal_numerical_mask(terminal: Any) -> Any:
     """
 
-  @param terminal:
-  @return:
-  """
+@param terminal:
+@return:
+"""
     if isinstance(terminal, bool):
         return 0 if terminal else 1
     if isinstance(terminal, tuple):

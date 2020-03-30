@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 from draugr import generator_batch
 from neodroid.environments.droid_environment import SingleUnityEnvironment
-from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import (
-    extract_neodroid_camera,
+from neodroid.utilities.snapshot_extraction.camera_extraction import (
+    extract_from_cameras,
 )
 
 __author__ = "Christian Heider Nielsen"
@@ -36,7 +36,7 @@ class MixedObservationWrapper(SingleUnityEnvironment):
 
         if message:
             return [
-                *extract_neodroid_camera(message).values(),
+                *extract_from_cameras(message).values(),
                 message.sensor("Class").value,
             ]
         return None

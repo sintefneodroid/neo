@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import functools
-import random
-from typing import Sequence
 
 from neodroid.utilities.spaces.range import Range
 from neodroid.utilities.spaces.space import Space
-from neodroid.utilities.transformations.encodings import signed_ternary_encoding
 
 __author__ = "Christian Heider Nielsen"
 __all__ = ["ActionSpace"]

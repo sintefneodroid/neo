@@ -4,23 +4,23 @@ import logging
 from pathlib import Path
 from typing import Mapping, Union
 
-from neodroid import PROJECT_APP_PATH, __version__, DEFAULT_ENVIRONMENTS_PATH
+from neodroid import DEFAULT_ENVIRONMENTS_PATH, __version__
 from neodroid.factories.motion_reactions import verify_motion_reactions
+from neodroid.utilities import launch_environment
 from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
+from neodroid.utilities.unity_specifications import Reaction
 from neodroid.utilities.unity_specifications.environment_description import (
     EnvironmentDescription,
 )
 from neodroid.utilities.unity_specifications.environment_snapshot import (
     EnvironmentSnapshot,
 )
-from neodroid.utilities.unity_specifications import Reaction
 from neodroid.utilities.unity_specifications.reaction_parameters import (
     ReactionParameters,
 )
 from neodroid.utilities.unity_specifications.simulator_configuration import (
     SimulatorConfiguration,
 )
-from neodroid.utilities import launch_environment
 
 __author__ = "Christian Heider Nielsen"
 

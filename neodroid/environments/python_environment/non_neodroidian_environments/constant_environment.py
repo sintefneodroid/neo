@@ -1,7 +1,7 @@
 import numpy
 from gym import Env
 
-from neodroid.models import Range, Space
+from neodroid.utilities import Range, Space
 
 
 class NoRenderEnv(Env):
@@ -15,7 +15,7 @@ class ConstantEnvironment(NoRenderEnv):
         ranges = [
             Range(min_value=0, max_value=1, decimal_granularity=0) for i in range(n_obs)
         ]
-        self.action_space = Space(ranges, discrete_binary=True)
+        self.action_space = Space(ranges)
         self.observation_space = Space(
             [
                 Range(min_value=0, max_value=1, decimal_granularity=0)

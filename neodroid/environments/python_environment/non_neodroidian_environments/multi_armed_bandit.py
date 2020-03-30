@@ -29,8 +29,8 @@
    = Q(a;k) + 1/(k+1) * (R(a) - Q(a;k))
 
 """
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def main():
@@ -118,9 +118,7 @@ def main():
     # =========================
     N_bandits = len(bandit_probs)
     print(
-        "Running multi-armed bandits with N_bandits = {} and agent epsilon = {}".format(
-            N_bandits, epsilon
-        )
+        f"Running multi-armed bandits with N_bandits = {N_bandits} and agent epsilon = {epsilon}"
     )
     reward_history_avg = np.zeros(N_episodes)  # reward history experiment-averaged
     action_history_sum = np.zeros((N_episodes, N_bandits))  # sum action history
@@ -132,15 +130,11 @@ def main():
         )  # perform experiment
 
         if (i + 1) % (N_experiments / 100) == 0:
-            print("[Experiment {}/{}]".format(i + 1, N_experiments))
-            print("  N_episodes = {}".format(N_episodes))
-            print("  bandit choice history = {}".format(action_history + 1))
-            print("  reward history = {}".format(reward_history))
-            print(
-                "  average reward = {}".format(
-                    np.sum(reward_history) / len(reward_history)
-                )
-            )
+            print(f"[Experiment {i + 1}/{N_experiments}]")
+            print(f"  N_episodes = {N_episodes}")
+            print(f"  bandit choice history = {action_history + 1}")
+            print(f"  reward history = {reward_history}")
+            print(f"  average reward = {np.sum(reward_history) / len(reward_history)}")
             print("")
         # Sum up experiment reward (later to be divided to represent an average)
         reward_history_avg += reward_history
@@ -149,18 +143,16 @@ def main():
             action_history_sum[j][a] += 1
 
     reward_history_avg /= np.float(N_experiments)
-    print("reward history avg = {}".format(reward_history_avg))
+    print(f"reward history avg = {reward_history_avg}")
 
     # =========================
     # Plot reward history results
     # =========================
     plt.plot(reward_history_avg)
     plt.xlabel("Episode number")
-    plt.ylabel("Rewards collected".format(N_experiments))
+    plt.ylabel(f"Rewards collected")
     plt.title(
-        "Bandit reward history averaged over {} experiments (epsilon = {})".format(
-            N_experiments, epsilon
-        )
+        f"Bandit reward history averaged over {N_experiments} experiments (epsilon = {epsilon})"
     )
     ax = plt.gca()
     ax.set_xscale("log", nonposx="clip")
@@ -181,12 +173,10 @@ def main():
             list(np.array(range(len(action_history_sum_plot))) + 1),
             action_history_sum_plot,
             linewidth=5.0,
-            label="Bandit #{}".format(i + 1),
+            label=f"Bandit #{i + 1}",
         )
     plt.title(
-        "Bandit action history averaged over {} experiments (epsilon = {})".format(
-            N_experiments, epsilon
-        ),
+        f"Bandit action history averaged over {N_experiments} experiments (epsilon = {epsilon})",
         fontsize=26,
     )
     plt.xlabel("Episode Number", fontsize=26)

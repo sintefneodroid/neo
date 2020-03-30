@@ -1,35 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import time
-from math import sqrt, floor, ceil
-from typing import Iterable
 
-import cv2
 from matplotlib import pyplot
-import numpy
-from matplotlib import animation
 
 from draugr import (
+    float_chw_to_hwc_uint_batch,
     generator_batch,
     horizontal_imshow,
-    uint_hwc_to_chw_float_batch,
-    torch_vision_normalize_chw,
-    float_chw_to_hwc_uint_batch,
     reverse_torch_vision_normalize_chw,
     to_tensor,
+    torch_vision_normalize_chw,
+    uint_hwc_to_chw_float_batch,
 )
-from draugr.torch_utilities.images.channel_transform import rgb_drop_alpha_batch
-from neodroid.environments.droid_environment import UnityEnvironment
-from neodroid.environments.droid_environment.deprecated.batched_unity_environments import (
-    VectorWrapper,
-)
-from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import (
-    extract_all_as_camera,
-)
+from draugr.numpy_utilities.channel_transform import rgb_drop_alpha_batch_nhwc
 from neodroid.wrappers.observation_wrapper.mixed_observation_wrapper import (
     MixedObservationWrapper,
 )
-from warg.named_ordered_dictionary import NOD
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = ""
@@ -44,7 +30,7 @@ def main():
 
     inputs = torch_vision_normalize_chw(
         uint_hwc_to_chw_float_batch(
-            rgb_drop_alpha_batch(to_tensor(inputs, device="cpu"))
+            rgb_drop_alpha_batch_nhwc(to_tensor(inputs, device="cpu"))
         )
     )
 

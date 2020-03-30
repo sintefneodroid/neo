@@ -101,7 +101,7 @@ def get_os(run_lambda):
         version = get_mac_version(run_lambda)
         if version is None:
             return None
-        return "Mac OSX {}".format(version)
+        return f"Mac OSX {version}"
 
     if platform == "linux":
         # Ubuntu/Debian based
@@ -175,16 +175,6 @@ def get_env_info():
     )
 
 
-env_info_fmt = r"""
-Neo version: {neo_version}
-Is a development build: {is_a_development_build}
-OS: {os}
-Python version: {python_version}
-Versions of relevant libraries:
-{pip_packages}
-""".strip()
-
-
 def pretty_str(env_info):
     def replace_all_none_objects(dct, replacement="Could not collect"):
         for key in dct.keys():
@@ -227,7 +217,16 @@ def pretty_str(env_info):
         mutable_dict["pip_packages"] = prepend(
             mutable_dict["pip_packages"], f"[{env_info.pip_version}] "
         )
-    return env_info_fmt.format(**mutable_dict)
+    return r"""
+Neo version: {neo_version}
+Is a development build: {is_a_development_build}
+OS: {os}
+Python version: {python_version}
+Versions of relevant libraries:
+{pip_packages}
+""".format(
+        **mutable_dict
+    ).strip()
 
 
 def get_pretty_env_info():

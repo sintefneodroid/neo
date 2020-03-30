@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Any, Dict
+from typing import Dict
 
-from neodroid.utilities.unity_specifications.configurable import Configurable
-from neodroid.utilities.unity_specifications.sensor import Sensor
-from neodroid.utilities.spaces import (
-    ObservationSpace,
-    Sequence,
-    ActionSpace,
-    SignalSpace,
-    Range,
-)
 from neodroid.messaging.fbs.FBSModels import FEnvironmentDescription
 from neodroid.messaging.fbs.fbs_state_utilties import (
     deserialise_actors,
-    deserialise_sensors,
     deserialise_configurables,
+    deserialise_sensors,
 )
+from neodroid.utilities.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
+from neodroid.utilities.unity_specifications.configurable import Configurable
+from neodroid.utilities.unity_specifications.sensor import Sensor
 
 __author__ = "Christian Heider Nielsen"
 

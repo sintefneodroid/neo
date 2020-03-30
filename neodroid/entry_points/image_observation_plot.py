@@ -1,21 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import time
-from math import sqrt, floor, ceil
-from typing import Iterable
+from math import ceil, floor, sqrt
 
 import cv2
-from matplotlib import pyplot
 import numpy
-from matplotlib import animation
+from matplotlib import animation, pyplot
 
 from neodroid.environments.droid_environment import UnityEnvironment
-from neodroid.environments.droid_environment.deprecated.batched_unity_environments import (
-    VectorWrapper,
-)
-from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import (
-    extract_all_as_camera,
-)
+from neodroid.utilities.snapshot_extraction.camera_extraction import extract_all_cameras
 from warg.named_ordered_dictionary import NOD
 
 __author__ = "Christian Heider Nielsen"
@@ -32,7 +25,7 @@ time_s = time.time()
 
 image_axs = NOD()
 
-env = VectorWrapper(UnityEnvironment(connect_to_running=True))
+env = UnityEnvironment(connect_to_running=True)
 fig = pyplot.figure()
 print_obs = False
 
@@ -40,15 +33,13 @@ print_obs = False
 def update_figures(i):
     global time_s, frame_i, image_axs
 
-    # sample = env.action_space.sample()
-    # obs, signal, terminated, info = env.react(sample).to_gym_like_output()
-    obs, signal, terminated, info = env.reset().to_gym_like_output()
+    info = next(iter(env.reset().values()))
     if print_obs:
         print(i)
         for obs in info.sensors.values():
             print(obs)
 
-    new_images = extract_all_as_camera(info)
+    new_images = extract_all_cameras(info)
 
     # new_images['RGB'] = new_images['RGB'] ** 0.454545
 
@@ -66,14 +57,14 @@ def update_figures(i):
         f"Update: {i}, "
         f"Frame: {frame_i}, "
         f"FPS: {fps}, "
-        f"Signal: {signal}, "
-        f"Terminated: {bool(terminated)}"
+        f"Signal: {info.signal}, "
+        f"Terminated: {bool(info.terminated)}"
     )
 
     for k, v in new_images.items():
         image_axs[k].set_data(v)
 
-    if terminated:
+    if info.terminated:
         env.reset()
         frame_i = 0
     else:
@@ -83,15 +74,13 @@ def update_figures(i):
 def main():
     global image_axs
 
-    env.reset()
-    acs = env.action_space.sample()
-    obs, rew, term, info = env.react(acs).to_gym_like_output()
+    info = next(iter(env.reset().values()))
     if print_obs:
         print(0)
         for obs in info.sensors.values():
             print(obs)
 
-    new_images = extract_all_as_camera(info)
+    new_images = extract_all_cameras(info)
 
     side = sqrt(len(new_images))
     xs = ceil(side)

@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from neodroid.messaging import ClientEvents, message_client_event
+from neodroid.messaging.message_client import MessageClient
 from neodroid.utilities.unity_specifications.environment_snapshot import (
     EnvironmentSnapshot,
 )
-from neodroid.messaging import ClientEvents, message_client_event
-from neodroid.messaging.message_client import MessageClient
 
 __author__ = "Christian Heider Nielsen"
 

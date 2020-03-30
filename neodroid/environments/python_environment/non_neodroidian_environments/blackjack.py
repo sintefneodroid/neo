@@ -31,9 +31,9 @@
  ============================================================
 
 """
-import random, pickle
+import random
+
 import numpy as np
-from collections import deque
 
 
 class BlackjackEnvironment:
@@ -222,5 +222,5 @@ if __name__ == "__main__":
 
         # Print training progress
         if (episode + 1) % int(N_episodes / 100) == 0:
-            print("[episode = {}/{}]".format(episode + 1, N_episodes))
+            print(f"[episode = {episode + 1}/{N_episodes}]")
             agent.display_greedy_policy()

@@ -31,14 +31,14 @@ class MotionViewList(GridLayout):
                     {
                         "cls": ListItemLabel,
                         "kwargs": {
-                            "text": "Middle-{0}".format(row_data["text"]),
+                            "text": f"Middle-{row_data['text']}",
                             "is_representing_cls": True,
                         },
                     },
                     {
                         "cls": ListItemLabel,
                         "kwargs": {
-                            "text": "End-{0}".format(row_data["text"]),
+                            "text": f"End-{row_data['text']}",
                             "is_representing_cls": True,
                         },
                     },
@@ -46,7 +46,7 @@ class MotionViewList(GridLayout):
                 ],
             }
 
-        item_strings = ["{0}".format(index) for index in range(100)]
+        item_strings = [f"{index}" for index in range(100)]
 
         dict_adapter = DictAdapter(
             sorted_keys=item_strings,

@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Iterable, Sized, Sequence, Union
+from typing import Iterable, Union
 
-import numpy
 from gym import Env
 
 from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
@@ -59,8 +58,8 @@ class NeodroidGymEnvironment(object):
     def observation_space(self) -> ObservationSpace:
         """
 
-        :return:
-        """
+    :return:
+    """
 
         if len(self._env.observation_space.shape) >= 1:
             aspc = self._env.observation_space

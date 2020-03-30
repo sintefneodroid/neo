@@ -7,13 +7,12 @@ __doc__ = r"""
            Created on 20/02/2020
            """
 
-import gym
-from gym import spaces
-from gym import utils
-from gym.utils import seeding
-import numpy as np
-
 import logging
+
+import gym
+import numpy as np
+from gym import spaces, utils
+from gym.utils import seeding
 
 logger = logging.getLogger(__name__)
 
@@ -21,11 +20,11 @@ logger = logging.getLogger(__name__)
 class InventoryEnv(gym.Env, utils.EzPickle):
     """Inventory control with lost sales environment
 
-  This environment corresponds to the version of the inventory control
-  with lost sales problem described in Example 1.1 in Algorithms for
-  Reinforcement Learning by Csaba Szepesvari (2010).
-  https://sites.ualberta.ca/~szepesva/RLBook.html
-  """
+This environment corresponds to the version of the inventory control
+with lost sales problem described in Example 1.1 in Algorithms for
+Reinforcement Learning by Csaba Szepesvari (2010).
+https://sites.ualberta.ca/~szepesva/RLBook.html
+"""
 
     def step(self, action):
         return self._step(action)

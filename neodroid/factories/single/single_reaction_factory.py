@@ -4,14 +4,14 @@ import logging
 from typing import Sequence
 
 from neodroid.utilities.spaces import ActionSpace
+from neodroid.utilities.transformations import normalise_action
 from neodroid.utilities.unity_specifications import (
-    EnvironmentDescription,
     Configuration,
+    EnvironmentDescription,
     Motion,
     Reaction,
     ReactionParameters,
 )
-from neodroid.utilities.transformations import normalise_action
 
 __author__ = "Christian Heider Nielsen"
 

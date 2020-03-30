@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 import argparse
 
+from ucb1 import UCB1
+
 from neodroid.utilities import Displayable
 from warg.arguments import add_bool_arg
-from ucb1 import UCB1
 
 __author__ = "Christian Heider Nielsen"
 

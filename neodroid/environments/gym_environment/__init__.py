@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from .gym_wrapper import *
 from .action_encoding import *
+from .gym_wrapper import *
 from .vector_gym_environment import *
 
 __author__ = "Christian Heider Nielsen"

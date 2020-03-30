@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from os import cpu_count
-from typing import Iterable, Sized, Sequence
+from typing import Sequence
 
 import numpy
-from gym import Env
 
 from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
     VectorEnvironmentSnapshot,

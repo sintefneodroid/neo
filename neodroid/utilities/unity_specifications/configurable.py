@@ -4,7 +4,6 @@
 
 __author__ = "Christian Heider Nielsen"
 
-
 # @pretty_print
 import functools
 

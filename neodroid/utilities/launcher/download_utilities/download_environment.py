@@ -34,16 +34,16 @@ def download_environment(
     from urllib.request import urlretrieve
     import zipfile
 
-    download_format = (
-        "https://drive.google.com/uc?export=download&confirm=-oy0&id={FILE_ID}"
-    )
-    # download_format = 'https://drive.google.com/uc?export=download&confirm=NezD&id={FILE_ID}'
     available_envs = available_environments()
     if name not in available_envs:
         raise FileNotFoundError(f"Environment with name {name} not found remotely")
     hash_id = available_envs[name]
     print(f"\nFetching {name} environment\n")
-    formatted = download_format.format(FILE_ID=hash_id)  # +'.tmp')
+
+    # download_format = 'https://drive.google.com/uc?export=download&confirm=NezD&id={FILE_ID}'
+    formatted = (
+        f"https://drive.google.com/uc?export=download&confirm=-oy0&id={hash_id}"
+    )  # +'.tmp')
 
     if not os.path.exists(path_to_executables_directory):
         os.makedirs(path_to_executables_directory)

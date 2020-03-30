@@ -1,11 +1,11 @@
-from typing import Any, Tuple, List, Dict
+from typing import Any, Dict, List, Tuple
 
 import imageio
 import numpy
 
+from neodroid.messaging.fbs import FBSModels as F
 from neodroid.utilities import unity_specifications as US
 from neodroid.utilities.spaces.range import Range
-from neodroid.messaging.fbs import FBSModels as F
 
 
 def deserialise_states(flat_states) -> Tuple[Dict[str, Any], Any]:
@@ -276,14 +276,17 @@ def deserialise_byte_array(f_obs) -> Tuple[Any, List]:
         out = numpy.frombuffer(data, dtype=numpy.uint8)
         out = out.reshape(*byte_array.ShapeAsNumpy())
         out = numpy.flipud(out)
+        # out = out[...,::-1]
     elif t == F.FByteDataType.FLOAT16:
         out = numpy.frombuffer(data, dtype=numpy.float16)
         out = out.reshape(*byte_array.ShapeAsNumpy())
         out = numpy.flipud(out)
+        # out = out[...,::-1]
     elif t == F.FByteDataType.FLOAT32:
         out = numpy.frombuffer(data, dtype=numpy.float32)
         out = out.reshape(*byte_array.ShapeAsNumpy())
         out = numpy.flipud(out)
+        # out = out[...,::-1]
     elif t == F.FByteDataType.PNG:
         out = imageio.imread(data, format="PNG-PIL")
     elif t == F.FByteDataType.JPEG:
@@ -337,9 +340,9 @@ def deserialise_actuators(flat_actor) -> Dict[str, Any]:
 def deserialise_rang(frange) -> Range:
     """
 
-  @param frange:
-  @return:
-  """
+@param frange:
+@return:
+"""
     return Range(
         decimal_granularity=frange.DecimalGranularity(),
         min_value=frange.MinValue(),
@@ -351,9 +354,9 @@ def deserialise_rang(frange) -> Range:
 def deserialise_space(flat_space: List) -> List[Range]:
     """
 
-  @param flat_space:
-  @return:
-  """
+@param flat_space:
+@return:
+"""
     ret = []
     for space in flat_space:
         if space is not None:

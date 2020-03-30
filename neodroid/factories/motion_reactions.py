@@ -4,8 +4,8 @@ import logging
 from typing import Mapping
 
 from neodroid.utilities import EnvironmentDescription, EnvironmentSnapshot
-from neodroid.utilities.unity_specifications.motion import Motion
 from neodroid.utilities.unity_specifications import Reaction
+from neodroid.utilities.unity_specifications.motion import Motion
 from neodroid.utilities.unity_specifications.reaction_parameters import (
     ReactionParameters,
 )

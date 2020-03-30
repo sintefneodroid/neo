@@ -7,7 +7,7 @@ __doc__ = r"""
            Created on 03/01/2020
            """
 
-from math import sin, cos, acos, sqrt
+from math import acos, cos, sin, sqrt
 from typing import Iterable
 
 import numpy

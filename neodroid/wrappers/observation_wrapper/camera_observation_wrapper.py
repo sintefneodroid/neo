@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 from neodroid.environments.droid_environment import SingleUnityEnvironment
 from neodroid.utilities.exceptions.exceptions import SensorNotAvailableException
-from neodroid.utilities.unity_specifications.prefabs.neodroid_camera_extraction import (
+from neodroid.utilities.snapshot_extraction.camera_extraction import (
     extract_camera_observation,
-    extract_neodroid_camera,
+    extract_from_cameras,
 )
 
 __author__ = "Christian Heider Nielsen"
@@ -38,5 +38,5 @@ class CameraObservationWrapper(SingleUnityEnvironment):
             message = self.fetch_new_frame()
 
         if message:
-            return extract_neodroid_camera(message)
+            return extract_from_cameras(message)
         return None

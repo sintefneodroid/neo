@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import functools
 import math
 from typing import Sequence
 
 import numpy
 
-from neodroid.utilities.spaces.space import Space
 from neodroid.utilities.spaces.range import Range
+from neodroid.utilities.spaces.space import Space
 
 __author__ = "Christian Heider Nielsen"
 

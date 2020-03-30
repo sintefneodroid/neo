@@ -2,10 +2,10 @@ import os.path as osp
 import tempfile
 
 import filelock
-from matplotlib import pyplot
 import numpy
 from gym import Env
 from gym.spaces import Box, Discrete
+from matplotlib import pyplot
 
 
 class MnistEnv(Env):
@@ -54,7 +54,7 @@ class MnistEnv(Env):
         return self.state[0], signal, terminal, {}
 
     def train_mode(self):
-        self.dataset = self.mnist.train
+        self.dataset = self.mnist.train_ssd
 
     def test_mode(self):
         self.dataset = self.mnist.test

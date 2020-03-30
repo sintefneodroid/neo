@@ -24,12 +24,12 @@ __all__ = ["Environment"]
 
 class Environment(ABC):
     """
-  Environment base class, this class is responsible for defining the interface of interaction. It is
-  designed with the idea for constructing/connecting, configuring, resetting and reacting with an
-  Environment as a Markov Decision Process(MDP). However can easily used as a stateless interface for
-  collecting data, eg. from a real world camera, synthetic (Maybe domain randomised images) data or
-  sampling consecutive data points (Maybe a time series of sensor values).
-  """
+Environment base class, this class is responsible for defining the interface of interaction. It is
+designed with the idea for constructing/connecting, configuring, resetting and reacting with an
+Environment as a Markov Decision Process(MDP). However can easily used as a stateless interface for
+collecting data, eg. from a real world camera, synthetic (Maybe domain randomised images) data or
+sampling consecutive data points (Maybe a time series of sensor values).
+"""
 
     @drop_unused_kws
     def __init__(

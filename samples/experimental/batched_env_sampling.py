@@ -4,7 +4,7 @@
 
 __author__ = "Christian Heider Nielsen"
 
-from neodroid.utilities import ReactionParameters, Motion, Reaction
+from neodroid.utilities import Motion, Reaction, ReactionParameters
 
 
 def construct_reactions(env, R):

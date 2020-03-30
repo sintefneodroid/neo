@@ -1,22 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Callable, Sequence, Iterable, Mapping, List, Any
+from typing import List, Mapping
 
 import numpy
 from attr import dataclass
 
-from neodroid.messaging.fbs.FBSModels.FState import FState
-from neodroid.messaging.fbs.fbs_state_utilties import (
-    deserialise_description,
-    deserialise_observables,
-    deserialise_unobservables,
-)
-
 __author__ = "Christian Heider Nielsen"
 
-from neodroid.utilities import EnvironmentSnapshot, NoEnvironment
+from neodroid.utilities import NoEnvironment
+from neodroid.utilities.unity_specifications import EnvironmentSnapshot
 from warg import IterDictValuesMixin, IndexDictTuplesMixin
-
 
 __all__ = ["VectorPoints", "NumpyVectorPoints", "VectorEnvironmentSnapshot"]
 
@@ -31,8 +24,8 @@ class VectorPoints(IterDictValuesMixin, IndexDictTuplesMixin):
     def __len__(self):
         """
 
-    @return:
-    """
+@return:
+"""
         return len(self.terminated)
 
 
@@ -46,8 +39,8 @@ class NumpyVectorPoints(IterDictValuesMixin, IndexDictTuplesMixin):
     def __len__(self):
         """
 
-    @return:
-    """
+@return:
+"""
         return len(self.terminated)
 
 

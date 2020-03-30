@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 from typing import Sequence
 
-from neodroid.utilities.spaces.space import Space
-
 from neodroid.utilities.spaces.range import Range
+from neodroid.utilities.spaces.space import Space
 
 __author__ = "Christian Heider Nielsen"
 

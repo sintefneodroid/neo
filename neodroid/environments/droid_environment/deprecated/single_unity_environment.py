@@ -9,13 +9,13 @@ from neodroid.factories.single.single_reaction_factory import (
 )
 from neodroid.utilities import (
     ActionSpace,
-    ObservationSpace,
-    SignalSpace,
     EnvironmentDescription,
     EnvironmentSnapshot,
     NoEnvironment,
+    ObservationSpace,
     Reaction,
     Sensor,
+    SignalSpace,
 )
 
 __author__ = "Christian Heider Nielsen"

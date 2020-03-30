@@ -10,7 +10,6 @@ __author__ = "Christian Heider Nielsen"
 import json
 
 from .reaction_parameters import ReactionParameters
-from .motion import Motion
 
 
 class Reaction(object):

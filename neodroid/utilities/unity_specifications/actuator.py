@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import functools
-from typing import List
 
-from neodroid.messaging.fbs.fbs_state_utilties import (
-    deserialise_space,
-    deserialise_rang,
-)
+from neodroid.messaging.fbs.fbs_state_utilties import deserialise_rang
 
 __author__ = "Christian Heider Nielsen"
 

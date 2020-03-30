@@ -2,6 +2,13 @@ import time
 
 import neodroid
 
+__all__ = [
+    "default_camera_observer_names",
+    "extract_all_cameras",
+    "extract_camera_observation",
+    "extract_from_cameras",
+]
+
 default_camera_observer_names = (
     "Material",
     "WorldSpace",
@@ -26,7 +33,7 @@ default_camera_observer_names = (
 )
 
 
-def extract_neodroid_camera(state, cameras=default_camera_observer_names):
+def extract_from_cameras(state, cameras=default_camera_observer_names):
     out = dict()
 
     for camera in cameras:
@@ -37,7 +44,7 @@ def extract_neodroid_camera(state, cameras=default_camera_observer_names):
     return out
 
 
-def extract_all_as_camera(state):
+def extract_all_cameras(state):
     out = dict()
 
     for camera in state.sensors.keys():
@@ -58,10 +65,10 @@ if isinstance(img, (bytes, BytesIO)):
 img = img#imageio.imread(img)
 else:
 if image_size[0] is None or image_size[1] is None:
-  # TODO: support inference of only one dimension based on knowns
-  symmetric_size = int(math.sqrt((len(img) / image_size[-1])))
-  image_size = list(image_size)
-  image_size[0] = image_size[1] = symmetric_size
+# TODO: support inference of only one dimension based on knowns
+symmetric_size = int(math.sqrt((len(img) / image_size[-1])))
+image_size = list(image_size)
+image_size[0] = image_size[1] = symmetric_size
 
 img = numpy.array(img, dtype=d_type).reshape(*image_size)
 img = numpy.flipud(img)
@@ -85,7 +92,7 @@ if __name__ == "__main__":
     while environments.is_connected:
         states = environments.react()
         state = next(iter(states.values()))
-        extract_all_as_camera(state)
+        extract_all_cameras(state)
         terminated = state.terminated
 
         if terminated:
