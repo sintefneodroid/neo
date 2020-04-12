@@ -107,6 +107,19 @@ def verify_motion_reaction(
 
 
 def construct_reaction_from_list(motion_list, actors, normalise, space):
+    """
+
+    @param motion_list:
+    @type motion_list:
+    @param actors:
+    @type actors:
+    @param normalise:
+    @type normalise:
+    @param space:
+    @type space:
+    @return:
+    @rtype:
+    """
     if not isinstance(motion_list, list):
         motion_list = [motion_list]
     motions = construct_motions_from_list(motion_list, actors, normalise, space)
@@ -117,6 +130,19 @@ def construct_reaction_from_list(motion_list, actors, normalise, space):
 def construct_motions_from_list(
     input_list, actors, normalise: bool, space: ActionSpace
 ):
+    """
+
+    @param input_list:
+    @type input_list:
+    @param actors:
+    @type actors:
+    @param normalise:
+    @type normalise:
+    @param space:
+    @type space:
+    @return:
+    @rtype:
+    """
     actor_actuator_tuples = [
         (actor.actor_name, actuator.actuator_name, actuator.motion_space)
         for actor in actors
@@ -152,6 +178,15 @@ def construct_motions_from_list(
 def verify_configuration_reaction(
     *, input_reaction, environment_description: EnvironmentDescription
 ):
+    """
+
+    @param input_reaction:
+    @type input_reaction:
+    @param environment_description:
+    @type environment_description:
+    @return:
+    @rtype:
+    """
     if environment_description:
         parameters = ReactionParameters(reset=True, configure=True, describe=True)
         configurables = environment_description.configurables.values()
@@ -199,6 +234,15 @@ def verify_configuration_reaction(
 
 
 def construct_configuration_reaction_from_list(configuration_list, configurables):
+    """
+
+    @param configuration_list:
+    @type configuration_list:
+    @param configurables:
+    @type configurables:
+    @return:
+    @rtype:
+    """
     configurations = construct_configurations_from_known_observables(
         configuration_list, configurables
     )
@@ -207,6 +251,15 @@ def construct_configuration_reaction_from_list(configuration_list, configurables
 
 
 def construct_configurations_from_known_observables(input_list, configurables):
+    """
+
+    @param input_list:
+    @type input_list:
+    @param configurables:
+    @type configurables:
+    @return:
+    @rtype:
+    """
     new_configurations = [
         Configuration(configurable.configurable_name, list_val)
         for (list_val, configurable) in zip(input_list, configurables)

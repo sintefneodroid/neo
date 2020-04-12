@@ -24,6 +24,10 @@ EnvironmentSnapshotType = TypeVar(
 
 
 class EnvironmentSnapshot(object):
+    """
+
+    """
+
     def __init__(self, fbs_state: FState = None):
         self._fbs_state = fbs_state
 
@@ -33,6 +37,11 @@ class EnvironmentSnapshot(object):
 
     @cached_property
     def environment_name(self) -> str:
+        """
+
+        @return:
+        @rtype:
+        """
         if isinstance(self._environment_name, Callable):
             self._environment_name = self._environment_name()
         return self._environment_name
@@ -43,6 +52,11 @@ class EnvironmentSnapshot(object):
 
     @cached_property
     def signal(self) -> float:
+        """
+
+        @return:
+        @rtype:
+        """
         if isinstance(self._signal, Callable):
             self._signal = self._signal()
         return self._signal
@@ -53,6 +67,11 @@ class EnvironmentSnapshot(object):
 
     @cached_property
     def observables(self) -> List[float]:
+        """
+
+        @return:
+        @rtype:
+        """
         if isinstance(self._observables, Callable):
             self._observables = self._observables()
         return self._observables
@@ -63,6 +82,11 @@ class EnvironmentSnapshot(object):
 
     @cached_property
     def unobservables(self) -> List[float]:
+        """
+
+        @return:
+        @rtype:
+        """
         if isinstance(self._unobservables, Callable):
             self._unobservables = self._unobservables()
         return self._unobservables
@@ -73,6 +97,11 @@ class EnvironmentSnapshot(object):
 
     @cached_property
     def frame_number(self) -> int:
+        """
+
+        @return:
+        @rtype:
+        """
         if isinstance(self._frame_number, Callable):
             self._frame_number = self._frame_number()
         return self._frame_number
@@ -83,6 +112,11 @@ class EnvironmentSnapshot(object):
 
     @cached_property
     def terminated(self) -> bool:
+        """
+
+        @return:
+        @rtype:
+        """
         if isinstance(self._terminated, Callable):
             self._terminated = self._terminated()
         return self._terminated
@@ -93,6 +127,11 @@ class EnvironmentSnapshot(object):
 
     @cached_property
     def termination_reason(self) -> str:
+        """
+
+        @return:
+        @rtype:
+        """
         if isinstance(self._termination_reason, Callable):
             self._termination_reason = self._termination_reason()
         return self._termination_reason
@@ -103,41 +142,95 @@ class EnvironmentSnapshot(object):
 
     @cached_property
     def extra_serialised_message(self) -> str:
+        """
+
+        @return:
+        @rtype:
+        """
         if isinstance(self._extra_serialised_message, Callable):
             self._extra_serialised_message = self._extra_serialised_message()
         return self._extra_serialised_message
 
     @cached_property
     def description(self) -> EnvironmentDescription:
+        """
+
+        @return:
+        @rtype:
+        """
         if self._fbs_state:
             if self._fbs_state.EnvironmentDescription():
                 return deserialise_description(self._fbs_state.EnvironmentDescription())
 
     @cached_property
     def sensors(self) -> Mapping[str, Sensor]:
+        """
+
+        @return:
+        @rtype:
+        """
         if self.description:
             return self.description.sensors
 
     def sensor(self, key) -> Sensor:
+        """
+
+        @param key:
+        @type key:
+        @return:
+        @rtype:
+        """
         if self.description:
             return self.description.sensor(key)
 
     @cached_property
     def configurables(self) -> Mapping[str, Configurable]:
+        """
+
+        @return:
+        @rtype:
+        """
         if self.description:
             return self.description.configurables
 
     def configurable(self, key) -> Configurable:
+        """
+
+        @param key:
+        @type key:
+        @return:
+        @rtype:
+        """
         if self.description:
             return self.description.configurable(key)
 
     def to_gym_like_output(self) -> tuple:
+        """
+
+        @return:
+        @rtype:
+        """
         return self.observables, self.signal, self.terminated, self
 
     @staticmethod
     def from_gym(
         environment_name, observables, signal, terminated, info=None
     ) -> EnvironmentSnapshotType:
+        """
+
+        @param environment_name:
+        @type environment_name:
+        @param observables:
+        @type observables:
+        @param signal:
+        @type signal:
+        @param terminated:
+        @type terminated:
+        @param info:
+        @type info:
+        @return:
+        @rtype:
+        """
         snapshot = EnvironmentSnapshot(None)
         snapshot._environment_name = environment_name
         snapshot._environment_name = ""
@@ -151,10 +244,20 @@ class EnvironmentSnapshot(object):
         return snapshot
 
     def to_dict(self) -> dict:
+        """
+
+        @return:
+        @rtype:
+        """
         # inspect.getmembers(a)
         return dict(vars(self))
 
     def to_json(self) -> object:
+        """
+
+        @return:
+        @rtype:
+        """
         import json
 
         encoder = json.JSONEncoder()

@@ -6,10 +6,19 @@ from neodroid.utilities import Range, Space
 
 class NoRenderEnv(Env):
     def render(self, mode="human"):
+        """
+
+        @param mode:
+        @type mode:
+        """
         pass
 
 
 class ConstantEnvironment(NoRenderEnv):
+    """
+
+    """
+
     def __init__(self, n_obs=1, n_actions=1):
 
         ranges = [
@@ -28,28 +37,66 @@ class ConstantEnvironment(NoRenderEnv):
         self.reset()
 
     def reset(self):
+        """
+
+        @return:
+        @rtype:
+        """
         self.obs = self.observation_space.sample()
         return self.obs
 
     def step(self, actions):
+        """
+
+        @param actions:
+        @type actions:
+        @return:
+        @rtype:
+        """
         if actions > 0:
             return self.obs, 0, True, {}
 
         return self.obs, 1, False, {}
 
     def act(self, a):
+        """
+
+        @param a:
+        @type a:
+        @return:
+        @rtype:
+        """
         return self.step(a)
 
     def react(self, a):
+        """
+
+        @param a:
+        @type a:
+        @return:
+        @rtype:
+        """
         return self.act(a)
 
 
 class StatefulEnvironment(ConstantEnvironment):
     def reset(self):
+        """
+
+        @return:
+        @rtype:
+        """
         self.obs = self.observation_space.sample()
         return [self.obs]
 
     def step(self, actions):
+        """
+
+        @param actions:
+        @type actions:
+        @return:
+        @rtype:
+        """
         terminated = numpy.array_equal(self.obs, [actions])
         if isinstance(terminated, numpy.ndarray):
             terminated = terminated.all()

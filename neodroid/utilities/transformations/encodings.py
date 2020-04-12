@@ -13,6 +13,15 @@ __all__ = ["signed_ternary_encoding", "to_one_hot", "agg_double_list"]
 
 
 def signed_ternary_encoding(*, size: int, index: int):
+    """
+
+    @param size:
+    @type size:
+    @param index:
+    @type index:
+    @return:
+    @rtype:
+    """
     # assert isinstance(size,(int,numpy.int64)), f'size was {type(size)}'
     # assert isinstance(index,(int,numpy.int64)), f'index was {type(index)}'
     # assert size*2 > index, f'signed size was {size*2}, index was {index}'
@@ -33,6 +42,15 @@ def signed_ternary_encoding(*, size: int, index: int):
 
 
 def to_one_hot(dims, index):
+    """
+
+    @param dims:
+    @type dims:
+    @param index:
+    @type index:
+    @return:
+    @rtype:
+    """
     if not isinstance(index, Iterable):
         index = [index]
     acs = []
@@ -49,6 +67,13 @@ def to_one_hot(dims, index):
 
 
 def agg_double_list(l):
+    """
+
+    @param l:
+    @type l:
+    @return:
+    @rtype:
+    """
     # l: [ [...], [...], [...] ]
     # l_i: result of each step in the i-th episode
     s = [numpy.sum(numpy.array(l_i), 0) for l_i in l]

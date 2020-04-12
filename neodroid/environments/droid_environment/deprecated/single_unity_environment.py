@@ -25,24 +25,44 @@ __all__ = ["SingleUnityEnvironment"]
 class SingleUnityEnvironment(UnityEnvironment):
     @property
     def description(self) -> EnvironmentDescription:
+        """
+
+        @return:
+        @rtype:
+        """
         while not self._description:
             self.describe()
         return next(iter(self._description.values()))
 
     @property
     def observation_space(self) -> ObservationSpace:
+        """
+
+        @return:
+        @rtype:
+        """
         while not self._observation_space:
             self.describe()
         return next(iter(self._observation_space.values()))
 
     @property
     def action_space(self) -> ActionSpace:
+        """
+
+        @return:
+        @rtype:
+        """
         while not self._action_space:
             self.describe()
         return next(iter(self._action_space.values()))
 
     @property
     def signal_space(self) -> SignalSpace:
+        """
+
+        @return:
+        @rtype:
+        """
         while not self._signal_space:
             self.describe()
         return next(iter(self._signal_space.values()))
@@ -55,6 +75,19 @@ class SingleUnityEnvironment(UnityEnvironment):
     def react(
         self, input_reaction=None, *, parameters=None, normalise=False, **kwargs
     ) -> EnvironmentSnapshot:
+        """
+
+        @param input_reaction:
+        @type input_reaction:
+        @param parameters:
+        @type parameters:
+        @param normalise:
+        @type normalise:
+        @param kwargs:
+        @type kwargs:
+        @return:
+        @rtype:
+        """
         if not isinstance(input_reaction, Reaction):
             input_reaction = verify_motion_reaction(
                 reaction_input=input_reaction,
@@ -77,7 +110,17 @@ class SingleUnityEnvironment(UnityEnvironment):
     def reset(
         self, input_reaction=None, state=None, on_reset_callback=None
     ) -> EnvironmentSnapshot:
+        """
 
+        @param input_reaction:
+        @type input_reaction:
+        @param state:
+        @type state:
+        @param on_reset_callback:
+        @type on_reset_callback:
+        @return:
+        @rtype:
+        """
         input_reaction = verify_configuration_reaction(
             input_reaction=input_reaction, environment_description=self.description
         )
@@ -91,14 +134,43 @@ class SingleUnityEnvironment(UnityEnvironment):
         return new_state
 
     def configure(self, *args, **kwargs) -> EnvironmentSnapshot:
+        """
+
+        @param args:
+        @type args:
+        @param kwargs:
+        @type kwargs:
+        @return:
+        @rtype:
+        """
         return self.reset(*args, **kwargs)
 
     def describe(self, *args, **kwargs) -> EnvironmentSnapshot:
+        """
+
+        @param args:
+        @type args:
+        @param kwargs:
+        @type kwargs:
+        @return:
+        @rtype:
+        """
         new_states = super().describe(*args, **kwargs)
         message = list(new_states.values())[0]
         return message
 
     def sensor(self, name, *args, **kwargs) -> Sensor:
+        """
+
+        @param name:
+        @type name:
+        @param args:
+        @type args:
+        @param kwargs:
+        @type kwargs:
+        @return:
+        @rtype:
+        """
         state_env_0 = list(self._last_snapshots.values())[0]
         sens = state_env_0.sensor(name)
         if not sens:

@@ -11,6 +11,10 @@ __all__ = ["PythonEnvironment"]
 
 
 class PythonEnvironment(Environment, ABC):
+    """
+
+    """
+
     def __init__(
         self,
         *,
@@ -36,6 +40,11 @@ class PythonEnvironment(Environment, ABC):
         return self.react()
 
     def describe(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self.react(
             parameters=M.ReactionParameters(
                 terminable=False, describe=True, episode_count=False
@@ -43,6 +52,13 @@ class PythonEnvironment(Environment, ABC):
         )
 
     def update_interface_statics(self, new_states, new_simulator_configuration):
+        """
+
+        @param new_states:
+        @type new_states:
+        @param new_simulator_configuration:
+        @type new_simulator_configuration:
+        """
         self._last_message = new_states
 
         self._simulator_configuration = new_simulator_configuration

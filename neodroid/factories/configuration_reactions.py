@@ -151,6 +151,17 @@ return Reaction(parameters=parameters)
 def construct_configuration_reaction_from_list(
     configuration_list, configurables, env_name="all"
 ):
+    """
+
+    @param configuration_list:
+    @type configuration_list:
+    @param configurables:
+    @type configurables:
+    @param env_name:
+    @type env_name:
+    @return:
+    @rtype:
+    """
     configurations = construct_configurations_from_known_observables(
         configuration_list, configurables
     )
@@ -171,6 +182,15 @@ def construct_configuration_reaction_from_list(
 
 
 def construct_configurations_from_known_observables(input_list, configurables):
+    """
+
+    @param input_list:
+    @type input_list:
+    @param configurables:
+    @type configurables:
+    @return:
+    @rtype:
+    """
     new_configurations = [
         Configuration(configurable.configurable_name, list_val)
         for (list_val, configurable) in zip(input_list, configurables)

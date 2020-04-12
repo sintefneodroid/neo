@@ -11,16 +11,30 @@ from warg import cached_property
 
 
 class Actuator(object):
+    """
+
+    """
+
     def __init__(self, actuator_name, motion_space):
         self._actuator_name = actuator_name
         self._range = motion_space
 
     @cached_property
     def actuator_name(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._actuator_name
 
     @cached_property
     def motion_space(self) -> Range:
+        """
+
+        @return:
+        @rtype:
+        """
         return deserialise_rang(self._range)
 
     @functools.lru_cache()

@@ -9,13 +9,13 @@ __author__ = "Christian Heider Nielsen"
 
 from neodroid.utilities import NoEnvironment
 from neodroid.utilities.unity_specifications import EnvironmentSnapshot
-from warg import IterDictValuesMixin, IndexDictTuplesMixin
+from warg import IterDictValuesMixin, OrdinalIndexingDictMixin
 
 __all__ = ["VectorPoints", "NumpyVectorPoints", "VectorEnvironmentSnapshot"]
 
 
 @dataclass
-class VectorPoints(IterDictValuesMixin, IndexDictTuplesMixin):
+class VectorPoints(IterDictValuesMixin, OrdinalIndexingDictMixin):
     __slots__ = ["observables", "signal", "terminated"]
     observables: List[List[float]]
     signal: List[float]
@@ -30,7 +30,7 @@ class VectorPoints(IterDictValuesMixin, IndexDictTuplesMixin):
 
 
 @dataclass
-class NumpyVectorPoints(IterDictValuesMixin, IndexDictTuplesMixin):
+class NumpyVectorPoints(IterDictValuesMixin, OrdinalIndexingDictMixin):
     __slots__ = ["observables", "signal", "terminated"]
     observables: numpy.ndarray
     signal: numpy.ndarray

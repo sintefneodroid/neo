@@ -20,6 +20,10 @@ __all__ = ["NeodroidGymEnvironment"]
 
 
 class NeodroidGymEnvironment(object):
+    """
+
+    """
+
     @drop_unused_kws
     def __init__(
         self, environment: Union[str, Env] = "", *, auto_reset_on_terminal_state=True
@@ -117,15 +121,32 @@ class NeodroidGymEnvironment(object):
 
     @property
     def environment_name(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._environment_name
 
     @drop_unused_kws
     def react(self, a: Iterable) -> VectorEnvironmentSnapshot:
+        """
+
+        @param a:
+        @type a:
+        @return:
+        @rtype:
+        """
         a = a[0]
         e = EnvironmentSnapshot.from_gym(self.environment_name, *self._env.step(a))
         return VectorEnvironmentSnapshot({self.environment_name: e})
 
     def reset(self) -> VectorEnvironmentSnapshot:
+        """
+
+        @return:
+        @rtype:
+        """
         observables = self._env.reset()
         e = EnvironmentSnapshot.from_gym(
             self.environment_name, observables, 0, False, None

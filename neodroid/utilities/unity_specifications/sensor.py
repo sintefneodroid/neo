@@ -20,18 +20,38 @@ class Sensor(object):
 
     @property
     def name(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._sensor_name
 
     @property
     def is_image(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._is_image
 
     @property
     def space(self) -> List[Range]:
+        """
+
+        @return:
+        @rtype:
+        """
         return self._range
 
     @property
     def value(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._value
 
     def __repr__(self):

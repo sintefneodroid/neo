@@ -13,6 +13,10 @@ from .reaction_parameters import ReactionParameters
 
 
 class Reaction(object):
+    """
+
+    """
+
     def __init__(
         self,
         *,
@@ -43,10 +47,20 @@ receives the same reaction.
 
     @property
     def environment_name(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._environment_name
 
     @property
     def parameters(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._parameters
 
     @parameters.setter
@@ -55,6 +69,11 @@ receives the same reaction.
 
     @property
     def motions(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._motions
 
     @motions.setter
@@ -63,6 +82,11 @@ receives the same reaction.
 
     @property
     def configurations(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._configurations
 
     @configurations.setter
@@ -71,6 +95,11 @@ receives the same reaction.
 
     @property
     def displayables(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._displayables
 
     @displayables.setter
@@ -79,6 +108,11 @@ receives the same reaction.
 
     @property
     def unobservables(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._unobservables
 
     @unobservables.setter
@@ -87,6 +121,11 @@ receives the same reaction.
 
     @property
     def serialised_message(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._serialised_message
 
     @serialised_message.setter
@@ -94,6 +133,11 @@ receives the same reaction.
         self._serialised_message = message
 
     def to_dict(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return {
             "_configurations": [
                 configuration.to_dict() for configuration in self._configurations
@@ -102,6 +146,11 @@ receives the same reaction.
         }
 
     def to_json(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return json.dumps(self.to_dict())
 
     def __repr__(self):

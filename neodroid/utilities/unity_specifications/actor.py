@@ -10,23 +10,49 @@ from warg import cached_property
 
 
 class Actor(object):
+    """
+
+    """
+
     def __init__(self, flat_actor):
         self._flat_actor = flat_actor
 
     @cached_property
     def actor_name(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._flat_actor.ActorName().decode()
 
     @cached_property
     def is_alive(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return self._flat_actor.Alive()
 
     def actuator(self, key):
+        """
+
+        @param key:
+        @type key:
+        @return:
+        @rtype:
+        """
         if key in deserialise_actuators(self._flat_actor):
             return deserialise_actuators(self._flat_actor)[key]
 
     @cached_property
     def actuators(self):
+        """
+
+        @return:
+        @rtype:
+        """
         return deserialise_actuators(self._flat_actor)
 
     @functools.lru_cache()

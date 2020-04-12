@@ -2,45 +2,18 @@
 # -*- coding: utf-8 -*-
 import logging
 from contextlib import suppress
-
+import zmq
 from neodroid.messaging.fbs import FStates, deserialise_states, serialise_reactions
 
 __author__ = "Christian Heider Nielsen"
 
-import functools
-
-import zmq
-
-REQUEST_TIMEOUT = 8000  # Milliseconds
-REQUEST_RETRIES = 9
-
-LAST_RECEIVED_FRAME_NUMBER = 0
-
-
-def singleton(cls):
-    """ Use class as singleton. """
-
-    cls.__new_original__ = cls.__new__
-
-    @functools.wraps(cls.__new__)
-    def singleton_new(cls, *args, **kw):
-        it = cls.__dict__.get("__it__")
-        if it is not None:
-            return it
-
-        cls.__it__ = it = cls.__new_original__(cls, *args, **kw)
-        it.__init_original__(*args, **kw)
-        return it
-
-    cls.__new__ = singleton_new
-    cls.__init_original__ = cls.__init__
-    cls.__init__ = object.__init__
-
-    return cls
-
 
 # @singleton
 class MessageClient(object):
+    """
+
+  """
+
     def __init__(
         self,
         tcp_address="localhost",
@@ -74,8 +47,15 @@ class MessageClient(object):
         self._poller = None
         self._request_socket = None
 
-    def open_connection(self):
+        self.REQUEST_TIMEOUT = 8000  # Milliseconds
+        self.REQUEST_RETRIES = 9
 
+        self.LAST_RECEIVED_FRAME_NUMBER = 0
+
+    def open_connection(self):
+        """
+
+    """
         self._request_socket = self._context.socket(self._socket_type)
 
         if not self._request_socket:
@@ -101,6 +81,9 @@ class MessageClient(object):
         self._poller.register(self._request_socket, zmq.POLLIN)
 
     def close_connection(self):
+        """
+
+    """
         with suppress(zmq.error.ZMQError):
             # if not self._request_socket.closed:
             self._request_socket.setsockopt(zmq.LINGER, 0)
@@ -109,10 +92,18 @@ class MessageClient(object):
             # self._poller.close()
 
     def teardown(self):
+        """
+
+    """
         self.close_connection()
         self._context.term()
 
     def build(self, single_threaded=False):
+        """
+
+    @param single_threaded:
+    @type single_threaded:
+    """
         if single_threaded:
             self._context = zmq.Context.instance()
 
@@ -124,7 +115,13 @@ class MessageClient(object):
         self.open_connection()
 
     def send_receive(self, reactions):
-        global LAST_RECEIVED_FRAME_NUMBER
+        """
+
+    @param reactions:
+    @type reactions:
+    @return:
+    @rtype:
+    """
         if self._request_socket is None:
             self.build()
 
@@ -133,10 +130,10 @@ class MessageClient(object):
             self._request_socket.send(serialised_reaction)
             self._expecting_response = True
 
-            retries_left = REQUEST_RETRIES
+            retries_left = self.REQUEST_RETRIES
 
             while self._expecting_response:
-                sockets = dict(self._poller.poll(REQUEST_TIMEOUT))
+                sockets = dict(self._poller.poll(self.REQUEST_TIMEOUT))
 
                 if sockets.get(self._request_socket):
                     response = self._request_socket.recv()
@@ -172,7 +169,7 @@ class MessageClient(object):
                     else:
                         if self._writer:
                             self._writer(
-                                f"Retrying to connect, attempt: {retries_left:d}/{REQUEST_RETRIES:d}"
+                                f"Retrying to connect, attempt: {retries_left:d}/{self.REQUEST_RETRIES:d}"
                             )
                         self.open_connection()
                         self._request_socket.send(serialised_reaction)

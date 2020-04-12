@@ -11,6 +11,9 @@ __author__ = "Christian Heider Nielsen"
 
 
 def main():
+    """
+
+    """
     parser = argparse.ArgumentParser(description="Neodroid Action Space Sampling")
     parser.add_argument(
         "--IP", "-ip", type=str, default="localhost", metavar="IP", help="IP Address"

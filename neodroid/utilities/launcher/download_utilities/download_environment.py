@@ -7,6 +7,10 @@ from tqdm import tqdm
 
 
 class DownloadProgress(tqdm):
+    """
+
+    """
+
     last_block = 0
 
     def __init__(
@@ -17,6 +21,15 @@ class DownloadProgress(tqdm):
         )
 
     def hook(self, block_num=1, block_size=1, total_size=None):
+        """
+
+        @param block_num:
+        @type block_num:
+        @param block_size:
+        @type block_size:
+        @param total_size:
+        @type total_size:
+        """
         self.total = total_size
         self.update((block_num - self.last_block) * block_size)
         self.last_block = block_num
@@ -86,6 +99,13 @@ def download_environment(
 
 
 def available_environments(repository="http://environments.neodroid.ml/ls"):
+    """
+
+    @param repository:
+    @type repository:
+    @return:
+    @rtype:
+    """
     from urllib.request import Request, urlopen
     import csv
 
