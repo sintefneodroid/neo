@@ -1,6 +1,5 @@
+devpack
 flatbuffers
-draugr
-warg
 pyfiglet
 fire
 pyzmq
