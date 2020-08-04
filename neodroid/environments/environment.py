@@ -61,64 +61,64 @@ sampling consecutive data points (Maybe a time series of sensor values).
     def environment_name(self) -> str:
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return self._environment_name
 
     @abstractmethod
     def configure(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        """
+    @param args:
+    @type args:
+    @param kwargs:
+    @type kwargs:
+    """
         raise NotImplementedError
 
     @abstractmethod
     def reset(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        """
+    @param args:
+    @type args:
+    @param kwargs:
+    @type kwargs:
+    """
         raise NotImplementedError
 
     @abstractmethod
     def react(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        """
+    @param args:
+    @type args:
+    @param kwargs:
+    @type kwargs:
+    """
         raise NotImplementedError
 
     @abstractmethod
     def display(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        """
+    @param args:
+    @type args:
+    @param kwargs:
+    @type kwargs:
+    """
         raise NotImplementedError
 
     @abstractmethod
     def describe(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        """
+    @param args:
+    @type args:
+    @param kwargs:
+    @type kwargs:
+    """
         raise NotImplementedError
 
     @property
@@ -126,7 +126,7 @@ sampling consecutive data points (Maybe a time series of sensor values).
     def description(self) -> EnvironmentDescription:
         """
 
-        """
+    """
         raise NotImplementedError
 
     @property
@@ -134,7 +134,7 @@ sampling consecutive data points (Maybe a time series of sensor values).
     def observation_space(self) -> ObservationSpace:
         """
 
-        """
+    """
         raise NotImplementedError
 
     @property
@@ -142,7 +142,7 @@ sampling consecutive data points (Maybe a time series of sensor values).
     def action_space(self) -> ActionSpace:
         """
 
-        """
+    """
         raise NotImplementedError
 
     @property
@@ -150,7 +150,7 @@ sampling consecutive data points (Maybe a time series of sensor values).
     def signal_space(self) -> SignalSpace:
         """
 
-        """
+    """
         raise NotImplementedError
 
     def __next__(self):
@@ -187,7 +187,7 @@ sampling consecutive data points (Maybe a time series of sensor values).
     def render(self):
         """
 
-        """
+    """
         pass
 
     @staticmethod

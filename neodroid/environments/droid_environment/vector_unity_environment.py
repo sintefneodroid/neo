@@ -25,7 +25,7 @@ from warg import drop_unused_kws
 class VectorUnityEnvironment(UnityEnvironment):
     """
 
-    """
+  """
 
     def __next__(self) -> Union[VectorEnvironmentSnapshot, None]:
         if not self._is_connected_to_server:
@@ -38,13 +38,13 @@ class VectorUnityEnvironment(UnityEnvironment):
     ) -> VectorEnvironmentSnapshot:
         """
 
-        @param input_reactions:
-        @type input_reactions:
-        @param parameters:
-        @type parameters:
-        @return:
-        @rtype:
-        """
+    @param input_reactions:
+    @type input_reactions:
+    @param parameters:
+    @type parameters:
+    @return:
+    @rtype:
+    """
         if not isinstance(input_reactions, Reaction):
             input_reactions = verify_motion_reactions(
                 input_reactions=input_reactions,
@@ -62,15 +62,15 @@ class VectorUnityEnvironment(UnityEnvironment):
     ) -> VectorEnvironmentSnapshot:
         """
 
-        @param input_reactions:
-        @type input_reactions:
-        @param state:
-        @type state:
-        @param on_reset_callback:
-        @type on_reset_callback:
-        @return:
-        @rtype:
-        """
+    @param input_reactions:
+    @type input_reactions:
+    @param state:
+    @type state:
+    @param on_reset_callback:
+    @type on_reset_callback:
+    @return:
+    @rtype:
+    """
         input_reactions = verify_configuration_reactions(
             input_reactions=input_reactions, environment_descriptions=self._description
         )
@@ -80,30 +80,30 @@ class VectorUnityEnvironment(UnityEnvironment):
     def configure(self, *args, **kwargs) -> VectorEnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        @return:
-        @rtype:
-        """
+    @param args:
+    @type args:
+    @param kwargs:
+    @type kwargs:
+    @return:
+    @rtype:
+    """
         return self.reset(*args, **kwargs)
 
     def describe(self) -> VectorEnvironmentSnapshot:
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return VectorEnvironmentSnapshot(super().describe())
 
     @property
     def action_space(self) -> VectorActionSpace:
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         while not self._action_space:
             self.describe()
         return VectorActionSpace(
@@ -114,9 +114,9 @@ class VectorUnityEnvironment(UnityEnvironment):
     def description(self) -> EnvironmentDescription:
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         while not self._description:
             self.describe()
         return next(iter(self._description.values()))
@@ -125,9 +125,9 @@ class VectorUnityEnvironment(UnityEnvironment):
     def observation_space(self) -> ObservationSpace:
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         while not self._observation_space:
             self.describe()
         return next(iter(self._observation_space.values()))
@@ -136,9 +136,9 @@ class VectorUnityEnvironment(UnityEnvironment):
     def signal_space(self) -> SignalSpace:
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         while not self._signal_space:
             self.describe()
         return next(iter(self._signal_space.values()))

@@ -10,7 +10,7 @@ from warg import cached_property
 class Configuration(object):
     """
 
-    """
+  """
 
     def __init__(self, configurable_name, configurable_value):
         self._configurable_name = configurable_name
@@ -20,27 +20,27 @@ class Configuration(object):
     def configurable_name(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return self._configurable_name
 
     @cached_property
     def configurable_value(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return self._configurable_value
 
     @functools.lru_cache()
     def to_dict(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return {
             "_configurable_name": self._configurable_name,
             "_configurable_value": self._configurable_value,

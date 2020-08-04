@@ -18,7 +18,7 @@ from warg import cached_property
 class SignalSpace(Space):
     """
 
-    """
+  """
 
     def __init__(self, ranges: Sequence[Range], solved_threshold=math.inf):
         super().__init__(ranges)
@@ -28,20 +28,20 @@ class SignalSpace(Space):
     def is_solved(self, value) -> bool:
         """
 
-        @param value:
-        @type value:
-        @return:
-        @rtype:
-        """
+    @param value:
+    @type value:
+    @return:
+    @rtype:
+    """
         return value > self.solved_threshold
 
     @cached_property
     def is_sparse(self) -> bool:
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return numpy.array([a.decimal_granularity == 0 for a in self._ranges]).all()
 
 

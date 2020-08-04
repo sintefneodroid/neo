@@ -94,9 +94,9 @@ if __name__ == "__main__":
                     break
 
                 state = state[list(state.keys())[0]]
-                label = state.sensor("Class").value
-                bb = state.sensor("BoundingBox").value
-                image_data = state.sensor("RGB").value
+                label = state._sensor("Class").value
+                bb = state._sensor("BoundingBox").value
+                image_data = state._sensor("RGB").value
                 dt.append((image_data, label, (256, 256, 4), json.loads(bb)))
 
         write_tf_record_file(dt, file_name=output_file_name)

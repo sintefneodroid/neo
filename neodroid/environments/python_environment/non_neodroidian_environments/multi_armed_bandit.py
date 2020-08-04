@@ -29,8 +29,8 @@
    = Q(a;k) + 1/(k+1) * (R(a) - Q(a;k))
 
 """
-from matplotlib import pyplot
 import numpy
+from matplotlib import pyplot
 
 
 def main():

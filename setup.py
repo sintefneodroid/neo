@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from typing import List, Union
+
+
 def python_version_check(major=3, minor=6):
     import sys
 
@@ -54,7 +57,7 @@ class NeodroidPackageMeta(type):
         return "text/markdown"
 
     @property
-    def packages(self):
+    def packages(self) -> List[Union[bytes, str]]:
         return find_packages(
             exclude=[
                 # 'Path/To/Exclude'
@@ -62,23 +65,23 @@ class NeodroidPackageMeta(type):
         )
 
     @property
-    def author_name(self):
+    def author_name(self) -> str:
         return author
 
     @property
-    def author_email(self):
+    def author_email(self) -> str:
         return "christian.heider@alexandra.dk"
 
     @property
-    def maintainer_name(self):
+    def maintainer_name(self) -> str:
         return self.author_name
 
     @property
-    def maintainer_email(self):
+    def maintainer_email(self) -> str:
         return self.author_email
 
     @property
-    def package_data(self):
+    def package_data(self) -> dict:
         # data = glob.glob('environments/mab/**', recursive=True)
         return {
             "neodroid": [
@@ -91,7 +94,7 @@ class NeodroidPackageMeta(type):
         }
 
     @property
-    def entry_points(self):
+    def entry_points(self) -> dict:
         return {
             "console_scripts": [
                 # "name_of_executable = module.with:function_to_execute"
@@ -151,7 +154,7 @@ class NeodroidPackageMeta(type):
         return requirements_out
 
     @property
-    def description(self):
+    def description(self) -> str:
         return (
             "Python interface for the Neodroid platform,"
             " an API for communicating with a Unity Game "
@@ -159,21 +162,21 @@ class NeodroidPackageMeta(type):
         )
 
     @property
-    def readme(self):
+    def readme(self) -> str:
         with open("README.md") as f:
             return f.read()
 
     @property
-    def keyword(self):
+    def keyword(self) -> str:
         with open("KEYWORDS.md") as f:
             return f.read()
 
     @property
-    def license(self):
+    def license(self) -> str:
         return "Apache License, Version 2.0"
 
     @property
-    def classifiers(self):
+    def classifiers(self) -> List[str]:
         return [
             "Development Status :: 4 - Beta",
             "Environment :: Console",
@@ -191,7 +194,7 @@ class NeodroidPackageMeta(type):
         ]
 
     @property
-    def version(self):
+    def version(self) -> str:
         return version
 
 

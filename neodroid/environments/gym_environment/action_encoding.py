@@ -12,7 +12,7 @@ __all__ = ["ToIntWrapper"]
 class ToIntWrapper:
     """
 
-    """
+  """
 
     def __init__(self, action_space: ActionSpace):
         self.action_space = action_space
@@ -20,9 +20,9 @@ class ToIntWrapper:
     def sample(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return [round(a) for a in self.action_space.sample()]
 
     def __getattr__(self, item):

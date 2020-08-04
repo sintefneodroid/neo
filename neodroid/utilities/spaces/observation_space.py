@@ -15,9 +15,9 @@ class ObservationSpace(Space):
     def space(self) -> Sequence:
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return self.continuous_shape
 
 

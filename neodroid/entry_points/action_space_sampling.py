@@ -9,11 +9,13 @@ from neodroid import connect
 
 __author__ = "Christian Heider Nielsen"
 
+from warg import add_bool_arg
+
 
 def main():
     """
 
-    """
+  """
     parser = argparse.ArgumentParser(description="Neodroid Action Space Sampling")
     parser.add_argument(
         "--IP", "-ip", type=str, default="localhost", metavar="IP", help="IP Address"
@@ -21,12 +23,17 @@ def main():
     parser.add_argument(
         "--PORT", "-port", type=int, default=6969, metavar="PORT", help="Port"
     )
+    add_bool_arg(parser, "benchmark")
+    add_bool_arg(parser, "verbose")
+    add_bool_arg(parser, "reset")
 
     aargs = parser.parse_args()
 
     environment = connect(ip=aargs.IP, port=aargs.PORT)
+    if aargs.reset:
+        environment.reset()
 
-    i = 0
+    i = 1
     freq = 100
     time_s = time.time()
     terminated = []
@@ -37,13 +44,20 @@ def main():
         for k, v in state.items():
             terminated.append(v.terminated)
 
-        time_now = time.time()
-        if i % freq == 0:
-            fps = 1 / (time_now - time_s)
-            print(f"fps:[{fps}]")
-
+        if aargs.benchmark:
+            time_now = time.time()
+            if i % freq == 0:
+                fps = 1 / (time_now - time_s)
+                print(f"fps:[{fps}]")
+            time_s = time_now
+        else:
+            if aargs.verbose:
+                a_out = state
+            else:
+                a = next(iter(state.values()))
+                a_out = f"frame#{a.frame_number}, {a.observables}"
+            print(f"snapshot#{i}, {a_out}")
         i += 1
-        time_s = time_now
 
         t = numpy.array(terminated)
         terminated = []

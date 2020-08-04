@@ -18,13 +18,13 @@ __all__ = ["normalise_vector", "Quaternion"]
 def normalise_vector(vector: Iterable, tolerance=0.00001) -> numpy.ndarray:
     """
 
-    @param vector:
-    @type vector:
-    @param tolerance:
-    @type tolerance:
-    @return:
-    @rtype:
-    """
+  @param vector:
+  @type vector:
+  @param tolerance:
+  @type tolerance:
+  @return:
+  @rtype:
+  """
     mag2 = sum(n * n for n in vector)
     if abs(mag2 - 1.0) > tolerance:
         mag = sqrt(mag2)
@@ -37,13 +37,13 @@ class Quaternion:
     def from_axisangle(theta, vector):
         """
 
-        @param theta:
-        @type theta:
-        @param vector:
-        @type vector:
-        @return:
-        @rtype:
-        """
+    @param theta:
+    @type theta:
+    @param vector:
+    @type vector:
+    @return:
+    @rtype:
+    """
         vector = normalise_vector(vector)
 
         new_quaternion = Quaternion()
@@ -54,11 +54,11 @@ class Quaternion:
     def from_value(value):
         """
 
-        @param value:
-        @type value:
-        @return:
-        @rtype:
-        """
+    @param value:
+    @type value:
+    @return:
+    @rtype:
+    """
         new_quaternion = Quaternion()
         new_quaternion.components = value
         return new_quaternion
@@ -104,9 +104,9 @@ class Quaternion:
     def get_conjugate(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         w, x, y, z = self.components
         result = Quaternion.from_value(numpy.array((w, -x, -y, -z)))
         return result
@@ -118,9 +118,9 @@ class Quaternion:
     def get_axisangle(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         w, axis = self.components[0], self.components[1:]
         theta = acos(w) * 2.0
 
@@ -129,17 +129,17 @@ class Quaternion:
     def tolist(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return self.components.tolist()
 
     def vector_norm(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         w, v = self.get_axisangle()
         return numpy.linalg.norm(v)
 

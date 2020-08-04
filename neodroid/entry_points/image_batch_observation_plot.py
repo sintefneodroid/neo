@@ -12,7 +12,7 @@ from draugr import (
     torch_vision_normalize_chw,
     uint_hwc_to_chw_float_batch,
 )
-from draugr.numpy_utilities.torch_channel_transform import rgb_drop_alpha_batch_nhwc
+from draugr.python_utilities.torch_channel_transform import rgb_drop_alpha_batch_nhwc
 from neodroid.wrappers.observation_wrapper.mixed_observation_wrapper import (
     MixedObservationWrapper,
 )

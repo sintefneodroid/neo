@@ -9,7 +9,7 @@ __author__ = "Christian Heider Nielsen"
 
 from neodroid.utilities import NoEnvironment
 from neodroid.utilities.unity_specifications import EnvironmentSnapshot
-from warg import IterDictValuesMixin, OrdinalIndexingDictMixin
+from warg.mixins import IterDictValuesMixin, OrdinalIndexingDictMixin
 
 __all__ = ["VectorPoints", "NumpyVectorPoints", "VectorEnvironmentSnapshot"]
 
@@ -103,3 +103,7 @@ class VectorEnvironmentSnapshot(object):
 
     def __unicode__(self):
         return self.__repr__()
+
+
+if __name__ == "__main__":
+    pass

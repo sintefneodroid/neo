@@ -22,7 +22,7 @@ __all__ = ["NeodroidVectorGymEnvironment"]
 class NeodroidVectorGymEnvironment(object):
     """
 
-    """
+  """
 
     @drop_unused_kws
     def __init__(
@@ -123,20 +123,20 @@ class NeodroidVectorGymEnvironment(object):
     def environment_name(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return self._environment_name
 
     @drop_unused_kws
     def react(self, a: Sequence) -> VectorEnvironmentSnapshot:
         """
 
-        @param a:
-        @type a:
-        @return:
-        @rtype:
-        """
+    @param a:
+    @type a:
+    @return:
+    @rtype:
+    """
         a = self.action_space.reproject(a)
         if self.action_space.is_discrete:
             a = numpy.squeeze(a, -1)
@@ -157,9 +157,9 @@ class NeodroidVectorGymEnvironment(object):
     def reset(self) -> VectorEnvironmentSnapshot:
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         res = self._env.reset()
         e = {
             f"{self.environment_name}{i}": EnvironmentSnapshot.from_gym(

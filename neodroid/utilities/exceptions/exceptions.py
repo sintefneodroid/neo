@@ -27,7 +27,7 @@ class NoEnvironment(Exception):
 class NoUnobservablesException(Exception):
     """
 
-    """
+  """
 
     def __init__(self, msg="Unoberservables not available."):
         Exception.__init__(self, msg)
@@ -36,7 +36,7 @@ class NoUnobservablesException(Exception):
 class SensorNotAvailableException(Exception):
     """
 
-    """
+  """
 
     def __init__(self, msg="Sensor not available."):
         Exception.__init__(self, msg)

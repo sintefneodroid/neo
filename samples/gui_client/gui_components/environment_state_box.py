@@ -114,19 +114,19 @@ class EnvironmentStateBox(BoxLayout):
             print("Image not valid")
 
     def update_reward_label(self, value: str):
-        self.reward_label.text = "Reward: " + value
+        self.reward_label.text = f"Reward: {value}"
 
     def update_frame_label(self, value: str):
-        self.frame_label.text = "Frame: " + value
+        self.frame_label.text = f"Frame: {value}"
 
     def update_interrupted_label(self, value: str):
-        self.interrupted_label.text = "Interrupted: " + value
+        self.interrupted_label.text = f"Interrupted: {value}"
 
     def update_energy_label(self, value: str):
-        self.energy_label.text = "Energy Spent Since Reset: " + value
+        self.energy_label.text = f"Energy Spent Since Reset: {value}"
 
     def update_time_label(self, value: str):
-        self.time_label.text = "Time Since Reset: " + value
+        self.time_label.text = f"Time Since Reset: {value}"
 
     def update_direction_label(self, value: str):
         pass

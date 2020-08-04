@@ -17,7 +17,7 @@ from warg import cached_property
 class Unobservables(object):
     """
 
-    """
+  """
 
     def __init__(self, unobservables):
         self._unobservables = unobservables
@@ -26,18 +26,18 @@ class Unobservables(object):
     def unobservables(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return self._unobservables
 
     @cached_property
     def poses_numpy(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         if self._unobservables:
             return deserialise_poses(self._unobservables)
 
@@ -45,9 +45,9 @@ class Unobservables(object):
     def bodies_numpy(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         if self._unobservables:
             return deserialise_bodies(self._unobservables)
 
@@ -55,9 +55,9 @@ class Unobservables(object):
     def state_configuration(self):
         """
 
-        @return:
-        @rtype:
-        """
+    @return:
+    @rtype:
+    """
         return numpy.array(
             [self.poses_numpy.flatten(), self.bodies_numpy.flatten()]
         ).flatten()

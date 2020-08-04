@@ -20,7 +20,7 @@ def grab_video_frame(cap):
     return cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
 
-frame_i = 0
+idependant_frame_i = 0
 time_s = time.time()
 
 image_axs = NOD()
@@ -28,14 +28,21 @@ image_axs = NOD()
 env = UnityEnvironment(connect_to_running=True)
 fig = pyplot.figure()
 print_obs = False
+reset_every_step = False
 
 
-def update_figures(i):
-    global time_s, frame_i, image_axs
+def update_figures(ith_figure_update: int):
+    global time_s, idependant_frame_i, image_axs
 
-    info = next(iter(env.reset().values()))
+    if reset_every_step:
+        info = next(iter(env.reset().values()))
+        idependant_frame_i = 0
+    else:
+        info = next(iter(env.react().values()))
+        idependant_frame_i += 1
+
     if print_obs:
-        print(i)
+        print(idependant_frame_i)
         for obs in info.sensors.values():
             print(obs)
 
@@ -53,22 +60,16 @@ def update_figures(i):
 
     time_s = time_now
 
+    for k, v in new_images.items():
+        image_axs[k].set_data(v)
+
     fig.suptitle(
-        f"Update: {i}, "
-        f"Frame: {frame_i}, "
+        f"Update: {idependant_frame_i}, "
+        f"Frame: {info.frame_number}, "
         f"FPS: {fps}, "
         f"Signal: {info.signal}, "
         f"Terminated: {bool(info.terminated)}"
     )
-
-    for k, v in new_images.items():
-        image_axs[k].set_data(v)
-
-    if info.terminated:
-        env.reset()
-        frame_i = 0
-    else:
-        frame_i += 1
 
 
 def main():

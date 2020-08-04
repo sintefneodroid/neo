@@ -72,8 +72,8 @@ class NeodroidDataGenerator(Dataset):
 
     def __getitem__(self, index):
         state = self._env.update()
-        rgb_arr = state.sensor("RGB").value
-        a_class = state.sensor("Class").value
+        rgb_arr = state._sensor("RGB").value
+        a_class = state._sensor("Class").value
 
         predictors = channel_transform(rgb_arr)
         # class_responses = to_one_hot(4, int(a_class))

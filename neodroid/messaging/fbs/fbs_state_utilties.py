@@ -3,9 +3,36 @@ from typing import Any, Dict, List, Tuple
 import imageio
 import numpy
 
-from neodroid.messaging.fbs import FBSModels as F
+from neodroid.messaging.fbs import FBSModels as F, FRange
 from neodroid.utilities import unity_specifications as US
 from neodroid.utilities.spaces.range import Range
+
+__all__ = [
+    "deserialise_body",
+    "deserialise_range",
+    "deserialise_actors",
+    "deserialise_array",
+    "deserialise_bodies",
+    "deserialise_double",
+    "deserialise_poses",
+    "deserialise_sensors",
+    "deserialise_sensor",
+    "deserialise_single",
+    "deserialise_space",
+    "deserialise_states",
+    "deserialise_string",
+    "deserialise_actuators",
+    "deserialise_byte_array",
+    "deserialise_configurables",
+    "deserialise_description",
+    "deserialise_euler_transform",
+    "deserialise_observables",
+    "deserialise_quadruple",
+    "deserialise_quaternion_transform",
+    "deserialise_rigidbody",
+    "deserialise_triple",
+    "deserialise_unobservables",
+]
 
 
 def deserialise_states(flat_states) -> Tuple[Dict[str, Any], Any]:
@@ -196,9 +223,9 @@ def deserialise_triple(f_obs) -> Tuple[List, List]:
     position = pos.Vec3()
     value = [position.X(), position.Y(), position.Z()]
     value_range = [
-        deserialise_rang(pos.XRange()),
-        deserialise_rang(pos.YRange()),
-        deserialise_rang(pos.ZRange()),
+        deserialise_range(pos.XRange()),
+        deserialise_range(pos.YRange()),
+        deserialise_range(pos.ZRange()),
     ]
     return value, value_range
 
@@ -208,7 +235,7 @@ def deserialise_double(f_obs) -> Tuple[List, List]:
     pos.Init(f_obs.Bytes, f_obs.Pos)
     position = pos.Vec2()
     value = [position.X(), position.Y()]
-    value_range = [deserialise_rang(pos.XRange()), deserialise_rang(pos.YRange())]
+    value_range = [deserialise_range(pos.XRange()), deserialise_range(pos.YRange())]
     return value, value_range
 
 
@@ -216,7 +243,7 @@ def deserialise_single(f_obs) -> Tuple[float, List]:
     val = F.FSingle()
     val.Init(f_obs.Bytes, f_obs.Pos)
     value, value_range = val.Value(), val.Range()
-    return value, [deserialise_rang(value_range)]
+    return value, [deserialise_range(value_range)]
 
 
 def deserialise_string(f_obs) -> Tuple[str, List]:
@@ -241,8 +268,8 @@ def deserialise_rigidbody(f_obs) -> Tuple[List, List]:
     ]
     return (
         data,
-        [deserialise_rang(qt.VelRange()) for _ in range(3)]
-        + [deserialise_rang(qt.AngRange()) for _ in range(3)],
+        [deserialise_range(qt.VelRange()) for _ in range(3)]
+        + [deserialise_range(qt.AngRange()) for _ in range(3)],
     )
 
 
@@ -262,8 +289,8 @@ def deserialise_quaternion_transform(f_obs) -> Tuple[List, List]:
     ]
     return (
         data,
-        [deserialise_rang(qt.PosRange()) for _ in range(3)]
-        + [deserialise_rang(qt.RotRange()) for _ in range(4)],
+        [deserialise_range(qt.PosRange()) for _ in range(3)]
+        + [deserialise_range(qt.RotRange()) for _ in range(4)],
     )
 
 
@@ -337,7 +364,7 @@ def deserialise_actuators(flat_actor) -> Dict[str, Any]:
     return actuators
 
 
-def deserialise_rang(frange) -> Range:
+def deserialise_range(frange: FRange) -> Range:
     """
 
 @param frange:
@@ -351,7 +378,7 @@ def deserialise_rang(frange) -> Range:
     )
 
 
-def deserialise_space(flat_space: List) -> List[Range]:
+def deserialise_space(flat_space: List[FRange]) -> List[Range]:
     """
 
 @param flat_space:
@@ -360,5 +387,5 @@ def deserialise_space(flat_space: List) -> List[Range]:
     ret = []
     for space in flat_space:
         if space is not None:
-            ret.append(deserialise_rang(space))
+            ret.append(deserialise_range(space))
     return ret
