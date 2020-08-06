@@ -172,7 +172,7 @@ class SingleUnityEnvironment(UnityEnvironment):
     @rtype:
     """
         state_env_0 = list(self._last_snapshots.values())[0]
-        sens = state_env_0._sensor(name)
+        sens = state_env_0.sensor(name)
         if not sens:
             warn("Sensor was not found!")
         return sens

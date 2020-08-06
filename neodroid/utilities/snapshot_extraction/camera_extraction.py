@@ -81,7 +81,7 @@ def extract_camera_observation(state, key):
   @return:
   @rtype:
   """
-    sensor = state._sensor(key)
+    sensor = state.sensor(key)
     if sensor and sensor.is_image:
         img = sensor.value
         return img

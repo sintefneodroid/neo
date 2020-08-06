@@ -153,7 +153,7 @@ class UnityEnvironment(NetworkingEnvironment):
 
         observer = []
         for e in envs:
-            o = e._sensor(name)
+            o = e.sensor(name)
             if not o:
                 logging.warning("Sensor was not found!")
             observer.append(o)

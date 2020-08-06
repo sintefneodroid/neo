@@ -85,15 +85,15 @@ def update_environment_widgets(state):
 
     try:
 
-        _gui.update_normal_image(state._sensor("NormalCamera").value)
-        _gui.update_motion_image(state._sensor("FlowCamera").value)
-        _gui.update_depth_image(state._sensor("DepthCamera").value)
-        _gui.update_segmentation_image(state._sensor("SegmentationCamera").value)
+        _gui.update_normal_image(state.sensor("NormalCamera").value)
+        _gui.update_motion_image(state.sensor("FlowCamera").value)
+        _gui.update_depth_image(state.sensor("DepthCamera").value)
+        _gui.update_segmentation_image(state.sensor("SegmentationCamera").value)
         _gui.update_instance_segmentation_image(
-            state._sensor("InstanceSegmentationCamera").value
+            state.sensor("InstanceSegmentationCamera").value
         )
-        _gui.update_rgb_image(state._sensor("RGBCamera").value)
-        _gui.update_infrared_shadow_image(state._sensor("InfraredShadowCamera").value)
+        _gui.update_rgb_image(state.sensor("RGBCamera").value)
+        _gui.update_infrared_shadow_image(state.sensor("InfraredShadowCamera").value)
     except BaseException:
         print("Failed at updating Images")
 

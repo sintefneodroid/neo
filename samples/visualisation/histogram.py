@@ -21,9 +21,9 @@ if __name__ == "__main__":
                         break
 
                     state = next(iter(state.values()))
-                    label = state._sensor("String").value
-                    ray = state._sensor("Ray").value
-                    image = state._sensor("RGB").value
+                    label = state.sensor("String").value
+                    ray = state.sensor("Ray").value
+                    image = state.sensor("RGB").value
 
                     print(label, ray, image)
 

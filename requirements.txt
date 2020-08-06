@@ -8,6 +8,4 @@ Pillow
 tqdm
 matplotlib
 cloudpickle
-imageio
-pip
-fire
+
