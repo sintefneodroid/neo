@@ -30,6 +30,7 @@ with open(
     author = re.search(rf"__author__ = {str_reg_exp}", content, re.M).group(1)
 __author__ = author
 
+__all__ = ['NeodroidPackage']
 
 class NeodroidPackageMeta(type):
     @property
@@ -83,8 +84,11 @@ class NeodroidPackageMeta(type):
     @property
     def package_data(self) -> dict:
         # data = glob.glob('environments/mab/**', recursive=True)
+        emds = [str(p) for p in pathlib.Path(__file__).parent.rglob('.md')]
+
         return {
             "neodroid": [
+                *emds
                 # *data
                 # 'environments/mab/**',
                 # 'environments/mab/**_Data/*',

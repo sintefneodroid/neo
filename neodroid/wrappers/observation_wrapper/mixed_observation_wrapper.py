@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from draugr import generator_batch
+from draugr import batch_generator
 from neodroid.environments.droid_environment import SingleUnityEnvironment
 from neodroid.utilities.snapshot_extraction.camera_extraction import (
     extract_from_cameras,
@@ -44,7 +44,7 @@ class MixedObservationWrapper(SingleUnityEnvironment):
 
 if __name__ == "__main__":
     env = MixedObservationWrapper()
-    data_iter = generator_batch(iter(env), 3)
+    data_iter = batch_generator(iter(env), 3)
 
     for a in data_iter:
         print(a)

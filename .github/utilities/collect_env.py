@@ -6,9 +6,9 @@ import subprocess
 import sys
 from collections import namedtuple
 
-from package import NeodroidPackage
+from setup import NeodroidPackage
 
-import neodroid as neo
+import neodroid
 
 PY3 = sys.version_info >= (3, 0)
 
@@ -166,8 +166,8 @@ def get_env_info():
     pip_version, pip_list_output = get_pip_packages(run_lambda)
 
     return SystemEnv(
-        neo_version=neo.__version__,
-        is_a_development_build=neo.version.DEVELOP,
+        neo_version=neodroid.__version__,
+        is_a_development_build=neodroid.IS_DEVELOP,
         python_version=f"{sys.version_info[0]}.{sys.version_info[1]}",
         pip_version=pip_version,
         pip_packages=pip_list_output,

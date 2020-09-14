@@ -5,5 +5,5 @@
 # recursive-include neodroid/environments UnityPlayer.dll
 include neodroid/environments .trackfolder
 
-include LICENSE.md README.md KEYWORDS.md
+global-include *.md
 include requirements*.txt
