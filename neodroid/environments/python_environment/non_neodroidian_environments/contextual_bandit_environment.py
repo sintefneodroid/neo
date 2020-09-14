@@ -6,6 +6,10 @@ import numpy
 
 
 class ContextualBanditEnvironment(object):
+    """
+
+  """
+
     def __init__(self, seed=0):
 
         self.np_random = numpy.random.RandomState()
@@ -18,13 +22,30 @@ class ContextualBanditEnvironment(object):
         self.num_actions = self.bandits.shape[1]
 
     def update_state(self):
+        """
+
+    @return:
+    @rtype:
+    """
         self.state = self.np_random.randint(0, len(self.bandits))
         return self.state
 
     def reset(self):
+        """
+
+    @return:
+    @rtype:
+    """
         return self.update_state()
 
     def act(self, action):
+        """
+
+    @param action:
+    @type action:
+    @return:
+    @rtype:
+    """
         threshold = self.bandits[self.state, action]
         result = self.np_random.random_sample()
         if result > threshold:

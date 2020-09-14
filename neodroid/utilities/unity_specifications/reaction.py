@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from collections import Sequence
-from typing import Sized
+from typing import Dict, List, Optional, Sequence
 
 from neodroid.utilities.unity_specifications.unobservables import Unobservables
 
@@ -13,11 +12,15 @@ from .reaction_parameters import ReactionParameters
 
 
 class Reaction(object):
+    """
+
+  """
+
     def __init__(
         self,
         *,
         parameters: ReactionParameters = None,
-        motions: Sized = (),
+        motions: Sequence = (),
         configurations: Sequence = (),
         unobservables: Unobservables = None,
         displayables: Sequence = None,
@@ -42,58 +45,98 @@ receives the same reaction.
         self._displayables = displayables
 
     @property
-    def environment_name(self):
+    def environment_name(self) -> str:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._environment_name
 
     @property
-    def parameters(self):
+    def parameters(self) -> ReactionParameters:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._parameters
 
     @parameters.setter
-    def parameters(self, parameters):
+    def parameters(self, parameters: ReactionParameters) -> None:
         self._parameters = parameters
 
     @property
-    def motions(self):
+    def motions(self) -> Sequence:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._motions
 
     @motions.setter
-    def motions(self, motions):
+    def motions(self, motions: Sequence) -> None:
         self._motions = motions
 
     @property
-    def configurations(self):
+    def configurations(self) -> Sequence:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._configurations
 
     @configurations.setter
-    def configurations(self, configurations):
+    def configurations(self, configurations: Sequence) -> None:
         self._configurations = configurations
 
     @property
-    def displayables(self):
+    def displayables(self) -> Sequence:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._displayables
 
     @displayables.setter
-    def displayables(self, displayables):
+    def displayables(self, displayables: Sequence) -> None:
         self._displayables = displayables
 
     @property
-    def unobservables(self):
+    def unobservables(self) -> Optional[Unobservables]:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._unobservables
 
     @unobservables.setter
-    def unobservables(self, unobservables):
+    def unobservables(self, unobservables: Optional[Unobservables]):
         self._unobservables = unobservables
 
     @property
-    def serialised_message(self):
+    def string_serialised_message(self) -> str:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._serialised_message
 
-    @serialised_message.setter
-    def serialised_message(self, message):
+    @string_serialised_message.setter
+    def string_serialised_message(self, message: str) -> None:
         self._serialised_message = message
 
-    def to_dict(self):
+    def to_dict(self) -> Dict[str, List]:
+        """
+
+    @return:
+    @rtype:
+    """
         return {
             "_configurations": [
                 configuration.to_dict() for configuration in self._configurations
@@ -101,10 +144,15 @@ receives the same reaction.
             "_motions": [motion.to_dict() for motion in self._motions],
         }
 
-    def to_json(self):
+    def to_json(self) -> str:
+        """
+
+    @return:
+    @rtype:
+    """
         return json.dumps(self.to_dict())
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (
             f"<Reaction>\n"
             f"<environment_name>{self.environment_name}</environment_name>\n"
@@ -114,7 +162,7 @@ receives the same reaction.
             f"<configurations>\n{self.configurations}</configurations>\n"
             f"<displayables>\n{self.displayables}</displayables>\n"
             f"<unobservables>\n{self.unobservables}</unobservables>\n"
-            f"<serialised_message>{self.serialised_message}</serialised_message>\n"
+            f"<serialised_message>{self.string_serialised_message}</serialised_message>\n"
             f"</Reaction>\n"
         )
 

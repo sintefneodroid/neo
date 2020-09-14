@@ -13,6 +13,17 @@ import numpy
 from neodroid.messaging.fbs import FBSModels as F
 from neodroid.utilities.unity_specifications.reaction import Reaction
 
+__all__ = [
+    "serialise_bodies",
+    "serialise_poses",
+    "serialise_motions",
+    "serialise_reactions",
+    "serialise_reaction",
+    "serialise_configurations",
+    "serialise_displayables",
+    "serialise_unobservables",
+]
+
 
 def serialise_reactions(input_reactions):
     B = Builder(1)
@@ -45,7 +56,9 @@ def serialise_reaction(B, input_reaction: Reaction):
     motions = serialise_motions(B, input_reaction)
 
     environment_string_offset = B.CreateString(input_reaction.environment_name)
-    serialised_message_string_offset = B.CreateString(input_reaction.serialised_message)
+    serialised_message_string_offset = B.CreateString(
+        input_reaction.string_serialised_message
+    )
 
     F.FReactionStart(B)
     F.FReactionAddParameters(

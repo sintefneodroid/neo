@@ -37,6 +37,8 @@ class Space(object):
 """
         if self.is_discrete:
             return a
+        # if self.is_01normalised:
+        #    return numpy.clamp()
         return a
         # return (a - self.min) / self.span
 
@@ -48,6 +50,8 @@ class Space(object):
 """
         if self.is_discrete:
             return a
+        # if self.is_01normalised:
+        #    return numpy.clamp()
         return a
         # return (a * self.span) + self.min
 

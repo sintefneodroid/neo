@@ -8,43 +8,78 @@ __author__ = "Christian Heider Nielsen"
 from pynput import keyboard
 
 
-def up():
+def up() -> dict:
+    """
+
+  @return:
+  @rtype:
+  """
     if "ActorY_" in ENVIRONMENT.description.actuators:
         return {"ActorY_": ENVIRONMENT.description.actuator("ActorY_").motion_space.max}
     raise KeyError(f"Could not find actuator ActorY_")
 
 
-def down():
+def down() -> dict:
+    """
+
+  @return:
+  @rtype:
+  """
     if "ActorY_" in ENVIRONMENT.description.actuators:
         return {"ActorY_": ENVIRONMENT.description.actuator("ActorY_").motion_space.min}
     raise KeyError(f"Could not find actuator ActorY_")
 
 
-def left():
+def left() -> dict:
+    """
+
+  @return:
+  @rtype:
+  """
     if "ActorX_" in ENVIRONMENT.description.actuators:
         return {"ActorX_": ENVIRONMENT.description.actuator("ActorX_").motion_space.min}
     raise KeyError(f"Could not find actuator ActorX_")
 
 
-def right():
+def right() -> dict:
+    """
+
+  @return:
+  @rtype:
+  """
     if "ActorX_" in ENVIRONMENT.description.actuators:
         return {"ActorX_": ENVIRONMENT.description.actuator("ActorX_").motion_space.max}
     raise KeyError(f"Could not find actuator ActorX_")
 
 
-def backward():
+def backward() -> dict:
+    """
+
+  @return:
+  @rtype:
+  """
     if "ActorZ_" in ENVIRONMENT.description.actuators:
         return {"ActorZ_": ENVIRONMENT.description.actuator("ActorZ_").motion_space.min}
     raise KeyError(f"Could not find actuator ActorZ_")
 
 
-def forward():
+def forward() -> dict:
+    """
+
+  @return:
+  @rtype:
+  """
     if "ActorZ_" in ENVIRONMENT.description.actuators:
         return {"ActorZ_": ENVIRONMENT.description.actuator("ActorZ_").motion_space.max}
     raise KeyError(f"Could not find actuator ActorZ_")
 
 
-def reset():
+def reset() -> str:
+    """
+
+  @return:
+  @rtype:
+  """
     return "reset"
 
 
@@ -68,12 +103,22 @@ COMBINATIONS = {
 
 
 def listen_for_combinations():
+    """
+
+  @return:
+  @rtype:
+  """
     print(f"\n\nPress any of:\n{COMBINATIONS}\n\n")
     print("")
     return keyboard.Listener(on_press=on_press, on_release=on_release)
 
 
 def on_press(key):
+    """
+
+  @param key:
+  @type key:
+  """
     global STEP_I
     if any([key in COMBINATIONS]):
         if key not in CURRENT_COMBINATIONS:
@@ -99,12 +144,20 @@ def on_press(key):
 
 
 def on_release(key):
+    """
+
+  @param key:
+  @type key:
+  """
     if any([key in COMBINATIONS]):
         if key in CURRENT_COMBINATIONS:
             CURRENT_COMBINATIONS.remove(key)
 
 
 def main():
+    """
+
+  """
     with listen_for_combinations() as listener:
         listener.join()
 

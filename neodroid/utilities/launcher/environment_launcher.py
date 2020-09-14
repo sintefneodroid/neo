@@ -81,7 +81,7 @@ def launch_environment(
         """
 cwd = os.getcwd()
 file_name = (file_name.strip()
-       .replace('.app', '').replace('.exe', '').replace('.x86_64', '').replace('.x86', ''))
+   .replace('.app', '').replace('.exe', '').replace('.x86_64', '').replace('.x86', ''))
 true_filename = os.path.basename(os.path.normpath(file_name))
 launch_string = None
 if platform == 'linux' or platform == 'linux2':

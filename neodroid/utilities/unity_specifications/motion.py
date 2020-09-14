@@ -2,8 +2,14 @@
 # -*- coding: utf-8 -*-
 __author__ = "Christian Heider Nielsen"
 
+from typing import Any, Dict
+
 
 class Motion(object):
+    """
+
+  """
+
     def __init__(self, actor_name: str, actuator_name: str, strength: float):
         """
 
@@ -17,24 +23,44 @@ class Motion(object):
 
     @property
     def actor_name(self) -> str:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._actor_name
 
     @property
     def actuator_name(self) -> str:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._actuator_name
 
     @property
     def strength(self) -> float:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._strength
 
-    def to_dict(self):
+    def to_dict(self) -> Dict[str, Any]:
+        """
+
+    @return:
+    @rtype:
+    """
         return {
             "_actor_name": self._actor_name,
             "_motor_name": self._actuator_name,
             "_strength": self._strength,
         }
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (
             f"<Motion>\n"
             f"<actor_name>{self._actor_name}</actor_name>\n"

@@ -31,10 +31,10 @@ ENV = "CartPole-v1"
 def run_ddpg(snapshot_config, *_):
     """Set up environment and algorithm and run the task.
 Args:
-    snapshot_config (garage.experiment.SnapshotConfig): The snapshot
-        configuration used by LocalRunner to create the snapshotter.
-        If None, it will create one with default settings.
-    _ : Unused parameters
+  snapshot_config (garage.experiment.SnapshotConfig): The snapshot
+      configuration used by LocalRunner to create the snapshotter.
+      If None, it will create one with default settings.
+  _ : Unused parameters
 """
     runner = LocalRunner(snapshot_config)
     env = GarageEnv(normalize(gym.make(ENV)))
@@ -80,10 +80,10 @@ Args:
 def run_ppo(snapshot_config, *_):
     """Set up environment and algorithm and run the task.
 Args:
-    snapshot_config (garage.experiment.SnapshotConfig): The snapshot
-        configuration used by LocalRunner to create the snapshotter.
-        If None, it will create one with default settings.
-    _ : Unused parameters
+  snapshot_config (garage.experiment.SnapshotConfig): The snapshot
+      configuration used by LocalRunner to create the snapshotter.
+      If None, it will create one with default settings.
+  _ : Unused parameters
 """
     env = TfEnv(env_name=ENV)
 

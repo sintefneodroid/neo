@@ -11,11 +11,20 @@ __doc__ = r"""
 
 
 class VectorActionSpace:
+    """
+
+  """
+
     def __init__(self, action_space: ActionSpace, num_env: int):
         self.action_space = action_space
         self.num_env = num_env
 
     def sample(self):
+        """
+
+    @return:
+    @rtype:
+    """
         return [self.action_space.sample() for _ in range(self.num_env)]
 
     def __getattr__(self, item):

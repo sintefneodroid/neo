@@ -33,10 +33,14 @@
 """
 import random
 
-import numpy as np
+import numpy
 
 
 class BlackjackEnvironment:
+    """
+
+  """
+
     def __init__(self):
         # Starts are parametrized efficiently with (s_player, s_dealer) where:
         #  s_player = player card sum in range [12, 21] inclusive
@@ -46,6 +50,11 @@ class BlackjackEnvironment:
         self.action_dim = (2,)  # 0=stick, 1=hit
 
     def reset(self):
+        """
+
+    @return:
+    @rtype:
+    """
         # Create a fresh deck of 52 cards (we will randomly sample this deck with replacement)
         SUITS = ["diamond", "club", "heart", "spade"]
         RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
@@ -57,13 +66,28 @@ class BlackjackEnvironment:
         # Note: it is important that we sample all possible (state,action) pairs
         # or you might run into the problem of not reaching convergence in Q.
         self.state = (
-            np.random.randint(self.state_dim[0]),
-            np.random.randint(self.state_dim[1]),
+            numpy.random.randint(self.state_dim[0]),
+            numpy.random.randint(self.state_dim[1]),
         )
         return self.state
 
     def step(self, action):
+        """
+
+    @param action:
+    @type action:
+    @return:
+    @rtype:
+    """
+
         def deal_card(DECK):
+            """
+
+      @param DECK:
+      @type DECK:
+      @return:
+      @rtype:
+      """
             card = random.choice(DECK)  # deal card with replacement
             if card["rank"] in ["A"]:
                 return 1  # non-usable ace
@@ -116,6 +140,10 @@ class BlackjackEnvironment:
 
 
 class Agent:
+    """
+
+  """
+
     def __init__(self, state_dim, action_dim):
         self.state_dim = state_dim  # state dimension
         self.action_dim = action_dim  # action dimension
@@ -123,29 +151,49 @@ class Agent:
         self.reset_learning_memory()
 
     def reset_episodic_memory(self):
+        """
+
+    """
         # Reset episodic memories
         self.memories = list()
 
     def reset_learning_memory(self):
+        """
+
+    """
         # Reset Q[s,a], r_visits[s,a], n_visits[s,a] to zero
-        self.Q = np.zeros(self.state_dim + self.action_dim, dtype=float)  # Q(s,a) value
-        self.returns_visits = np.zeros(
+        self.Q = numpy.zeros(
+            self.state_dim + self.action_dim, dtype=float
+        )  # Q(s,a) value
+        self.returns_visits = numpy.zeros(
             self.state_dim + self.action_dim, dtype=float
         )  # 3-dim matrix
-        self.n_visits = np.zeros(
+        self.n_visits = numpy.zeros(
             self.state_dim + self.action_dim, dtype=int
         )  # 3-dim matrix
 
     def get_action(self, state, force_random=False):
+        """
+
+    @param state:
+    @type state:
+    @param force_random:
+    @type force_random:
+    @return:
+    @rtype:
+    """
         if random.uniform(0, 1) < self.epsilon or force_random:
             # explore
-            action = np.random.randint(self.action_dim[0])
+            action = numpy.random.randint(self.action_dim[0])
         else:
             # greedy
-            action = np.argmax(self.Q[state[0], state[1], :])
+            action = numpy.argmax(self.Q[state[0], state[1], :])
         return action
 
     def train(self):
+        """
+
+    """
         # List all uniquely visited (state, action) pairs from episodic memory.
         # Also compute the total reward collected from the episode.
         # Returns after first-occurence of (s,a)
@@ -170,18 +218,26 @@ class Agent:
             self.Q[sa] = self.returns_visits[sa] / self.n_visits[sa]  # update Q(s,a)
 
     def memorize(self, memory):
+        """
+
+    @param memory:
+    @type memory:
+    """
         self.memories.append(memory)
 
     def display_greedy_policy(self):
+        """
+
+    """
         # Display greedy policy:
         #  - rows are s_player
         #  - columns are s_dealer
         print("\nDisplaying greedy policy:")
-        np.set_printoptions(precision=3)
-        greedy_policy = np.zeros(self.state_dim, dtype=int)
+        numpy.set_printoptions(precision=3)
+        greedy_policy = numpy.zeros(self.state_dim, dtype=int)
         for s_player in range(self.state_dim[0]):
             for s_dealer in range(self.state_dim[1]):
-                greedy_policy[s_player, s_dealer] = np.argmax(
+                greedy_policy[s_player, s_dealer] = numpy.argmax(
                     self.Q[s_player, s_dealer, :]
                 )
         print(greedy_policy)

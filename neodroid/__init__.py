@@ -13,7 +13,7 @@ from apppath import AppPath
 
 __project__ = "Neodroid"
 __author__ = "Christian Heider Nielsen"
-__version__ = "0.4.8"
+__version__ = "0.4.9"
 __doc__ = r"""
 Created on 27/04/2019
 
@@ -29,8 +29,10 @@ Created on 27/04/2019
 """
 __all__ = ["PROJECT_APP_PATH", "PROJECT_NAME", "PROJECT_VERSION", "get_version"]
 
+from typing import Any
 
-def dist_is_editable(dist):
+
+def dist_is_editable(dist: Any) -> bool:
     """
 Return True if given Distribution is an editable install.
 """
@@ -51,12 +53,12 @@ DEFAULT_ENVIRONMENTS_PATH = (PROJECT_APP_PATH.user_cache / "environments").absol
 distributions = {v.key: v for v in pkg_resources.working_set}
 if PROJECT_NAME in distributions:
     distribution = distributions[PROJECT_NAME]
-    DEVELOP = dist_is_editable(distribution)
+    IS_DEVELOP = dist_is_editable(distribution)
 else:
-    DEVELOP = True
+    IS_DEVELOP = True
 
 
-def get_version(append_time=DEVELOP):
+def get_version(append_time: Any = IS_DEVELOP) -> str:
     version = __version__
     if not version:
         version = os.getenv("VERSION", "0.0.0")

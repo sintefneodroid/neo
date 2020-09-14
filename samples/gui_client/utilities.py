@@ -13,11 +13,11 @@ def get_masked_depth_image(depth_image, light_mask_image, lower_limit, upper_lim
     mask_array = numpy.asarray(mask)
     mask_array = mask_array.reshape((mask_array.shape[0], mask_array.shape[1], 1))
     mask_array.setflags(write=1)
-    above_threshold = mask_array[:, :, 0] > upper_limit
+    above_threshold = mask_array[..., 0] > upper_limit
     mask_array[above_threshold] = 0
-    below_threshold = mask_array[:, :, 0] < lower_limit
+    below_threshold = mask_array[..., 0] < lower_limit
     mask_array[below_threshold] = 0
-    rest = mask_array[:, :, 0] == 0
+    rest = mask_array[..., 0] == 0
     depth_image = Image.open(depth_image).convert("L")
     depth_image_array = numpy.asarray(depth_image)
     ori = depth_image_array.shape
@@ -45,9 +45,9 @@ def rgb_segment(rgb_im, seg_im):
     green_masked_img = numpy.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), numpy.uint8)
     blue_masked_img = numpy.zeros((rgb_im.shape[1], rgb_im.shape[0], 3), numpy.uint8)
 
-    reds = seg_im[:, :, RED]
-    greens = seg_im[:, :, GREEN]
-    blues = seg_im[:, :, BLUE]
+    reds = seg_im[..., RED]
+    greens = seg_im[..., GREEN]
+    blues = seg_im[..., BLUE]
 
     red_mask = reds == 255
     green_mask = greens == 255

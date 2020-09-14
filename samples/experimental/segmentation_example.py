@@ -83,7 +83,7 @@ def process_states(states):
             green_masked_img,
             blue_masked_img,
         ) = rgb_segment(rgb_img, seg_img)
-        normed = red_img[:, :, 0] / 255.0
+        normed = red_img[..., 0] / 255.0
         rgb_imgs.append((rgb_img / 255.0, normed))
         # save(rgb_img, red_img)
 

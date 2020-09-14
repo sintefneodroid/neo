@@ -19,6 +19,10 @@ __all__ = ["NetworkingEnvironment"]
 
 
 class NetworkingEnvironment(Environment, ABC):
+    """
+
+  """
+
     def __init__(
         self,
         *,
@@ -104,6 +108,11 @@ class NetworkingEnvironment(Environment, ABC):
 
     @property
     def is_connected(self):
+        """
+
+    @return:
+    @rtype:
+    """
         return self._is_connected_to_server
 
     @abstractmethod
@@ -118,6 +127,15 @@ class NetworkingEnvironment(Environment, ABC):
         self.close()
 
     def close(self, *args, **kwargs):
+        """
+
+    @param args:
+    @type args:
+    @param kwargs:
+    @type kwargs:
+    @return:
+    @rtype:
+    """
         self._message_server.teardown()
 
         return self._close(*args, **kwargs)

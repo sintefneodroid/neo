@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import functools
+from typing import Any, Dict, Union
 
 from neodroid.messaging.fbs.fbs_state_utilties import deserialise_actuators
 
@@ -10,27 +11,53 @@ from warg import cached_property
 
 
 class Actor(object):
+    """
+
+  """
+
     def __init__(self, flat_actor):
         self._flat_actor = flat_actor
 
     @cached_property
-    def actor_name(self):
+    def actor_name(self) -> str:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._flat_actor.ActorName().decode()
 
     @cached_property
-    def is_alive(self):
+    def is_alive(self) -> bool:
+        """
+
+    @return:
+    @rtype:
+    """
         return self._flat_actor.Alive()
 
-    def actuator(self, key):
+    def actuator(self, key) -> Union[None, Any]:
+        """
+
+    @param key:
+    @type key:
+    @return:
+    @rtype:
+    """
         if key in deserialise_actuators(self._flat_actor):
             return deserialise_actuators(self._flat_actor)[key]
 
     @cached_property
-    def actuators(self):
+    def actuators(self) -> Dict[str, Any]:
+        """
+
+    @return:
+    @rtype:
+    """
         return deserialise_actuators(self._flat_actor)
 
     @functools.lru_cache()
-    def __repr__(self):
+    def __repr__(self) -> str:
         actuators = "".join(
             [str(actuators.__repr__()) for actuators in self.actuators.values()]
         )

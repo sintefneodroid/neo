@@ -29,8 +29,8 @@
    = Q(a;k) + 1/(k+1) * (R(a) - Q(a;k))
 
 """
-import matplotlib.pyplot as plt
-import numpy as np
+import numpy
+from matplotlib import pyplot
 
 
 def main():
@@ -64,17 +64,17 @@ def main():
 
         # Get reward (1 for success, 0 for failure)
         def get_reward(self, action):
-            rand = np.random.random()  # [0.0,1.0)
+            rand = numpy.random.random()  # [0.0,1.0)
             reward = 1 if (rand < self.prob[action]) else 0
             return reward
 
     class Agent:
         def __init__(self, bandit, epsilon):
             self.epsilon = epsilon
-            self.k = np.zeros(
-                bandit.N, dtype=np.int
+            self.k = numpy.zeros(
+                bandit.N, dtype=numpy.int
             )  # number of times action was chosen
-            self.Q = np.zeros(bandit.N, dtype=np.float)  # estimated value
+            self.Q = numpy.zeros(bandit.N, dtype=numpy.float)  # estimated value
 
         # Update Q action-value using:
         # Q(a) <- Q(a) + 1/(k+1) * (r(a) - Q(a))
@@ -84,13 +84,15 @@ def main():
 
         # Choose action using an epsilon-greedy agent
         def get_action(self, bandit, force_explore=False):
-            rand = np.random.random()  # [0.0,1.0)
+            rand = numpy.random.random()  # [0.0,1.0)
             if (rand < self.epsilon) or force_explore:
-                action_explore = np.random.randint(bandit.N)  # explore random bandit
+                action_explore = numpy.random.randint(bandit.N)  # explore random bandit
                 return action_explore
             else:
-                # action_greedy = np.argmax(self.Q)  # exploit best current bandit
-                action_greedy = np.random.choice(np.flatnonzero(self.Q == self.Q.max()))
+                # action_greedy = numpy.argmax(self.Q)  # exploit best current bandit
+                action_greedy = numpy.random.choice(
+                    numpy.flatnonzero(self.Q == self.Q.max())
+                )
                 return action_greedy
 
     # =========================
@@ -109,7 +111,7 @@ def main():
             # Append to history
             action_history.append(action)
             reward_history.append(reward)
-        return (np.array(action_history), np.array(reward_history))
+        return numpy.array(action_history), numpy.array(reward_history)
 
     # =========================
     #
@@ -120,8 +122,8 @@ def main():
     print(
         f"Running multi-armed bandits with N_bandits = {N_bandits} and agent epsilon = {epsilon}"
     )
-    reward_history_avg = np.zeros(N_episodes)  # reward history experiment-averaged
-    action_history_sum = np.zeros((N_episodes, N_bandits))  # sum action history
+    reward_history_avg = numpy.zeros(N_episodes)  # reward history experiment-averaged
+    action_history_sum = numpy.zeros((N_episodes, N_bandits))  # sum action history
     for i in range(N_experiments):
         bandit = Bandit(bandit_probs)  # initialize bandits
         agent = Agent(bandit, epsilon)  # initialize agent
@@ -134,7 +136,9 @@ def main():
             print(f"  N_episodes = {N_episodes}")
             print(f"  bandit choice history = {action_history + 1}")
             print(f"  reward history = {reward_history}")
-            print(f"  average reward = {np.sum(reward_history) / len(reward_history)}")
+            print(
+                f"  average reward = {numpy.sum(reward_history) / len(reward_history)}"
+            )
             print("")
         # Sum up experiment reward (later to be divided to represent an average)
         reward_history_avg += reward_history
@@ -142,59 +146,59 @@ def main():
         for j, (a) in enumerate(action_history):
             action_history_sum[j][a] += 1
 
-    reward_history_avg /= np.float(N_experiments)
+    reward_history_avg /= numpy.float(N_experiments)
     print(f"reward history avg = {reward_history_avg}")
 
     # =========================
     # Plot reward history results
     # =========================
-    plt.plot(reward_history_avg)
-    plt.xlabel("Episode number")
-    plt.ylabel(f"Rewards collected")
-    plt.title(
+    pyplot.plot(reward_history_avg)
+    pyplot.xlabel("Episode number")
+    pyplot.ylabel(f"Rewards collected")
+    pyplot.title(
         f"Bandit reward history averaged over {N_experiments} experiments (epsilon = {epsilon})"
     )
-    ax = plt.gca()
+    ax = pyplot.gca()
     ax.set_xscale("log", nonposx="clip")
-    plt.xlim([1, N_episodes])
+    pyplot.xlim([1, N_episodes])
     if save_fig:
         output_file = "output/rewards.png"
-        plt.savefig(output_file, bbox_inches="tight")
+        pyplot.savefig(output_file, bbox_inches="tight")
     else:
-        plt.show()
+        pyplot.show()
 
     # =========================
     # Plot action history results
     # =========================
-    plt.figure(figsize=(18, 12))
+    pyplot.figure(figsize=(18, 12))
     for i in range(N_bandits):
         action_history_sum_plot = 100 * action_history_sum[:, i] / N_experiments
-        plt.plot(
-            list(np.array(range(len(action_history_sum_plot))) + 1),
+        pyplot.plot(
+            list(numpy.array(range(len(action_history_sum_plot))) + 1),
             action_history_sum_plot,
             linewidth=5.0,
             label=f"Bandit #{i + 1}",
         )
-    plt.title(
+    pyplot.title(
         f"Bandit action history averaged over {N_experiments} experiments (epsilon = {epsilon})",
         fontsize=26,
     )
-    plt.xlabel("Episode Number", fontsize=26)
-    plt.ylabel("Bandit Action Choices (%)", fontsize=26)
-    leg = plt.legend(loc="upper left", shadow=True, fontsize=26)
-    ax = plt.gca()
+    pyplot.xlabel("Episode Number", fontsize=26)
+    pyplot.ylabel("Bandit Action Choices (%)", fontsize=26)
+    leg = pyplot.legend(loc="upper left", shadow=True, fontsize=26)
+    ax = pyplot.gca()
     ax.set_xscale("log", nonposx="clip")
-    plt.xlim([1, N_episodes])
-    plt.ylim([0, 100])
-    plt.xticks(fontsize=24)
-    plt.yticks(fontsize=24)
+    pyplot.xlim([1, N_episodes])
+    pyplot.ylim([0, 100])
+    pyplot.xticks(fontsize=24)
+    pyplot.yticks(fontsize=24)
     for legobj in leg.legendHandles:
         legobj.set_linewidth(16.0)
     if save_fig:
         output_file = "output/actions.png"
-        plt.savefig(output_file, bbox_inches="tight")
+        pyplot.savefig(output_file, bbox_inches="tight")
     else:
-        plt.show()
+        pyplot.show()
 
 
 # Driver

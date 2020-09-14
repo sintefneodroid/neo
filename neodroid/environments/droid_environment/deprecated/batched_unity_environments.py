@@ -11,6 +11,10 @@ from neodroid.utilities import ObservationSpace, Range, ActionSpace, VectorActio
 
 
 class BatchedUnityEnvironment(UnityEnvironment):
+    """
+
+  """
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._resets = []
@@ -65,10 +69,10 @@ if __name__ == "__main__":
         default=True,
         help="Connect to already running environment instead of starting another instance",
     )
-    args = parser.parse_args()
+    config = parser.parse_args()
 
     env = UnityEnvironment(
-        name=args.ENVIRONMENT_NAME, connect_to_running=args.CONNECT_TO_RUNNING
+        name=config.ENVIRONMENT_NAME, connect_to_running=config.CONNECT_TO_RUNNING
     )
 
     observation_session = tqdm(env, leave=False)
@@ -85,6 +89,10 @@ if __name__ == "__main__":
 
 
 class VectorWrapper:
+    """
+
+  """
+
     def __init__(self, env: UnityEnvironment):
         """
 
@@ -140,6 +148,17 @@ class VectorWrapper:
         return _output_shape
 
     def react(self, a, *args, **kwargs):
+        """
+
+    @param a:
+    @type a:
+    @param args:
+    @type args:
+    @param kwargs:
+    @type kwargs:
+    @return:
+    @rtype:
+    """
         if isinstance(a, numpy.ndarray):
             a = a.tolist()
 
@@ -150,6 +169,11 @@ class VectorWrapper:
         return info
 
     def reset(self):
+        """
+
+    @return:
+    @rtype:
+    """
         info = self._env.reset()
 
         info = next(iter(info.values()))

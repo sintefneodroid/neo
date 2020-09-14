@@ -1,6 +1,5 @@
+devpack
 flatbuffers
-draugr
-warg
 pyfiglet
 fire
 pyzmq
@@ -9,6 +8,4 @@ Pillow
 tqdm
 matplotlib
 cloudpickle
-imageio
-pip
-fire
+

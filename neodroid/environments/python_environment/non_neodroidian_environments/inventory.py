@@ -10,7 +10,7 @@ __doc__ = r"""
 import logging
 
 import gym
-import numpy as np
+import numpy
 from gym import spaces, utils
 from gym.utils import seeding
 
@@ -55,7 +55,7 @@ https://sites.ualberta.ca/~szepesva/RLBook.html
         self._reset()
 
     def demand(self):
-        return np.random.poisson(self.lam)
+        return numpy.random.poisson(self.lam)
 
     def transition(self, x, a, d):
         m = self.max

@@ -13,6 +13,11 @@ __all__ = ["ObservationSpace"]
 class ObservationSpace(Space):
     @property
     def space(self) -> Sequence:
+        """
+
+    @return:
+    @rtype:
+    """
         return self.continuous_shape
 
 
