@@ -4,8 +4,7 @@ from neodroid.utilities.unity_specifications import Motion, Reaction, ReactionPa
 
 __author__ = "Christian Heider Nielsen"
 
-import api.neodroid_environments as neo
-
+import neodroid.wrappers.formal_wrapper as neo
 
 def construct_reactions(env):
     parameters = ReactionParameters(
