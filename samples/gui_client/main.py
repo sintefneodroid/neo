@@ -1,35 +1,39 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.environments import UnityEnvironment
+from neodroid.environments.droid_environment import UnityEnvironment
 from neodroid.utilities.unity_specifications import (
     Configuration,
     Motion,
     Reaction,
     ReactionParameters,
 )
-from .gui import NeoGUI
+
 
 __author__ = "Christian Heider Nielsen"
+__doc__ = r'''
+'''
 
-_gui = None
-_neo_environment = None
+from gui import NeoGUI
+
+GUI = None
+NEODROID_ENVIRONMENT = None
 
 
 def on_connected_callback():
-    global _neo_environment
-    _gui.update_connect_button("Disconnect")
+    global NEODROID_ENVIRONMENT
+    GUI.update_connect_button("Disconnect")
 
 
 def on_disconnected_callback():
-    _gui.update_connect_button("Connect")
+    GUI.update_connect_button("Connect")
 
 
 def on_connect_callback(ip_address, port, launch_environment, environment):
-    global _neo_environment
-    if _neo_environment and _neo_environment.is_connected:
-        _neo_environment.close(on_disconnected_callback)
+    global NEODROID_ENVIRONMENT
+    if NEODROID_ENVIRONMENT and NEODROID_ENVIRONMENT.is_connected:
+        NEODROID_ENVIRONMENT.close(on_disconnected_callback)
     else:
-        _neo_environment = UnityEnvironment(
+        NEODROID_ENVIRONMENT = UnityEnvironment(
             ip=ip_address,
             port=int(port),
             on_connected_callback=on_connected_callback,
@@ -56,7 +60,7 @@ def on_step_callback(actor_name, slider_values):
         describe=False,
         episode_count=True,
     )
-    new_state = _neo_environment.react(Reaction(motions=motions, parameters=parameters))
+    new_state = NEODROID_ENVIRONMENT.react(Reaction(motions=motions, parameters=parameters))
     update_callback(new_state)
 
 
@@ -65,47 +69,47 @@ def on_reset_callback(slider_values):
     parameters = ReactionParameters(
         terminable=False, step=False, reset=True, configure=True, describe=True
     )
-    new_state = _neo_environment.react(
+    new_state = NEODROID_ENVIRONMENT.react(
         Reaction(parameters=parameters, configurations=configurations)
     )
     update_callback(new_state)
 
 
 def update_environment_widgets(state):
-    _gui.update_xml_text_label(str(state))
+    GUI.update_xml_text_label(str(state))
 
     try:
-        _gui.update_reward_label(str(state.signal))
-        _gui.update_energy_label(str(state.total_energy_spent))
-        _gui.update_frame_label(str(state.frame_number))
-        _gui.update_interrupted_label(str(state.terminated))
+        GUI.update_reward_label(str(state.signal))
+        GUI.update_energy_label(str(state.total_energy_spent))
+        GUI.update_frame_label(str(state.frame_number))
+        GUI.update_interrupted_label(str(state.terminated))
         # _gui.update_time_label(str(state.get_time_since_reset))
     except BaseException:
         print("Failed at updating rest of GUI")
 
     try:
 
-        _gui.update_normal_image(state.sensor("NormalCamera").value)
-        _gui.update_motion_image(state.sensor("FlowCamera").value)
-        _gui.update_depth_image(state.sensor("DepthCamera").value)
-        _gui.update_segmentation_image(state.sensor("SegmentationCamera").value)
-        _gui.update_instance_segmentation_image(
+        GUI.update_normal_image(state.sensor("NormalCamera").value)
+        GUI.update_motion_image(state.sensor("FlowCamera").value)
+        GUI.update_depth_image(state.sensor("DepthCamera").value)
+        GUI.update_segmentation_image(state.sensor("SegmentationCamera").value)
+        GUI.update_instance_segmentation_image(
             state.sensor("InstanceSegmentationCamera").value
         )
-        _gui.update_rgb_image(state.sensor("RGBCamera").value)
-        _gui.update_infrared_shadow_image(state.sensor("InfraredShadowCamera").value)
+        GUI.update_rgb_image(state.sensor("RGBCamera").value)
+        GUI.update_infrared_shadow_image(state.sensor("InfraredShadowCamera").value)
     except BaseException:
         print("Failed at updating Images")
 
 
 def main():
-    global _gui
-    _gui = NeoGUI(
+    global GUI
+    GUI = NeoGUI(
         on_connect_callback=on_connect_callback,
         on_step_callback=on_step_callback,
         on_reset_callback=on_reset_callback,
     )
-    _gui.run()
+    GUI.run()
 
 
 if __name__ == "__main__":
