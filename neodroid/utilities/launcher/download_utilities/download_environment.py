@@ -1,5 +1,5 @@
 import os
-import pathlib
+from pathlib import Path
 import stat
 import struct
 
@@ -7,9 +7,7 @@ from tqdm import tqdm
 
 
 class DownloadProgress(tqdm):
-    """
-
-  """
+    """"""
 
     last_block = 0
 
@@ -23,13 +21,13 @@ class DownloadProgress(tqdm):
     def hook(self, block_num=1, block_size=1, total_size=None):
         """
 
-    @param block_num:
-    @type block_num:
-    @param block_size:
-    @type block_size:
-    @param total_size:
-    @type total_size:
-    """
+        @param block_num:
+        @type block_num:
+        @param block_size:
+        @type block_size:
+        @param total_size:
+        @type total_size:
+        """
         self.total = total_size
         self.update((block_num - self.last_block) * block_size)
         self.last_block = block_num
@@ -37,13 +35,12 @@ class DownloadProgress(tqdm):
 
 def download_environment(
     name: str = "mab_win", path_to_executables_directory: str = "/tmp/neodroid"
-) -> pathlib.Path:
+) -> Path:
     """
 
-:param path_to_executables_directory:
-:return:
-:type name: object
-"""
+    :param path_to_executables_directory:
+    :return:
+    :type name: object"""
     from urllib.request import urlretrieve
     import zipfile
 
@@ -54,9 +51,7 @@ def download_environment(
     print(f"\nFetching {name} environment\n")
 
     # download_format = 'https://drive.google.com/uc?export=download&confirm=NezD&id={FILE_ID}'
-    formatted = (
-        f"https://drive.google.com/uc?export=download&confirm=-oy0&id={hash_id}"
-    )  # +'.tmp')
+    formatted = f"https://drive.google.com/uc?export=download&confirm=-oy0&id={hash_id}"  # +'.tmp')
 
     if not os.path.exists(path_to_executables_directory):
         os.makedirs(path_to_executables_directory)
@@ -64,14 +59,14 @@ def download_environment(
     with DownloadProgress(desc=name) as progress_bar:
         zip_file_name, headers = urlretrieve(
             formatted,
-            str(pathlib.Path(path_to_executables_directory) / f"{name}.zip"),
+            str(Path(path_to_executables_directory) / f"{name}.zip"),
             reporthook=progress_bar.hook,
         )
 
     with zipfile.ZipFile(zip_file_name, "r") as zip_ref:
         zip_ref.extractall(path_to_executables_directory)
 
-    zip_file_name = str(pathlib.Path(path_to_executables_directory) / zip_file_name)
+    zip_file_name = str(Path(path_to_executables_directory) / zip_file_name)
     # shutil.rmtree(file, ignore_errors=True)
     os.remove(zip_file_name)
 
@@ -81,13 +76,11 @@ def download_environment(
 
     if system_arch == 32:
         path_to_executable = str(
-            pathlib.Path(path_to_executables_directory)
-            / name
-            / f"{executable_file_name}.x86"
+            Path(path_to_executables_directory) / name / f"{executable_file_name}.x86"
         )
     else:
         path_to_executable = str(
-            pathlib.Path(path_to_executables_directory)
+            Path(path_to_executables_directory)
             / name
             / f"{executable_file_name}.x86_64"
         )
@@ -95,17 +88,17 @@ def download_environment(
     st = os.stat(path_to_executable)
     os.chmod(path_to_executable, st.st_mode | stat.S_IEXEC)
 
-    return pathlib.Path(path_to_executables_directory) / name
+    return Path(path_to_executables_directory) / name
 
 
 def available_environments(repository="http://environments.neodroid.ml/ls"):
     """
 
-  @param repository:
-  @type repository:
-  @return:
-  @rtype:
-  """
+    @param repository:
+    @type repository:
+    @return:
+    @rtype:
+    """
     from urllib.request import Request, urlopen
     import csv
 

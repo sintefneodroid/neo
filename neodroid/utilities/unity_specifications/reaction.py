@@ -12,9 +12,7 @@ from .reaction_parameters import ReactionParameters
 
 
 class Reaction(object):
-    """
-
-  """
+    """"""
 
     def __init__(
         self,
@@ -29,10 +27,9 @@ class Reaction(object):
     ):
         """
 
-The environment_name argument lets you specify which environments to react in, 'all' means all environment
-receives the same reaction.
-
-"""
+        The environment_name argument lets you specify which environments to react in, 'all' means all environment
+        receives the same reaction.
+        """
 
         self._serialised_message = serialised_message
         self._environment_name = environment_name
@@ -48,18 +45,18 @@ receives the same reaction.
     def environment_name(self) -> str:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._environment_name
 
     @property
     def parameters(self) -> ReactionParameters:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._parameters
 
     @parameters.setter
@@ -70,9 +67,9 @@ receives the same reaction.
     def motions(self) -> Sequence:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._motions
 
     @motions.setter
@@ -83,9 +80,9 @@ receives the same reaction.
     def configurations(self) -> Sequence:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._configurations
 
     @configurations.setter
@@ -96,9 +93,9 @@ receives the same reaction.
     def displayables(self) -> Sequence:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._displayables
 
     @displayables.setter
@@ -109,9 +106,9 @@ receives the same reaction.
     def unobservables(self) -> Optional[Unobservables]:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._unobservables
 
     @unobservables.setter
@@ -122,9 +119,9 @@ receives the same reaction.
     def string_serialised_message(self) -> str:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._serialised_message
 
     @string_serialised_message.setter
@@ -134,9 +131,9 @@ receives the same reaction.
     def to_dict(self) -> Dict[str, List]:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return {
             "_configurations": [
                 configuration.to_dict() for configuration in self._configurations
@@ -147,9 +144,9 @@ receives the same reaction.
     def to_json(self) -> str:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return json.dumps(self.to_dict())
 
     def __repr__(self) -> str:

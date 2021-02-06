@@ -19,9 +19,7 @@ __all__ = ["NetworkingEnvironment"]
 
 
 class NetworkingEnvironment(Environment, ABC):
-    """
-
-  """
+    """"""
 
     def __init__(
         self,
@@ -83,26 +81,20 @@ class NetworkingEnvironment(Environment, ABC):
 
     @message_client_event(event=ClientEvents.CONNECTED)
     def __on_connected_callback__(self):
-        """
-
-"""
+        """"""
         if self._external_on_connected_callback:
             self._external_on_connected_callback()
 
     @message_client_event(event=ClientEvents.DISCONNECTED)
     def __on_disconnected_callback__(self):
-        """
-
-"""
+        """"""
         self._is_connected_to_server = False
         if self._external_on_disconnected_callback:
             self._external_on_disconnected_callback()
 
     @message_client_event(event=ClientEvents.TIMEOUT)
     def __on_timeout_callback__(self):
-        """
-
-"""
+        """"""
         if self._external_on_timeout_callback:
             self._external_on_timeout_callback()
 
@@ -110,9 +102,9 @@ class NetworkingEnvironment(Environment, ABC):
     def is_connected(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._is_connected_to_server
 
     @abstractmethod
@@ -129,13 +121,13 @@ class NetworkingEnvironment(Environment, ABC):
     def close(self, *args, **kwargs):
         """
 
-    @param args:
-    @type args:
-    @param kwargs:
-    @type kwargs:
-    @return:
-    @rtype:
-    """
+        @param args:
+        @type args:
+        @param kwargs:
+        @type kwargs:
+        @return:
+        @rtype:
+        """
         self._message_server.teardown()
 
         return self._close(*args, **kwargs)

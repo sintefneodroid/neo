@@ -11,9 +11,7 @@ from neodroid.utilities import ObservationSpace, Range, ActionSpace, VectorActio
 
 
 class BatchedUnityEnvironment(UnityEnvironment):
-    """
-
-  """
+    """"""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -89,23 +87,19 @@ if __name__ == "__main__":
 
 
 class VectorWrapper:
-    """
-
-  """
+    """"""
 
     def __init__(self, env: UnityEnvironment):
         """
 
-:param env:
-"""
+        :param env:"""
         self._env = env
 
     @property
     def observation_space(self) -> ObservationSpace:
         """
 
-:return:
-"""
+        :return:"""
         _input_shape = None
 
         if len(next(iter(self._env._observation_space.values())).shape) >= 1:
@@ -127,8 +121,7 @@ class VectorWrapper:
     def action_space(self) -> ActionSpace:
         """
 
-:return:
-"""
+        :return:"""
         _output_shape = None
 
         if len(next(iter(self._env.action_space.values())).shape) >= 1:
@@ -150,15 +143,15 @@ class VectorWrapper:
     def react(self, a, *args, **kwargs):
         """
 
-    @param a:
-    @type a:
-    @param args:
-    @type args:
-    @param kwargs:
-    @type kwargs:
-    @return:
-    @rtype:
-    """
+        @param a:
+        @type a:
+        @param args:
+        @type args:
+        @param kwargs:
+        @type kwargs:
+        @return:
+        @rtype:
+        """
         if isinstance(a, numpy.ndarray):
             a = a.tolist()
 
@@ -171,9 +164,9 @@ class VectorWrapper:
     def reset(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         info = self._env.reset()
 
         info = next(iter(info.values()))

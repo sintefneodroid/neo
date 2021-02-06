@@ -8,9 +8,7 @@ import json
 
 
 class ReactionParameters(object):
-    """
-
-  """
+    """"""
 
     def __init__(
         self,
@@ -35,54 +33,54 @@ class ReactionParameters(object):
     def reset(self) -> bool:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._reset
 
     @property
     def configure(self) -> bool:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._configure
 
     @property
     def describe(self) -> bool:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._describe
 
     @property
     def step(self) -> bool:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._step
 
     @property
     def episode_count(self) -> bool:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._episode_count
 
     @property
     def terminable(self) -> bool:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._terminable
 
     @reset.setter
@@ -92,17 +90,17 @@ class ReactionParameters(object):
     def to_dict(self) -> dict:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return {"_reset": self._reset}
 
     def to_json(self) -> str:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return json.dumps(self.to_dict())
 
     def __repr__(self):

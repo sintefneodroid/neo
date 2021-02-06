@@ -36,13 +36,13 @@ default_camera_observer_names = (
 def extract_from_cameras(state, cameras=default_camera_observer_names):
     """
 
-  @param state:
-  @type state:
-  @param cameras:
-  @type cameras:
-  @return:
-  @rtype:
-  """
+    @param state:
+    @type state:
+    @param cameras:
+    @type cameras:
+    @return:
+    @rtype:
+    """
     out = dict()
 
     for camera in cameras:
@@ -56,11 +56,11 @@ def extract_from_cameras(state, cameras=default_camera_observer_names):
 def extract_all_cameras(state):
     """
 
-  @param state:
-  @type state:
-  @return:
-  @rtype:
-  """
+    @param state:
+    @type state:
+    @return:
+    @rtype:
+    """
     out = dict()
 
     for camera in state.sensors.keys():
@@ -74,13 +74,13 @@ def extract_all_cameras(state):
 def extract_camera_observation(state, key):
     """
 
-  @param state:
-  @type state:
-  @param key:
-  @type key:
-  @return:
-  @rtype:
-  """
+    @param state:
+    @type state:
+    @param key:
+    @type key:
+    @return:
+    @rtype:
+    """
     sensor = state.sensor(key)
     if sensor and sensor.is_image:
         img = sensor.value

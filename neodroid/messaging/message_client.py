@@ -12,9 +12,7 @@ __author__ = "Christian Heider Nielsen"
 
 # @singleton
 class MessageClient(object):
-    """
-
-"""
+    """"""
 
     def __init__(
         self,
@@ -55,9 +53,7 @@ class MessageClient(object):
         self.LAST_RECEIVED_FRAME_NUMBER = 0
 
     def open_connection(self):
-        """
-
-"""
+        """"""
         self._request_socket = self._context.socket(self._socket_type)
 
         if not self._request_socket:
@@ -83,9 +79,7 @@ class MessageClient(object):
         self._poller.register(self._request_socket, zmq.POLLIN)
 
     def close_connection(self):
-        """
-
-"""
+        """"""
         with suppress(zmq.error.ZMQError):
             # if not self._request_socket.closed:
             self._request_socket.setsockopt(zmq.LINGER, 0)
@@ -94,18 +88,15 @@ class MessageClient(object):
             # self._poller.close()
 
     def teardown(self):
-        """
-
-"""
+        """"""
         self.close_connection()
         self._context.term()
 
     def build(self, single_threaded=False):
         """
 
-@param single_threaded:
-@type single_threaded:
-"""
+        @param single_threaded:
+        @type single_threaded:"""
         if single_threaded:
             self._context = zmq.Context.instance()
 
@@ -119,11 +110,10 @@ class MessageClient(object):
     def send_receive(self, reactions):
         """
 
-@param reactions:
-@type reactions:
-@return:
-@rtype:
-"""
+        @param reactions:
+        @type reactions:
+        @return:
+        @rtype:"""
         if self._request_socket is None:
             self.build()
 

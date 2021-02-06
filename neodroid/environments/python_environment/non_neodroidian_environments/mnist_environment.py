@@ -9,16 +9,14 @@ from matplotlib import pyplot
 
 
 class MnistEnv(Env):
-    """
-
-  """
+    """"""
 
     def render(self, mode="human"):
         """
 
-    @param mode:
-    @type mode:
-    """
+        @param mode:
+        @type mode:
+        """
         pyplot.imshow(self.state[0])
         pyplot.title(self.state[1])
         pyplot.show()
@@ -49,9 +47,9 @@ class MnistEnv(Env):
     def reset(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         self._choose_next_state()
         self.time = 0
 
@@ -60,11 +58,11 @@ class MnistEnv(Env):
     def step(self, actions):
         """
 
-    @param actions:
-    @type actions:
-    @return:
-    @rtype:
-    """
+        @param actions:
+        @type actions:
+        @return:
+        @rtype:
+        """
         signal = self._get_reward(actions)
         self._choose_next_state()
         terminal = False
@@ -75,15 +73,11 @@ class MnistEnv(Env):
         return self.state[0], signal, terminal, {}
 
     def train_mode(self):
-        """
-
-    """
+        """"""
         self.dataset = self.mnist.train_ssd
 
     def test_mode(self):
-        """
-
-    """
+        """"""
         self.dataset = self.mnist.test
 
     def _choose_next_state(self):

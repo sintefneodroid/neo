@@ -11,9 +11,7 @@ from warg import cached_property
 
 
 class Actor(object):
-    """
-
-  """
+    """"""
 
     def __init__(self, flat_actor):
         self._flat_actor = flat_actor
@@ -22,28 +20,28 @@ class Actor(object):
     def actor_name(self) -> str:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._flat_actor.ActorName().decode()
 
     @cached_property
     def is_alive(self) -> bool:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._flat_actor.Alive()
 
     def actuator(self, key) -> Union[None, Any]:
         """
 
-    @param key:
-    @type key:
-    @return:
-    @rtype:
-    """
+        @param key:
+        @type key:
+        @return:
+        @rtype:
+        """
         if key in deserialise_actuators(self._flat_actor):
             return deserialise_actuators(self._flat_actor)[key]
 
@@ -51,9 +49,9 @@ class Actor(object):
     def actuators(self) -> Dict[str, Any]:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return deserialise_actuators(self._flat_actor)
 
     @functools.lru_cache()

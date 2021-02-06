@@ -20,9 +20,7 @@ __all__ = ["NeodroidGymEnvironment"]
 
 
 class NeodroidGymEnvironment(object):
-    """
-
-  """
+    """"""
 
     @drop_unused_kws
     def __init__(
@@ -30,8 +28,7 @@ class NeodroidGymEnvironment(object):
     ):
         """
 
-:param environment:
-"""
+        :param environment:"""
         if isinstance(environment, str):
             self._env = gym.make(environment)
         else:
@@ -43,8 +40,7 @@ class NeodroidGymEnvironment(object):
     def signal_space(self) -> SignalSpace:
         """
 
-:return:
-"""
+        :return:"""
 
         space = SignalSpace(
             [
@@ -62,8 +58,7 @@ class NeodroidGymEnvironment(object):
     def observation_space(self) -> ObservationSpace:
         """
 
-:return:
-"""
+        :return:"""
 
         if len(self._env.observation_space.shape) >= 1:
             aspc = self._env.observation_space
@@ -92,8 +87,7 @@ class NeodroidGymEnvironment(object):
     def action_space(self) -> ActionSpace:
         """
 
-:return:
-"""
+        :return:"""
 
         if len(self._env.action_space.shape) >= 1:
             aspc = self._env.action_space
@@ -123,20 +117,20 @@ class NeodroidGymEnvironment(object):
     def environment_name(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._environment_name
 
     @drop_unused_kws
     def react(self, a: Iterable) -> VectorEnvironmentSnapshot:
         """
 
-    @param a:
-    @type a:
-    @return:
-    @rtype:
-    """
+        @param a:
+        @type a:
+        @return:
+        @rtype:
+        """
         a = a[0]
         e = EnvironmentSnapshot.from_gym(self.environment_name, *self._env.step(a))
         return VectorEnvironmentSnapshot({self.environment_name: e})
@@ -144,9 +138,9 @@ class NeodroidGymEnvironment(object):
     def reset(self) -> VectorEnvironmentSnapshot:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         observables = self._env.reset()
         e = EnvironmentSnapshot.from_gym(
             self.environment_name, observables, 0, False, None

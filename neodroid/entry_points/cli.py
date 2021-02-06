@@ -26,8 +26,7 @@ sponsors = "SINTEF Ocean, Alexandra Institute, Norges Forskningsråd"
 class NeodroidCLI(object):
     def run(self, env_name: str) -> None:
         """
-Run an environment
-"""
+        Run an environment"""
         fail = False
         if os.path.exists(DEFAULT_ENVIRONMENTS_PATH):
             exe_path = f'{DEFAULT_ENVIRONMENTS_PATH}/{env_name}/{env_name.split("_")[0]}.x86_64'
@@ -63,8 +62,7 @@ Run an environment
     @staticmethod
     def fetch(env_name: str) -> Path:
         """
-Fetches a remotely stored environment with the specified name to local storage
-"""
+        Fetches a remotely stored environment with the specified name to local storage"""
         exe_path = download_environment(
             env_name, path_to_executables_directory=DEFAULT_ENVIRONMENTS_PATH
         )
@@ -73,15 +71,13 @@ Fetches a remotely stored environment with the specified name to local storage
 
     def install(self, env_name: str) -> Path:
         """
-Fetches a remotely stored environment with the specified name to local storage
-"""
+        Fetches a remotely stored environment with the specified name to local storage"""
         return self.fetch(env_name)
 
     @staticmethod
     def remove(env_name: str) -> None:
         """
-Removes locally stored environment with the specified name
-"""
+        Removes locally stored environment with the specified name"""
         exe_path = f"{DEFAULT_ENVIRONMENTS_PATH}/{env_name}"
         shutil.rmtree(exe_path, ignore_errors=True)
         # os.remove(exe_path)
@@ -89,8 +85,7 @@ Removes locally stored environment with the specified name
 
     def update(self, env_name: str) -> None:
         """
-Updates, fetches environment with the specified name again and replaces the previous version if present
-"""
+        Updates, fetches environment with the specified name again and replaces the previous version if present"""
         if os.path.exists(DEFAULT_ENVIRONMENTS_PATH):
             self.remove(env_name)
             exe_path = self.fetch(env_name)
@@ -99,16 +94,14 @@ Updates, fetches environment with the specified name again and replaces the prev
     @staticmethod
     def clean() -> None:
         """
-Removes all locally stored environments
-"""
+        Removes all locally stored environments"""
         if os.path.exists(DEFAULT_ENVIRONMENTS_PATH):
             shutil.rmtree(DEFAULT_ENVIRONMENTS_PATH, ignore_errors=True)
         print(f"{indent}cleaned, removed {DEFAULT_ENVIRONMENTS_PATH}")
 
     def ls_local(self) -> None:
         """
-Which environments are available locally
-"""
+        Which environments are available locally"""
         envs = []
         if os.path.exists(DEFAULT_ENVIRONMENTS_PATH):
             envs = os.listdir(DEFAULT_ENVIRONMENTS_PATH)
@@ -122,23 +115,20 @@ Which environments are available locally
     @staticmethod
     def ls_remote() -> None:
         """
-Which environments are available on remote servers
-"""
+        Which environments are available on remote servers"""
         envs = available_environments()
         for k, v in envs.items():
             print(f"{indent}- {k}")
 
     def ls(self) -> None:
         """
-Same as ls_local result
-"""
+        Same as ls_local result"""
         self.ls_local()
 
     @staticmethod
     def version() -> None:
         """
-Prints the version of this Neodroid installation.
-"""
+        Prints the version of this Neodroid installation."""
         draw_cli_header()
         print(f"Version: {get_version()}")
 

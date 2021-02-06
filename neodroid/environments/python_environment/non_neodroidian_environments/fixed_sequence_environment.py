@@ -7,9 +7,7 @@ from neodroid.environments.python_environment.non_neodroidian_environments impor
 
 
 class FixedSequenceEnvironment(NoRenderEnv):
-    """
-
-  """
+    """"""
 
     def __init__(self, n_actions=10, seed=0, episode_length=100):
         self._episode_len = episode_length
@@ -28,20 +26,20 @@ class FixedSequenceEnvironment(NoRenderEnv):
     def reset(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         self._time = 0
         return 0
 
     def step(self, actions):
         """
 
-    @param actions:
-    @type actions:
-    @return:
-    @rtype:
-    """
+        @param actions:
+        @type actions:
+        @return:
+        @rtype:
+        """
         signal = self._get_signal(actions)
         self._to_next_state()
         if self._episode_len and self.time >= self._episode_len:
@@ -53,9 +51,9 @@ class FixedSequenceEnvironment(NoRenderEnv):
     def time(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._time
 
     def _to_next_state(self):

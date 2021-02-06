@@ -13,9 +13,7 @@ from warg import add_bool_arg
 
 
 def main():
-    """
-
-  """
+    """"""
     parser = argparse.ArgumentParser(description="Neodroid Action Space Sampling")
     parser.add_argument(
         "--IP", "-ip", type=str, default="localhost", metavar="IP", help="IP Address"

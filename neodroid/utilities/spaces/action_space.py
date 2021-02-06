@@ -16,9 +16,9 @@ class ActionSpace(Space):
     def sample(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         actions = []
         for valid_input in self._ranges:
             sample = numpy.random.uniform(
@@ -30,11 +30,11 @@ class ActionSpace(Space):
     def validate(self, actions):
         """
 
-    @param actions:
-    @type actions:
-    @return:
-    @rtype:
-    """
+        @param actions:
+        @type actions:
+        @return:
+        @rtype:
+        """
         for i in range(len(actions)):
             clipped = numpy.clip(
                 actions[i], self._ranges[i].min_unnorm, self._ranges[i].max_unnorm
@@ -45,9 +45,9 @@ class ActionSpace(Space):
     def discrete_one_hot_sample(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         idx = numpy.random.randint(0, self.num_actuators)
         zeros = numpy.zeros(self.num_actuators)
         if len(self._ranges) > 0:
@@ -60,18 +60,18 @@ class ActionSpace(Space):
     def discrete_sample(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         idx = numpy.random.randint(0, self.discrete_steps)
         return idx
 
     def one_hot_sample(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         idx = numpy.random.randint(0, self.num_actuators)
         zeros = numpy.zeros(self.num_actuators)
         if len(self._ranges) > 0:
@@ -82,9 +82,9 @@ class ActionSpace(Space):
     def num_actuators(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self.n
 
 

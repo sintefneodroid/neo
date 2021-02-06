@@ -37,9 +37,7 @@ import numpy
 
 
 class BlackjackEnvironment:
-    """
-
-  """
+    """"""
 
     def __init__(self):
         # Starts are parametrized efficiently with (s_player, s_dealer) where:
@@ -52,9 +50,9 @@ class BlackjackEnvironment:
     def reset(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         # Create a fresh deck of 52 cards (we will randomly sample this deck with replacement)
         SUITS = ["diamond", "club", "heart", "spade"]
         RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
@@ -74,20 +72,20 @@ class BlackjackEnvironment:
     def step(self, action):
         """
 
-    @param action:
-    @type action:
-    @return:
-    @rtype:
-    """
+        @param action:
+        @type action:
+        @return:
+        @rtype:
+        """
 
         def deal_card(DECK):
             """
 
-      @param DECK:
-      @type DECK:
-      @return:
-      @rtype:
-      """
+            @param DECK:
+            @type DECK:
+            @return:
+            @rtype:
+            """
             card = random.choice(DECK)  # deal card with replacement
             if card["rank"] in ["A"]:
                 return 1  # non-usable ace
@@ -140,9 +138,7 @@ class BlackjackEnvironment:
 
 
 class Agent:
-    """
-
-  """
+    """"""
 
     def __init__(self, state_dim, action_dim):
         self.state_dim = state_dim  # state dimension
@@ -151,16 +147,12 @@ class Agent:
         self.reset_learning_memory()
 
     def reset_episodic_memory(self):
-        """
-
-    """
+        """"""
         # Reset episodic memories
         self.memories = list()
 
     def reset_learning_memory(self):
-        """
-
-    """
+        """"""
         # Reset Q[s,a], r_visits[s,a], n_visits[s,a] to zero
         self.Q = numpy.zeros(
             self.state_dim + self.action_dim, dtype=float
@@ -175,13 +167,13 @@ class Agent:
     def get_action(self, state, force_random=False):
         """
 
-    @param state:
-    @type state:
-    @param force_random:
-    @type force_random:
-    @return:
-    @rtype:
-    """
+        @param state:
+        @type state:
+        @param force_random:
+        @type force_random:
+        @return:
+        @rtype:
+        """
         if random.uniform(0, 1) < self.epsilon or force_random:
             # explore
             action = numpy.random.randint(self.action_dim[0])
@@ -191,9 +183,7 @@ class Agent:
         return action
 
     def train(self):
-        """
-
-    """
+        """"""
         # List all uniquely visited (state, action) pairs from episodic memory.
         # Also compute the total reward collected from the episode.
         # Returns after first-occurence of (s,a)
@@ -220,15 +210,13 @@ class Agent:
     def memorize(self, memory):
         """
 
-    @param memory:
-    @type memory:
-    """
+        @param memory:
+        @type memory:
+        """
         self.memories.append(memory)
 
     def display_greedy_policy(self):
-        """
-
-    """
+        """"""
         # Display greedy policy:
         #  - rows are s_player
         #  - columns are s_dealer

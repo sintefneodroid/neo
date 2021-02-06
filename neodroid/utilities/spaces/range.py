@@ -14,20 +14,17 @@ __all__ = ["Range"]
 
 
 class Range:
-    """
-
-"""
+    """"""
 
     def __init__(
         self, *, min_value=0, max_value=1, decimal_granularity=0, normalised=True
     ):
         """
 
-:param min_value:
-:param max_value:
-:param decimal_granularity:
-:param normalised:
-"""
+        :param min_value:
+        :param max_value:
+        :param decimal_granularity:
+        :param normalised:"""
         assert max_value >= min_value
         # assert decimal_granularity >= 0
 
@@ -40,45 +37,44 @@ class Range:
     @property
     def normalised(self) -> bool:
         """
-Indicates whether the action space span is zero-one normalised
-:return:
-"""
+        Indicates whether the action space span is zero-one normalised
+        :return:"""
         return self._normalised
 
     @property
     def decimal_granularity(self) -> int:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._decimal_granularity
 
     @property
     def min_unnorm(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._min_value
 
     @property
     def max_unnorm(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._max_value
 
     @cached_property
     def min(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         if self.normalised:
             return 0
         return self.min_unnorm
@@ -87,9 +83,9 @@ Indicates whether the action space span is zero-one normalised
     def max(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         if self.normalised:
             return 1
         return self.max_unnorm
@@ -98,9 +94,9 @@ Indicates whether the action space span is zero-one normalised
     def discrete_step_size(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         if self.decimal_granularity >= 0:
             return 1 / numpy.power(10, self.decimal_granularity)
         return sys.float_info.epsilon  # numpy.inf
@@ -109,18 +105,18 @@ Indicates whether the action space span is zero-one normalised
     def span_unnorm(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self.max_unnorm - self.min_unnorm
 
     @cached_property
     def span(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         if self.normalised:
             return 1
         return self.span_unnorm
@@ -129,18 +125,17 @@ Indicates whether the action space span is zero-one normalised
     def discrete_steps(self) -> int:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return math.floor(self.span_unnorm / self.discrete_step_size) + 1
 
     @functools.lru_cache()
     def to_dict(self) -> dict:
         """
 
-type(dict)
-:return:
-"""
+        type(dict)
+        :return:"""
         return {
             "decimal_granularity": self._decimal_granularity,
             "min_value": self._min_value,
@@ -150,31 +145,31 @@ type(dict)
     def normalise(self, value):
         """
 
-    @param value:
-    @type value:
-    @return:
-    @rtype:
-    """
+        @param value:
+        @type value:
+        @return:
+        @rtype:
+        """
         return (self.min_unnorm + value + 1) / (self.max_unnorm + 1)
 
     def denormalise(self, value):
         """
 
-    @param value:
-    @type value:
-    @return:
-    @rtype:
-    """
+        @param value:
+        @type value:
+        @return:
+        @rtype:
+        """
         return (value * self.max_unnorm) - self.min_unnorm
 
     def clip(self, value):
         """
 
-    @param value:
-    @type value:
-    @return:
-    @rtype:
-    """
+        @param value:
+        @type value:
+        @return:
+        @rtype:
+        """
         if self.span > 0:
             return numpy.clip(value, self._min_value, self._max_value)
         return value
@@ -182,11 +177,11 @@ type(dict)
     def round(self, value):
         """
 
-    @param value:
-    @type value:
-    @return:
-    @rtype:
-    """
+        @param value:
+        @type value:
+        @return:
+        @rtype:
+        """
         if self.decimal_granularity >= 0:
             return numpy.round(value, self.decimal_granularity)
         return value
@@ -194,11 +189,11 @@ type(dict)
     def clip_normalise_round(self, value):
         """
 
-    @param value:
-    @type value:
-    @return:
-    @rtype:
-    """
+        @param value:
+        @type value:
+        @return:
+        @rtype:
+        """
         return self.round(self.normalise(self.clip(value)))
 
     @functools.lru_cache()
@@ -221,9 +216,9 @@ type(dict)
     def sample(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         if self.decimal_granularity == 0:
             return self.cheapest_sample()
 
@@ -233,9 +228,9 @@ type(dict)
     def cheapest_sample(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         val = numpy.random.randint(self.min, self.max + 1)
 
         if isinstance(val, numpy.ndarray):
@@ -246,9 +241,9 @@ type(dict)
     def cheaper_sample(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         val = self.round(numpy.random.random() * self.span)
 
         if isinstance(val, numpy.ndarray):
@@ -259,9 +254,9 @@ type(dict)
     def expensive_sample(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         val = numpy.random.choice(
             numpy.linspace(self.min, self.max, num=self.discrete_steps)
         )

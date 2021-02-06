@@ -6,9 +6,7 @@ from warg import cached_property
 
 
 class SimulatorConfiguration(object):
-    """
-
-  """
+    """"""
 
     def __init__(
         self,
@@ -18,10 +16,9 @@ class SimulatorConfiguration(object):
     ):
         """
 
-:param fbs_configuration:
-:param api_version:
-:param simulator_info:
-"""
+        :param fbs_configuration:
+        :param api_version:
+        :param simulator_info:"""
         self._fbs_configuration = fbs_configuration
         self._api_version = api_version
         self._simulator_info = simulator_info
@@ -30,27 +27,27 @@ class SimulatorConfiguration(object):
     def simulator_configuration(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._fbs_configuration
 
     @cached_property
     def api_version(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._api_version.decode()
 
     @property
     def simulator_info(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         # if not isinstance(self._simulator_info, str):
         #  return self._simulator_info.decode()
         return self._simulator_info

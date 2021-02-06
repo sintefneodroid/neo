@@ -24,8 +24,7 @@ class VectorPoints(IterDictValuesMixin, OrdinalIndexingDictMixin):
     def __len__(self):
         """
 
-@return:
-"""
+        @return:"""
         return len(self.terminated)
 
 
@@ -39,8 +38,7 @@ class NumpyVectorPoints(IterDictValuesMixin, OrdinalIndexingDictMixin):
     def __len__(self):
         """
 
-@return:
-"""
+        @return:"""
         return len(self.terminated)
 
 

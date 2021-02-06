@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import List, Union
+from pathlib import Path
+from typing import List, Sequence, Union
 
 
-def python_version_check(major=3, minor=6):
+def python_version_check(major: int = 3, minor: int = 7):
     import sys
 
     assert sys.version_info.major == major and sys.version_info.minor >= minor, (
@@ -15,13 +16,60 @@ def python_version_check(major=3, minor=6):
 python_version_check()
 
 import os
-import pathlib
+
+
+def read_reqs(file: str, path: Path) -> List[str]:
+    """"""
+
+    def readlines_ignore_comments(f):
+        """"""
+        return [a_ for a_ in f.readlines() if "#" not in a_ and a_]
+
+    def recursive_flatten_ignore_str(seq: Sequence) -> Sequence:
+        """"""
+        if not seq:  # is empty Sequence
+            return seq
+        if isinstance(seq[0], str):
+            return seq
+        if isinstance(seq[0], Sequence):
+            return (
+                *recursive_flatten_ignore_str(seq[0]),
+                *recursive_flatten_ignore_str(seq[1:]),
+            )
+        return (*seq[:1], *recursive_flatten_ignore_str(seq[1:]))
+
+    def unroll_nested_reqs(req_str: str, base_path: Path):
+        """"""
+        if req_str.startswith("-r"):
+            with open(base_path / req_str.strip("-r").strip()) as f:
+                return [
+                    unroll_nested_reqs(req.strip(), base_path)
+                    for req in readlines_ignore_comments(f)
+                ]
+        else:
+            return (req_str,)
+
+    requirements_group = []
+    with open(str(path / file)) as f:
+        requirements = readlines_ignore_comments(f)
+        for requirement in requirements:
+            requirements_group.extend(
+                recursive_flatten_ignore_str(
+                    unroll_nested_reqs(requirement.strip(), path)
+                )
+            )
+
+    req_set = set(requirements_group)
+    req_set.discard("")
+    return list(req_set)
+
+
 import re
 
 from setuptools import find_packages
 
 with open(
-    pathlib.Path(os.path.dirname(__file__)) / "neodroid" / "__init__.py", "r"
+    Path(os.path.dirname(__file__)) / "neodroid" / "__init__.py", "r"
 ) as project_init_file:
     str_reg_exp = "['\"]([^'\"]*)['\"]"
     content = project_init_file.read()  # get strings from module
@@ -30,16 +78,21 @@ with open(
     author = re.search(rf"__author__ = {str_reg_exp}", content, re.M).group(1)
 __author__ = author
 
-__all__ = ['NeodroidPackage']
+__all__ = ["NeodroidPackage"]
+
 
 class NeodroidPackageMeta(type):
     @property
     def test_dependencies(self) -> list:
-        return ["pytest", "mock"]
+        return read_reqs(
+            "requirements_tests.txt", Path(__file__).parent / "requirements"
+        )
 
     @property
     def setup_dependencies(self) -> list:
-        return ["pytest-runner"]
+        return read_reqs(
+            "requirements_setup.txt", Path(__file__).parent / "requirements"
+        )
 
     @property
     def package_name(self) -> str:
@@ -84,7 +137,7 @@ class NeodroidPackageMeta(type):
     @property
     def package_data(self) -> dict:
         # data = glob.glob('environments/mab/**', recursive=True)
-        emds = [str(p) for p in pathlib.Path(__file__).parent.rglob('.md')]
+        emds = [str(p) for p in Path(__file__).parent.rglob(".md")]
 
         return {
             "neodroid": [
@@ -121,33 +174,24 @@ class NeodroidPackageMeta(type):
             #       'neodroid-win-mab platform_system == "Windows"']
         }
 
-        path: pathlib.Path = pathlib.Path(__file__).parent
+        path: Path = Path(__file__).parent / "requirements"
 
         for file in path.iterdir():
             if file.name.startswith("requirements_"):
-
-                requirements_group = []
-                with open(str(file.absolute())) as f:
-                    requirements = f.readlines()
-
-                    for requirement in requirements:
-                        requirements_group.append(requirement.strip())
-
                 group_name_ = "_".join(file.name.strip(".txt").split("_")[1:])
-
-                these_extras[group_name_] = requirements_group
+                these_extras[group_name_] = read_reqs(file.name, path)
 
         all_dependencies = []
 
         for group_name in these_extras:
             all_dependencies += these_extras[group_name]
-        these_extras["all"] = all_dependencies
+        these_extras["all"] = list(set(all_dependencies))
 
         return these_extras
 
     @property
     def requirements(self) -> list:
-        path = pathlib.Path(__file__).parent
+        path = Path(__file__).parent
         requirements_out = []
         with open(path / "requirements.txt") as f:
             requirements = f.readlines()

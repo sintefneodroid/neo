@@ -20,11 +20,10 @@ logger = logging.getLogger(__name__)
 class InventoryEnv(gym.Env, utils.EzPickle):
     """Inventory control with lost sales environment
 
-This environment corresponds to the version of the inventory control
-with lost sales problem described in Example 1.1 in Algorithms for
-Reinforcement Learning by Csaba Szepesvari (2010).
-https://sites.ualberta.ca/~szepesva/RLBook.html
-"""
+    This environment corresponds to the version of the inventory control
+    with lost sales problem described in Example 1.1 in Algorithms for
+    Reinforcement Learning by Csaba Szepesvari (2010).
+    https://sites.ualberta.ca/~szepesva/RLBook.html"""
 
     def step(self, action):
         return self._step(action)

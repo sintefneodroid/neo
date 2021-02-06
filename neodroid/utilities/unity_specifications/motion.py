@@ -6,17 +6,14 @@ from typing import Any, Dict
 
 
 class Motion(object):
-    """
-
-  """
+    """"""
 
     def __init__(self, actor_name: str, actuator_name: str, strength: float):
         """
 
-:param actor_name:
-:param actuator_name:
-:param strength: Strength has a possible direction given by the sign of the float
-"""
+        :param actor_name:
+        :param actuator_name:
+        :param strength: Strength has a possible direction given by the sign of the float"""
         self._actor_name = actor_name
         self._actuator_name = actuator_name
         self._strength = strength
@@ -25,35 +22,35 @@ class Motion(object):
     def actor_name(self) -> str:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._actor_name
 
     @property
     def actuator_name(self) -> str:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._actuator_name
 
     @property
     def strength(self) -> float:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._strength
 
     def to_dict(self) -> Dict[str, Any]:
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return {
             "_actor_name": self._actor_name,
             "_motor_name": self._actuator_name,

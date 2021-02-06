@@ -10,8 +10,8 @@ from neodroid.utilities.unity_specifications import (
 
 
 __author__ = "Christian Heider Nielsen"
-__doc__ = r'''
-'''
+__doc__ = r"""
+"""
 
 from gui import NeoGUI
 
@@ -60,7 +60,9 @@ def on_step_callback(actor_name, slider_values):
         describe=False,
         episode_count=True,
     )
-    new_state = NEODROID_ENVIRONMENT.react(Reaction(motions=motions, parameters=parameters))
+    new_state = NEODROID_ENVIRONMENT.react(
+        Reaction(motions=motions, parameters=parameters)
+    )
     update_callback(new_state)
 
 

@@ -13,9 +13,7 @@ from warg import cached_property
 
 
 class Configurable(object):
-    """
-
-  """
+    """"""
 
     def __init__(
         self,
@@ -31,27 +29,27 @@ class Configurable(object):
     def configurable_name(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._configurable_name
 
     @cached_property
     def configurable_value(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return self._configurable_value
 
     @cached_property
     def configurable_space(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         if self._configurable_space:
             # space = deserialise_space(self._configurable_space) #Already done
             space = self._configurable_space
@@ -61,9 +59,9 @@ class Configurable(object):
     def to_dict(self):
         """
 
-    @return:
-    @rtype:
-    """
+        @return:
+        @rtype:
+        """
         return {
             "configurable_name": self.configurable_name,
             "configurable_value": self.configurable_value,
