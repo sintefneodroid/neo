@@ -9,7 +9,7 @@ from matplotlib import animation, pyplot
 
 from neodroid.environments.droid_environment import UnityEnvironment
 from neodroid.utilities.snapshot_extraction.camera_extraction import extract_all_cameras
-from warg.named_ordered_dictionary import NOD
+from warg import NOD
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = ""

@@ -1,7 +1,14 @@
-![neodroid](https://media.githubusercontent.com/media/sintefneodroid/neo/master/.github/images/header.png)
+<!--![header](.github/images/header.png)-->
 
-# Neo
-Neo is a python package that enables deserialisation and an interface to the [Droid](https://github.com/sintefneodroid/droid) counterpart of the [Neodroid](https://github.com/sintefneodroid) platform.
+<p align="center">
+  <img src=".github/images/header.png" alt='header' />
+</p>
+
+<h1 align="center">Neo</h1>
+
+<!--# Neo-->
+
+Neo is a python package that enables deserialisation, serialisation and an interface to the [Droid](https://github.com/sintefneodroid/droid) counterpart of the [Neodroid](https://github.com/sintefneodroid) platform.
 
 ---
 

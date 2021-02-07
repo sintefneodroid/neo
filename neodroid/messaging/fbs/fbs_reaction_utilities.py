@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from collections import Sequence
+from typing import Sequence
 
 from flatbuffers import Builder
 

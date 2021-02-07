@@ -137,17 +137,19 @@ class NeodroidVectorGymEnvironment(object):
             a = numpy.squeeze(a, -1)
         res = self._env.step(a)
 
-        e = {
-            f"{self.environment_name}{i}": EnvironmentSnapshot.from_gym(
-                self.environment_name,
-                self.observation_space.project(o),
-                self.signal_space.project(s),
-                t,
-                info,
-            )
-            for i, (o, s, t, info) in enumerate(res)
-        }
-        return VectorEnvironmentSnapshot(e)
+        if res:
+            e = {
+                f"{self.environment_name}{i}": EnvironmentSnapshot.from_gym(
+                    self.environment_name,
+                    self.observation_space.project(o),
+                    self.signal_space.project(s),
+                    t,
+                    info,
+                )
+                for i, (o, s, t, info) in enumerate(res)
+            }
+            return VectorEnvironmentSnapshot(e)
+        raise ValueError("received None res")
 
     def reset(self) -> VectorEnvironmentSnapshot:
         """
@@ -156,13 +158,15 @@ class NeodroidVectorGymEnvironment(object):
         @rtype:
         """
         res = self._env.reset()
-        e = {
-            f"{self.environment_name}{i}": EnvironmentSnapshot.from_gym(
-                self.environment_name, o, 0, False, None
-            )
-            for i, o in enumerate(res)
-        }
-        return VectorEnvironmentSnapshot(e)
+        if res:
+            e = {
+                f"{self.environment_name}{i}": EnvironmentSnapshot.from_gym(
+                    self.environment_name, o, 0, False, None
+                )
+                for i, o in enumerate(res)
+            }
+            return VectorEnvironmentSnapshot(e)
+        raise ValueError("received None res")
 
     def __getattr__(self, item):
         return getattr(self._env, item)
