@@ -37,8 +37,8 @@ class EnvironmentSnapshot(object):
     def environment_name(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if isinstance(self._environment_name, Callable):
             self._environment_name = self._environment_name()
@@ -52,8 +52,8 @@ class EnvironmentSnapshot(object):
     def signal(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if isinstance(self._signal, Callable):
             self._signal = self._signal()
@@ -67,8 +67,8 @@ class EnvironmentSnapshot(object):
     def observables(self) -> List[float]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if isinstance(self._observables, Callable):
             self._observables = self._observables()
@@ -82,8 +82,8 @@ class EnvironmentSnapshot(object):
     def unobservables(self) -> List[float]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if isinstance(self._unobservables, Callable):
             self._unobservables = self._unobservables()
@@ -97,8 +97,8 @@ class EnvironmentSnapshot(object):
     def frame_number(self) -> int:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if isinstance(self._frame_number, Callable):
             self._frame_number = self._frame_number()
@@ -112,8 +112,8 @@ class EnvironmentSnapshot(object):
     def terminated(self) -> bool:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if isinstance(self._terminated, Callable):
             self._terminated = self._terminated()
@@ -127,8 +127,8 @@ class EnvironmentSnapshot(object):
     def termination_reason(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if isinstance(self._termination_reason, Callable):
             self._termination_reason = self._termination_reason()
@@ -142,8 +142,8 @@ class EnvironmentSnapshot(object):
     def extra_serialised_message(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if isinstance(self._extra_serialised_message, Callable):
             self._extra_serialised_message = self._extra_serialised_message()
@@ -153,8 +153,8 @@ class EnvironmentSnapshot(object):
     def description(self) -> EnvironmentDescription:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if self._fbs_state:
             if self._fbs_state.EnvironmentDescription():
@@ -164,8 +164,8 @@ class EnvironmentSnapshot(object):
     def sensors(self) -> Mapping[str, Sensor]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if self.description:
             return self.description.sensors
@@ -173,10 +173,10 @@ class EnvironmentSnapshot(object):
     def sensor(self, key) -> Sensor:
         """
 
-        @param key:
-        @type key:
-        @return:
-        @rtype:
+        :param key:
+        :type key:
+        :return:
+        :rtype:
         """
         if self.description:
             return self.description.sensor(key)
@@ -185,8 +185,8 @@ class EnvironmentSnapshot(object):
     def configurables(self) -> Mapping[str, Configurable]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if self.description:
             return self.description.configurables
@@ -194,10 +194,10 @@ class EnvironmentSnapshot(object):
     def configurable(self, key) -> Configurable:
         """
 
-        @param key:
-        @type key:
-        @return:
-        @rtype:
+        :param key:
+        :type key:
+        :return:
+        :rtype:
         """
         if self.description:
             return self.description.configurable(key)
@@ -205,8 +205,8 @@ class EnvironmentSnapshot(object):
     def to_gym_like_output(self) -> tuple:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self.observables, self.signal, self.terminated, self
 
@@ -216,18 +216,18 @@ class EnvironmentSnapshot(object):
     ) -> EnvironmentSnapshotType:
         """
 
-        @param environment_name:
-        @type environment_name:
-        @param observables:
-        @type observables:
-        @param signal:
-        @type signal:
-        @param terminated:
-        @type terminated:
-        @param info:
-        @type info:
-        @return:
-        @rtype:
+        :param environment_name:
+        :type environment_name:
+        :param observables:
+        :type observables:
+        :param signal:
+        :type signal:
+        :param terminated:
+        :type terminated:
+        :param info:
+        :type info:
+        :return:
+        :rtype:
         """
         snapshot = EnvironmentSnapshot(None)
         snapshot._environment_name = environment_name
@@ -244,8 +244,8 @@ class EnvironmentSnapshot(object):
     def to_dict(self) -> dict:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         # inspect.getmembers(a)
         return dict(vars(self))
@@ -253,8 +253,8 @@ class EnvironmentSnapshot(object):
     def to_json(self) -> object:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         import json
 

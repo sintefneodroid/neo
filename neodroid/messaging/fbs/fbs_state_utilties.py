@@ -12,9 +12,13 @@ from neodroid.messaging.fbs import (
     FArray,
     FBSModels as F,
     FByteArray,
+    FEnvironmentDescription,
     FObservation,
     FQTObs,
     FRange,
+    FState,
+    FStates,
+    FUnobservables,
     FValues,
 )
 from neodroid.utilities import unity_specifications as US
@@ -48,7 +52,7 @@ __all__ = [
 ]
 
 
-def deserialise_states(flat_states) -> Tuple[Dict[str, Any], Any]:
+def deserialise_states(flat_states: FStates) -> Tuple[Dict[str, Any], Any]:
     states = {}
 
     for i in range(flat_states.StatesLength()):
@@ -62,13 +66,16 @@ def deserialise_states(flat_states) -> Tuple[Dict[str, Any], Any]:
         out_states[key] = states[key]
 
     simulator_configuration = US.SimulatorConfiguration(
-        flat_states.SimulatorConfiguration(), flat_states.ApiVersion()
+        flat_states.SimulatorConfiguration(),
+        flat_states.ApiVersion(),  # , TODO: add SIMULATOR_INFO
     )
 
     return out_states, simulator_configuration
 
 
-def deserialise_configurables(flat_environment_description) -> Dict[str, Any]:
+def deserialise_configurables(
+    flat_environment_description: FEnvironmentDescription,
+) -> Dict[str, Any]:
     configurables = {}
     if flat_environment_description:
         for i in range(flat_environment_description.ConfigurablesLength()):
@@ -86,7 +93,7 @@ def deserialise_configurables(flat_environment_description) -> Dict[str, Any]:
     return configurables
 
 
-def deserialise_sensors(flat_description) -> Dict[str, Any]:
+def deserialise_sensors(flat_description: FEnvironmentDescription) -> Dict[str, Any]:
     out_sensors = {}
 
     for i in range(flat_description.SensorsLength()):
@@ -129,15 +136,17 @@ def deserialise_sensor(obs_type, obs_value) -> Tuple[Any, List, bool]:
     return value, value_range, only_direct_access
 
 
-def deserialise_observables(state) -> List[float]:
+def deserialise_observables(state: FState) -> List[float]:
     return [state.Observables(i) for i in range(state.ObservablesLength())]
 
 
-def deserialise_unobservables(state) -> Any:
+def deserialise_unobservables(state: FState) -> Any:
     return US.Unobservables(state.Unobservables())
 
 
-def deserialise_actors(flat_environment_description) -> Dict[str, Any]:
+def deserialise_actors(
+    flat_environment_description: FEnvironmentDescription,
+) -> Dict[str, Any]:
     actors = {}
     if flat_environment_description:
         for i in range(flat_environment_description.ActorsLength()):
@@ -158,11 +167,11 @@ def deserialise_actors(flat_environment_description) -> Dict[str, Any]:
     return out_actors
 
 
-def deserialise_description(flat_description) -> Any:
+def deserialise_description(flat_description: FEnvironmentDescription) -> Any:
     return US.EnvironmentDescription(flat_description)
 
 
-def deserialise_poses(unobservables) -> numpy.ndarray:
+def deserialise_poses(unobservables: FUnobservables) -> numpy.ndarray:
     pl = unobservables.PosesLength()
     poses = numpy.zeros((pl, 7))
     for i in range(pl):
@@ -173,7 +182,7 @@ def deserialise_poses(unobservables) -> numpy.ndarray:
     return poses
 
 
-def deserialise_bodies(unobservables) -> numpy.ndarray:
+def deserialise_bodies(unobservables: FUnobservables) -> numpy.ndarray:
     bl = unobservables.BodiesLength()
     bodies = numpy.zeros((bl, 6))
     for i in range(bl):
@@ -397,8 +406,8 @@ def deserialise_actuators(flat_actor: FActor) -> Dict[str, Any]:
 def deserialise_range(flat_range: FRange) -> Range:
     """
 
-    @param flat_range:
-    @return:"""
+    :param flat_range:
+    :return:"""
     return Range(
         decimal_granularity=flat_range.DecimalGranularity(),
         min_value=flat_range.MinValue(),
@@ -410,8 +419,8 @@ def deserialise_range(flat_range: FRange) -> Range:
 def deserialise_space(flat_space: List[FRange]) -> List[Range]:
     """
 
-    @param flat_space:
-    @return:"""
+    :param flat_space:
+    :return:"""
     ret = []
     for space in flat_space:
         if space is not None:

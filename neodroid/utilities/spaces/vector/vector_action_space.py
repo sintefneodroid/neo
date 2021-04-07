@@ -20,8 +20,8 @@ class VectorActionSpace:
     def sample(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return [self.action_space.sample() for _ in range(self.num_env)]
 

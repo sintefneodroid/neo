@@ -18,8 +18,8 @@ class Configuration(object):
     def configurable_name(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._configurable_name
 
@@ -27,8 +27,8 @@ class Configuration(object):
     def configurable_value(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._configurable_value
 
@@ -36,8 +36,8 @@ class Configuration(object):
     def to_dict(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return {
             "_configurable_name": self._configurable_name,

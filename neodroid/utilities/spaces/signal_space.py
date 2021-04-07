@@ -12,24 +12,24 @@ __author__ = "Christian Heider Nielsen"
 
 __all__ = ["SignalSpace"]
 
-from warg import cached_property
+from warg import Number, cached_property
 
 
 class SignalSpace(Space):
     """"""
 
-    def __init__(self, ranges: Sequence[Range], solved_threshold=math.inf):
+    def __init__(self, ranges: Sequence[Range], solved_threshold: Number = math.inf):
         super().__init__(ranges)
 
         self.solved_threshold = solved_threshold
 
-    def is_solved(self, value) -> bool:
+    def is_solved(self, value: Number) -> bool:
         """
 
-        @param value:
-        @type value:
-        @return:
-        @rtype:
+        :param value:
+        :type value:
+        :return:
+        :rtype:
         """
         return value > self.solved_threshold
 
@@ -37,8 +37,8 @@ class SignalSpace(Space):
     def is_sparse(self) -> bool:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return numpy.array([a.decimal_granularity == 0 for a in self._ranges]).all()
 

@@ -29,8 +29,8 @@ class Configurable(object):
     def configurable_name(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._configurable_name
 
@@ -38,8 +38,8 @@ class Configurable(object):
     def configurable_value(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._configurable_value
 
@@ -47,8 +47,8 @@ class Configurable(object):
     def configurable_space(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if self._configurable_space:
             # space = deserialise_space(self._configurable_space) #Already done
@@ -59,8 +59,8 @@ class Configurable(object):
     def to_dict(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return {
             "configurable_name": self.configurable_name,

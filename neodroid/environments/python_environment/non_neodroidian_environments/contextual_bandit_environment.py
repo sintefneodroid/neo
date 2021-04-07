@@ -22,8 +22,8 @@ class ContextualBanditEnvironment(object):
     def update_state(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         self.state = self.np_random.randint(0, len(self.bandits))
         return self.state
@@ -31,18 +31,18 @@ class ContextualBanditEnvironment(object):
     def reset(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self.update_state()
 
     def act(self, action):
         """
 
-        @param action:
-        @type action:
-        @return:
-        @rtype:
+        :param action:
+        :type action:
+        :return:
+        :rtype:
         """
         threshold = self.bandits[self.state, action]
         result = self.np_random.random_sample()

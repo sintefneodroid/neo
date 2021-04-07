@@ -8,7 +8,7 @@ import numpy
 
 __author__ = "Christian Heider Nielsen"
 
-from warg import cached_property
+from warg import Number, cached_property
 
 __all__ = ["Range"]
 
@@ -17,7 +17,12 @@ class Range:
     """"""
 
     def __init__(
-        self, *, min_value=0, max_value=1, decimal_granularity=0, normalised=True
+        self,
+        *,
+        min_value: Number = 0,
+        max_value: Number = 1,
+        decimal_granularity: int = 0,
+        normalised: bool = True,
     ):
         """
 
@@ -45,8 +50,8 @@ class Range:
     def decimal_granularity(self) -> int:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._decimal_granularity
 
@@ -54,8 +59,8 @@ class Range:
     def min_unnorm(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._min_value
 
@@ -63,8 +68,8 @@ class Range:
     def max_unnorm(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._max_value
 
@@ -72,8 +77,8 @@ class Range:
     def min(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if self.normalised:
             return 0
@@ -83,8 +88,8 @@ class Range:
     def max(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if self.normalised:
             return 1
@@ -94,8 +99,8 @@ class Range:
     def discrete_step_size(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if self.decimal_granularity >= 0:
             return 1 / numpy.power(10, self.decimal_granularity)
@@ -105,8 +110,8 @@ class Range:
     def span_unnorm(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self.max_unnorm - self.min_unnorm
 
@@ -114,8 +119,8 @@ class Range:
     def span(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if self.normalised:
             return 1
@@ -125,8 +130,8 @@ class Range:
     def discrete_steps(self) -> int:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return math.floor(self.span_unnorm / self.discrete_step_size) + 1
 
@@ -145,30 +150,30 @@ class Range:
     def normalise(self, value):
         """
 
-        @param value:
-        @type value:
-        @return:
-        @rtype:
+        :param value:
+        :type value:
+        :return:
+        :rtype:
         """
         return (self.min_unnorm + value + 1) / (self.max_unnorm + 1)
 
     def denormalise(self, value):
         """
 
-        @param value:
-        @type value:
-        @return:
-        @rtype:
+        :param value:
+        :type value:
+        :return:
+        :rtype:
         """
         return (value * self.max_unnorm) - self.min_unnorm
 
     def clip(self, value):
         """
 
-        @param value:
-        @type value:
-        @return:
-        @rtype:
+        :param value:
+        :type value:
+        :return:
+        :rtype:
         """
         if self.span > 0:
             return numpy.clip(value, self._min_value, self._max_value)
@@ -177,10 +182,10 @@ class Range:
     def round(self, value):
         """
 
-        @param value:
-        @type value:
-        @return:
-        @rtype:
+        :param value:
+        :type value:
+        :return:
+        :rtype:
         """
         if self.decimal_granularity >= 0:
             return numpy.round(value, self.decimal_granularity)
@@ -189,10 +194,10 @@ class Range:
     def clip_normalise_round(self, value):
         """
 
-        @param value:
-        @type value:
-        @return:
-        @rtype:
+        :param value:
+        :type value:
+        :return:
+        :rtype:
         """
         return self.round(self.normalise(self.clip(value)))
 
@@ -216,8 +221,8 @@ class Range:
     def sample(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         if self.decimal_granularity == 0:
             return self.cheapest_sample()
@@ -228,8 +233,8 @@ class Range:
     def cheapest_sample(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         val = numpy.random.randint(self.min, self.max + 1)
 
@@ -241,8 +246,8 @@ class Range:
     def cheaper_sample(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         val = self.round(numpy.random.random() * self.span)
 
@@ -254,8 +259,8 @@ class Range:
     def expensive_sample(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         val = numpy.random.choice(
             numpy.linspace(self.min, self.max, num=self.discrete_steps)

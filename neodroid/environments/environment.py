@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 import logging
 from abc import ABC, abstractmethod
+from enum import Enum
 from pathlib import Path
 from types import coroutine
-from typing import Any
+from typing import Any, Optional
 
 from neodroid import PROJECT_APP_PATH
 from neodroid.utilities import EnvironmentSnapshot
@@ -60,8 +61,8 @@ class Environment(ABC):
     def environment_name(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._environment_name
 
@@ -69,10 +70,10 @@ class Environment(ABC):
     def configure(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
         """
         raise NotImplementedError
 
@@ -80,10 +81,10 @@ class Environment(ABC):
     def reset(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
         """
         raise NotImplementedError
 
@@ -91,10 +92,10 @@ class Environment(ABC):
     def react(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
         """
         raise NotImplementedError
 
@@ -102,10 +103,10 @@ class Environment(ABC):
     def display(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
         """
         raise NotImplementedError
 
@@ -113,10 +114,10 @@ class Environment(ABC):
     def describe(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
         """
         raise NotImplementedError
 
@@ -174,12 +175,14 @@ class Environment(ABC):
         :rtype:"""
         return self
 
-    def render(self):
-        """"""
+    def render(self, *args, **kwargs) -> Optional[numpy.ndarray]:
+        """
+
+        """
         pass
 
     @staticmethod
-    def seed(seed):
+    def seed(seed: int) -> None:
         """
 
         :param seed:

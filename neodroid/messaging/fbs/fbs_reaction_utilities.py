@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Sequence
+from typing import Iterable, Sequence, Union
 
 from flatbuffers import Builder
 
@@ -25,7 +25,7 @@ __all__ = [
 ]
 
 
-def serialise_reactions(input_reactions):
+def serialise_reactions(input_reactions: Iterable) -> Union[int, bytearray]:
     B = Builder(1)
 
     reaction_offsets = []
@@ -49,7 +49,7 @@ def serialise_reactions(input_reactions):
     return B.Output()
 
 
-def serialise_reaction(B, input_reaction: Reaction):
+def serialise_reaction(B: Builder, input_reaction: Reaction) -> Union[int, bytearray]:
     unobservables = serialise_unobservables(B, input_reaction)
     displayables = serialise_displayables(B, input_reaction)
     configurations = serialise_configurations(B, input_reaction)
@@ -84,7 +84,7 @@ def serialise_reaction(B, input_reaction: Reaction):
     return F.FReactionEnd(B)
 
 
-def serialise_unobservables(B, input_reaction):
+def serialise_unobservables(B: Builder, input_reaction) -> Union[int, bytearray]:
     unobservables = input_reaction.unobservables
     if unobservables:
         unobservables = unobservables.unobservables
@@ -103,7 +103,7 @@ def serialise_unobservables(B, input_reaction):
         return F.FUnobservablesEnd(B)
 
 
-def serialise_poses(B, fu):
+def serialise_poses(B: Builder, fu) -> Union[int, bytearray]:
     pl = fu.PosesLength()
     F.FUnobservablesStartPosesVector(B, pl)
     for i in range(pl):
@@ -116,7 +116,7 @@ def serialise_poses(B, fu):
     return B.EndVector(pl)
 
 
-def serialise_bodies(B, fu):
+def serialise_bodies(B: Builder, fu) -> Union[int, bytearray]:
     bl = fu.BodiesLength()
     F.FUnobservablesStartBodiesVector(B, bl)
     for i in range(bl):
@@ -127,7 +127,7 @@ def serialise_bodies(B, fu):
     return B.EndVector(bl)
 
 
-def serialise_motions(B, input_reaction: Reaction):
+def serialise_motions(B: Builder, input_reaction: Reaction) -> Union[int, bytearray]:
     motion_offsets = []
     for input_motion in input_reaction.motions:
         assert isinstance(input_motion.actor_name, str), type(input_motion.actor_name)
@@ -154,7 +154,7 @@ def serialise_motions(B, input_reaction: Reaction):
     return B.EndVector(l)
 
 
-def serialise_displayables(B, input_reaction):
+def serialise_displayables(B: Builder, input_reaction) -> Union[int, bytearray]:
     displayables_offsets = []
     if input_reaction.displayables is not None:
         for input_displayable in input_reaction.displayables:
@@ -241,7 +241,7 @@ def serialise_displayables(B, input_reaction):
     return B.EndVector(len(displayables_offsets))
 
 
-def serialise_configurations(B, input_reaction):
+def serialise_configurations(B: Builder, input_reaction) -> Union[int, bytearray]:
     configurations_offsets = []
     if input_reaction.configurations is not None:
         for input_configuration in input_reaction.configurations:

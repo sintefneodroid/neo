@@ -3,7 +3,7 @@
 import functools
 from typing import Any, Dict, Union
 
-from neodroid.messaging.fbs.fbs_state_utilties import deserialise_actuators
+from neodroid.messaging.fbs import FActor, deserialise_actuators
 
 __author__ = "Christian Heider Nielsen"
 
@@ -13,15 +13,15 @@ from warg import cached_property
 class Actor(object):
     """"""
 
-    def __init__(self, flat_actor):
+    def __init__(self, flat_actor: FActor):
         self._flat_actor = flat_actor
 
     @cached_property
     def actor_name(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._flat_actor.ActorName().decode()
 
@@ -29,18 +29,18 @@ class Actor(object):
     def is_alive(self) -> bool:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._flat_actor.Alive()
 
     def actuator(self, key) -> Union[None, Any]:
         """
 
-        @param key:
-        @type key:
-        @return:
-        @rtype:
+        :param key:
+        :type key:
+        :return:
+        :rtype:
         """
         if key in deserialise_actuators(self._flat_actor):
             return deserialise_actuators(self._flat_actor)[key]
@@ -49,8 +49,8 @@ class Actor(object):
     def actuators(self) -> Dict[str, Any]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return deserialise_actuators(self._flat_actor)
 

@@ -33,8 +33,8 @@ class ReactionParameters(object):
     def reset(self) -> bool:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._reset
 
@@ -42,8 +42,8 @@ class ReactionParameters(object):
     def configure(self) -> bool:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._configure
 
@@ -51,8 +51,8 @@ class ReactionParameters(object):
     def describe(self) -> bool:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._describe
 
@@ -60,8 +60,8 @@ class ReactionParameters(object):
     def step(self) -> bool:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._step
 
@@ -69,8 +69,8 @@ class ReactionParameters(object):
     def episode_count(self) -> bool:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._episode_count
 
@@ -78,8 +78,8 @@ class ReactionParameters(object):
     def terminable(self) -> bool:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._terminable
 
@@ -90,16 +90,16 @@ class ReactionParameters(object):
     def to_dict(self) -> dict:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return {"_reset": self._reset}
 
     def to_json(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return json.dumps(self.to_dict())
 

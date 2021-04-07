@@ -12,30 +12,34 @@ __author__ = "Christian Heider Nielsen"
 import numpy
 
 from warg import cached_property
+from neodroid.messaging.fbs import FUnobservables
 
 
 class Unobservables(object):
-    """"""
+    """
+  Represents a full reproducible state, eg. physics engine state and other unobservables
 
-    def __init__(self, unobservables):
+  """
+
+    def __init__(self, unobservables: FUnobservables):
         self._unobservables = unobservables
 
     @property
     def unobservables(self):
         """
 
-        @return:
-        @rtype:
-        """
+    :return:
+    :rtype:
+    """
         return self._unobservables
 
     @cached_property
     def poses_numpy(self):
         """
 
-        @return:
-        @rtype:
-        """
+    :return:
+    :rtype:
+    """
         if self._unobservables:
             return deserialise_poses(self._unobservables)
 
@@ -43,9 +47,9 @@ class Unobservables(object):
     def bodies_numpy(self):
         """
 
-        @return:
-        @rtype:
-        """
+    :return:
+    :rtype:
+    """
         if self._unobservables:
             return deserialise_bodies(self._unobservables)
 
@@ -53,9 +57,9 @@ class Unobservables(object):
     def state_configuration(self):
         """
 
-        @return:
-        @rtype:
-        """
+    :return:
+    :rtype:
+    """
         return numpy.array(
             [self.poses_numpy.flatten(), self.bodies_numpy.flatten()]
         ).flatten()

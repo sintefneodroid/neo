@@ -27,8 +27,8 @@ class EnvironmentDescription(object):
     def objective_name(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._fbs_description.Objective().ObjectiveName()
 
@@ -36,8 +36,8 @@ class EnvironmentDescription(object):
     def max_episode_length(self) -> int:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._fbs_description.Objective().MaxEpisodeLength()
 
@@ -45,18 +45,18 @@ class EnvironmentDescription(object):
     def actors(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return deserialise_actors(self._fbs_description)
 
     def actor(self, key):
         """
 
-        @param key:
-        @type key:
-        @return:
-        @rtype:
+        :param key:
+        :type key:
+        :return:
+        :rtype:
         """
         actors = self.actors
         if key in actors:
@@ -66,8 +66,8 @@ class EnvironmentDescription(object):
     def actuators(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         actuators_out = []
         for a in deserialise_actors(self._fbs_description).values():
@@ -77,10 +77,10 @@ class EnvironmentDescription(object):
     def actuator(self, key):
         """
 
-        @param key:
-        @type key:
-        @return:
-        @rtype:
+        :param key:
+        :type key:
+        :return:
+        :rtype:
         """
         actuators = self.actuators
         if key in actuators:
@@ -90,18 +90,18 @@ class EnvironmentDescription(object):
     def sensors(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return deserialise_sensors(self._fbs_description)
 
     def sensor(self, key) -> Sensor:
         """
 
-        @param key:
-        @type key:
-        @return:
-        @rtype:
+        :param key:
+        :type key:
+        :return:
+        :rtype:
         """
         if key in self.sensors:
             return self.sensors[key]
@@ -110,18 +110,18 @@ class EnvironmentDescription(object):
     def configurables(self) -> Dict[str, Configurable]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return deserialise_configurables(self._fbs_description)
 
     def configurable(self, key: str) -> Configurable:
         """
 
-        @param key:
-        @type key:
-        @return:
-        @rtype:
+        :param key:
+        :type key:
+        :return:
+        :rtype:
         """
         configurables = self.configurables
         if key in configurables:
@@ -158,8 +158,8 @@ class EnvironmentDescription(object):
     def observation_space(self) -> ObservationSpace:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         sensor_names = self.sensors.keys()
         observation_spaces = []
@@ -173,8 +173,8 @@ class EnvironmentDescription(object):
     def action_space(self) -> ActionSpace:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         motion_names = self.actors.keys()
         motion_spaces = []
@@ -188,8 +188,8 @@ class EnvironmentDescription(object):
     def signal_space(self) -> SignalSpace:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return SignalSpace((Range(min_value=-1, max_value=1, decimal_granularity=3),))
 

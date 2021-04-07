@@ -26,8 +26,8 @@ class FixedSequenceEnvironment(NoRenderEnv):
     def reset(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         self._time = 0
         return 0
@@ -35,10 +35,10 @@ class FixedSequenceEnvironment(NoRenderEnv):
     def step(self, actions):
         """
 
-        @param actions:
-        @type actions:
-        @return:
-        @rtype:
+        :param actions:
+        :type actions:
+        :return:
+        :rtype:
         """
         signal = self._get_signal(actions)
         self._to_next_state()
@@ -51,8 +51,8 @@ class FixedSequenceEnvironment(NoRenderEnv):
     def time(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._time
 

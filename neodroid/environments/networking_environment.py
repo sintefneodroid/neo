@@ -102,8 +102,8 @@ class NetworkingEnvironment(Environment, ABC):
     def is_connected(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._is_connected_to_server
 
@@ -121,12 +121,12 @@ class NetworkingEnvironment(Environment, ABC):
     def close(self, *args, **kwargs):
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        @return:
-        @rtype:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        :return:
+        :rtype:
         """
         self._message_server.teardown()
 

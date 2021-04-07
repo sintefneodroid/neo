@@ -22,8 +22,8 @@ class Motion(object):
     def actor_name(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._actor_name
 
@@ -31,8 +31,8 @@ class Motion(object):
     def actuator_name(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._actuator_name
 
@@ -40,16 +40,16 @@ class Motion(object):
     def strength(self) -> float:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._strength
 
     def to_dict(self) -> Dict[str, Any]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return {
             "_actor_name": self._actor_name,

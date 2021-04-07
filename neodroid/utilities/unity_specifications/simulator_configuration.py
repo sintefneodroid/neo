@@ -4,15 +4,17 @@ __author__ = "Christian Heider Nielsen"
 
 from warg import cached_property
 
+from neodroid.messaging.fbs import FConfiguration
+
 
 class SimulatorConfiguration(object):
     """"""
 
     def __init__(
         self,
-        fbs_configuration,
-        api_version,
-        simulator_info="No simulator_info available",
+        fbs_configuration: FConfiguration,
+        api_version: bytes,
+        simulator_info: str = "No simulator_info available",
     ):
         """
 
@@ -27,26 +29,26 @@ class SimulatorConfiguration(object):
     def simulator_configuration(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._fbs_configuration
 
     @cached_property
-    def api_version(self):
+    def api_version(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._api_version.decode()
 
     @property
-    def simulator_info(self):
+    def simulator_info(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         # if not isinstance(self._simulator_info, str):
         #  return self._simulator_info.decode()

@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 import logging
 from contextlib import suppress
+from typing import Callable, Optional
 
 import zmq
+from draugr.writers import Writer
 
 from neodroid.messaging.fbs import FStates, deserialise_states, serialise_reactions
 
@@ -16,14 +18,14 @@ class MessageClient(object):
 
     def __init__(
         self,
-        tcp_address="localhost",
-        tcp_port=6969,
-        on_timeout_callback=None,
-        on_step_done_callback=None,
-        on_connected_callback=None,
-        on_disconnected_callback=None,
-        single_threaded=False,
-        writer=logging.info,
+        tcp_address: str = "localhost",
+        tcp_port: int = 6969,
+        on_timeout_callback: Optional[Callable] = None,
+        on_step_done_callback: Optional[Callable] = None,
+        on_connected_callback: Optional[Callable] = None,
+        on_disconnected_callback: Optional[Callable] = None,
+        single_threaded: bool = False,
+        writer: callable = logging.info,
     ):
 
         self._tcp_address = tcp_address
@@ -95,8 +97,8 @@ class MessageClient(object):
     def build(self, single_threaded=False):
         """
 
-        @param single_threaded:
-        @type single_threaded:"""
+    :param single_threaded:
+    :type single_threaded:"""
         if single_threaded:
             self._context = zmq.Context.instance()
 
@@ -110,10 +112,10 @@ class MessageClient(object):
     def send_receive(self, reactions):
         """
 
-        @param reactions:
-        @type reactions:
-        @return:
-        @rtype:"""
+    :param reactions:
+    :type reactions:
+    :return:
+    :rtype:"""
         if self._request_socket is None:
             self.build()
 

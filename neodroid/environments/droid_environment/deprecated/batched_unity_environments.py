@@ -143,14 +143,14 @@ class VectorWrapper:
     def react(self, a, *args, **kwargs):
         """
 
-        @param a:
-        @type a:
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        @return:
-        @rtype:
+        :param a:
+        :type a:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        :return:
+        :rtype:
         """
         if isinstance(a, numpy.ndarray):
             a = a.tolist()
@@ -164,8 +164,8 @@ class VectorWrapper:
     def reset(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         info = self._env.reset()
 

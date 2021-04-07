@@ -21,8 +21,8 @@ class Actuator(object):
     def actuator_name(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._actuator_name
 
@@ -30,8 +30,8 @@ class Actuator(object):
     def motion_space(self) -> Range:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return deserialise_range(self._range)
 

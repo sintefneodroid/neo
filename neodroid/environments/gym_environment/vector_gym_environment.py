@@ -1,26 +1,41 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from os import cpu_count
-from typing import Sequence
+from typing import Sequence, Optional, Tuple
 
 import numpy
 
+from neodroid.utilities import EnvironmentDescription
 from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
     VectorEnvironmentSnapshot,
 )
+from neodroid.environments.environment import Environment
 from neodroid.utilities.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
 from neodroid.utilities.unity_specifications import EnvironmentSnapshot
 
 __author__ = "Christian Heider Nielsen"
 
 from trolls import SubProcessEnvironments, make_gym_env
-from warg import drop_unused_kws
+from warg import drop_unused_kws, passes_kws_to
 
 __all__ = ["NeodroidVectorGymEnvironment"]
 
 
-class NeodroidVectorGymEnvironment(object):
+class NeodroidVectorGymEnvironment(Environment):
     """"""
+
+    def configure(self, *args, **kwargs) -> EnvironmentSnapshot:
+        pass
+
+    def display(self, *args, **kwargs) -> EnvironmentSnapshot:
+        pass
+
+    def describe(self, *args, **kwargs) -> EnvironmentSnapshot:
+        pass
+
+    @property
+    def description(self) -> EnvironmentDescription:
+        pass
 
     @drop_unused_kws
     def __init__(
@@ -41,7 +56,7 @@ class NeodroidVectorGymEnvironment(object):
     def signal_space(self) -> SignalSpace:
         """
 
-        :return:"""
+    :return:"""
 
         space = SignalSpace(
             [
@@ -59,7 +74,7 @@ class NeodroidVectorGymEnvironment(object):
     def observation_space(self) -> ObservationSpace:
         """
 
-        :return:"""
+    :return:"""
 
         if len(self._env.observation_space.shape) >= 1:
             aspc = self._env.observation_space
@@ -88,7 +103,7 @@ class NeodroidVectorGymEnvironment(object):
     def action_space(self) -> ActionSpace:
         """
 
-        :return:"""
+    :return:"""
 
         if len(self._env.action_space.shape) >= 1:
             aspc = self._env.action_space
@@ -118,20 +133,20 @@ class NeodroidVectorGymEnvironment(object):
     def environment_name(self):
         """
 
-        @return:
-        @rtype:
-        """
+    :return:
+    :rtype:
+    """
         return self._environment_name
 
     @drop_unused_kws
     def react(self, a: Sequence) -> VectorEnvironmentSnapshot:
         """
 
-        @param a:
-        @type a:
-        @return:
-        @rtype:
-        """
+    :param a:
+    :type a:
+    :return:
+    :rtype:
+    """
         a = self.action_space.reproject(a)
         if self.action_space.is_discrete:
             a = numpy.squeeze(a, -1)
@@ -154,9 +169,9 @@ class NeodroidVectorGymEnvironment(object):
     def reset(self) -> VectorEnvironmentSnapshot:
         """
 
-        @return:
-        @rtype:
-        """
+    :return:
+    :rtype:
+    """
         res = self._env.reset()
         if res:
             e = {
@@ -167,6 +182,10 @@ class NeodroidVectorGymEnvironment(object):
             }
             return VectorEnvironmentSnapshot(e)
         raise ValueError("received None res")
+
+    @passes_kws_to(SubProcessEnvironments.render)
+    def render(self, *args, **kwargs):
+        return self._env.render(*args, **kwargs)
 
     def __getattr__(self, item):
         return getattr(self._env, item)

@@ -117,8 +117,8 @@ class NeodroidGymEnvironment(object):
     def environment_name(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._environment_name
 
@@ -126,10 +126,10 @@ class NeodroidGymEnvironment(object):
     def react(self, a: Iterable) -> VectorEnvironmentSnapshot:
         """
 
-        @param a:
-        @type a:
-        @return:
-        @rtype:
+        :param a:
+        :type a:
+        :return:
+        :rtype:
         """
         a = a[0]
         e = EnvironmentSnapshot.from_gym(self.environment_name, *self._env.step(a))
@@ -138,8 +138,8 @@ class NeodroidGymEnvironment(object):
     def reset(self) -> VectorEnvironmentSnapshot:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         observables = self._env.reset()
         e = EnvironmentSnapshot.from_gym(

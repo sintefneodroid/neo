@@ -20,8 +20,8 @@ class Sensor(object):
     def name(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._sensor_name
 
@@ -29,8 +29,8 @@ class Sensor(object):
     def is_image(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._is_image
 
@@ -38,8 +38,8 @@ class Sensor(object):
     def space(self) -> List[Range]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._range
 
@@ -47,8 +47,8 @@ class Sensor(object):
     def value(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._value
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import List, Mapping
+from typing import List, Mapping, Optional, Tuple
 
 import numpy
 from attr import dataclass
@@ -24,7 +24,7 @@ class VectorPoints(IterDictValuesMixin, OrdinalIndexingDictMixin):
     def __len__(self):
         """
 
-        @return:"""
+        :return:"""
         return len(self.terminated)
 
 
@@ -38,7 +38,7 @@ class NumpyVectorPoints(IterDictValuesMixin, OrdinalIndexingDictMixin):
     def __len__(self):
         """
 
-        @return:"""
+        :return:"""
         return len(self.terminated)
 
 

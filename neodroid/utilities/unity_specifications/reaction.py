@@ -20,8 +20,8 @@ class Reaction(object):
         parameters: ReactionParameters = None,
         motions: Sequence = (),
         configurations: Sequence = (),
-        unobservables: Unobservables = None,
-        displayables: Sequence = None,
+        unobservables: Optional[Unobservables] = None,
+        displayables: Optional[Sequence] = None,
         environment_name: str = "None",
         serialised_message: str = "",
     ):
@@ -45,8 +45,8 @@ class Reaction(object):
     def environment_name(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._environment_name
 
@@ -54,8 +54,8 @@ class Reaction(object):
     def parameters(self) -> ReactionParameters:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._parameters
 
@@ -67,8 +67,8 @@ class Reaction(object):
     def motions(self) -> Sequence:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._motions
 
@@ -80,8 +80,8 @@ class Reaction(object):
     def configurations(self) -> Sequence:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._configurations
 
@@ -93,8 +93,8 @@ class Reaction(object):
     def displayables(self) -> Sequence:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._displayables
 
@@ -106,8 +106,8 @@ class Reaction(object):
     def unobservables(self) -> Optional[Unobservables]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._unobservables
 
@@ -119,8 +119,8 @@ class Reaction(object):
     def string_serialised_message(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._serialised_message
 
@@ -131,8 +131,8 @@ class Reaction(object):
     def to_dict(self) -> Dict[str, List]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return {
             "_configurations": [
@@ -144,8 +144,8 @@ class Reaction(object):
     def to_json(self) -> str:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return json.dumps(self.to_dict())
 

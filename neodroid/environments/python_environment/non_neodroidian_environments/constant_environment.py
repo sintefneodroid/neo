@@ -8,8 +8,8 @@ class NoRenderEnv(Env):
     def render(self, mode="human"):
         """
 
-        @param mode:
-        @type mode:
+        :param mode:
+        :type mode:
         """
         pass
 
@@ -37,8 +37,8 @@ class ConstantEnvironment(NoRenderEnv):
     def reset(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         self.obs = self.observation_space.sample()
         return self.obs
@@ -46,10 +46,10 @@ class ConstantEnvironment(NoRenderEnv):
     def step(self, actions):
         """
 
-        @param actions:
-        @type actions:
-        @return:
-        @rtype:
+        :param actions:
+        :type actions:
+        :return:
+        :rtype:
         """
         if actions > 0:
             return self.obs, 0, True, {}
@@ -59,20 +59,20 @@ class ConstantEnvironment(NoRenderEnv):
     def act(self, a):
         """
 
-        @param a:
-        @type a:
-        @return:
-        @rtype:
+        :param a:
+        :type a:
+        :return:
+        :rtype:
         """
         return self.step(a)
 
     def react(self, a):
         """
 
-        @param a:
-        @type a:
-        @return:
-        @rtype:
+        :param a:
+        :type a:
+        :return:
+        :rtype:
         """
         return self.act(a)
 
@@ -81,8 +81,8 @@ class StatefulEnvironment(ConstantEnvironment):
     def reset(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         self.obs = self.observation_space.sample()
         return [self.obs]
@@ -90,10 +90,10 @@ class StatefulEnvironment(ConstantEnvironment):
     def step(self, actions):
         """
 
-        @param actions:
-        @type actions:
-        @return:
-        @rtype:
+        :param actions:
+        :type actions:
+        :return:
+        :rtype:
         """
         terminated = numpy.array_equal(self.obs, [actions])
         if isinstance(terminated, numpy.ndarray):

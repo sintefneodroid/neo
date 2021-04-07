@@ -27,8 +27,8 @@ class SingleUnityEnvironment(UnityEnvironment):
     def description(self) -> EnvironmentDescription:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         while not self._description:
             self.describe()
@@ -38,8 +38,8 @@ class SingleUnityEnvironment(UnityEnvironment):
     def observation_space(self) -> ObservationSpace:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         while not self._observation_space:
             self.describe()
@@ -49,8 +49,8 @@ class SingleUnityEnvironment(UnityEnvironment):
     def action_space(self) -> ActionSpace:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         while not self._action_space:
             self.describe()
@@ -60,8 +60,8 @@ class SingleUnityEnvironment(UnityEnvironment):
     def signal_space(self) -> SignalSpace:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         while not self._signal_space:
             self.describe()
@@ -77,16 +77,16 @@ class SingleUnityEnvironment(UnityEnvironment):
     ) -> EnvironmentSnapshot:
         """
 
-        @param input_reaction:
-        @type input_reaction:
-        @param parameters:
-        @type parameters:
-        @param normalise:
-        @type normalise:
-        @param kwargs:
-        @type kwargs:
-        @return:
-        @rtype:
+        :param input_reaction:
+        :type input_reaction:
+        :param parameters:
+        :type parameters:
+        :param normalise:
+        :type normalise:
+        :param kwargs:
+        :type kwargs:
+        :return:
+        :rtype:
         """
         if not isinstance(input_reaction, Reaction):
             input_reaction = verify_motion_reaction(
@@ -112,14 +112,14 @@ class SingleUnityEnvironment(UnityEnvironment):
     ) -> EnvironmentSnapshot:
         """
 
-        @param input_reaction:
-        @type input_reaction:
-        @param state:
-        @type state:
-        @param on_reset_callback:
-        @type on_reset_callback:
-        @return:
-        @rtype:
+        :param input_reaction:
+        :type input_reaction:
+        :param state:
+        :type state:
+        :param on_reset_callback:
+        :type on_reset_callback:
+        :return:
+        :rtype:
         """
         input_reaction = verify_configuration_reaction(
             input_reaction=input_reaction, environment_description=self.description
@@ -136,24 +136,24 @@ class SingleUnityEnvironment(UnityEnvironment):
     def configure(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        @return:
-        @rtype:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        :return:
+        :rtype:
         """
         return self.reset(*args, **kwargs)
 
     def describe(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        @return:
-        @rtype:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        :return:
+        :rtype:
         """
         new_states = super().describe(*args, **kwargs)
         message = list(new_states.values())[0]
@@ -162,14 +162,14 @@ class SingleUnityEnvironment(UnityEnvironment):
     def sensor(self, name, *args, **kwargs) -> Sensor:
         """
 
-        @param name:
-        @type name:
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        @return:
-        @rtype:
+        :param name:
+        :type name:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        :return:
+        :rtype:
         """
         state_env_0 = list(self._last_snapshots.values())[0]
         sens = state_env_0.sensor(name)

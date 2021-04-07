@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 from pathlib import Path
-from typing import Mapping, Union
+from typing import Any, Callable, Dict, Iterable, Mapping, Optional, Sequence, Union
 
 from neodroid import DEFAULT_ENVIRONMENTS_PATH, __version__
 from neodroid.factories.motion_reactions import verify_motion_reactions
@@ -79,8 +79,8 @@ class UnityEnvironment(NetworkingEnvironment):
     def description(self) -> Mapping[str, EnvironmentDescription]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         while not self._description:
             self.describe()
@@ -90,8 +90,8 @@ class UnityEnvironment(NetworkingEnvironment):
     def observation_space(self) -> Mapping[str, ObservationSpace]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         while not self._observation_space:
             self.describe()
@@ -101,8 +101,8 @@ class UnityEnvironment(NetworkingEnvironment):
     def action_space(self) -> Mapping[str, ActionSpace]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         while not self._action_space:
             self.describe()
@@ -112,8 +112,8 @@ class UnityEnvironment(NetworkingEnvironment):
     def signal_space(self) -> Mapping[str, SignalSpace]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         while not self._signal_space:
             self.describe()
@@ -123,8 +123,8 @@ class UnityEnvironment(NetworkingEnvironment):
     def simulator_configuration(self) -> SimulatorConfiguration:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         while not self._simulator_configuration:
             self.describe()
@@ -134,18 +134,18 @@ class UnityEnvironment(NetworkingEnvironment):
     def neodroid_api_version(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return __version__
 
     def sensor(self, name: str):
         """
 
-        @param name:
-        @type name:
-        @return:
-        @rtype:
+        :param name:
+        :type name:
+        :return:
+        :rtype:
         """
         envs = list(self._last_snapshots.values())
 
@@ -179,23 +179,25 @@ class UnityEnvironment(NetworkingEnvironment):
     def configure(self, *args, **kwargs) -> Mapping[str, EnvironmentSnapshot]:
         """
 
-        @param args:
-        @type args:
-        @param kwargs:
-        @type kwargs:
-        @return:
-        @rtype:
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        :return:
+        :rtype:
         """
         return self.reset(*args, **kwargs)
 
     def react(
         self,
-        input_reactions=None,
+        input_reactions: Optional[Any] = None,
         *,
-        parameters=ReactionParameters(episode_count=True, step=True, terminable=True),
-        normalise=False,
-        on_reaction_sent_callback=None,
-        on_step_done_callback=None,
+        parameters: Optional[ReactionParameters] = ReactionParameters(
+            episode_count=True, step=True, terminable=True
+        ),
+        normalise: bool = False,
+        on_reaction_sent_callback: Optional[Callable] = None,
+        on_step_done_callback: Optional[Callable] = None,
         **kwargs,
     ) -> Mapping[str, EnvironmentSnapshot]:
         """
@@ -212,7 +214,7 @@ class UnityEnvironment(NetworkingEnvironment):
         :type on_step_done_callback:
         :return:
         :rtype:"""
-        logging.info("Reacting in environment")
+        logging.info(f"Reacting in environment: {self.environment_name}")
 
         if (
             isinstance(input_reactions, list)
@@ -237,13 +239,13 @@ class UnityEnvironment(NetworkingEnvironment):
 
         return self.send(input_reactions)
 
-    def send(self, input_reactions):
+    def send(self, input_reactions: Iterable) -> Dict[str, Any]:
         """
 
-        @param input_reactions:
-        @type input_reactions:
-        @return:
-        @rtype:
+        :param input_reactions:
+        :type input_reactions:
+        :return:
+        :rtype:
         """
         (new_snapshots, simulator_configuration) = self._message_server.send_receive(
             input_reactions
@@ -259,13 +261,13 @@ class UnityEnvironment(NetworkingEnvironment):
 
         return new_snapshots
 
-    def display(self, displayables) -> Mapping[str, EnvironmentSnapshot]:
+    def display(self, displayables: Sequence) -> Mapping[str, EnvironmentSnapshot]:
         """
 
-        @param displayables:
-        @type displayables:
-        @return:
-        @rtype:
+        :param displayables:
+        :type displayables:
+        :return:
+        :rtype:
         """
         conf_reaction = Reaction(displayables=displayables)
         message = self.reset(conf_reaction)
@@ -273,18 +275,21 @@ class UnityEnvironment(NetworkingEnvironment):
             return message
 
     def reset(
-        self, input_reactions=None, state=None, on_reset_callback=None
+        self,
+        input_reactions: Optional[Any] = None,
+        state: Optional[EnvironmentSnapshot] = None,
+        on_reset_callback: Optional[Callable] = None,
     ) -> Mapping[str, EnvironmentSnapshot]:
         """
 
-        @param input_reactions:
-        @type input_reactions:
-        @param state:
-        @type state:
-        @param on_reset_callback:
-        @type on_reset_callback:
-        @return:
-        @rtype:
+        :param input_reactions:
+        :type input_reactions:
+        :param state: Reset to a certain state #TODO NOT IMPLEMENTED
+        :type state:
+        :param on_reset_callback:
+        :type on_reset_callback:
+        :return:
+        :rtype:
         """
         logging.info("Resetting environment")
 
@@ -296,7 +301,7 @@ class UnityEnvironment(NetworkingEnvironment):
 
         return self.send(input_reactions)
 
-    def _close(self, callback=None):
+    def _close(self, callback: Optional[Callable] = None):
         """
 
         :param callback:
@@ -327,13 +332,17 @@ class UnityEnvironment(NetworkingEnvironment):
 
         return self.send([reaction])
 
-    def update_interface_attributes(self, new_states, new_simulator_configuration):
+    def update_interface_attributes(
+        self,
+        new_states: Dict[str, EnvironmentSnapshot],
+        new_simulator_configuration: SimulatorConfiguration,
+    ) -> None:
         """
 
-        @param new_states:
-        @type new_states:
-        @param new_simulator_configuration:
-        @type new_simulator_configuration:
+        :param new_states:
+        :type new_states:
+        :param new_simulator_configuration:
+        :type new_simulator_configuration:
         """
         if not self._description:
             self._description = {}

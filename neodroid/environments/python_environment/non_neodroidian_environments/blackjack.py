@@ -50,8 +50,8 @@ class BlackjackEnvironment:
     def reset(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         # Create a fresh deck of 52 cards (we will randomly sample this deck with replacement)
         SUITS = ["diamond", "club", "heart", "spade"]
@@ -72,19 +72,19 @@ class BlackjackEnvironment:
     def step(self, action):
         """
 
-        @param action:
-        @type action:
-        @return:
-        @rtype:
+        :param action:
+        :type action:
+        :return:
+        :rtype:
         """
 
         def deal_card(DECK):
             """
 
-            @param DECK:
-            @type DECK:
-            @return:
-            @rtype:
+            :param DECK:
+            :type DECK:
+            :return:
+            :rtype:
             """
             card = random.choice(DECK)  # deal card with replacement
             if card["rank"] in ["A"]:
@@ -167,12 +167,12 @@ class Agent:
     def get_action(self, state, force_random=False):
         """
 
-        @param state:
-        @type state:
-        @param force_random:
-        @type force_random:
-        @return:
-        @rtype:
+        :param state:
+        :type state:
+        :param force_random:
+        :type force_random:
+        :return:
+        :rtype:
         """
         if random.uniform(0, 1) < self.epsilon or force_random:
             # explore
@@ -210,8 +210,8 @@ class Agent:
     def memorize(self, memory):
         """
 
-        @param memory:
-        @type memory:
+        :param memory:
+        :type memory:
         """
         self.memories.append(memory)
 

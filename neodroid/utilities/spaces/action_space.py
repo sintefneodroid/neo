@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from typing import List
 
 from neodroid.utilities.spaces.range import Range
 from neodroid.utilities.spaces.space import Space
@@ -9,15 +10,15 @@ __all__ = ["ActionSpace"]
 
 import numpy
 
-from warg import cached_property
+from warg import Number, cached_property
 
 
 class ActionSpace(Space):
-    def sample(self):
+    def sample(self) -> List[Number]:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         actions = []
         for valid_input in self._ranges:
@@ -27,13 +28,13 @@ class ActionSpace(Space):
             actions.append(numpy.round(sample, valid_input.decimal_granularity))
         return actions
 
-    def validate(self, actions):
+    def validate(self, actions: List[Number]) -> List[Number]:
         """
 
-        @param actions:
-        @type actions:
-        @return:
-        @rtype:
+        :param actions:
+        :type actions:
+        :return:
+        :rtype:
         """
         for i in range(len(actions)):
             clipped = numpy.clip(
@@ -42,11 +43,11 @@ class ActionSpace(Space):
             actions[i] = numpy.round(clipped, self._ranges[i].decimal_granularity)
         return actions
 
-    def discrete_one_hot_sample(self):
+    def discrete_one_hot_sample(self) -> numpy.ndarray:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         idx = numpy.random.randint(0, self.num_actuators)
         zeros = numpy.zeros(self.num_actuators)
@@ -57,20 +58,19 @@ class ActionSpace(Space):
             zeros[idx] = val
         return zeros
 
-    def discrete_sample(self):
+    def discrete_sample(self) -> numpy.ndarray:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
-        idx = numpy.random.randint(0, self.discrete_steps)
-        return idx
+        return numpy.random.randint(0, self.discrete_steps)
 
-    def one_hot_sample(self):
+    def one_hot_sample(self) -> numpy.ndarray:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         idx = numpy.random.randint(0, self.num_actuators)
         zeros = numpy.zeros(self.num_actuators)
@@ -79,11 +79,11 @@ class ActionSpace(Space):
         return zeros
 
     @cached_property
-    def num_actuators(self):
+    def num_actuators(self) -> int:
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self.n
 

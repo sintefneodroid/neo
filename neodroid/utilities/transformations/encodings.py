@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Iterable, Sequence, Sized, Union
+from typing import Iterable, List, Sequence, Sized, Union
 
 __author__ = "Christian Heider Nielsen"
 
@@ -12,15 +12,15 @@ __doc__ = r"""
 __all__ = ["signed_ternary_encoding", "to_one_hot", "agg_double_list"]
 
 
-def signed_ternary_encoding(*, size: int, index: int):
+def signed_ternary_encoding(*, size: int, index: int) -> List[numpy.ndarray]:
     """
 
-    @param size:
-    @type size:
-    @param index:
-    @type index:
-    @return:
-    @rtype:"""
+    :param size:
+    :type size:
+    :param index:
+    :type index:
+    :return:
+    :rtype:"""
     # assert isinstance(size,(int,numpy.int64)), f'size was {type(size)}'
     # assert isinstance(index,(int,numpy.int64)), f'index was {type(index)}'
     # assert size*2 > index, f'signed size was {size*2}, index was {index}'
@@ -40,15 +40,15 @@ def signed_ternary_encoding(*, size: int, index: int):
     return acs
 
 
-def to_one_hot(dims: Sequence[int], index: Union[int, Sized]):
+def to_one_hot(dims: Sequence[int], index: Union[int, Sized]) -> List[numpy.ndarray]:
     """
 
-    @param dims:
-    @type dims:
-    @param index:
-    @type index:
-    @return:
-    @rtype:"""
+    :param dims:
+    :type dims:
+    :param index:
+    :type index:
+    :return:
+    :rtype:"""
     if not isinstance(index, Sized):
         index = [index]
 
@@ -68,10 +68,12 @@ def to_one_hot(dims: Sequence[int], index: Union[int, Sized]):
 def agg_double_list(l):
     """
 
-    @param l:
-    @type l:
-    @return:
-    @rtype:"""
+    TODO: reflect return of s_mu, s_std
+
+    :param l:
+    :type l:
+    :return:
+    :rtype:"""
     # l: [ [...], [...], [...] ]
     # l_i: result of each step in the i-th episode
     s = [numpy.sum(numpy.array(l_i), 0) for l_i in l]

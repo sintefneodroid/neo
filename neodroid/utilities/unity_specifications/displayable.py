@@ -17,8 +17,8 @@ class Displayable(object):
     def displayable_name(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._displayable_name
 
@@ -26,16 +26,16 @@ class Displayable(object):
     def displayable_value(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return self._displayable_value
 
     def to_dict(self):
         """
 
-        @return:
-        @rtype:
+        :return:
+        :rtype:
         """
         return {
             "_displayable_name": self._displayable_name,

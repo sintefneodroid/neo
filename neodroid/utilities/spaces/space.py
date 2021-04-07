@@ -11,7 +11,7 @@ __author__ = "Christian Heider Nielsen"
 
 __all__ = ["Space"]
 
-from warg import cached_property
+from warg import Number, cached_property
 
 
 class Space(object):
@@ -26,11 +26,11 @@ class Space(object):
         self._ranges = ranges
         self._names = names
 
-    def project(self, a: Sequence[float]) -> Sequence[float]:
+    def project(self, a: Sequence[Number]) -> Sequence[float]:
         """
 
-        @param a:
-        @return:"""
+        :param a:
+        :return:"""
         if self.is_discrete:
             return a
         # if self.is_01normalised:
@@ -38,11 +38,11 @@ class Space(object):
         return a
         # return (a - self.min) / self.span
 
-    def reproject(self, a: Sequence[float]) -> Sequence[float]:
+    def reproject(self, a: Sequence[Number]) -> Sequence[float]:
         """
 
-        @param a:
-        @return:"""
+        :param a:
+        :return:"""
         if self.is_discrete:
             return a
         # if self.is_01normalised:
@@ -53,57 +53,57 @@ class Space(object):
     def clip(self, values: Sequence) -> numpy.ndarray:
         """
 
-        @param values:
-        @return:"""
+        :param values:
+        :return:"""
         assert len(self.ranges) == len(values)
         return numpy.array([a.clip(v) for a, v in zip(self._ranges, values)])
 
     def sample(self) -> Sequence[float]:
         """
 
-        @return:"""
+        :return:"""
         return [r.sample() for r in self._ranges]
 
     @property
     def max(self) -> numpy.ndarray:
         """
 
-        @return:"""
+        :return:"""
         return self.high
 
     @property
     def min(self) -> numpy.ndarray:
         """
 
-        @return:"""
+        :return:"""
         return self.low
 
     @cached_property
     def ranges(self) -> Sequence[Range]:
         """
 
-        @return:"""
+        :return:"""
         return self._ranges
 
     @cached_property
     def low(self) -> numpy.ndarray:
         """
 
-        @return:"""
+        :return:"""
         return numpy.array([motion_space.min_unnorm for motion_space in self._ranges])
 
     @cached_property
     def high(self) -> numpy.ndarray:
         """
 
-        @return:"""
+        :return:"""
         return numpy.array([motion_space.max_unnorm for motion_space in self._ranges])
 
     @cached_property
     def span(self) -> numpy.ndarray:
         """
 
-        @return:"""
+        :return:"""
         res = self.high - self.low
         assert (res > 0).all()
         return res
@@ -112,28 +112,28 @@ class Space(object):
     def decimal_granularity(self) -> List[int]:
         """
 
-        @return:"""
+        :return:"""
         return [motion_space.decimal_granularity for motion_space in self._ranges]
 
     @cached_property
     def is_singular(self) -> bool:
         """
 
-        @return:"""
+        :return:"""
         return len(self._ranges) == 1
 
     @cached_property
     def is_discrete(self) -> bool:
         """
 
-        @return:"""
+        :return:"""
         return numpy.array([a.decimal_granularity == 0 for a in self._ranges]).all()
 
     @cached_property
     def is_mixed(self) -> bool:
         """
 
-        @return:"""
+        :return:"""
         return (
             numpy.array([a.decimal_granularity != 0 for a in self._ranges]).any()
             and not self.is_continuous
@@ -143,14 +143,14 @@ class Space(object):
     def is_continuous(self) -> bool:
         """
 
-        @return:"""
+        :return:"""
         return numpy.array([a.decimal_granularity != 0 for a in self._ranges]).all()
 
     @cached_property
     def shape(self) -> Tuple[int, ...]:
         """
 
-        @return:"""
+        :return:"""
         if self.is_discrete:
             return self.discrete_steps_shape
 
@@ -160,28 +160,28 @@ class Space(object):
     def discrete_steps(self) -> int:
         """
 
-        @return:"""
+        :return:"""
         return sum(self.discrete_steps_shape)
 
     @cached_property
     def discrete_steps_shape(self) -> Tuple[int, ...]:
         """
 
-        @return:"""
+        :return:"""
         return (*[r.discrete_steps for r in self._ranges],)
 
     @cached_property
     def continuous_shape(self) -> Tuple[int, ...]:
         """
 
-        @return:"""
+        :return:"""
         return (len(self._ranges),)
 
     @cached_property
     def is_01normalised(self) -> numpy.ndarray:
         """
 
-        @return:"""
+        :return:"""
         return numpy.array(
             [a.normalised for a in self._ranges if hasattr(a, "normalised")]
         ).all()
@@ -190,7 +190,7 @@ class Space(object):
     def __repr__(self) -> str:
         """
 
-        @return:"""
+        :return:"""
         names_str = "".join([str(r.__repr__()) for r in self._names])
         ranges_str = "".join([str(r.__repr__()) for r in self._ranges])
 
@@ -205,14 +205,14 @@ class Space(object):
     def n(self) -> int:
         """
 
-        @return:"""
+        :return:"""
         return len(self._ranges)
 
     @functools.lru_cache()
     def __len__(self) -> int:
         """
 
-        @return:"""
+        :return:"""
         return self.n
 
 
