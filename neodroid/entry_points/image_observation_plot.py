@@ -7,7 +7,7 @@ import cv2
 import numpy
 from matplotlib import animation, pyplot
 
-from neodroid.environments.droid_environment import UnityEnvironment
+from neodroid.environments.droid_environment import DictUnityEnvironment
 from neodroid.utilities.snapshot_extraction.camera_extraction import extract_all_cameras
 from warg import NOD
 
@@ -25,7 +25,7 @@ time_s = time.time()
 
 image_axs = NOD()
 
-env = UnityEnvironment(connect_to_running=True)
+env = DictUnityEnvironment(connect_to_running=True)
 fig = pyplot.figure()
 print_obs = False
 reset_every_step = False

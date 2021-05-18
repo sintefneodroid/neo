@@ -4,7 +4,7 @@ import logging
 
 import numpy
 
-from neodroid.utilities.unity_specifications import (
+from neodroid.utilities.specifications.unity_specifications import (
     Configuration,
     Motion,
     Reaction,

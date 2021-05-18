@@ -2,15 +2,14 @@
 # -*- coding: utf-8 -*-
 import logging
 from abc import ABC, abstractmethod
-from enum import Enum
 from pathlib import Path
 from types import coroutine
 from typing import Any, Optional
 
 from neodroid import PROJECT_APP_PATH
 from neodroid.utilities import EnvironmentSnapshot
-from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
-from neodroid.utilities.unity_specifications.environment_description import (
+from trolls.spaces import ActionSpace, ObservationSpace, SignalSpace
+from neodroid.utilities.specifications.unity_specifications.environment_description import (
     EnvironmentDescription,
 )
 
@@ -124,25 +123,25 @@ class Environment(ABC):
     @property
     @abstractmethod
     def description(self) -> EnvironmentDescription:
-        """"""
+        """ """
         raise NotImplementedError
 
     @property
     @abstractmethod
     def observation_space(self) -> ObservationSpace:
-        """"""
+        """ """
         raise NotImplementedError
 
     @property
     @abstractmethod
     def action_space(self) -> ActionSpace:
-        """"""
+        """ """
         raise NotImplementedError
 
     @property
     @abstractmethod
     def signal_space(self) -> SignalSpace:
-        """"""
+        """ """
         raise NotImplementedError
 
     def __next__(self):
@@ -176,9 +175,7 @@ class Environment(ABC):
         return self
 
     def render(self, *args, **kwargs) -> Optional[numpy.ndarray]:
-        """
-
-        """
+        """ """
         pass
 
     @staticmethod

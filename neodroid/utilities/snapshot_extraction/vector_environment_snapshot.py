@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import List, Mapping, Optional, Tuple
+from typing import List, Mapping
 
 import numpy
 from attr import dataclass
@@ -8,7 +8,7 @@ from attr import dataclass
 __author__ = "Christian Heider Nielsen"
 
 from neodroid.utilities import NoEnvironment
-from neodroid.utilities.unity_specifications import EnvironmentSnapshot
+from neodroid.utilities.specifications.unity_specifications import EnvironmentSnapshot
 from warg.mixins import IterDictValuesMixin, OrdinalIndexingDictMixin
 
 __all__ = ["VectorPoints", "NumpyVectorPoints", "VectorEnvironmentSnapshot"]

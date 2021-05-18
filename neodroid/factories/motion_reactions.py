@@ -4,9 +4,9 @@ import logging
 from typing import Mapping
 
 from neodroid.utilities import EnvironmentDescription, EnvironmentSnapshot
-from neodroid.utilities.unity_specifications import Reaction
-from neodroid.utilities.unity_specifications.motion import Motion
-from neodroid.utilities.unity_specifications.reaction_parameters import (
+from neodroid.utilities.specifications.unity_specifications import Reaction
+from neodroid.utilities.specifications.unity_specifications.motion import Motion
+from neodroid.utilities.specifications.unity_specifications.reaction_parameters import (
     ReactionParameters,
 )
 
@@ -24,17 +24,17 @@ def verify_motion_reactions(
 ):
     """
 
-  :param input_reactions:
-  :type input_reactions:
-  :param environment_descriptions:
-  :type environment_descriptions:
-  :param environment_snapshots:
-  :type environment_snapshots:
-  :param _auto_reset:
-  :type _auto_reset:
-  :return:
-  :rtype:
-  """
+    :param input_reactions:
+    :type input_reactions:
+    :param environment_descriptions:
+    :type environment_descriptions:
+    :param environment_snapshots:
+    :type environment_snapshots:
+    :param _auto_reset:
+    :type _auto_reset:
+    :return:
+    :rtype:
+    """
     outs = []
     if (
         input_reactions is not None
@@ -123,17 +123,17 @@ def construct_individual_reactions_from_list(
 ):
     """
 
-  :param motion_list:
-  :type motion_list:
-  :param actors:
-  :type actors:
-  :param env_name:
-  :type env_name:
-  :param reset:
-  :type reset:
-  :return:
-  :rtype:
-  """
+    :param motion_list:
+    :type motion_list:
+    :param actors:
+    :type actors:
+    :param env_name:
+    :type env_name:
+    :param reset:
+    :type reset:
+    :return:
+    :rtype:
+    """
     motions = construct_motions_from_list(motion_list, actors)
     parameters = ReactionParameters(
         terminable=True,
@@ -149,13 +149,13 @@ def construct_individual_reactions_from_list(
 def construct_motions_from_list(input_list, actors):
     """
 
-  :param input_list:
-  :type input_list:
-  :param actors:
-  :type actors:
-  :return:
-  :rtype:
-  """
+    :param input_list:
+    :type input_list:
+    :param actors:
+    :type actors:
+    :return:
+    :rtype:
+    """
     actor_motor_tuples = [
         (actor.actor_name, motor.actuator_name, motor.motion_space)
         for actor in actors

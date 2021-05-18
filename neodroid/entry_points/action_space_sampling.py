@@ -5,7 +5,7 @@ import time
 
 import numpy
 
-from neodroid import connect
+from neodroid.environments.droid_environment import connect_dict
 
 __author__ = "Christian Heider Nielsen"
 
@@ -13,7 +13,7 @@ from warg import add_bool_arg
 
 
 def main():
-    """"""
+    """ """
     parser = argparse.ArgumentParser(description="Neodroid Action Space Sampling")
     parser.add_argument(
         "--IP", "-ip", type=str, default="localhost", metavar="IP", help="IP Address"
@@ -27,7 +27,7 @@ def main():
 
     aargs = parser.parse_args()
 
-    environment = connect(ip=aargs.IP, port=aargs.PORT)
+    environment = connect_dict(ip=aargs.IP, port=aargs.PORT)
     if aargs.reset:
         environment.reset()
 
@@ -37,6 +37,7 @@ def main():
     terminated = []
     while environment.is_connected:
         action = [aas.sample() for aas in environment.action_space.values()]
+        print(action)
         state = environment.react(action)
 
         for k, v in state.items():

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.environments.droid_environment import UnityEnvironment
-from neodroid.utilities.unity_specifications import (
+from neodroid.environments.droid_environment import DictUnityEnvironment
+from neodroid.utilities.specifications.unity_specifications import (
     Configuration,
     Motion,
     Reaction,
@@ -33,7 +33,7 @@ def on_connect_callback(ip_address, port, launch_environment, environment):
     if NEODROID_ENVIRONMENT and NEODROID_ENVIRONMENT.is_connected:
         NEODROID_ENVIRONMENT.close(on_disconnected_callback)
     else:
-        NEODROID_ENVIRONMENT = UnityEnvironment(
+        NEODROID_ENVIRONMENT = DictUnityEnvironment(
             ip=ip_address,
             port=int(port),
             on_connected_callback=on_connected_callback,

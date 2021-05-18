@@ -9,20 +9,15 @@ from flatbuffers import Table
 
 from neodroid.messaging.fbs import (
     FActor,
-    FArray,
     FBSModels as F,
-    FByteArray,
     FEnvironmentDescription,
-    FObservation,
-    FQTObs,
     FRange,
     FState,
     FStates,
     FUnobservables,
-    FValues,
 )
-from neodroid.utilities import unity_specifications as US
-from neodroid.utilities.spaces.range import Range
+from neodroid.utilities.specifications import unity_specifications as US
+from trolls.spaces import Range
 
 __all__ = [
     "deserialise_body",

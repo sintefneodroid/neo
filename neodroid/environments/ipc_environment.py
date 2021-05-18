@@ -9,13 +9,13 @@ __doc__ = r"""
 
 from abc import ABC
 
-from neodroid import Environment
+from neodroid.environments.environment import Environment
 
 
 class IpcEnvironment(Environment, ABC):
     """
-  Interprocess Com
-  TODO:
-  """
+    Interprocess Com
+    TODO:
+    """
 
     pass

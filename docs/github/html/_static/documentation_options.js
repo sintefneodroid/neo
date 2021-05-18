@@ -1,9 +1,3 @@
-var DOCUMENTATION_OPTIONS = {
-    URL_ROOT: '',
-    VERSION: 'master',
-    LANGUAGE: 'None',
-    COLLAPSE_INDEX: false,
-    FILE_SUFFIX: '.html',
-    HAS_SOURCE: true,
-    SOURCELINK_SUFFIX: '.txt'
-};
+version https://git-lfs.github.com/spec/v1
+oid sha256:2bbab65f74e8c973da825a51008a4e68d6e639a9a747715c1a746e53e5169265
+size 309

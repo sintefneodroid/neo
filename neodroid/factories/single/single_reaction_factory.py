@@ -3,9 +3,9 @@
 import logging
 from typing import Sequence
 
-from neodroid.utilities.spaces import ActionSpace
+from trolls.spaces import ActionSpace
 from neodroid.utilities.transformations import normalise_action
-from neodroid.utilities.unity_specifications import (
+from neodroid.utilities.specifications.unity_specifications import (
     Configuration,
     EnvironmentDescription,
     Motion,

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.environments.droid_environment import connect
+from neodroid.environments.droid_environment import connect_dict
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = (
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     def main(generate_num=10):
 
         if generate_num > 0:
-            with connect() as env:
+            with connect_dict() as env:
                 for i, state in enumerate(env):
                     if i >= generate_num:
                         break

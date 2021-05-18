@@ -11,7 +11,7 @@ __author__ = "Christian Heider Nielsen"
 import numpy
 
 from neodroid.messaging.fbs import FBSModels as F
-from neodroid.utilities.unity_specifications.reaction import Reaction
+from neodroid.utilities.specifications.unity_specifications.reaction import Reaction
 
 __all__ = [
     "serialise_bodies",

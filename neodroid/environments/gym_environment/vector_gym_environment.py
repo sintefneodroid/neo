@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from os import cpu_count
-from typing import Sequence, Optional, Tuple
+from typing import Sequence
 
 import numpy
 
@@ -10,8 +10,16 @@ from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
     VectorEnvironmentSnapshot,
 )
 from neodroid.environments.environment import Environment
-from neodroid.utilities.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
-from neodroid.utilities.unity_specifications import EnvironmentSnapshot
+from trolls.spaces import (
+    ActionSpace,
+    ObservationSpace,
+    Range,
+    SignalSpace,
+    VectorActionSpace,
+    VectorObservationSpace,
+    VectorSignalSpace,
+)
+from neodroid.utilities.specifications.unity_specifications import EnvironmentSnapshot
 
 __author__ = "Christian Heider Nielsen"
 
@@ -22,7 +30,7 @@ __all__ = ["NeodroidVectorGymEnvironment"]
 
 
 class NeodroidVectorGymEnvironment(Environment):
-    """"""
+    """ """
 
     def configure(self, *args, **kwargs) -> EnvironmentSnapshot:
         pass
@@ -42,21 +50,22 @@ class NeodroidVectorGymEnvironment(Environment):
         self,
         environment_name,
         *,
-        num_envs: int = cpu_count(),
+        num_env: int = cpu_count(),
         auto_reset_on_terminal_state=False,
     ):
 
         self._env = SubProcessEnvironments(
-            [make_gym_env(environment_name) for _ in range(num_envs)],
+            [make_gym_env(environment_name) for _ in range(num_env)],
             auto_reset_on_terminal_state=auto_reset_on_terminal_state,
         )
+        self._num_env = num_env
         self._environment_name = environment_name
 
     @property
-    def signal_space(self) -> SignalSpace:
+    def signal_space(self) -> VectorSignalSpace:
         """
 
-    :return:"""
+        :return:"""
 
         space = SignalSpace(
             [
@@ -68,13 +77,13 @@ class NeodroidVectorGymEnvironment(Environment):
             ]
         )
 
-        return space
+        return VectorSignalSpace(space, self._num_env)
 
     @property
-    def observation_space(self) -> ObservationSpace:
+    def observation_space(self) -> VectorObservationSpace:
         """
 
-    :return:"""
+        :return:"""
 
         if len(self._env.observation_space.shape) >= 1:
             aspc = self._env.observation_space
@@ -97,19 +106,23 @@ class NeodroidVectorGymEnvironment(Environment):
                 ]
             )
 
-        return space
+        return VectorObservationSpace(space, self._num_env)
 
     @property
-    def action_space(self) -> ActionSpace:
+    def action_space(self) -> VectorActionSpace:
         """
 
-    :return:"""
+        :return:"""
 
         if len(self._env.action_space.shape) >= 1:
             aspc = self._env.action_space
             space = ActionSpace(
                 [
-                    Range(decimal_granularity=2, min_value=mn, max_value=mx)
+                    Range(
+                        decimal_granularity=aspc.action_space.is_singular_discrete,
+                        min_value=mn,
+                        max_value=mx,
+                    )
                     for _, mn, mx in zip(
                         range(self._env.action_space.shape[0]), aspc.low, aspc.high
                     )
@@ -127,29 +140,29 @@ class NeodroidVectorGymEnvironment(Environment):
                 ]
             )
 
-        return space
+        return VectorActionSpace(space, self._num_env)
 
     @property
     def environment_name(self):
         """
 
-    :return:
-    :rtype:
-    """
+        :return:
+        :rtype:
+        """
         return self._environment_name
 
     @drop_unused_kws
     def react(self, a: Sequence) -> VectorEnvironmentSnapshot:
         """
 
-    :param a:
-    :type a:
-    :return:
-    :rtype:
-    """
+        :param a:
+        :type a:
+        :return:
+        :rtype:
+        """
         a = self.action_space.reproject(a)
-        if self.action_space.is_discrete:
-            a = numpy.squeeze(a, -1)
+        # if self.action_space.is_discrete:
+        #    a = numpy.squeeze(a, -1)
         res = self._env.step(a)
 
         if res:
@@ -169,9 +182,9 @@ class NeodroidVectorGymEnvironment(Environment):
     def reset(self) -> VectorEnvironmentSnapshot:
         """
 
-    :return:
-    :rtype:
-    """
+        :return:
+        :rtype:
+        """
         res = self._env.reset()
         if res:
             e = {
@@ -195,10 +208,18 @@ class NeodroidVectorGymEnvironment(Environment):
 
 
 if __name__ == "__main__":
-    env = NeodroidVectorGymEnvironment("CartPole-v1")
-    print(env.observation_space)
-    print(env.action_space)
-    print(env.signal_space)
-    print(env.reset())
-    print(env.react([1]))
-    print(env.react(env.action_space.sample()))
+
+    def asda():
+        env = NeodroidVectorGymEnvironment("CartPole-v1")
+        print(env.observation_space)
+        print(env.action_space)
+        print(env.signal_space)
+        print(env.reset())
+        for i in range(10):
+            s = env.react(env.action_space.sample())
+            env.render()
+            if s.terminated.all():
+                env.reset()
+        env.close()
+
+    asda()

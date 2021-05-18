@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from neodroid.utilities.spaces import Range
+from trolls.spaces import Range
 
 __author__ = "Christian Heider Nielsen"
 

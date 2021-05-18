@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Any, Generator, Tuple
+from typing import Any, Generator
 
-from neodroid.utilities.spaces import ActionSpace
+from trolls.spaces import ActionSpace
 
 __author__ = "Christian Heider Nielsen"
 
@@ -10,7 +10,7 @@ __all__ = ["ToIntWrapper"]
 
 
 class ToIntWrapper:
-    """"""
+    """ """
 
     def __init__(self, action_space: ActionSpace):
         self.action_space = action_space

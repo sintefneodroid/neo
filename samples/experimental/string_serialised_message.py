@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.environments import connect
+from neodroid.environments.droid_environment import connect_dict
 
 __author__ = "Christian Heider Nielsen"
 
@@ -8,7 +8,7 @@ from neodroid import messaging
 
 
 def main():
-    _environment = connect()
+    _environment = connect_dict()
 
     i = 0
     while _environment.is_connected:

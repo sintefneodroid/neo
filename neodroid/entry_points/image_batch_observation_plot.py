@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from draugr import batch_generator, horizontal_imshow
+from draugr import batch_generator
 from draugr.torch_utilities import (
     float_chw_to_hwc_uint_tensor,
     to_tensor,
@@ -9,7 +9,7 @@ from draugr.torch_utilities import (
 from matplotlib import pyplot
 
 
-from draugr.python_utilities.torch_channel_transform import (
+from draugr.python_utilities.torch_like_channel_transformation import (
     reverse_torch_vision_normalize_batch_nchw,
     rgb_drop_alpha_batch_nhwc,
     torch_vision_normalize_batch_nchw,
@@ -17,6 +17,7 @@ from draugr.python_utilities.torch_channel_transform import (
 from neodroid.wrappers.observation_wrapper.mixed_observation_wrapper import (
     MixedObservationWrapper,
 )
+from draugr.visualisation.matplotlib_utilities import horizontal_imshow
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = r"""

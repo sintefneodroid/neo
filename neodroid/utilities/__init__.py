@@ -5,6 +5,5 @@ __author__ = "Christian Heider Nielsen"
 from .exceptions import *
 from .launcher import *
 from .snapshot_extraction import *
-from .spaces import *
 from .transformations import *
-from .unity_specifications import *
+from .specifications import *

@@ -11,6 +11,7 @@ class ClientEvents(Enum):
     CONNECTED = auto()
     DISCONNECTED = auto()
     TIMEOUT = auto()
+    RECONNECTED = auto()
 
 
 def message_client_event(event):
@@ -21,6 +22,8 @@ def message_client_event(event):
                 logging.info("Connected to server")
             elif event is ClientEvents.DISCONNECTED:
                 logging.info("Disconnected from server")
+            elif event is ClientEvents.RECONNECTED:
+                logging.info("Reconnected to server")
             elif event is ClientEvents.TIMEOUT:
                 logging.warning("Connection timeout")
             return func(ctx, *args, **kwargs)

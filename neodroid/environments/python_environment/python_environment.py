@@ -5,13 +5,13 @@ from neodroid.environments.environment import Environment
 __author__ = "Christian Heider Nielsen"
 
 from abc import ABC
-import neodroid.utilities.unity_specifications as M
+import neodroid.utilities.specifications.unity_specifications as M
 
 __all__ = ["PythonEnvironment"]
 
 
 class PythonEnvironment(Environment, ABC):
-    """"""
+    """ """
 
     def __init__(
         self,

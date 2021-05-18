@@ -7,8 +7,8 @@ from gym import Env
 from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
     VectorEnvironmentSnapshot,
 )
-from neodroid.utilities.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
-from neodroid.utilities.unity_specifications import EnvironmentSnapshot
+from trolls.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
+from neodroid.utilities.specifications.unity_specifications import EnvironmentSnapshot
 
 __author__ = "Christian Heider Nielsen"
 
@@ -20,7 +20,7 @@ __all__ = ["NeodroidGymEnvironment"]
 
 
 class NeodroidGymEnvironment(object):
-    """"""
+    """ """
 
     @drop_unused_kws
     def __init__(
