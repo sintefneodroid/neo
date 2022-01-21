@@ -27,7 +27,7 @@ _[Neodroid](https://github.com/sintefneodroid) is developed with support from Re
       </a>
     </td>
     <td>
-      <a href='https://documentation.neodroid.ml/?badge=latest'>
+      <a href='https://sintefneodroid.github.io/documentation/?badge=latest'>
         <img src='https://readthedocs.org/projects/neodroid/badge/?version=latest' alt='Documentation Status' />
       </a>
     </td>
