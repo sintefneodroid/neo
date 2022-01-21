@@ -98,7 +98,7 @@ def download_environment(
     return pathlib.Path(path_to_executables_directory) / name
 
 
-def available_environments(repository="http://environments.neodroid.ml/ls"):
+def available_environments(repository="http://sintefneodroid.github.io/environments/ls"):
     """
 
   @param repository:
