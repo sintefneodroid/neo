@@ -7,9 +7,9 @@ from attr import dataclass
 
 __author__ = "Christian Heider Nielsen"
 
+from warg import OrdinalIndexingDictMixin, IterDictValuesMixin
 from neodroid.utilities import NoEnvironment
 from neodroid.utilities.specifications.unity_specifications import EnvironmentSnapshot
-from warg.mixins import IterDictValuesMixin, OrdinalIndexingDictMixin
 
 __all__ = ["VectorPoints", "NumpyVectorPoints", "VectorEnvironmentSnapshot"]
 

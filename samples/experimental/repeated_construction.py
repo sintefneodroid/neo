@@ -4,9 +4,8 @@
 __author__ = "Christian Heider Nielsen"
 __doc__ = ""
 
-import contextlib
 
-from draugr.stopping import IgnoreInterruptSignal
+from draugr import IgnoreInterruptSignal
 
 import neodroid
 

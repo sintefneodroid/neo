@@ -23,7 +23,7 @@ from neodroid.utilities.specifications.unity_specifications import EnvironmentSn
 
 __author__ = "Christian Heider Nielsen"
 
-from trolls import SubProcessEnvironments, make_gym_env
+from trolls.multiple_environments_wrapper import SubProcessEnvironments, make_gym_env
 from warg import drop_unused_kws, passes_kws_to
 
 __all__ = ["NeodroidVectorGymEnvironment"]
