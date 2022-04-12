@@ -1,7 +1,6 @@
 from random import uniform
 
 import gym
-import beamnggym  # pip install pip install BeamNG.gym
 
 env = gym.make("BNG-WCA-Race-Geometry-v0")
 env.reset()

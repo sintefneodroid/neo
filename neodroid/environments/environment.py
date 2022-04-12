@@ -8,10 +8,10 @@ from typing import Any, Optional
 
 from neodroid import PROJECT_APP_PATH
 from neodroid.utilities import EnvironmentSnapshot
-from trolls.spaces import ActionSpace, ObservationSpace, SignalSpace
 from neodroid.utilities.specifications.unity_specifications.environment_description import (
     EnvironmentDescription,
 )
+from trolls.spaces import ActionSpace, ObservationSpace, SignalSpace
 
 __author__ = "Christian Heider Nielsen"
 

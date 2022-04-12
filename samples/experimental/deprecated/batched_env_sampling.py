@@ -30,7 +30,6 @@ def construct_reactions(env, R):
     }
 
     for i in range(19):
-
         parameters = ReactionParameters(
             terminable=True,
             step=True,

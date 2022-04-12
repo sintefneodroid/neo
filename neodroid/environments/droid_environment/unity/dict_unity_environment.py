@@ -7,7 +7,6 @@ from typing import Any, Callable, Dict, Iterable, Mapping, Optional, Sequence, U
 from neodroid import DEFAULT_ENVIRONMENTS_PATH, __version__
 from neodroid.factories.motion_reactions import verify_motion_reactions
 from neodroid.utilities import launch_environment
-from trolls.spaces import ActionSpace, ObservationSpace, SignalSpace
 from neodroid.utilities.specifications.unity_specifications import Reaction
 from neodroid.utilities.specifications.unity_specifications.environment_description import (
     EnvironmentDescription,
@@ -21,6 +20,7 @@ from neodroid.utilities.specifications.unity_specifications.reaction_parameters 
 from neodroid.utilities.specifications.unity_specifications.simulator_configuration import (
     SimulatorConfiguration,
 )
+from trolls.spaces import ActionSpace, ObservationSpace, SignalSpace
 
 __author__ = "Christian Heider Nielsen"
 

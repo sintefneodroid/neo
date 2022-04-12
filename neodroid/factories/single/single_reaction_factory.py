@@ -3,8 +3,6 @@
 import logging
 from typing import Sequence
 
-from trolls.spaces import ActionSpace
-from neodroid.utilities.transformations import normalise_action
 from neodroid.utilities.specifications.unity_specifications import (
     Configuration,
     EnvironmentDescription,
@@ -12,6 +10,8 @@ from neodroid.utilities.specifications.unity_specifications import (
     Reaction,
     ReactionParameters,
 )
+from neodroid.utilities.transformations import normalise_action
+from trolls.spaces import ActionSpace
 
 __author__ = "Christian Heider Nielsen"
 

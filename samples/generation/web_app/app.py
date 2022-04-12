@@ -107,7 +107,6 @@ def create_app(base_path, labels_path, template_folder=None, UPLOAD_FOLDER="Uplo
 
 
 if __name__ == "__main__":
-
     executable_path = Path.home() / "Data"
     executable_path.mkdir(parents=True)
     exported_model_path = executable_path / "export"

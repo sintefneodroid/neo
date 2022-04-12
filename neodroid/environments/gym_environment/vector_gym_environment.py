@@ -3,13 +3,12 @@
 from os import cpu_count
 from typing import Sequence
 
-import numpy
-
+from neodroid.environments.environment import Environment
 from neodroid.utilities import EnvironmentDescription
 from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
     VectorEnvironmentSnapshot,
 )
-from neodroid.environments.environment import Environment
+from neodroid.utilities.specifications.unity_specifications import EnvironmentSnapshot
 from trolls.spaces import (
     ActionSpace,
     ObservationSpace,
@@ -19,7 +18,6 @@ from trolls.spaces import (
     VectorObservationSpace,
     VectorSignalSpace,
 )
-from neodroid.utilities.specifications.unity_specifications import EnvironmentSnapshot
 
 __author__ = "Christian Heider Nielsen"
 

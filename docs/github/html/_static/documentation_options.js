@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2bbab65f74e8c973da825a51008a4e68d6e639a9a747715c1a746e53e5169265
-size 309
+var DOCUMENTATION_OPTIONS = {
+    URL_ROOT: document.getElementById("documentation_options").getAttribute('data-url_root'),
+    VERSION: '0.4.9',
+    LANGUAGE: 'None',
+    COLLAPSE_INDEX: false,
+    FILE_SUFFIX: '.html',
+    HAS_SOURCE: true,
+    SOURCELINK_SUFFIX: '.txt',
+    NAVIGATION_WITH_KEYS: false,
+};

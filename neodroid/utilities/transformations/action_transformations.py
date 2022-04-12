@@ -4,7 +4,6 @@ __doc__ = r"""
 
 __all__ = ["reverse_normalise_action", "normalise_action"]
 
-
 from trolls.spaces import ActionSpace, Range
 
 

@@ -1,23 +1,18 @@
-import abc
-
-import torch
-from torch import nn
-import numpy
+import copy
+import datetime
+import random
 from collections import deque
-import random, copy
 
-import time, datetime
-from matplotlib import pyplot
-
-from gym.wrappers import FrameStack
-
-from neodroid import PROJECT_APP_PATH
-from draugr.tqdm_utilities import progress_bar
-from draugr.torch_utilities import global_torch_device, PTW
-from draugr import latest_file
-from nes_py.wrappers import JoypadSpace  # NES Emulator for OpenAI Gym
 import gym_super_mario_bros  # Super Mario environment for OpenAI Gym
-
+import numpy
+import torch
+from draugr import latest_file
+from draugr.torch_utilities import global_torch_device, PTW
+from draugr.tqdm_utilities import progress_bar
+from gym.wrappers import FrameStack
+from neodroid import PROJECT_APP_PATH
+from nes_py.wrappers import JoypadSpace  # NES Emulator for OpenAI Gym
+from torch import nn
 from trolls.gym_wrappers import (
     GrayScaleObservation,
     ResizeObservation,

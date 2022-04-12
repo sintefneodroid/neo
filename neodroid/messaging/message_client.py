@@ -5,8 +5,6 @@ from contextlib import suppress
 from typing import Callable, Optional, Sequence
 
 import zmq
-from draugr.writers import Writer
-
 from neodroid.messaging.fbs import FStates, deserialise_states, serialise_reactions
 
 __author__ = "Christian Heider Nielsen"

@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 __author__ = "Christian Heider Nielsen"
 
-from warg import cached_property
-
 from neodroid.messaging.fbs import FConfiguration
+from warg import cached_property
 
 __all__ = ["SimulatorConfiguration"]
 

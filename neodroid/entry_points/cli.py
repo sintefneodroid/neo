@@ -4,15 +4,14 @@ import stat
 import subprocess
 from pathlib import Path
 
-import fire
-from pyfiglet import Figlet
-
 import draugr
+import fire
 from neodroid import DEFAULT_ENVIRONMENTS_PATH, get_version
 from neodroid.utilities.launcher.download_utilities.download_environment import (
     available_environments,
     download_environment,
 )
+from pyfiglet import Figlet
 
 margin_percentage = 0 / 6
 terminal_width = draugr.get_terminal_size().columns

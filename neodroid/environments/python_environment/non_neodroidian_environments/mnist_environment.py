@@ -22,7 +22,6 @@ class MnistEnv(Env):
         pyplot.show()
 
     def __init__(self, seed=0, episode_len=None, no_images=None):
-
         from tensorflow.examples.tutorials.mnist import input_data
 
         # we could use temporary directory for this with a context manager and

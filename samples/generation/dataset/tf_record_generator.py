@@ -118,7 +118,6 @@ if __name__ == "__main__":
 
     parsed_image_dataset = raw_image_dataset.map(_parse_image_function)
     for image_features in parsed_image_dataset:
-
         print(image_features["bb_x"])
         print(image_features["bb_y"])
         print(image_features["bb_w"])

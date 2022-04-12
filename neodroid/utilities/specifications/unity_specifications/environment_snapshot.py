@@ -20,7 +20,6 @@ from .environment_description import EnvironmentDescription
 
 __all__ = ["EnvironmentSnapshot"]
 
-
 EnvironmentSnapshotType = TypeVar(
     "EnvironmentSnapshotType", bound="EnvironmentSnapshot"
 )

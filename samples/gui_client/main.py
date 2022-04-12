@@ -8,7 +8,6 @@ from neodroid.utilities.specifications.unity_specifications import (
     ReactionParameters,
 )
 
-
 __author__ = "Christian Heider Nielsen"
 __doc__ = r"""
 """

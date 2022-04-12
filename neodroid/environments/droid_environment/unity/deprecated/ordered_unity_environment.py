@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from itertools import count
-from typing import Union, Optional, Tuple
+from typing import Union
 
 from neodroid.environments.droid_environment import (
     DictUnityEnvironment,
@@ -21,7 +21,7 @@ __all__ = ["OrderedUnityEnvironment"]
 
 from warg import drop_unused_kws
 
-from trolls.spaces import ObservationSpace, SignalSpace, VectorActionSpace, ActionSpace
+from trolls.spaces import ObservationSpace, SignalSpace, ActionSpace
 
 
 class OrderedUnityEnvironment(DictUnityEnvironment):

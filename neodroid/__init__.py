@@ -8,7 +8,6 @@ from pathlib import Path
 from warnings import warn
 
 import pkg_resources
-
 from apppath import AppPath
 
 __project__ = "Neodroid"

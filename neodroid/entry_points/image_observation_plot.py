@@ -6,7 +6,6 @@ from math import ceil, floor, sqrt
 import cv2
 import numpy
 from matplotlib import animation, pyplot
-
 from neodroid.environments.droid_environment import DictUnityEnvironment
 from neodroid.utilities.snapshot_extraction.camera_extraction import extract_all_cameras
 from warg import NOD
@@ -95,7 +94,6 @@ def main():
         a = [axes]
     for ax, (k, v) in zip(a, new_images.items()):
         if k:
-
             ax.set_facecolor("gray")
             ax.set_title(k)
             image_axs[k] = ax.imshow(v)

@@ -2,8 +2,9 @@
 
 import unittest
 from pathlib import Path
-import pytest
+
 import pkg_resources
+import pytest
 
 _REQUIREMENTS_PATH = Path(__file__).parent.with_name("requirements.txt")
 _EXTRA_REQUIREMENTS_PATH = Path(__file__).parent.parent / "requirements"

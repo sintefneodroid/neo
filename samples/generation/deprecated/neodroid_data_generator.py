@@ -2,10 +2,9 @@
 # -*- coding: utf-8 -*-
 from multiprocessing import Pipe, Process
 
-from torch.utils.data import Dataset
-
 from draugr.torch_utilities import channel_transform
 from neodroid.wrappers import CameraObservationWrapper
+from torch.utils.data import Dataset
 from trolls.experimental import CloudPickleWrapper
 
 __author__ = "Christian Heider Nielsen"

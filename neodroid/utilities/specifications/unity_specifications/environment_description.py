@@ -8,11 +8,11 @@ from neodroid.messaging.fbs.fbs_state_utilties import (
     deserialise_configurables,
     deserialise_sensors,
 )
-from trolls.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
 from neodroid.utilities.specifications.unity_specifications.configurable import (
     Configurable,
 )
 from neodroid.utilities.specifications.unity_specifications.sensor import Sensor
+from trolls.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
 
 __author__ = "Christian Heider Nielsen"
 

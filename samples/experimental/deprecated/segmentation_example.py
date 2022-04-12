@@ -94,7 +94,7 @@ def process_states(states):
 
 
 from torch import nn
-from torch.nn import functional as F
+from torch.nn import functional
 
 
 class CNN(nn.Module):
@@ -113,11 +113,11 @@ class CNN(nn.Module):
     def forward(self, x):
         x = self.conv1(x)
         # x = self.bn1(x)
-        x = F.relu(x)
+        x = functional.relu(x)
         x = self.pool1(x)
         x = self.conv2(x)
         # x = self.bn1(x)
-        x = F.relu(x)
+        x = functional.relu(x)
         # x = self.upsample1(x)
         x = self.tconv1(x)
         # x = self.upsample2(x)

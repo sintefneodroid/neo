@@ -145,7 +145,6 @@ class Quaternion:
 
 
 if __name__ == "__main__":
-
     x_axis_unit = (1, 0, 0)
     y_axis_unit = (0, 1, 0)
     z_axis_unit = (0, 0, 1)

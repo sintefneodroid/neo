@@ -12,8 +12,8 @@ import torch
 from garage.envs import normalize
 from garage.envs.base import GarageEnv
 from garage.experiment import LocalRunner, run_experiment
-from garage.np.baselines import LinearFeatureBaseline
-from garage.np.exploration_strategies import OUStrategy
+from garage.numpy.baselines import LinearFeatureBaseline
+from garage.numpy.exploration_strategies import OUStrategy
 from garage.replay_buffer import SimpleReplayBuffer
 from garage.tf.algos import PPO, TRPO
 from garage.tf.envs import TfEnv
@@ -134,5 +134,4 @@ def run_tpro(snapshot_config, *_):
 
 
 if __name__ == "__main__":
-
     run_experiment(run_tpro, snapshot_mode="last", seed=1)

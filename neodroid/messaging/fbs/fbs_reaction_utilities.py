@@ -3,7 +3,6 @@
 from typing import Iterable, Sequence, Union
 
 from flatbuffers import Builder
-
 from neodroid.utilities.exceptions.exceptions import NoUnobservablesException
 
 __author__ = "Christian Heider Nielsen"
@@ -36,7 +35,7 @@ def serialise_reactions(input_reactions: Iterable) -> Union[int, bytearray]:
     F.FReactionsStartReactionsVector(B, l)
     for offset in reaction_offsets:
         B.PrependUOffsetTRelative(offset)
-    reactions_vector_offset = B.EndVector()#l)
+    reactions_vector_offset = B.EndVector()  # l)
 
     F.FReactionsStart(B)
     F.FReactionsAddReactions(B, reactions_vector_offset)
@@ -113,7 +112,7 @@ def serialise_poses(B: Builder, fu) -> Union[int, bytearray]:
         F.CreateFQuaternionTransform(
             B, pos.X(), pos.Y(), pos.Z(), rot.X(), rot.Y(), rot.Z(), rot.W()
         )
-    return B.EndVector()#pl)
+    return B.EndVector()  # pl)
 
 
 def serialise_bodies(B: Builder, fu) -> Union[int, bytearray]:
@@ -124,7 +123,7 @@ def serialise_bodies(B: Builder, fu) -> Union[int, bytearray]:
         vel = body.Velocity(F.FVector3())
         ang = body.AngularVelocity(F.FVector3())
         F.CreateFBody(B, vel.X(), vel.Y(), vel.Z(), ang.X(), ang.Y(), ang.Z())
-    return B.EndVector()#bl)
+    return B.EndVector()  # bl)
 
 
 def serialise_motions(B: Builder, input_reaction: Reaction) -> Union[int, bytearray]:
@@ -151,7 +150,7 @@ def serialise_motions(B: Builder, input_reaction: Reaction) -> Union[int, bytear
     F.FReactionStartMotionsVector(B, l)
     for input_motion in motion_offsets:
         B.PrependUOffsetTRelative(input_motion)
-    return B.EndVector()#l)
+    return B.EndVector()  # l)
 
 
 def serialise_displayables(B: Builder, input_reaction) -> Union[int, bytearray]:
@@ -185,13 +184,13 @@ def serialise_displayables(B: Builder, input_reaction) -> Union[int, bytearray]:
                 for v_ in reversed(a0):
                     v = numpy.float64(v_)
                     B.PrependFloat64(v)
-                values_offset = B.EndVector()#_length)
+                values_offset = B.EndVector()  # _length)
 
                 F.FValuedVector3sStartPointsVector(B, _length)
                 for p in reversed(a1):
                     x, y, z = numpy.float64(p)
                     F.CreateFVector3(B, x, y, z)
-                points = B.EndVector()#_length)
+                points = B.EndVector()  # _length)
 
                 F.FValuedVector3sStart(B)
                 F.FValuedVector3sAddVals(B, values_offset)
@@ -210,7 +209,7 @@ def serialise_displayables(B: Builder, input_reaction) -> Union[int, bytearray]:
                 for p in reversed(input_value):
                     x, y, z = p
                     F.CreateFVector3(B, x, y, z)
-                points = B.EndVector()#_length)
+                points = B.EndVector()  # _length)
 
                 F.FVector3sStart(B)
                 F.FVector3sAddPoints(B, points)
@@ -222,7 +221,7 @@ def serialise_displayables(B: Builder, input_reaction) -> Union[int, bytearray]:
                 F.FValuesStartValsVector(B, _length)
                 for v_ in reversed(input_value):
                     B.PrependFloat64(numpy.float64(v_))
-                values_offset = B.EndVector()#_length)
+                values_offset = B.EndVector()  # _length)
 
                 F.FValuesStart(B)
                 F.FValuesAddVals(B, values_offset)
@@ -238,7 +237,7 @@ def serialise_displayables(B: Builder, input_reaction) -> Union[int, bytearray]:
     F.FReactionStartConfigurationsVector(B, len(displayables_offsets))
     for offset in displayables_offsets:
         B.PrependUOffsetTRelative(offset)
-    return B.EndVector()#len(displayables_offsets))
+    return B.EndVector()  # len(displayables_offsets))
 
 
 def serialise_configurations(B: Builder, input_reaction) -> Union[int, bytearray]:
@@ -257,4 +256,4 @@ def serialise_configurations(B: Builder, input_reaction) -> Union[int, bytearray
     F.FReactionStartConfigurationsVector(B, len(configurations_offsets))
     for input_configuration in configurations_offsets:
         B.PrependUOffsetTRelative(input_configuration)
-    return B.EndVector()#len(configurations_offsets))
+    return B.EndVector()  # len(configurations_offsets))

@@ -253,7 +253,6 @@ class NeodroidPackage(metaclass=NeodroidPackageMeta):
 from setuptools import setup
 
 if __name__ == "__main__":
-
     pkg = NeodroidPackage
 
     setup(

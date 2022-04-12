@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import argparse
-import time
-
-import numpy
 
 from neodroid.environments.droid_environment import connect_dict
 

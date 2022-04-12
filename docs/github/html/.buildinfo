@@ -1,3 +1,4 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:eb8b9fd16b934c6fb962f9f7503c3a85b8d7a195796fc3deaa626eb6943d72bc
-size 234
+# Sphinx build info version 1
+# This file hashes the configuration used when building these files. When it is not found, a full rebuild will be done.
+config: 9881344ab7434334ea75aef12b90d3a9
+tags: 645f666f9bcd5a90fca523b33c5a78b7

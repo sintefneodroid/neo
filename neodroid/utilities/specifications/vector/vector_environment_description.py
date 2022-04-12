@@ -11,7 +11,6 @@ from neodroid.utilities.specifications.unity_specifications.environment_descript
     EnvironmentDescription,
 )
 
-
 __all__ = ["VectorEnvironmentDescription"]
 
 
