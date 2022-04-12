@@ -12,6 +12,7 @@ _EXTRA_REQUIREMENTS_PATH = Path(__file__).parent.parent/'requirements'
 class TestRequirements(unittest.TestCase):
     """Test availability of required packages."""
 
+
     def test_requirements(self):
         """Test that each required package is available."""
         requirements = pkg_resources.parse_requirements(_REQUIREMENTS_PATH.open())
