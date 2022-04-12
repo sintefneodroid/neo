@@ -18,6 +18,8 @@ __author__ = "Christian Heider Nielsen"
 
 from warg import cached_property
 
+__all__ = ["EnvironmentDescription"]
+
 
 class EnvironmentDescription(object):
     """ """

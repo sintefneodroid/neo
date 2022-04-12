@@ -9,6 +9,8 @@ __author__ = "Christian Heider Nielsen"
 from trolls.spaces import Range
 from warg import cached_property
 
+__all__ = ["Actuator"]
+
 
 class Actuator(object):
     """ """

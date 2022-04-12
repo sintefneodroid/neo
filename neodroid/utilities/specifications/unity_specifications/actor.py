@@ -10,6 +10,8 @@ __author__ = "Christian Heider Nielsen"
 
 from warg import cached_property
 
+__all__ = ["Actor"]
+
 
 class Actor(object):
     """ """

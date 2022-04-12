@@ -12,6 +12,8 @@ import json
 
 from .reaction_parameters import ReactionParameters
 
+__all__ = ["Reaction"]
+
 
 class Reaction(object):
     """ """

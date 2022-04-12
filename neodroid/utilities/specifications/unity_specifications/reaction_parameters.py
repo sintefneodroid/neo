@@ -6,6 +6,8 @@ __author__ = "Christian Heider Nielsen"
 
 import json
 
+__all__ = ["ReactionParameters"]
+
 
 class ReactionParameters(object):
     """ """

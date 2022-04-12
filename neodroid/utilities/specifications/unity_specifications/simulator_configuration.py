@@ -6,6 +6,8 @@ from warg import cached_property
 
 from neodroid.messaging.fbs import FConfiguration
 
+__all__ = ["SimulatorConfiguration"]
+
 
 class SimulatorConfiguration(object):
     """ """

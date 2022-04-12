@@ -7,6 +7,9 @@ import functools
 from warg import cached_property
 
 
+__all__ = ["Configuration"]
+
+
 class Configuration(object):
     """ """
 

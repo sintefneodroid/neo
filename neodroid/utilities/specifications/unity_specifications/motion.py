@@ -4,6 +4,8 @@ __author__ = "Christian Heider Nielsen"
 
 from typing import Any, Dict
 
+__all__ = ["Motion"]
+
 
 class Motion(object):
     """ """

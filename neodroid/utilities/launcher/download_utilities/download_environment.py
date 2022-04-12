@@ -6,6 +6,9 @@ import struct
 from tqdm import tqdm
 
 
+__all__ = ["download_environment", "DownloadProgress", "available_environments"]
+
+
 class DownloadProgress(tqdm):
     """"""
 

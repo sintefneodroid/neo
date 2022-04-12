@@ -14,6 +14,8 @@ import numpy
 from warg import cached_property
 from neodroid.messaging.fbs import FUnobservables
 
+__all__ = ["Unobservables"]
+
 
 class Unobservables(object):
     """

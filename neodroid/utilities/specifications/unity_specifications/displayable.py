@@ -5,6 +5,8 @@ __author__ = "Christian Heider Nielsen"
 # @pretty_print
 from warg import cached_property
 
+__all__ = ["Displayable"]
+
 
 class Displayable(object):
     """ """

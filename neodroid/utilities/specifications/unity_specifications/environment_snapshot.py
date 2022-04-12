@@ -18,6 +18,9 @@ from .sensor import Sensor
 from .configurable import Configurable
 from .environment_description import EnvironmentDescription
 
+__all__ = ["EnvironmentSnapshot"]
+
+
 EnvironmentSnapshotType = TypeVar(
     "EnvironmentSnapshotType", bound="EnvironmentSnapshot"
 )

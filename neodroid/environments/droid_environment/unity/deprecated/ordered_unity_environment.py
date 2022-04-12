@@ -3,7 +3,10 @@
 from itertools import count
 from typing import Union, Optional, Tuple
 
-from neodroid.environments.droid_environment import DictUnityEnvironment
+from neodroid.environments.droid_environment import (
+    DictUnityEnvironment,
+    VectorUnityEnvironment,
+)
 from neodroid.factories.configuration_reactions import verify_configuration_reactions
 from neodroid.factories.motion_reactions import verify_motion_reactions
 from neodroid.utilities import (
@@ -18,7 +21,7 @@ __all__ = ["OrderedUnityEnvironment"]
 
 from warg import drop_unused_kws
 
-from trolls.spaces import ObservationSpace, SignalSpace, VectorActionSpace
+from trolls.spaces import ObservationSpace, SignalSpace, VectorActionSpace, ActionSpace
 
 
 class OrderedUnityEnvironment(DictUnityEnvironment):

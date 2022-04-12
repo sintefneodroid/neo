@@ -5,6 +5,9 @@
 __author__ = "Christian Heider Nielsen"
 
 
+__all__ = ["launch_environment"]
+
+
 def launch_environment(
     environment_name,
     *,

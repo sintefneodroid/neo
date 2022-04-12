@@ -1,7 +1,6 @@
 import numpy
 from gym import Env
-
-from neodroid.utilities import Range, Space
+from trolls.spaces import Range, Space
 
 
 class NoRenderEnv(Env):

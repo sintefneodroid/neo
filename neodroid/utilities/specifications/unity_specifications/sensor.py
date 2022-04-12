@@ -6,6 +6,8 @@ __author__ = "Christian Heider Nielsen"
 
 from trolls.spaces import Range
 
+__all__ = ["Sensor"]
+
 
 class Sensor(object):
     r""" """
