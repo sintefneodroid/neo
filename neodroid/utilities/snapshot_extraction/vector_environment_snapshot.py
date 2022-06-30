@@ -7,9 +7,9 @@ from attr import dataclass
 
 __author__ = "Christian Heider Nielsen"
 
+from warg import OrdinalIndexingDictMixin, IterDictValuesMixin
 from neodroid.utilities import NoEnvironment
-from neodroid.utilities.unity_specifications import EnvironmentSnapshot
-from warg.mixins import IterDictValuesMixin, OrdinalIndexingDictMixin
+from neodroid.utilities.specifications.unity_specifications import EnvironmentSnapshot
 
 __all__ = ["VectorPoints", "NumpyVectorPoints", "VectorEnvironmentSnapshot"]
 
@@ -24,8 +24,7 @@ class VectorPoints(IterDictValuesMixin, OrdinalIndexingDictMixin):
     def __len__(self):
         """
 
-@return:
-"""
+        :return:"""
         return len(self.terminated)
 
 
@@ -39,8 +38,7 @@ class NumpyVectorPoints(IterDictValuesMixin, OrdinalIndexingDictMixin):
     def __len__(self):
         """
 
-@return:
-"""
+        :return:"""
         return len(self.terminated)
 
 

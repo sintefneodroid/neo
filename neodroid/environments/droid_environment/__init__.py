@@ -1,32 +1,52 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from warg import passes_kws_to
-from .unity_environment import UnityEnvironment
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = r"""
            """
 
+from warg import passes_kws_to
 
-@passes_kws_to(UnityEnvironment.__init__)
-def make(
+from .bullet_environment import *
+from .godot_environment import *
+from .unity import *
+
+
+@passes_kws_to(DictUnityEnvironment.__init__)
+def make_dict(
     environment_name: str = None, clones: int = 0, *args, **kwargs
-) -> UnityEnvironment:
-    _environments = UnityEnvironment(
+) -> DictUnityEnvironment:
+    _environments = DictUnityEnvironment(
         environment_name=environment_name, clones=clones, *args, **kwargs
     )
     return _environments
 
 
-@passes_kws_to(UnityEnvironment.__init__)
-def connect(ip: str = "localhost", port: int = 6969, **kwargs) -> UnityEnvironment:
-    _environments = UnityEnvironment(
+@passes_kws_to(DictUnityEnvironment.__init__)
+def connect_dict(
+    ip: str = "localhost", port: int = 6969, **kwargs
+) -> DictUnityEnvironment:
+    _environments = DictUnityEnvironment(
         connect_to_running=True, ip=ip, port=port, **kwargs
     )
     return _environments
 
 
-from neodroid.environments.droid_environment.deprecated.single_unity_environment import *
-from .unity_environment import *
-from .vector_unity_environment import *
-from neodroid.environments.droid_environment.deprecated.batched_unity_environments import *
+@passes_kws_to(VectorUnityEnvironment.__init__)
+def make_vector(
+    environment_name: str = None, clones: int = 0, *args, **kwargs
+) -> VectorUnityEnvironment:
+    _environments = VectorUnityEnvironment(
+        environment_name=environment_name, clones=clones, *args, **kwargs
+    )
+    return _environments
+
+
+@passes_kws_to(VectorUnityEnvironment.__init__)
+def connect_vector(
+    ip: str = "localhost", port: int = 6969, **kwargs
+) -> VectorUnityEnvironment:
+    _environments = VectorUnityEnvironment(
+        connect_to_running=True, ip=ip, port=port, **kwargs
+    )
+    return _environments

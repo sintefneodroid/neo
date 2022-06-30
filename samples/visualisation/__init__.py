@@ -20,7 +20,7 @@ class PointEnv(Env):
     def step(self, action):
         self._state = self._state + action
         x, y = self._state
-        reward = -((x ** 2 + y ** 2) ** 0.5)
+        reward = -((x**2 + y**2) ** 0.5)
         done = abs(x) < 0.01 and abs(y) < 0.01
         next_observation = numpy.copy(self._state)
         return Step(observation=next_observation, reward=reward, done=done)

@@ -4,11 +4,11 @@
 __author__ = "Christian Heider Nielsen"
 __doc__ = ""
 
-import contextlib
+from warg import IgnoreInterruptSignal
 
 import neodroid
 
 for i in range(100):
-    with neodroid.connect() as env, contextlib.suppress(KeyboardInterrupt):
+    with neodroid.connect() as env, IgnoreInterruptSignal():
         print(i)
         env.react()

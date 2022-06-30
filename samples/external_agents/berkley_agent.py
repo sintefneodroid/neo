@@ -12,8 +12,8 @@ import torch
 from garage.envs import normalize
 from garage.envs.base import GarageEnv
 from garage.experiment import LocalRunner, run_experiment
-from garage.np.baselines import LinearFeatureBaseline
-from garage.np.exploration_strategies import OUStrategy
+from garage.numpy.baselines import LinearFeatureBaseline
+from garage.numpy.exploration_strategies import OUStrategy
 from garage.replay_buffer import SimpleReplayBuffer
 from garage.tf.algos import PPO, TRPO
 from garage.tf.envs import TfEnv
@@ -30,12 +30,11 @@ ENV = "CartPole-v1"
 
 def run_ddpg(snapshot_config, *_):
     """Set up environment and algorithm and run the task.
-Args:
-  snapshot_config (garage.experiment.SnapshotConfig): The snapshot
-      configuration used by LocalRunner to create the snapshotter.
-      If None, it will create one with default settings.
-  _ : Unused parameters
-"""
+    Args:
+      snapshot_config (garage.experiment.SnapshotConfig): The snapshot
+          configuration used by LocalRunner to create the snapshotter.
+          If None, it will create one with default settings.
+      _ : Unused parameters"""
     runner = LocalRunner(snapshot_config)
     env = GarageEnv(normalize(gym.make(ENV)))
 
@@ -79,12 +78,11 @@ Args:
 
 def run_ppo(snapshot_config, *_):
     """Set up environment and algorithm and run the task.
-Args:
-  snapshot_config (garage.experiment.SnapshotConfig): The snapshot
-      configuration used by LocalRunner to create the snapshotter.
-      If None, it will create one with default settings.
-  _ : Unused parameters
-"""
+    Args:
+      snapshot_config (garage.experiment.SnapshotConfig): The snapshot
+          configuration used by LocalRunner to create the snapshotter.
+          If None, it will create one with default settings.
+      _ : Unused parameters"""
     env = TfEnv(env_name=ENV)
 
     runner = LocalRunner(snapshot_config)
@@ -136,5 +134,4 @@ def run_tpro(snapshot_config, *_):
 
 
 if __name__ == "__main__":
-
     run_experiment(run_tpro, snapshot_mode="last", seed=1)

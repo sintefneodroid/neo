@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.utilities.unity_specifications import Motion, Reaction, ReactionParameters
+from neodroid.utilities.specifications.unity_specifications import (
+    Motion,
+    Reaction,
+    ReactionParameters,
+)
 
 __author__ = "Christian Heider Nielsen"
 
 import neodroid.wrappers.formal_wrapper as neo
+
 
 def construct_reactions(env):
     parameters = ReactionParameters(

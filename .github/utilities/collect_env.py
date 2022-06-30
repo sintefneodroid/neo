@@ -6,9 +6,8 @@ import subprocess
 import sys
 from collections import namedtuple
 
-from setup import NeodroidPackage
-
 import neodroid
+from setup import NeodroidPackage
 
 PY3 = sys.version_info >= (3, 0)
 

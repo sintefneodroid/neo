@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 from contextlib import suppress
+from typing import Callable, Optional, Sequence
 
 import zmq
 
@@ -12,20 +13,19 @@ __author__ = "Christian Heider Nielsen"
 
 # @singleton
 class MessageClient(object):
-    """
-
-"""
+    """ """
 
     def __init__(
         self,
-        tcp_address="localhost",
-        tcp_port=6969,
-        on_timeout_callback=None,
-        on_step_done_callback=None,
-        on_connected_callback=None,
-        on_disconnected_callback=None,
-        single_threaded=False,
-        writer=logging.info,
+        tcp_address: str = "localhost",
+        tcp_port: int = 6969,
+        on_timeout_callback: Optional[Callable] = None,
+        on_step_done_callback: Optional[Callable] = None,
+        on_connected_callback: Optional[Callable] = None,
+        on_disconnected_callback: Optional[Callable] = None,
+        on_reconnected_callback: Optional[Callable] = None,
+        single_threaded: bool = False,
+        writer: callable = logging.info,
     ):
 
         self._tcp_address = tcp_address
@@ -40,10 +40,12 @@ class MessageClient(object):
         self._on_connected_callback = on_connected_callback
         self._on_step_done = on_step_done_callback
         self._on_disconnected_callback = on_disconnected_callback
+        self._on_reconnected_callback = on_reconnected_callback
         self._writer = writer
 
+        self.should_be_single_threaded = single_threaded
         if single_threaded:
-            self.build(single_threaded)
+            self._build(single_threaded)
 
         self._context = None
         self._poller = None
@@ -54,10 +56,8 @@ class MessageClient(object):
 
         self.LAST_RECEIVED_FRAME_NUMBER = 0
 
-    def open_connection(self):
-        """
-
-"""
+    def _open_connection(self):
+        """ """
         self._request_socket = self._context.socket(self._socket_type)
 
         if not self._request_socket:
@@ -81,11 +81,11 @@ class MessageClient(object):
 
         self._poller = zmq.Poller()
         self._poller.register(self._request_socket, zmq.POLLIN)
+        if self._writer:
+            self._writer("Poller up")
 
     def close_connection(self):
-        """
-
-"""
+        """ """
         with suppress(zmq.error.ZMQError):
             # if not self._request_socket.closed:
             self._request_socket.setsockopt(zmq.LINGER, 0)
@@ -94,18 +94,16 @@ class MessageClient(object):
             # self._poller.close()
 
     def teardown(self):
-        """
-
-"""
+        """ """
         self.close_connection()
         self._context.term()
 
-    def build(self, single_threaded=False):
+    def _build(self, single_threaded: bool = False):
         """
 
-@param single_threaded:
-@type single_threaded:
-"""
+        :param single_threaded:
+        :type single_threaded:"""
+
         if single_threaded:
             self._context = zmq.Context.instance()
 
@@ -114,18 +112,17 @@ class MessageClient(object):
         else:
             self._context = zmq.Context()
 
-        self.open_connection()
+        self._open_connection()
 
-    def send_receive(self, reactions):
+    def send_receive(self, reactions: Sequence):
         """
 
-@param reactions:
-@type reactions:
-@return:
-@rtype:
-"""
+        :param reactions:
+        :type reactions:
+        :return:
+        :rtype:"""
         if self._request_socket is None:
-            self.build()
+            self._build(self.should_be_single_threaded)
 
         if not self._expecting_response:
             serialised_reaction = serialise_reactions(reactions)
@@ -139,6 +136,8 @@ class MessageClient(object):
 
                 if sockets.get(self._request_socket):
                     response = self._request_socket.recv()
+                    if retries_left < self.REQUEST_RETRIES:
+                        self._on_reconnected_callback()
                     if not response:  # or len(response)<4:
                         continue
 
@@ -154,8 +153,10 @@ class MessageClient(object):
                     # LAST_RECEIVED_FRAME_NUMBER=states.frame_number
 
                     return states, simulator_configuration
-
                 else:
+                    if self._writer:
+                        self._writer("Timeout")
+
                     if self._on_timeout_callback:
                         self._on_timeout_callback()
                     self.close_connection()
@@ -173,8 +174,10 @@ class MessageClient(object):
                             self._writer(
                                 f"Retrying to connect, attempt: {retries_left:d}/{self.REQUEST_RETRIES:d}"
                             )
-                        self.open_connection()
+                        self._open_connection()
                         self._request_socket.send(serialised_reaction)
 
             if self._on_step_done:
                 self._on_step_done()
+
+        return None, None

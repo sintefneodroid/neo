@@ -30,7 +30,6 @@ def construct_reactions(env, R):
     }
 
     for i in range(19):
-
         parameters = ReactionParameters(
             terminable=True,
             step=True,
@@ -61,7 +60,9 @@ def construct_reactions(env, R):
 
 
 def main():
-    environments = VectorNeodroidEnvironment(connect_to_running=True)
+    import neodroid as neo
+
+    environments = neo.NeodroidEnvironment(connect_to_running=True)
     R = [False for _ in range(20)]
     while environments.is_connected:
         reactions = construct_reactions(environments, R)

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from draugr import batch_generator
+
 from neodroid.environments.droid_environment import SingleUnityEnvironment
 from neodroid.utilities.snapshot_extraction.camera_extraction import (
     extract_from_cameras,

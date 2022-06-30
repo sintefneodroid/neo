@@ -3,15 +3,14 @@
 from gui_components import EnvironmentStateBox, ReactionBox, StatusBar, XMLBox
 
 __author__ = "Christian Heider Nielsen"
-__doc__ = r'''
-'''
+__doc__ = r"""
+"""
 
 from kivy.app import App
-from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 
+__all__ = ["NeoGUI"]
 
-__all__ = ['NeoGUI']
 
 class NeoGUI(App):
     def __init__(
@@ -21,7 +20,7 @@ class NeoGUI(App):
         self._on_step_callback = on_step_callback
         self._on_reset_callback = on_reset_callback
         self._on_connect_callback = on_connect_callback
-        #Window.clearcolor = (1, 1, 1, 1)
+        # Window.clearcolor = (1, 1, 1, 1)
 
         self.parent_rows = BoxLayout(orientation="vertical")
         self.columns = BoxLayout(orientation="horizontal")

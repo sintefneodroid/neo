@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from neodroid.messaging import ClientEvents, message_client_event
+from neodroid.messaging import ClientEventsEnum, message_client_event
 from neodroid.messaging.message_client import MessageClient
-from neodroid.utilities.unity_specifications.environment_snapshot import (
+from neodroid.utilities.specifications.unity_specifications.environment_snapshot import (
     EnvironmentSnapshot,
 )
 
@@ -13,15 +13,13 @@ __author__ = "Christian Heider Nielsen"
 import time
 from abc import ABC, abstractmethod
 
-from .environment import Environment
+from neodroid.environments.environment import Environment
 
 __all__ = ["NetworkingEnvironment"]
 
 
 class NetworkingEnvironment(Environment, ABC):
-    """
-
-  """
+    """ """
 
     def __init__(
         self,
@@ -32,6 +30,7 @@ class NetworkingEnvironment(Environment, ABC):
         on_connected_callback: callable = None,
         on_disconnected_callback: callable = None,
         on_timeout_callback: callable = None,
+        on_reconnected_callback: callable = None,
         retries: int = 10,
         connect_try_interval: float = 0.1,
         **kwargs,
@@ -45,6 +44,7 @@ class NetworkingEnvironment(Environment, ABC):
         self._external_on_connected_callback = on_connected_callback
         self._external_on_disconnected_callback = on_disconnected_callback
         self._external_on_timeout_callback = on_timeout_callback
+        self._external_on_reconnected_callback = on_reconnected_callback
         self._retries = retries
         self._connect_try_interval = connect_try_interval
 
@@ -53,66 +53,67 @@ class NetworkingEnvironment(Environment, ABC):
             raise StopIteration
         return self.react()
 
-    def _setup_connection(self, auto_describe: bool = True):
+    def _setup_connection(self, auto_describe: bool = True, writer=logging.info):
         connect_tries = range(self._retries)
-
         self._message_server = MessageClient(
             self._ip,
             self._port,
             on_timeout_callback=self.__on_timeout_callback__,
             on_connected_callback=self.__on_connected_callback__,
             on_disconnected_callback=self.__on_disconnected_callback__,
+            on_reconnected_callback=self.__on_reconnected_callback__,
+            writer=writer,
         )
 
         if auto_describe:
             while self.description is None:
                 self.describe()
                 time.sleep(self._connect_try_interval)
-                logging.info(
+                writer(
                     f"Connecting, please make sure that the ip {self._ip} "
                     f"and port {self._port} "
-                    f"are cd correct"
+                    f"are correct"
                 )
                 n = next(connect_tries)
-                if n == self._retries:
+                if n >= self._retries:
                     raise ConnectionError
 
             self._is_connected_to_server = True
         else:
             self._is_connected_to_server = True
 
-    @message_client_event(event=ClientEvents.CONNECTED)
+    @message_client_event(event=ClientEventsEnum.connected)
     def __on_connected_callback__(self):
-        """
-
-"""
+        """ """
         if self._external_on_connected_callback:
             self._external_on_connected_callback()
 
-    @message_client_event(event=ClientEvents.DISCONNECTED)
+    @message_client_event(event=ClientEventsEnum.disconnected)
     def __on_disconnected_callback__(self):
-        """
-
-"""
+        """ """
         self._is_connected_to_server = False
         if self._external_on_disconnected_callback:
             self._external_on_disconnected_callback()
 
-    @message_client_event(event=ClientEvents.TIMEOUT)
+    @message_client_event(event=ClientEventsEnum.timeout)
     def __on_timeout_callback__(self):
-        """
-
-"""
+        """ """
         if self._external_on_timeout_callback:
             self._external_on_timeout_callback()
+
+    @message_client_event(event=ClientEventsEnum.reconnected)
+    def __on_reconnected_callback__(self):
+        """ """
+        if self._external_on_reconnected_callback:
+            self._external_on_reconnected_callback()
 
     @property
     def is_connected(self):
         """
 
-    @return:
-    @rtype:
-    """
+        :return:
+        :rtype:
+        """
         return self._is_connected_to_server
 
     @abstractmethod
@@ -129,13 +130,13 @@ class NetworkingEnvironment(Environment, ABC):
     def close(self, *args, **kwargs):
         """
 
-    @param args:
-    @type args:
-    @param kwargs:
-    @type kwargs:
-    @return:
-    @rtype:
-    """
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        :return:
+        :rtype:
+        """
         self._message_server.teardown()
 
         return self._close(*args, **kwargs)

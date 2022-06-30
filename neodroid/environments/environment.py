@@ -4,14 +4,14 @@ import logging
 from abc import ABC, abstractmethod
 from pathlib import Path
 from types import coroutine
-from typing import Any
+from typing import Any, Optional
 
 from neodroid import PROJECT_APP_PATH
 from neodroid.utilities import EnvironmentSnapshot
-from neodroid.utilities.spaces import ActionSpace, ObservationSpace, SignalSpace
-from neodroid.utilities.unity_specifications.environment_description import (
+from neodroid.utilities.specifications.unity_specifications.environment_description import (
     EnvironmentDescription,
 )
+from trolls.spaces import ActionSpace, ObservationSpace, SignalSpace
 
 __author__ = "Christian Heider Nielsen"
 
@@ -24,12 +24,11 @@ __all__ = ["Environment"]
 
 class Environment(ABC):
     """
-Environment base class, this class is responsible for defining the interface of interaction. It is
-designed with the idea for constructing/connecting, configuring, resetting and reacting with an
-Environment as a Markov Decision Process(MDP). However can easily used as a stateless interface for
-collecting data, eg. from a real world camera, synthetic (Maybe domain randomised images) data or
-sampling consecutive data points (Maybe a time series of sensor values).
-"""
+    Environment base class, this class is responsible for defining the interface of interaction. It is
+    designed with the idea for constructing/connecting, configuring, resetting and reacting with an
+    Environment as a Markov Decision Process(MDP). However can easily used as a stateless interface for
+    collecting data, eg. from a real world camera, synthetic (Maybe domain randomised images) data or
+    sampling consecutive data points (Maybe a time series of sensor values)."""
 
     @drop_unused_kws
     def __init__(
@@ -61,96 +60,88 @@ sampling consecutive data points (Maybe a time series of sensor values).
     def environment_name(self) -> str:
         """
 
-    @return:
-    @rtype:
-    """
+        :return:
+        :rtype:
+        """
         return self._environment_name
 
     @abstractmethod
     def configure(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-    @param args:
-    @type args:
-    @param kwargs:
-    @type kwargs:
-    """
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        """
         raise NotImplementedError
 
     @abstractmethod
     def reset(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-    @param args:
-    @type args:
-    @param kwargs:
-    @type kwargs:
-    """
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        """
         raise NotImplementedError
 
     @abstractmethod
     def react(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-    @param args:
-    @type args:
-    @param kwargs:
-    @type kwargs:
-    """
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        """
         raise NotImplementedError
 
     @abstractmethod
     def display(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-    @param args:
-    @type args:
-    @param kwargs:
-    @type kwargs:
-    """
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        """
         raise NotImplementedError
 
     @abstractmethod
     def describe(self, *args, **kwargs) -> EnvironmentSnapshot:
         """
 
-    @param args:
-    @type args:
-    @param kwargs:
-    @type kwargs:
-    """
+        :param args:
+        :type args:
+        :param kwargs:
+        :type kwargs:
+        """
         raise NotImplementedError
 
     @property
     @abstractmethod
     def description(self) -> EnvironmentDescription:
-        """
-
-    """
+        """ """
         raise NotImplementedError
 
     @property
     @abstractmethod
     def observation_space(self) -> ObservationSpace:
-        """
-
-    """
+        """ """
         raise NotImplementedError
 
     @property
     @abstractmethod
     def action_space(self) -> ActionSpace:
-        """
-
-    """
+        """ """
         raise NotImplementedError
 
     @property
     @abstractmethod
     def signal_space(self) -> SignalSpace:
-        """
-
-    """
+        """ """
         raise NotImplementedError
 
     def __next__(self):
@@ -179,22 +170,18 @@ sampling consecutive data points (Maybe a time series of sensor values).
     @coroutine
     def coroutine_generator(self):
         """
-:return:
-:rtype:
-"""
+        :return:
+        :rtype:"""
         return self
 
-    def render(self):
-        """
-
-    """
+    def render(self, *args, **kwargs) -> Optional[numpy.ndarray]:
+        """ """
         pass
 
     @staticmethod
-    def seed(seed):
+    def seed(seed: int) -> None:
         """
 
-:param seed:
-:type seed:
-"""
+        :param seed:
+        :type seed:"""
         numpy.random.seed(seed)

@@ -6,10 +6,10 @@ from math import ceil, floor, sqrt
 import cv2
 import numpy
 from matplotlib import animation, pyplot
+from warg import NOD
 
-from neodroid.environments.droid_environment import UnityEnvironment
+from neodroid.environments.droid_environment import DictUnityEnvironment
 from neodroid.utilities.snapshot_extraction.camera_extraction import extract_all_cameras
-from warg.named_ordered_dictionary import NOD
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = ""
@@ -25,7 +25,7 @@ time_s = time.time()
 
 image_axs = NOD()
 
-env = UnityEnvironment(connect_to_running=True)
+env = DictUnityEnvironment(connect_to_running=True)
 fig = pyplot.figure()
 print_obs = False
 reset_every_step = False
@@ -95,7 +95,6 @@ def main():
         a = [axes]
     for ax, (k, v) in zip(a, new_images.items()):
         if k:
-
             ax.set_facecolor("gray")
             ax.set_title(k)
             image_axs[k] = ax.imshow(v)

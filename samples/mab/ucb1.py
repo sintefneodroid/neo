@@ -1,7 +1,7 @@
 import math
 import sys
 
-from warg.named_ordered_dictionary import NOD
+from warg import NOD
 
 
 def index_of_max(x):
@@ -61,7 +61,7 @@ class UCB1:
     def train(self, arms, rollouts=1000) -> NOD:
         for t in range(rollouts):
             chosen_arm = self.select_arm()
-            reward = arms[chosen_arm].draw()
+            reward = arms[chosen_arm].actions()
             self.update_belief(chosen_arm, reward)
         return NOD()
 

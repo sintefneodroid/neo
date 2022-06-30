@@ -5,15 +5,13 @@ from neodroid.environments.environment import Environment
 __author__ = "Christian Heider Nielsen"
 
 from abc import ABC
-import neodroid.utilities.unity_specifications as M
+import neodroid.utilities.specifications.unity_specifications as M
 
 __all__ = ["PythonEnvironment"]
 
 
 class PythonEnvironment(Environment, ABC):
-    """
-
-  """
+    """ """
 
     def __init__(
         self,
@@ -42,9 +40,9 @@ class PythonEnvironment(Environment, ABC):
     def describe(self):
         """
 
-    @return:
-    @rtype:
-    """
+        :return:
+        :rtype:
+        """
         return self.react(
             parameters=M.ReactionParameters(
                 terminable=False, describe=True, episode_count=False
@@ -54,11 +52,11 @@ class PythonEnvironment(Environment, ABC):
     def update_interface_statics(self, new_states, new_simulator_configuration):
         """
 
-    @param new_states:
-    @type new_states:
-    @param new_simulator_configuration:
-    @type new_simulator_configuration:
-    """
+        :param new_states:
+        :type new_states:
+        :param new_simulator_configuration:
+        :type new_simulator_configuration:
+        """
         self._last_message = new_states
 
         self._simulator_configuration = new_simulator_configuration

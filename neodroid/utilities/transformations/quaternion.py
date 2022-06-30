@@ -15,16 +15,16 @@ import numpy
 __all__ = ["normalise_vector", "Quaternion"]
 
 
-def normalise_vector(vector: Iterable, tolerance=0.00001) -> numpy.ndarray:
+def normalise_vector(vector: Iterable, tolerance: float = 0.00001) -> numpy.ndarray:
     """
 
-  @param vector:
-  @type vector:
-  @param tolerance:
-  @type tolerance:
-  @return:
-  @rtype:
-  """
+    :param vector:
+    :type vector:
+    :param tolerance:
+    :type tolerance:
+    :return:
+    :rtype:
+    """
     mag2 = sum(n * n for n in vector)
     if abs(mag2 - 1.0) > tolerance:
         mag = sqrt(mag2)
@@ -34,36 +34,36 @@ def normalise_vector(vector: Iterable, tolerance=0.00001) -> numpy.ndarray:
 
 class Quaternion:
     @staticmethod
-    def from_axisangle(theta, vector):
+    def from_axis_angle(theta, vector):
         """
 
-    @param theta:
-    @type theta:
-    @param vector:
-    @type vector:
-    @return:
-    @rtype:
-    """
+        :param theta:
+        :type theta:
+        :param vector:
+        :type vector:
+        :return:
+        :rtype:
+        """
         vector = normalise_vector(vector)
 
         new_quaternion = Quaternion()
-        new_quaternion._axisangle_to_q(theta, vector)
+        new_quaternion._axis_angle_to_q(theta, vector)
         return new_quaternion
 
     @staticmethod
     def from_value(value):
         """
 
-    @param value:
-    @type value:
-    @return:
-    @rtype:
-    """
+        :param value:
+        :type value:
+        :return:
+        :rtype:
+        """
         new_quaternion = Quaternion()
         new_quaternion.components = value
         return new_quaternion
 
-    def _axisangle_to_q(self, theta, v):
+    def _axis_angle_to_q(self, theta, v):
         x = v[0]
         y = v[1]
         z = v[2]
@@ -104,23 +104,23 @@ class Quaternion:
     def get_conjugate(self):
         """
 
-    @return:
-    @rtype:
-    """
+        :return:
+        :rtype:
+        """
         w, x, y, z = self.components
         result = Quaternion.from_value(numpy.array((w, -x, -y, -z)))
         return result
 
     def __repr__(self):
-        theta, vector = self.get_axisangle()
+        theta, vector = self.get_axis_angle()
         return f"(({theta:.6f}; {vector[0]:.6f}, {vector[1]:.6f}, {vector[2]:.6f}))"
 
-    def get_axisangle(self):
+    def get_axis_angle(self):
         """
 
-    @return:
-    @rtype:
-    """
+        :return:
+        :rtype:
+        """
         w, axis = self.components[0], self.components[1:]
         theta = acos(w) * 2.0
 
@@ -129,30 +129,29 @@ class Quaternion:
     def tolist(self):
         """
 
-    @return:
-    @rtype:
-    """
+        :return:
+        :rtype:
+        """
         return self.components.tolist()
 
     def vector_norm(self):
         """
 
-    @return:
-    @rtype:
-    """
-        w, v = self.get_axisangle()
+        :return:
+        :rtype:
+        """
+        w, v = self.get_axis_angle()
         return numpy.linalg.norm(v)
 
 
 if __name__ == "__main__":
-
     x_axis_unit = (1, 0, 0)
     y_axis_unit = (0, 1, 0)
     z_axis_unit = (0, 0, 1)
 
-    r1 = Quaternion.from_axisangle(numpy.pi / 2, x_axis_unit)
-    r2 = Quaternion.from_axisangle(numpy.pi / 2, y_axis_unit)
-    r3 = Quaternion.from_axisangle(numpy.pi / 2, z_axis_unit)
+    r1 = Quaternion.from_axis_angle(numpy.pi / 2, x_axis_unit)
+    r2 = Quaternion.from_axis_angle(numpy.pi / 2, y_axis_unit)
+    r3 = Quaternion.from_axis_angle(numpy.pi / 2, z_axis_unit)
 
     # Quaternion - vector multiplication
     v = r1 * y_axis_unit

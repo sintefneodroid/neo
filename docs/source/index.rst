@@ -1,17 +1,28 @@
-.. Neo documentation master file, created by
-sphinx-quickstart on Tue Jul 25 10:23:12 2017.
-You can adapt this file completely to your liking, but it should at least
-contain the root `toctree` directive.
-
-Welcome to Neo's documentation!
+|organisation| |project| Documentation
 ===============================
 
-.. mdinclude:: ../../.github/README.rst
+Version: |version| |today|
+
+..  autosummary::
+    :toctree: generated
+    :template: custom_autosummary/module.rst
+    :recursive:
+
+    neodroid
+
 
 .. toctree::
-:maxdepth: 2
-     :caption: Contents:
+    :glob:
+    :hidden:
+    :maxdepth: 1
+    :caption: Notes
 
+    getting_started
+
+What's next?
+-------------
+
+Read the :ref:`Getting Started Guide <getting_started>`
 
 
 Indices and tables

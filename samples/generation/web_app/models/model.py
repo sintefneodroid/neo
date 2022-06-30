@@ -1,7 +1,6 @@
 import json
 
 import numpy
-import tensorflow as tf
 from keras_preprocessing.image import img_to_array, load_img
 from tensorflow.python.keras.applications import VGG16
 

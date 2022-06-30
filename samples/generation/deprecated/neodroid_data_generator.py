@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 from multiprocessing import Pipe, Process
 
+from draugr.torch_utilities import channel_transform
 from torch.utils.data import Dataset
 
-from draugr.torch_utilities import channel_transform
 from neodroid.wrappers import CameraObservationWrapper
 from trolls.experimental import CloudPickleWrapper
 
