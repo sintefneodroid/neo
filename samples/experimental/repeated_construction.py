@@ -4,7 +4,7 @@
 __author__ = "Christian Heider Nielsen"
 __doc__ = ""
 
-from draugr import IgnoreInterruptSignal
+from warg import IgnoreInterruptSignal
 
 import neodroid
 
