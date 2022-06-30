@@ -4,7 +4,7 @@ __doc__ = r"""
 
 __all__ = ["reverse_normalise_action", "normalise_action"]
 
-from trolls.spaces import ActionSpace, Range
+from trolls.spaces import ActionSpace, Dimension
 
 
 def reverse_normalise_action(*, action: float, action_space: ActionSpace) -> float:
@@ -12,6 +12,8 @@ def reverse_normalise_action(*, action: float, action_space: ActionSpace) -> flo
 
     TODO: INCONSISTENT ACTION SPACE AND RANGE ABSTRACTION LEVEL, normalise_action
 
+    :param action_space:
+    :type action_space:
     :param action:
     :type action:
     :return:
@@ -22,7 +24,7 @@ def reverse_normalise_action(*, action: float, action_space: ActionSpace) -> flo
     return act_k_inv * (action - act_b)
 
 
-def normalise_action(*, action: float, motion_space: Range) -> float:
+def normalise_action(*, action: float, motion_space: Dimension) -> float:
     """
 
     TODO: INCONSISTENT ACTION SPACE AND RANGE ABSTRACTION LEVEL, reverse_normalise_action

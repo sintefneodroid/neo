@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from trolls.spaces import Range
+from trolls.spaces import Dimension
 
 __author__ = "Christian Heider Nielsen"
 
@@ -12,7 +12,7 @@ __author__ = "Christian Heider Nielsen"
     [(0, 0, 0, False), (1, 2, 1, False), (-1, 2, 1, False)],
 )
 def test_space_construction(min, max, dec, norm):
-    space = Range(
+    space = Dimension(
         min_value=min, max_value=max, decimal_granularity=dec, normalised=norm
     )
     assert space.min == min

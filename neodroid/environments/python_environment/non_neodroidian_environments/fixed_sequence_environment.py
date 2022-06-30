@@ -1,9 +1,9 @@
 import numpy
-from gym.spaces import Discrete
 
 from neodroid.environments.python_environment.non_neodroidian_environments import (
     NoRenderEnv,
 )
+from trolls.spaces import ActionSpace, Dimension, ObservationSpace
 
 
 class FixedSequenceEnvironment(NoRenderEnv):
@@ -18,8 +18,8 @@ class FixedSequenceEnvironment(NoRenderEnv):
             self.np_random.randint(0, n_actions - 1) for _ in range(episode_length)
         ]
 
-        self.action_space = Discrete(n_actions)
-        self.observation_space = Discrete(1)
+        self.action_space = ActionSpace(Dimension(n_actions))
+        self.observation_space = ObservationSpace(Dimension(1))
 
         self.reset()
 

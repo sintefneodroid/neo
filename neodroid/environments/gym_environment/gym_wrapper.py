@@ -3,11 +3,12 @@
 from typing import Iterable, Union
 
 from gym import Env
+
 from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
     VectorEnvironmentSnapshot,
 )
 from neodroid.utilities.specifications.unity_specifications import EnvironmentSnapshot
-from trolls.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
+from trolls.spaces import ActionSpace, ObservationSpace, Dimension, SignalSpace
 
 __author__ = "Christian Heider Nielsen"
 
@@ -18,7 +19,7 @@ from warg import drop_unused_kws
 __all__ = ["NeodroidGymEnvironment"]
 
 
-class NeodroidGymEnvironment(object):
+class NeodroidGymEnvironment:
     """ """
 
     @drop_unused_kws
@@ -29,9 +30,12 @@ class NeodroidGymEnvironment(object):
 
         :param environment:"""
         if isinstance(environment, str):
-            self._env = gym.make(environment)
+            self._env = gym.make(
+                environment
+            )  # NormalisedActions(gym.make(environment))
         else:
             self._env = environment
+
         self._environment_name = environment
         self._auto_reset_on_terminal_state = auto_reset_on_terminal_state
 
@@ -43,7 +47,7 @@ class NeodroidGymEnvironment(object):
 
         space = SignalSpace(
             [
-                Range(
+                Dimension(
                     min_value=-float("inf"),
                     max_value=float("inf"),
                     decimal_granularity=9,
@@ -63,16 +67,14 @@ class NeodroidGymEnvironment(object):
             aspc = self._env.observation_space
             space = ObservationSpace(
                 [
-                    Range(decimal_granularity=2, min_value=mn, max_value=mx)
-                    for _, mn, mx in zip(
-                        range(self._env.observation_space.shape[0]), aspc.low, aspc.high
-                    )
+                    Dimension(decimal_granularity=2, min_value=mn, max_value=mx)
+                    for _, mn, mx in zip(range(aspc.shape[0]), aspc.low, aspc.high)
                 ]
             )
         else:
             space = ObservationSpace(
                 [
-                    Range(
+                    Dimension(
                         min_value=0,
                         max_value=self._env.observation_space.n,
                         decimal_granularity=0,
@@ -92,17 +94,15 @@ class NeodroidGymEnvironment(object):
             aspc = self._env.action_space
             space = ActionSpace(
                 [
-                    Range(decimal_granularity=2, min_value=mn, max_value=mx)
-                    for _, mn, mx in zip(
-                        range(self._env.action_space.shape[0]), aspc.low, aspc.high
-                    )
+                    Dimension(decimal_granularity=2, min_value=mn, max_value=mx)
+                    for _, mn, mx in zip(range(aspc.shape[0]), aspc.low, aspc.high)
                 ]
             )
 
         else:
             space = ActionSpace(
                 [
-                    Range(
+                    Dimension(
                         min_value=0,
                         max_value=self._env.action_space.n - 1,
                         decimal_granularity=0,
@@ -157,4 +157,8 @@ if __name__ == "__main__":
     print(env.signal_space)
     print(env.reset())
     print(env.react([1]))
-    print(env.react(env.action_space.sample()))
+    for _ in range(10):
+        env.reset()
+        for _ in range(200):
+            print(env.react([env.action_space.sample()]))
+            env.render()

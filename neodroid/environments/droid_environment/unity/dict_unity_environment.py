@@ -323,8 +323,6 @@ class DictUnityEnvironment(NetworkingEnvironment):
     def describe(self) -> Mapping[str, EnvironmentSnapshot]:
         """
 
-        :param parameters:
-        :type parameters:
         :return:
         :rtype:"""
         reaction = Reaction(
@@ -335,71 +333,75 @@ class DictUnityEnvironment(NetworkingEnvironment):
 
         return self.send([reaction])
 
-    def update_interface_attributes(
-        self,
-        new_states: Dict[str, EnvironmentSnapshot],
-        new_simulator_configuration: SimulatorConfiguration,
-        ensure_no_space_changes: bool = False,
-    ) -> None:
-        """
 
-        :param new_states:
-        :type new_states:
-        :param new_simulator_configuration:
-        :type new_simulator_configuration:
-        """
-        if not self._description:
-            self._description = {}
-        if not self._action_space:
-            self._action_space = {}
-        if not self._observation_space:
-            self._observation_space = {}
-        if not self._signal_space:
-            self._signal_space = {}
+def update_interface_attributes(
+    self,
+    new_states: Dict[str, EnvironmentSnapshot],
+    new_simulator_configuration: SimulatorConfiguration,
+    ensure_no_space_changes: bool = False,
+) -> None:
+    """
 
-        self._simulator_configuration = new_simulator_configuration
-        envs = new_states.items()
+    :param ensure_no_space_changes:
+    :type ensure_no_space_changes:
+    :param new_states:
+    :type new_states:
+    :param new_simulator_configuration:
+    :type new_simulator_configuration:
+    """
+    if not self._description:
+        self._description = {}
+    if not self._action_space:
+        self._action_space = {}
+    if not self._observation_space:
+        self._observation_space = {}
+    if not self._signal_space:
+        self._signal_space = {}
 
-        for key, env in envs:
-            if env.description:
-                self._description[key] = env.description
+    self._simulator_configuration = new_simulator_configuration
+    envs = new_states.items()
 
-                if key in self._action_space and ensure_no_space_changes:
-                    assert (
-                        self._action_space[key] == env.description.action_space
-                    ), f"Action space changed! {self._action_space[key], env.description.action_space}"
-                else:
-                    self._action_space[key] = env.description.action_space
+    for key, env in envs:
+        if env.description:
+            self._description[key] = env.description
 
-                if key in self._observation_space and ensure_no_space_changes:
-                    assert (
-                        self._observation_space[key]
-                        == env.description.observation_space
-                    ), f"Observation space changed! {self._observation_space[key], env.description.observation_space}"
-                else:
-                    self._observation_space[key] = env.description.observation_space
+            if key in self._action_space and ensure_no_space_changes:
+                assert (
+                    self._action_space[key] == env.description.action_space
+                ), f"Action space changed! {self._action_space[key], env.description.action_space}"
+            else:
+                self._action_space[key] = env.description.action_space
 
-                if key in self._signal_space and ensure_no_space_changes:
-                    assert (
-                        self._signal_space[key] == env.description.signal_space
-                    ), f"Signal space changed! {self._signal_space[key], env.description.signal_space}"
-                else:
-                    self._signal_space[key] = env.description.signal_space
+            if key in self._observation_space and ensure_no_space_changes:
+                assert (
+                    self._observation_space[key] == env.description.observation_space
+                ), f"Observation space changed! {self._observation_space[key], env.description.observation_space}"
+            else:
+                self._observation_space[key] = env.description.observation_space
 
-    def __on_reconnected_callback__(self):
-        super().__on_reconnected_callback__()
-        new_states = self.describe()
+            if key in self._signal_space and ensure_no_space_changes:
+                assert (
+                    self._signal_space[key] == env.description.signal_space
+                ), f"Signal space changed! {self._signal_space[key], env.description.signal_space}"
+            else:
+                self._signal_space[key] = env.description.signal_space
 
-    def __repr__(self):
-        return (
-            f"<NeodroidEnvironment>\n"
-            f"  <ObservationSpace>{self.observation_space}</ObservationSpace>\n"
-            f"  <ActionSpace>{self.action_space}</ActionSpace>\n"
-            f"  <Description>{self.description}</Description>\n"
-            f"  <SimulatorConfiguration>{self.simulator_configuration}</SimulatorConfiguration>\n"
-            f"  <IsConnected>{self.is_connected}</IsConnected>\n"
-            f"</NeodroidEnvironment>"
-        )
+
+def __on_reconnected_callback__(self):
+    super().__on_reconnected_callback__()
+    new_states = self.describe()
+
+
+def __repr__(self):
+    return (
+        f"<NeodroidEnvironment>\n"
+        f"  <ObservationSpace>{self.observation_space}</ObservationSpace>\n"
+        f"  <ActionSpace>{self.action_space}</ActionSpace>\n"
+        f"  <Description>{self.description}</Description>\n"
+        f"  <SimulatorConfiguration>{self.simulator_configuration}</SimulatorConfiguration>\n"
+        f"  <IsConnected>{self.is_connected}</IsConnected>\n"
+        f"</NeodroidEnvironment>"
+    )
 
 
 if __name__ == "__main__":

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from neodroid.environments.droid_environment import SingleUnityEnvironment
 from warg import NOD
+
+from neodroid.environments.droid_environment import SingleUnityEnvironment
 
 __author__ = "Christian Heider Nielsen"
 

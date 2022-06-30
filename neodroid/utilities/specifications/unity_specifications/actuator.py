@@ -6,7 +6,7 @@ from neodroid.messaging.fbs.fbs_state_utilties import deserialise_range
 
 __author__ = "Christian Heider Nielsen"
 
-from trolls.spaces import Range
+from trolls.spaces import Dimension
 from warg import cached_property
 
 __all__ = ["Actuator"]
@@ -29,7 +29,7 @@ class Actuator(object):
         return self._actuator_name
 
     @cached_property
-    def motion_space(self) -> Range:
+    def motion_space(self) -> Dimension:
         """
 
         :return:

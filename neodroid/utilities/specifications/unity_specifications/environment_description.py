@@ -12,7 +12,7 @@ from neodroid.utilities.specifications.unity_specifications.configurable import 
     Configurable,
 )
 from neodroid.utilities.specifications.unity_specifications.sensor import Sensor
-from trolls.spaces import ActionSpace, ObservationSpace, Range, SignalSpace
+from trolls.spaces import ActionSpace, ObservationSpace, Dimension, SignalSpace
 
 __author__ = "Christian Heider Nielsen"
 
@@ -195,7 +195,9 @@ class EnvironmentDescription(object):
         :return:
         :rtype:
         """
-        return SignalSpace((Range(min_value=-1, max_value=1, decimal_granularity=3),))
+        return SignalSpace(
+            (Dimension(min_value=-1, max_value=1, decimal_granularity=3),)
+        )
 
 
 if __name__ == "__main__":

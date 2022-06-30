@@ -9,7 +9,7 @@ from neodroid.environments.droid_environment.unity.dict_unity_environment import
 __author__ = "Christian Heider Nielsen"
 __all__ = ["BatchedUnityEnvironment"]
 
-from trolls.spaces import ObservationSpace, Range, ActionSpace, VectorActionSpace
+from trolls.spaces import ObservationSpace, Dimension, ActionSpace, VectorActionSpace
 
 
 class BatchedUnityEnvironment(DictUnityEnvironment):
@@ -103,15 +103,15 @@ class VectorWrapper:
 
         :return:"""
         _input_shape = None
-
-        if len(next(iter(self._env._observation_space.values())).shape) >= 1:
-            _input_shape = next(iter(self._env._observation_space.values()))
+        ospc = self._env._observation_space
+        if len(next(iter(ospc.values())).shape) >= 1:
+            _input_shape = next(iter(ospc.values()))
         else:
             _input_shape = ObservationSpace(
                 [
-                    Range(
+                    Dimension(
                         min_value=0,
-                        max_value=next(iter(self._env._observation_space.values())).n,
+                        max_value=next(iter(ospc.values())).n,
                         decimal_granularity=0,
                     )
                 ]
@@ -125,19 +125,19 @@ class VectorWrapper:
 
         :return:"""
         _output_shape = None
-
-        if len(next(iter(self._env.action_space.values())).shape) >= 1:
-            _output_shape = next(iter(self._env.action_space.values()))
+        aspc = self._env.action_space
+        if len(next(iter(aspc.values())).shape) >= 1:
+            _output_shape = next(iter(aspc.values()))
         else:
             _output_shape = VectorActionSpace(
                 [
-                    Range(
+                    Dimension(
                         min_value=0,
-                        max_value=next(iter(self._env.action_space.values())).n,
+                        max_value=next(iter(aspc.values())).n,
                         decimal_granularity=0,
                     )
                 ],
-                len(self._env.action_space.values()),
+                len(aspc.values()),
             )
 
         return _output_shape

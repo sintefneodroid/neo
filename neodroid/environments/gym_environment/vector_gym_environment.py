@@ -12,7 +12,7 @@ from neodroid.utilities.specifications.unity_specifications import EnvironmentSn
 from trolls.spaces import (
     ActionSpace,
     ObservationSpace,
-    Range,
+    Dimension,
     SignalSpace,
     VectorActionSpace,
     VectorObservationSpace,
@@ -67,7 +67,7 @@ class NeodroidVectorGymEnvironment(Environment):
 
         space = SignalSpace(
             [
-                Range(
+                Dimension(
                     min_value=-float("inf"),
                     max_value=float("inf"),
                     decimal_granularity=9,
@@ -82,23 +82,21 @@ class NeodroidVectorGymEnvironment(Environment):
         """
 
         :return:"""
+        ospc = self._env.observation_space
+        if len(ospc.shape) >= 1:
 
-        if len(self._env.observation_space.shape) >= 1:
-            aspc = self._env.observation_space
             space = ObservationSpace(
                 [
-                    Range(decimal_granularity=6, min_value=mn, max_value=mx)
-                    for _, mn, mx in zip(
-                        range(self._env.observation_space.shape[0]), aspc.low, aspc.high
-                    )
+                    Dimension(decimal_granularity=6, min_value=mn, max_value=mx)
+                    for _, mn, mx in zip(range(ospc.shape[0]), ospc.low, ospc.high)
                 ]
             )
         else:
             space = ObservationSpace(
                 [
-                    Range(
+                    Dimension(
                         min_value=0,
-                        max_value=self._env.observation_space.n,
+                        max_value=ospc.n,
                         decimal_granularity=0,
                     )
                 ]
@@ -111,28 +109,26 @@ class NeodroidVectorGymEnvironment(Environment):
         """
 
         :return:"""
+        aspc = self._env.action_space
+        if len(self.aspc.shape) >= 1:
 
-        if len(self._env.action_space.shape) >= 1:
-            aspc = self._env.action_space
             space = ActionSpace(
                 [
-                    Range(
-                        decimal_granularity=aspc.action_space.is_singular_discrete,
+                    Dimension(
+                        decimal_granularity=0 if aspc.is_singular_discrete else 2,
                         min_value=mn,
                         max_value=mx,
                     )
-                    for _, mn, mx in zip(
-                        range(self._env.action_space.shape[0]), aspc.low, aspc.high
-                    )
+                    for _, mn, mx in zip(range(aspc.shape[0]), aspc.low, aspc.high)
                 ]
             )
 
         else:
             space = ActionSpace(
                 [
-                    Range(
+                    Dimension(
                         min_value=0,
-                        max_value=self._env.action_space.n - 1,
+                        max_value=aspc.n - 1,
                         decimal_granularity=0,
                     )
                 ]
@@ -208,12 +204,12 @@ class NeodroidVectorGymEnvironment(Environment):
 if __name__ == "__main__":
 
     def asda():
-        env = NeodroidVectorGymEnvironment("CartPole-v1")
+        env = NeodroidVectorGymEnvironment("CartPole-v1", num_env=2)
         print(env.observation_space)
         print(env.action_space)
         print(env.signal_space)
         print(env.reset())
-        for i in range(10):
+        for i in range(2000):
             s = env.react(env.action_space.sample())
             env.render()
             if s.terminated.all():

@@ -5,6 +5,7 @@ import PIL
 import numpy
 from PIL.Image import Image
 from flatbuffers import Table
+
 from neodroid.messaging.fbs import (
     FActor,
     FBSModels as F,
@@ -15,7 +16,7 @@ from neodroid.messaging.fbs import (
     FUnobservables,
 )
 from neodroid.utilities.specifications import unity_specifications as US
-from trolls.spaces import Range
+from trolls.spaces import Dimension
 
 __all__ = [
     "deserialise_body",
@@ -201,7 +202,7 @@ def deserialise_euler_transform(f_obs: Table) -> Tuple[List, List]:
             [direction.X(), direction.Y(), direction.Z()],
             [rotation.X(), rotation.Y(), rotation.Z()],
         ],
-        [Range(decimal_granularity=10) for _ in range(9)],
+        [Dimension(decimal_granularity=10) for _ in range(9)],
     )
 
 
@@ -219,7 +220,7 @@ def deserialise_body(f_obs: Table) -> Tuple[List, List]:
             [velocity.X(), velocity.Y(), velocity.Z()],
             [angular_velocity.X(), angular_velocity.Y(), angular_velocity.Z()],
         ],
-        [Range(decimal_granularity=10, normalised=True) for _ in range(6)],
+        [Dimension(decimal_granularity=10, normalised=True) for _ in range(6)],
     )
 
 
@@ -229,7 +230,7 @@ def deserialise_quadruple(f_obs: Table) -> Tuple[List, List]:
     quad = q.Quat()
     data = [quad.X(), quad.Y(), quad.Z(), quad.W()]
     # ranges = [q.XRange(),q.YRange(), q.ZRange(), q.WRange()]
-    return data, [Range(decimal_granularity=10, normalised=True) for _ in range(4)]
+    return data, [Dimension(decimal_granularity=10, normalised=True) for _ in range(4)]
 
 
 def deserialise_triple(f_obs: Table) -> Tuple[List, List]:
@@ -364,7 +365,7 @@ def deserialise_array(flat_obs: Table) -> Tuple[numpy.ndarray, List]:
     return (
         data,
         [
-            Range(decimal_granularity=10, normalised=False)
+            Dimension(decimal_granularity=10, normalised=False)
             for _ in range(array.ArrayLength())
         ],
     )
@@ -396,12 +397,12 @@ def deserialise_actuators(flat_actor: FActor) -> Dict[str, Any]:
     return actuators
 
 
-def deserialise_range(flat_range: FRange) -> Range:
+def deserialise_range(flat_range: FRange) -> Dimension:
     """
 
     :param flat_range:
     :return:"""
-    return Range(
+    return Dimension(
         decimal_granularity=flat_range.DecimalGranularity(),
         min_value=flat_range.MinValue(),
         max_value=flat_range.MaxValue(),
@@ -409,7 +410,7 @@ def deserialise_range(flat_range: FRange) -> Range:
     )
 
 
-def deserialise_space(flat_space: List[FRange]) -> List[Range]:
+def deserialise_space(flat_space: List[FRange]) -> List[Dimension]:
     """
 
     :param flat_space:

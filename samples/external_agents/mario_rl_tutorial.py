@@ -10,9 +10,10 @@ from draugr import latest_file
 from draugr.torch_utilities import global_torch_device, PTW
 from draugr.tqdm_utilities import progress_bar
 from gym.wrappers import FrameStack
-from neodroid import PROJECT_APP_PATH
 from nes_py.wrappers import JoypadSpace  # NES Emulator for OpenAI Gym
 from torch import nn
+
+from neodroid import PROJECT_APP_PATH
 from trolls.gym_wrappers import (
     GrayScaleObservation,
     ResizeObservation,

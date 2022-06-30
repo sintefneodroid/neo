@@ -4,7 +4,7 @@ from typing import List
 
 __author__ = "Christian Heider Nielsen"
 
-from trolls.spaces import Range
+from trolls.spaces import Dimension
 
 __all__ = ["Sensor"]
 
@@ -37,7 +37,7 @@ class Sensor(object):
         return self._is_image
 
     @property
-    def space(self) -> List[Range]:
+    def space(self) -> List[Dimension]:
         """
 
         :return:

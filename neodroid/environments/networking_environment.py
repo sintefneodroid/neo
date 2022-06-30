@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from neodroid.messaging import ClientEvents, message_client_event
+from neodroid.messaging import ClientEventsEnum, message_client_event
 from neodroid.messaging.message_client import MessageClient
 from neodroid.utilities.specifications.unity_specifications.environment_snapshot import (
     EnvironmentSnapshot,
@@ -82,26 +82,26 @@ class NetworkingEnvironment(Environment, ABC):
         else:
             self._is_connected_to_server = True
 
-    @message_client_event(event=ClientEvents.CONNECTED)
+    @message_client_event(event=ClientEventsEnum.connected)
     def __on_connected_callback__(self):
         """ """
         if self._external_on_connected_callback:
             self._external_on_connected_callback()
 
-    @message_client_event(event=ClientEvents.DISCONNECTED)
+    @message_client_event(event=ClientEventsEnum.disconnected)
     def __on_disconnected_callback__(self):
         """ """
         self._is_connected_to_server = False
         if self._external_on_disconnected_callback:
             self._external_on_disconnected_callback()
 
-    @message_client_event(event=ClientEvents.TIMEOUT)
+    @message_client_event(event=ClientEventsEnum.timeout)
     def __on_timeout_callback__(self):
         """ """
         if self._external_on_timeout_callback:
             self._external_on_timeout_callback()
 
-    @message_client_event(event=ClientEvents.RECONNECTED)
+    @message_client_event(event=ClientEventsEnum.reconnected)
     def __on_reconnected_callback__(self):
         """ """
         if self._external_on_reconnected_callback:

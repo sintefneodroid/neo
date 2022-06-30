@@ -8,8 +8,9 @@ __author__ = "Christian Heider Nielsen"
 import functools
 from typing import Any, List
 
-from trolls.spaces import Range
 from warg import cached_property
+
+from trolls.spaces import Dimension
 
 __all__ = ["Configurable"]
 
@@ -21,7 +22,7 @@ class Configurable(object):
         self,
         configurable_name: str,
         configurable_value: Any,
-        space: List[Range],  #:List[FRange],
+        space: List[Dimension],  #:List[FRange],
     ):
         self._configurable_name = configurable_name
         self._configurable_value = configurable_value

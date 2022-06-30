@@ -1,7 +1,7 @@
 import numpy
 from gym import Env
 
-from trolls.spaces import Range, Space
+from trolls.spaces import Dimension, Space
 
 
 class NoRenderEnv(Env):
@@ -19,12 +19,13 @@ class ConstantEnvironment(NoRenderEnv):
 
     def __init__(self, n_obs=1, n_actions=1):
         ranges = [
-            Range(min_value=0, max_value=1, decimal_granularity=0) for i in range(n_obs)
+            Dimension(min_value=0, max_value=1, decimal_granularity=0)
+            for i in range(n_obs)
         ]
         self.action_space = Space(ranges)
         self.observation_space = Space(
             [
-                Range(min_value=0, max_value=1, decimal_granularity=0)
+                Dimension(min_value=0, max_value=1, decimal_granularity=0)
                 for i in range(n_actions)
             ]
         )

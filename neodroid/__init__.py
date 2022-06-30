@@ -12,7 +12,7 @@ from apppath import AppPath
 
 __project__ = "Neodroid"
 __author__ = "Christian Heider Nielsen"
-__version__ = "0.4.9"
+__version__ = "0.5.0"
 __doc__ = r"""
 Created on 27/04/2019
 
@@ -33,7 +33,7 @@ from typing import Any
 
 def dist_is_editable(dist: Any) -> bool:
     """
-    Return True if given Distribution is an editable install."""
+    Return True if given Distribution is an editable installation."""
     for path_item in sys.path:
         egg_link = Path(path_item) / f"{dist.project_name}.egg-link"
         if egg_link.is_file():
@@ -45,6 +45,7 @@ PROJECT_NAME = __project__.lower().strip().replace(" ", "_")
 PROJECT_YEAR = 2018
 PROJECT_VERSION = __version__
 PROJECT_AUTHOR = __author__.lower().strip().replace(" ", "_")
+PROJECT_ORGANISATION = "Neodroid"
 PROJECT_APP_PATH = AppPath(app_name=PROJECT_NAME, app_author=PROJECT_AUTHOR)
 PACKAGE_DATA_PATH = Path(pkg_resources.resource_filename(PROJECT_NAME, "data"))
 INCLUDE_PROJECT_READMES = False

@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 __author__ = "Christian Heider Nielsen"
 
-import neodroid.wrappers.formal_wrapper as neo
 import numpy
+
+import neodroid.wrappers.formal_wrapper as neo
 from neodroid import messaging
 
 
