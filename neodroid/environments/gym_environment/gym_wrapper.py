@@ -8,7 +8,7 @@ from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
     VectorEnvironmentSnapshot,
 )
 from neodroid.utilities.specifications.unity_specifications import EnvironmentSnapshot
-from trolls.spaces import ActionSpace, ObservationSpace, Dimension, SignalSpace
+from trolls.spaces import ActionSpace, Dimension, ObservationSpace, SignalSpace
 
 __author__ = "Christian Heider Nielsen"
 

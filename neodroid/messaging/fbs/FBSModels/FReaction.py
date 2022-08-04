@@ -24,7 +24,7 @@ class FReaction(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
-        return None
+        return
 
     # FReaction
     def Parameters(self):
@@ -36,7 +36,7 @@ class FReaction(object):
             obj = FReactionParameters()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FReaction
     def Motions(self, j):
@@ -50,7 +50,7 @@ class FReaction(object):
             obj = FMotion()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FReaction
     def MotionsLength(self):
@@ -71,7 +71,7 @@ class FReaction(object):
             obj = FDisplayable()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FReaction
     def DisplayablesLength(self):
@@ -90,7 +90,7 @@ class FReaction(object):
             obj = FUnobservables()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FReaction
     def Configurations(self, j):
@@ -104,7 +104,7 @@ class FReaction(object):
             obj = FConfiguration()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FReaction
     def ConfigurationsLength(self):
@@ -118,7 +118,7 @@ class FReaction(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
-        return None
+        return
 
 
 def FReactionStart(builder):

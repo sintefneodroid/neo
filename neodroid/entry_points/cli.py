@@ -4,8 +4,8 @@ import stat
 import subprocess
 from pathlib import Path
 
-import draugr
 import fire
+import warg
 from pyfiglet import Figlet
 
 from neodroid import DEFAULT_ENVIRONMENTS_PATH, get_version
@@ -15,7 +15,7 @@ from neodroid.utilities.launcher.download_utilities.download_environment import 
 )
 
 margin_percentage = 0 / 6
-terminal_width = draugr.get_terminal_size().columns
+terminal_width = warg.get_terminal_size().columns
 margin = int(margin_percentage * terminal_width)
 width = terminal_width - 2 * margin
 underline = "_" * width

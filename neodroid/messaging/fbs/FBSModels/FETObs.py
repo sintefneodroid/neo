@@ -29,7 +29,7 @@ class FETObs(object):
             obj = FEulerTransform()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FETObs
     def PosRange(self):
@@ -41,7 +41,7 @@ class FETObs(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FETObs
     def RotRange(self):
@@ -53,7 +53,7 @@ class FETObs(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FETObs
     def DirRange(self):
@@ -65,7 +65,7 @@ class FETObs(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
 
 def FETObsStart(builder):

@@ -9,9 +9,9 @@ from neodroid.environments.droid_environment.unity.dict_unity_environment import
 from neodroid.factories.configuration_reactions import verify_configuration_reactions
 from neodroid.factories.motion_reactions import verify_motion_reactions
 from neodroid.utilities import (
-    VectorEnvironmentDescription,
     Reaction,
     ReactionParameters,
+    VectorEnvironmentDescription,
     VectorEnvironmentSnapshot,
 )
 
@@ -28,7 +28,7 @@ class VectorUnityEnvironment(DictUnityEnvironment):
 
     def __next__(self) -> Union[VectorEnvironmentSnapshot, None]:
         if not self._is_connected_to_server:
-            return None
+            return
         return self.react()
 
     @drop_unused_kws
@@ -177,7 +177,7 @@ if __name__ == "__main__":
         auto_reset_on_terminal_state=True,
     )
 
-    # observation_session = tqdm(env, leave=False)
+    # observation_session = progress_bar(env)
     # for environment_state in observation_session:
     # if environment_state.terminated.all():
     #  print(f"Interrupted {environment_state.signal}")

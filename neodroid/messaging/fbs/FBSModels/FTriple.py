@@ -29,7 +29,7 @@ class FTriple(object):
             obj = FVector3()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FTriple
     def XRange(self):
@@ -41,7 +41,7 @@ class FTriple(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FTriple
     def YRange(self):
@@ -53,7 +53,7 @@ class FTriple(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FTriple
     def ZRange(self):
@@ -65,7 +65,7 @@ class FTriple(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
 
 def FTripleStart(builder):

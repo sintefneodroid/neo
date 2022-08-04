@@ -40,7 +40,7 @@ class FlaskWrapper(SingleUnityEnvironment):
     def observe(self, *args, **kwargs):
         message = super().observe(*args, **kwargs)
         if message:
-            return (message.observation, message.signal, message.terminated, message)
+            return message.observation, message.signal, message.terminated, message
         return None, None, None, None
 
     def quit(self, *args, **kwargs):

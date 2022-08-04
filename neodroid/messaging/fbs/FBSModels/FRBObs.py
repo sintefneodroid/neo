@@ -29,7 +29,7 @@ class FRBObs(object):
             obj = FBody()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FRBObs
     def VelRange(self):
@@ -41,7 +41,7 @@ class FRBObs(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FRBObs
     def AngRange(self):
@@ -53,7 +53,7 @@ class FRBObs(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
 
 def FRBObsStart(builder):

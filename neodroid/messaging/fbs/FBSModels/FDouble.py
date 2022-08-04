@@ -29,7 +29,7 @@ class FDouble(object):
             obj = FVector2()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FDouble
     def XRange(self):
@@ -41,7 +41,7 @@ class FDouble(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FDouble
     def YRange(self):
@@ -53,7 +53,7 @@ class FDouble(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
 
 def FDoubleStart(builder):

@@ -29,7 +29,7 @@ class FEnvironmentDescription(object):
             obj = FObjective()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FEnvironmentDescription
     def AvailableObjectives(self, j):
@@ -43,7 +43,7 @@ class FEnvironmentDescription(object):
             obj = FObjective()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FEnvironmentDescription
     def AvailableObjectivesLength(self):
@@ -64,7 +64,7 @@ class FEnvironmentDescription(object):
             obj = FActor()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FEnvironmentDescription
     def ActorsLength(self):
@@ -85,7 +85,7 @@ class FEnvironmentDescription(object):
             obj = FConfigurable()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FEnvironmentDescription
     def ConfigurablesLength(self):
@@ -106,7 +106,7 @@ class FEnvironmentDescription(object):
             obj = FSensor()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FEnvironmentDescription
     def SensorsLength(self):

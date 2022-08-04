@@ -1,6 +1,6 @@
 import numpy
 
-from neodroid.environments.python_environment.non_neodroidian_environments import (
+from neodroid.environments.python_environment.non_neodroidian_environments.constant_environment import (
     NoRenderEnv,
 )
 from trolls.spaces import ActionSpace, Dimension, ObservationSpace

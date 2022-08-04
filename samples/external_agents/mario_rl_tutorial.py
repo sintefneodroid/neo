@@ -7,7 +7,7 @@ import gym_super_mario_bros  # Super Mario environment for OpenAI Gym
 import numpy
 import torch
 from draugr import latest_file
-from draugr.torch_utilities import global_torch_device, PTW
+from draugr.torch_utilities import PTW, global_torch_device
 from draugr.tqdm_utilities import progress_bar
 from gym.wrappers import FrameStack
 from nes_py.wrappers import JoypadSpace  # NES Emulator for OpenAI Gym
@@ -266,7 +266,7 @@ class MarioAgent:
 
         loss = self.update_q_online(td_est, td_tgt)
 
-        return (td_est.mean().item(), loss)
+        return td_est.mean().item(), loss
 
 
 if __name__ == "__main__":

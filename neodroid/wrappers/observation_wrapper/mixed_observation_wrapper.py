@@ -40,7 +40,7 @@ class MixedObservationWrapper(SingleUnityEnvironment):
                 *extract_from_cameras(message).values(),
                 message.sensor("Class").value,
             ]
-        return None
+        return
 
 
 if __name__ == "__main__":

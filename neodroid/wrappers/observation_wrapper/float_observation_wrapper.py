@@ -20,7 +20,7 @@ class FloatObservationWrapper(SingleUnityEnvironment):
         if self._last_snapshots:
             return self.sensor(key)
         warn("No message available")
-        return None
+        return
 
     def configure(self, *args, **kwargs):
         message = super().reset(*args, **kwargs)
@@ -31,7 +31,7 @@ class FloatObservationWrapper(SingleUnityEnvironment):
     def fetch_new_frame(self, *args, **kwargs):
         message = super().observe(*args, **kwargs)
         if message:
-            return (message.observables, message.signal, message.terminated, message)
+            return message.observables, message.signal, message.terminated, message
         return None, None, None, None
 
     def quit(self, *args, **kwargs):

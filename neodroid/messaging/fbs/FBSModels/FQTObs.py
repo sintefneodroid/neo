@@ -29,7 +29,7 @@ class FQTObs(object):
             obj = FQuaternionTransform()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FQTObs
     def PosRange(self):
@@ -41,7 +41,7 @@ class FQTObs(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FQTObs
     def RotRange(self):
@@ -53,7 +53,7 @@ class FQTObs(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
 
 def FQTObsStart(builder):

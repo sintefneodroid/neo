@@ -24,7 +24,7 @@ class FDisplayable(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
-        return None
+        return
 
     # FDisplayable
     def DisplayableValueType(self):
@@ -42,7 +42,7 @@ class FDisplayable(object):
             obj = Table(bytearray(), 0)
             self._tab.Union(obj, o)
             return obj
-        return None
+        return
 
 
 def FDisplayableStart(builder):

@@ -24,7 +24,7 @@ class FObjective(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
-        return None
+        return
 
     # FObjective
     def MaxEpisodeLength(self):
@@ -43,7 +43,7 @@ class FObjective(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
 
 def FObjectiveStart(builder):

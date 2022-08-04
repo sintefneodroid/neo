@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from warnings import warn
 
+from draugr.tqdm_utilities import progress_bar
+
 from neodroid.environments.droid_environment import DictUnityEnvironment
 from neodroid.factories.single.single_reaction_factory import (
     verify_configuration_reaction,
@@ -179,7 +181,6 @@ class SingleUnityEnvironment(DictUnityEnvironment):
 
 if __name__ == "__main__":
     import argparse
-    from tqdm import tqdm
 
     parser = argparse.ArgumentParser(description="Single environment wrapper")
     parser.add_argument(
@@ -203,7 +204,7 @@ if __name__ == "__main__":
         connect_to_running=proc_args.CONNECT_TO_RUNNING,
     )
 
-    observation_session = tqdm(env, leave=False)
+    observation_session = progress_bar(env)
     for environment_state in observation_session:
         if environment_state.terminated:
             print(f"Interrupted {environment_state.signal}")

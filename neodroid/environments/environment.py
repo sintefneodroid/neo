@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+__author__ = "Christian Heider Nielsen"
+__doc__ = r"""
+"""
+
 import logging
 from abc import ABC, abstractmethod
+from enum import Enum
 from pathlib import Path
 from types import coroutine
 from typing import Any, Optional
+
+import numpy
+from sorcery import assigned_names
+from warg import drop_unused_kws
 
 from neodroid import PROJECT_APP_PATH
 from neodroid.utilities import EnvironmentSnapshot
@@ -12,12 +22,6 @@ from neodroid.utilities.specifications.unity_specifications.environment_descript
     EnvironmentDescription,
 )
 from trolls.spaces import ActionSpace, ObservationSpace, SignalSpace
-
-__author__ = "Christian Heider Nielsen"
-
-import numpy
-
-from warg import drop_unused_kws
 
 __all__ = ["Environment"]
 
@@ -185,3 +189,12 @@ class Environment(ABC):
         :param seed:
         :type seed:"""
         numpy.random.seed(seed)
+
+
+class EnvironmentType(Enum):
+    """
+    TODO: Migrate to NEO package
+
+    """
+
+    (gym, zmq_pipe, unity, blender, torcs) = assigned_names()

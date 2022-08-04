@@ -30,7 +30,7 @@ class FUnobservables(object):
             obj = FQuaternionTransform()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FUnobservables
     def PosesLength(self):
@@ -50,7 +50,7 @@ class FUnobservables(object):
             obj = FBody()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FUnobservables
     def BodiesLength(self):

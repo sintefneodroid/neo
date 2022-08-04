@@ -103,6 +103,7 @@ ENV/
 # Spyder project settings
 .spyderproject
 .spyproject
+*.out
 
 # mkdocs documentation
 /site

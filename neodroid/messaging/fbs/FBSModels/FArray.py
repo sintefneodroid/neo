@@ -55,7 +55,7 @@ class FArray(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FArray
     def RangesLength(self):

@@ -9,7 +9,7 @@ from ucb1 import UCB1
 
 __author__ = "Christian Heider Nielsen"
 
-import neodroid.environments.unity.single_unity_environment as neo
+import neodroid.environments.droid_environment.unity.deprecated.single_unity_environment as neo
 
 
 def construct_displayables(normed, tries, totals):

@@ -31,7 +31,7 @@ class FStates(object):
             obj = FState()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FStates
     def StatesLength(self):
@@ -45,7 +45,7 @@ class FStates(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
-        return None
+        return
 
     # FStates
     def SimulatorConfiguration(self):
@@ -57,7 +57,7 @@ class FStates(object):
             obj = FSimulatorConfiguration()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
 
 def FStatesStart(builder):

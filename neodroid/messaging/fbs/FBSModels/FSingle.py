@@ -38,7 +38,7 @@ class FSingle(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
 
 def FSingleStart(builder):

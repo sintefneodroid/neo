@@ -38,7 +38,7 @@ class FValuedVector3Point(object):
             obj = FVector3()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
 
 def FValuedVector3PointStart(builder):

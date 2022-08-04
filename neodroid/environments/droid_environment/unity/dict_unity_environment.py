@@ -4,6 +4,8 @@ import logging
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, Mapping, Optional, Sequence, Union
 
+from draugr.tqdm_utilities import progress_bar
+
 from neodroid import DEFAULT_ENVIRONMENTS_PATH, __version__
 from neodroid.factories.motion_reactions import verify_motion_reactions
 from neodroid.utilities import launch_environment
@@ -333,80 +335,78 @@ class DictUnityEnvironment(NetworkingEnvironment):
 
         return self.send([reaction])
 
+    def update_interface_attributes(
+        self,
+        new_states: Dict[str, EnvironmentSnapshot],
+        new_simulator_configuration: SimulatorConfiguration,
+        ensure_no_space_changes: bool = False,
+    ) -> None:
+        """
 
-def update_interface_attributes(
-    self,
-    new_states: Dict[str, EnvironmentSnapshot],
-    new_simulator_configuration: SimulatorConfiguration,
-    ensure_no_space_changes: bool = False,
-) -> None:
-    """
+        :param ensure_no_space_changes:
+        :type ensure_no_space_changes:
+        :param new_states:
+        :type new_states:
+        :param new_simulator_configuration:
+        :type new_simulator_configuration:
+        """
+        if not self._description:
+            self._description = {}
+        if not self._action_space:
+            self._action_space = {}
+        if not self._observation_space:
+            self._observation_space = {}
+        if not self._signal_space:
+            self._signal_space = {}
 
-    :param ensure_no_space_changes:
-    :type ensure_no_space_changes:
-    :param new_states:
-    :type new_states:
-    :param new_simulator_configuration:
-    :type new_simulator_configuration:
-    """
-    if not self._description:
-        self._description = {}
-    if not self._action_space:
-        self._action_space = {}
-    if not self._observation_space:
-        self._observation_space = {}
-    if not self._signal_space:
-        self._signal_space = {}
+        self._simulator_configuration = new_simulator_configuration
+        envs = new_states.items()
 
-    self._simulator_configuration = new_simulator_configuration
-    envs = new_states.items()
+        for key, env in envs:
+            if env.description:
+                self._description[key] = env.description
 
-    for key, env in envs:
-        if env.description:
-            self._description[key] = env.description
+                if key in self._action_space and ensure_no_space_changes:
+                    assert (
+                        self._action_space[key] == env.description.action_space
+                    ), f"Action space changed! {self._action_space[key], env.description.action_space}"
+                else:
+                    self._action_space[key] = env.description.action_space
 
-            if key in self._action_space and ensure_no_space_changes:
-                assert (
-                    self._action_space[key] == env.description.action_space
-                ), f"Action space changed! {self._action_space[key], env.description.action_space}"
-            else:
-                self._action_space[key] = env.description.action_space
+                if key in self._observation_space and ensure_no_space_changes:
+                    assert (
+                        self._observation_space[key]
+                        == env.description.observation_space
+                    ), f"Observation space changed! {self._observation_space[key], env.description.observation_space}"
+                else:
+                    self._observation_space[key] = env.description.observation_space
 
-            if key in self._observation_space and ensure_no_space_changes:
-                assert (
-                    self._observation_space[key] == env.description.observation_space
-                ), f"Observation space changed! {self._observation_space[key], env.description.observation_space}"
-            else:
-                self._observation_space[key] = env.description.observation_space
+                if key in self._signal_space and ensure_no_space_changes:
+                    assert (
+                        self._signal_space[key] == env.description.signal_space
+                    ), f"Signal space changed! {self._signal_space[key], env.description.signal_space}"
+                else:
+                    self._signal_space[key] = env.description.signal_space
 
-            if key in self._signal_space and ensure_no_space_changes:
-                assert (
-                    self._signal_space[key] == env.description.signal_space
-                ), f"Signal space changed! {self._signal_space[key], env.description.signal_space}"
-            else:
-                self._signal_space[key] = env.description.signal_space
+    def __on_reconnected_callback__(self):
+        super().__on_reconnected_callback__()
+        if False:
+            new_states = self.describe()
 
-
-def __on_reconnected_callback__(self):
-    super().__on_reconnected_callback__()
-    new_states = self.describe()
-
-
-def __repr__(self):
-    return (
-        f"<NeodroidEnvironment>\n"
-        f"  <ObservationSpace>{self.observation_space}</ObservationSpace>\n"
-        f"  <ActionSpace>{self.action_space}</ActionSpace>\n"
-        f"  <Description>{self.description}</Description>\n"
-        f"  <SimulatorConfiguration>{self.simulator_configuration}</SimulatorConfiguration>\n"
-        f"  <IsConnected>{self.is_connected}</IsConnected>\n"
-        f"</NeodroidEnvironment>"
-    )
+    def __repr__(self):
+        return (
+            f"<NeodroidEnvironment>\n"
+            f"  <ObservationSpace>{self.observation_space}</ObservationSpace>\n"
+            f"  <ActionSpace>{self.action_space}</ActionSpace>\n"
+            f"  <Description>{self.description}</Description>\n"
+            f"  <SimulatorConfiguration>{self.simulator_configuration}</SimulatorConfiguration>\n"
+            f"  <IsConnected>{self.is_connected}</IsConnected>\n"
+            f"</NeodroidEnvironment>"
+        )
 
 
 if __name__ == "__main__":
     import argparse
-    from tqdm import tqdm
 
     parser = argparse.ArgumentParser(description="Neodroid Environments")
     parser.add_argument(
@@ -429,7 +429,7 @@ if __name__ == "__main__":
         name=arguments.ENVIRONMENT_NAME, connect_to_running=arguments.CONNECT_TO_RUNNING
     )
 
-    observation_session = tqdm(env, leave=False)
+    observation_session = progress_bar(env)
     i = 0
     for environment_state in observation_session:
         first_environment_state = list(environment_state.values())[0]

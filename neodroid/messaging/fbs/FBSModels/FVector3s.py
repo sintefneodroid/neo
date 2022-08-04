@@ -30,7 +30,7 @@ class FVector3s(object):
             obj = FVector3()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FVector3s
     def PointsLength(self):

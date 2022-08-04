@@ -29,7 +29,7 @@ class FQuadruple(object):
             obj = FQuaternion()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FQuadruple
     def XRange(self):
@@ -41,7 +41,7 @@ class FQuadruple(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FQuadruple
     def YRange(self):
@@ -53,7 +53,7 @@ class FQuadruple(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FQuadruple
     def ZRange(self):
@@ -65,7 +65,7 @@ class FQuadruple(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FQuadruple
     def WRange(self):
@@ -77,7 +77,7 @@ class FQuadruple(object):
             obj = FRange()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
 
 def FQuadrupleStart(builder):

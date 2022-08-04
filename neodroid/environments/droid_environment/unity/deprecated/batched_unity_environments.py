@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import numpy
+from draugr.tqdm_utilities import progress_bar
 
 from neodroid.environments.droid_environment.unity.dict_unity_environment import (
     DictUnityEnvironment,
@@ -52,7 +53,6 @@ class BatchedUnityEnvironment(DictUnityEnvironment):
 
 if __name__ == "__main__":
     import argparse
-    from tqdm import tqdm
 
     parser = argparse.ArgumentParser(description="Batched Neodroid Environments")
     parser.add_argument(
@@ -75,7 +75,7 @@ if __name__ == "__main__":
         name=config.ENVIRONMENT_NAME, connect_to_running=config.CONNECT_TO_RUNNING
     )
 
-    observation_session = tqdm(env, leave=False)
+    observation_session = progress_bar(env)
     i = 0
     for environment_state in observation_session:
         first_environment_state = list(environment_state.values())[0]

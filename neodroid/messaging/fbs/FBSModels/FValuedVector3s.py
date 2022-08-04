@@ -55,7 +55,7 @@ class FValuedVector3s(object):
             obj = FVector3()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FValuedVector3s
     def PointsLength(self):

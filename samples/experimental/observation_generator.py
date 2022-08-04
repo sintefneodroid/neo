@@ -4,11 +4,11 @@ from contextlib import suppress
 
 __author__ = "Christian Heider Nielsen"
 
-from tqdm import tqdm
-
-tqdm.monitor_interval = 0
-
 from neodroid.wrappers import NeodroidFormalWrapper
+
+
+def progress_bar(env):
+    pass
 
 
 def main():
@@ -20,7 +20,7 @@ def main():
     with suppress(ConnectionError, KeyboardInterrupt), NeodroidFormalWrapper(
         connect_to_running=True
     ) as env:
-        with tqdm(env, leave=False) as observation_session:
+        with progress_bar(env) as observation_session:
             for (observation, reward, terminated, info) in observation_session:
                 frame_i += 1
 

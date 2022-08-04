@@ -3,9 +3,9 @@ import stat
 import struct
 from pathlib import Path
 
-from tqdm import tqdm
-
 __all__ = ["download_environment", "DownloadProgress", "available_environments"]
+
+from tqdm import tqdm
 
 
 class DownloadProgress(tqdm):

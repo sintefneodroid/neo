@@ -39,4 +39,4 @@ class CameraObservationWrapper(SingleUnityEnvironment):
 
         if message:
             return extract_from_cameras(message)
-        return None
+        return

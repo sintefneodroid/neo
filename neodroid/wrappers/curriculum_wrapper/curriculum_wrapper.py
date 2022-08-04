@@ -117,7 +117,7 @@ class NeodroidCurriculumWrapper(SingleUnityEnvironment):
     def observe(self, *args, **kwargs):
         message = super().observe()
         if message:
-            return (message.observables, message.signal, message.terminated, message)
+            return message.observables, message.signal, message.terminated, message
         return None, None, None, None
 
     def quit(self, *args, **kwargs):

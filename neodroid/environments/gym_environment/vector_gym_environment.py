@@ -11,8 +11,8 @@ from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
 from neodroid.utilities.specifications.unity_specifications import EnvironmentSnapshot
 from trolls.spaces import (
     ActionSpace,
-    ObservationSpace,
     Dimension,
+    ObservationSpace,
     SignalSpace,
     VectorActionSpace,
     VectorObservationSpace,

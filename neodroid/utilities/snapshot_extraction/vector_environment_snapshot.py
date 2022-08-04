@@ -44,6 +44,8 @@ class NumpyVectorPoints(IterDictValuesMixin, OrdinalIndexingDictMixin):
 
 class VectorEnvironmentSnapshot(object):
     def __init__(self, environment_snapshots: Mapping[str, EnvironmentSnapshot]):
+        if not environment_snapshots:
+            raise NoEnvironment()
         keys = environment_snapshots.keys()
         if not len(keys):
             raise NoEnvironment

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+__author__ = "Christian Heider Nielsen"
+
 from warnings import warn
 
 from neodroid.environments.droid_environment.unity.deprecated.single_unity_environment import (
     SingleUnityEnvironment,
 )
-
-__author__ = "Christian Heider Nielsen"
 
 
 class NeodroidFormalWrapper(SingleUnityEnvironment):
@@ -37,7 +37,7 @@ class NeodroidFormalWrapper(SingleUnityEnvironment):
         if self._last_snapshots:
             return self.sensor(key)
         warn("No message available")
-        return None
+        return
 
     def configure(self, *args, **kwargs):
         message = super().reset(*args, **kwargs)
@@ -48,7 +48,7 @@ class NeodroidFormalWrapper(SingleUnityEnvironment):
     def observe(self, *args, **kwargs):
         message = super().observe(*args, **kwargs)
         if message:
-            return (message.observables, message.signal, message.terminated, message)
+            return message.observables, message.signal, message.terminated, message
         return None, None, None, None
 
     def quit(self, *args, **kwargs):

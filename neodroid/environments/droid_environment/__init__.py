@@ -7,8 +7,7 @@ __doc__ = r"""
 
 from warg import passes_kws_to
 
-from .bullet_environment import *
-from .godot_environment import *
+
 from .unity import *
 
 

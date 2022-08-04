@@ -12,7 +12,7 @@ from neodroid.utilities.specifications.unity_specifications.configurable import 
     Configurable,
 )
 from neodroid.utilities.specifications.unity_specifications.sensor import Sensor
-from trolls.spaces import ActionSpace, ObservationSpace, Dimension, SignalSpace
+from trolls.spaces import ActionSpace, Dimension, ObservationSpace, SignalSpace
 
 __author__ = "Christian Heider Nielsen"
 

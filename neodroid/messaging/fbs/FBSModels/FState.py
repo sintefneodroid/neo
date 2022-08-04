@@ -24,7 +24,7 @@ class FState(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
-        return None
+        return
 
     # FState
     def FrameNumber(self):
@@ -68,7 +68,7 @@ class FState(object):
             obj = FUnobservables()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FState
     def Signal(self):
@@ -93,7 +93,7 @@ class FState(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
-        return None
+        return
 
     # FState
     def EnvironmentDescription(self):
@@ -105,7 +105,7 @@ class FState(object):
             obj = FEnvironmentDescription()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FState
     def LastReaction(self):
@@ -117,14 +117,14 @@ class FState(object):
             obj = FReaction()
             obj.Init(self._tab.Bytes, x)
             return obj
-        return None
+        return
 
     # FState
     def ExtraSerialisedMessage(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(22))
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
-        return None
+        return
 
 
 def FStateStart(builder):
