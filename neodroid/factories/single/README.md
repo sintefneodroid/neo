@@ -1,0 +1,1 @@
+neodroid/factories/single

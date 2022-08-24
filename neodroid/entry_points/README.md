@@ -1,0 +1,1 @@
+neodroid/entry_points
