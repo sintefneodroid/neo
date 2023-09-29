@@ -25,7 +25,6 @@ class BatchedUnityEnvironment(DictUnityEnvironment):
         return self._resets
 
     def _react(self, reactions=None, **kwargs):
-
         if self._resets and len(self._resets) > 0:
             i = 0
             for reset in self._resets:

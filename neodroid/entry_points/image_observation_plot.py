@@ -6,10 +6,9 @@ from math import ceil, floor, sqrt
 import cv2
 import numpy
 from matplotlib import animation, pyplot
-from warg import NOD
-
 from neodroid.environments.droid_environment import DictUnityEnvironment
 from neodroid.utilities.snapshot_extraction.camera_extraction import extract_all_cameras
+from warg import NOD
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = ""

@@ -51,7 +51,6 @@ class NeodroidVectorGymEnvironment(Environment):
         num_env: int = cpu_count(),
         auto_reset_on_terminal_state=False,
     ):
-
         self._env = SubProcessEnvironments(
             [make_gym_env(environment_name) for _ in range(num_env)],
             auto_reset_on_terminal_state=auto_reset_on_terminal_state,
@@ -84,7 +83,6 @@ class NeodroidVectorGymEnvironment(Environment):
         :return:"""
         ospc = self._env.observation_space
         if len(ospc.shape) >= 1:
-
             space = ObservationSpace(
                 [
                     Dimension(decimal_granularity=6, min_value=mn, max_value=mx)
@@ -111,7 +109,6 @@ class NeodroidVectorGymEnvironment(Environment):
         :return:"""
         aspc = self._env.action_space
         if len(self.aspc.shape) >= 1:
-
             space = ActionSpace(
                 [
                     Dimension(

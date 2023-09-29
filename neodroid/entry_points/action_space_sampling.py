@@ -4,7 +4,6 @@ import argparse
 import time
 
 import numpy
-
 from neodroid.environments.droid_environment import connect_dict
 
 __author__ = "Christian Heider Nielsen"

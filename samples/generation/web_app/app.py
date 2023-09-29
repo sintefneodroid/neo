@@ -68,7 +68,6 @@ def create_app(base_path, labels_path, template_folder=None, UPLOAD_FOLDER="Uplo
     @app.route("/assessment", methods=["GET", "POST"])
     def upload_and_classify():
         if request.method == "POST":
-
             # check if the post request has the file part
             if "file" not in request.files:
                 flash("No file part")

@@ -1,8 +1,8 @@
 # These are supported funding model platforms
 
-github: [cnheider]
-patreon:         cnheider
+github: [ cnheider ]
+patreon: cnheider
 open_collective: cnheider
-ko_fi:           cnheider
-tidelift:        pypi/Neodroid
+ko_fi: cnheider
+tidelift: pypi/Neodroid
 custom: # Replace with a single custom sponsorship URL

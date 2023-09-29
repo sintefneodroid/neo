@@ -3,7 +3,6 @@
 import logging
 
 import numpy
-
 from neodroid.utilities.specifications.unity_specifications import (
     Configuration,
     Motion,
@@ -44,10 +43,10 @@ if is_valid_configurations:
 return reaction_input
 else:
 reaction_input.motions(
-  construct_configurations_from_known_observables(
-      reaction_input.configurations, configurables
-      )
-  )
+construct_configurations_from_known_observables(
+    reaction_input.configurations, configurables
+    )
+)
 return reaction_input
 elif isinstance(reaction_input, list):
 is_valid_configurations = all(

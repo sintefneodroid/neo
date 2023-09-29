@@ -1,52 +1,52 @@
 {% extends "layout.html" %}
 {% block content %}
-  <div class="container-fluid bg-2 text-center" id="third">
+<div class="container-fluid bg-2 text-center" id="third">
     {% if scroll %}
-      <script>
-          document.location.hash = '#' + '{{ scroll }}';
-      </script>
+    <script>
+        document.location.hash = '#' + '{{ scroll }}';
+    </script>
     {% endif %}
     <h3>Assessment Complete</h3>
     <br>
     <p>
-      <img src="{{ url_for('uploads.send_file', filename=filename) }}"
-           class="img-thumbnail"
-           id="picture" alt='Uploaded Image'>
+        <img src="{{ url_for('uploads.send_file', filename=filename) }}"
+             class="img-thumbnail"
+             id="picture" alt='Uploaded Image'>
     </p>
     <h4>Results:</h4>
     <table>
-      {% for dict_item in results %}
+        {% for dict_item in results %}
         {% for model_name, model_result in dict_item.items() %}
-          <tr>
+        <tr>
             <td>
-              <p>{{ model_name }}</p>
+                <p>{{ model_name }}</p>
             </td>
             <td>
-              {% for category,prob in model_result.items() %}
+                {% for category,prob in model_result.items() %}
                 <p>{{ category }}:{{ prob }} </p>
-              {% endfor %}
+                {% endfor %}
             </td>
-          </tr>
+        </tr>
         {% endfor %}
-      {% endfor %}
+        {% endfor %}
     </table>
 
     <br>
     <p>{{ message }}</p>
     <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle"
-              type="button"
-              data-toggle="dropdown"
-              id="menu1">Next Steps
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu"
-          role="menu"
-          aria-labelledby="menu1"
-          style="line-height: 20px;vertical-align:middle;">
-        <li><a href="{{ url_for('assess_input') }}">Request another assessment</a></li>
-      </ul>
+        <button class="btn btn-default dropdown-toggle"
+                type="button"
+                data-toggle="dropdown"
+                id="menu1">Next Steps
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu"
+            role="menu"
+            aria-labelledby="menu1"
+            style="line-height: 20px;vertical-align:middle;">
+            <li><a href="{{ url_for('assess_input') }}">Request another assessment</a></li>
+        </ul>
     </div>
-  </div>
+</div>
 
 {% endblock %}

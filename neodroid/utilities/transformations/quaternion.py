@@ -76,7 +76,6 @@ class Quaternion:
         self.components = numpy.array([w, x, y, z])
 
     def __mul__(self, b):
-
         if isinstance(b, Quaternion):
             return self._multiply_with_quaternion(b)
         elif isinstance(b, (list, tuple, numpy.ndarray)):

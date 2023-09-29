@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 __author__ = "Christian Heider Nielsen"
 
-import numpy
-
 import neodroid.wrappers.curriculum_wrapper as neo
+import numpy
 from neodroid.utilities import Configuration
 
 random_motion_horizon = 5

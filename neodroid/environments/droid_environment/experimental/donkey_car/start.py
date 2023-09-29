@@ -12,7 +12,6 @@ __all__ = []
 import gym
 import numpy
 
-
 # SET UP ENVIRONMENT
 # You can also launch the simulator separately
 # in that case, you don't need to pass a `conf` object

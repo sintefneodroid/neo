@@ -27,7 +27,6 @@ def aisjd():
 
 
 def uhasd():
-    import isaacgym
     import isaacgymenvs
     import torch
 
@@ -49,7 +48,6 @@ def uhasd():
 
 def uiahsduhasd():
     import gym
-    import isaacgym
     import isaacgymenvs
     import torch
 

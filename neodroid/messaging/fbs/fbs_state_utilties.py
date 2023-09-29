@@ -5,7 +5,6 @@ import PIL
 import numpy
 from PIL.Image import Image
 from flatbuffers import Table
-
 from neodroid.messaging.fbs import (
     FActor,
     FBSModels as F,

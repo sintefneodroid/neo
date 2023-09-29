@@ -3,7 +3,6 @@
 from typing import Iterable, Sequence, Union
 
 from flatbuffers import Builder
-
 from neodroid.utilities.exceptions.exceptions import NoUnobservablesException
 
 __author__ = "Christian Heider Nielsen"

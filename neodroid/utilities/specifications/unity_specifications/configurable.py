@@ -8,9 +8,8 @@ __author__ = "Christian Heider Nielsen"
 import functools
 from typing import Any, List
 
-from warg import cached_property
-
 from trolls.spaces import Dimension
+from warg import cached_property
 
 __all__ = ["Configurable"]
 

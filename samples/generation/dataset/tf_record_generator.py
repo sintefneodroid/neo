@@ -79,7 +79,6 @@ def write_tf_record_file(data_tuples, file_name="neodroid_bb_images.tfr"):
 
 
 if __name__ == "__main__":
-
     generate_num = 10
     output_file_name = PROJECT_APP_PATH.user_data / "neodroid_bb_images.tfr"
 

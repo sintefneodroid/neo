@@ -6,13 +6,12 @@ from pathlib import Path
 
 import fire
 import warg
-from pyfiglet import Figlet
-
 from neodroid import DEFAULT_ENVIRONMENTS_PATH, get_version
 from neodroid.utilities.launcher.download_utilities.download_environment import (
     available_environments,
     download_environment,
 )
+from pyfiglet import Figlet
 
 margin_percentage = 0 / 6
 terminal_width = warg.get_terminal_size().columns
@@ -62,7 +61,8 @@ class NeodroidCLI(object):
     @staticmethod
     def fetch(env_name: str) -> Path:
         """
-        Fetches a remotely stored environment with the specified name to local storage"""
+        Fetches a remotely stored environment with the specified name to local storage
+        """
         exe_path = download_environment(
             env_name, path_to_executables_directory=DEFAULT_ENVIRONMENTS_PATH
         )
@@ -71,7 +71,8 @@ class NeodroidCLI(object):
 
     def install(self, env_name: str) -> Path:
         """
-        Fetches a remotely stored environment with the specified name to local storage"""
+        Fetches a remotely stored environment with the specified name to local storage
+        """
         return self.fetch(env_name)
 
     @staticmethod
@@ -85,7 +86,8 @@ class NeodroidCLI(object):
 
     def update(self, env_name: str) -> None:
         """
-        Updates, fetches environment with the specified name again and replaces the previous version if present"""
+        Updates, fetches environment with the specified name again and replaces the previous version if present
+        """
         if os.path.exists(DEFAULT_ENVIRONMENTS_PATH):
             self.remove(env_name)
             exe_path = self.fetch(env_name)

@@ -3,9 +3,8 @@
 from multiprocessing import Pipe, Process
 
 from draugr.torch_utilities import channel_transform
-from torch.utils.data import Dataset
-
 from neodroid.wrappers import CameraObservationWrapper
+from torch.utils.data import Dataset
 from trolls.experimental import CloudPickleWrapper
 
 __author__ = "Christian Heider Nielsen"

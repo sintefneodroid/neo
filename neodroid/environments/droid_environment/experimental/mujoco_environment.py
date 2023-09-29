@@ -201,7 +201,6 @@ if False:
     env = gym.make("Humanoid-v4")
     print("\nIt is OKAY!" if env.reset() is not None else "\nSome problem here...")
 
-
 if False:
     import mujoco_py
     import os

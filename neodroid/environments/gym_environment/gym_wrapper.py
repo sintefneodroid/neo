@@ -3,7 +3,6 @@
 from typing import Iterable, Union
 
 from gym import Env
-
 from neodroid.utilities.snapshot_extraction.vector_environment_snapshot import (
     VectorEnvironmentSnapshot,
 )

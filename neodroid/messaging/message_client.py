@@ -5,7 +5,6 @@ from contextlib import suppress
 from typing import Callable, Optional, Sequence
 
 import zmq
-
 from neodroid.messaging.fbs import FStates, deserialise_states, serialise_reactions
 
 __author__ = "Christian Heider Nielsen"
@@ -27,7 +26,6 @@ class MessageClient(object):
         single_threaded: bool = False,
         writer: callable = logging.info,
     ):
-
         self._tcp_address = tcp_address
         self._tcp_port = tcp_port
 

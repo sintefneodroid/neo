@@ -36,7 +36,6 @@ class EnvironmentStateBox(BoxLayout):
         self.assemble_components()
 
     def assemble_components(self):
-
         self.image_row_layout.add_widget(self.rgb_image)
         self.image_row_layout.add_widget(self.segmentation_image)
         self.image_row_layout.add_widget(self.instance_segmentation_image)
@@ -89,7 +88,6 @@ class EnvironmentStateBox(BoxLayout):
 
     def update_instance_segmentation_image(self, instance_segmentation_image_data):
         try:
-
             instance_segmentation_image = CoreImage(
                 instance_segmentation_image_data, ext="png"
             )

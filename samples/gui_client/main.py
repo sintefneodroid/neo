@@ -89,7 +89,6 @@ def update_environment_widgets(state):
         print("Failed at updating rest of GUI")
 
     try:
-
         GUI.update_normal_image(state.sensor("NormalCamera").value)
         GUI.update_motion_image(state.sensor("FlowCamera").value)
         GUI.update_depth_image(state.sensor("DepthCamera").value)

@@ -24,7 +24,6 @@ class StatusBar(BoxLayout):
         self.assemble_components()
 
     def assemble_components(self):
-
         self.connect_button.bind(on_release=self.on_connect_button)
         self.launch_check_box.bind(active=self.on_launch_button)
 

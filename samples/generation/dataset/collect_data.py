@@ -10,7 +10,6 @@ __doc__ = (
 if __name__ == "__main__":
 
     def main(generate_num=10):
-
         if generate_num > 0:
             with connect_dict() as env:
                 for i, state in enumerate(env):

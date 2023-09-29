@@ -107,7 +107,6 @@ return img
 
 
 if __name__ == "__main__":
-
     environments = neodroid.connect()
     environments.reset()
 

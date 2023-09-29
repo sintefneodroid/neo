@@ -5,7 +5,6 @@ from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, Mapping, Optional, Sequence, Union
 
 from draugr.tqdm_utilities import progress_bar
-
 from neodroid import DEFAULT_ENVIRONMENTS_PATH, __version__
 from neodroid.factories.motion_reactions import verify_motion_reactions
 from neodroid.utilities import launch_environment
@@ -72,7 +71,6 @@ class DictUnityEnvironment(NetworkingEnvironment):
             if self._simulation_instance:
                 logging.debug(f"successfully started environment {environment_name}")
             else:
-
                 logging.debug(f"could not start environment {environment_name}")
 
         self._setup_connection()

@@ -12,7 +12,6 @@ from draugr.tqdm_utilities import progress_bar
 if __name__ == "__main__":
 
     def mixed():
-
         import neodroid
 
         a = [-1]
@@ -31,7 +30,6 @@ if __name__ == "__main__":
         print("Done")
 
     def increasing():
-
         import neodroid
 
         a = [-1]
@@ -51,7 +49,6 @@ if __name__ == "__main__":
         print("Done")
 
     def decreasing():
-
         import neodroid
 
         a = [-1]

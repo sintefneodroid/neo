@@ -9,7 +9,6 @@ class ContextualBanditEnvironment(object):
     """"""
 
     def __init__(self, seed=0):
-
         self.np_random = numpy.random.RandomState()
         self.np_random.seed(seed)
 
