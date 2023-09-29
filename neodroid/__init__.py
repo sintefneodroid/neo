@@ -3,7 +3,6 @@
 
 from pathlib import Path
 
-import pkg_resources
 from warg import package_is_editable, get_version, clean_string
 
 try:
@@ -39,7 +38,7 @@ PROJECT_VERSION = __version__
 PROJECT_AUTHOR = clean_string(__author__)
 PROJECT_ORGANISATION = clean_string("Neodroid")
 PROJECT_APP_PATH = AppPath(app_name=PROJECT_NAME, app_author=PROJECT_AUTHOR)
-PACKAGE_DATA_PATH = Path(pkg_resources.resource_filename(PROJECT_NAME, "data"))
+PACKAGE_DATA_PATH = files(PROJECT_NAME) / "data"
 INCLUDE_PROJECT_READMES = False
 DEFAULT_ENVIRONMENTS_PATH = (PROJECT_APP_PATH.user_cache / "environments").absolute()
 
