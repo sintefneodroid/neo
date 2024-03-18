@@ -48,7 +48,10 @@ class ReactionBox(BoxLayout):
                 str(self.motor_1.motor_input.text),
                 float(self.motor_1.motor_slider.value),
             ),
-            (str(self.motor_2.motor_input.text), float(self.motor_2.motor_slider.value))
+            (
+                str(self.motor_2.motor_input.text),
+                float(self.motor_2.motor_slider.value),
+            ),
             # (str(self.motor_3.motor_input.text),
             # float(self.motor_3.motor_slider.value)),
             # (str(self.motor_4.motor_input.text),

@@ -21,7 +21,7 @@ __doc__ = r"""
 def verify_configuration_reactions(
     *,
     input_reactions,
-    environment_descriptions
+    environment_descriptions,
     #: Mapping[str, EnvironmentDescription]
 ):
     """
