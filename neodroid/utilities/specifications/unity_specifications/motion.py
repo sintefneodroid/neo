@@ -15,7 +15,8 @@ class Motion(object):
 
         :param actor_name:
         :param actuator_name:
-        :param strength: Strength has a possible direction given by the sign of the float"""
+        :param strength: Strength has a possible direction given by the sign of the float
+        """
         self._actor_name = actor_name
         self._actuator_name = actuator_name
         self._strength = strength

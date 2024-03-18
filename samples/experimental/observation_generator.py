@@ -21,7 +21,7 @@ def main():
         connect_to_running=True
     ) as env:
         with tqdm(env, leave=False) as observation_session:
-            for (observation, reward, terminated, info) in observation_session:
+            for observation, reward, terminated, info in observation_session:
                 frame_i += 1
 
                 if not diverged and frame_i != info.frame_number:

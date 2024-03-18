@@ -47,7 +47,7 @@ def update_callback(state):
 def on_step_callback(actor_name, slider_values):
     motions = [
         Motion(str(actor_name), str(slider_values[0][0]), slider_values[0][1]),
-        Motion(str(actor_name), str(slider_values[1][0]), slider_values[1][1])
+        Motion(str(actor_name), str(slider_values[1][0]), slider_values[1][1]),
         # Motion(str(actor_name), str(slider_values[2][0]), slider_values[2][1]),
         # Motion(str(actor_name), str(slider_values[3][0]), slider_values[3][1])
     ]

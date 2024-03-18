@@ -53,7 +53,7 @@ class NeodroidCurriculumWrapper(SingleUnityEnvironment):
         configure_params = ReactionParameters(
             reset=True,
             terminable=False,
-            configure=True
+            configure=True,
             # ,episode_count=False
         )
 
@@ -63,7 +63,7 @@ class NeodroidCurriculumWrapper(SingleUnityEnvironment):
 
         non_terminable_params = ReactionParameters(
             step=True,
-            terminable=False
+            terminable=False,
             #                                              ,
             #                                              episode_count=False
         )
