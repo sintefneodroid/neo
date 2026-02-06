@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from typing import Any, Generator
 
 from trolls.spaces import ActionSpace

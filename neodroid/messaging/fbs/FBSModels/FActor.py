@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FActor(object):
+class FActor:
     __slots__ = ["_tab"]
 
     @classmethod

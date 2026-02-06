@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from typing import Dict, List, Optional, Sequence
 
 from neodroid.utilities.specifications.unity_specifications.unobservables import (
@@ -14,7 +13,7 @@ from .reaction_parameters import ReactionParameters
 __all__ = ["Reaction"]
 
 
-class Reaction(object):
+class Reaction:
     """ """
 
     def __init__(

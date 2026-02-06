@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from draugr import batch_generator
 from draugr.python_utilities.torch_like_channel_transformation import (
     reverse_torch_vision_normalize_batch_nchw,

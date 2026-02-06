@@ -3,36 +3,36 @@ neodroid.messaging
 
 .. automodule:: neodroid.messaging
 
-   
-   
-   
 
-   
-   
+
+
+
+
+
    .. rubric:: Functions
 
    .. autosummary::
       :toctree:
-   
-      message_client_event
-   
-   
 
-   
-   
+      message_client_event
+
+
+
+
+
    .. rubric:: Classes
 
    .. autosummary::
       :toctree:
       :template: custom_autosummary/class.rst
-   
-      ClientEventsEnum
-   
-   
 
-   
-   
-   
+      ClientEventsEnum
+
+
+
+
+
+
 
 
 
@@ -45,4 +45,3 @@ neodroid.messaging
 
    neodroid.messaging.fbs
    neodroid.messaging.message_client
-

@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FUnobservables(object):
+class FUnobservables:
     __slots__ = ["_tab"]
 
     @classmethod

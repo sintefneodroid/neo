@@ -1,12 +1,12 @@
+cloudpickle
 devpack
-flatbuffers
-pyfiglet
 fire
-pyzmq
+flatbuffers
+matplotlib
 numpy
 Pillow
-tqdm
-matplotlib
-cloudpickle
+pyfiglet
+pyzmq
 
 setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
+tqdm

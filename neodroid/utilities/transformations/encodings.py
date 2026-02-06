@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from typing import Iterable, List, Sequence, Sized, Union
 
 __author__ = "Christian Heider Nielsen"

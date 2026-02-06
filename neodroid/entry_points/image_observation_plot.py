@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import time
 from math import ceil, floor, sqrt
 
@@ -18,7 +17,7 @@ def grab_video_frame(cap):
     return cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
 
-idependant_frame_i = 0
+independant_frame_i = 0
 time_s = time.time()
 
 image_axs = NOD()
@@ -30,17 +29,17 @@ reset_every_step = False
 
 
 def update_figures(ith_figure_update: int):
-    global time_s, idependant_frame_i, image_axs
+    global time_s, independant_frame_i
 
     if reset_every_step:
         info = next(iter(env.reset().values()))
-        idependant_frame_i = 0
+        independant_frame_i = 0
     else:
         info = next(iter(env.react().values()))
-        idependant_frame_i += 1
+        independant_frame_i += 1
 
     if print_obs:
-        print(idependant_frame_i)
+        print(independant_frame_i)
         for obs in info.sensors.values():
             print(obs)
 
@@ -62,7 +61,7 @@ def update_figures(ith_figure_update: int):
         image_axs[k].set_data(v)
 
     fig.suptitle(
-        f"Update: {idependant_frame_i}, "
+        f"Update: {independant_frame_i}, "
         f"Frame: {info.frame_number}, "
         f"FPS: {fps}, "
         f"Signal: {info.signal}, "
@@ -71,7 +70,6 @@ def update_figures(ith_figure_update: int):
 
 
 def main():
-    global image_axs
 
     info = next(iter(env.reset().values()))
     if print_obs:

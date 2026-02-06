@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FSensor(object):
+class FSensor:
     __slots__ = ["_tab"]
 
     @classmethod

@@ -1,12 +1,13 @@
-# -*- coding: utf-8 -*-
 from gui_components import EnvironmentStateBox, ReactionBox, StatusBar, XMLBox
+
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+
 
 __author__ = "Christian Heider Nielsen"
 __doc__ = r"""
 """
 
-from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
 
 __all__ = ["NeoGUI"]
 

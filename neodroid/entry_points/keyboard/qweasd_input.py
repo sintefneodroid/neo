@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from neodroid.environments.droid_environment import SingleUnityEnvironment
 from warg import NOD
 

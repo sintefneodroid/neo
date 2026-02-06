@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FReaction(object):
+class FReaction:
     __slots__ = ["_tab"]
 
     @classmethod

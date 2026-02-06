@@ -3,7 +3,7 @@
 # namespace: State
 
 
-class FObservation(object):
+class FObservation:
     NONE = 0
     FSingle = 1
     FDouble = 2

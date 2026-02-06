@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import argparse
 
 from neodroid.utilities import Displayable

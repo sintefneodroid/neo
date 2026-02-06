@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FEulerTransform(object):
+class FEulerTransform:
     __slots__ = ["_tab"]
 
     # FEulerTransform

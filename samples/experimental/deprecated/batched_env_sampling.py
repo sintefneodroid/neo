@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 __author__ = "Christian Heider Nielsen"
 
 from neodroid.utilities import Motion, Reaction, ReactionParameters

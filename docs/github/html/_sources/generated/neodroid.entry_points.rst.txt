@@ -3,21 +3,21 @@ neodroid.entry\_points
 
 .. automodule:: neodroid.entry_points
 
-   
-   
-   
 
-   
-   
-   
 
-   
-   
-   
 
-   
-   
-   
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -34,4 +34,3 @@ neodroid.entry\_points
    neodroid.entry_points.image_observation_plot
    neodroid.entry_points.keyboard
    neodroid.entry_points.observation_space_sampling
-

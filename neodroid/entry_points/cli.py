@@ -22,7 +22,7 @@ indent = " " * margin
 sponsors = "SINTEF Ocean, Alexandra Institute, Norges Forskningsråd"
 
 
-class NeodroidCLI(object):
+class NeodroidCLI:
     def run(self, env_name: str) -> None:
         """
         Run an environment"""

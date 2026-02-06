@@ -12,12 +12,12 @@ Neo is a python package that enables deserialisation, serialisation and an inter
 the [Droid](https://github.com/sintefneodroid/droid) counterpart of the [Neodroid](https://github.com/sintefneodroid)
 platform.
 
----
+______________________________________________________________________
 
 _[Neodroid](https://github.com/sintefneodroid) is developed with support from Research Council of Norway Grant
 #262900. ([https://www.forskningsradet.no/prosjektbanken/#/project/NFR/262900](https://www.forskningsradet.no/prosjektbanken/#/project/NFR/262900))_
 
----
+______________________________________________________________________
 
 <table>
   <tr>
@@ -139,7 +139,7 @@ the [Droid](https://github.com/sintefneodroid/droid) project repository.
 # To Do's
 
 - [ ] Be able to select and/or parameterise an objective/evaluation (None,ReachGoal,Stabilise,..) function for an
-  environment
+    environment
 
 # Contributing
 
@@ -153,7 +153,7 @@ This project is licensed under the Apache V2 License. See [LICENSE](LICENSE.md) 
 
 For citation you may use the following bibtex entry:
 
-````
+```
 @misc{neodroid,
   author = {Heider, Christian},
   title = {Neodroid Platform},
@@ -162,7 +162,7 @@ For citation you may use the following bibtex entry:
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/sintefneodroid}},
 }
-````
+```
 
 # Other Components Of the Neodroid Platform
 
@@ -173,14 +173,14 @@ For citation you may use the following bibtex entry:
 # FAQ
 
 - My iterations per second are maxed out at ~60..
-    - Ensure that you have disabled vsync, for bumblebee users on linux you can use ```vblank_mode=0 optirun ..```.
+    - Ensure that you have disabled vsync, for bumblebee users on linux you can use `vblank_mode=0 optirun ..`.
 - Why was this tool created, what does it serve and not just use Unity's own RL framework?
     - This project is very similar to Unity's own
-      project [Unity Machine Learning Agents](https://github.com/Unity-Technologies/ml-agents). The most of the efforts
-      done in this project were made prior to their
-      announcement, [Introducing: Unity Machine Learning Agents](https://blogs.unity3d.com/2017/09/19/introducing-unity-machine-learning-agents/).
-      The entire Neodroid platform served and still serves as a tool for academic research specific to the authors
-      interests, hence explaining to the existence and future direction of this project.
+        project [Unity Machine Learning Agents](https://github.com/Unity-Technologies/ml-agents). The most of the efforts
+        done in this project were made prior to their
+        announcement, [Introducing: Unity Machine Learning Agents](https://blogs.unity3d.com/2017/09/19/introducing-unity-machine-learning-agents/).
+        The entire Neodroid platform served and still serves as a tool for academic research specific to the authors
+        interests, hence explaining to the existence and future direction of this project.
 
 ## Other Problems
 
@@ -188,6 +188,6 @@ Please contact us or add an issue if have a problem that is not listed in the FA
 
 # Authors
 
-* **Christian Heider Nielsen** - [cnheider](https://github.com/cnheider)
+- **Christian Heider Nielsen** - [cnheider](https://github.com/cnheider)
 
 Here other [contributors](https://github.com/sintefneodroid/neo/contributors) to this project are listed.

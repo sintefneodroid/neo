@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FTriple(object):
+class FTriple:
     __slots__ = ["_tab"]
 
     @classmethod

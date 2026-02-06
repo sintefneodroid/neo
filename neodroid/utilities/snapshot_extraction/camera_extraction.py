@@ -43,7 +43,7 @@ def extract_from_cameras(state, cameras=default_camera_observer_names):
     :return:
     :rtype:
     """
-    out = dict()
+    out = {}
 
     for camera in cameras:
         res = extract_camera_observation(state, camera)
@@ -61,7 +61,7 @@ def extract_all_cameras(state):
     :return:
     :rtype:
     """
-    out = dict()
+    out = {}
 
     for camera in state.sensors.keys():
         res = extract_camera_observation(state, camera)

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from neodroid.environments.droid_environment import connect_dict
 
 __author__ = "Christian Heider Nielsen"

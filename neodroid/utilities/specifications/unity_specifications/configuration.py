@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 __author__ = "Christian Heider Nielsen"
 
 import functools
@@ -8,7 +7,7 @@ from warg import cached_property
 __all__ = ["Configuration"]
 
 
-class Configuration(object):
+class Configuration:
     """ """
 
     def __init__(self, configurable_name, configurable_value):
@@ -33,7 +32,7 @@ class Configuration(object):
         """
         return self._configurable_value
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def to_dict(self):
         """
 
@@ -45,7 +44,7 @@ class Configuration(object):
             "_configurable_value": self._configurable_value,
         }
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def __repr__(self):
         return (
             f"<Configuration>\n"

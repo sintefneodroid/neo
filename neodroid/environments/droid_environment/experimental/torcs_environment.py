@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 __author__ = "heider"
 __doc__ = r"""
 
@@ -11,7 +9,7 @@ __all__ = []
 import numpy
 
 
-class Agent(object):
+class Agent:
     def __init__(self, dim_action):
         self.dim_action = dim_action
 

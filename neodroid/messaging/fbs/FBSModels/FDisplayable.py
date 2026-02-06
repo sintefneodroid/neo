@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FDisplayable(object):
+class FDisplayable:
     __slots__ = ["_tab"]
 
     @classmethod

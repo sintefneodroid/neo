@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from typing import Dict, Optional
 
 from neodroid.messaging.fbs.FBSModels import FEnvironmentDescription
@@ -20,7 +19,7 @@ from warg import cached_property
 __all__ = ["EnvironmentDescription"]
 
 
-class EnvironmentDescription(object):
+class EnvironmentDescription:
     """ """
 
     def __init__(self, fbs_description: FEnvironmentDescription):

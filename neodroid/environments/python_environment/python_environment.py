@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from neodroid.environments.environment import Environment
 
 __author__ = "Christian Heider Nielsen"

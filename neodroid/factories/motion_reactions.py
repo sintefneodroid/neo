@@ -1,5 +1,4 @@
 # !/usr/bin/env python3
-# -*- coding: utf-8 -*-
 import logging
 from collections.abc import Collection
 from typing import Iterable, List, Mapping, Optional, Sized
@@ -19,7 +18,7 @@ import numpy
 
 def verify_motion_reactions(
     *,
-    input_reactions:Optional[Sized],
+    input_reactions: Optional[Sized],
     environment_descriptions: Mapping[str, EnvironmentDescription],
     environment_snapshots: Mapping[str, EnvironmentSnapshot],
     _auto_reset: bool = False,
@@ -125,7 +124,7 @@ def verify_motion_reactions(
 
 
 def construct_individual_reactions_from_list(
-    motion_list:Iterable, actors:Collection[Actor], env_name: str, reset: bool = False
+    motion_list: Iterable, actors: Collection[Actor], env_name: str, reset: bool = False
 ):
     """
 
@@ -141,7 +140,7 @@ def construct_individual_reactions_from_list(
     :rtype:
     """
 
-    #assert isinstance(motion_list, Iterable), f"Expected motion list to be an iterable, got {type(motion_list)}"
+    # assert isinstance(motion_list, Iterable), f"Expected motion list to be an iterable, got {type(motion_list)}"
 
     motions = construct_motions_from_list(motion_list, actors)
 
@@ -157,7 +156,9 @@ def construct_individual_reactions_from_list(
     return Reaction(motions=motions, parameters=parameters, environment_name=env_name)
 
 
-def construct_motions_from_list(input_list:Iterable, actors:Collection[Actor])-> List[Motion]:
+def construct_motions_from_list(
+    input_list: Iterable, actors: Collection[Actor]
+) -> List[Motion]:
     """
 
     :param input_list:
@@ -175,8 +176,9 @@ def construct_motions_from_list(input_list:Iterable, actors:Collection[Actor])->
 
     new_motions = [
         Motion(actor_name, actuator_name, list_val)
-        for (list_val, (actor_name,actuator_name,*_))
-        in zip(input_list, actor_motor_tuples)
+        for (list_val, (actor_name, actuator_name, *_)) in zip(
+            input_list, actor_motor_tuples
+        )
     ]
 
     return new_motions

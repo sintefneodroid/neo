@@ -3,21 +3,21 @@ neodroid.entry\_points.keyboard
 
 .. automodule:: neodroid.entry_points.keyboard
 
-   
-   
-   
 
-   
-   
-   
 
-   
-   
-   
 
-   
-   
-   
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29,4 +29,3 @@ neodroid.entry\_points.keyboard
    :recursive:
 
    neodroid.entry_points.keyboard.qweasd_input
-

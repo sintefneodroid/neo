@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FQuadruple(object):
+class FQuadruple:
     __slots__ = ["_tab"]
 
     @classmethod

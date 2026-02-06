@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FConfigurable(object):
+class FConfigurable:
     __slots__ = ["_tab"]
 
     @classmethod

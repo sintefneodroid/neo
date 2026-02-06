@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 __author__ = "Christian Heider Nielsen"
 
 # @pretty_print
@@ -7,7 +6,7 @@ from warg import cached_property
 __all__ = ["Displayable"]
 
 
-class Displayable(object):
+class Displayable:
     """ """
 
     def __init__(self, displayable_name, displayable_value):

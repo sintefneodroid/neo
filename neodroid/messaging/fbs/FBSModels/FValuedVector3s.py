@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FValuedVector3s(object):
+class FValuedVector3s:
     __slots__ = ["_tab"]
 
     @classmethod

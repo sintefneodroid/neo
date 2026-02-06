@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-
-__author__ = "Christian Heider Nielsen"
-__doc__ = ""
-
-# %%
 import neodroid
 
 for i in range(100):
@@ -11,15 +5,6 @@ for i in range(100):
         print(i)
         env.react()
 
-# %% [markdown]
-# Heading 1
-# Heading 2
-## Heading 2.1
-## Heading 2.2
-#
-# $e ^ {i\pi} + 1 = 0$
-#
-# %%
 
 for i in range(100):
     with neodroid.connect() as env:

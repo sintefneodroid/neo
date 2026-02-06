@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FQuaternion(object):
+class FQuaternion:
     __slots__ = ["_tab"]
 
     # FQuaternion

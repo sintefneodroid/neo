@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import functools
 from typing import Any, Dict, Union
 
@@ -12,7 +11,7 @@ from warg import cached_property
 __all__ = ["Actor"]
 
 
-class Actor(object):
+class Actor:
     """ """
 
     def __init__(self, flat_actor: FActor):
@@ -56,7 +55,7 @@ class Actor(object):
         """
         return deserialise_actuators(self._flat_actor)
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def __repr__(self) -> str:
         actuators = "".join(
             [str(actuators.__repr__()) for actuators in self.actuators.values()]

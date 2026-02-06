@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import functools
 from typing import Callable, List, Mapping, TypeVar
 
@@ -24,7 +23,7 @@ EnvironmentSnapshotType = TypeVar(
 )
 
 
-class EnvironmentSnapshot(object):
+class EnvironmentSnapshot:
     """ """
 
     def __init__(self, fbs_state: FState = None):
@@ -262,7 +261,7 @@ class EnvironmentSnapshot(object):
         encoder = json.JSONEncoder()
         return encoder.encode(self.to_dict())
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def __repr__(self) -> str:
         return (
             f"<EnvironmentSnapshot>\n"

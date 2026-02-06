@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FActuator(object):
+class FActuator:
     __slots__ = ["_tab"]
 
     @classmethod

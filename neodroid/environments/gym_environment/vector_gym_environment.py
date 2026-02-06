@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from os import cpu_count
 from typing import Sequence
 

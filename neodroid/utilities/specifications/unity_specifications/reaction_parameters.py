@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import logging
 
 __author__ = "Christian Heider Nielsen"
@@ -8,7 +7,7 @@ import json
 __all__ = ["ReactionParameters"]
 
 
-class ReactionParameters(object):
+class ReactionParameters:
     """ """
 
     def __init__(

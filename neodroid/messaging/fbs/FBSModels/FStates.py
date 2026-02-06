@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FStates(object):
+class FStates:
     __slots__ = ["_tab"]
 
     @classmethod

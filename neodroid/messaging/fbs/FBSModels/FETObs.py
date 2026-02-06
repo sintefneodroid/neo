@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FETObs(object):
+class FETObs:
     __slots__ = ["_tab"]
 
     @classmethod

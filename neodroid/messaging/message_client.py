@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import logging
 from contextlib import suppress
 from typing import Callable, Optional, Sequence
@@ -10,7 +9,7 @@ __author__ = "Christian Heider Nielsen"
 
 
 # @singleton
-class MessageClient(object):
+class MessageClient:
     """ """
 
     def __init__(

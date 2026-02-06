@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from pathlib import Path
 from typing import List, Sequence, Union
 
@@ -68,7 +67,7 @@ import re
 from setuptools import find_packages
 
 with open(
-    Path(os.path.dirname(__file__)) / "neodroid" / "__init__.py", "r"
+    Path(os.path.dirname(__file__)) / "neodroid" / "__init__.py"
 ) as project_init_file:
     str_reg_exp = "['\"]([^'\"]*)['\"]"
     content = project_init_file.read()  # get strings from module

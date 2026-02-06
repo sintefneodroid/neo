@@ -1,5 +1,5 @@
 import io
-from typing import Any, Dict, List, Tuple,Optional
+from typing import Any, Dict, List, Tuple, Optional
 
 import PIL
 import numpy
@@ -101,7 +101,9 @@ def deserialise_sensors(flat_description: FEnvironmentDescription) -> Dict[str, 
     return out_sensors
 
 
-def deserialise_sensor(obs_type:F.FObservation, obs_value:Table) -> Tuple[Any, List, bool]:
+def deserialise_sensor(
+    obs_type: F.FObservation, obs_value: Table
+) -> Tuple[Any, List, bool]:
     value = None
     value_range = None
     only_direct_access = False

@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FObjective(object):
+class FObjective:
     __slots__ = ["_tab"]
 
     @classmethod

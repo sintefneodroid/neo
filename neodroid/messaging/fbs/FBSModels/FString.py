@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FString(object):
+class FString:
     __slots__ = ["_tab"]
 
     @classmethod

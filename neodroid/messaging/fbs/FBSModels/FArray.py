@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FArray(object):
+class FArray:
     __slots__ = ["_tab"]
 
     @classmethod

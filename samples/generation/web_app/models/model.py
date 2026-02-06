@@ -10,6 +10,8 @@ from tensorflow.python.keras.backend import clear_session
 from tensorflow.python.keras.utils import get_file
 from tensorflow.python.saved_model import tag_constants
 
+import tensorflow as tf
+
 CLASS_INDEX = None
 CLASS_INDEX_PATH = "https://s3.amazonaws.com/deep-learning-models/image-models/imagenet_class_index.json"
 
@@ -65,7 +67,7 @@ def predict(sess, model_graph, input_tensor):
 def run_models(img_path, base_path, labels_path):
     labels = []
 
-    with open(labels_path, "r") as f:
+    with open(labels_path) as f:
         for label in f.readlines():
             labels.append(label)
 
@@ -76,7 +78,7 @@ def run_models(img_path, base_path, labels_path):
         zipped = [a for a in zip(*top_n_prediction[0])]
         vgg_predictions = {cat: prob for cat, prob in zip(zipped[1], zipped[2])}
     except:
-        vgg_predictions = dict()
+        vgg_predictions = {}
 
     try:
         image_in = prepare_img_size(img_path)
@@ -90,7 +92,7 @@ def run_models(img_path, base_path, labels_path):
 
         dlp_predictions = {k: v for v, k in zip(category_result, labels)}
     except Exception as e:
-        dlp_predictions = dict()
+        dlp_predictions = {}
         print(f"failed dlp_prediction {e}")
 
     message = "Assessment complete!"

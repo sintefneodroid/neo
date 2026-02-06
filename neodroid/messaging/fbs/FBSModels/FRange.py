@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FRange(object):
+class FRange:
     __slots__ = ["_tab"]
 
     # FRange

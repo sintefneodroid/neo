@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 __author__ = "heider"
 __doc__ = r"""
 
@@ -33,7 +31,7 @@ if True:
     <option iterations="10" tolerance="0" gravity="-1 0 -10" jacobian="dense">
       <flag fwdinv="enable" energy="enable"/>
     </option>
-  
+
     <asset>
       <mesh name="icosahedron" scale=".05 .05 .05"
             vertex="0         1       1.618
@@ -50,7 +48,7 @@ if True:
                    -1.618     0      -1"/>
       <hfield name="hfield" nrow="3" ncol="3" size=".2 .2 .1 .03"/>
     </asset>
-  
+
     <default>
       <site rgba=".5 .5 .5 .5"/>
       <joint armature="1" damping="10"/>
@@ -65,7 +63,7 @@ if True:
         <joint damping=".1" armature=".1"/>
       </default>
     </default>
-  
+
     <worldbody>
       <light pos="0 0 3"/>
       <geom type="plane" size="4 4 .1"/>
@@ -135,11 +133,11 @@ if True:
         <site name="anchor2" pos=".05 .05 .05"/>
       </body>
     </worldbody>
-  
+
     <equality>
       <weld body1="cylinder" body2="world"/>
     </equality>
-  
+
     <tendon>
       <spatial name="spatial" limited="true" range="0 .7" rgba="1 0 1 1">
         <site site="anchor0"/>
@@ -152,7 +150,7 @@ if True:
         <joint joint="hipy_1" coef="1"/>
       </fixed>
     </tendon>
-  
+
     <actuator>
       <motor tendon="fixed" gear="100"/>
       <motor tendon="spatial" gear="10"/>
@@ -164,7 +162,7 @@ if True:
       <general site="wheel_0" gear="0 0 0 0 10 0" dyntype="filter" dynprm="1"/>
       <general joint="wheel_1" biastype="affine" dyntype="integrator" dynprm="1" biasprm="0 -1"/>
     </actuator>
-  
+
     <sensor>
       <framepos objtype="site" objname="wheel_0" reftype="site" refname="wheel_2"/>
       <rangefinder site="rf"/>
@@ -180,7 +178,7 @@ if True:
     </sensor>
   </mujoco>"""
 
-    ASSETS = dict()
+    ASSETS = {}
     with open(str(s), "rb") as f:
         ASSETS["gizmo.stl"] = f.read()
     # from mujoco import MjModel, MjSim, MjViewer

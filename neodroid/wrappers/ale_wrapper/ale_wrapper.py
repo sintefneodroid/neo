@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from neodroid.environments.droid_environment.unity.deprecated.single_unity_environment import (
     SingleUnityEnvironment,
 )

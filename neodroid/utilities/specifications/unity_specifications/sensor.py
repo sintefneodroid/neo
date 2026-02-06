@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from typing import List
 
 __author__ = "Christian Heider Nielsen"
@@ -8,7 +7,7 @@ from trolls.spaces import Dimension
 __all__ = ["Sensor"]
 
 
-class Sensor(object):
+class Sensor:
     r""" """
 
     def __init__(self, sensor_name, sensor_range, sensor_value, is_image):

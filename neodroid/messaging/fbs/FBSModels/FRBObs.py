@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FRBObs(object):
+class FRBObs:
     __slots__ = ["_tab"]
 
     @classmethod

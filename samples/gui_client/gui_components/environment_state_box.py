@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 __author__ = "Christian Heider Nielsen"
 
 from kivy.core.image import Image as CoreImage

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from neodroid.environments.droid_environment import SingleUnityEnvironment
 from neodroid.utilities.exceptions.exceptions import SensorNotAvailableException
 from neodroid.utilities.snapshot_extraction.camera_extraction import (

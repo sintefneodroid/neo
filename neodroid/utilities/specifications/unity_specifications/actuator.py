@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import functools
 
 from neodroid.messaging.fbs.fbs_state_utilties import deserialise_range
@@ -11,7 +10,7 @@ from warg import cached_property
 __all__ = ["Actuator"]
 
 
-class Actuator(object):
+class Actuator:
     """ """
 
     def __init__(self, actuator_name, motion_space):
@@ -36,7 +35,7 @@ class Actuator(object):
         """
         return deserialise_range(self._range)
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def __repr__(self) -> str:
         return (
             f"<Actuator>\n"

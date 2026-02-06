@@ -8,21 +8,19 @@ neodroid.messaging.ClientEventsEnum
    :show-inheritance:
    :inherited-members:
 
-   
+
    .. automethod:: __init__
 
-   
-   
 
-   
-   
+
+
+
+
    .. rubric:: Attributes
 
    .. autosummary::
-   
+
       ~ClientEventsEnum.connected
       ~ClientEventsEnum.disconnected
       ~ClientEventsEnum.timeout
       ~ClientEventsEnum.reconnected
-   
-   

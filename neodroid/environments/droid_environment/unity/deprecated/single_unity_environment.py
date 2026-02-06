@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from warnings import warn
 
 from draugr.progress_bars import progress_bar

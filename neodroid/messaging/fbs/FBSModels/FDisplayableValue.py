@@ -3,7 +3,7 @@
 # namespace: Reaction
 
 
-class FDisplayableValue(object):
+class FDisplayableValue:
     NONE = 0
     FValue = 1
     FValues = 2

@@ -3,7 +3,7 @@
 # namespace: FBS
 
 
-class FSimulationType(object):
+class FSimulationType:
     Independent = 0
     FrameDependent = 1
     PhysicsDependent = 2

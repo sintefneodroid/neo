@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 __author__ = "Christian Heider Nielsen"
 
 # @pretty_print
@@ -13,7 +10,7 @@ from warg import cached_property
 __all__ = ["Configurable"]
 
 
-class Configurable(object):
+class Configurable:
     """ """
 
     def __init__(
@@ -56,7 +53,7 @@ class Configurable(object):
             space = self._configurable_space
             return space
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def to_dict(self):
         """
 
@@ -69,7 +66,7 @@ class Configurable(object):
             "configurable_space": self.configurable_space,
         }
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def __repr__(self):
         return (
             f"<Configurable>\n"

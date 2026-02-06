@@ -1,36 +1,37 @@
 """
 
- blackjack.py  (author: Anson Wong / git: ankonzoid)
+blackjack.py  (author: Anson Wong / git: ankonzoid)
 
- Solving the game of blackjack (no-usable ace, dealing with replacement).
- The learning method is Monte Carlo Exploring Starts with reward sample averaging.
- Refer to Chapter 5 (Monte Carlo Methods) of Richard Sutton's "Reinforcement Learning:
- An Introducion".
+Solving the game of blackjack (no-usable ace, dealing with replacement).
+The learning method is Monte Carlo Exploring Starts with reward sample averaging.
+Refer to Chapter 5 (Monte Carlo Methods) of Richard Sutton's "Reinforcement Learning:
+An Introducion".
 
- ============================================================
+============================================================
 
- Monte Carlo ES (Exploring Starts), for estimating π ≈ π∗
+Monte Carlo ES (Exploring Starts), for estimating π ≈ π∗
 
- Initialize, for all s ∈ S, a ∈ A(s):
-   Q(s, a) ← arbitrary
-   π(s) ← arbitrary
-   Returns(s, a) ← empty list
+Initialize, for all s ∈ S, a ∈ A(s):
+  Q(s, a) ← arbitrary
+  π(s) ← arbitrary
+  Returns(s, a) ← empty list
 
- Repeat forever:
-   Choose S0 ∈ S and A0 ∈ A(S0) s.t. all pairs have probability > 0
-   Generate an episode starting from S0, A0, following π
+Repeat forever:
+  Choose S0 ∈ S and A0 ∈ A(S0) s.t. all pairs have probability > 0
+  Generate an episode starting from S0, A0, following π
 
-   For each pair s, a appearing in the episode:
-     G ← the return that follows the first occurrence of s, a
-     Append G to Returns(s, a)
-     Q(s, a) ← average(Returns(s, a))
+  For each pair s, a appearing in the episode:
+    G ← the return that follows the first occurrence of s, a
+    Append G to Returns(s, a)
+    Q(s, a) ← average(Returns(s, a))
 
-   For each s in the episode:
-     π(s) ← argmax[a'] Q(s, a')
+  For each s in the episode:
+    π(s) ← argmax[a'] Q(s, a')
 
- ============================================================
+============================================================
 
 """
+
 import random
 
 import numpy
@@ -56,7 +57,7 @@ class BlackjackEnvironment:
         # Create a fresh deck of 52 cards (we will randomly sample this deck with replacement)
         SUITS = ["diamond", "club", "heart", "spade"]
         RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
-        self.DECK = list()
+        self.DECK = []
         for suit in SUITS:
             for rank in RANKS:
                 self.DECK.append({"rank": rank, "suit": suit})
@@ -149,7 +150,7 @@ class Agent:
     def reset_episodic_memory(self):
         """"""
         # Reset episodic memories
-        self.memories = list()
+        self.memories = []
 
     def reset_learning_memory(self):
         """"""

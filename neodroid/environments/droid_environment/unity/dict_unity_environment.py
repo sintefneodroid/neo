@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import logging
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, Mapping, Optional, Sequence, Union

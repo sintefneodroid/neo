@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from typing import List, Mapping
 
 import numpy
@@ -41,7 +40,7 @@ class NumpyVectorPoints(IterDictValuesMixin, OrdinalIndexingDictMixin):
         return len(self.terminated)
 
 
-class VectorEnvironmentSnapshot(object):
+class VectorEnvironmentSnapshot:
     def __init__(self, environment_snapshots: Mapping[str, EnvironmentSnapshot]):
         if not environment_snapshots:
             raise NoEnvironment()

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from itertools import count
 from typing import Callable, Optional, Union
 
@@ -57,7 +56,10 @@ class VectorUnityEnvironment(DictUnityEnvironment):
         return VectorEnvironmentSnapshot(self.send(input_reactions=input_reactions))
 
     def reset(
-        self, input_reactions=None, state=None, on_reset_callback: Optional[Callable] = None
+        self,
+        input_reactions=None,
+        state=None,
+        on_reset_callback: Optional[Callable] = None,
     ) -> VectorEnvironmentSnapshot:
         """
 

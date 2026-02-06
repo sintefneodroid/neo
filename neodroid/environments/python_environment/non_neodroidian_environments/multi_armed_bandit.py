@@ -1,34 +1,35 @@
 """
 
- multiarmed_bandits.py  (author: Anson Wong / git: ankonzoid)
+multiarmed_bandits.py  (author: Anson Wong / git: ankonzoid)
 
- We solve the multi-armed bandit problem using a classical epsilon-greedy
- agent with reward-average sampling to estimate the action-value Q.
- This algorithm follows closely with the notation of Sutton's RL textbook.
+We solve the multi-armed bandit problem using a classical epsilon-greedy
+agent with reward-average sampling to estimate the action-value Q.
+This algorithm follows closely with the notation of Sutton's RL textbook.
 
- We set up up bandits with a fixed probability distribution of success,
- and receive stochastic rewards from the bandits of +1 for success,
- and 0 reward for failure.
+We set up up bandits with a fixed probability distribution of success,
+and receive stochastic rewards from the bandits of +1 for success,
+and 0 reward for failure.
 
- The update rule for our action-values Q is:
+The update rule for our action-values Q is:
 
-   Q(a) <- Q(a) + 1/(k+1) * (R(a) - Q(a))
+  Q(a) <- Q(a) + 1/(k+1) * (R(a) - Q(a))
 
- where
+where
 
-   Q(a) = current value estimate of action "a"
-   k = number of times action "a" was chosen so far
-   R(a) = reward of sampling action bandit (bandit) "a"
+  Q(a) = current value estimate of action "a"
+  k = number of times action "a" was chosen so far
+  R(a) = reward of sampling action bandit (bandit) "a"
 
- The derivation of the above Q incremental implementation update:
+The derivation of the above Q incremental implementation update:
 
-   Q(a;k+1)
-   = 1/(k+1) * (R(a_1) + R(a_2) + ... + R(a_k) + R(a))
-   = 1/(k+1) * (k*Q(a;k) + R(a))
-   = 1/(k+1) * ((k+1)*Q(a;k) + R(a) - Q(a;k))
-   = Q(a;k) + 1/(k+1) * (R(a) - Q(a;k))
+  Q(a;k+1)
+  = 1/(k+1) * (R(a_1) + R(a_2) + ... + R(a_k) + R(a))
+  = 1/(k+1) * (k*Q(a;k) + R(a))
+  = 1/(k+1) * ((k+1)*Q(a;k) + R(a) - Q(a;k))
+  = Q(a;k) + 1/(k+1) * (R(a) - Q(a;k))
 
 """
+
 import numpy
 from matplotlib import pyplot
 

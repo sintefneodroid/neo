@@ -1,30 +1,30 @@
-﻿neodroid
+neodroid
 ========
 
 .. automodule:: neodroid
 
-   
-   
-   
 
-   
-   
+
+
+
+
+
    .. rubric:: Functions
 
    .. autosummary::
       :toctree:
-   
+
       get_version
-   
-   
 
-   
-   
-   
 
-   
-   
-   
+
+
+
+
+
+
+
+
 
 
 
@@ -41,4 +41,3 @@
    neodroid.messaging
    neodroid.utilities
    neodroid.wrappers
-

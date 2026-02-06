@@ -3,7 +3,7 @@
 # namespace: FBS
 
 
-class FByteDataType(object):
+class FByteDataType:
     UINT8 = 0
     FLOAT16 = 1
     FLOAT32 = 2

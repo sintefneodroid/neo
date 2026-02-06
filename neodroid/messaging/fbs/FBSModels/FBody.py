@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FBody(object):
+class FBody:
     __slots__ = ["_tab"]
 
     # FBody

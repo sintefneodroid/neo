@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FMotion(object):
+class FMotion:
     __slots__ = ["_tab"]
 
     @classmethod

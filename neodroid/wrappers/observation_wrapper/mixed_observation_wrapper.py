@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from draugr import batch_generator
 
 from neodroid.environments.droid_environment import SingleUnityEnvironment

@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FQTObs(object):
+class FQTObs:
     __slots__ = ["_tab"]
 
     @classmethod

@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FDouble(object):
+class FDouble:
     __slots__ = ["_tab"]
 
     @classmethod

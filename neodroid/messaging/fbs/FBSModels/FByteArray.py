@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FByteArray(object):
+class FByteArray:
     __slots__ = ["_tab"]
 
     @classmethod

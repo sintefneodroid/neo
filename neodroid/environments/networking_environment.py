@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import logging
 
 from neodroid.messaging import ClientEventsEnum, message_client_event

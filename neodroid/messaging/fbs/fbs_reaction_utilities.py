@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from typing import Iterable, Sequence, Union
 
 from flatbuffers import Builder

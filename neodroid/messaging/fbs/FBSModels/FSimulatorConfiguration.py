@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FSimulatorConfiguration(object):
+class FSimulatorConfiguration:
     __slots__ = ["_tab"]
 
     # FSimulatorConfiguration

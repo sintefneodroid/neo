@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from neodroid.utilities.specifications.unity_specifications import (
     Motion,
     Reaction,

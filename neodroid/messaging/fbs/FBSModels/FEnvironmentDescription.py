@@ -5,7 +5,7 @@
 import flatbuffers
 
 
-class FEnvironmentDescription(object):
+class FEnvironmentDescription:
     __slots__ = ["_tab"]
 
     @classmethod

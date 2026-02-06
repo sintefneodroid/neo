@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import numpy
 from draugr.progress_bars import progress_bar
 
@@ -177,7 +176,7 @@ class VectorWrapper:
         return getattr(self._env, item)
 
 
-"""
+IGNORE_THIS = """
 
 def signal_space(self) -> SignalSpace:
 pass

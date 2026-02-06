@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from contextlib import suppress
 
 __author__ = "Christian Heider Nielsen"

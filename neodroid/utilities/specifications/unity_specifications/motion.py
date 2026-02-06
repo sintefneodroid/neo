@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 __author__ = "Christian Heider Nielsen"
 
 from typing import Any, Dict
@@ -6,7 +5,7 @@ from typing import Any, Dict
 __all__ = ["Motion"]
 
 
-class Motion(object):
+class Motion:
     """ """
 
     def __init__(self, actor_name: str, actuator_name: str, strength: float):

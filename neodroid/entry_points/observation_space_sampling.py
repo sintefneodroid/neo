@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import argparse
 
 from neodroid.environments.droid_environment import connect_dict

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import functools
 
 from neodroid.messaging.fbs.fbs_state_utilties import (
@@ -16,7 +15,7 @@ from neodroid.messaging.fbs import FUnobservables
 __all__ = ["Unobservables"]
 
 
-class Unobservables(object):
+class Unobservables:
     """
     Represents a full reproducible state, eg. physics engine state and other unobservables
 
@@ -65,7 +64,7 @@ class Unobservables(object):
             [self.poses_numpy.flatten(), self.bodies_numpy.flatten()]
         ).flatten()
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def __repr__(self):
         return (
             f"<Unobservables>\n"

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import logging
 
 import numpy
@@ -19,7 +18,7 @@ __doc__ = r"""
 def verify_configuration_reactions(
     *,
     input_reactions,
-    environment_descriptions
+    environment_descriptions,
     #: Mapping[str, EnvironmentDescription]
 ):
     """
