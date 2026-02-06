@@ -8,7 +8,7 @@ import numpy
 import torch
 from draugr import latest_file
 from draugr.torch_utilities import PTW, global_torch_device
-from draugr.tqdm_utilities import progress_bar
+from draugr.progress_bars import progress_bar
 from gym.wrappers import FrameStack
 from neodroid import PROJECT_APP_PATH
 from nes_py.wrappers import JoypadSpace  # NES Emulator for OpenAI Gym

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from .action_encoding import *
 from .gym_wrapper import *

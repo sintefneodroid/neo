@@ -1,7 +1,8 @@
 from os.path import dirname, join, realpath
 
 PROJECT = "DemoWebApp"
-CONFIG_NAME = __name__
+from neodroidagent.configs.base_config import *
+CONFIG_NAME = f'{__name__} on {CONFIG_NAME}'
 from pathlib import Path
 
 CONFIG_FILE_PATH = Path(__file__)

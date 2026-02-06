@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 __author__ = "Christian Heider Nielsen"
@@ -7,7 +6,7 @@ __doc__ = r"""
            Created on 17/06/2020
            """
 
-from draugr.tqdm_utilities import progress_bar
+from draugr.progress_bars import progress_bar
 
 if __name__ == "__main__":
 

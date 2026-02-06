@@ -1,9 +1,11 @@
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import logging
-from typing import Mapping
+from collections.abc import Collection
+from typing import Iterable, List, Mapping, Optional, Sized
 
-from neodroid.utilities import EnvironmentDescription, EnvironmentSnapshot
+import warg
+from neodroid.utilities import Actor, EnvironmentDescription, EnvironmentSnapshot
 from neodroid.utilities.specifications.unity_specifications import Reaction
 from neodroid.utilities.specifications.unity_specifications.motion import Motion
 from neodroid.utilities.specifications.unity_specifications.reaction_parameters import (
@@ -17,7 +19,7 @@ import numpy
 
 def verify_motion_reactions(
     *,
-    input_reactions,
+    input_reactions:Optional[Sized],
     environment_descriptions: Mapping[str, EnvironmentDescription],
     environment_snapshots: Mapping[str, EnvironmentSnapshot],
     _auto_reset: bool = False,
@@ -98,15 +100,19 @@ def verify_motion_reactions(
                                 input_a, actors, env_name=env_name, reset=reset
                             )
                         )
-                elif isinstance(input_a, (int, float)):
+                elif isinstance(input_a, warg.Number):
                     outs.append(
                         construct_individual_reactions_from_list(
                             [input_a], actors, env_name=env_name, reset=reset
                         )
                     )
                 elif isinstance(input_a, (numpy.ndarray, numpy.generic)):
+                    sds = input_a.astype(float).tolist()
+                    if isinstance(sds, warg.Number):
+                        sds = [sds]
+
                     a = construct_individual_reactions_from_list(
-                        input_a.astype(float).tolist(),
+                        sds,
                         actors,
                         env_name=env_name,
                         reset=reset,
@@ -119,7 +125,7 @@ def verify_motion_reactions(
 
 
 def construct_individual_reactions_from_list(
-    motion_list, actors, env_name: str, reset: bool = False
+    motion_list:Iterable, actors:Collection[Actor], env_name: str, reset: bool = False
 ):
     """
 
@@ -134,7 +140,11 @@ def construct_individual_reactions_from_list(
     :return:
     :rtype:
     """
+
+    #assert isinstance(motion_list, Iterable), f"Expected motion list to be an iterable, got {type(motion_list)}"
+
     motions = construct_motions_from_list(motion_list, actors)
+
     parameters = ReactionParameters(
         terminable=True,
         step=not reset,
@@ -143,10 +153,11 @@ def construct_individual_reactions_from_list(
         describe=False,
         episode_count=not reset,
     )
+
     return Reaction(motions=motions, parameters=parameters, environment_name=env_name)
 
 
-def construct_motions_from_list(input_list, actors):
+def construct_motions_from_list(input_list:Iterable, actors:Collection[Actor])-> List[Motion]:
     """
 
     :param input_list:
@@ -163,7 +174,9 @@ def construct_motions_from_list(input_list, actors):
     ]
 
     new_motions = [
-        Motion(actor_motor_tuple[0], actor_motor_tuple[1], list_val)
-        for (list_val, actor_motor_tuple) in zip(input_list, actor_motor_tuples)
+        Motion(actor_name, actuator_name, list_val)
+        for (list_val, (actor_name,actuator_name,*_))
+        in zip(input_list, actor_motor_tuples)
     ]
+
     return new_motions

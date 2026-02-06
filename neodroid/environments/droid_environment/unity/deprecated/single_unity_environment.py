@@ -1,8 +1,7 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from warnings import warn
 
-from draugr.tqdm_utilities import progress_bar
+from draugr.progress_bars import progress_bar
 from neodroid.environments.droid_environment import DictUnityEnvironment
 from neodroid.factories.single.single_reaction_factory import (
     verify_configuration_reaction,

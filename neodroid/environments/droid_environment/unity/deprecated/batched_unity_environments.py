@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import numpy
-from draugr.tqdm_utilities import progress_bar
+from draugr.progress_bars import progress_bar
 
 from neodroid.environments.droid_environment.unity.dict_unity_environment import (
     DictUnityEnvironment,

@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from typing import Dict
+from typing import Dict, Optional
 
 from neodroid.messaging.fbs.FBSModels import FEnvironmentDescription
 from neodroid.messaging.fbs.fbs_state_utilties import (
@@ -99,7 +98,7 @@ class EnvironmentDescription(object):
         """
         return deserialise_sensors(self._fbs_description)
 
-    def sensor(self, key) -> Sensor:
+    def sensor(self, key) -> Optional[Sensor]:
         """
 
         :param key:
@@ -119,7 +118,7 @@ class EnvironmentDescription(object):
         """
         return deserialise_configurables(self._fbs_description)
 
-    def configurable(self, key: str) -> Configurable:
+    def configurable(self, key: str) -> Optional[Configurable]:
         """
 
         :param key:

@@ -1,10 +1,11 @@
 import io
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Tuple,Optional
 
 import PIL
 import numpy
 from PIL.Image import Image
 from flatbuffers import Table
+
 from neodroid.messaging.fbs import (
     FActor,
     FBSModels as F,
@@ -100,7 +101,7 @@ def deserialise_sensors(flat_description: FEnvironmentDescription) -> Dict[str, 
     return out_sensors
 
 
-def deserialise_sensor(obs_type, obs_value) -> Tuple[Any, List, bool]:
+def deserialise_sensor(obs_type:F.FObservation, obs_value:Table) -> Tuple[Any, List, bool]:
     value = None
     value_range = None
     only_direct_access = False
@@ -396,11 +397,14 @@ def deserialise_actuators(flat_actor: FActor) -> Dict[str, Any]:
     return actuators
 
 
-def deserialise_range(flat_range: FRange) -> Dimension:
+def deserialise_range(flat_range: Optional[FRange]) -> Dimension:
     """
 
     :param flat_range:
     :return:"""
+    if flat_range is None:
+        return Dimension(decimal_granularity=10, normalised=False)
+
     return Dimension(
         decimal_granularity=flat_range.DecimalGranularity(),
         min_value=flat_range.MinValue(),

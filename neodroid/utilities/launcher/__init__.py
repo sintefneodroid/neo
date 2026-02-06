@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from neodroid.utilities.launcher.download_utilities.download_environment import (
     available_environments,

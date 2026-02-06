@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import argparse
 
@@ -7,7 +6,7 @@ from neodroid.environments.droid_environment import connect_dict
 __author__ = "Christian Heider Nielsen"
 
 from warg import add_bool_arg
-from draugr.tqdm_utilities import progress_bar
+from draugr.progress_bars import progress_bar
 
 
 def main():

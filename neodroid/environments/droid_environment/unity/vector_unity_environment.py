@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from itertools import count
-from typing import Union
+from typing import Callable, Optional, Union
 
 from neodroid.environments.droid_environment.unity.dict_unity_environment import (
     DictUnityEnvironment,
@@ -51,13 +50,14 @@ class VectorUnityEnvironment(DictUnityEnvironment):
                 environment_snapshots=self._last_snapshots,
                 _auto_reset=self._auto_reset,
             )
+
         if parameters is not None:
             input_reactions.parameters = parameters
 
         return VectorEnvironmentSnapshot(self.send(input_reactions=input_reactions))
 
     def reset(
-        self, input_reactions=None, state=None, on_reset_callback: callable = None
+        self, input_reactions=None, state=None, on_reset_callback: Optional[Callable] = None
     ) -> VectorEnvironmentSnapshot:
         """
 

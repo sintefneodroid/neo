@@ -147,7 +147,7 @@ def get_pip_packages(run_lambda):
     out3 = run_with_pip("pip3")
 
     number_of_pips = len([x for x in [out2, out3] if x is not None])
-    if number_of_pips is 0:
+    if number_of_pips == 0:
         return "pip", out2
 
     if number_of_pips == 1:

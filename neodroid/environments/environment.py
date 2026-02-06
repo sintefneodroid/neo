@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 __author__ = "Christian Heider Nielsen"
@@ -22,7 +21,7 @@ from sorcery import assigned_names
 from trolls.spaces import ActionSpace, ObservationSpace, SignalSpace
 from warg import drop_unused_kws
 
-__all__ = ["Environment"]
+__all__ = ["Environment", 'EnvironmentType']
 
 
 class Environment(ABC):

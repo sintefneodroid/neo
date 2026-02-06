@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from draugr import batch_generator
 from draugr.python_utilities.torch_like_channel_transformation import (
